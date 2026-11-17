@@ -185,6 +185,12 @@ def get_policies(create_mode: Optional[_builtins.int] = None,
         create_mode=2)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPolicies](https://www.tencentcloud.com/document/api/598/32240)
+
 
     :param _builtins.int create_mode: Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.
     :param _builtins.str description: The description of the CAM policy.
@@ -252,6 +258,12 @@ def get_policies_output(create_mode: pulumi.Input[Optional[Optional[_builtins.in
         type=1,
         create_mode=2)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPolicies](https://www.tencentcloud.com/document/api/598/32240)
 
 
     :param _builtins.int create_mode: Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.

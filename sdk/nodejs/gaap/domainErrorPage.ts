@@ -40,6 +40,18 @@ import * as utilities from "../utilities";
  *     body: "bad request",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33137)
+ *   - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
+ * * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
+ * * Delete:
+ *   - [DeleteDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33136)
+ *   - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
  */
 export class DomainErrorPage extends pulumi.CustomResource {
     /**

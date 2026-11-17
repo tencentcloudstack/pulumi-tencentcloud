@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     namespace: "default",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
  */
 export function getRequestStatus(args: GetRequestStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetRequestStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -104,6 +110,12 @@ export interface GetRequestStatusResult {
  *     namespace: "default",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
  */
 export function getRequestStatusOutput(args: GetRequestStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRequestStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

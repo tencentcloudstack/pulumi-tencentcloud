@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "crs-c1nl9rpv",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
  */
 export function getInstanceZoneInfo(args?: GetInstanceZoneInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceZoneInfoResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetInstanceZoneInfoResult {
  *     instanceId: "crs-c1nl9rpv",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
  */
 export function getInstanceZoneInfoOutput(args?: GetInstanceZoneInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceZoneInfoResult> {
     args = args || {};

@@ -220,6 +220,15 @@ class Template(pulumi.CustomResource):
             remark="terraform example")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddSmsTemplate](https://www.tencentcloud.com/document/api/382/40526)
+        * Read: [DescribeSmsTemplateList](https://www.tencentcloud.com/document/api/382/40524)
+        * Update: [ModifySmsTemplate](https://www.tencentcloud.com/document/api/382/40523)
+        * Delete: [DeleteSmsTemplate](https://www.tencentcloud.com/document/api/382/40525)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -253,6 +262,15 @@ class Template(pulumi.CustomResource):
             sms_type=0,
             remark="terraform example")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddSmsTemplate](https://www.tencentcloud.com/document/api/382/40526)
+        * Read: [DescribeSmsTemplateList](https://www.tencentcloud.com/document/api/382/40524)
+        * Update: [ModifySmsTemplate](https://www.tencentcloud.com/document/api/382/40523)
+        * Delete: [DeleteSmsTemplate](https://www.tencentcloud.com/document/api/382/40525)
 
 
         :param str resource_name: The name of the resource.

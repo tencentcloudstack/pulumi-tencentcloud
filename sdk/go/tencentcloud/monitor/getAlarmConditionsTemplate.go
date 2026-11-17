@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
 func GetAlarmConditionsTemplate(ctx *pulumi.Context, args *GetAlarmConditionsTemplateArgs, opts ...pulumi.InvokeOption) (*GetAlarmConditionsTemplateResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmConditionsTemplateResult

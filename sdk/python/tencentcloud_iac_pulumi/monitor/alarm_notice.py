@@ -379,6 +379,15 @@ class AlarmNotice(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAlarmNotice](https://www.tencentcloud.com/document/api/248/39304)
+        * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
+        * Update: [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/248/39299)
+        * Delete: [DeleteAlarmNotices](https://www.tencentcloud.com/document/api/248/39303)
+
         ## Import
 
         Monitor Alarm Notice can be imported, e.g.
@@ -461,6 +470,15 @@ class AlarmNotice(pulumi.CustomResource):
                 ],
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAlarmNotice](https://www.tencentcloud.com/document/api/248/39304)
+        * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
+        * Update: [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/248/39299)
+        * Delete: [DeleteAlarmNotices](https://www.tencentcloud.com/document/api/248/39303)
 
         ## Import
 

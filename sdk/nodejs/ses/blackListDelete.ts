@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const blackList = new tencentcloud.ses.BlackListDelete("black_list", {emailAddress: "terraform-tf@gmail.com"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DeleteBlackList](https://www.tencentcloud.com/document/api/1084/39417)
  */
 export class BlackListDelete extends pulumi.CustomResource {
     /**

@@ -18,6 +18,20 @@ import * as utilities from "../utilities";
  *     operate: "stop",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+ *   - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&type=document&lang=en)
+ *   - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&type=document&lang=en)
+ * * Read: [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+ * * Update:
+ *   - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+ *   - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&type=document&lang=en)
+ *   - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&type=document&lang=en)
  */
 export class OperateContainerGroup extends pulumi.CustomResource {
     /**

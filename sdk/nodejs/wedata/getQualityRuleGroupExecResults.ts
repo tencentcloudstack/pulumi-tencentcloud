@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&type=document&lang=en)
  */
 export function getQualityRuleGroupExecResults(args: GetQualityRuleGroupExecResultsArgs, opts?: pulumi.InvokeOptions): Promise<GetQualityRuleGroupExecResultsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -125,6 +131,12 @@ export interface GetQualityRuleGroupExecResultsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&type=document&lang=en)
  */
 export function getQualityRuleGroupExecResultsOutput(args: GetQualityRuleGroupExecResultsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetQualityRuleGroupExecResultsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

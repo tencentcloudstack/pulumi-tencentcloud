@@ -224,6 +224,12 @@ def get_service_status(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.kms.get_service_status()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -260,6 +266,12 @@ def get_service_status_output(result_output_file: pulumi.Input[Optional[Optional
 
     example = tencentcloud.kms.get_service_status()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
 
 
     :param _builtins.str result_output_file: Used to save results.

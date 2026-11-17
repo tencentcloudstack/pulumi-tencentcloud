@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     projectId: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
  */
 export function getLogExportList(args: GetLogExportListArgs, opts?: pulumi.InvokeOptions): Promise<GetLogExportListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetLogExportListResult {
  *     projectId: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
  */
 export function getLogExportListOutput(args: GetLogExportListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLogExportListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

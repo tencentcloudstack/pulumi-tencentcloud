@@ -42,6 +42,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateMountPoint](https://www.tencentcloud.com/document/api/1106/42434)
+// * Read: [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+// * Update: [ModifyMountPoint](https://www.tencentcloud.com/document/api/1106/42429)
+// * Delete: [DeleteMountPoint](https://www.tencentcloud.com/document/api/1106/42433)
+//
 // ## Import
 //
 // chdfs mountPoint can be imported using the id, e.g.

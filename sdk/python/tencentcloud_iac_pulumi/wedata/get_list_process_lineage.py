@@ -135,6 +135,12 @@ def get_list_process_lineage(platform: Optional[_builtins.str] = None,
         platform="WEDATA")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListProcessLineage](https://www.tencentcloud.com/document/api/1174/77946)
+
 
     :param _builtins.str platform: Source: WEDATA|THIRD, default WEDATA.
     :param _builtins.str process_id: Task unique ID.
@@ -174,6 +180,12 @@ def get_list_process_lineage_output(platform: pulumi.Input[Optional[_builtins.st
         process_type="SCHEDULE_TASK",
         platform="WEDATA")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListProcessLineage](https://www.tencentcloud.com/document/api/1174/77946)
 
 
     :param _builtins.str platform: Source: WEDATA|THIRD, default WEDATA.

@@ -54,6 +54,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeExternalClusterRegisterCommand](https://www.tencentcloud.com/search/?wd=DescribeExternalClusterRegisterCommand&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetExternalClusterRegisterCommandResult> InvokeAsync(GetExternalClusterRegisterCommandArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetExternalClusterRegisterCommandResult>("tencentcloud:Monitor/getExternalClusterRegisterCommand:getExternalClusterRegisterCommand", args ?? new GetExternalClusterRegisterCommandArgs(), options.WithDefaults());
@@ -100,6 +106,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeExternalClusterRegisterCommand](https://www.tencentcloud.com/search/?wd=DescribeExternalClusterRegisterCommand&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetExternalClusterRegisterCommandResult> Invoke(GetExternalClusterRegisterCommandInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetExternalClusterRegisterCommandResult>("tencentcloud:Monitor/getExternalClusterRegisterCommand:getExternalClusterRegisterCommand", args ?? new GetExternalClusterRegisterCommandInvokeArgs(), options.WithDefaults());
@@ -146,6 +158,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeExternalClusterRegisterCommand](https://www.tencentcloud.com/search/?wd=DescribeExternalClusterRegisterCommand&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetExternalClusterRegisterCommandResult> Invoke(GetExternalClusterRegisterCommandInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetExternalClusterRegisterCommandResult>("tencentcloud:Monitor/getExternalClusterRegisterCommand:getExternalClusterRegisterCommand", args ?? new GetExternalClusterRegisterCommandInvokeArgs(), options.WithDefaults());

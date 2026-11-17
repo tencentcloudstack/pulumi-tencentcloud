@@ -95,6 +95,12 @@ def get_rotation_history(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.ssm.get_rotation_history(secret_name="keep_terraform")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str secret_name: Secret name.
@@ -124,6 +130,12 @@ def get_rotation_history_output(result_output_file: pulumi.Input[Optional[Option
 
     example = tencentcloud.ssm.get_rotation_history(secret_name="keep_terraform")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     flinkVersion: "Flink-1.11",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&type=document&lang=en)
  */
 export function getSystemResource(args?: GetSystemResourceArgs, opts?: pulumi.InvokeOptions): Promise<GetSystemResourceResult> {
     args = args || {};
@@ -101,6 +107,12 @@ export interface GetSystemResourceResult {
  *     flinkVersion: "Flink-1.11",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&type=document&lang=en)
  */
 export function getSystemResourceOutput(args?: GetSystemResourceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSystemResourceResult> {
     args = args || {};

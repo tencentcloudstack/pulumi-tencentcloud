@@ -188,6 +188,14 @@ class LocalBinlogConfig(pulumi.CustomResource):
             max_usage=50)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLocalBinlogConfig](https://www.tencentcloud.com/document/api/236/45200)
+        * Read: [DescribeLocalBinlogConfig](https://www.tencentcloud.com/document/api/236/45201)
+        * Update: [ModifyLocalBinlogConfig](https://www.tencentcloud.com/document/api/236/45200)
+
         ## Import
 
         mysql local_binlog_config can be imported using the id, e.g.
@@ -259,6 +267,14 @@ class LocalBinlogConfig(pulumi.CustomResource):
             save_hours=140,
             max_usage=50)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLocalBinlogConfig](https://www.tencentcloud.com/document/api/236/45200)
+        * Read: [DescribeLocalBinlogConfig](https://www.tencentcloud.com/document/api/236/45201)
+        * Update: [ModifyLocalBinlogConfig](https://www.tencentcloud.com/document/api/236/45200)
 
         ## Import
 

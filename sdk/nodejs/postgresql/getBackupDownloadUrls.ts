@@ -39,6 +39,12 @@ import * as utilities from "../utilities";
  *     },
  * }));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
  */
 export function getBackupDownloadUrls(args: GetBackupDownloadUrlsArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupDownloadUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -134,6 +140,12 @@ export interface GetBackupDownloadUrlsResult {
  *     },
  * }));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
  */
 export function getBackupDownloadUrlsOutput(args: GetBackupDownloadUrlsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupDownloadUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

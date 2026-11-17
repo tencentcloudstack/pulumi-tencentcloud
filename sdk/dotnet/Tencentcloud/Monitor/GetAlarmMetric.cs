@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
         /// </summary>
         public static Task<GetAlarmMetricResult> InvokeAsync(GetAlarmMetricArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
         /// </summary>
         public static Output<GetAlarmMetricResult> Invoke(GetAlarmMetricInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
         /// </summary>
         public static Output<GetAlarmMetricResult> Invoke(GetAlarmMetricInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricInvokeArgs(), options.WithDefaults());

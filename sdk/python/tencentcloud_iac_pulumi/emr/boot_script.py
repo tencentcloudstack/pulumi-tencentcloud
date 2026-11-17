@@ -161,6 +161,15 @@ class BootScript(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBootScript](https://www.tencentcloud.com/document/api/1026/84707)
+        * Read: [DescribeBootScript](https://www.tencentcloud.com/document/api/1026/84715)
+        * Update: [ModifyBootScript](https://www.tencentcloud.com/document/api/1026/84707)
+        * Delete: [ModifyBootScript](https://www.tencentcloud.com/document/api/1026/84707)
+
         ## Import
 
         EMR boot script can be imported using the id (`{instance_id}#{boot_type}`), e.g.
@@ -201,6 +210,15 @@ class BootScript(pulumi.CustomResource):
                 "region": "ap-guangzhou",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBootScript](https://www.tencentcloud.com/document/api/1026/84707)
+        * Read: [DescribeBootScript](https://www.tencentcloud.com/document/api/1026/84715)
+        * Update: [ModifyBootScript](https://www.tencentcloud.com/document/api/1026/84707)
+        * Delete: [ModifyBootScript](https://www.tencentcloud.com/document/api/1026/84707)
 
         ## Import
 

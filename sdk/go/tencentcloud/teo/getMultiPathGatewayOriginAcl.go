@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
 func GetMultiPathGatewayOriginAcl(ctx *pulumi.Context, args *GetMultiPathGatewayOriginAclArgs, opts ...pulumi.InvokeOption) (*GetMultiPathGatewayOriginAclResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMultiPathGatewayOriginAclResult

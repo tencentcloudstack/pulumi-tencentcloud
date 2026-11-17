@@ -304,6 +304,15 @@ class IpAccessControlV2(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateIpAccessControl](https://www.tencentcloud.com/document/api/627/64775)
+        * Read: [DescribeIpAccessControl](https://www.tencentcloud.com/document/api/627/64773)
+        * Update: [ModifyIpAccessControl](https://www.tencentcloud.com/document/api/627/64771)
+        * Delete: [DeleteIpAccessControlV2](https://www.tencentcloud.com/document/api/627/64774)
+
         ## Import
 
         waf ip access control v2 can be imported using the id, e.g.
@@ -358,6 +367,15 @@ class IpAccessControlV2(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateIpAccessControl](https://www.tencentcloud.com/document/api/627/64775)
+        * Read: [DescribeIpAccessControl](https://www.tencentcloud.com/document/api/627/64773)
+        * Update: [ModifyIpAccessControl](https://www.tencentcloud.com/document/api/627/64771)
+        * Delete: [DeleteIpAccessControlV2](https://www.tencentcloud.com/document/api/627/64774)
 
         ## Import
 

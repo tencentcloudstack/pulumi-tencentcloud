@@ -90,6 +90,12 @@ class SyncDevicesToIoaOperation(pulumi.CustomResource):
         ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SyncDevicesToIOA](https://www.tencentcloud.com/search/?wd=SyncDevicesToIOA&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -116,6 +122,12 @@ class SyncDevicesToIoaOperation(pulumi.CustomResource):
             1895,
         ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SyncDevicesToIOA](https://www.tencentcloud.com/search/?wd=SyncDevicesToIOA&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

@@ -301,6 +301,20 @@ class OwaspRuleTypeConfig(pulumi.CustomResource):
             rule_type_level=200)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ModifyOwaspRuleTypeAction](https://www.tencentcloud.com/document/api/627/73179)
+          - [ModifyOwaspRuleTypeLevel](https://www.tencentcloud.com/document/api/627/73178)
+          - [ModifyOwaspRuleTypeStatus](https://www.tencentcloud.com/document/api/627/73177)
+        * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
+        * Update:
+          - [ModifyOwaspRuleTypeAction](https://www.tencentcloud.com/document/api/627/73179)
+          - [ModifyOwaspRuleTypeLevel](https://www.tencentcloud.com/document/api/627/73178)
+          - [ModifyOwaspRuleTypeStatus](https://www.tencentcloud.com/document/api/627/73177)
+
         ## Import
 
         WAF owasp rule type config can be imported using the domain#typeId, e.g.
@@ -340,6 +354,20 @@ class OwaspRuleTypeConfig(pulumi.CustomResource):
             rule_type_action=1,
             rule_type_level=200)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ModifyOwaspRuleTypeAction](https://www.tencentcloud.com/document/api/627/73179)
+          - [ModifyOwaspRuleTypeLevel](https://www.tencentcloud.com/document/api/627/73178)
+          - [ModifyOwaspRuleTypeStatus](https://www.tencentcloud.com/document/api/627/73177)
+        * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
+        * Update:
+          - [ModifyOwaspRuleTypeAction](https://www.tencentcloud.com/document/api/627/73179)
+          - [ModifyOwaspRuleTypeLevel](https://www.tencentcloud.com/document/api/627/73178)
+          - [ModifyOwaspRuleTypeStatus](https://www.tencentcloud.com/document/api/627/73177)
 
         ## Import
 

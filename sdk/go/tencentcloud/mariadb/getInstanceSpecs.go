@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&type=document&lang=en)
 func GetInstanceSpecs(ctx *pulumi.Context, args *GetInstanceSpecsArgs, opts ...pulumi.InvokeOption) (*GetInstanceSpecsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceSpecsResult

@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     method: "get",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&type=document&lang=en)
  */
 export function getMicroserviceApiVersion(args: GetMicroserviceApiVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetMicroserviceApiVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetMicroserviceApiVersionResult {
  *     method: "get",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&type=document&lang=en)
  */
 export function getMicroserviceApiVersionOutput(args: GetMicroserviceApiVersionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMicroserviceApiVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

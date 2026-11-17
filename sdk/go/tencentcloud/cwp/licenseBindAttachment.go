@@ -75,6 +75,17 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeLicenseBindSchedule](https://www.tencentcloud.com/document/api/296/63783)
+//   - [ModifyLicenseBinds](https://www.tencentcloud.com/document/api/296/63775)
+//
+// * Read: [DescribeLicenseBindList](https://www.tencentcloud.com/document/api/296/63784)
+// * Delete: [ModifyLicenseUnBinds](https://www.tencentcloud.com/document/api/296/84588)
+//
 // ## Import
 //
 // CWP license bind attachment can be imported using the resourceId#licenseId#quuid#licenseType, e.g.

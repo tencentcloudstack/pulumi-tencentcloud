@@ -140,6 +140,12 @@ def get_api_detail(application_id: Optional[_builtins.str] = None,
         application_id="application-a24x29xv")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiDetail](https://www.tencentcloud.com/search/?wd=DescribeApiDetail&type=document&lang=en)
+
 
     :param _builtins.str application_id: application id.
     :param _builtins.str method: request method.
@@ -189,6 +195,12 @@ def get_api_detail_output(application_id: pulumi.Input[Optional[_builtins.str]] 
         pkg_version="20210625192923",
         application_id="application-a24x29xv")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiDetail](https://www.tencentcloud.com/search/?wd=DescribeApiDetail&type=document&lang=en)
 
 
     :param _builtins.str application_id: application id.

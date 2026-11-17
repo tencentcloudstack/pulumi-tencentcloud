@@ -36,7 +36,7 @@ class ConfigArgs:
         :param pulumi.Input['ConfigExtractRuleArgs'] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
         :param pulumi.Input[Sequence[pulumi.Input['ConfigExcludePathArgs']]] exclude_paths: Collection path blocklist.
         :param pulumi.Input[_builtins.str] input_type: Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
-        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         :param pulumi.Input[_builtins.str] name: Collection configuration name.
         :param pulumi.Input[_builtins.str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[_builtins.str] path: Log collection path containing the filename. Required for document collection.
@@ -98,7 +98,7 @@ class ConfigArgs:
     @pulumi.getter(name="logType")
     def log_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 
@@ -172,7 +172,7 @@ class _ConfigState:
         :param pulumi.Input[Sequence[pulumi.Input['ConfigExcludePathArgs']]] exclude_paths: Collection path blocklist.
         :param pulumi.Input['ConfigExtractRuleArgs'] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
         :param pulumi.Input[_builtins.str] input_type: Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
-        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         :param pulumi.Input[_builtins.str] name: Collection configuration name.
         :param pulumi.Input[_builtins.str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[_builtins.str] path: Log collection path containing the filename. Required for document collection.
@@ -235,7 +235,7 @@ class _ConfigState:
     @pulumi.getter(name="logType")
     def log_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 
@@ -360,6 +360,15 @@ class Config(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfig](https://www.tencentcloud.com/document/api/614/42813)
+        * Read: [DescribeConfigs](https://www.tencentcloud.com/document/api/614/42809)
+        * Update: [ModifyConfig](https://www.tencentcloud.com/document/api/614/42807)
+        * Delete: [DeleteConfig](https://www.tencentcloud.com/document/api/614/42812)
+
         ## Import
 
         CLS config can be imported using the id, e.g.
@@ -374,7 +383,7 @@ class Config(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[Union['ConfigExcludePathArgs', 'ConfigExcludePathArgsDict']]]] exclude_paths: Collection path blocklist.
         :param pulumi.Input[Union['ConfigExtractRuleArgs', 'ConfigExtractRuleArgsDict']] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
         :param pulumi.Input[_builtins.str] input_type: Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
-        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         :param pulumi.Input[_builtins.str] name: Collection configuration name.
         :param pulumi.Input[_builtins.str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[_builtins.str] path: Log collection path containing the filename. Required for document collection.
@@ -438,6 +447,15 @@ class Config(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfig](https://www.tencentcloud.com/document/api/614/42813)
+        * Read: [DescribeConfigs](https://www.tencentcloud.com/document/api/614/42809)
+        * Update: [ModifyConfig](https://www.tencentcloud.com/document/api/614/42807)
+        * Delete: [DeleteConfig](https://www.tencentcloud.com/document/api/614/42812)
 
         ## Import
 
@@ -518,7 +536,7 @@ class Config(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[Union['ConfigExcludePathArgs', 'ConfigExcludePathArgsDict']]]] exclude_paths: Collection path blocklist.
         :param pulumi.Input[Union['ConfigExtractRuleArgs', 'ConfigExtractRuleArgsDict']] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
         :param pulumi.Input[_builtins.str] input_type: Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
-        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        :param pulumi.Input[_builtins.str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         :param pulumi.Input[_builtins.str] name: Collection configuration name.
         :param pulumi.Input[_builtins.str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[_builtins.str] path: Log collection path containing the filename. Required for document collection.
@@ -566,7 +584,7 @@ class Config(pulumi.CustomResource):
     @pulumi.getter(name="logType")
     def log_type(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 

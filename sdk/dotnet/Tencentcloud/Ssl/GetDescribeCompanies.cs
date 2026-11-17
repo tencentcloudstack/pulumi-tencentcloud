@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
         /// </summary>
         public static Task<GetDescribeCompaniesResult> InvokeAsync(GetDescribeCompaniesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
         /// </summary>
         public static Output<GetDescribeCompaniesResult> Invoke(GetDescribeCompaniesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
         /// </summary>
         public static Output<GetDescribeCompaniesResult> Invoke(GetDescribeCompaniesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesInvokeArgs(), options.WithDefaults());

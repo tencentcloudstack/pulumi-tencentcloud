@@ -168,6 +168,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CompleteExpansion](https://www.tencentcloud.com/document/api/238/72761)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
 type CompleteExpansion struct {
 	pulumi.CustomResourceState
 

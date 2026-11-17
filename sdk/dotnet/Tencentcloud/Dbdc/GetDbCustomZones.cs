@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomZones](https://www.tencentcloud.com/search/?wd=DescribeDBCustomZones&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDbCustomZonesResult> InvokeAsync(GetDbCustomZonesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCustomZonesResult>("tencentcloud:Dbdc/getDbCustomZones:getDbCustomZones", args ?? new GetDbCustomZonesArgs(), options.WithDefaults());
@@ -54,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomZones](https://www.tencentcloud.com/search/?wd=DescribeDBCustomZones&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomZonesResult> Invoke(GetDbCustomZonesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomZonesResult>("tencentcloud:Dbdc/getDbCustomZones:getDbCustomZones", args ?? new GetDbCustomZonesInvokeArgs(), options.WithDefaults());
@@ -77,6 +89,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomZones](https://www.tencentcloud.com/search/?wd=DescribeDBCustomZones&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomZonesResult> Invoke(GetDbCustomZonesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomZonesResult>("tencentcloud:Dbdc/getDbCustomZones:getDbCustomZones", args ?? new GetDbCustomZonesInvokeArgs(), options.WithDefaults());

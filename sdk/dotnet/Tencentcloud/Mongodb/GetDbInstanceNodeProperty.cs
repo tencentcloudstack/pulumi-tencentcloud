@@ -66,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
         /// </summary>
         public static Task<GetDbInstanceNodePropertyResult> InvokeAsync(GetDbInstanceNodePropertyArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceNodePropertyResult>("tencentcloud:Mongodb/getDbInstanceNodeProperty:getDbInstanceNodeProperty", args ?? new GetDbInstanceNodePropertyArgs(), options.WithDefaults());
@@ -124,6 +130,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
         /// </summary>
         public static Output<GetDbInstanceNodePropertyResult> Invoke(GetDbInstanceNodePropertyInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceNodePropertyResult>("tencentcloud:Mongodb/getDbInstanceNodeProperty:getDbInstanceNodeProperty", args ?? new GetDbInstanceNodePropertyInvokeArgs(), options.WithDefaults());
@@ -182,6 +194,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
         /// </summary>
         public static Output<GetDbInstanceNodePropertyResult> Invoke(GetDbInstanceNodePropertyInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceNodePropertyResult>("tencentcloud:Mongodb/getDbInstanceNodeProperty:getDbInstanceNodeProperty", args ?? new GetDbInstanceNodePropertyInvokeArgs(), options.WithDefaults());

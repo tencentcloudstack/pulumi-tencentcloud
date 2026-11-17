@@ -70,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSignature](https://www.tencentcloud.com/document/api/1051/50727)
+    /// 
     /// ## Import
     /// 
     /// tcr ImageSignatureOperation can be imported using the id, e.g.

@@ -119,6 +119,12 @@ class ModifySwitchTimePeriodOperation(pulumi.CustomResource):
             switch_tag=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySwitchTimePeriod](https://www.tencentcloud.com/document/api/409/41612)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class ModifySwitchTimePeriodOperation(pulumi.CustomResource):
             db_instance_id=pgsql_id,
             switch_tag=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySwitchTimePeriod](https://www.tencentcloud.com/document/api/409/41612)
 
 
         :param str resource_name: The name of the resource.

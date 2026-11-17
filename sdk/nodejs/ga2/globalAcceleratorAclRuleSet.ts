@@ -54,6 +54,23 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateGlobalAcceleratorAclRule](https://www.tencentcloud.com/document/api/1299/83833)
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+ * * Read: [DescribeGlobalAcceleratorAclRules](https://www.tencentcloud.com/document/api/1299/83813)
+ * * Update:
+ *   - [CreateGlobalAcceleratorAclRule](https://www.tencentcloud.com/document/api/1299/83833)
+ *   - [DeleteGlobalAcceleratorAclRule](https://www.tencentcloud.com/document/api/1299/83824)
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+ *   - [ModifyGlobalAcceleratorAclRule](https://www.tencentcloud.com/document/api/1299/83805)
+ * * Delete:
+ *   - [DeleteGlobalAcceleratorAclRule](https://www.tencentcloud.com/document/api/1299/83824)
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+ *
  * ## Import
  *
  * GA2 ACL rule set can be imported using the composite id `<global_accelerator_id>#<global_accelerator_acl_policy_id>`, e.g.

@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyOwaspRuleStatus](https://www.tencentcloud.com/document/api/627/73180)
+    /// * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
+    /// * Update: [ModifyOwaspRuleStatus](https://www.tencentcloud.com/document/api/627/73180)
+    /// 
     /// ## Import
     /// 
     /// WAF owasp rule status config can be imported using the domain#ruleId, e.g.

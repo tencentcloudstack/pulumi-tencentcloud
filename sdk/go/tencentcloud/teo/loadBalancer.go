@@ -61,6 +61,72 @@ import (
 //
 // ```
 //
+// ### Example Usage - HTTP_V2 with probeCluster
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := teo.NewLoadBalancer(ctx, "example", &teo.LoadBalancerArgs{
+//				ZoneId: pulumi.String("zone-3fkff38fyw8s"),
+//				Name:   pulumi.String("tf-example-v2"),
+//				Type:   pulumi.String("HTTP_V2"),
+//				OriginGroups: teo.LoadBalancerOriginGroupArray{
+//					&teo.LoadBalancerOriginGroupArgs{
+//						Priority:      pulumi.String("priority_1"),
+//						OriginGroupId: pulumi.String("og-3w0nrwiw4c6v"),
+//					},
+//				},
+//				HealthChecker: &teo.LoadBalancerHealthCheckerArgs{
+//					Type:              pulumi.String("HTTP"),
+//					Path:              pulumi.String("www.example.com/test"),
+//					Port:              pulumi.Int(80),
+//					Interval:          pulumi.Int(30),
+//					Timeout:           pulumi.Int(5),
+//					HealthThreshold:   pulumi.Int(3),
+//					CriticalThreshold: pulumi.Int(2),
+//					Method:            pulumi.String("HEAD"),
+//					ExpectedCodes: pulumi.StringArray{
+//						pulumi.String("200"),
+//					},
+//					FollowRedirect: pulumi.String("false"),
+//					ProbeCluster:   pulumi.String("global"),
+//				},
+//				SteeringPolicy: pulumi.String("Pritory"),
+//				FailoverPolicy: pulumi.String("OtherOriginGroup"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateLoadBalancer](https://www.tencentcloud.com/document/api/1145/66031)
+//   - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+//
+// * Read: [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+// * Update:
+//   - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+//   - [ModifyLoadBalancer](https://www.tencentcloud.com/document/api/1145/66027)
+//
+// * Delete: [DeleteLoadBalancer](https://www.tencentcloud.com/document/api/1145/66030)
+//
 // ## Import
 //
 // TEO load balancer can be imported using the zoneId#instanceId, e.g.
@@ -83,7 +149,7 @@ type LoadBalancer struct {
 	OriginGroups LoadBalancerOriginGroupArrayOutput `pulumi:"originGroups"`
 	// Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
 	SteeringPolicy pulumi.StringPtrOutput `pulumi:"steeringPolicy"`
-	// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+	// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
 	Type pulumi.StringOutput `pulumi:"type"`
 	// Site ID.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
@@ -140,7 +206,7 @@ type loadBalancerState struct {
 	OriginGroups []LoadBalancerOriginGroup `pulumi:"originGroups"`
 	// Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
 	SteeringPolicy *string `pulumi:"steeringPolicy"`
-	// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+	// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
 	Type *string `pulumi:"type"`
 	// Site ID.
 	ZoneId *string `pulumi:"zoneId"`
@@ -159,7 +225,7 @@ type LoadBalancerState struct {
 	OriginGroups LoadBalancerOriginGroupArrayInput
 	// Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
 	SteeringPolicy pulumi.StringPtrInput
-	// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+	// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
 	Type pulumi.StringPtrInput
 	// Site ID.
 	ZoneId pulumi.StringPtrInput
@@ -180,7 +246,7 @@ type loadBalancerArgs struct {
 	OriginGroups []LoadBalancerOriginGroup `pulumi:"originGroups"`
 	// Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
 	SteeringPolicy *string `pulumi:"steeringPolicy"`
-	// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+	// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
 	Type string `pulumi:"type"`
 	// Site ID.
 	ZoneId string `pulumi:"zoneId"`
@@ -198,7 +264,7 @@ type LoadBalancerArgs struct {
 	OriginGroups LoadBalancerOriginGroupArrayInput
 	// Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
 	SteeringPolicy pulumi.StringPtrInput
-	// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+	// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
 	Type pulumi.StringInput
 	// Site ID.
 	ZoneId pulumi.StringInput
@@ -321,7 +387,7 @@ func (o LoadBalancerOutput) SteeringPolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LoadBalancer) pulumi.StringPtrOutput { return v.SteeringPolicy }).(pulumi.StringPtrOutput)
 }
 
-// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
 func (o LoadBalancerOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *LoadBalancer) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

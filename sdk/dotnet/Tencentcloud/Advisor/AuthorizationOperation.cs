@@ -27,6 +27,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Advisor
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAdvisorAuthorization](https://www.tencentcloud.com/document/api/1079/77120)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Advisor/authorizationOperation:AuthorizationOperation")]
     public partial class AuthorizationOperation : global::Pulumi.CustomResource

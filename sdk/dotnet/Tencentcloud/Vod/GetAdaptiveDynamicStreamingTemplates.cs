@@ -83,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
         /// </summary>
         public static Task<GetAdaptiveDynamicStreamingTemplatesResult> InvokeAsync(GetAdaptiveDynamicStreamingTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesArgs(), options.WithDefaults());
@@ -158,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
         /// </summary>
         public static Output<GetAdaptiveDynamicStreamingTemplatesResult> Invoke(GetAdaptiveDynamicStreamingTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesInvokeArgs(), options.WithDefaults());
@@ -233,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
         /// </summary>
         public static Output<GetAdaptiveDynamicStreamingTemplatesResult> Invoke(GetAdaptiveDynamicStreamingTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesInvokeArgs(), options.WithDefaults());

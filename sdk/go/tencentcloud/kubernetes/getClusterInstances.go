@@ -50,6 +50,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
 func GetClusterInstances(ctx *pulumi.Context, args *GetClusterInstancesArgs, opts ...pulumi.InvokeOption) (*GetClusterInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterInstancesResult

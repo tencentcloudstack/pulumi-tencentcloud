@@ -41,6 +41,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+//   - [UpdateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39410)
 type VerifyDomain struct {
 	pulumi.CustomResourceState
 

@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/flushBinlog:FlushBinlog")]
     public partial class FlushBinlog : global::Pulumi.CustomResource

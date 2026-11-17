@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
 func GetResetInstanceBlueprint(ctx *pulumi.Context, args *GetResetInstanceBlueprintArgs, opts ...pulumi.InvokeOption) (*GetResetInstanceBlueprintResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResetInstanceBlueprintResult

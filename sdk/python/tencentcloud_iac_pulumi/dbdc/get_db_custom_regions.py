@@ -88,6 +88,12 @@ def get_db_custom_regions(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.dbdc.get_db_custom_regions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomRegions](https://www.tencentcloud.com/search/?wd=DescribeDBCustomRegions&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -115,6 +121,12 @@ def get_db_custom_regions_output(result_output_file: pulumi.Input[Optional[Optio
 
     example = tencentcloud.dbdc.get_db_custom_regions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomRegions](https://www.tencentcloud.com/search/?wd=DescribeDBCustomRegions&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

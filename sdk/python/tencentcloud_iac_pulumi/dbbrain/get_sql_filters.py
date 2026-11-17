@@ -128,6 +128,12 @@ def get_sql_filters(filter_ids: Optional[Sequence[_builtins.int]] = None,
         filter_ids=[sql_filter.filter_id])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&type=document&lang=en)
+
 
     :param Sequence[_builtins.int] filter_ids: filter id list.
     :param _builtins.str instance_id: instance id.
@@ -177,6 +183,12 @@ def get_sql_filters_output(filter_ids: pulumi.Input[Optional[Optional[Sequence[_
     sql_filters = tencentcloud.dbbrain.get_sql_filters_output(instance_id="mysql_ins_id",
         filter_ids=[sql_filter.filter_id])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&type=document&lang=en)
 
 
     :param Sequence[_builtins.int] filter_ids: filter id list.

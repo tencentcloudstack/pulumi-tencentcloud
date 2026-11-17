@@ -160,6 +160,14 @@ def get_basic_instances(id: Optional[_builtins.str] = None,
         subnet_id="subnet-nf9n81ps")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+
 
     :param _builtins.str id: ID of the SQL Server basic instance to be query.
     :param _builtins.str name: Name of the SQL Server basic instance to be query.
@@ -225,6 +233,14 @@ def get_basic_instances_output(id: pulumi.Input[Optional[Optional[_builtins.str]
     example_vpc = tencentcloud.sqlserver.get_basic_instances(vpc_id="vpc-409mvdvv",
         subnet_id="subnet-nf9n81ps")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
     :param _builtins.str id: ID of the SQL Server basic instance to be query.

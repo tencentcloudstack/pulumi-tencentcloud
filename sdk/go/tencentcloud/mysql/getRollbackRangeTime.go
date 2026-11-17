@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
 func GetRollbackRangeTime(ctx *pulumi.Context, args *GetRollbackRangeTimeArgs, opts ...pulumi.InvokeOption) (*GetRollbackRangeTimeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRollbackRangeTimeResult

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
         /// </summary>
         public static Task<GetCodeMaxPermissionResult> InvokeAsync(GetCodeMaxPermissionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCodeMaxPermissionResult>("tencentcloud:Wedata/getCodeMaxPermission:getCodeMaxPermission", args ?? new GetCodeMaxPermissionArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
         /// </summary>
         public static Output<GetCodeMaxPermissionResult> Invoke(GetCodeMaxPermissionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCodeMaxPermissionResult>("tencentcloud:Wedata/getCodeMaxPermission:getCodeMaxPermission", args ?? new GetCodeMaxPermissionInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
         /// </summary>
         public static Output<GetCodeMaxPermissionResult> Invoke(GetCodeMaxPermissionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCodeMaxPermissionResult>("tencentcloud:Wedata/getCodeMaxPermission:getCodeMaxPermission", args ?? new GetCodeMaxPermissionInvokeArgs(), options.WithDefaults());

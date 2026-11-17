@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string BasePath;
         /// <summary>
-        /// ID of the resource.
+        /// API service ID, e.g. `apisrv-xxxxxxxx`.
         /// </summary>
         public readonly string? Id;
         /// <summary>

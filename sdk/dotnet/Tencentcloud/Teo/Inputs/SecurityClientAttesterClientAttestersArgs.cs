@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string> AttesterSource { get; set; } = null!;
 
         /// <summary>
-        /// ID of the resource.
+        /// Client attester ID, e.g. `attest-xxxxxxxx`.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

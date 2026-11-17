@@ -85,6 +85,12 @@ def get_black_header(result_output_file: Optional[_builtins.str] = None,
     black_header = tencentcloud.gaap.get_black_header()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -110,6 +116,12 @@ def get_black_header_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     black_header = tencentcloud.gaap.get_black_header()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
 
 
     :param _builtins.str result_output_file: Used to save results.

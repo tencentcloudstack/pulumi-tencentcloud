@@ -668,6 +668,17 @@ class Topic(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTopic](https://www.tencentcloud.com/document/api/614/42785)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+        * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
+
         ## Import
 
         cls topic can be imported using the id, e.g.
@@ -837,6 +848,17 @@ class Topic(pulumi.CustomResource):
                 "tagKey": "tagValue",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTopic](https://www.tencentcloud.com/document/api/614/42785)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+        * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
 
         ## Import
 

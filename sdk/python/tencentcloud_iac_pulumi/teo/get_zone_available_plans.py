@@ -86,6 +86,12 @@ def get_zone_available_plans(result_output_file: Optional[_builtins.str] = None,
     zone_available_plans = tencentcloud.teo.get_zone_available_plans()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_zone_available_plans_output(result_output_file: pulumi.Input[Optional[Op
 
     zone_available_plans = tencentcloud.teo.get_zone_available_plans()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
 
 
     :param _builtins.str result_output_file: Used to save results.

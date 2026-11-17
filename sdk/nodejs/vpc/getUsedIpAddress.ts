@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-4owdpnwr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
  */
 export function getUsedIpAddress(args: GetUsedIpAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetUsedIpAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetUsedIpAddressResult {
  *     vpcId: "vpc-4owdpnwr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
  */
 export function getUsedIpAddressOutput(args: GetUsedIpAddressOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUsedIpAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -101,6 +101,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [BindRuleRealServers](https://www.tencentcloud.com/document/api/608/33047)
+//   - [CreateRule](https://www.tencentcloud.com/document/api/608/33045)
+//
+// * Read: [DescribeRulesByRuleIds](https://www.tencentcloud.com/document/api/608/33134)
+// * Update:
+//   - [BindRuleRealServers](https://www.tencentcloud.com/document/api/608/33047)
+//   - [ModifyRuleAttribute](https://www.tencentcloud.com/document/api/608/33038)
+//
+// * Delete:
+//   - [DeleteRule](https://www.tencentcloud.com/document/api/608/33043)
+//   - [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
+//
 // ## Import
 //
 // GAAP http rule can be imported using the id, e.g.

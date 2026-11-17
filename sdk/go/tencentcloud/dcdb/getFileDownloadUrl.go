@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/1042/44288)
 func GetFileDownloadUrl(ctx *pulumi.Context, args *GetFileDownloadUrlArgs, opts ...pulumi.InvokeOption) (*GetFileDownloadUrlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFileDownloadUrlResult

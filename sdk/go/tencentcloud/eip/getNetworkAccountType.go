@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNetworkAccountType](https://www.tencentcloud.com/search/?wd=DescribeNetworkAccountType&type=document&lang=en)
 func GetNetworkAccountType(ctx *pulumi.Context, args *GetNetworkAccountTypeArgs, opts ...pulumi.InvokeOption) (*GetNetworkAccountTypeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNetworkAccountTypeResult

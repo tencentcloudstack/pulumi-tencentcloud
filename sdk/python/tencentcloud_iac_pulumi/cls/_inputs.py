@@ -115,6 +115,14 @@ __all__ = [
     'DataTransformDstResourceArgsDict',
     'DataTransformEnvInfoArgs',
     'DataTransformEnvInfoArgsDict',
+    'DeliverTaskDeliverRuleArgs',
+    'DeliverTaskDeliverRuleArgsDict',
+    'DeliverTaskSourceTopicConfigArgs',
+    'DeliverTaskSourceTopicConfigArgsDict',
+    'DeliverTaskSourceTopicConfigTopicArgs',
+    'DeliverTaskSourceTopicConfigTopicArgsDict',
+    'DeliverTaskTargetTopicConfigArgs',
+    'DeliverTaskTargetTopicConfigArgsDict',
     'DlcDeliverDlcInfoArgs',
     'DlcDeliverDlcInfoArgsDict',
     'DlcDeliverDlcInfoFieldInfoArgs',
@@ -199,6 +207,8 @@ __all__ = [
     'KafkaRechargeLogRechargeRuleArgsDict',
     'KafkaRechargeProtocolArgs',
     'KafkaRechargeProtocolArgsDict',
+    'LogsetTagListArgs',
+    'LogsetTagListArgsDict',
     'MachineGroupMachineGroupTypeArgs',
     'MachineGroupMachineGroupTypeArgsDict',
     'MetricSubscribeInstanceInfoArgs',
@@ -215,8 +225,18 @@ __all__ = [
     'NoticeContentNoticeContentsRecoveryContentArgsDict',
     'NoticeContentNoticeContentsTriggerContentArgs',
     'NoticeContentNoticeContentsTriggerContentArgsDict',
+    'RemoteWriteTaskAuthInfoArgs',
+    'RemoteWriteTaskAuthInfoArgsDict',
     'ScheduledSqlDstResourceArgs',
     'ScheduledSqlDstResourceArgsDict',
+    'ScheduledSqlDstResourceCustomMetricLabelArgs',
+    'ScheduledSqlDstResourceCustomMetricLabelArgsDict',
+    'SplunkDeliverExternalRoleArgs',
+    'SplunkDeliverExternalRoleArgsDict',
+    'SplunkDeliverMetadataInfoArgs',
+    'SplunkDeliverMetadataInfoArgsDict',
+    'SplunkDeliverNetInfoArgs',
+    'SplunkDeliverNetInfoArgsDict',
     'TopicCustomKmsInfoArgs',
     'TopicCustomKmsInfoArgsDict',
     'TopicExtendsAnonymousAccessArgs',
@@ -5170,18 +5190,58 @@ class DataTransformDstResourceArgsDict(TypedDict):
     """
     Dst topic ID.
     """
+    external_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+    """
+    is_cross_account: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+    """
+    logset_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Name of the logset that contains the destination topic. Used in cross-account scenario.
+    """
+    role_arn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+    """
+    topic_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Name of the destination topic. Used in cross-account scenario.
+    """
 
 @pulumi.input_type
 class DataTransformDstResourceArgs:
     def __init__(__self__, *,
                  alias: pulumi.Input[_builtins.str],
-                 topic_id: pulumi.Input[_builtins.str]):
+                 topic_id: pulumi.Input[_builtins.str],
+                 external_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 is_cross_account: pulumi.Input[Optional[_builtins.bool]] = None,
+                 logset_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 topic_name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] alias: Alias.
         :param pulumi.Input[_builtins.str] topic_id: Dst topic ID.
+        :param pulumi.Input[_builtins.str] external_id: External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+        :param pulumi.Input[_builtins.bool] is_cross_account: Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+        :param pulumi.Input[_builtins.str] logset_name: Name of the logset that contains the destination topic. Used in cross-account scenario.
+        :param pulumi.Input[_builtins.str] role_arn: In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+        :param pulumi.Input[_builtins.str] topic_name: Name of the destination topic. Used in cross-account scenario.
         """
         pulumi.set(__self__, "alias", alias)
         pulumi.set(__self__, "topic_id", topic_id)
+        if external_id is not None:
+            pulumi.set(__self__, "external_id", external_id)
+        if is_cross_account is not None:
+            pulumi.set(__self__, "is_cross_account", is_cross_account)
+        if logset_name is not None:
+            pulumi.set(__self__, "logset_name", logset_name)
+        if role_arn is not None:
+            pulumi.set(__self__, "role_arn", role_arn)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
 
     @_builtins.property
     @pulumi.getter
@@ -5206,6 +5266,66 @@ class DataTransformDstResourceArgs:
     @topic_id.setter
     def topic_id(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "topic_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+        """
+        return pulumi.get(self, "external_id")
+
+    @external_id.setter
+    def external_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isCrossAccount")
+    def is_cross_account(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+        """
+        return pulumi.get(self, "is_cross_account")
+
+    @is_cross_account.setter
+    def is_cross_account(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_cross_account", value)
+
+    @_builtins.property
+    @pulumi.getter(name="logsetName")
+    def logset_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Name of the logset that contains the destination topic. Used in cross-account scenario.
+        """
+        return pulumi.get(self, "logset_name")
+
+    @logset_name.setter
+    def logset_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "logset_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @role_arn.setter
+    def role_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "role_arn", value)
+
+    @_builtins.property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Name of the destination topic. Used in cross-account scenario.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "topic_name", value)
 
 
 class DataTransformEnvInfoArgsDict(TypedDict):
@@ -5253,6 +5373,254 @@ class DataTransformEnvInfoArgs:
     @value.setter
     def value(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "value", value)
+
+
+class DeliverTaskDeliverRuleArgsDict(TypedDict):
+    data_scope: pulumi.Input[_builtins.int]
+    """
+    Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+    """
+
+@pulumi.input_type
+class DeliverTaskDeliverRuleArgs:
+    def __init__(__self__, *,
+                 data_scope: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.int] data_scope: Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+        """
+        pulumi.set(__self__, "data_scope", data_scope)
+
+    @_builtins.property
+    @pulumi.getter(name="dataScope")
+    def data_scope(self) -> pulumi.Input[_builtins.int]:
+        """
+        Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+        """
+        return pulumi.get(self, "data_scope")
+
+    @data_scope.setter
+    def data_scope(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "data_scope", value)
+
+
+class DeliverTaskSourceTopicConfigArgsDict(TypedDict):
+    logset_id: pulumi.Input[_builtins.str]
+    """
+    Source logset id.
+    """
+    topic_filter_type: pulumi.Input[_builtins.int]
+    """
+    Topic filter type. 1: static select.
+    """
+    topics: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['DeliverTaskSourceTopicConfigTopicArgsDict']]]]]
+    """
+    Source topic list.
+    """
+
+@pulumi.input_type
+class DeliverTaskSourceTopicConfigArgs:
+    def __init__(__self__, *,
+                 logset_id: pulumi.Input[_builtins.str],
+                 topic_filter_type: pulumi.Input[_builtins.int],
+                 topics: pulumi.Input[Optional[Sequence[pulumi.Input['DeliverTaskSourceTopicConfigTopicArgs']]]] = None):
+        """
+        :param pulumi.Input[_builtins.str] logset_id: Source logset id.
+        :param pulumi.Input[_builtins.int] topic_filter_type: Topic filter type. 1: static select.
+        :param pulumi.Input[Sequence[pulumi.Input['DeliverTaskSourceTopicConfigTopicArgs']]] topics: Source topic list.
+        """
+        pulumi.set(__self__, "logset_id", logset_id)
+        pulumi.set(__self__, "topic_filter_type", topic_filter_type)
+        if topics is not None:
+            pulumi.set(__self__, "topics", topics)
+
+    @_builtins.property
+    @pulumi.getter(name="logsetId")
+    def logset_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Source logset id.
+        """
+        return pulumi.get(self, "logset_id")
+
+    @logset_id.setter
+    def logset_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "logset_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="topicFilterType")
+    def topic_filter_type(self) -> pulumi.Input[_builtins.int]:
+        """
+        Topic filter type. 1: static select.
+        """
+        return pulumi.get(self, "topic_filter_type")
+
+    @topic_filter_type.setter
+    def topic_filter_type(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "topic_filter_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def topics(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['DeliverTaskSourceTopicConfigTopicArgs']]]]:
+        """
+        Source topic list.
+        """
+        return pulumi.get(self, "topics")
+
+    @topics.setter
+    def topics(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['DeliverTaskSourceTopicConfigTopicArgs']]]]):
+        pulumi.set(self, "topics", value)
+
+
+class DeliverTaskSourceTopicConfigTopicArgsDict(TypedDict):
+    topic_id: pulumi.Input[_builtins.str]
+    """
+    Log topic id.
+    """
+
+@pulumi.input_type
+class DeliverTaskSourceTopicConfigTopicArgs:
+    def __init__(__self__, *,
+                 topic_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] topic_id: Log topic id.
+        """
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @_builtins.property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Log topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "topic_id", value)
+
+
+class DeliverTaskTargetTopicConfigArgsDict(TypedDict):
+    account_type: pulumi.Input[_builtins.int]
+    """
+    Target account type. 1: current main account, 2: other main account.
+    """
+    logset_id: pulumi.Input[_builtins.str]
+    """
+    Target logset id.
+    """
+    region: pulumi.Input[_builtins.str]
+    """
+    Target region, e.g. ap-guangzhou.
+    """
+    topic_id: pulumi.Input[_builtins.str]
+    """
+    Target topic id.
+    """
+    external_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    External ID, required when AccountType=2.
+    """
+    role_arn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Role ARN, required when AccountType=2.
+    """
+
+@pulumi.input_type
+class DeliverTaskTargetTopicConfigArgs:
+    def __init__(__self__, *,
+                 account_type: pulumi.Input[_builtins.int],
+                 logset_id: pulumi.Input[_builtins.str],
+                 region: pulumi.Input[_builtins.str],
+                 topic_id: pulumi.Input[_builtins.str],
+                 external_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 role_arn: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.int] account_type: Target account type. 1: current main account, 2: other main account.
+        :param pulumi.Input[_builtins.str] logset_id: Target logset id.
+        :param pulumi.Input[_builtins.str] region: Target region, e.g. ap-guangzhou.
+        :param pulumi.Input[_builtins.str] topic_id: Target topic id.
+        :param pulumi.Input[_builtins.str] external_id: External ID, required when AccountType=2.
+        :param pulumi.Input[_builtins.str] role_arn: Role ARN, required when AccountType=2.
+        """
+        pulumi.set(__self__, "account_type", account_type)
+        pulumi.set(__self__, "logset_id", logset_id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "topic_id", topic_id)
+        if external_id is not None:
+            pulumi.set(__self__, "external_id", external_id)
+        if role_arn is not None:
+            pulumi.set(__self__, "role_arn", role_arn)
+
+    @_builtins.property
+    @pulumi.getter(name="accountType")
+    def account_type(self) -> pulumi.Input[_builtins.int]:
+        """
+        Target account type. 1: current main account, 2: other main account.
+        """
+        return pulumi.get(self, "account_type")
+
+    @account_type.setter
+    def account_type(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "account_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="logsetId")
+    def logset_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Target logset id.
+        """
+        return pulumi.get(self, "logset_id")
+
+    @logset_id.setter
+    def logset_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "logset_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[_builtins.str]:
+        """
+        Target region, e.g. ap-guangzhou.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "region", value)
+
+    @_builtins.property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Target topic id.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "topic_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        External ID, required when AccountType=2.
+        """
+        return pulumi.get(self, "external_id")
+
+    @external_id.setter
+    def external_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Role ARN, required when AccountType=2.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @role_arn.setter
+    def role_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "role_arn", value)
 
 
 class DlcDeliverDlcInfoArgsDict(TypedDict):
@@ -8715,6 +9083,53 @@ class KafkaRechargeProtocolArgs:
         pulumi.set(self, "user_name", value)
 
 
+class LogsetTagListArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    Tag key.
+    """
+    value: pulumi.Input[_builtins.str]
+    """
+    Tag value.
+    """
+
+@pulumi.input_type
+class LogsetTagListArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 value: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key: Tag key.
+        :param pulumi.Input[_builtins.str] value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[_builtins.str]:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "value", value)
+
+
 class MachineGroupMachineGroupTypeArgsDict(TypedDict):
     type: pulumi.Input[_builtins.str]
     """
@@ -9157,6 +9572,75 @@ class NoticeContentNoticeContentsTriggerContentArgs:
         pulumi.set(self, "title", value)
 
 
+class RemoteWriteTaskAuthInfoArgsDict(TypedDict):
+    password: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Basic auth password.
+    """
+    token: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Basic auth token.
+    """
+    username: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Basic auth username.
+    """
+
+@pulumi.input_type
+class RemoteWriteTaskAuthInfoArgs:
+    def __init__(__self__, *,
+                 password: pulumi.Input[Optional[_builtins.str]] = None,
+                 token: pulumi.Input[Optional[_builtins.str]] = None,
+                 username: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] password: Basic auth password.
+        :param pulumi.Input[_builtins.str] token: Basic auth token.
+        :param pulumi.Input[_builtins.str] username: Basic auth username.
+        """
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if token is not None:
+            pulumi.set(__self__, "token", token)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def password(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Basic auth password.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "password", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def token(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Basic auth token.
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "token", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Basic auth username.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "username", value)
+
+
 class ScheduledSqlDstResourceArgsDict(TypedDict):
     topic_id: pulumi.Input[_builtins.str]
     """
@@ -9166,9 +9650,25 @@ class ScheduledSqlDstResourceArgsDict(TypedDict):
     """
     topic type.
     """
+    custom_metric_labels: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['ScheduledSqlDstResourceCustomMetricLabelArgsDict']]]]]
+    """
+    custom metric labels, used to add static dimensions to metrics.
+    """
+    custom_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    metric timestamp field, the default value is the left boundary time of the SQL query range.
+    """
+    metric_labels: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    metric dimensions, time type is not accepted.
+    """
     metric_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     metric name.
+    """
+    metric_names: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    metric names, used when biz_type is 1 (metric topic) for multi-metric scenarios.
     """
     region: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -9180,19 +9680,35 @@ class ScheduledSqlDstResourceArgs:
     def __init__(__self__, *,
                  topic_id: pulumi.Input[_builtins.str],
                  biz_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 custom_metric_labels: pulumi.Input[Optional[Sequence[pulumi.Input['ScheduledSqlDstResourceCustomMetricLabelArgs']]]] = None,
+                 custom_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 metric_labels: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  metric_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 metric_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  region: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] topic_id: dst topic id.
         :param pulumi.Input[_builtins.int] biz_type: topic type.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduledSqlDstResourceCustomMetricLabelArgs']]] custom_metric_labels: custom metric labels, used to add static dimensions to metrics.
+        :param pulumi.Input[_builtins.str] custom_time: metric timestamp field, the default value is the left boundary time of the SQL query range.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] metric_labels: metric dimensions, time type is not accepted.
         :param pulumi.Input[_builtins.str] metric_name: metric name.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] metric_names: metric names, used when biz_type is 1 (metric topic) for multi-metric scenarios.
         :param pulumi.Input[_builtins.str] region: topic region.
         """
         pulumi.set(__self__, "topic_id", topic_id)
         if biz_type is not None:
             pulumi.set(__self__, "biz_type", biz_type)
+        if custom_metric_labels is not None:
+            pulumi.set(__self__, "custom_metric_labels", custom_metric_labels)
+        if custom_time is not None:
+            pulumi.set(__self__, "custom_time", custom_time)
+        if metric_labels is not None:
+            pulumi.set(__self__, "metric_labels", metric_labels)
         if metric_name is not None:
             pulumi.set(__self__, "metric_name", metric_name)
+        if metric_names is not None:
+            pulumi.set(__self__, "metric_names", metric_names)
         if region is not None:
             pulumi.set(__self__, "region", region)
 
@@ -9221,6 +9737,42 @@ class ScheduledSqlDstResourceArgs:
         pulumi.set(self, "biz_type", value)
 
     @_builtins.property
+    @pulumi.getter(name="customMetricLabels")
+    def custom_metric_labels(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ScheduledSqlDstResourceCustomMetricLabelArgs']]]]:
+        """
+        custom metric labels, used to add static dimensions to metrics.
+        """
+        return pulumi.get(self, "custom_metric_labels")
+
+    @custom_metric_labels.setter
+    def custom_metric_labels(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ScheduledSqlDstResourceCustomMetricLabelArgs']]]]):
+        pulumi.set(self, "custom_metric_labels", value)
+
+    @_builtins.property
+    @pulumi.getter(name="customTime")
+    def custom_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        metric timestamp field, the default value is the left boundary time of the SQL query range.
+        """
+        return pulumi.get(self, "custom_time")
+
+    @custom_time.setter
+    def custom_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "custom_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="metricLabels")
+    def metric_labels(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        metric dimensions, time type is not accepted.
+        """
+        return pulumi.get(self, "metric_labels")
+
+    @metric_labels.setter
+    def metric_labels(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "metric_labels", value)
+
+    @_builtins.property
     @pulumi.getter(name="metricName")
     def metric_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -9233,6 +9785,18 @@ class ScheduledSqlDstResourceArgs:
         pulumi.set(self, "metric_name", value)
 
     @_builtins.property
+    @pulumi.getter(name="metricNames")
+    def metric_names(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        metric names, used when biz_type is 1 (metric topic) for multi-metric scenarios.
+        """
+        return pulumi.get(self, "metric_names")
+
+    @metric_names.setter
+    def metric_names(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "metric_names", value)
+
+    @_builtins.property
     @pulumi.getter
     def region(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -9243,6 +9807,333 @@ class ScheduledSqlDstResourceArgs:
     @region.setter
     def region(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "region", value)
+
+
+class ScheduledSqlDstResourceCustomMetricLabelArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    custom metric label key.
+    """
+    value: pulumi.Input[_builtins.str]
+    """
+    custom metric label value.
+    """
+
+@pulumi.input_type
+class ScheduledSqlDstResourceCustomMetricLabelArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 value: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key: custom metric label key.
+        :param pulumi.Input[_builtins.str] value: custom metric label value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        custom metric label key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[_builtins.str]:
+        """
+        custom metric label value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "value", value)
+
+
+class SplunkDeliverExternalRoleArgsDict(TypedDict):
+    external_id: pulumi.Input[_builtins.str]
+    """
+    Cross-account delivery role name.
+    """
+    role_arn: pulumi.Input[_builtins.str]
+    """
+    Cross-account delivery role RoleArn.
+    """
+
+@pulumi.input_type
+class SplunkDeliverExternalRoleArgs:
+    def __init__(__self__, *,
+                 external_id: pulumi.Input[_builtins.str],
+                 role_arn: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] external_id: Cross-account delivery role name.
+        :param pulumi.Input[_builtins.str] role_arn: Cross-account delivery role RoleArn.
+        """
+        pulumi.set(__self__, "external_id", external_id)
+        pulumi.set(__self__, "role_arn", role_arn)
+
+    @_builtins.property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Cross-account delivery role name.
+        """
+        return pulumi.get(self, "external_id")
+
+    @external_id.setter
+    def external_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "external_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> pulumi.Input[_builtins.str]:
+        """
+        Cross-account delivery role RoleArn.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @role_arn.setter
+    def role_arn(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "role_arn", value)
+
+
+class SplunkDeliverMetadataInfoArgsDict(TypedDict):
+    format: pulumi.Input[_builtins.str]
+    """
+    Data format. Valid values: rawlog, json.
+    """
+    enable_tag: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to deliver __TAG__ field.
+    """
+    meta_fields: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+    """
+    tag_json_tiled: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to flatten JSON. Required when enable_tag is true.
+    """
+
+@pulumi.input_type
+class SplunkDeliverMetadataInfoArgs:
+    def __init__(__self__, *,
+                 format: pulumi.Input[_builtins.str],
+                 enable_tag: pulumi.Input[Optional[_builtins.bool]] = None,
+                 meta_fields: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 tag_json_tiled: pulumi.Input[Optional[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[_builtins.str] format: Data format. Valid values: rawlog, json.
+        :param pulumi.Input[_builtins.bool] enable_tag: Whether to deliver __TAG__ field.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] meta_fields: Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+        :param pulumi.Input[_builtins.bool] tag_json_tiled: Whether to flatten JSON. Required when enable_tag is true.
+        """
+        pulumi.set(__self__, "format", format)
+        if enable_tag is not None:
+            pulumi.set(__self__, "enable_tag", enable_tag)
+        if meta_fields is not None:
+            pulumi.set(__self__, "meta_fields", meta_fields)
+        if tag_json_tiled is not None:
+            pulumi.set(__self__, "tag_json_tiled", tag_json_tiled)
+
+    @_builtins.property
+    @pulumi.getter
+    def format(self) -> pulumi.Input[_builtins.str]:
+        """
+        Data format. Valid values: rawlog, json.
+        """
+        return pulumi.get(self, "format")
+
+    @format.setter
+    def format(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "format", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableTag")
+    def enable_tag(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to deliver __TAG__ field.
+        """
+        return pulumi.get(self, "enable_tag")
+
+    @enable_tag.setter
+    def enable_tag(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_tag", value)
+
+    @_builtins.property
+    @pulumi.getter(name="metaFields")
+    def meta_fields(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+        """
+        return pulumi.get(self, "meta_fields")
+
+    @meta_fields.setter
+    def meta_fields(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "meta_fields", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tagJsonTiled")
+    def tag_json_tiled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to flatten JSON. Required when enable_tag is true.
+        """
+        return pulumi.get(self, "tag_json_tiled")
+
+    @tag_json_tiled.setter
+    def tag_json_tiled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "tag_json_tiled", value)
+
+
+class SplunkDeliverNetInfoArgsDict(TypedDict):
+    host: pulumi.Input[_builtins.str]
+    """
+    Network address.
+    """
+    net_type: pulumi.Input[_builtins.int]
+    """
+    Network type. 1: internal network, 2: external network.
+    """
+    port: pulumi.Input[_builtins.int]
+    """
+    Port.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    Authentication token.
+    """
+    is_ssl: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to use SSL. Default is false.
+    """
+    virtual_gateway_type: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Network service type. Required when net_type is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+    """
+    vpc_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    VPC ID. Required when net_type is internal network.
+    """
+
+@pulumi.input_type
+class SplunkDeliverNetInfoArgs:
+    def __init__(__self__, *,
+                 host: pulumi.Input[_builtins.str],
+                 net_type: pulumi.Input[_builtins.int],
+                 port: pulumi.Input[_builtins.int],
+                 token: pulumi.Input[_builtins.str],
+                 is_ssl: pulumi.Input[Optional[_builtins.bool]] = None,
+                 virtual_gateway_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 vpc_id: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] host: Network address.
+        :param pulumi.Input[_builtins.int] net_type: Network type. 1: internal network, 2: external network.
+        :param pulumi.Input[_builtins.int] port: Port.
+        :param pulumi.Input[_builtins.str] token: Authentication token.
+        :param pulumi.Input[_builtins.bool] is_ssl: Whether to use SSL. Default is false.
+        :param pulumi.Input[_builtins.int] virtual_gateway_type: Network service type. Required when net_type is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+        :param pulumi.Input[_builtins.str] vpc_id: VPC ID. Required when net_type is internal network.
+        """
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "net_type", net_type)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "token", token)
+        if is_ssl is not None:
+            pulumi.set(__self__, "is_ssl", is_ssl)
+        if virtual_gateway_type is not None:
+            pulumi.set(__self__, "virtual_gateway_type", virtual_gateway_type)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def host(self) -> pulumi.Input[_builtins.str]:
+        """
+        Network address.
+        """
+        return pulumi.get(self, "host")
+
+    @host.setter
+    def host(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "host", value)
+
+    @_builtins.property
+    @pulumi.getter(name="netType")
+    def net_type(self) -> pulumi.Input[_builtins.int]:
+        """
+        Network type. 1: internal network, 2: external network.
+        """
+        return pulumi.get(self, "net_type")
+
+    @net_type.setter
+    def net_type(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "net_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[_builtins.int]:
+        """
+        Port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "port", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def token(self) -> pulumi.Input[_builtins.str]:
+        """
+        Authentication token.
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "token", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isSsl")
+    def is_ssl(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to use SSL. Default is false.
+        """
+        return pulumi.get(self, "is_ssl")
+
+    @is_ssl.setter
+    def is_ssl(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_ssl", value)
+
+    @_builtins.property
+    @pulumi.getter(name="virtualGatewayType")
+    def virtual_gateway_type(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Network service type. Required when net_type is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+        """
+        return pulumi.get(self, "virtual_gateway_type")
+
+    @virtual_gateway_type.setter
+    def virtual_gateway_type(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "virtual_gateway_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        VPC ID. Required when net_type is internal network.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @vpc_id.setter
+    def vpc_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "vpc_id", value)
 
 
 class TopicCustomKmsInfoArgsDict(TypedDict):

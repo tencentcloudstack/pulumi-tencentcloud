@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
         /// </summary>
         public static Task<GetInstanceByCertIdResult> InvokeAsync(GetInstanceByCertIdArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
         /// </summary>
         public static Output<GetInstanceByCertIdResult> Invoke(GetInstanceByCertIdInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
         /// </summary>
         public static Output<GetInstanceByCertIdResult> Invoke(GetInstanceByCertIdInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdInvokeArgs(), options.WithDefaults());

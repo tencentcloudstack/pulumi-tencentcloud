@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
         /// </summary>
         public static Task<GetDomainErrorPageInfosResult> InvokeAsync(GetDomainErrorPageInfosArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
         /// </summary>
         public static Output<GetDomainErrorPageInfosResult> Invoke(GetDomainErrorPageInfosInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
         /// </summary>
         public static Output<GetDomainErrorPageInfosResult> Invoke(GetDomainErrorPageInfosInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosInvokeArgs(), options.WithDefaults());

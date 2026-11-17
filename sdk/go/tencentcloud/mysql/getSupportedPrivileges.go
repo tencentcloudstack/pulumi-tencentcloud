@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
 func GetSupportedPrivileges(ctx *pulumi.Context, args *GetSupportedPrivilegesArgs, opts ...pulumi.InvokeOption) (*GetSupportedPrivilegesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSupportedPrivilegesResult

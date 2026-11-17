@@ -213,6 +213,14 @@ class PolicyVersion(pulumi.CustomResource):
             }))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePolicyVersion](https://www.tencentcloud.com/document/api/598/36313)
+        * Read: [GetPolicyVersion](https://www.tencentcloud.com/document/api/598/36311)
+        * Delete: [DeletePolicyVersion](https://www.tencentcloud.com/document/api/598/36312)
+
         ## Import
 
         CAM policy version can be imported using the id, e.g.
@@ -274,6 +282,14 @@ class PolicyVersion(pulumi.CustomResource):
                 ],
             }))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePolicyVersion](https://www.tencentcloud.com/document/api/598/36313)
+        * Read: [GetPolicyVersion](https://www.tencentcloud.com/document/api/598/36311)
+        * Delete: [DeletePolicyVersion](https://www.tencentcloud.com/document/api/598/36312)
 
         ## Import
 

@@ -119,6 +119,14 @@ class InstanceMixIpTargetConfig(pulumi.CustomResource):
             mix_ip_target=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLoadBalancerMixIpTarget](https://www.tencentcloud.com/search/?wd=ModifyLoadBalancerMixIpTarget&type=document&lang=en)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Update: [ModifyLoadBalancerMixIpTarget](https://www.tencentcloud.com/search/?wd=ModifyLoadBalancerMixIpTarget&type=document&lang=en)
+
         ## Import
 
         clb instance_mix_ip_target_config can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class InstanceMixIpTargetConfig(pulumi.CustomResource):
             load_balancer_id="lb-5dnrkgry",
             mix_ip_target=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLoadBalancerMixIpTarget](https://www.tencentcloud.com/search/?wd=ModifyLoadBalancerMixIpTarget&type=document&lang=en)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Update: [ModifyLoadBalancerMixIpTarget](https://www.tencentcloud.com/search/?wd=ModifyLoadBalancerMixIpTarget&type=document&lang=en)
 
         ## Import
 

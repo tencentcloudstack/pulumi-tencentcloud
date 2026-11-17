@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBundles](https://www.tencentcloud.com/document/api/1103/42472)
 func GetBundle(ctx *pulumi.Context, args *GetBundleArgs, opts ...pulumi.InvokeOption) (*GetBundleResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBundleResult

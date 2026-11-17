@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [Invoke](https://www.tencentcloud.com/document/api/583/17243)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/invokeFunction:InvokeFunction")]
     public partial class InvokeFunction : global::Pulumi.CustomResource

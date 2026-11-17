@@ -200,6 +200,12 @@ def get_upload_incremental_info(backup_migration_id: Optional[_builtins.str] = N
         incremental_migration_id="mssql-incremental-migration-h36gkdxn")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
+
 
     :param _builtins.str backup_migration_id: Backup import task ID, which is returned through the API CreateBackupMigration.
     :param _builtins.str incremental_migration_id: ID of the incremental import task.
@@ -246,6 +252,12 @@ def get_upload_incremental_info_output(backup_migration_id: pulumi.Input[Optiona
         backup_migration_id="mssql-backup-migration-83t5u3tv",
         incremental_migration_id="mssql-incremental-migration-h36gkdxn")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
 
 
     :param _builtins.str backup_migration_id: Backup import task ID, which is returned through the API CreateBackupMigration.

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     dataEngineId: "DataEngine-80ibn1cj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
  */
 export function getCheckDataEngineImageCanBeUpgrade(args: GetCheckDataEngineImageCanBeUpgradeArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckDataEngineImageCanBeUpgradeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -72,6 +78,12 @@ export interface GetCheckDataEngineImageCanBeUpgradeResult {
  *     dataEngineId: "DataEngine-80ibn1cj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
  */
 export function getCheckDataEngineImageCanBeUpgradeOutput(args: GetCheckDataEngineImageCanBeUpgradeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCheckDataEngineImageCanBeUpgradeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

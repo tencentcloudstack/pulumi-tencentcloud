@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
         /// </summary>
         public static Task<GetOwaspRuleTypesResult> InvokeAsync(GetOwaspRuleTypesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOwaspRuleTypesResult>("tencentcloud:Waf/getOwaspRuleTypes:getOwaspRuleTypes", args ?? new GetOwaspRuleTypesArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
         /// </summary>
         public static Output<GetOwaspRuleTypesResult> Invoke(GetOwaspRuleTypesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOwaspRuleTypesResult>("tencentcloud:Waf/getOwaspRuleTypes:getOwaspRuleTypes", args ?? new GetOwaspRuleTypesInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
         /// </summary>
         public static Output<GetOwaspRuleTypesResult> Invoke(GetOwaspRuleTypesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOwaspRuleTypesResult>("tencentcloud:Waf/getOwaspRuleTypes:getOwaspRuleTypes", args ?? new GetOwaspRuleTypesInvokeArgs(), options.WithDefaults());

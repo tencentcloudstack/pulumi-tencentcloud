@@ -22,6 +22,14 @@ import * as utilities from "../utilities";
  *     content: example.then(example => example.content),
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+ *   - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
  */
 export class ImportZoneConfigOperation extends pulumi.CustomResource {
     /**

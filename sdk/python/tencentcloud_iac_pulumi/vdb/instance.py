@@ -325,6 +325,7 @@ class _InstanceState:
                  expired_at: pulumi.Input[Optional[_builtins.str]] = None,
                  extend: pulumi.Input[Optional[_builtins.str]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  instance_type: pulumi.Input[Optional[_builtins.str]] = None,
                  is_no_expired: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -363,6 +364,7 @@ class _InstanceState:
         :param pulumi.Input[_builtins.str] expired_at: Expiration time.
         :param pulumi.Input[_builtins.str] extend: Extended information in JSON format.
         :param pulumi.Input[_builtins.bool] force_delete: Whether to force delete (destroy) the instance. If false, only isolate to recycle bin. If true, isolate then destroy. Default is false.
+        :param pulumi.Input[_builtins.str] instance_id: Instance ID.
         :param pulumi.Input[_builtins.str] instance_name: Instance name. Supports up to 60 characters.
         :param pulumi.Input[_builtins.str] instance_type: Instance type. Valid values: base, single, cluster.
         :param pulumi.Input[_builtins.bool] is_no_expired: Whether the instance never expires.
@@ -409,6 +411,8 @@ class _InstanceState:
             pulumi.set(__self__, "extend", extend)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if instance_type is not None:
@@ -579,6 +583,18 @@ class _InstanceState:
     @force_delete.setter
     def force_delete(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_delete", value)
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_id", value)
 
     @_builtins.property
     @pulumi.getter(name="instanceName")
@@ -920,18 +936,18 @@ class Instance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         example = tencentcloud.vdb.Instance("example",
-            vpc_id="vpc-xxxxxxxx",
-            subnet_id="subnet-xxxxxxxx",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             pay_mode=0,
-            security_group_ids=["sg-xxxxxxxx"],
+            security_group_ids=["sg-4rd5741x"],
             instance_name="tf-example",
             instance_type="single",
-            node_type="normal",
+            node_type="store",
             cpu=2,
-            memory=4,
+            memory=16,
             disk_size=50,
             worker_node_num=1,
-            force_delete=False)
+            force_delete=True)
         ```
 
         ### Create a monthly subscription cluster instance with all parameters
@@ -941,12 +957,13 @@ class Instance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         cluster = tencentcloud.vdb.Instance("cluster",
-            vpc_id="vpc-xxxxxxxx",
-            subnet_id="subnet-xxxxxxxx",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            security_group_ids=["sg-4rd5741x"],
             pay_mode=1,
             pay_period=1,
             auto_renew=1,
-            instance_name="tf-example-cluster",
+            instance_name="tf-example",
             instance_type="cluster",
             mode="two",
             product_type=0,
@@ -957,25 +974,31 @@ class Instance(pulumi.CustomResource):
             worker_node_num=2,
             params="{\\"key\\":\\"value\\"}",
             force_delete=True,
-            security_group_ids=["sg-xxxxxxxx"],
-            resource_tags=[
-                {
-                    "tag_key": "env",
-                    "tag_value": "test",
-                },
-                {
-                    "tag_key": "project",
-                    "tag_value": "demo",
-                },
-            ])
+            resource_tags=[{
+                "tag_key": "createBy",
+                "tag_value": "Terraform",
+            }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+        * Update:
+          - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceSecurityGroups&type=document&lang=en)
+          - [ScaleOutInstance](https://www.tencentcloud.com/search/?wd=ScaleOutInstance&type=document&lang=en)
+          - [ScaleUpInstance](https://www.tencentcloud.com/search/?wd=ScaleUpInstance&type=document&lang=en)
+        * Delete:
+          - [DestroyInstances](https://www.tencentcloud.com/search/?wd=DestroyInstances&type=document&lang=en)
+          - [IsolateInstance](https://www.tencentcloud.com/search/?wd=IsolateInstance&type=document&lang=en)
 
         ## Import
 
         VDB instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-xxxxxxxx
+        $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-oft69wcm
         ```
 
 
@@ -1020,18 +1043,18 @@ class Instance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         example = tencentcloud.vdb.Instance("example",
-            vpc_id="vpc-xxxxxxxx",
-            subnet_id="subnet-xxxxxxxx",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             pay_mode=0,
-            security_group_ids=["sg-xxxxxxxx"],
+            security_group_ids=["sg-4rd5741x"],
             instance_name="tf-example",
             instance_type="single",
-            node_type="normal",
+            node_type="store",
             cpu=2,
-            memory=4,
+            memory=16,
             disk_size=50,
             worker_node_num=1,
-            force_delete=False)
+            force_delete=True)
         ```
 
         ### Create a monthly subscription cluster instance with all parameters
@@ -1041,12 +1064,13 @@ class Instance(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         cluster = tencentcloud.vdb.Instance("cluster",
-            vpc_id="vpc-xxxxxxxx",
-            subnet_id="subnet-xxxxxxxx",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            security_group_ids=["sg-4rd5741x"],
             pay_mode=1,
             pay_period=1,
             auto_renew=1,
-            instance_name="tf-example-cluster",
+            instance_name="tf-example",
             instance_type="cluster",
             mode="two",
             product_type=0,
@@ -1057,25 +1081,31 @@ class Instance(pulumi.CustomResource):
             worker_node_num=2,
             params="{\\"key\\":\\"value\\"}",
             force_delete=True,
-            security_group_ids=["sg-xxxxxxxx"],
-            resource_tags=[
-                {
-                    "tag_key": "env",
-                    "tag_value": "test",
-                },
-                {
-                    "tag_key": "project",
-                    "tag_value": "demo",
-                },
-            ])
+            resource_tags=[{
+                "tag_key": "createBy",
+                "tag_value": "Terraform",
+            }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+        * Update:
+          - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceSecurityGroups&type=document&lang=en)
+          - [ScaleOutInstance](https://www.tencentcloud.com/search/?wd=ScaleOutInstance&type=document&lang=en)
+          - [ScaleUpInstance](https://www.tencentcloud.com/search/?wd=ScaleUpInstance&type=document&lang=en)
+        * Delete:
+          - [DestroyInstances](https://www.tencentcloud.com/search/?wd=DestroyInstances&type=document&lang=en)
+          - [IsolateInstance](https://www.tencentcloud.com/search/?wd=IsolateInstance&type=document&lang=en)
 
         ## Import
 
         VDB instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-xxxxxxxx
+        $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-oft69wcm
         ```
 
 
@@ -1153,6 +1183,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["engine_version"] = None
             __props__.__dict__["expired_at"] = None
             __props__.__dict__["extend"] = None
+            __props__.__dict__["instance_id"] = None
             __props__.__dict__["is_no_expired"] = None
             __props__.__dict__["isolate_at"] = None
             __props__.__dict__["networks"] = None
@@ -1184,6 +1215,7 @@ class Instance(pulumi.CustomResource):
             expired_at: pulumi.Input[Optional[_builtins.str]] = None,
             extend: pulumi.Input[Optional[_builtins.str]] = None,
             force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+            instance_id: pulumi.Input[Optional[_builtins.str]] = None,
             instance_name: pulumi.Input[Optional[_builtins.str]] = None,
             instance_type: pulumi.Input[Optional[_builtins.str]] = None,
             is_no_expired: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -1226,6 +1258,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] expired_at: Expiration time.
         :param pulumi.Input[_builtins.str] extend: Extended information in JSON format.
         :param pulumi.Input[_builtins.bool] force_delete: Whether to force delete (destroy) the instance. If false, only isolate to recycle bin. If true, isolate then destroy. Default is false.
+        :param pulumi.Input[_builtins.str] instance_id: Instance ID.
         :param pulumi.Input[_builtins.str] instance_name: Instance name. Supports up to 60 characters.
         :param pulumi.Input[_builtins.str] instance_type: Instance type. Valid values: base, single, cluster.
         :param pulumi.Input[_builtins.bool] is_no_expired: Whether the instance never expires.
@@ -1266,6 +1299,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["expired_at"] = expired_at
         __props__.__dict__["extend"] = extend
         __props__.__dict__["force_delete"] = force_delete
+        __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["instance_type"] = instance_type
         __props__.__dict__["is_no_expired"] = is_no_expired
@@ -1303,7 +1337,7 @@ class Instance(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="autoRenew")
-    def auto_renew(self) -> pulumi.Output[Optional[_builtins.int]]:
+    def auto_renew(self) -> pulumi.Output[_builtins.int]:
         """
         Auto-renew flag. 0: disabled, 1: enabled.
         """
@@ -1374,8 +1408,16 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "force_delete")
 
     @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @_builtins.property
     @pulumi.getter(name="instanceName")
-    def instance_name(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def instance_name(self) -> pulumi.Output[_builtins.str]:
         """
         Instance name. Supports up to 60 characters.
         """
@@ -1431,7 +1473,7 @@ class Instance(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="nodeType")
-    def node_type(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def node_type(self) -> pulumi.Output[_builtins.str]:
         """
         Node type. Valid values: compute, normal, store.
         """
@@ -1479,7 +1521,7 @@ class Instance(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="productType")
-    def product_type(self) -> pulumi.Output[Optional[_builtins.int]]:
+    def product_type(self) -> pulumi.Output[_builtins.int]:
         """
         Product version. 0: standard, 1: capacity-enhanced.
         """

@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     resumeOption: "normal",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+ *   - [ResumeMigrateJob](https://www.tencentcloud.com/document/api/571/51803)
  */
 export class MigrateJobResumeOperation extends pulumi.CustomResource {
     /**

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
         /// </summary>
         public static Task<GetParseLiveStreamProcessNotificationResult> InvokeAsync(GetParseLiveStreamProcessNotificationArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
         /// </summary>
         public static Output<GetParseLiveStreamProcessNotificationResult> Invoke(GetParseLiveStreamProcessNotificationInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
         /// </summary>
         public static Output<GetParseLiveStreamProcessNotificationResult> Invoke(GetParseLiveStreamProcessNotificationInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationInvokeArgs(), options.WithDefaults());

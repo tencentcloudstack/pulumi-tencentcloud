@@ -96,6 +96,12 @@ def get_describe_certificate(certificate_id: Optional[_builtins.str] = None,
     describe_certificate = tencentcloud.ssl.get_describe_certificate(certificate_id="8cj4g8h8")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
+
 
     :param _builtins.str certificate_id: Certificate ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_describe_certificate_output(certificate_id: pulumi.Input[Optional[_built
 
     describe_certificate = tencentcloud.ssl.get_describe_certificate(certificate_id="8cj4g8h8")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
 
 
     :param _builtins.str certificate_id: Certificate ID.

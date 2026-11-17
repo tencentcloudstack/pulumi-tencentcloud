@@ -100,6 +100,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWorkloadGroup](https://www.tencentcloud.com/search/?wd=CreateWorkloadGroup&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyWorkloadGroup](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroup&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteWorkloadGroup](https://www.tencentcloud.com/search/?wd=DeleteWorkloadGroup&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cdwdoris workload group can be imported using the id, e.g.

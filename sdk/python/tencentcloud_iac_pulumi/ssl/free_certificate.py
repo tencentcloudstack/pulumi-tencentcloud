@@ -672,6 +672,17 @@ class FreeCertificate(pulumi.CustomResource):
             alias="example_free_cert")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyCertificate](https://www.tencentcloud.com/document/api/1007/36592)
+        * Read: [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+        * Update:
+          - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+          - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+        * Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/1007/36589)
+
         ## Import
 
         FreeCertificate instance can be imported, e.g.
@@ -726,6 +737,17 @@ class FreeCertificate(pulumi.CustomResource):
             csr_key_password="csr_pwd",
             alias="example_free_cert")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyCertificate](https://www.tencentcloud.com/document/api/1007/36592)
+        * Read: [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+        * Update:
+          - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+          - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+        * Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/1007/36589)
 
         ## Import
 

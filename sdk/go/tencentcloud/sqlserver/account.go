@@ -105,6 +105,24 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateAccount](https://www.tencentcloud.com/document/api/238/32121)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//
+// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+// * Update:
+//   - [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+//   - [ModifyAccountRemark](https://www.tencentcloud.com/document/api/238/32132)
+//   - [ResetAccountPassword](https://www.tencentcloud.com/document/api/238/32098)
+//
+// * Delete:
+//   - [DeleteAccount](https://www.tencentcloud.com/document/api/238/32118)
+//   - [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+//
 // ## Import
 //
 // SQL Server account can be imported using the id, e.g.

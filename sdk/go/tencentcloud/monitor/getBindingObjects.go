@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
 func GetBindingObjects(ctx *pulumi.Context, args *GetBindingObjectsArgs, opts ...pulumi.InvokeOption) (*GetBindingObjectsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBindingObjectsResult

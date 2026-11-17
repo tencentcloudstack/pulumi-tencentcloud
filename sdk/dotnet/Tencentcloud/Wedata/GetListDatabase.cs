@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDatabase](https://www.tencentcloud.com/document/api/1174/77948)
         /// </summary>
         public static Task<GetListDatabaseResult> InvokeAsync(GetListDatabaseArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListDatabaseResult>("tencentcloud:Wedata/getListDatabase:getListDatabase", args ?? new GetListDatabaseArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDatabase](https://www.tencentcloud.com/document/api/1174/77948)
         /// </summary>
         public static Output<GetListDatabaseResult> Invoke(GetListDatabaseInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListDatabaseResult>("tencentcloud:Wedata/getListDatabase:getListDatabase", args ?? new GetListDatabaseInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDatabase](https://www.tencentcloud.com/document/api/1174/77948)
         /// </summary>
         public static Output<GetListDatabaseResult> Invoke(GetListDatabaseInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListDatabaseResult>("tencentcloud:Wedata/getListDatabase:getListDatabase", args ?? new GetListDatabaseInvokeArgs(), options.WithDefaults());

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
         /// </summary>
         public static Task<GetSpecinfosResult> InvokeAsync(GetSpecinfosArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
         /// </summary>
         public static Output<GetSpecinfosResult> Invoke(GetSpecinfosInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
         /// </summary>
         public static Output<GetSpecinfosResult> Invoke(GetSpecinfosInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosInvokeArgs(), options.WithDefaults());

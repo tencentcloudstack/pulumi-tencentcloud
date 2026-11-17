@@ -48,6 +48,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLiveSnapshotTemplate](https://www.tencentcloud.com/document/api/267/30834)
+// * Read: [DescribeLiveSnapshotTemplate](https://www.tencentcloud.com/document/api/267/30830)
+// * Update: [ModifyLiveSnapshotTemplate](https://www.tencentcloud.com/document/api/267/30828)
+// * Delete: [DeleteLiveSnapshotTemplate](https://www.tencentcloud.com/document/api/267/30832)
+//
 // ## Import
 //
 // css snapshotTemplate can be imported using the id, e.g.

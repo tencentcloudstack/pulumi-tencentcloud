@@ -596,6 +596,15 @@ class RealtimeLogDelivery(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59507)
+        * Read: [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/api/1145/59503)
+        * Update: [ModifyRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59501)
+        * Delete: [DeleteRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59505)
+
         ## Import
 
         teo teo_realtime_log_delivery can be imported using the id, e.g.
@@ -677,6 +686,15 @@ class RealtimeLogDelivery(pulumi.CustomResource):
                 "region": "ap-nanjing",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59507)
+        * Read: [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/api/1145/59503)
+        * Update: [ModifyRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59501)
+        * Delete: [DeleteRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59505)
 
         ## Import
 

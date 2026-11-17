@@ -86,6 +86,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateExtendEndpoint](https://www.tencentcloud.com/document/api/1097/67599)
+// * Read: [DescribeExtendEndpointList](https://www.tencentcloud.com/document/api/1097/67595)
+// * Delete: [DeleteEndPoint](https://www.tencentcloud.com/document/api/1097/67598)
+//
 // ## Import
 //
 // Private Dns extend end point can be imported using the id, e.g.

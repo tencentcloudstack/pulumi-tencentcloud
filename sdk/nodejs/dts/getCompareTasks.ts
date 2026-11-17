@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     jobId: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
  */
 export function getCompareTasks(args: GetCompareTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetCompareTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetCompareTasksResult {
  *     jobId: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
  */
 export function getCompareTasksOutput(args: GetCompareTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCompareTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

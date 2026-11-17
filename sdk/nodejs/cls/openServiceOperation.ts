@@ -15,6 +15,15 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.cls.OpenServiceOperation("example", {});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
+ *   - [OpenClsService](https://www.tencentcloud.com/document/api/614/80500)
+ * * Read: [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
  */
 export class OpenServiceOperation extends pulumi.CustomResource {
     /**

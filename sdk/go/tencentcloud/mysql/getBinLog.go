@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
 func GetBinLog(ctx *pulumi.Context, args *GetBinLogArgs, opts ...pulumi.InvokeOption) (*GetBinLogResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBinLogResult

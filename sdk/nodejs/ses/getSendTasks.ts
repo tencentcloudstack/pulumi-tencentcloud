@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     taskType: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSendTasks](https://www.tencentcloud.com/document/api/1084/44865)
  */
 export function getSendTasks(args?: GetSendTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetSendTasksResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetSendTasksResult {
  *     taskType: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSendTasks](https://www.tencentcloud.com/document/api/1084/44865)
  */
 export function getSendTasksOutput(args?: GetSendTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSendTasksResult> {
     args = args || {};

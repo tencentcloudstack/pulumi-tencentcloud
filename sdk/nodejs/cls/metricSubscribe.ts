@@ -61,6 +61,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateMetricSubscribe](https://www.tencentcloud.com/document/api/614/80562)
+ *   - [ModifyMetricSubscribe](https://www.tencentcloud.com/document/api/614/80554)
+ * * Read: [DescribeMetricSubscribes](https://www.tencentcloud.com/document/api/614/80556)
+ * * Update: [ModifyMetricSubscribe](https://www.tencentcloud.com/document/api/614/80554)
+ * * Delete: [DeleteMetricSubscribe](https://www.tencentcloud.com/document/api/614/80560)
+ *
  * ## Import
  *
  * CLS metric subscribe can be imported using the composite id, e.g. the composite id is `topicId#taskId` formatted by `topicId` and `taskId` joined with `#`:

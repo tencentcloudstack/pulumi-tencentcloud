@@ -59,6 +59,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&amp;type=document&amp;lang=en)
+    ///   - [ModifyEdgeIpSwitch](https://www.tencentcloud.com/search/?wd=ModifyEdgeIpSwitch&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&amp;type=document&amp;lang=en)
+    ///   - [ModifyEdgeIpSwitch](https://www.tencentcloud.com/search/?wd=ModifyEdgeIpSwitch&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/edgeFirewallSwitch:EdgeFirewallSwitch")]
     public partial class EdgeFirewallSwitch : global::Pulumi.CustomResource

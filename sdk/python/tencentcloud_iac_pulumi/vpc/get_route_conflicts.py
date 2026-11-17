@@ -110,6 +110,12 @@ def get_route_conflicts(destination_cidr_blocks: Optional[Sequence[_builtins.str
         destination_cidr_blocks=["172.18.111.0/24"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] destination_cidr_blocks: List of conflicting destinations to check for.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_route_conflicts_output(destination_cidr_blocks: pulumi.Input[Optional[Se
     route_conflicts = tencentcloud.vpc.get_route_conflicts(route_table_id="rtb-6xypllqe",
         destination_cidr_blocks=["172.18.111.0/24"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] destination_cidr_blocks: List of conflicting destinations to check for.

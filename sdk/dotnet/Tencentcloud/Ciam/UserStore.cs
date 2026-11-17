@@ -33,6 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUserStore](https://www.tencentcloud.com/search/?wd=CreateUserStore&amp;type=document&amp;lang=en)
+    /// * Read: [ListUserStore](https://www.tencentcloud.com/search/?wd=ListUserStore&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateUserStore](https://www.tencentcloud.com/search/?wd=UpdateUserStore&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteUserStore](https://www.tencentcloud.com/search/?wd=DeleteUserStore&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ciam UserStore can be imported using the id, e.g.

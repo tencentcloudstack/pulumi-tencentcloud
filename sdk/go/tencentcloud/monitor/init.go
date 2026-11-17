@@ -75,8 +75,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &TmpMultipleWritesList{}
 	case "tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule":
 		r = &TmpRecordingRule{}
-	case "tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob":
-		r = &TmpScrapeJob{}
 	case "tencentcloud:Monitor/tmpTkeAlertPolicy:TmpTkeAlertPolicy":
 		r = &TmpTkeAlertPolicy{}
 	case "tencentcloud:Monitor/tmpTkeBasicConfig:TmpTkeBasicConfig":
@@ -239,11 +237,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Monitor/tmpRecordingRule",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Monitor/tmpScrapeJob",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

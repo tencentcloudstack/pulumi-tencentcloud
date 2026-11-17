@@ -193,6 +193,12 @@ def get_groups(application_id: Optional[_builtins.str] = None,
         group_id_lists=["group-yrjkln9v"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroups](https://www.tencentcloud.com/search/?wd=DescribeGroups&type=document&lang=en)
+
 
     :param _builtins.str application_id: applicationId.
     :param _builtins.str cluster_id: clusterId.
@@ -262,6 +268,12 @@ def get_groups_output(application_id: pulumi.Input[Optional[Optional[_builtins.s
         status="Running",
         group_id_lists=["group-yrjkln9v"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroups](https://www.tencentcloud.com/search/?wd=DescribeGroups&type=document&lang=en)
 
 
     :param _builtins.str application_id: applicationId.

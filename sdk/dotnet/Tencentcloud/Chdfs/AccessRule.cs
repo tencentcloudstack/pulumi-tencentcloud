@@ -37,6 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAccessRules](https://www.tencentcloud.com/document/api/1106/42418)
+    /// * Read: [DescribeAccessRules](https://www.tencentcloud.com/document/api/1106/42416)
+    /// * Update: [ModifyAccessRules](https://www.tencentcloud.com/document/api/1106/42415)
+    /// * Delete: [DeleteAccessRules](https://www.tencentcloud.com/document/api/1106/42417)
+    /// 
     /// ## Import
     /// 
     /// chdfs AccessRule can be imported using the id, e.g.

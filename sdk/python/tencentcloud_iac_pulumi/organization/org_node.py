@@ -220,6 +220,17 @@ class OrgNode(pulumi.CustomResource):
             remark="for terraform test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddOrganizationNode](https://www.tencentcloud.com/document/api/1031/52066)
+        * Read: [DescribeOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52061)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateOrganizationNode](https://www.tencentcloud.com/document/api/1031/52059)
+        * Delete: [DeleteOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52063)
+
         ## Import
 
         organization org_node can be imported using the id, e.g.
@@ -255,6 +266,17 @@ class OrgNode(pulumi.CustomResource):
             parent_node_id=2003721,
             remark="for terraform test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddOrganizationNode](https://www.tencentcloud.com/document/api/1031/52066)
+        * Read: [DescribeOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52061)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateOrganizationNode](https://www.tencentcloud.com/document/api/1031/52059)
+        * Delete: [DeleteOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52063)
 
         ## Import
 

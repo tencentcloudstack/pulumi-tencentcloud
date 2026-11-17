@@ -511,6 +511,24 @@ class Proxy(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateProxy](https://www.tencentcloud.com/document/api/1098/56560)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+        * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [ModifyProxyDesc](https://www.tencentcloud.com/document/api/1098/56554)
+          - [SwitchProxyVpc](https://www.tencentcloud.com/document/api/1098/52493)
+          - [UpgradeProxy](https://www.tencentcloud.com/document/api/1098/56551)
+        * Delete:
+          - [CloseProxy](https://www.tencentcloud.com/document/api/1098/56561)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -558,6 +576,24 @@ class Proxy(pulumi.CustomResource):
                 "proxy_node_count": 2,
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateProxy](https://www.tencentcloud.com/document/api/1098/56560)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+        * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [ModifyProxyDesc](https://www.tencentcloud.com/document/api/1098/56554)
+          - [SwitchProxyVpc](https://www.tencentcloud.com/document/api/1098/52493)
+          - [UpgradeProxy](https://www.tencentcloud.com/document/api/1098/56551)
+        * Delete:
+          - [CloseProxy](https://www.tencentcloud.com/document/api/1098/56561)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
 
 
         :param str resource_name: The name of the resource.

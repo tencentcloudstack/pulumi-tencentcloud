@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&type=document&lang=en)
  */
 export function getBindApiAppsStatus(args: GetBindApiAppsStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetBindApiAppsStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -101,6 +107,12 @@ export interface GetBindApiAppsStatusResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&type=document&lang=en)
  */
 export function getBindApiAppsStatusOutput(args: GetBindApiAppsStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBindApiAppsStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -45,6 +45,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &InstanceTransparentDataEncryption{}
 	case "tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
+	case "tencentcloud:Mongodb/scaleUpDbInstanceCpu:ScaleUpDbInstanceCpu":
+		r = &ScaleUpDbInstanceCpu{}
 	case "tencentcloud:Mongodb/shardingInstance:ShardingInstance":
 		r = &ShardingInstance{}
 	case "tencentcloud:Mongodb/standbyInstance:StandbyInstance":
@@ -120,6 +122,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mongodb/readonlyInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/scaleUpDbInstanceCpu",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

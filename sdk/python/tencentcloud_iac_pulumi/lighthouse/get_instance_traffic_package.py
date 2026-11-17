@@ -116,6 +116,12 @@ def get_instance_traffic_package(instance_ids: Optional[Sequence[_builtins.str]]
     instance_traffic_package = tencentcloud.lighthouse.get_instance_traffic_package()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
+
 
     :param Sequence[_builtins.str] instance_ids: Instance ID list.
     :param _builtins.int limit: Number of returned results. Default value is 20. Maximum value is 100.
@@ -153,6 +159,12 @@ def get_instance_traffic_package_output(instance_ids: pulumi.Input[Optional[Opti
 
     instance_traffic_package = tencentcloud.lighthouse.get_instance_traffic_package()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
 
 
     :param Sequence[_builtins.str] instance_ids: Instance ID list.

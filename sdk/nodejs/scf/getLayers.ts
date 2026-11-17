@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const layers = tencentcloud.scf.getLayers({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
  */
 export function getLayers(args?: GetLayersArgs, opts?: pulumi.InvokeOptions): Promise<GetLayersResult> {
     args = args || {};
@@ -73,6 +79,12 @@ export interface GetLayersResult {
  *
  * const layers = tencentcloud.scf.getLayers({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
  */
 export function getLayersOutput(args?: GetLayersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLayersResult> {
     args = args || {};

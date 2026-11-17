@@ -42,6 +42,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AssociateHaVipInstance](https://www.tencentcloud.com/search/?wd=AssociateHaVipInstance&type=document&lang=en)
+// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+// * Delete: [DisassociateHaVipInstance](https://www.tencentcloud.com/search/?wd=DisassociateHaVipInstance&type=document&lang=en)
+//
 // ## Import
 //
 // vpc haVipInstanceAttachment can be imported using the id(${haVipId}#${instanceType}#${instanceId}), e.g.

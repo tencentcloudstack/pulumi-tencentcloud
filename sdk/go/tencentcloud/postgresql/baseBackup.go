@@ -75,6 +75,26 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateBaseBackup](https://www.tencentcloud.com/document/api/409/54349)
+//   - [DescribeBaseBackups](https://www.tencentcloud.com/document/api/409/54343)
+//   - [ModifyBaseBackupExpireTime](https://www.tencentcloud.com/document/api/409/54341)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeBaseBackups](https://www.tencentcloud.com/document/api/409/54343)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [ModifyBaseBackupExpireTime](https://www.tencentcloud.com/document/api/409/54341)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Delete: [DeleteBaseBackup](https://www.tencentcloud.com/document/api/409/54348)
+//
 // ## Import
 //
 // PostgreSQL base backup can be imported using the dBInstanceId#baseBackupId, e.g.

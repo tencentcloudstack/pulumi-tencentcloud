@@ -108,7 +108,7 @@ class _DeployConfigGroupVersionState:
         :param pulumi.Input[_builtins.str] env_id: Environment ID. Please specify the environment ID to which the version should be released.
         :param pulumi.Input[_builtins.str] message: Deploy result message.
         :param pulumi.Input[_builtins.str] record_id: Deploy record ID.
-        :param pulumi.Input[_builtins.str] status: Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        :param pulumi.Input[_builtins.str] status: Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         :param pulumi.Input[_builtins.str] zone_id: Zone ID.
         """
         if config_group_version_infos is not None:
@@ -204,7 +204,7 @@ class _DeployConfigGroupVersionState:
     @pulumi.getter
     def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         """
         return pulumi.get(self, "status")
 
@@ -259,6 +259,15 @@ class DeployConfigGroupVersion(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DeployConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57976)
+          - [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
+        * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -295,6 +304,15 @@ class DeployConfigGroupVersion(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DeployConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57976)
+          - [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
+        * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
 
 
         :param str resource_name: The name of the resource.
@@ -372,7 +390,7 @@ class DeployConfigGroupVersion(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] env_id: Environment ID. Please specify the environment ID to which the version should be released.
         :param pulumi.Input[_builtins.str] message: Deploy result message.
         :param pulumi.Input[_builtins.str] record_id: Deploy record ID.
-        :param pulumi.Input[_builtins.str] status: Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        :param pulumi.Input[_builtins.str] status: Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         :param pulumi.Input[_builtins.str] zone_id: Zone ID.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -441,7 +459,7 @@ class DeployConfigGroupVersion(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[_builtins.str]:
         """
-        Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         """
         return pulumi.get(self, "status")
 

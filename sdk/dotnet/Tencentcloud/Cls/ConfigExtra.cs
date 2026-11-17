@@ -95,6 +95,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateConfigExtra](https://www.tencentcloud.com/search/?wd=CreateConfigExtra&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeConfigExtras](https://www.tencentcloud.com/search/?wd=DescribeConfigExtras&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyConfigExtra](https://www.tencentcloud.com/search/?wd=ModifyConfigExtra&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteConfigExtra](https://www.tencentcloud.com/search/?wd=DeleteConfigExtra&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cls ConfigExtra can be imported using the id, e.g.

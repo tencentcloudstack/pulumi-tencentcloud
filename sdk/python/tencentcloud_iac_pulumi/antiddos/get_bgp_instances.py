@@ -126,6 +126,12 @@ def get_bgp_instances(filter_instance_id_lists: Optional[Sequence[_builtins.str]
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] filter_instance_id_lists: Instance ID list.
     :param _builtins.str filter_region: Region.
@@ -172,6 +178,12 @@ def get_bgp_instances_output(filter_instance_id_lists: pulumi.Input[Optional[Opt
             "tag_value": "Terraform",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] filter_instance_id_lists: Instance ID list.

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["prom-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
  */
 export function getTmpInstances(args?: GetTmpInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetTmpInstancesResult> {
     args = args || {};
@@ -139,6 +145,12 @@ export interface GetTmpInstancesResult {
  *     instanceIds: ["prom-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
  */
 export function getTmpInstancesOutput(args?: GetTmpInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTmpInstancesResult> {
     args = args || {};

@@ -154,6 +154,12 @@ def get_backup_download_urls(backup_download_restriction: Optional[Union['GetBac
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
+
 
     :param Union['GetBackupDownloadUrlsBackupDownloadRestrictionArgs', 'GetBackupDownloadUrlsBackupDownloadRestrictionArgsDict'] backup_download_restriction: Backup download restriction.
     :param _builtins.str backup_id: Unique backup ID.
@@ -217,6 +223,12 @@ def get_backup_download_urls_output(backup_download_restriction: pulumi.Input[Op
             "ip_sets": ["0.0.0.0"],
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
 
 
     :param Union['GetBackupDownloadUrlsBackupDownloadRestrictionArgs', 'GetBackupDownloadUrlsBackupDownloadRestrictionArgsDict'] backup_download_restriction: Backup download restriction.

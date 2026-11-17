@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
         /// </summary>
         public static Task<GetWebVitalsPageResult> InvokeAsync(GetWebVitalsPageArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
         /// </summary>
         public static Output<GetWebVitalsPageResult> Invoke(GetWebVitalsPageInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
         /// </summary>
         public static Output<GetWebVitalsPageResult> Invoke(GetWebVitalsPageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebVitalsPageResult>("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args ?? new GetWebVitalsPageInvokeArgs(), options.WithDefaults());

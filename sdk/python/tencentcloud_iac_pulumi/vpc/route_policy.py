@@ -135,6 +135,15 @@ class RoutePolicy(pulumi.CustomResource):
             route_policy_description="remark.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRoutePolicy](https://www.tencentcloud.com/document/api/215/74070)
+        * Read: [DescribeRoutePolicies](https://www.tencentcloud.com/search/?wd=DescribeRoutePolicies&type=document&lang=en)
+        * Update: [ModifyRoutePolicyAttribute](https://www.tencentcloud.com/document/api/215/74063)
+        * Delete: [DeleteRoutePolicy](https://www.tencentcloud.com/document/api/215/74067)
+
         ## Import
 
         VPC route policy can be imported using the id, e.g.
@@ -168,6 +177,15 @@ class RoutePolicy(pulumi.CustomResource):
             route_policy_name="tf-example",
             route_policy_description="remark.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRoutePolicy](https://www.tencentcloud.com/document/api/215/74070)
+        * Read: [DescribeRoutePolicies](https://www.tencentcloud.com/search/?wd=DescribeRoutePolicies&type=document&lang=en)
+        * Update: [ModifyRoutePolicyAttribute](https://www.tencentcloud.com/document/api/215/74063)
+        * Delete: [DeleteRoutePolicy](https://www.tencentcloud.com/document/api/215/74067)
 
         ## Import
 

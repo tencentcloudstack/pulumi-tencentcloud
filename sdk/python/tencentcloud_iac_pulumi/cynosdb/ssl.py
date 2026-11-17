@@ -168,6 +168,22 @@ class Ssl(pulumi.CustomResource):
             status="ON")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/1098/69801)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/search/?wd=DescribeSSLStatus&type=document&lang=en)
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+          - [OpenSSL](https://www.tencentcloud.com/search/?wd=OpenSSL&type=document&lang=en)
+        * Read: [DescribeSSLStatus](https://www.tencentcloud.com/search/?wd=DescribeSSLStatus&type=document&lang=en)
+        * Update:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/1098/69801)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/search/?wd=DescribeSSLStatus&type=document&lang=en)
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+          - [OpenSSL](https://www.tencentcloud.com/search/?wd=OpenSSL&type=document&lang=en)
+
         ## Import
 
         cynosdb ssl can be imported using the clusterId#instanceId, e.g.
@@ -203,6 +219,22 @@ class Ssl(pulumi.CustomResource):
             instance_id="cynosdbmysql-ins-pfsv6q1e",
             status="ON")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/1098/69801)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/search/?wd=DescribeSSLStatus&type=document&lang=en)
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+          - [OpenSSL](https://www.tencentcloud.com/search/?wd=OpenSSL&type=document&lang=en)
+        * Read: [DescribeSSLStatus](https://www.tencentcloud.com/search/?wd=DescribeSSLStatus&type=document&lang=en)
+        * Update:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/1098/69801)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/search/?wd=DescribeSSLStatus&type=document&lang=en)
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+          - [OpenSSL](https://www.tencentcloud.com/search/?wd=OpenSSL&type=document&lang=en)
 
         ## Import
 

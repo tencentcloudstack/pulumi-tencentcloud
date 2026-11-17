@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     subnetIds: ["subnet-i9tpf6hq"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
  */
 export function getSubnetResourceDashboard(args: GetSubnetResourceDashboardArgs, opts?: pulumi.InvokeOptions): Promise<GetSubnetResourceDashboardResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSubnetResourceDashboardResult {
  *     subnetIds: ["subnet-i9tpf6hq"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
  */
 export function getSubnetResourceDashboardOutput(args: GetSubnetResourceDashboardOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSubnetResourceDashboardResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

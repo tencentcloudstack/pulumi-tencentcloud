@@ -2439,7 +2439,7 @@ class ClusterMaintenanceWindowAndExclusionExclusionArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    Maintenance exclusion ID.
     """
 
 @pulumi.input_type
@@ -2453,7 +2453,7 @@ class ClusterMaintenanceWindowAndExclusionExclusionArgs:
         :param pulumi.Input[_builtins.str] end_at: Maintenance exclusion end time.
         :param pulumi.Input[_builtins.str] name: Maintenance exclusion name.
         :param pulumi.Input[_builtins.str] start_at: Maintenance exclusion start time.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.int] id: Maintenance exclusion ID.
         """
         pulumi.set(__self__, "end_at", end_at)
         pulumi.set(__self__, "name", name)
@@ -2501,7 +2501,7 @@ class ClusterMaintenanceWindowAndExclusionExclusionArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        Maintenance exclusion ID.
         """
         return pulumi.get(self, "id")
 
@@ -5877,7 +5877,7 @@ class GlobalMaintenanceWindowAndExclusionExclusionArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    Maintenance exclusion ID.
     """
 
 @pulumi.input_type
@@ -5891,7 +5891,7 @@ class GlobalMaintenanceWindowAndExclusionExclusionArgs:
         :param pulumi.Input[_builtins.str] end_at: Maintenance exclusion end time.
         :param pulumi.Input[_builtins.str] name: Maintenance exclusion name.
         :param pulumi.Input[_builtins.str] start_at: Maintenance exclusion start time.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.int] id: Maintenance exclusion ID.
         """
         pulumi.set(__self__, "end_at", end_at)
         pulumi.set(__self__, "name", name)
@@ -5939,7 +5939,7 @@ class GlobalMaintenanceWindowAndExclusionExclusionArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        Maintenance exclusion ID.
         """
         return pulumi.get(self, "id")
 
@@ -6133,6 +6133,10 @@ class NativeNodePoolNativeArgsDict(TypedDict):
     """
     Whether to enable self-healing ability.
     """
+    custom_image: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Custom image ID.
+    """
     data_disks: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['NativeNodePoolNativeDataDiskArgsDict']]]]]
     """
     Native node pool data disk list.
@@ -6199,6 +6203,7 @@ class NativeNodePoolNativeArgs:
                  subnet_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
                  system_disk: pulumi.Input['NativeNodePoolNativeSystemDiskArgs'],
                  auto_repair: pulumi.Input[Optional[_builtins.bool]] = None,
+                 custom_image: pulumi.Input[Optional[_builtins.str]] = None,
                  data_disks: pulumi.Input[Optional[Sequence[pulumi.Input['NativeNodePoolNativeDataDiskArgs']]]] = None,
                  enable_autoscaling: pulumi.Input[Optional[_builtins.bool]] = None,
                  health_check_policy_name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -6220,6 +6225,7 @@ class NativeNodePoolNativeArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] subnet_ids: Subnet list.
         :param pulumi.Input['NativeNodePoolNativeSystemDiskArgs'] system_disk: System disk configuration.
         :param pulumi.Input[_builtins.bool] auto_repair: Whether to enable self-healing ability.
+        :param pulumi.Input[_builtins.str] custom_image: Custom image ID.
         :param pulumi.Input[Sequence[pulumi.Input['NativeNodePoolNativeDataDiskArgs']]] data_disks: Native node pool data disk list.
         :param pulumi.Input[_builtins.bool] enable_autoscaling: Whether to enable elastic scaling.
         :param pulumi.Input[_builtins.str] health_check_policy_name: Fault self-healing rule name.
@@ -6242,6 +6248,8 @@ class NativeNodePoolNativeArgs:
         pulumi.set(__self__, "system_disk", system_disk)
         if auto_repair is not None:
             pulumi.set(__self__, "auto_repair", auto_repair)
+        if custom_image is not None:
+            pulumi.set(__self__, "custom_image", custom_image)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
         if enable_autoscaling is not None:
@@ -6342,6 +6350,18 @@ class NativeNodePoolNativeArgs:
     @auto_repair.setter
     def auto_repair(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "auto_repair", value)
+
+    @_builtins.property
+    @pulumi.getter(name="customImage")
+    def custom_image(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Custom image ID.
+        """
+        return pulumi.get(self, "custom_image")
+
+    @custom_image.setter
+    def custom_image(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "custom_image", value)
 
     @_builtins.property
     @pulumi.getter(name="dataDisks")
@@ -8026,7 +8046,7 @@ class NodePoolNodeConfigArgsDict(TypedDict):
     """
     extra_args: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
     """
-    Custom parameter information related to the node. This is a white-list parameter.
+    Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
     """
     gpu_args: NotRequired[pulumi.Input[Optional['NodePoolNodeConfigGpuArgsArgsDict']]]
     """
@@ -8065,7 +8085,7 @@ class NodePoolNodeConfigArgs:
         :param pulumi.Input[Sequence[pulumi.Input['NodePoolNodeConfigDataDiskArgs']]] data_disks: Configurations of data disk.
         :param pulumi.Input[_builtins.int] desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
         :param pulumi.Input[_builtins.str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] extra_args: Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
         :param pulumi.Input['NodePoolNodeConfigGpuArgsArgs'] gpu_args: GPU driver parameters.
         :param pulumi.Input[_builtins.bool] is_schedule: Indicate to schedule the adding node or not. Default is true.
         :param pulumi.Input[_builtins.str] mount_target: Mount target. Default is not mounting.
@@ -8131,7 +8151,7 @@ class NodePoolNodeConfigArgs:
     @pulumi.getter(name="extraArgs")
     def extra_args(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
-        Custom parameter information related to the node. This is a white-list parameter.
+        Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
         """
         return pulumi.get(self, "extra_args")
 

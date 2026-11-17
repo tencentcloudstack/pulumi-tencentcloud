@@ -44,6 +44,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateBackupStorageLocation](https://www.tencentcloud.com/document/api/457/55012)
+// * Read: [DescribeBackupStorageLocations](https://www.tencentcloud.com/document/api/457/55010)
+// * Delete: [DeleteBackupStorageLocation](https://www.tencentcloud.com/document/api/457/55011)
+//
 // ## Import
 //
 // tke backup storage location can be imported, e.g.

@@ -1584,6 +1584,20 @@ class ClusterRelease(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterRelease](https://www.tencentcloud.com/search/?wd=CreateClusterRelease&type=document&lang=en)
+          - [DescribeClusterPendingReleases](https://www.tencentcloud.com/search/?wd=DescribeClusterPendingReleases&type=document&lang=en)
+          - [DescribeClusterReleaseDetails](https://www.tencentcloud.com/search/?wd=DescribeClusterReleaseDetails&type=document&lang=en)
+        * Read: [DescribeClusterReleaseDetails](https://www.tencentcloud.com/search/?wd=DescribeClusterReleaseDetails&type=document&lang=en)
+        * Update:
+          - [DescribeClusterReleases](https://www.tencentcloud.com/search/?wd=DescribeClusterReleases&type=document&lang=en)
+          - [UpgradeClusterRelease](https://www.tencentcloud.com/search/?wd=UpgradeClusterRelease&type=document&lang=en)
+        * Delete: [UninstallClusterRelease](https://www.tencentcloud.com/search/?wd=UninstallClusterRelease&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -2721,6 +2735,20 @@ class ClusterRelease(pulumi.CustomResource):
                 "values_type": "yaml",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterRelease](https://www.tencentcloud.com/search/?wd=CreateClusterRelease&type=document&lang=en)
+          - [DescribeClusterPendingReleases](https://www.tencentcloud.com/search/?wd=DescribeClusterPendingReleases&type=document&lang=en)
+          - [DescribeClusterReleaseDetails](https://www.tencentcloud.com/search/?wd=DescribeClusterReleaseDetails&type=document&lang=en)
+        * Read: [DescribeClusterReleaseDetails](https://www.tencentcloud.com/search/?wd=DescribeClusterReleaseDetails&type=document&lang=en)
+        * Update:
+          - [DescribeClusterReleases](https://www.tencentcloud.com/search/?wd=DescribeClusterReleases&type=document&lang=en)
+          - [UpgradeClusterRelease](https://www.tencentcloud.com/search/?wd=UpgradeClusterRelease&type=document&lang=en)
+        * Delete: [UninstallClusterRelease](https://www.tencentcloud.com/search/?wd=UninstallClusterRelease&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

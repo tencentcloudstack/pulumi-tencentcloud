@@ -19,6 +19,7 @@ from .customize_error_page import *
 from .ddos_protection_config import *
 from .deploy_config_group_version import *
 from .dns_record import *
+from .dns_records_status import *
 from .domain_shared_cname_attachment import *
 from .edge_kv import *
 from .edge_kv_namespace import *
@@ -28,6 +29,7 @@ from .function_replica import *
 from .function_rule import *
 from .function_rule_priority import *
 from .function_runtime_environment import *
+from .get_billing_data import *
 from .get_config_group_version_detail import *
 from .get_config_group_versions import *
 from .get_content_quota import *
@@ -36,6 +38,7 @@ from .get_deploy_config_version_history import *
 from .get_edge_kv_list import *
 from .get_environments import *
 from .get_export_zone_config import *
+from .get_ip_group_references import *
 from .get_ip_region import *
 from .get_multi_path_gateway_origin_acl import *
 from .get_multi_path_gateway_region import *

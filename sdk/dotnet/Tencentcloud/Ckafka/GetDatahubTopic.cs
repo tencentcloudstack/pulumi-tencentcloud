@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
         /// </summary>
         public static Task<GetDatahubTopicResult> InvokeAsync(GetDatahubTopicArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
         /// </summary>
         public static Output<GetDatahubTopicResult> Invoke(GetDatahubTopicInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
         /// </summary>
         public static Output<GetDatahubTopicResult> Invoke(GetDatahubTopicInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatahubTopicResult>("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args ?? new GetDatahubTopicInvokeArgs(), options.WithDefaults());

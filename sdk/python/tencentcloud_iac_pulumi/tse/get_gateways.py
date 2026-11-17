@@ -100,6 +100,12 @@ def get_gateways(filters: Optional[Sequence[Union['GetGatewaysFilterArgs', 'GetG
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
+
 
     :param Sequence[Union['GetGatewaysFilterArgs', 'GetGatewaysFilterArgsDict']] filters: filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_gateways_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['
         "values": ["gateway-ddbb709b"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
 
 
     :param Sequence[Union['GetGatewaysFilterArgs', 'GetGatewaysFilterArgsDict']] filters: filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.

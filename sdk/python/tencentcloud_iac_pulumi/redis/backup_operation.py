@@ -158,6 +158,14 @@ class BackupOperation(pulumi.CustomResource):
             storage_days=7)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [ManualBackupInstance](https://www.tencentcloud.com/document/api/239/32073)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -189,6 +197,14 @@ class BackupOperation(pulumi.CustomResource):
             remark="manually back",
             storage_days=7)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [ManualBackupInstance](https://www.tencentcloud.com/document/api/239/32073)
 
 
         :param str resource_name: The name of the resource.

@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.ssl.CheckCertificateDomainVerificationOperation("example", {certificateId: "6BE701Jx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CheckCertificateDomainVerification](https://www.tencentcloud.com/document/api/1007/79938)
  */
 export class CheckCertificateDomainVerificationOperation extends pulumi.CustomResource {
     /**

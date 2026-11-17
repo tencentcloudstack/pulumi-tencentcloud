@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterParamLogs](https://www.tencentcloud.com/search/?wd=DescribeClusterParamLogs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetClusterParamLogsResult> InvokeAsync(GetClusterParamLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterParamLogs](https://www.tencentcloud.com/search/?wd=DescribeClusterParamLogs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetClusterParamLogsResult> Invoke(GetClusterParamLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterParamLogs](https://www.tencentcloud.com/search/?wd=DescribeClusterParamLogs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetClusterParamLogsResult> Invoke(GetClusterParamLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsInvokeArgs(), options.WithDefaults());

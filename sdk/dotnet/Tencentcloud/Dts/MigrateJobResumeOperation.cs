@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+    ///   - [ResumeMigrateJob](https://www.tencentcloud.com/document/api/571/51803)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/migrateJobResumeOperation:MigrateJobResumeOperation")]
     public partial class MigrateJobResumeOperation : global::Pulumi.CustomResource

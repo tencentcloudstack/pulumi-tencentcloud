@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLineage](https://www.tencentcloud.com/document/api/1174/77947)
         /// </summary>
         public static Task<GetListLineageResult> InvokeAsync(GetListLineageArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListLineageResult>("tencentcloud:Wedata/getListLineage:getListLineage", args ?? new GetListLineageArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLineage](https://www.tencentcloud.com/document/api/1174/77947)
         /// </summary>
         public static Output<GetListLineageResult> Invoke(GetListLineageInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListLineageResult>("tencentcloud:Wedata/getListLineage:getListLineage", args ?? new GetListLineageInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLineage](https://www.tencentcloud.com/document/api/1174/77947)
         /// </summary>
         public static Output<GetListLineageResult> Invoke(GetListLineageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListLineageResult>("tencentcloud:Wedata/getListLineage:getListLineage", args ?? new GetListLineageInvokeArgs(), options.WithDefaults());

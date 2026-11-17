@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     isElastic: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&type=document&lang=en)
  */
 export function getSpec(args: GetSpecArgs, opts?: pulumi.InvokeOptions): Promise<GetSpecResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetSpecResult {
  *     isElastic: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&type=document&lang=en)
  */
 export function getSpecOutput(args: GetSpecOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSpecResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

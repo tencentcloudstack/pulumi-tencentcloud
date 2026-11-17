@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
         /// </summary>
         public static Task<GetMembersResult> InvokeAsync(GetMembersArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersArgs(), options.WithDefaults());
@@ -92,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
         /// </summary>
         public static Output<GetMembersResult> Invoke(GetMembersInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersInvokeArgs(), options.WithDefaults());
@@ -134,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
         /// </summary>
         public static Output<GetMembersResult> Invoke(GetMembersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersInvokeArgs(), options.WithDefaults());

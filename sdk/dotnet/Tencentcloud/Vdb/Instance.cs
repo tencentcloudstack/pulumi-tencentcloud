@@ -29,21 +29,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
     /// {
     ///     var example = new Tencentcloud.Vdb.Instance("example", new()
     ///     {
-    ///         VpcId = "vpc-xxxxxxxx",
-    ///         SubnetId = "subnet-xxxxxxxx",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         PayMode = 0,
     ///         SecurityGroupIds = new[]
     ///         {
-    ///             "sg-xxxxxxxx",
+    ///             "sg-4rd5741x",
     ///         },
     ///         InstanceName = "tf-example",
     ///         InstanceType = "single",
-    ///         NodeType = "normal",
+    ///         NodeType = "store",
     ///         Cpu = 2,
-    ///         Memory = 4,
+    ///         Memory = 16,
     ///         DiskSize = 50,
     ///         WorkerNodeNum = 1,
-    ///         ForceDelete = false,
+    ///         ForceDelete = true,
     ///     });
     /// 
     /// });
@@ -61,12 +61,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
     /// {
     ///     var cluster = new Tencentcloud.Vdb.Instance("cluster", new()
     ///     {
-    ///         VpcId = "vpc-xxxxxxxx",
-    ///         SubnetId = "subnet-xxxxxxxx",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             "sg-4rd5741x",
+    ///         },
     ///         PayMode = 1,
     ///         PayPeriod = 1,
     ///         AutoRenew = 1,
-    ///         InstanceName = "tf-example-cluster",
+    ///         InstanceName = "tf-example",
     ///         InstanceType = "cluster",
     ///         Mode = "two",
     ///         ProductType = 0,
@@ -77,21 +81,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
     ///         WorkerNodeNum = 2,
     ///         Params = "{\"key\":\"value\"}",
     ///         ForceDelete = true,
-    ///         SecurityGroupIds = new[]
-    ///         {
-    ///             "sg-xxxxxxxx",
-    ///         },
     ///         ResourceTags = new[]
     ///         {
     ///             new Tencentcloud.Vdb.Inputs.InstanceResourceTagArgs
     ///             {
-    ///                 TagKey = "env",
-    ///                 TagValue = "test",
-    ///             },
-    ///             new Tencentcloud.Vdb.Inputs.InstanceResourceTagArgs
-    ///             {
-    ///                 TagKey = "project",
-    ///                 TagValue = "demo",
+    ///                 TagKey = "createBy",
+    ///                 TagValue = "Terraform",
     ///             },
     ///         },
     ///     });
@@ -99,12 +94,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceSecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [ScaleOutInstance](https://www.tencentcloud.com/search/?wd=ScaleOutInstance&amp;type=document&amp;lang=en)
+    ///   - [ScaleUpInstance](https://www.tencentcloud.com/search/?wd=ScaleUpInstance&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DestroyInstances](https://www.tencentcloud.com/search/?wd=DestroyInstances&amp;type=document&amp;lang=en)
+    ///   - [IsolateInstance](https://www.tencentcloud.com/search/?wd=IsolateInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// VDB instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-xxxxxxxx
+    /// $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-oft69wcm
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vdb/instance:Instance")]
@@ -120,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
         /// Auto-renew flag. 0: disabled, 1: enabled.
         /// </summary>
         [Output("autoRenew")]
-        public Output<int?> AutoRenew { get; private set; } = null!;
+        public Output<int> AutoRenew { get; private set; } = null!;
 
         /// <summary>
         /// CPU cores.
@@ -171,10 +179,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
+        /// Instance ID.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
         /// Instance name. Supports up to 60 characters.
         /// </summary>
         [Output("instanceName")]
-        public Output<string?> InstanceName { get; private set; } = null!;
+        public Output<string> InstanceName { get; private set; } = null!;
 
         /// <summary>
         /// Instance type. Valid values: base, single, cluster.
@@ -216,7 +230,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
         /// Node type. Valid values: compute, normal, store.
         /// </summary>
         [Output("nodeType")]
-        public Output<string?> NodeType { get; private set; } = null!;
+        public Output<string> NodeType { get; private set; } = null!;
 
         /// <summary>
         /// Instance node list.
@@ -252,7 +266,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
         /// Product version. 0: standard, 1: capacity-enhanced.
         /// </summary>
         [Output("productType")]
-        public Output<int?> ProductType { get; private set; } = null!;
+        public Output<int> ProductType { get; private set; } = null!;
 
         /// <summary>
         /// Region.
@@ -554,6 +568,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
+
+        /// <summary>
+        /// Instance ID.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
 
         /// <summary>
         /// Instance name. Supports up to 60 characters.

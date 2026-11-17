@@ -59,6 +59,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateUserDirectory](https://www.tencentcloud.com/search/?wd=CreateUserDirectory&type=document&lang=en)
+// * Read: [DescribeUserDirectory](https://www.tencentcloud.com/search/?wd=DescribeUserDirectory&type=document&lang=en)
+// * Update: [ModifyUserDirectory](https://www.tencentcloud.com/search/?wd=ModifyUserDirectory&type=document&lang=en)
+// * Delete: [DeleteUserDirectory](https://www.tencentcloud.com/search/?wd=DeleteUserDirectory&type=document&lang=en)
+//
 // ## Import
 //
 // BH user directory can be imported using the id, e.g.

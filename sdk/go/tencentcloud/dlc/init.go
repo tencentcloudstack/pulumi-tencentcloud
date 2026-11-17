@@ -45,6 +45,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DetachUserPolicyOperation{}
 	case "tencentcloud:Dlc/detachWorkGroupPolicyOperation:DetachWorkGroupPolicyOperation":
 		r = &DetachWorkGroupPolicyOperation{}
+	case "tencentcloud:Dlc/metaDatabase:MetaDatabase":
+		r = &MetaDatabase{}
 	case "tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation":
 		r = &ModifyDataEngineDescriptionOperation{}
 	case "tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation":
@@ -150,6 +152,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dlc/detachWorkGroupPolicyOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dlc/metaDatabase",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

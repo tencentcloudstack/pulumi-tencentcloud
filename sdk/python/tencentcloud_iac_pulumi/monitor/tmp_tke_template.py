@@ -159,6 +159,15 @@ class TmpTkeTemplate(pulumi.CustomResource):
         })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusTemp](https://www.tencentcloud.com/document/api/248/53327)
+        * Read: [DescribePrometheusTemp](https://www.tencentcloud.com/document/api/248/53318)
+        * Update: [ModifyPrometheusTemp](https://www.tencentcloud.com/document/api/248/53316)
+        * Delete: [DeletePrometheusTemp](https://www.tencentcloud.com/document/api/248/53326)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -253,6 +262,15 @@ class TmpTkeTemplate(pulumi.CustomResource):
             ],
         })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusTemp](https://www.tencentcloud.com/document/api/248/53327)
+        * Read: [DescribePrometheusTemp](https://www.tencentcloud.com/document/api/248/53318)
+        * Update: [ModifyPrometheusTemp](https://www.tencentcloud.com/document/api/248/53316)
+        * Delete: [DeletePrometheusTemp](https://www.tencentcloud.com/document/api/248/53326)
 
 
         :param str resource_name: The name of the resource.

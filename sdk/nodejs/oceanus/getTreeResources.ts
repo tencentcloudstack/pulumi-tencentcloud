@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&type=document&lang=en)
  */
 export function getTreeResources(args: GetTreeResourcesArgs, opts?: pulumi.InvokeOptions): Promise<GetTreeResourcesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetTreeResourcesResult {
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&type=document&lang=en)
  */
 export function getTreeResourcesOutput(args: GetTreeResourcesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTreeResourcesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

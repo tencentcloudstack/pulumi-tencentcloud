@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPullStreamTaskStatusResult> InvokeAsync(GetPullStreamTaskStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPullStreamTaskStatusResult> Invoke(GetPullStreamTaskStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPullStreamTaskStatusResult> Invoke(GetPullStreamTaskStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusInvokeArgs(), options.WithDefaults());

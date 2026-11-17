@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     clusterType: "INDEPENDENT_CLUSTER",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&type=document&lang=en)
  */
 export function getClusterAvailableExtraArgs(args: GetClusterAvailableExtraArgsArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterAvailableExtraArgsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetClusterAvailableExtraArgsResult {
  *     clusterType: "INDEPENDENT_CLUSTER",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&type=document&lang=en)
  */
 export function getClusterAvailableExtraArgsOutput(args: GetClusterAvailableExtraArgsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterAvailableExtraArgsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

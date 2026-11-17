@@ -85,6 +85,12 @@ class IsolateHourInstanceOperation(pulumi.CustomResource):
         isolate_hour_instance_operation = tencentcloud.dcdb.IsolateHourInstanceOperation("isolate_hour_instance_operation", instance_ids=dcdb_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [IsolateHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45898)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +113,12 @@ class IsolateHourInstanceOperation(pulumi.CustomResource):
 
         isolate_hour_instance_operation = tencentcloud.dcdb.IsolateHourInstanceOperation("isolate_hour_instance_operation", instance_ids=dcdb_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [IsolateHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45898)
 
 
         :param str resource_name: The name of the resource.

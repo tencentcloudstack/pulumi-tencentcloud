@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+    ///   - [RestartDBInstance](https://www.tencentcloud.com/document/api/409/18097)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/restartDbInstanceOperation:RestartDbInstanceOperation")]
     public partial class RestartDbInstanceOperation : global::Pulumi.CustomResource

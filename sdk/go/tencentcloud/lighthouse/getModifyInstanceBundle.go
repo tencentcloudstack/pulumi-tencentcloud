@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
 func GetModifyInstanceBundle(ctx *pulumi.Context, args *GetModifyInstanceBundleArgs, opts ...pulumi.InvokeOption) (*GetModifyInstanceBundleResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetModifyInstanceBundleResult

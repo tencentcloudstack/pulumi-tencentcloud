@@ -96,6 +96,12 @@ def get_zone(cdc_id: Optional[_builtins.str] = None,
     ckafka_zone = tencentcloud.ckafka.get_zone()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCkafkaZone](https://www.tencentcloud.com/document/api/597/40318)
+
 
     :param _builtins.str cdc_id: cdc professional cluster business parameters.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_zone_output(cdc_id: pulumi.Input[Optional[Optional[_builtins.str]]] = No
 
     ckafka_zone = tencentcloud.ckafka.get_zone()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCkafkaZone](https://www.tencentcloud.com/document/api/597/40318)
 
 
     :param _builtins.str cdc_id: cdc professional cluster business parameters.

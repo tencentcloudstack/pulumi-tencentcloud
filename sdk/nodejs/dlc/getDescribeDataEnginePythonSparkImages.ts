@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
  */
 export function getDescribeDataEnginePythonSparkImages(args: GetDescribeDataEnginePythonSparkImagesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeDataEnginePythonSparkImagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetDescribeDataEnginePythonSparkImagesResult {
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
  */
 export function getDescribeDataEnginePythonSparkImagesOutput(args: GetDescribeDataEnginePythonSparkImagesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeDataEnginePythonSparkImagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

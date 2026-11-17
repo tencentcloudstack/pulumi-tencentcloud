@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const userDomains = tencentcloud.waf.getUserDomains({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
  */
 export function getUserDomains(args?: GetUserDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetUserDomainsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetUserDomainsResult {
  *
  * const userDomains = tencentcloud.waf.getUserDomains({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
  */
 export function getUserDomainsOutput(args?: GetUserDomainsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserDomainsResult> {
     args = args || {};

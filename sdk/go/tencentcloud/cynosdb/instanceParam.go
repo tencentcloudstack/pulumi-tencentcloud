@@ -47,6 +47,19 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//   - [ModifyInstanceParam](https://www.tencentcloud.com/document/api/1098/55904)
+//
+// * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/1098/55906)
+// * Update:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//   - [ModifyInstanceParam](https://www.tencentcloud.com/document/api/1098/55904)
 type InstanceParam struct {
 	pulumi.CustomResourceState
 

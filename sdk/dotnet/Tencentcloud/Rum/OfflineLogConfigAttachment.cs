@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateOfflineLogConfig](https://www.tencentcloud.com/search/?wd=CreateOfflineLogConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteOfflineLogConfig](https://www.tencentcloud.com/search/?wd=DeleteOfflineLogConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// rum OfflineLogConfigAttachment can be imported using the id, e.g.

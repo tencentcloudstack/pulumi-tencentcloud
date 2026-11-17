@@ -378,6 +378,15 @@ class ApiSecSensitivePrivilegeRule(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&type=document&lang=en)
+        * Read: [DescribeApiSecSensitiveRuleList](https://www.tencentcloud.com/search/?wd=DescribeApiSecSensitiveRuleList&type=document&lang=en)
+        * Update: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&type=document&lang=en)
+        * Delete: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&type=document&lang=en)
+
         ## Import
 
         WAF api sec sensitive privilege rule can be imported using the domain#ruleName, e.g.
@@ -428,6 +437,15 @@ class ApiSecSensitivePrivilegeRule(pulumi.CustomResource):
                 "values": ["/api/user/info"],
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&type=document&lang=en)
+        * Read: [DescribeApiSecSensitiveRuleList](https://www.tencentcloud.com/search/?wd=DescribeApiSecSensitiveRuleList&type=document&lang=en)
+        * Update: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&type=document&lang=en)
+        * Delete: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&type=document&lang=en)
 
         ## Import
 

@@ -30,8 +30,11 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
 //				LogsetName: pulumi.String("tf-example"),
-//				Tags: pulumi.StringMap{
-//					"createdBy": pulumi.String("Terraform"),
+//				TagLists: cls.LogsetTagListArray{
+//					&cls.LogsetTagListArgs{
+//						Key:   pulumi.String("createdBy"),
+//						Value: pulumi.String("Terraform"),
+//					},
 //				},
 //			})
 //			if err != nil {
@@ -42,6 +45,24 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateLogset](https://www.tencentcloud.com/document/api/614/42780)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [ModifyLogset](https://www.tencentcloud.com/document/api/614/42777)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
 //
 // ## Import
 //
@@ -58,7 +79,11 @@ type Logset struct {
 	LogsetName pulumi.StringOutput `pulumi:"logsetName"`
 	// If assumerUin is not empty, it indicates the service provider who creates the logset.
 	RoleName pulumi.StringOutput `pulumi:"roleName"`
-	// Tag description list.
+	// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+	TagLists LogsetTagListArrayOutput `pulumi:"tagLists"`
+	// It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+	//
+	// Deprecated: It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Number of log topics in logset.
 	TopicCount pulumi.IntOutput `pulumi:"topicCount"`
@@ -103,7 +128,11 @@ type logsetState struct {
 	LogsetName *string `pulumi:"logsetName"`
 	// If assumerUin is not empty, it indicates the service provider who creates the logset.
 	RoleName *string `pulumi:"roleName"`
-	// Tag description list.
+	// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+	TagLists []LogsetTagList `pulumi:"tagLists"`
+	// It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+	//
+	// Deprecated: It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
 	Tags map[string]string `pulumi:"tags"`
 	// Number of log topics in logset.
 	TopicCount *int `pulumi:"topicCount"`
@@ -116,7 +145,11 @@ type LogsetState struct {
 	LogsetName pulumi.StringPtrInput
 	// If assumerUin is not empty, it indicates the service provider who creates the logset.
 	RoleName pulumi.StringPtrInput
-	// Tag description list.
+	// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+	TagLists LogsetTagListArrayInput
+	// It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+	//
+	// Deprecated: It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
 	Tags pulumi.StringMapInput
 	// Number of log topics in logset.
 	TopicCount pulumi.IntPtrInput
@@ -129,7 +162,11 @@ func (LogsetState) ElementType() reflect.Type {
 type logsetArgs struct {
 	// Logset name, which must be unique.
 	LogsetName string `pulumi:"logsetName"`
-	// Tag description list.
+	// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+	TagLists []LogsetTagList `pulumi:"tagLists"`
+	// It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+	//
+	// Deprecated: It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
 	Tags map[string]string `pulumi:"tags"`
 }
 
@@ -137,7 +174,11 @@ type logsetArgs struct {
 type LogsetArgs struct {
 	// Logset name, which must be unique.
 	LogsetName pulumi.StringInput
-	// Tag description list.
+	// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+	TagLists LogsetTagListArrayInput
+	// It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+	//
+	// Deprecated: It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
 	Tags pulumi.StringMapInput
 }
 
@@ -243,7 +284,14 @@ func (o LogsetOutput) RoleName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Logset) pulumi.StringOutput { return v.RoleName }).(pulumi.StringOutput)
 }
 
-// Tag description list.
+// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+func (o LogsetOutput) TagLists() LogsetTagListArrayOutput {
+	return o.ApplyT(func(v *Logset) LogsetTagListArrayOutput { return v.TagLists }).(LogsetTagListArrayOutput)
+}
+
+// It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+//
+// Deprecated: It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
 func (o LogsetOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Logset) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }

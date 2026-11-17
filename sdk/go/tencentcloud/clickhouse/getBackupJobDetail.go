@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&type=document&lang=en)
 func GetBackupJobDetail(ctx *pulumi.Context, args *GetBackupJobDetailArgs, opts ...pulumi.InvokeOption) (*GetBackupJobDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupJobDetailResult

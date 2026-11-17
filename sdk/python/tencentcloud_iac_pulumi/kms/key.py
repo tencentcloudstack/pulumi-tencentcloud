@@ -28,6 +28,7 @@ class KeyArgs:
                  key_rotation_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  key_usage: pulumi.Input[Optional[_builtins.str]] = None,
                  pending_delete_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 rotate_days: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Key resource.
@@ -40,6 +41,7 @@ class KeyArgs:
         :param pulumi.Input[_builtins.bool] key_rotation_enabled: Specify whether to enable key rotation, valid when key_usage is `ENCRYPT_DECRYPT`. Default value is `false`.
         :param pulumi.Input[_builtins.str] key_usage: Usage of CMK. Available values include `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
         :param pulumi.Input[_builtins.int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
+        :param pulumi.Input[_builtins.int] rotate_days: Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of CMK.
         """
         pulumi.set(__self__, "alias", alias)
@@ -57,6 +59,8 @@ class KeyArgs:
             pulumi.set(__self__, "key_usage", key_usage)
         if pending_delete_window_in_days is not None:
             pulumi.set(__self__, "pending_delete_window_in_days", pending_delete_window_in_days)
+        if rotate_days is not None:
+            pulumi.set(__self__, "rotate_days", rotate_days)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -157,6 +161,18 @@ class KeyArgs:
         pulumi.set(self, "pending_delete_window_in_days", value)
 
     @_builtins.property
+    @pulumi.getter(name="rotateDays")
+    def rotate_days(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
+        """
+        return pulumi.get(self, "rotate_days")
+
+    @rotate_days.setter
+    def rotate_days(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "rotate_days", value)
+
+    @_builtins.property
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
@@ -181,6 +197,7 @@ class _KeyState:
                  key_state: pulumi.Input[Optional[_builtins.str]] = None,
                  key_usage: pulumi.Input[Optional[_builtins.str]] = None,
                  pending_delete_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 rotate_days: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Key resources.
@@ -194,6 +211,7 @@ class _KeyState:
         :param pulumi.Input[_builtins.str] key_state: State of CMK.
         :param pulumi.Input[_builtins.str] key_usage: Usage of CMK. Available values include `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
         :param pulumi.Input[_builtins.int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
+        :param pulumi.Input[_builtins.int] rotate_days: Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of CMK.
         """
         if alias is not None:
@@ -214,6 +232,8 @@ class _KeyState:
             pulumi.set(__self__, "key_usage", key_usage)
         if pending_delete_window_in_days is not None:
             pulumi.set(__self__, "pending_delete_window_in_days", pending_delete_window_in_days)
+        if rotate_days is not None:
+            pulumi.set(__self__, "rotate_days", rotate_days)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -326,6 +346,18 @@ class _KeyState:
         pulumi.set(self, "pending_delete_window_in_days", value)
 
     @_builtins.property
+    @pulumi.getter(name="rotateDays")
+    def rotate_days(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
+        """
+        return pulumi.get(self, "rotate_days")
+
+    @rotate_days.setter
+    def rotate_days(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "rotate_days", value)
+
+    @_builtins.property
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
@@ -352,6 +384,7 @@ class Key(pulumi.CustomResource):
                  key_rotation_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  key_usage: pulumi.Input[Optional[_builtins.str]] = None,
                  pending_delete_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 rotate_days: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
@@ -371,6 +404,24 @@ class Key(pulumi.CustomResource):
             key_rotation_enabled=False,
             is_enabled=True,
             pending_delete_window_in_days=7,
+            tags={
+                "createdBy": "Terraform",
+            })
+        ```
+
+        ### Create kms instance with key rotation and rotate days.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kms.Key("example",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_usage="ENCRYPT_DECRYPT",
+            key_rotation_enabled=True,
+            rotate_days=30,
+            is_enabled=True,
             tags={
                 "createdBy": "Terraform",
             })
@@ -423,6 +474,30 @@ class Key(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ArchiveKey](https://www.tencentcloud.com/document/api/1030/38198)
+          - [CreateKey](https://www.tencentcloud.com/document/api/1030/32199)
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+          - [EnableKeyRotation](https://www.tencentcloud.com/document/api/1030/32191)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateAlias](https://www.tencentcloud.com/document/api/1030/32182)
+          - [UpdateKeyDescription](https://www.tencentcloud.com/document/api/1030/32181)
+        * Delete:
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+          - [ScheduleKeyDeletion](https://www.tencentcloud.com/document/api/1030/33534)
+
         ## Import
 
         KMS keys can be imported using the id, e.g.
@@ -442,6 +517,7 @@ class Key(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] key_rotation_enabled: Specify whether to enable key rotation, valid when key_usage is `ENCRYPT_DECRYPT`. Default value is `false`.
         :param pulumi.Input[_builtins.str] key_usage: Usage of CMK. Available values include `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
         :param pulumi.Input[_builtins.int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
+        :param pulumi.Input[_builtins.int] rotate_days: Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of CMK.
         """
         ...
@@ -472,6 +548,24 @@ class Key(pulumi.CustomResource):
             })
         ```
 
+        ### Create kms instance with key rotation and rotate days.
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kms.Key("example",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_usage="ENCRYPT_DECRYPT",
+            key_rotation_enabled=True,
+            rotate_days=30,
+            is_enabled=True,
+            tags={
+                "createdBy": "Terraform",
+            })
+        ```
+
         ### Create kms instance with HSM
 
         ```python
@@ -518,6 +612,30 @@ class Key(pulumi.CustomResource):
                 "createdBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ArchiveKey](https://www.tencentcloud.com/document/api/1030/38198)
+          - [CreateKey](https://www.tencentcloud.com/document/api/1030/32199)
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+          - [EnableKeyRotation](https://www.tencentcloud.com/document/api/1030/32191)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateAlias](https://www.tencentcloud.com/document/api/1030/32182)
+          - [UpdateKeyDescription](https://www.tencentcloud.com/document/api/1030/32181)
+        * Delete:
+          - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+          - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+          - [ScheduleKeyDeletion](https://www.tencentcloud.com/document/api/1030/33534)
 
         ## Import
 
@@ -551,6 +669,7 @@ class Key(pulumi.CustomResource):
                  key_rotation_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  key_usage: pulumi.Input[Optional[_builtins.str]] = None,
                  pending_delete_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 rotate_days: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -571,6 +690,7 @@ class Key(pulumi.CustomResource):
             __props__.__dict__["key_rotation_enabled"] = key_rotation_enabled
             __props__.__dict__["key_usage"] = key_usage
             __props__.__dict__["pending_delete_window_in_days"] = pending_delete_window_in_days
+            __props__.__dict__["rotate_days"] = rotate_days
             __props__.__dict__["tags"] = tags
             __props__.__dict__["key_state"] = None
         super(Key, __self__).__init__(
@@ -592,6 +712,7 @@ class Key(pulumi.CustomResource):
             key_state: pulumi.Input[Optional[_builtins.str]] = None,
             key_usage: pulumi.Input[Optional[_builtins.str]] = None,
             pending_delete_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
+            rotate_days: pulumi.Input[Optional[_builtins.int]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None) -> 'Key':
         """
         Get an existing Key resource's state with the given name, id, and optional extra
@@ -609,6 +730,7 @@ class Key(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] key_state: State of CMK.
         :param pulumi.Input[_builtins.str] key_usage: Usage of CMK. Available values include `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
         :param pulumi.Input[_builtins.int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
+        :param pulumi.Input[_builtins.int] rotate_days: Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of CMK.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -624,6 +746,7 @@ class Key(pulumi.CustomResource):
         __props__.__dict__["key_state"] = key_state
         __props__.__dict__["key_usage"] = key_usage
         __props__.__dict__["pending_delete_window_in_days"] = pending_delete_window_in_days
+        __props__.__dict__["rotate_days"] = rotate_days
         __props__.__dict__["tags"] = tags
         return Key(resource_name, opts=opts, __props__=__props__)
 
@@ -698,6 +821,14 @@ class Key(pulumi.CustomResource):
         Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         """
         return pulumi.get(self, "pending_delete_window_in_days")
+
+    @_builtins.property
+    @pulumi.getter(name="rotateDays")
+    def rotate_days(self) -> pulumi.Output[_builtins.int]:
+        """
+        Key rotation period in days, range 7~365, default 365. Only effective when `key_usage` is `ENCRYPT_DECRYPT` and `key_rotation_enabled` is `true`.
+        """
+        return pulumi.get(self, "rotate_days")
 
     @_builtins.property
     @pulumi.getter

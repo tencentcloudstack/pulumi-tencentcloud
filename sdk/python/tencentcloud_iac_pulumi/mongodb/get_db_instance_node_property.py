@@ -198,6 +198,12 @@ def get_db_instance_node_property(instance_id: Optional[_builtins.str] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param Sequence[_builtins.str] node_ids: Node ID list.
@@ -272,6 +278,12 @@ def get_db_instance_node_property_output(instance_id: pulumi.Input[Optional[_bui
             "tag_value": "prod",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
 
 
     :param _builtins.str instance_id: Instance ID.

@@ -102,6 +102,12 @@ def get_nat_fw_cluster_region_status(nat_cluster_region_status_query_lists: Opti
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&type=document&lang=en)
+
 
     :param Sequence[Union['GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs', 'GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgsDict']] nat_cluster_region_status_query_lists: List of query conditions for NAT firewall cluster region status.
     :param _builtins.str result_output_file: Used to save results.
@@ -136,6 +142,12 @@ def get_nat_fw_cluster_region_status_output(nat_cluster_region_status_query_list
         "routing_mode": 0,
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&type=document&lang=en)
 
 
     :param Sequence[Union['GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs', 'GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgsDict']] nat_cluster_region_status_query_lists: List of query conditions for NAT firewall cluster region status.

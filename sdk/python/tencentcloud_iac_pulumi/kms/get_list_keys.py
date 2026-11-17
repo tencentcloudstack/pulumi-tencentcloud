@@ -106,6 +106,12 @@ def get_list_keys(hsm_cluster_id: Optional[_builtins.str] = None,
     example = tencentcloud.kms.get_list_keys(role=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
+
 
     :param _builtins.str hsm_cluster_id: HSM cluster ID (only valid for KMS exclusive/managed service instances).
     :param _builtins.str result_output_file: Used to save results.
@@ -139,6 +145,12 @@ def get_list_keys_output(hsm_cluster_id: pulumi.Input[Optional[Optional[_builtin
 
     example = tencentcloud.kms.get_list_keys(role=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
 
 
     :param _builtins.str hsm_cluster_id: HSM cluster ID (only valid for KMS exclusive/managed service instances).

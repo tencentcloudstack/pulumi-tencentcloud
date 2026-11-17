@@ -163,6 +163,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/1098/40756)
+// * Read: [DescribeBackupConfig](https://www.tencentcloud.com/document/api/1098/40760)
+// * Update: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/1098/40756)
+//
 // ## Import
 //
 // CynosDB backup config can be imported using the id, e.g.

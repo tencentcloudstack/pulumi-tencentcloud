@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMetaTableResult> InvokeAsync(GetMetaTableArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMetaTableResult> Invoke(GetMetaTableInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMetaTableResult> Invoke(GetMetaTableInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMetaTableResult>("tencentcloud:Oceanus/getMetaTable:getMetaTable", args ?? new GetMetaTableInvokeArgs(), options.WithDefaults());

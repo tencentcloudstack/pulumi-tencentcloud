@@ -16,6 +16,8 @@ var _ = internal.GetEnvOrDefault
 type InstanceNetwork struct {
 	// Old IP expiration time.
 	ExpireTime *string `pulumi:"expireTime"`
+	// Whether it is an SSL network.
+	IsSsl *bool `pulumi:"isSsl"`
 	// Internal port.
 	Port *int `pulumi:"port"`
 	// Old IP preservation duration in days.
@@ -42,6 +44,8 @@ type InstanceNetworkInput interface {
 type InstanceNetworkArgs struct {
 	// Old IP expiration time.
 	ExpireTime pulumi.StringPtrInput `pulumi:"expireTime"`
+	// Whether it is an SSL network.
+	IsSsl pulumi.BoolPtrInput `pulumi:"isSsl"`
 	// Internal port.
 	Port pulumi.IntPtrInput `pulumi:"port"`
 	// Old IP preservation duration in days.
@@ -108,6 +112,11 @@ func (o InstanceNetworkOutput) ToInstanceNetworkOutputWithContext(ctx context.Co
 // Old IP expiration time.
 func (o InstanceNetworkOutput) ExpireTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceNetwork) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
+}
+
+// Whether it is an SSL network.
+func (o InstanceNetworkOutput) IsSsl() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v InstanceNetwork) *bool { return v.IsSsl }).(pulumi.BoolPtrOutput)
 }
 
 // Internal port.

@@ -49,6 +49,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ReplaceRoutesWithRoutePolicy](https://www.tencentcloud.com/document/api/215/76539)
+// * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+// * Update: [ReplaceRoutesWithRoutePolicy](https://www.tencentcloud.com/document/api/215/76539)
 type ReplaceRoutesWithRoutePolicyConfig struct {
 	pulumi.CustomResourceState
 

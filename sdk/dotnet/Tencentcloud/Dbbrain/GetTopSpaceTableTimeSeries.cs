@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceTableTimeSeries](https://www.tencentcloud.com/document/api/1035/41188)
         /// </summary>
         public static Task<GetTopSpaceTableTimeSeriesResult> InvokeAsync(GetTopSpaceTableTimeSeriesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceTableTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceTableTimeSeries:getTopSpaceTableTimeSeries", args ?? new GetTopSpaceTableTimeSeriesArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceTableTimeSeries](https://www.tencentcloud.com/document/api/1035/41188)
         /// </summary>
         public static Output<GetTopSpaceTableTimeSeriesResult> Invoke(GetTopSpaceTableTimeSeriesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceTableTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceTableTimeSeries:getTopSpaceTableTimeSeries", args ?? new GetTopSpaceTableTimeSeriesInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceTableTimeSeries](https://www.tencentcloud.com/document/api/1035/41188)
         /// </summary>
         public static Output<GetTopSpaceTableTimeSeriesResult> Invoke(GetTopSpaceTableTimeSeriesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceTableTimeSeriesResult>("tencentcloud:Dbbrain/getTopSpaceTableTimeSeries:getTopSpaceTableTimeSeries", args ?? new GetTopSpaceTableTimeSeriesInvokeArgs(), options.WithDefaults());

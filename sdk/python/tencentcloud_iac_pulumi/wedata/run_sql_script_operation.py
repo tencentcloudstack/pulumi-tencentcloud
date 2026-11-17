@@ -213,6 +213,12 @@ class RunSqlScriptOperation(pulumi.CustomResource):
             script_content="SHOW DATABASES;")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RunSQLScript](https://www.tencentcloud.com/document/api/1174/73844)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -252,6 +258,12 @@ class RunSqlScriptOperation(pulumi.CustomResource):
             project_id="2983848457986924544",
             script_content="SHOW DATABASES;")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RunSQLScript](https://www.tencentcloud.com/document/api/1174/73844)
 
 
         :param str resource_name: The name of the resource.

@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const syncJobIsolateOperation = new tencentcloud.dts.SyncJobIsolateOperation("sync_job_isolate_operation", {jobId: "sync-werwfs23"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+ *   - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
  */
 export class SyncJobIsolateOperation extends pulumi.CustomResource {
     /**

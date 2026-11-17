@@ -111,6 +111,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+//   - [ModifyClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42698)
+//
+// * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+// * Update:
+//   - [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+//   - [ModifyClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42698)
+//
+// * Delete:
+//   - [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+//   - [ModifyClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42698)
+//
 // ## Import
 //
 // TKE cluster authentication can be imported using the id, e.g.

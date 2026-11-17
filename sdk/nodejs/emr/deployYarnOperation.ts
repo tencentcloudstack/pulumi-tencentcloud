@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const emrYarn = new tencentcloud.emr.DeployYarnOperation("emr_yarn", {instanceId: "emr-xxxxxx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DeployYarnConf](https://www.tencentcloud.com/document/api/1026/73207)
+ *   - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
  */
 export class DeployYarnOperation extends pulumi.CustomResource {
     /**

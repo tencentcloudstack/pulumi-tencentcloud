@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceGroupId: "rg-j3zolzg77b",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&type=document&lang=en)
  */
 export function getNativeSparkSessions(args?: GetNativeSparkSessionsArgs, opts?: pulumi.InvokeOptions): Promise<GetNativeSparkSessionsResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetNativeSparkSessionsResult {
  *     resourceGroupId: "rg-j3zolzg77b",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&type=document&lang=en)
  */
 export function getNativeSparkSessionsOutput(args?: GetNativeSparkSessionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNativeSparkSessionsResult> {
     args = args || {};

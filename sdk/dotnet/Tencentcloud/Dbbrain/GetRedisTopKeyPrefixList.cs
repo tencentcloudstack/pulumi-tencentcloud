@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
         /// </summary>
         public static Task<GetRedisTopKeyPrefixListResult> InvokeAsync(GetRedisTopKeyPrefixListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
         /// </summary>
         public static Output<GetRedisTopKeyPrefixListResult> Invoke(GetRedisTopKeyPrefixListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
         /// </summary>
         public static Output<GetRedisTopKeyPrefixListResult> Invoke(GetRedisTopKeyPrefixListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRedisTopKeyPrefixListResult>("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args ?? new GetRedisTopKeyPrefixListInvokeArgs(), options.WithDefaults());

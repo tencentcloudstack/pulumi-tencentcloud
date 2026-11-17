@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeReservedInstancesOfferings](https://www.tencentcloud.com/document/api/213/68356)
 func GetInstanceConfigs(ctx *pulumi.Context, args *GetInstanceConfigsArgs, opts ...pulumi.InvokeOption) (*GetInstanceConfigsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceConfigsResult

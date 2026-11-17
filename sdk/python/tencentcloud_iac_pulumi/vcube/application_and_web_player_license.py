@@ -220,6 +220,14 @@ class ApplicationAndWebPlayerLicense(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateApplicationAndWebPlayerLicense](https://www.tencentcloud.com/search/?wd=CreateApplicationAndWebPlayerLicense&type=document&lang=en)
+        * Read: [DescribeVcubeApplicationAndPlayList](https://www.tencentcloud.com/search/?wd=DescribeVcubeApplicationAndPlayList&type=document&lang=en)
+        * Delete: [DeleteApplicationAndWebPlayerLicense](https://www.tencentcloud.com/search/?wd=DeleteApplicationAndWebPlayerLicense&type=document&lang=en)
+
         ## Import
 
         VCube application and web player license can be imported using the id, e.g.
@@ -257,6 +265,14 @@ class ApplicationAndWebPlayerLicense(pulumi.CustomResource):
                 "www.example3.com",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateApplicationAndWebPlayerLicense](https://www.tencentcloud.com/search/?wd=CreateApplicationAndWebPlayerLicense&type=document&lang=en)
+        * Read: [DescribeVcubeApplicationAndPlayList](https://www.tencentcloud.com/search/?wd=DescribeVcubeApplicationAndPlayList&type=document&lang=en)
+        * Delete: [DeleteApplicationAndWebPlayerLicense](https://www.tencentcloud.com/search/?wd=DeleteApplicationAndWebPlayerLicense&type=document&lang=en)
 
         ## Import
 

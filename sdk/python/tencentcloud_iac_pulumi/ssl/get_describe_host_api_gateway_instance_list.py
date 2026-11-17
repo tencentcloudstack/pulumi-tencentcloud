@@ -138,6 +138,12 @@ def get_describe_host_api_gateway_instance_list(certificate_id: Optional[_builti
         resource_type="apiGateway")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostApiGatewayInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostApiGatewayInstanceList&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostApiGatewayInstanceListFilterArgs', 'GetDescribeHostApiGatewayInstanceListFilterArgsDict']] filters: List of filtering parameters; Filterkey: domainmatch.
@@ -184,6 +190,12 @@ def get_describe_host_api_gateway_instance_list_output(certificate_id: pulumi.In
     describe_host_api_gateway_instance_list = tencentcloud.ssl.get_describe_host_api_gateway_instance_list(certificate_id="9Bpk7XOu",
         resource_type="apiGateway")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostApiGatewayInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostApiGatewayInstanceList&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

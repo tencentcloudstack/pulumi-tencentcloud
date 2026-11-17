@@ -139,6 +139,12 @@ def get_instance_slow_log(end_time: Optional[_builtins.str] = None,
         format="json")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/240/36929)
+
 
     :param _builtins.str end_time: Slow log termination time, format: yyyy-mm-dd hh:mm:ss, such as: 2019-06-02 12:00:00.The time interval between the start and end of the query cannot exceed 24 hours,and only slow logs within the last 7 days are allowed to be queried.
     :param _builtins.str format: Slow log return format. By default, the original slow log format is returned,and versions 4.4 and above can be set to json.
@@ -188,6 +194,12 @@ def get_instance_slow_log_output(end_time: pulumi.Input[Optional[_builtins.str]]
         slow_ms=100,
         format="json")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/240/36929)
 
 
     :param _builtins.str end_time: Slow log termination time, format: yyyy-mm-dd hh:mm:ss, such as: 2019-06-02 12:00:00.The time interval between the start and end of the query cannot exceed 24 hours,and only slow logs within the last 7 days are allowed to be queried.

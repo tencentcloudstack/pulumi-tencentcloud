@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     roleConfigurationId: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
  */
 export function getConfigurationProvisionings(args: GetConfigurationProvisioningsArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigurationProvisioningsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetConfigurationProvisioningsResult {
  *     roleConfigurationId: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
  */
 export function getConfigurationProvisioningsOutput(args: GetConfigurationProvisioningsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigurationProvisioningsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

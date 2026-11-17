@@ -127,6 +127,12 @@ def get_function_versions(function_name: Optional[_builtins.str] = None,
         namespace="default")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListVersionByFunction](https://www.tencentcloud.com/document/api/583/34416)
+
 
     :param _builtins.str function_name: Function Name.
     :param _builtins.str namespace: The namespace where the function locates.
@@ -169,6 +175,12 @@ def get_function_versions_output(function_name: pulumi.Input[Optional[_builtins.
     function_versions = tencentcloud.scf.get_function_versions(function_name="keep-1676351130",
         namespace="default")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListVersionByFunction](https://www.tencentcloud.com/document/api/583/34416)
 
 
     :param _builtins.str function_name: Function Name.

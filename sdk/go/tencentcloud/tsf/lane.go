@@ -46,6 +46,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLane](https://www.tencentcloud.com/search/?wd=CreateLane&type=document&lang=en)
+// * Read: [DescribeLanes](https://www.tencentcloud.com/search/?wd=DescribeLanes&type=document&lang=en)
+// * Update: [ModifyLane](https://www.tencentcloud.com/search/?wd=ModifyLane&type=document&lang=en)
+// * Delete: [DeleteLane](https://www.tencentcloud.com/search/?wd=DeleteLane&type=document&lang=en)
 type Lane struct {
 	pulumi.CustomResourceState
 

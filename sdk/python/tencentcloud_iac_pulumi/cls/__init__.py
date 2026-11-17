@@ -15,6 +15,7 @@ from .cos_recharge import *
 from .cos_shipper import *
 from .dashboard import *
 from .data_transform import *
+from .deliver_task import *
 from .dlc_deliver import *
 from .export import *
 from .get_alarm_notices import *
@@ -33,6 +34,8 @@ from .machine_group import *
 from .metric_subscribe import *
 from .notice_content import *
 from .open_service_operation import *
+from .remote_write_task import *
 from .scheduled_sql import *
+from .splunk_deliver import *
 from .topic import *
 from .web_callback import *

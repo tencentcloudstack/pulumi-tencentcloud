@@ -126,6 +126,12 @@ class StopJob(pulumi.CustomResource):
             work_space_id="space-2idq8wbr")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StopJobs](https://www.tencentcloud.com/search/?wd=StopJobs&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -154,6 +160,12 @@ class StopJob(pulumi.CustomResource):
             }],
             work_space_id="space-2idq8wbr")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StopJobs](https://www.tencentcloud.com/search/?wd=StopJobs&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     zoneId: "zone-2qtuhspy7cr6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
  */
 export function getContentQuota(args: GetContentQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetContentQuotaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetContentQuotaResult {
  *     zoneId: "zone-2qtuhspy7cr6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
  */
 export function getContentQuotaOutput(args: GetContentQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetContentQuotaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

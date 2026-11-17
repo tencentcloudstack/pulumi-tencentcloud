@@ -359,6 +359,15 @@ class PeerConnectManager(pulumi.CustomResource):
             destination_region="ap-guangzhou")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=CreateVpcPeeringConnection&type=document&lang=en)
+        * Read: [DescribeVpcPeeringConnections](https://www.tencentcloud.com/search/?wd=DescribeVpcPeeringConnections&type=document&lang=en)
+        * Update: [ModifyVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=ModifyVpcPeeringConnection&type=document&lang=en)
+        * Delete: [DeleteVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=DeleteVpcPeeringConnection&type=document&lang=en)
+
         ## Import
 
         vpc peer_connect_manager can be imported using the id, e.g.
@@ -411,6 +420,15 @@ class PeerConnectManager(pulumi.CustomResource):
             destination_uin=owner_uin,
             destination_region="ap-guangzhou")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=CreateVpcPeeringConnection&type=document&lang=en)
+        * Read: [DescribeVpcPeeringConnections](https://www.tencentcloud.com/search/?wd=DescribeVpcPeeringConnections&type=document&lang=en)
+        * Update: [ModifyVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=ModifyVpcPeeringConnection&type=document&lang=en)
+        * Delete: [DeleteVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=DeleteVpcPeeringConnection&type=document&lang=en)
 
         ## Import
 

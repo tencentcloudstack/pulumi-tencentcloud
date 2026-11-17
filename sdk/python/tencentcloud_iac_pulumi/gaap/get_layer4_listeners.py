@@ -171,6 +171,14 @@ def get_layer4_listeners(listener_id: Optional[_builtins.str] = None,
         listener_id=foo_layer4_listener.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+      - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
+
 
     :param _builtins.str listener_id: ID of the layer4 listener to be queried.
     :param _builtins.str listener_name: Name of the layer4 listener to be queried.
@@ -242,6 +250,14 @@ def get_layer4_listeners_output(listener_id: pulumi.Input[Optional[Optional[_bui
         proxy_id=foo_proxy.id,
         listener_id=foo_layer4_listener.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+      - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
 
 
     :param _builtins.str listener_id: ID of the layer4 listener to be queried.

@@ -44,6 +44,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeLogInstanceList](https://www.tencentcloud.com/document/api/239/82338)
+//   - [OpenLog](https://www.tencentcloud.com/document/api/239/82335)
+//
+// * Read: [DescribeLogInstanceList](https://www.tencentcloud.com/document/api/239/82338)
+// * Update:
+//   - [DescribeLogInstanceList](https://www.tencentcloud.com/document/api/239/82338)
+//   - [ModifyLog](https://www.tencentcloud.com/document/api/239/82336)
+//
+// * Delete:
+//   - [CloseLog](https://www.tencentcloud.com/document/api/239/82342)
+//   - [DescribeLogInstanceList](https://www.tencentcloud.com/document/api/239/82338)
+//
 // ## Import
 //
 // Redis audit log can be imported using the instance id, e.g.

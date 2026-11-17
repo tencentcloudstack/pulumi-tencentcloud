@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
         /// </summary>
         public static Task<GetProjectSecurityGroupsResult> InvokeAsync(GetProjectSecurityGroupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupsResult>("tencentcloud:Cynosdb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
         /// </summary>
         public static Output<GetProjectSecurityGroupsResult> Invoke(GetProjectSecurityGroupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupsResult>("tencentcloud:Cynosdb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
         /// </summary>
         public static Output<GetProjectSecurityGroupsResult> Invoke(GetProjectSecurityGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupsResult>("tencentcloud:Cynosdb/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsInvokeArgs(), options.WithDefaults());

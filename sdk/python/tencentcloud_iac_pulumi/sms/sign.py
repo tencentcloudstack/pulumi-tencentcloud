@@ -319,6 +319,15 @@ class Sign(pulumi.CustomResource):
             proof_image="your_proof_image")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddSmsSign](https://www.tencentcloud.com/document/api/382/40534)
+        * Read: [DescribeSmsSignList](https://www.tencentcloud.com/document/api/382/40532)
+        * Update: [ModifySmsSign](https://www.tencentcloud.com/document/api/382/40531)
+        * Delete: [DeleteSmsSign](https://www.tencentcloud.com/document/api/382/40533)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -356,6 +365,15 @@ class Sign(pulumi.CustomResource):
             sign_purpose=0,
             proof_image="your_proof_image")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddSmsSign](https://www.tencentcloud.com/document/api/382/40534)
+        * Read: [DescribeSmsSignList](https://www.tencentcloud.com/document/api/382/40532)
+        * Update: [ModifySmsSign](https://www.tencentcloud.com/document/api/382/40531)
+        * Delete: [DeleteSmsSign](https://www.tencentcloud.com/document/api/382/40533)
 
 
         :param str resource_name: The name of the resource.

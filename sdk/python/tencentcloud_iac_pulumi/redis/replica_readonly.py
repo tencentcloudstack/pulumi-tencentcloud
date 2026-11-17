@@ -189,6 +189,20 @@ class ReplicaReadonly(pulumi.CustomResource):
             operate="enable")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+          - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+        * Update:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+          - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -251,6 +265,20 @@ class ReplicaReadonly(pulumi.CustomResource):
             readonly_policies=["master"],
             operate="enable")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+          - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+        * Update:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+          - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
 
 
         :param str resource_name: The name of the resource.

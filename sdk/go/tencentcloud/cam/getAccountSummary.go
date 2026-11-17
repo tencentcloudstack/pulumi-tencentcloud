@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
 func GetAccountSummary(ctx *pulumi.Context, args *GetAccountSummaryArgs, opts ...pulumi.InvokeOption) (*GetAccountSummaryResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountSummaryResult

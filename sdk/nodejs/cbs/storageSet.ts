@@ -83,6 +83,14 @@ import * as utilities from "../utilities";
  *     encrypt: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ * * Delete: [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
  */
 export class StorageSet extends pulumi.CustomResource {
     /**

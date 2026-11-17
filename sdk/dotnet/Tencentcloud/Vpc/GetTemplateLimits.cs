@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTemplateLimits](https://www.tencentcloud.com/search/?wd=DescribeTemplateLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTemplateLimitsResult> InvokeAsync(GetTemplateLimitsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTemplateLimits](https://www.tencentcloud.com/search/?wd=DescribeTemplateLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTemplateLimitsResult> Invoke(GetTemplateLimitsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTemplateLimits](https://www.tencentcloud.com/search/?wd=DescribeTemplateLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTemplateLimitsResult> Invoke(GetTemplateLimitsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsInvokeArgs(), options.WithDefaults());

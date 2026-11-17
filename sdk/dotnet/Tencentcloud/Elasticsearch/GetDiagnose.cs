@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDiagnoseResult> InvokeAsync(GetDiagnoseArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDiagnoseResult> Invoke(GetDiagnoseInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDiagnoseResult> Invoke(GetDiagnoseInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseInvokeArgs(), options.WithDefaults());

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
         /// </summary>
         public static Task<GetDatabaseTableResult> InvokeAsync(GetDatabaseTableArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseTableResult>("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", args ?? new GetDatabaseTableArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
         /// </summary>
         public static Output<GetDatabaseTableResult> Invoke(GetDatabaseTableInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseTableResult>("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", args ?? new GetDatabaseTableInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
         /// </summary>
         public static Output<GetDatabaseTableResult> Invoke(GetDatabaseTableInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseTableResult>("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", args ?? new GetDatabaseTableInvokeArgs(), options.WithDefaults());

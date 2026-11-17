@@ -285,6 +285,15 @@ class FullBackupMigration(pulumi.CustomResource):
             backup_files=[example.lists[0].internet_url])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateBackupMigration](https://www.tencentcloud.com/document/api/238/39843)
+        * Read: [DescribeBackupMigration](https://www.tencentcloud.com/document/api/238/39838)
+        * Update: [ModifyBackupMigration](https://www.tencentcloud.com/document/api/238/39834)
+        * Delete: [DeleteBackupMigration](https://www.tencentcloud.com/document/api/238/39841)
+
         ## Import
 
         sqlserver full_backup_migration can be imported using the id, e.g.
@@ -373,6 +382,15 @@ class FullBackupMigration(pulumi.CustomResource):
             migration_name="migration_test",
             backup_files=[example.lists[0].internet_url])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateBackupMigration](https://www.tencentcloud.com/document/api/238/39843)
+        * Read: [DescribeBackupMigration](https://www.tencentcloud.com/document/api/238/39838)
+        * Update: [ModifyBackupMigration](https://www.tencentcloud.com/document/api/238/39834)
+        * Delete: [DeleteBackupMigration](https://www.tencentcloud.com/document/api/238/39841)
 
         ## Import
 

@@ -97,6 +97,15 @@ import * as utilities from "../utilities";
  *     celRule: "(has(request.url) && request.url.startsWith('/prefix')) && (has(request.method) && request.method == 'POST')",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+ * * Read: [DescribeCCRuleList](https://www.tencentcloud.com/document/api/627/64524)
+ * * Update: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+ * * Delete: [DeleteCCRule](https://www.tencentcloud.com/document/api/627/64551)
  */
 export class Cc extends pulumi.CustomResource {
     /**

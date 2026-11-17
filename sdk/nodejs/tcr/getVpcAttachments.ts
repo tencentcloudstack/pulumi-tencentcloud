@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  *     instanceId: "cls-satg5125",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
  */
 export function getVpcAttachments(args: GetVpcAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetVpcAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +96,14 @@ export interface GetVpcAttachmentsResult {
  *     instanceId: "cls-satg5125",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
  */
 export function getVpcAttachmentsOutput(args: GetVpcAttachmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVpcAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

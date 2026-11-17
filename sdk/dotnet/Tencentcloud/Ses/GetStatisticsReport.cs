@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
         /// </summary>
         public static Task<GetStatisticsReportResult> InvokeAsync(GetStatisticsReportArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
         /// </summary>
         public static Output<GetStatisticsReportResult> Invoke(GetStatisticsReportInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
         /// </summary>
         public static Output<GetStatisticsReportResult> Invoke(GetStatisticsReportInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportInvokeArgs(), options.WithDefaults());

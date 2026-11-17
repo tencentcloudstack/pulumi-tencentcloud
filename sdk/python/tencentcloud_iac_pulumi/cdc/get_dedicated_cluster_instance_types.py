@@ -96,6 +96,12 @@ def get_dedicated_cluster_instance_types(dedicated_cluster_id: Optional[_builtin
     types = tencentcloud.cdc.get_dedicated_cluster_instance_types(dedicated_cluster_id="cluster-262n63e8")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
+
 
     :param _builtins.str dedicated_cluster_id: Dedicated Cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_dedicated_cluster_instance_types_output(dedicated_cluster_id: pulumi.Inp
 
     types = tencentcloud.cdc.get_dedicated_cluster_instance_types(dedicated_cluster_id="cluster-262n63e8")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
 
 
     :param _builtins.str dedicated_cluster_id: Dedicated Cluster ID.

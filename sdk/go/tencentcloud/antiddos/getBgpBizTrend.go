@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
 func GetBgpBizTrend(ctx *pulumi.Context, args *GetBgpBizTrendArgs, opts ...pulumi.InvokeOption) (*GetBgpBizTrendResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBgpBizTrendResult

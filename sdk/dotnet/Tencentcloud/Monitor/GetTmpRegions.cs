@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTmpRegionsResult> InvokeAsync(GetTmpRegionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTmpRegionsResult> Invoke(GetTmpRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTmpRegionsResult> Invoke(GetTmpRegionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsInvokeArgs(), options.WithDefaults());

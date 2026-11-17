@@ -40,6 +40,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+//   - [StopLogstashPipelines](https://www.tencentcloud.com/search/?wd=StopLogstashPipelines&type=document&lang=en)
 type StopLogstashPipelineOperation struct {
 	pulumi.CustomResourceState
 

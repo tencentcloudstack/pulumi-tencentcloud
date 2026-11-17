@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
 func GetSecretLastUsedTime(ctx *pulumi.Context, args *GetSecretLastUsedTimeArgs, opts ...pulumi.InvokeOption) (*GetSecretLastUsedTimeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecretLastUsedTimeResult

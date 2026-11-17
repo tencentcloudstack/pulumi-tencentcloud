@@ -96,6 +96,12 @@ def get_instance_node_info(instance_id: Optional[_builtins.str] = None,
     instance_node_info = tencentcloud.dcdb.get_instance_node_info(instance_id=dcdb_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
+
 
     :param _builtins.str instance_id: Instance ID, such as tdsqlshard-6ltok4u9.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_node_info_output(instance_id: pulumi.Input[Optional[_builtins.s
 
     instance_node_info = tencentcloud.dcdb.get_instance_node_info(instance_id=dcdb_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
 
 
     :param _builtins.str instance_id: Instance ID, such as tdsqlshard-6ltok4u9.

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSlowLogUserHostStats](https://www.tencentcloud.com/document/api/1035/41182)
 func GetSlowLogUserHostStats(ctx *pulumi.Context, args *GetSlowLogUserHostStatsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogUserHostStatsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogUserHostStatsResult

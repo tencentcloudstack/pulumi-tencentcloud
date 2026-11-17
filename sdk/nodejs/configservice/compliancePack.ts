@@ -60,6 +60,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AddCompliancePack](https://www.tencentcloud.com/document/api/1164/85009)
+ *   - [UpdateCompliancePackStatus](https://www.tencentcloud.com/document/api/1164/84995)
+ * * Read: [DescribeCompliancePack](https://www.tencentcloud.com/document/api/1164/85005)
+ * * Update:
+ *   - [UpdateCompliancePack](https://www.tencentcloud.com/document/api/1164/84996)
+ *   - [UpdateCompliancePackStatus](https://www.tencentcloud.com/document/api/1164/84995)
+ *
  * ## Import
  *
  * Config compliance pack can be imported using the id, e.g.

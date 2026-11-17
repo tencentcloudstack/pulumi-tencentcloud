@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceName: "tftest.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
  */
 export function getResourceFiles(args: GetResourceFilesArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceFilesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -114,6 +120,12 @@ export interface GetResourceFilesResult {
  *     resourceName: "tftest.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
  */
 export function getResourceFilesOutput(args: GetResourceFilesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourceFilesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

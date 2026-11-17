@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
 func GetCheckDataEngineImageCanBeUpgrade(ctx *pulumi.Context, args *GetCheckDataEngineImageCanBeUpgradeArgs, opts ...pulumi.InvokeOption) (*GetCheckDataEngineImageCanBeUpgradeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckDataEngineImageCanBeUpgradeResult

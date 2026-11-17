@@ -57,6 +57,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAddressTemplate](https://www.tencentcloud.com/search/?wd=CreateAddressTemplate&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAddressTemplateList](https://www.tencentcloud.com/search/?wd=DescribeAddressTemplateList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAddressTemplate](https://www.tencentcloud.com/search/?wd=ModifyAddressTemplate&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAddressTemplate](https://www.tencentcloud.com/search/?wd=DeleteAddressTemplate&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cfw AddressTemplate can be imported using the id, e.g.

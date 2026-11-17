@@ -242,6 +242,14 @@ class TracingConfig(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyTracingConfig](https://www.tencentcloud.com/search/?wd=ModifyTracingConfig&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Update: [ModifyTracingConfig](https://www.tencentcloud.com/search/?wd=ModifyTracingConfig&type=document&lang=en)
+
         ## Import
 
         tcm tracing_config can be imported using the mesh_id, e.g.
@@ -298,6 +306,14 @@ class TracingConfig(pulumi.CustomResource):
                 "address": "",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyTracingConfig](https://www.tencentcloud.com/search/?wd=ModifyTracingConfig&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Update: [ModifyTracingConfig](https://www.tencentcloud.com/search/?wd=ModifyTracingConfig&type=document&lang=en)
 
         ## Import
 

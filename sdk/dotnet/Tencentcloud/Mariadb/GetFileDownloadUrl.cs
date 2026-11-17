@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/237/44248)
         /// </summary>
         public static Task<GetFileDownloadUrlResult> InvokeAsync(GetFileDownloadUrlArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/237/44248)
         /// </summary>
         public static Output<GetFileDownloadUrlResult> Invoke(GetFileDownloadUrlInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/237/44248)
         /// </summary>
         public static Output<GetFileDownloadUrlResult> Invoke(GetFileDownloadUrlInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlInvokeArgs(), options.WithDefaults());

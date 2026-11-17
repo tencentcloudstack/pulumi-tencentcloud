@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     subUin: 100033690181,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
  */
 export function getGroupUserAccount(args?: GetGroupUserAccountArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupUserAccountResult> {
     args = args || {};
@@ -87,6 +93,12 @@ export interface GetGroupUserAccountResult {
  *     subUin: 100033690181,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
  */
 export function getGroupUserAccountOutput(args?: GetGroupUserAccountOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupUserAccountResult> {
     args = args || {};

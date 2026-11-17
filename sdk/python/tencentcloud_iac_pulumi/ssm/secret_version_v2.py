@@ -258,6 +258,20 @@ class SecretVersionV2(pulumi.CustomResource):
             secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutSecretValue](https://www.tencentcloud.com/document/api/1078/38645)
+        * Read:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
+        * Update:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [UpdateSecret](https://www.tencentcloud.com/document/api/1078/38642)
+        * Delete: [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+
         ## Import
 
         SSM secret version (v2) can be imported using `secretName#versionId`, e.g.
@@ -330,6 +344,20 @@ class SecretVersionV2(pulumi.CustomResource):
             version_id="v2",
             secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutSecretValue](https://www.tencentcloud.com/document/api/1078/38645)
+        * Read:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
+        * Update:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [UpdateSecret](https://www.tencentcloud.com/document/api/1078/38642)
+        * Delete: [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
 
         ## Import
 

@@ -174,6 +174,12 @@ def get_api_group(auth_type: Optional[_builtins.str] = None,
         gateway_instance_id="gw-ins-lvdypq5k")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&type=document&lang=en)
+
 
     :param _builtins.str auth_type: Authentication type. secret: Secret key authentication; none: No authentication.
     :param _builtins.str gateway_instance_id: Gateway Instance Id.
@@ -233,6 +239,12 @@ def get_api_group_output(auth_type: pulumi.Input[Optional[Optional[_builtins.str
         order_type=0,
         gateway_instance_id="gw-ins-lvdypq5k")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&type=document&lang=en)
 
 
     :param _builtins.str auth_type: Authentication type. secret: Secret key authentication; none: No authentication.

@@ -150,6 +150,15 @@ class QualityRuleGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateQualityRuleGroup](https://www.tencentcloud.com/search/?wd=CreateQualityRuleGroup&type=document&lang=en)
+        * Read: [ListQualityRuleGroups](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroups&type=document&lang=en)
+        * Update: [ModifyQualityRuleGroup](https://www.tencentcloud.com/search/?wd=ModifyQualityRuleGroup&type=document&lang=en)
+        * Delete: [DeleteQualityRuleGroup](https://www.tencentcloud.com/search/?wd=DeleteQualityRuleGroup&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -204,6 +213,15 @@ class QualityRuleGroup(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateQualityRuleGroup](https://www.tencentcloud.com/search/?wd=CreateQualityRuleGroup&type=document&lang=en)
+        * Read: [ListQualityRuleGroups](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroups&type=document&lang=en)
+        * Update: [ModifyQualityRuleGroup](https://www.tencentcloud.com/search/?wd=ModifyQualityRuleGroup&type=document&lang=en)
+        * Delete: [DeleteQualityRuleGroup](https://www.tencentcloud.com/search/?wd=DeleteQualityRuleGroup&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

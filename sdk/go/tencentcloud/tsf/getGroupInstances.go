@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&type=document&lang=en)
 func LookupGroupInstances(ctx *pulumi.Context, args *LookupGroupInstancesArgs, opts ...pulumi.InvokeOption) (*LookupGroupInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGroupInstancesResult

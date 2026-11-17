@@ -120,6 +120,12 @@ def get_rollback_time_range(cluster_id: Optional[_builtins.str] = None,
     rollback_time_range = tencentcloud.cynosdb.get_rollback_time_range(cluster_id="cynosdbmysql-bws8h88b")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -151,6 +157,12 @@ def get_rollback_time_range_output(cluster_id: pulumi.Input[Optional[_builtins.s
 
     rollback_time_range = tencentcloud.cynosdb.get_rollback_time_range(cluster_id="cynosdbmysql-bws8h88b")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
 
 
     :param _builtins.str cluster_id: Cluster ID.

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeScores](https://www.tencentcloud.com/document/api/1131/45304)
 func GetScores(ctx *pulumi.Context, args *GetScoresArgs, opts ...pulumi.InvokeOption) (*GetScoresResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScoresResult

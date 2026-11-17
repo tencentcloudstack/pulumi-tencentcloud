@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [CheckDataEngineImageCanBeRollback](https://www.tencentcloud.com/document/api/1155/62695)
 func GetCheckDataEngineImageCanBeRollback(ctx *pulumi.Context, args *GetCheckDataEngineImageCanBeRollbackArgs, opts ...pulumi.InvokeOption) (*GetCheckDataEngineImageCanBeRollbackResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckDataEngineImageCanBeRollbackResult

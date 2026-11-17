@@ -122,6 +122,12 @@ def get_routes(ccn_id: Optional[_builtins.str] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
+
 
     :param _builtins.str ccn_id: ID of the CCN to be queried.
     :param Sequence[Union['GetRoutesFilterArgs', 'GetRoutesFilterArgsDict']] filters: Filter conditions.
@@ -170,6 +176,12 @@ def get_routes_output(ccn_id: pulumi.Input[Optional[_builtins.str]] = None,
             "values": ["ccnrtb-jpf7bzn3"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
 
 
     :param _builtins.str ccn_id: ID of the CCN to be queried.

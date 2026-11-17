@@ -59,6 +59,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
         /// </summary>
         public static Task<GetDedicatedClustersResult> InvokeAsync(GetDedicatedClustersArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDedicatedClustersResult>("tencentcloud:Postgresql/getDedicatedClusters:getDedicatedClusters", args ?? new GetDedicatedClustersArgs(), options.WithDefaults());
@@ -110,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
         /// </summary>
         public static Output<GetDedicatedClustersResult> Invoke(GetDedicatedClustersInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClustersResult>("tencentcloud:Postgresql/getDedicatedClusters:getDedicatedClusters", args ?? new GetDedicatedClustersInvokeArgs(), options.WithDefaults());
@@ -161,6 +173,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
         /// </summary>
         public static Output<GetDedicatedClustersResult> Invoke(GetDedicatedClustersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClustersResult>("tencentcloud:Postgresql/getDedicatedClusters:getDedicatedClusters", args ?? new GetDedicatedClustersInvokeArgs(), options.WithDefaults());

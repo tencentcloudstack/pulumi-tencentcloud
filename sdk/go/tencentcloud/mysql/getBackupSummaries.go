@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBackupSummaries](https://www.tencentcloud.com/document/api/236/35195)
 func GetBackupSummaries(ctx *pulumi.Context, args *GetBackupSummariesArgs, opts ...pulumi.InvokeOption) (*GetBackupSummariesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupSummariesResult

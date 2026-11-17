@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
 func GetInstanceParamRecords(ctx *pulumi.Context, args *GetInstanceParamRecordsArgs, opts ...pulumi.InvokeOption) (*GetInstanceParamRecordsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceParamRecordsResult

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     msgTag: "msg value",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SendRocketMQMessage](https://www.tencentcloud.com/search/?wd=SendRocketMQMessage&type=document&lang=en)
  */
 export class SendRocketmqMessage extends pulumi.CustomResource {
     /**

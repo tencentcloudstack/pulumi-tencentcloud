@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetEdgeFwSwitchesResult> InvokeAsync(GetEdgeFwSwitchesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEdgeFwSwitchesResult> Invoke(GetEdgeFwSwitchesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEdgeFwSwitchesResult> Invoke(GetEdgeFwSwitchesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEdgeFwSwitchesResult>("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args ?? new GetEdgeFwSwitchesInvokeArgs(), options.WithDefaults());

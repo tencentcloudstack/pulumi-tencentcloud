@@ -23,6 +23,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateLineGroup](https://www.tencentcloud.com/search/?wd=CreateLineGroup&type=document&lang=en)
+ * * Read: [DescribeLineGroupList](https://www.tencentcloud.com/search/?wd=DescribeLineGroupList&type=document&lang=en)
+ * * Update: [ModifyLineGroup](https://www.tencentcloud.com/search/?wd=ModifyLineGroup&type=document&lang=en)
+ * * Delete: [DeleteLineGroup](https://www.tencentcloud.com/search/?wd=DeleteLineGroup&type=document&lang=en)
+ *
  * ## Import
  *
  * DNSPod line group can be imported using the id (format: `{domain}#{line_group_id}`), e.g.

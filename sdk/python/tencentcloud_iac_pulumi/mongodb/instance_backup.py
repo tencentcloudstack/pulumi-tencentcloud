@@ -153,6 +153,14 @@ class InstanceBackup(pulumi.CustomResource):
             backup_remark="my backup")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackupDBInstance](https://www.tencentcloud.com/document/api/240/37922)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -180,6 +188,14 @@ class InstanceBackup(pulumi.CustomResource):
             backup_method=0,
             backup_remark="my backup")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackupDBInstance](https://www.tencentcloud.com/document/api/240/37922)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
 
 
         :param str resource_name: The name of the resource.

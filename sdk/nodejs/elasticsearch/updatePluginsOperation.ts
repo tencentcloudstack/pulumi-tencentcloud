@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  *     forceUpdate: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ *   - [UpdatePlugins](https://www.tencentcloud.com/document/api/845/37919)
  */
 export class UpdatePluginsOperation extends pulumi.CustomResource {
     /**

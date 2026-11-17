@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicProduceConnection](https://www.tencentcloud.com/document/api/597/53303)
         /// </summary>
         public static Task<GetTopicProduceConnectionResult> InvokeAsync(GetTopicProduceConnectionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicProduceConnection](https://www.tencentcloud.com/document/api/597/53303)
         /// </summary>
         public static Output<GetTopicProduceConnectionResult> Invoke(GetTopicProduceConnectionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicProduceConnection](https://www.tencentcloud.com/document/api/597/53303)
         /// </summary>
         public static Output<GetTopicProduceConnectionResult> Invoke(GetTopicProduceConnectionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionInvokeArgs(), options.WithDefaults());

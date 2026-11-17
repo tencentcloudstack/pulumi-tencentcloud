@@ -125,6 +125,14 @@ class GrafanaWhitelistConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49741)
+        * Read: [DescribeGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49756)
+        * Update: [UpdateGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49741)
+
         ## Import
 
         monitor grafana_whitelist_config can be imported using the id, e.g.
@@ -162,6 +170,14 @@ class GrafanaWhitelistConfig(pulumi.CustomResource):
                 "10.1.1.3",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49741)
+        * Read: [DescribeGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49756)
+        * Update: [UpdateGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49741)
 
         ## Import
 

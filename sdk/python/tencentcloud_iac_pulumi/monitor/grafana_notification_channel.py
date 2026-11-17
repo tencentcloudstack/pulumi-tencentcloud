@@ -304,6 +304,15 @@ class GrafanaNotificationChannel(pulumi.CustomResource):
             extra_org_ids=["1"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49768)
+        * Read: [DescribeGrafanaChannels](https://www.tencentcloud.com/document/api/248/50845)
+        * Update: [UpdateGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49742)
+        * Delete: [DeleteGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49764)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -400,6 +409,15 @@ class GrafanaNotificationChannel(pulumi.CustomResource):
             receivers=[foo_alarm_notice.amp_consumer_id],
             extra_org_ids=["1"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49768)
+        * Read: [DescribeGrafanaChannels](https://www.tencentcloud.com/document/api/248/50845)
+        * Update: [UpdateGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49742)
+        * Delete: [DeleteGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49764)
 
 
         :param str resource_name: The name of the resource.

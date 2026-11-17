@@ -104,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
         /// </summary>
         public static Task<GetBackupByFlowIdResult> InvokeAsync(GetBackupByFlowIdArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupByFlowIdResult>("tencentcloud:Sqlserver/getBackupByFlowId:getBackupByFlowId", args ?? new GetBackupByFlowIdArgs(), options.WithDefaults());
@@ -200,6 +206,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
         /// </summary>
         public static Output<GetBackupByFlowIdResult> Invoke(GetBackupByFlowIdInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupByFlowIdResult>("tencentcloud:Sqlserver/getBackupByFlowId:getBackupByFlowId", args ?? new GetBackupByFlowIdInvokeArgs(), options.WithDefaults());
@@ -296,6 +308,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
         /// </summary>
         public static Output<GetBackupByFlowIdResult> Invoke(GetBackupByFlowIdInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupByFlowIdResult>("tencentcloud:Sqlserver/getBackupByFlowId:getBackupByFlowId", args ?? new GetBackupByFlowIdInvokeArgs(), options.WithDefaults());

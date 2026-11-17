@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
         /// </summary>
         public static Task<GetRecordTypeResult> InvokeAsync(GetRecordTypeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
         /// </summary>
         public static Output<GetRecordTypeResult> Invoke(GetRecordTypeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
         /// </summary>
         public static Output<GetRecordTypeResult> Invoke(GetRecordTypeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordTypeResult>("tencentcloud:Dnspod/getRecordType:getRecordType", args ?? new GetRecordTypeInvokeArgs(), options.WithDefaults());

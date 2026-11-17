@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
 func GetGroupLog(ctx *pulumi.Context, args *GetGroupLogArgs, opts ...pulumi.InvokeOption) (*GetGroupLogResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGroupLogResult

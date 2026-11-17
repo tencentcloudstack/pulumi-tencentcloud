@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [PublishVersion](https://www.tencentcloud.com/document/api/583/34415)
+    /// * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+    /// 
     /// ## Import
     /// 
     /// scf FunctionVersion can be imported using the id, e.g.

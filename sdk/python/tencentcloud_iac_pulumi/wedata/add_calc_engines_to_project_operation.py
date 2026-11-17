@@ -126,6 +126,12 @@ class AddCalcEnginesToProjectOperation(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddCalcEnginesToProject](https://www.tencentcloud.com/document/api/1174/77878)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -155,6 +161,12 @@ class AddCalcEnginesToProjectOperation(pulumi.CustomResource):
                 "default_database": "default_db",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddCalcEnginesToProject](https://www.tencentcloud.com/document/api/1174/77878)
 
 
         :param str resource_name: The name of the resource.

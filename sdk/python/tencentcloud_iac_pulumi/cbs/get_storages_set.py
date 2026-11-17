@@ -252,6 +252,12 @@ def get_storages_set(availability_zone: Optional[_builtins.str] = None,
     example = tencentcloud.cbs.get_storages_set(availability_zone="ap-guangzhou-3")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+
 
     :param _builtins.str availability_zone: The available zone that the CBS instance locates at.
     :param Sequence[_builtins.str] charge_types: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
@@ -335,6 +341,12 @@ def get_storages_set_output(availability_zone: pulumi.Input[Optional[Optional[_b
 
     example = tencentcloud.cbs.get_storages_set(availability_zone="ap-guangzhou-3")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
 
 
     :param _builtins.str availability_zone: The available zone that the CBS instance locates at.

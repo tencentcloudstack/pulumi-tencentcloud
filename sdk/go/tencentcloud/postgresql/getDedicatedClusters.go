@@ -71,6 +71,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
 func GetDedicatedClusters(ctx *pulumi.Context, args *GetDedicatedClustersArgs, opts ...pulumi.InvokeOption) (*GetDedicatedClustersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDedicatedClustersResult

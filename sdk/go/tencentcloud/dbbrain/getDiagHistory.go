@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
 func GetDiagHistory(ctx *pulumi.Context, args *GetDiagHistoryArgs, opts ...pulumi.InvokeOption) (*GetDiagHistoryResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiagHistoryResult

@@ -227,6 +227,22 @@ class Instance(pulumi.CustomResource):
             operation_timing="IMMEDIATE")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterInstances](https://www.tencentcloud.com/search/?wd=CreateClusterInstances&type=document&lang=en)
+          - [DescribeResourcesByDealName](https://www.tencentcloud.com/search/?wd=DescribeResourcesByDealName&type=document&lang=en)
+        * Read: [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+        * Update:
+          - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+          - [ModifyClusterInstancesSpec](https://www.tencentcloud.com/search/?wd=ModifyClusterInstancesSpec&type=document&lang=en)
+        * Delete:
+          - [DeleteClusterInstances](https://www.tencentcloud.com/search/?wd=DeleteClusterInstances&type=document&lang=en)
+          - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+          - [IsolateClusterInstances](https://www.tencentcloud.com/search/?wd=IsolateClusterInstances&type=document&lang=en)
+
         ## Import
 
         tdcpg instance can be imported using the id, e.g.
@@ -272,6 +288,22 @@ class Instance(pulumi.CustomResource):
             instance_name="instance_name",
             operation_timing="IMMEDIATE")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterInstances](https://www.tencentcloud.com/search/?wd=CreateClusterInstances&type=document&lang=en)
+          - [DescribeResourcesByDealName](https://www.tencentcloud.com/search/?wd=DescribeResourcesByDealName&type=document&lang=en)
+        * Read: [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+        * Update:
+          - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+          - [ModifyClusterInstancesSpec](https://www.tencentcloud.com/search/?wd=ModifyClusterInstancesSpec&type=document&lang=en)
+        * Delete:
+          - [DeleteClusterInstances](https://www.tencentcloud.com/search/?wd=DeleteClusterInstances&type=document&lang=en)
+          - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+          - [IsolateClusterInstances](https://www.tencentcloud.com/search/?wd=IsolateClusterInstances&type=document&lang=en)
 
         ## Import
 

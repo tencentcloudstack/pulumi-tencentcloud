@@ -119,6 +119,12 @@ class CancelUpgradePlanOperation(pulumi.CustomResource):
             plan_id=39)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CancelUpgradePlan](https://www.tencentcloud.com/search/?wd=CancelUpgradePlan&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class CancelUpgradePlanOperation(pulumi.CustomResource):
             cluster_id="cls-d2cit6no",
             plan_id=39)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CancelUpgradePlan](https://www.tencentcloud.com/search/?wd=CancelUpgradePlan&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

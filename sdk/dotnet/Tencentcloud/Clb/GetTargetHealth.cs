@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
         /// </summary>
         public static Task<GetTargetHealthResult> InvokeAsync(GetTargetHealthArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
         /// </summary>
         public static Output<GetTargetHealthResult> Invoke(GetTargetHealthInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
         /// </summary>
         public static Output<GetTargetHealthResult> Invoke(GetTargetHealthInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTargetHealthResult>("tencentcloud:Clb/getTargetHealth:getTargetHealth", args ?? new GetTargetHealthInvokeArgs(), options.WithDefaults());

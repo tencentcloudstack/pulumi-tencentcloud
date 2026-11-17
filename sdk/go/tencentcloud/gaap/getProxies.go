@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
 func GetProxies(ctx *pulumi.Context, args *GetProxiesArgs, opts ...pulumi.InvokeOption) (*GetProxiesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxiesResult

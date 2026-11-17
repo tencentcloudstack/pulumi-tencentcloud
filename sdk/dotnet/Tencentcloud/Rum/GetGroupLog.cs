@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
         /// </summary>
         public static Task<GetGroupLogResult> InvokeAsync(GetGroupLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
         /// </summary>
         public static Output<GetGroupLogResult> Invoke(GetGroupLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
         /// </summary>
         public static Output<GetGroupLogResult> Invoke(GetGroupLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogInvokeArgs(), options.WithDefaults());

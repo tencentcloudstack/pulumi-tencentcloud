@@ -3,6 +3,7 @@
 
 import builtins as _builtins
 import sys
+from collections.abc import Mapping
 from typing import Optional, overload
 
 import pulumi
@@ -21,18 +22,26 @@ class LogTopicArgs:
     def __init__(__self__, *,
                  log_set_id: pulumi.Input[_builtins.str],
                  topic_name: pulumi.Input[_builtins.str],
-                 status: pulumi.Input[Optional[_builtins.bool]] = None):
+                 period: pulumi.Input[Optional[_builtins.int]] = None,
+                 status: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a LogTopic resource.
 
         :param pulumi.Input[_builtins.str] log_set_id: Log topic of CLB instance.
         :param pulumi.Input[_builtins.str] topic_name: Log topic of CLB instance.
+        :param pulumi.Input[_builtins.int] period: Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
         :param pulumi.Input[_builtins.bool] status: The status of log topic. true: enable; false: disable. Default is true.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of clb log topic.
         """
         pulumi.set(__self__, "log_set_id", log_set_id)
         pulumi.set(__self__, "topic_name", topic_name)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @_builtins.property
     @pulumi.getter(name="logSetId")
@@ -60,6 +69,18 @@ class LogTopicArgs:
 
     @_builtins.property
     @pulumi.getter
+    def period(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "period", value)
+
+    @_builtins.property
+    @pulumi.getter
     def status(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         The status of log topic. true: enable; false: disable. Default is true.
@@ -70,28 +91,48 @@ class LogTopicArgs:
     def status(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "status", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Tags of clb log topic.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _LogTopicState:
     def __init__(__self__, *,
                  create_time: pulumi.Input[Optional[_builtins.str]] = None,
                  log_set_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 period: pulumi.Input[Optional[_builtins.int]] = None,
                  status: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  topic_name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering LogTopic resources.
 
         :param pulumi.Input[_builtins.str] create_time: Log topic creation time.
         :param pulumi.Input[_builtins.str] log_set_id: Log topic of CLB instance.
+        :param pulumi.Input[_builtins.int] period: Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
         :param pulumi.Input[_builtins.bool] status: The status of log topic. true: enable; false: disable. Default is true.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of clb log topic.
         :param pulumi.Input[_builtins.str] topic_name: Log topic of CLB instance.
         """
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if log_set_id is not None:
             pulumi.set(__self__, "log_set_id", log_set_id)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if topic_name is not None:
             pulumi.set(__self__, "topic_name", topic_name)
 
@@ -121,6 +162,18 @@ class _LogTopicState:
 
     @_builtins.property
     @pulumi.getter
+    def period(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "period", value)
+
+    @_builtins.property
+    @pulumi.getter
     def status(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         The status of log topic. true: enable; false: disable. Default is true.
@@ -130,6 +183,18 @@ class _LogTopicState:
     @status.setter
     def status(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "status", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Tags of clb log topic.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter(name="topicName")
@@ -151,7 +216,9 @@ class LogTopic(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  log_set_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 period: pulumi.Input[Optional[_builtins.int]] = None,
                  status: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  topic_name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -166,8 +233,24 @@ class LogTopic(pulumi.CustomResource):
         example = tencentcloud.clb.LogTopic("example",
             log_set_id="2ed70190-bf06-4777-980d-2d8a327a2554",
             topic_name="tf-example",
-            status=True)
+            status=True,
+            period=30,
+            tags={
+                "env": "prod",
+            })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateTopic](https://www.tencentcloud.com/document/api/214/37820)
+          - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+          - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+        * Update: [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+        * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
 
         ## Import
 
@@ -181,7 +264,9 @@ class LogTopic(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] log_set_id: Log topic of CLB instance.
+        :param pulumi.Input[_builtins.int] period: Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
         :param pulumi.Input[_builtins.bool] status: The status of log topic. true: enable; false: disable. Default is true.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of clb log topic.
         :param pulumi.Input[_builtins.str] topic_name: Log topic of CLB instance.
         """
         ...
@@ -202,8 +287,24 @@ class LogTopic(pulumi.CustomResource):
         example = tencentcloud.clb.LogTopic("example",
             log_set_id="2ed70190-bf06-4777-980d-2d8a327a2554",
             topic_name="tf-example",
-            status=True)
+            status=True,
+            period=30,
+            tags={
+                "env": "prod",
+            })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateTopic](https://www.tencentcloud.com/document/api/214/37820)
+          - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+          - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+        * Update: [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+        * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
 
         ## Import
 
@@ -230,7 +331,9 @@ class LogTopic(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  log_set_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 period: pulumi.Input[Optional[_builtins.int]] = None,
                  status: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  topic_name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -244,7 +347,9 @@ class LogTopic(pulumi.CustomResource):
             if log_set_id is None and not opts.urn:
                 raise TypeError("Missing required property 'log_set_id'")
             __props__.__dict__["log_set_id"] = log_set_id
+            __props__.__dict__["period"] = period
             __props__.__dict__["status"] = status
+            __props__.__dict__["tags"] = tags
             if topic_name is None and not opts.urn:
                 raise TypeError("Missing required property 'topic_name'")
             __props__.__dict__["topic_name"] = topic_name
@@ -261,7 +366,9 @@ class LogTopic(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             create_time: pulumi.Input[Optional[_builtins.str]] = None,
             log_set_id: pulumi.Input[Optional[_builtins.str]] = None,
+            period: pulumi.Input[Optional[_builtins.int]] = None,
             status: pulumi.Input[Optional[_builtins.bool]] = None,
+            tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             topic_name: pulumi.Input[Optional[_builtins.str]] = None) -> 'LogTopic':
         """
         Get an existing LogTopic resource's state with the given name, id, and optional extra
@@ -272,7 +379,9 @@ class LogTopic(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] create_time: Log topic creation time.
         :param pulumi.Input[_builtins.str] log_set_id: Log topic of CLB instance.
+        :param pulumi.Input[_builtins.int] period: Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
         :param pulumi.Input[_builtins.bool] status: The status of log topic. true: enable; false: disable. Default is true.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of clb log topic.
         :param pulumi.Input[_builtins.str] topic_name: Log topic of CLB instance.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -281,7 +390,9 @@ class LogTopic(pulumi.CustomResource):
 
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["log_set_id"] = log_set_id
+        __props__.__dict__["period"] = period
         __props__.__dict__["status"] = status
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["topic_name"] = topic_name
         return LogTopic(resource_name, opts=opts, __props__=__props__)
 
@@ -303,11 +414,27 @@ class LogTopic(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
+    def period(self) -> pulumi.Output[_builtins.int]:
+        """
+        Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+        """
+        return pulumi.get(self, "period")
+
+    @_builtins.property
+    @pulumi.getter
     def status(self) -> pulumi.Output[_builtins.bool]:
         """
         The status of log topic. true: enable; false: disable. Default is true.
         """
         return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, _builtins.str]]]:
+        """
+        Tags of clb log topic.
+        """
+        return pulumi.get(self, "tags")
 
     @_builtins.property
     @pulumi.getter(name="topicName")

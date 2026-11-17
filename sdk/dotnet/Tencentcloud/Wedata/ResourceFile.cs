@@ -52,6 +52,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateResourceFile](https://www.tencentcloud.com/document/api/1174/73887)
+    /// * Read: [GetResourceFile](https://www.tencentcloud.com/document/api/1174/73877)
+    /// * Update: [UpdateResourceFile](https://www.tencentcloud.com/document/api/1174/73863)
+    /// * Delete: [DeleteResourceFile](https://www.tencentcloud.com/document/api/1174/61162)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/resourceFile:ResourceFile")]
     public partial class ResourceFile : global::Pulumi.CustomResource

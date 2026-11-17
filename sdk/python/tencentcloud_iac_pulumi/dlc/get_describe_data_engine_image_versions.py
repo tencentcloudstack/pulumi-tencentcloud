@@ -121,6 +121,12 @@ def get_describe_data_engine_image_versions(asc: Optional[_builtins.bool] = None
         asc=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngineImageVersions](https://www.tencentcloud.com/document/api/1155/62655)
+
 
     :param _builtins.bool asc: Sort by: false (descending, default), true (ascending).
     :param _builtins.str engine_type: Engine type only support: SparkSQL/PrestoSQL/SparkBatch.
@@ -160,6 +166,12 @@ def get_describe_data_engine_image_versions_output(asc: pulumi.Input[Optional[Op
         sort="UpdateTime",
         asc=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngineImageVersions](https://www.tencentcloud.com/document/api/1155/62655)
 
 
     :param _builtins.bool asc: Sort by: false (descending, default), true (ascending).

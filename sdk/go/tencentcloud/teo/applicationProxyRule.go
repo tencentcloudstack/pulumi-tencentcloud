@@ -55,6 +55,20 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateApplicationProxyRule](https://www.tencentcloud.com/document/api/1145/50984)
+// * Read: [DescribeApplicationProxies](https://www.tencentcloud.com/document/api/1145/50981)
+// * Update:
+//   - [ModifyApplicationProxyRule](https://www.tencentcloud.com/document/api/1145/50979)
+//   - [ModifyApplicationProxyRuleStatus](https://www.tencentcloud.com/document/api/1145/50978)
+//
+// * Delete:
+//   - [DeleteApplicationProxyRule](https://www.tencentcloud.com/document/api/1145/50982)
+//   - [ModifyApplicationProxyRuleStatus](https://www.tencentcloud.com/document/api/1145/50978)
+//
 // ## Import
 //
 // teo applicationProxyRule can be imported using the zoneId#proxyId#ruleId, e.g.

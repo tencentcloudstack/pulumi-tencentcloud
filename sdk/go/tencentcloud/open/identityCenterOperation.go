@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [OpenIdentityCenter](https://www.tencentcloud.com/document/api/1031/63591)
 type IdentityCenterOperation struct {
 	pulumi.CustomResourceState
 

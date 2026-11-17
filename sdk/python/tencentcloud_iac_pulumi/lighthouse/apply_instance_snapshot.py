@@ -119,6 +119,14 @@ class ApplyInstanceSnapshot(pulumi.CustomResource):
             snapshot_id="lhsnap-123456")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ApplyInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42465)
+          - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class ApplyInstanceSnapshot(pulumi.CustomResource):
             instance_id="lhins-123456",
             snapshot_id="lhsnap-123456")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ApplyInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42465)
+          - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
 
 
         :param str resource_name: The name of the resource.

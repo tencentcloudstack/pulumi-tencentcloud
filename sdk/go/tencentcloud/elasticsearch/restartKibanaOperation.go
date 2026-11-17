@@ -39,6 +39,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+//   - [RestartKibana](https://www.tencentcloud.com/document/api/845/38995)
 type RestartKibanaOperation struct {
 	pulumi.CustomResourceState
 

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
         /// </summary>
         public static Task<GetRotationHistoryResult> InvokeAsync(GetRotationHistoryArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRotationHistoryResult>("tencentcloud:Ssm/getRotationHistory:getRotationHistory", args ?? new GetRotationHistoryArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
         /// </summary>
         public static Output<GetRotationHistoryResult> Invoke(GetRotationHistoryInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRotationHistoryResult>("tencentcloud:Ssm/getRotationHistory:getRotationHistory", args ?? new GetRotationHistoryInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
         /// </summary>
         public static Output<GetRotationHistoryResult> Invoke(GetRotationHistoryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRotationHistoryResult>("tencentcloud:Ssm/getRotationHistory:getRotationHistory", args ?? new GetRotationHistoryInvokeArgs(), options.WithDefaults());

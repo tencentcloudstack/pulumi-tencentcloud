@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListDownstreamTasks](https://www.tencentcloud.com/document/api/1174/73872)
 func GetDownstreamTasks(ctx *pulumi.Context, args *GetDownstreamTasksArgs, opts ...pulumi.InvokeOption) (*GetDownstreamTasksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDownstreamTasksResult

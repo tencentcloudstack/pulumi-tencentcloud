@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-8078da86",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNacosReplicas](https://www.tencentcloud.com/search/?wd=DescribeNacosReplicas&type=document&lang=en)
  */
 export function getNacosReplicas(args: GetNacosReplicasArgs, opts?: pulumi.InvokeOptions): Promise<GetNacosReplicasResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetNacosReplicasResult {
  *     instanceId: "ins-8078da86",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNacosReplicas](https://www.tencentcloud.com/search/?wd=DescribeNacosReplicas&type=document&lang=en)
  */
 export function getNacosReplicasOutput(args: GetNacosReplicasOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNacosReplicasResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

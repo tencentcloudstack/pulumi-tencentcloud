@@ -99,6 +99,12 @@ def get_orders(deal_name: Optional[_builtins.str] = None,
     orders = tencentcloud.mariadb.get_orders(deal_name="20230607164033835942781")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
+
 
     :param _builtins.str deal_name: List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_orders_output(deal_name: pulumi.Input[Optional[_builtins.str]] = None,
 
     orders = tencentcloud.mariadb.get_orders(deal_name="20230607164033835942781")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
 
 
     :param _builtins.str deal_name: List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.

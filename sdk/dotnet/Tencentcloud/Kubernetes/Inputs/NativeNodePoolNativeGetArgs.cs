@@ -19,6 +19,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         [Input("autoRepair")]
         public Input<bool>? AutoRepair { get; set; }
 
+        /// <summary>
+        /// Custom image ID.
+        /// </summary>
+        [Input("customImage")]
+        public Input<string>? CustomImage { get; set; }
+
         [Input("dataDisks")]
         private InputList<Inputs.NativeNodePoolNativeDataDiskGetArgs>? _dataDisks;
 

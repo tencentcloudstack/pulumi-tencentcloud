@@ -116,6 +116,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddAttackWhiteRule](https://www.tencentcloud.com/search/?wd=AddAttackWhiteRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAttackWhiteRule](https://www.tencentcloud.com/search/?wd=DescribeAttackWhiteRule&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAttackWhiteRule](https://www.tencentcloud.com/search/?wd=ModifyAttackWhiteRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAttackWhiteRule](https://www.tencentcloud.com/search/?wd=DeleteAttackWhiteRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// WAF attack white rule can be imported using the id, e.g.

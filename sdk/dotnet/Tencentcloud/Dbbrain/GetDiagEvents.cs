@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
         /// </summary>
         public static Task<GetDiagEventsResult> InvokeAsync(GetDiagEventsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
         /// </summary>
         public static Output<GetDiagEventsResult> Invoke(GetDiagEventsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
         /// </summary>
         public static Output<GetDiagEventsResult> Invoke(GetDiagEventsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsInvokeArgs(), options.WithDefaults());

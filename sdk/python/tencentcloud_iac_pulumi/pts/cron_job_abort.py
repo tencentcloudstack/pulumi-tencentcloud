@@ -119,6 +119,12 @@ class CronJobAbort(pulumi.CustomResource):
             cron_job_id="job-dtm93vx0")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AbortCronJobs](https://www.tencentcloud.com/document/api/1249/68540)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class CronJobAbort(pulumi.CustomResource):
             project_id="project-abc",
             cron_job_id="job-dtm93vx0")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AbortCronJobs](https://www.tencentcloud.com/document/api/1249/68540)
 
 
         :param str resource_name: The name of the resource.

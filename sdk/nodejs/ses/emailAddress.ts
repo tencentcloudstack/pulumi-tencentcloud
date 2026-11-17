@@ -34,6 +34,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateEmailAddress](https://www.tencentcloud.com/document/api/1084/39406)
+ *   - [UpdateEmailSmtpPassWord](https://www.tencentcloud.com/document/api/1084/52677)
+ * * Read: [ListEmailAddress](https://www.tencentcloud.com/document/api/1084/39404)
+ * * Update: [UpdateEmailSmtpPassWord](https://www.tencentcloud.com/document/api/1084/52677)
+ * * Delete: [DeleteEmailAddress](https://www.tencentcloud.com/document/api/1084/39405)
+ *
  * ## Import
  *
  * ses emailAddress can be imported using the id, e.g.

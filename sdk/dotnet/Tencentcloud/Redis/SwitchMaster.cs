@@ -103,6 +103,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ChangeReplicaToMaster](https://www.tencentcloud.com/document/api/239/41037)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    /// * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
+    /// * Update:
+    ///   - [ChangeReplicaToMaster](https://www.tencentcloud.com/document/api/239/41037)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/switchMaster:SwitchMaster")]
     public partial class SwitchMaster : global::Pulumi.CustomResource

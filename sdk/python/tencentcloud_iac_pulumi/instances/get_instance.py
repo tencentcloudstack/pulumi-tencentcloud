@@ -228,6 +228,12 @@ def get_instance(availability_zone: Optional[_builtins.str] = None,
     example = tencentcloud.instances.get_instance(instance_set_ids=["ins-a81rnm8c"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+
 
     :param _builtins.str availability_zone: The available zone that the CVM instance locates at.
     :param _builtins.str dedicated_cluster_id: Exclusive cluster id.
@@ -317,6 +323,12 @@ def get_instance_output(availability_zone: pulumi.Input[Optional[Optional[_built
 
     example = tencentcloud.instances.get_instance(instance_set_ids=["ins-a81rnm8c"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
 
 
     :param _builtins.str availability_zone: The available zone that the CVM instance locates at.

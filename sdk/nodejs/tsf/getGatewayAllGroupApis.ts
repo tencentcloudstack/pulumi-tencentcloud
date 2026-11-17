@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     searchWord: "user",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&type=document&lang=en)
  */
 export function getGatewayAllGroupApis(args: GetGatewayAllGroupApisArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayAllGroupApisResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetGatewayAllGroupApisResult {
  *     searchWord: "user",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&type=document&lang=en)
  */
 export function getGatewayAllGroupApisOutput(args: GetGatewayAllGroupApisOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayAllGroupApisResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

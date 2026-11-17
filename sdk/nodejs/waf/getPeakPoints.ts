@@ -38,6 +38,12 @@ import * as utilities from "../utilities";
  *     metricName: "access",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
  */
 export function getPeakPoints(args: GetPeakPointsArgs, opts?: pulumi.InvokeOptions): Promise<GetPeakPointsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -138,6 +144,12 @@ export interface GetPeakPointsResult {
  *     metricName: "access",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
  */
 export function getPeakPointsOutput(args: GetPeakPointsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPeakPointsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

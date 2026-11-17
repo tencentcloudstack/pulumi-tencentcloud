@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetGatewayAllGroupApisResult> InvokeAsync(GetGatewayAllGroupApisArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGatewayAllGroupApisResult> Invoke(GetGatewayAllGroupApisInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGatewayAllGroupApisResult> Invoke(GetGatewayAllGroupApisInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisInvokeArgs(), options.WithDefaults());

@@ -27,6 +27,10 @@ class InstanceNetworkArgsDict(TypedDict):
     """
     Old IP expiration time.
     """
+    is_ssl: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether it is an SSL network.
+    """
     port: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
     Internal port.
@@ -52,6 +56,7 @@ class InstanceNetworkArgsDict(TypedDict):
 class InstanceNetworkArgs:
     def __init__(__self__, *,
                  expire_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 is_ssl: pulumi.Input[Optional[_builtins.bool]] = None,
                  port: pulumi.Input[Optional[_builtins.int]] = None,
                  preserve_duration: pulumi.Input[Optional[_builtins.int]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -59,6 +64,7 @@ class InstanceNetworkArgs:
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] expire_time: Old IP expiration time.
+        :param pulumi.Input[_builtins.bool] is_ssl: Whether it is an SSL network.
         :param pulumi.Input[_builtins.int] port: Internal port.
         :param pulumi.Input[_builtins.int] preserve_duration: Old IP preservation duration in days.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet ID.
@@ -67,6 +73,8 @@ class InstanceNetworkArgs:
         """
         if expire_time is not None:
             pulumi.set(__self__, "expire_time", expire_time)
+        if is_ssl is not None:
+            pulumi.set(__self__, "is_ssl", is_ssl)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if preserve_duration is not None:
@@ -89,6 +97,18 @@ class InstanceNetworkArgs:
     @expire_time.setter
     def expire_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "expire_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isSsl")
+    def is_ssl(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether it is an SSL network.
+        """
+        return pulumi.get(self, "is_ssl")
+
+    @is_ssl.setter
+    def is_ssl(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_ssl", value)
 
     @_builtins.property
     @pulumi.getter

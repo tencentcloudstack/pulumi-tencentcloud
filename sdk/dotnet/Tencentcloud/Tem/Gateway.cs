@@ -81,6 +81,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyIngress](https://www.tencentcloud.com/document/api/1094/42018)
+    /// * Read: [DescribeIngress](https://www.tencentcloud.com/document/api/1094/42021)
+    /// * Update: [ModifyIngress](https://www.tencentcloud.com/document/api/1094/42018)
+    /// * Delete: [DeleteIngress](https://www.tencentcloud.com/document/api/1094/42022)
+    /// 
     /// ## Import
     /// 
     /// tem gateway can be imported using the id, e.g.

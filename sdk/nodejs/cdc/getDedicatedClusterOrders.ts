@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     actionType: "CREATE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
  */
 export function getDedicatedClusterOrders(args?: GetDedicatedClusterOrdersArgs, opts?: pulumi.InvokeOptions): Promise<GetDedicatedClusterOrdersResult> {
     args = args || {};
@@ -113,6 +119,12 @@ export interface GetDedicatedClusterOrdersResult {
  *     actionType: "CREATE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
  */
 export function getDedicatedClusterOrdersOutput(args?: GetDedicatedClusterOrdersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDedicatedClusterOrdersResult> {
     args = args || {};

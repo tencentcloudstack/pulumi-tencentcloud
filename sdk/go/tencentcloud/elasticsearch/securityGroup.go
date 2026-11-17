@@ -44,6 +44,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyEsVipSecurityGroup](https://www.tencentcloud.com/search/?wd=ModifyEsVipSecurityGroup&type=document&lang=en)
+// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+// * Update: [ModifyEsVipSecurityGroup](https://www.tencentcloud.com/search/?wd=ModifyEsVipSecurityGroup&type=document&lang=en)
+//
 // ## Import
 //
 // elasticsearch securityGroup can be imported using the id, e.g.

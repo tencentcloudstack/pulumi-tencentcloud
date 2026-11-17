@@ -31,6 +31,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+    ///   - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
+    /// * Read: [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+    /// * Update:
+    ///   - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+    ///   - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/operateHourDbInstance:OperateHourDbInstance")]
     public partial class OperateHourDbInstance : global::Pulumi.CustomResource

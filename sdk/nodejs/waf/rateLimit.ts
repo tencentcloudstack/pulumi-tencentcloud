@@ -46,6 +46,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateRateLimitV2](https://www.tencentcloud.com/search/?wd=CreateRateLimitV2&type=document&lang=en)
+ *   - [DescribeRateLimitsV2](https://www.tencentcloud.com/search/?wd=DescribeRateLimitsV2&type=document&lang=en)
+ * * Read: [DescribeRateLimitsV2](https://www.tencentcloud.com/search/?wd=DescribeRateLimitsV2&type=document&lang=en)
+ * * Update:
+ *   - [DescribeRateLimitsV2](https://www.tencentcloud.com/search/?wd=DescribeRateLimitsV2&type=document&lang=en)
+ *   - [UpdateRateLimitV2](https://www.tencentcloud.com/search/?wd=UpdateRateLimitV2&type=document&lang=en)
+ * * Delete: [DeleteRateLimitsV2](https://www.tencentcloud.com/search/?wd=DeleteRateLimitsV2&type=document&lang=en)
+ *
  * ## Import
  *
  * WAF rate limit rule can be imported using the composite id domain#limit_rule_id, e.g.

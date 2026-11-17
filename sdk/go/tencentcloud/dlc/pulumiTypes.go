@@ -555,7 +555,7 @@ type AttachUserPolicyAttachmentPolicySet struct {
 	EngineGeneration *string `pulumi:"engineGeneration"`
 	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
 	Function *string `pulumi:"function"`
-	// ID of the resource.
+	// The policy ID.
 	Id *int `pulumi:"id"`
 	// Whether the permission source is admin.
 	IsAdminPolicy *bool `pulumi:"isAdminPolicy"`
@@ -611,7 +611,7 @@ type AttachUserPolicyAttachmentPolicySetArgs struct {
 	EngineGeneration pulumi.StringPtrInput `pulumi:"engineGeneration"`
 	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
 	Function pulumi.StringPtrInput `pulumi:"function"`
-	// ID of the resource.
+	// The policy ID.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// Whether the permission source is admin.
 	IsAdminPolicy pulumi.BoolPtrInput `pulumi:"isAdminPolicy"`
@@ -753,7 +753,7 @@ func (o AttachUserPolicyAttachmentPolicySetOutput) Function() pulumi.StringPtrOu
 	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The policy ID.
 func (o AttachUserPolicyAttachmentPolicySetOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
@@ -917,7 +917,7 @@ func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Function() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The policy ID.
 func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *int {
 		if v == nil {
@@ -1313,7 +1313,7 @@ type AttachWorkGroupPolicyAttachmentPolicySet struct {
 	EngineGeneration *string `pulumi:"engineGeneration"`
 	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
 	Function *string `pulumi:"function"`
-	// ID of the resource.
+	// The policy ID.
 	Id *int `pulumi:"id"`
 	// Whether the permission source is admin, which is not required as an input parameter.
 	IsAdminPolicy *bool `pulumi:"isAdminPolicy"`
@@ -1369,7 +1369,7 @@ type AttachWorkGroupPolicyAttachmentPolicySetArgs struct {
 	EngineGeneration pulumi.StringPtrInput `pulumi:"engineGeneration"`
 	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
 	Function pulumi.StringPtrInput `pulumi:"function"`
-	// ID of the resource.
+	// The policy ID.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// Whether the permission source is admin, which is not required as an input parameter.
 	IsAdminPolicy pulumi.BoolPtrInput `pulumi:"isAdminPolicy"`
@@ -1511,7 +1511,7 @@ func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Function() pulumi.String
 	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The policy ID.
 func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
@@ -1675,7 +1675,7 @@ func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Function() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The policy ID.
 func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *int {
 		if v == nil {
@@ -9286,6 +9286,2735 @@ func (o DetachWorkGroupPolicyOperationPolicySetArrayOutput) Index(i pulumi.IntIn
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DetachWorkGroupPolicyOperationPolicySet {
 		return vs[0].([]DetachWorkGroupPolicyOperationPolicySet)[vs[1].(int)]
 	}).(DetachWorkGroupPolicyOperationPolicySetOutput)
+}
+
+type MetaDatabaseGovernPolicy struct {
+	// Govern engine.
+	GovernEngine *string `pulumi:"governEngine"`
+	// Govern rule type, `Customize` or `Intelligence`.
+	RuleType *string `pulumi:"ruleType"`
+}
+
+// MetaDatabaseGovernPolicyInput is an input type that accepts MetaDatabaseGovernPolicyArgs and MetaDatabaseGovernPolicyOutput values.
+// You can construct a concrete instance of `MetaDatabaseGovernPolicyInput` via:
+//
+//	MetaDatabaseGovernPolicyArgs{...}
+type MetaDatabaseGovernPolicyInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseGovernPolicyOutput() MetaDatabaseGovernPolicyOutput
+	ToMetaDatabaseGovernPolicyOutputWithContext(context.Context) MetaDatabaseGovernPolicyOutput
+}
+
+type MetaDatabaseGovernPolicyArgs struct {
+	// Govern engine.
+	GovernEngine pulumi.StringPtrInput `pulumi:"governEngine"`
+	// Govern rule type, `Customize` or `Intelligence`.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
+}
+
+func (MetaDatabaseGovernPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseGovernPolicy)(nil)).Elem()
+}
+
+func (i MetaDatabaseGovernPolicyArgs) ToMetaDatabaseGovernPolicyOutput() MetaDatabaseGovernPolicyOutput {
+	return i.ToMetaDatabaseGovernPolicyOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseGovernPolicyArgs) ToMetaDatabaseGovernPolicyOutputWithContext(ctx context.Context) MetaDatabaseGovernPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseGovernPolicyOutput)
+}
+
+func (i MetaDatabaseGovernPolicyArgs) ToMetaDatabaseGovernPolicyPtrOutput() MetaDatabaseGovernPolicyPtrOutput {
+	return i.ToMetaDatabaseGovernPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseGovernPolicyArgs) ToMetaDatabaseGovernPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseGovernPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseGovernPolicyOutput).ToMetaDatabaseGovernPolicyPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseGovernPolicyPtrInput is an input type that accepts MetaDatabaseGovernPolicyArgs, MetaDatabaseGovernPolicyPtr and MetaDatabaseGovernPolicyPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseGovernPolicyPtrInput` via:
+//
+//	        MetaDatabaseGovernPolicyArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseGovernPolicyPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseGovernPolicyPtrOutput() MetaDatabaseGovernPolicyPtrOutput
+	ToMetaDatabaseGovernPolicyPtrOutputWithContext(context.Context) MetaDatabaseGovernPolicyPtrOutput
+}
+
+type metaDatabaseGovernPolicyPtrType MetaDatabaseGovernPolicyArgs
+
+func MetaDatabaseGovernPolicyPtr(v *MetaDatabaseGovernPolicyArgs) MetaDatabaseGovernPolicyPtrInput {
+	return (*metaDatabaseGovernPolicyPtrType)(v)
+}
+
+func (*metaDatabaseGovernPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseGovernPolicy)(nil)).Elem()
+}
+
+func (i *metaDatabaseGovernPolicyPtrType) ToMetaDatabaseGovernPolicyPtrOutput() MetaDatabaseGovernPolicyPtrOutput {
+	return i.ToMetaDatabaseGovernPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseGovernPolicyPtrType) ToMetaDatabaseGovernPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseGovernPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseGovernPolicyPtrOutput)
+}
+
+type MetaDatabaseGovernPolicyOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseGovernPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseGovernPolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseGovernPolicyOutput) ToMetaDatabaseGovernPolicyOutput() MetaDatabaseGovernPolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseGovernPolicyOutput) ToMetaDatabaseGovernPolicyOutputWithContext(ctx context.Context) MetaDatabaseGovernPolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseGovernPolicyOutput) ToMetaDatabaseGovernPolicyPtrOutput() MetaDatabaseGovernPolicyPtrOutput {
+	return o.ToMetaDatabaseGovernPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseGovernPolicyOutput) ToMetaDatabaseGovernPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseGovernPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseGovernPolicy) *MetaDatabaseGovernPolicy {
+		return &v
+	}).(MetaDatabaseGovernPolicyPtrOutput)
+}
+
+// Govern engine.
+func (o MetaDatabaseGovernPolicyOutput) GovernEngine() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseGovernPolicy) *string { return v.GovernEngine }).(pulumi.StringPtrOutput)
+}
+
+// Govern rule type, `Customize` or `Intelligence`.
+func (o MetaDatabaseGovernPolicyOutput) RuleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseGovernPolicy) *string { return v.RuleType }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseGovernPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseGovernPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseGovernPolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseGovernPolicyPtrOutput) ToMetaDatabaseGovernPolicyPtrOutput() MetaDatabaseGovernPolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseGovernPolicyPtrOutput) ToMetaDatabaseGovernPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseGovernPolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseGovernPolicyPtrOutput) Elem() MetaDatabaseGovernPolicyOutput {
+	return o.ApplyT(func(v *MetaDatabaseGovernPolicy) MetaDatabaseGovernPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseGovernPolicy
+		return ret
+	}).(MetaDatabaseGovernPolicyOutput)
+}
+
+// Govern engine.
+func (o MetaDatabaseGovernPolicyPtrOutput) GovernEngine() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseGovernPolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.GovernEngine
+	}).(pulumi.StringPtrOutput)
+}
+
+// Govern rule type, `Customize` or `Intelligence`.
+func (o MetaDatabaseGovernPolicyPtrOutput) RuleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseGovernPolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RuleType
+	}).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseMetaDatabaseInfo struct {
+	// Description of the DLC meta database, length 0~2048.
+	Comment *string `pulumi:"comment"`
+	// Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+	DatabaseName string `pulumi:"databaseName"`
+}
+
+// MetaDatabaseMetaDatabaseInfoInput is an input type that accepts MetaDatabaseMetaDatabaseInfoArgs and MetaDatabaseMetaDatabaseInfoOutput values.
+// You can construct a concrete instance of `MetaDatabaseMetaDatabaseInfoInput` via:
+//
+//	MetaDatabaseMetaDatabaseInfoArgs{...}
+type MetaDatabaseMetaDatabaseInfoInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseMetaDatabaseInfoOutput() MetaDatabaseMetaDatabaseInfoOutput
+	ToMetaDatabaseMetaDatabaseInfoOutputWithContext(context.Context) MetaDatabaseMetaDatabaseInfoOutput
+}
+
+type MetaDatabaseMetaDatabaseInfoArgs struct {
+	// Description of the DLC meta database, length 0~2048.
+	Comment pulumi.StringPtrInput `pulumi:"comment"`
+	// Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+}
+
+func (MetaDatabaseMetaDatabaseInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseMetaDatabaseInfo)(nil)).Elem()
+}
+
+func (i MetaDatabaseMetaDatabaseInfoArgs) ToMetaDatabaseMetaDatabaseInfoOutput() MetaDatabaseMetaDatabaseInfoOutput {
+	return i.ToMetaDatabaseMetaDatabaseInfoOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseMetaDatabaseInfoArgs) ToMetaDatabaseMetaDatabaseInfoOutputWithContext(ctx context.Context) MetaDatabaseMetaDatabaseInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseMetaDatabaseInfoOutput)
+}
+
+func (i MetaDatabaseMetaDatabaseInfoArgs) ToMetaDatabaseMetaDatabaseInfoPtrOutput() MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return i.ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseMetaDatabaseInfoArgs) ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseMetaDatabaseInfoOutput).ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseMetaDatabaseInfoPtrInput is an input type that accepts MetaDatabaseMetaDatabaseInfoArgs, MetaDatabaseMetaDatabaseInfoPtr and MetaDatabaseMetaDatabaseInfoPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseMetaDatabaseInfoPtrInput` via:
+//
+//	        MetaDatabaseMetaDatabaseInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseMetaDatabaseInfoPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseMetaDatabaseInfoPtrOutput() MetaDatabaseMetaDatabaseInfoPtrOutput
+	ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(context.Context) MetaDatabaseMetaDatabaseInfoPtrOutput
+}
+
+type metaDatabaseMetaDatabaseInfoPtrType MetaDatabaseMetaDatabaseInfoArgs
+
+func MetaDatabaseMetaDatabaseInfoPtr(v *MetaDatabaseMetaDatabaseInfoArgs) MetaDatabaseMetaDatabaseInfoPtrInput {
+	return (*metaDatabaseMetaDatabaseInfoPtrType)(v)
+}
+
+func (*metaDatabaseMetaDatabaseInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseMetaDatabaseInfo)(nil)).Elem()
+}
+
+func (i *metaDatabaseMetaDatabaseInfoPtrType) ToMetaDatabaseMetaDatabaseInfoPtrOutput() MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return i.ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseMetaDatabaseInfoPtrType) ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseMetaDatabaseInfoPtrOutput)
+}
+
+type MetaDatabaseMetaDatabaseInfoOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseMetaDatabaseInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseMetaDatabaseInfo)(nil)).Elem()
+}
+
+func (o MetaDatabaseMetaDatabaseInfoOutput) ToMetaDatabaseMetaDatabaseInfoOutput() MetaDatabaseMetaDatabaseInfoOutput {
+	return o
+}
+
+func (o MetaDatabaseMetaDatabaseInfoOutput) ToMetaDatabaseMetaDatabaseInfoOutputWithContext(ctx context.Context) MetaDatabaseMetaDatabaseInfoOutput {
+	return o
+}
+
+func (o MetaDatabaseMetaDatabaseInfoOutput) ToMetaDatabaseMetaDatabaseInfoPtrOutput() MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return o.ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseMetaDatabaseInfoOutput) ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseMetaDatabaseInfo) *MetaDatabaseMetaDatabaseInfo {
+		return &v
+	}).(MetaDatabaseMetaDatabaseInfoPtrOutput)
+}
+
+// Description of the DLC meta database, length 0~2048.
+func (o MetaDatabaseMetaDatabaseInfoOutput) Comment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseMetaDatabaseInfo) *string { return v.Comment }).(pulumi.StringPtrOutput)
+}
+
+// Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+func (o MetaDatabaseMetaDatabaseInfoOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v MetaDatabaseMetaDatabaseInfo) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+type MetaDatabaseMetaDatabaseInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseMetaDatabaseInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseMetaDatabaseInfo)(nil)).Elem()
+}
+
+func (o MetaDatabaseMetaDatabaseInfoPtrOutput) ToMetaDatabaseMetaDatabaseInfoPtrOutput() MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseMetaDatabaseInfoPtrOutput) ToMetaDatabaseMetaDatabaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseMetaDatabaseInfoPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseMetaDatabaseInfoPtrOutput) Elem() MetaDatabaseMetaDatabaseInfoOutput {
+	return o.ApplyT(func(v *MetaDatabaseMetaDatabaseInfo) MetaDatabaseMetaDatabaseInfo {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseMetaDatabaseInfo
+		return ret
+	}).(MetaDatabaseMetaDatabaseInfoOutput)
+}
+
+// Description of the DLC meta database, length 0~2048.
+func (o MetaDatabaseMetaDatabaseInfoPtrOutput) Comment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseMetaDatabaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Comment
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+func (o MetaDatabaseMetaDatabaseInfoPtrOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseMetaDatabaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DatabaseName
+	}).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseProperty struct {
+	// Property key.
+	Key *string `pulumi:"key"`
+	// Property value.
+	Value *string `pulumi:"value"`
+}
+
+// MetaDatabasePropertyInput is an input type that accepts MetaDatabasePropertyArgs and MetaDatabasePropertyOutput values.
+// You can construct a concrete instance of `MetaDatabasePropertyInput` via:
+//
+//	MetaDatabasePropertyArgs{...}
+type MetaDatabasePropertyInput interface {
+	pulumi.Input
+
+	ToMetaDatabasePropertyOutput() MetaDatabasePropertyOutput
+	ToMetaDatabasePropertyOutputWithContext(context.Context) MetaDatabasePropertyOutput
+}
+
+type MetaDatabasePropertyArgs struct {
+	// Property key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Property value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (MetaDatabasePropertyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseProperty)(nil)).Elem()
+}
+
+func (i MetaDatabasePropertyArgs) ToMetaDatabasePropertyOutput() MetaDatabasePropertyOutput {
+	return i.ToMetaDatabasePropertyOutputWithContext(context.Background())
+}
+
+func (i MetaDatabasePropertyArgs) ToMetaDatabasePropertyOutputWithContext(ctx context.Context) MetaDatabasePropertyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabasePropertyOutput)
+}
+
+// MetaDatabasePropertyArrayInput is an input type that accepts MetaDatabasePropertyArray and MetaDatabasePropertyArrayOutput values.
+// You can construct a concrete instance of `MetaDatabasePropertyArrayInput` via:
+//
+//	MetaDatabasePropertyArray{ MetaDatabasePropertyArgs{...} }
+type MetaDatabasePropertyArrayInput interface {
+	pulumi.Input
+
+	ToMetaDatabasePropertyArrayOutput() MetaDatabasePropertyArrayOutput
+	ToMetaDatabasePropertyArrayOutputWithContext(context.Context) MetaDatabasePropertyArrayOutput
+}
+
+type MetaDatabasePropertyArray []MetaDatabasePropertyInput
+
+func (MetaDatabasePropertyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseProperty)(nil)).Elem()
+}
+
+func (i MetaDatabasePropertyArray) ToMetaDatabasePropertyArrayOutput() MetaDatabasePropertyArrayOutput {
+	return i.ToMetaDatabasePropertyArrayOutputWithContext(context.Background())
+}
+
+func (i MetaDatabasePropertyArray) ToMetaDatabasePropertyArrayOutputWithContext(ctx context.Context) MetaDatabasePropertyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabasePropertyArrayOutput)
+}
+
+type MetaDatabasePropertyOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabasePropertyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseProperty)(nil)).Elem()
+}
+
+func (o MetaDatabasePropertyOutput) ToMetaDatabasePropertyOutput() MetaDatabasePropertyOutput {
+	return o
+}
+
+func (o MetaDatabasePropertyOutput) ToMetaDatabasePropertyOutputWithContext(ctx context.Context) MetaDatabasePropertyOutput {
+	return o
+}
+
+// Property key.
+func (o MetaDatabasePropertyOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseProperty) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Property value.
+func (o MetaDatabasePropertyOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseProperty) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabasePropertyArrayOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabasePropertyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseProperty)(nil)).Elem()
+}
+
+func (o MetaDatabasePropertyArrayOutput) ToMetaDatabasePropertyArrayOutput() MetaDatabasePropertyArrayOutput {
+	return o
+}
+
+func (o MetaDatabasePropertyArrayOutput) ToMetaDatabasePropertyArrayOutputWithContext(ctx context.Context) MetaDatabasePropertyArrayOutput {
+	return o
+}
+
+func (o MetaDatabasePropertyArrayOutput) Index(i pulumi.IntInput) MetaDatabasePropertyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetaDatabaseProperty {
+		return vs[0].([]MetaDatabaseProperty)[vs[1].(int)]
+	}).(MetaDatabasePropertyOutput)
+}
+
+type MetaDatabaseSmartPolicy struct {
+	// Base info of smart policy.
+	BaseInfo *MetaDatabaseSmartPolicyBaseInfo `pulumi:"baseInfo"`
+	// Policy description of smart policy.
+	Policy *MetaDatabaseSmartPolicyPolicy `pulumi:"policy"`
+}
+
+// MetaDatabaseSmartPolicyInput is an input type that accepts MetaDatabaseSmartPolicyArgs and MetaDatabaseSmartPolicyOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyInput` via:
+//
+//	MetaDatabaseSmartPolicyArgs{...}
+type MetaDatabaseSmartPolicyInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyOutput() MetaDatabaseSmartPolicyOutput
+	ToMetaDatabaseSmartPolicyOutputWithContext(context.Context) MetaDatabaseSmartPolicyOutput
+}
+
+type MetaDatabaseSmartPolicyArgs struct {
+	// Base info of smart policy.
+	BaseInfo MetaDatabaseSmartPolicyBaseInfoPtrInput `pulumi:"baseInfo"`
+	// Policy description of smart policy.
+	Policy MetaDatabaseSmartPolicyPolicyPtrInput `pulumi:"policy"`
+}
+
+func (MetaDatabaseSmartPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicy)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyArgs) ToMetaDatabaseSmartPolicyOutput() MetaDatabaseSmartPolicyOutput {
+	return i.ToMetaDatabaseSmartPolicyOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyArgs) ToMetaDatabaseSmartPolicyOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyOutput)
+}
+
+func (i MetaDatabaseSmartPolicyArgs) ToMetaDatabaseSmartPolicyPtrOutput() MetaDatabaseSmartPolicyPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyArgs) ToMetaDatabaseSmartPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyOutput).ToMetaDatabaseSmartPolicyPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPtrInput is an input type that accepts MetaDatabaseSmartPolicyArgs, MetaDatabaseSmartPolicyPtr and MetaDatabaseSmartPolicyPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPtrOutput() MetaDatabaseSmartPolicyPtrOutput
+	ToMetaDatabaseSmartPolicyPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPtrOutput
+}
+
+type metaDatabaseSmartPolicyPtrType MetaDatabaseSmartPolicyArgs
+
+func MetaDatabaseSmartPolicyPtr(v *MetaDatabaseSmartPolicyArgs) MetaDatabaseSmartPolicyPtrInput {
+	return (*metaDatabaseSmartPolicyPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicy)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPtrType) ToMetaDatabaseSmartPolicyPtrOutput() MetaDatabaseSmartPolicyPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPtrType) ToMetaDatabaseSmartPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyOutput) ToMetaDatabaseSmartPolicyOutput() MetaDatabaseSmartPolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyOutput) ToMetaDatabaseSmartPolicyOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyOutput) ToMetaDatabaseSmartPolicyPtrOutput() MetaDatabaseSmartPolicyPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyOutput) ToMetaDatabaseSmartPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicy) *MetaDatabaseSmartPolicy {
+		return &v
+	}).(MetaDatabaseSmartPolicyPtrOutput)
+}
+
+// Base info of smart policy.
+func (o MetaDatabaseSmartPolicyOutput) BaseInfo() MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicy) *MetaDatabaseSmartPolicyBaseInfo { return v.BaseInfo }).(MetaDatabaseSmartPolicyBaseInfoPtrOutput)
+}
+
+// Policy description of smart policy.
+func (o MetaDatabaseSmartPolicyOutput) Policy() MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicy) *MetaDatabaseSmartPolicyPolicy { return v.Policy }).(MetaDatabaseSmartPolicyPolicyPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPtrOutput) ToMetaDatabaseSmartPolicyPtrOutput() MetaDatabaseSmartPolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPtrOutput) ToMetaDatabaseSmartPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPtrOutput) Elem() MetaDatabaseSmartPolicyOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicy) MetaDatabaseSmartPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicy
+		return ret
+	}).(MetaDatabaseSmartPolicyOutput)
+}
+
+// Base info of smart policy.
+func (o MetaDatabaseSmartPolicyPtrOutput) BaseInfo() MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicy) *MetaDatabaseSmartPolicyBaseInfo {
+		if v == nil {
+			return nil
+		}
+		return v.BaseInfo
+	}).(MetaDatabaseSmartPolicyBaseInfoPtrOutput)
+}
+
+// Policy description of smart policy.
+func (o MetaDatabaseSmartPolicyPtrOutput) Policy() MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicy) *MetaDatabaseSmartPolicyPolicy {
+		if v == nil {
+			return nil
+		}
+		return v.Policy
+	}).(MetaDatabaseSmartPolicyPolicyPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyBaseInfo struct {
+	// User AppID.
+	AppId *string `pulumi:"appId"`
+	// Catalog name.
+	Catalog *string `pulumi:"catalog"`
+	// Database name.
+	Database *string `pulumi:"database"`
+	// Policy type.
+	PolicyType *string `pulumi:"policyType"`
+	// Table name.
+	Table *string `pulumi:"table"`
+	// User UIN.
+	Uin string `pulumi:"uin"`
+}
+
+// MetaDatabaseSmartPolicyBaseInfoInput is an input type that accepts MetaDatabaseSmartPolicyBaseInfoArgs and MetaDatabaseSmartPolicyBaseInfoOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyBaseInfoInput` via:
+//
+//	MetaDatabaseSmartPolicyBaseInfoArgs{...}
+type MetaDatabaseSmartPolicyBaseInfoInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyBaseInfoOutput() MetaDatabaseSmartPolicyBaseInfoOutput
+	ToMetaDatabaseSmartPolicyBaseInfoOutputWithContext(context.Context) MetaDatabaseSmartPolicyBaseInfoOutput
+}
+
+type MetaDatabaseSmartPolicyBaseInfoArgs struct {
+	// User AppID.
+	AppId pulumi.StringPtrInput `pulumi:"appId"`
+	// Catalog name.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// Database name.
+	Database pulumi.StringPtrInput `pulumi:"database"`
+	// Policy type.
+	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
+	// Table name.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+	// User UIN.
+	Uin pulumi.StringInput `pulumi:"uin"`
+}
+
+func (MetaDatabaseSmartPolicyBaseInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyBaseInfo)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyBaseInfoArgs) ToMetaDatabaseSmartPolicyBaseInfoOutput() MetaDatabaseSmartPolicyBaseInfoOutput {
+	return i.ToMetaDatabaseSmartPolicyBaseInfoOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyBaseInfoArgs) ToMetaDatabaseSmartPolicyBaseInfoOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyBaseInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyBaseInfoOutput)
+}
+
+func (i MetaDatabaseSmartPolicyBaseInfoArgs) ToMetaDatabaseSmartPolicyBaseInfoPtrOutput() MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyBaseInfoArgs) ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyBaseInfoOutput).ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyBaseInfoPtrInput is an input type that accepts MetaDatabaseSmartPolicyBaseInfoArgs, MetaDatabaseSmartPolicyBaseInfoPtr and MetaDatabaseSmartPolicyBaseInfoPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyBaseInfoPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyBaseInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyBaseInfoPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyBaseInfoPtrOutput() MetaDatabaseSmartPolicyBaseInfoPtrOutput
+	ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyBaseInfoPtrOutput
+}
+
+type metaDatabaseSmartPolicyBaseInfoPtrType MetaDatabaseSmartPolicyBaseInfoArgs
+
+func MetaDatabaseSmartPolicyBaseInfoPtr(v *MetaDatabaseSmartPolicyBaseInfoArgs) MetaDatabaseSmartPolicyBaseInfoPtrInput {
+	return (*metaDatabaseSmartPolicyBaseInfoPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyBaseInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyBaseInfo)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyBaseInfoPtrType) ToMetaDatabaseSmartPolicyBaseInfoPtrOutput() MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyBaseInfoPtrType) ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyBaseInfoPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyBaseInfoOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyBaseInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyBaseInfo)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) ToMetaDatabaseSmartPolicyBaseInfoOutput() MetaDatabaseSmartPolicyBaseInfoOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) ToMetaDatabaseSmartPolicyBaseInfoOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyBaseInfoOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) ToMetaDatabaseSmartPolicyBaseInfoPtrOutput() MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyBaseInfo) *MetaDatabaseSmartPolicyBaseInfo {
+		return &v
+	}).(MetaDatabaseSmartPolicyBaseInfoPtrOutput)
+}
+
+// User AppID.
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) AppId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyBaseInfo) *string { return v.AppId }).(pulumi.StringPtrOutput)
+}
+
+// Catalog name.
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyBaseInfo) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) Database() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyBaseInfo) *string { return v.Database }).(pulumi.StringPtrOutput)
+}
+
+// Policy type.
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) PolicyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyBaseInfo) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyBaseInfo) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+// User UIN.
+func (o MetaDatabaseSmartPolicyBaseInfoOutput) Uin() pulumi.StringOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyBaseInfo) string { return v.Uin }).(pulumi.StringOutput)
+}
+
+type MetaDatabaseSmartPolicyBaseInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyBaseInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyBaseInfo)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) ToMetaDatabaseSmartPolicyBaseInfoPtrOutput() MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) ToMetaDatabaseSmartPolicyBaseInfoPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyBaseInfoPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) Elem() MetaDatabaseSmartPolicyBaseInfoOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) MetaDatabaseSmartPolicyBaseInfo {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyBaseInfo
+		return ret
+	}).(MetaDatabaseSmartPolicyBaseInfoOutput)
+}
+
+// User AppID.
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) AppId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AppId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Catalog name.
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) Database() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Database
+	}).(pulumi.StringPtrOutput)
+}
+
+// Policy type.
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) PolicyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Table
+	}).(pulumi.StringPtrOutput)
+}
+
+// User UIN.
+func (o MetaDatabaseSmartPolicyBaseInfoPtrOutput) Uin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyBaseInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Uin
+	}).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicy struct {
+	// Change table policy.
+	ChangeTable *MetaDatabaseSmartPolicyPolicyChangeTable `pulumi:"changeTable"`
+	// Index policy.
+	Index *MetaDatabaseSmartPolicyPolicyIndex `pulumi:"index"`
+	// Whether to inherit.
+	Inherit *string `pulumi:"inherit"`
+	// Data lifecycle policy.
+	Lifecycle *MetaDatabaseSmartPolicyPolicyLifecycle `pulumi:"lifecycle"`
+	// Data governance resources.
+	Resources []MetaDatabaseSmartPolicyPolicyResource `pulumi:"resources"`
+	// Table expiration policy.
+	TableExpiration *MetaDatabaseSmartPolicyPolicyTableExpiration `pulumi:"tableExpiration"`
+	// Data rewrite policy.
+	Written *MetaDatabaseSmartPolicyPolicyWritten `pulumi:"written"`
+}
+
+// MetaDatabaseSmartPolicyPolicyInput is an input type that accepts MetaDatabaseSmartPolicyPolicyArgs and MetaDatabaseSmartPolicyPolicyOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyArgs{...}
+type MetaDatabaseSmartPolicyPolicyInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyOutput() MetaDatabaseSmartPolicyPolicyOutput
+	ToMetaDatabaseSmartPolicyPolicyOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyArgs struct {
+	// Change table policy.
+	ChangeTable MetaDatabaseSmartPolicyPolicyChangeTablePtrInput `pulumi:"changeTable"`
+	// Index policy.
+	Index MetaDatabaseSmartPolicyPolicyIndexPtrInput `pulumi:"index"`
+	// Whether to inherit.
+	Inherit pulumi.StringPtrInput `pulumi:"inherit"`
+	// Data lifecycle policy.
+	Lifecycle MetaDatabaseSmartPolicyPolicyLifecyclePtrInput `pulumi:"lifecycle"`
+	// Data governance resources.
+	Resources MetaDatabaseSmartPolicyPolicyResourceArrayInput `pulumi:"resources"`
+	// Table expiration policy.
+	TableExpiration MetaDatabaseSmartPolicyPolicyTableExpirationPtrInput `pulumi:"tableExpiration"`
+	// Data rewrite policy.
+	Written MetaDatabaseSmartPolicyPolicyWrittenPtrInput `pulumi:"written"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicy)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyArgs) ToMetaDatabaseSmartPolicyPolicyOutput() MetaDatabaseSmartPolicyPolicyOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyArgs) ToMetaDatabaseSmartPolicyPolicyOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyArgs) ToMetaDatabaseSmartPolicyPolicyPtrOutput() MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyArgs) ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyOutput).ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyPtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyArgs, MetaDatabaseSmartPolicyPolicyPtr and MetaDatabaseSmartPolicyPolicyPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyPtrOutput() MetaDatabaseSmartPolicyPolicyPtrOutput
+	ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyPtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyPtrType MetaDatabaseSmartPolicyPolicyArgs
+
+func MetaDatabaseSmartPolicyPolicyPtr(v *MetaDatabaseSmartPolicyPolicyArgs) MetaDatabaseSmartPolicyPolicyPtrInput {
+	return (*metaDatabaseSmartPolicyPolicyPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicy)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyPtrType) ToMetaDatabaseSmartPolicyPolicyPtrOutput() MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyPtrType) ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyOutput) ToMetaDatabaseSmartPolicyPolicyOutput() MetaDatabaseSmartPolicyPolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyOutput) ToMetaDatabaseSmartPolicyPolicyOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyOutput) ToMetaDatabaseSmartPolicyPolicyPtrOutput() MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyOutput) ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicy {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyPtrOutput)
+}
+
+// Change table policy.
+func (o MetaDatabaseSmartPolicyPolicyOutput) ChangeTable() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyChangeTable { return v.ChangeTable }).(MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput)
+}
+
+// Index policy.
+func (o MetaDatabaseSmartPolicyPolicyOutput) Index() MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyIndex { return v.Index }).(MetaDatabaseSmartPolicyPolicyIndexPtrOutput)
+}
+
+// Whether to inherit.
+func (o MetaDatabaseSmartPolicyPolicyOutput) Inherit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) *string { return v.Inherit }).(pulumi.StringPtrOutput)
+}
+
+// Data lifecycle policy.
+func (o MetaDatabaseSmartPolicyPolicyOutput) Lifecycle() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyLifecycle { return v.Lifecycle }).(MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput)
+}
+
+// Data governance resources.
+func (o MetaDatabaseSmartPolicyPolicyOutput) Resources() MetaDatabaseSmartPolicyPolicyResourceArrayOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) []MetaDatabaseSmartPolicyPolicyResource { return v.Resources }).(MetaDatabaseSmartPolicyPolicyResourceArrayOutput)
+}
+
+// Table expiration policy.
+func (o MetaDatabaseSmartPolicyPolicyOutput) TableExpiration() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyTableExpiration {
+		return v.TableExpiration
+	}).(MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput)
+}
+
+// Data rewrite policy.
+func (o MetaDatabaseSmartPolicyPolicyOutput) Written() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyWritten { return v.Written }).(MetaDatabaseSmartPolicyPolicyWrittenPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) ToMetaDatabaseSmartPolicyPolicyPtrOutput() MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) ToMetaDatabaseSmartPolicyPolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) Elem() MetaDatabaseSmartPolicyPolicyOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) MetaDatabaseSmartPolicyPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicy
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyOutput)
+}
+
+// Change table policy.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) ChangeTable() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyChangeTable {
+		if v == nil {
+			return nil
+		}
+		return v.ChangeTable
+	}).(MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput)
+}
+
+// Index policy.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) Index() MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyIndex {
+		if v == nil {
+			return nil
+		}
+		return v.Index
+	}).(MetaDatabaseSmartPolicyPolicyIndexPtrOutput)
+}
+
+// Whether to inherit.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) Inherit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Inherit
+	}).(pulumi.StringPtrOutput)
+}
+
+// Data lifecycle policy.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) Lifecycle() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyLifecycle {
+		if v == nil {
+			return nil
+		}
+		return v.Lifecycle
+	}).(MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput)
+}
+
+// Data governance resources.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) Resources() MetaDatabaseSmartPolicyPolicyResourceArrayOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) []MetaDatabaseSmartPolicyPolicyResource {
+		if v == nil {
+			return nil
+		}
+		return v.Resources
+	}).(MetaDatabaseSmartPolicyPolicyResourceArrayOutput)
+}
+
+// Table expiration policy.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) TableExpiration() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyTableExpiration {
+		if v == nil {
+			return nil
+		}
+		return v.TableExpiration
+	}).(MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput)
+}
+
+// Data rewrite policy.
+func (o MetaDatabaseSmartPolicyPolicyPtrOutput) Written() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicy) *MetaDatabaseSmartPolicyPolicyWritten {
+		if v == nil {
+			return nil
+		}
+		return v.Written
+	}).(MetaDatabaseSmartPolicyPolicyWrittenPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyChangeTable struct {
+	// Data retention time of change table, in days.
+	DataRetentionTime *int `pulumi:"dataRetentionTime"`
+}
+
+// MetaDatabaseSmartPolicyPolicyChangeTableInput is an input type that accepts MetaDatabaseSmartPolicyPolicyChangeTableArgs and MetaDatabaseSmartPolicyPolicyChangeTableOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyChangeTableInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyChangeTableArgs{...}
+type MetaDatabaseSmartPolicyPolicyChangeTableInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyChangeTableOutput() MetaDatabaseSmartPolicyPolicyChangeTableOutput
+	ToMetaDatabaseSmartPolicyPolicyChangeTableOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyChangeTableOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyChangeTableArgs struct {
+	// Data retention time of change table, in days.
+	DataRetentionTime pulumi.IntPtrInput `pulumi:"dataRetentionTime"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyChangeTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyChangeTable)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyChangeTableArgs) ToMetaDatabaseSmartPolicyPolicyChangeTableOutput() MetaDatabaseSmartPolicyPolicyChangeTableOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyChangeTableOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyChangeTableArgs) ToMetaDatabaseSmartPolicyPolicyChangeTableOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyChangeTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyChangeTableOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyChangeTableArgs) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutput() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyChangeTableArgs) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyChangeTableOutput).ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyChangeTablePtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyChangeTableArgs, MetaDatabaseSmartPolicyPolicyChangeTablePtr and MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyChangeTablePtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyChangeTableArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyChangeTablePtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutput() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput
+	ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyChangeTablePtrType MetaDatabaseSmartPolicyPolicyChangeTableArgs
+
+func MetaDatabaseSmartPolicyPolicyChangeTablePtr(v *MetaDatabaseSmartPolicyPolicyChangeTableArgs) MetaDatabaseSmartPolicyPolicyChangeTablePtrInput {
+	return (*metaDatabaseSmartPolicyPolicyChangeTablePtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyChangeTablePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyChangeTable)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyChangeTablePtrType) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutput() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyChangeTablePtrType) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyChangeTableOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyChangeTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyChangeTable)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTableOutput) ToMetaDatabaseSmartPolicyPolicyChangeTableOutput() MetaDatabaseSmartPolicyPolicyChangeTableOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTableOutput) ToMetaDatabaseSmartPolicyPolicyChangeTableOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyChangeTableOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTableOutput) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutput() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTableOutput) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyChangeTable) *MetaDatabaseSmartPolicyPolicyChangeTable {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput)
+}
+
+// Data retention time of change table, in days.
+func (o MetaDatabaseSmartPolicyPolicyChangeTableOutput) DataRetentionTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyChangeTable) *int { return v.DataRetentionTime }).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyChangeTable)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutput() MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput) ToMetaDatabaseSmartPolicyPolicyChangeTablePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput) Elem() MetaDatabaseSmartPolicyPolicyChangeTableOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyChangeTable) MetaDatabaseSmartPolicyPolicyChangeTable {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyChangeTable
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyChangeTableOutput)
+}
+
+// Data retention time of change table, in days.
+func (o MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput) DataRetentionTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyChangeTable) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DataRetentionTime
+	}).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyIndex struct {
+	// Whether to enable index.
+	IndexEnable *string `pulumi:"indexEnable"`
+}
+
+// MetaDatabaseSmartPolicyPolicyIndexInput is an input type that accepts MetaDatabaseSmartPolicyPolicyIndexArgs and MetaDatabaseSmartPolicyPolicyIndexOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyIndexInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyIndexArgs{...}
+type MetaDatabaseSmartPolicyPolicyIndexInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyIndexOutput() MetaDatabaseSmartPolicyPolicyIndexOutput
+	ToMetaDatabaseSmartPolicyPolicyIndexOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyIndexOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyIndexArgs struct {
+	// Whether to enable index.
+	IndexEnable pulumi.StringPtrInput `pulumi:"indexEnable"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyIndexArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyIndex)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyIndexArgs) ToMetaDatabaseSmartPolicyPolicyIndexOutput() MetaDatabaseSmartPolicyPolicyIndexOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyIndexOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyIndexArgs) ToMetaDatabaseSmartPolicyPolicyIndexOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyIndexOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyIndexOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyIndexArgs) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutput() MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyIndexArgs) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyIndexOutput).ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyIndexPtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyIndexArgs, MetaDatabaseSmartPolicyPolicyIndexPtr and MetaDatabaseSmartPolicyPolicyIndexPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyIndexPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyIndexArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyIndexPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyIndexPtrOutput() MetaDatabaseSmartPolicyPolicyIndexPtrOutput
+	ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyIndexPtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyIndexPtrType MetaDatabaseSmartPolicyPolicyIndexArgs
+
+func MetaDatabaseSmartPolicyPolicyIndexPtr(v *MetaDatabaseSmartPolicyPolicyIndexArgs) MetaDatabaseSmartPolicyPolicyIndexPtrInput {
+	return (*metaDatabaseSmartPolicyPolicyIndexPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyIndexPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyIndex)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyIndexPtrType) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutput() MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyIndexPtrType) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyIndexPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyIndexOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyIndexOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyIndex)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexOutput) ToMetaDatabaseSmartPolicyPolicyIndexOutput() MetaDatabaseSmartPolicyPolicyIndexOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexOutput) ToMetaDatabaseSmartPolicyPolicyIndexOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyIndexOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexOutput) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutput() MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexOutput) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyIndex) *MetaDatabaseSmartPolicyPolicyIndex {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyIndexPtrOutput)
+}
+
+// Whether to enable index.
+func (o MetaDatabaseSmartPolicyPolicyIndexOutput) IndexEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyIndex) *string { return v.IndexEnable }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyIndexPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyIndexPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyIndex)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexPtrOutput) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutput() MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexPtrOutput) ToMetaDatabaseSmartPolicyPolicyIndexPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyIndexPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyIndexPtrOutput) Elem() MetaDatabaseSmartPolicyPolicyIndexOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyIndex) MetaDatabaseSmartPolicyPolicyIndex {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyIndex
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyIndexOutput)
+}
+
+// Whether to enable index.
+func (o MetaDatabaseSmartPolicyPolicyIndexPtrOutput) IndexEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyIndex) *string {
+		if v == nil {
+			return nil
+		}
+		return v.IndexEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyLifecycle struct {
+	// Whether to drop table (deprecated, use tableExpiration instead).
+	DropTable *bool `pulumi:"dropTable"`
+	// Expiration time.
+	Expiration *int `pulumi:"expiration"`
+	// Expired field.
+	ExpiredField *string `pulumi:"expiredField"`
+	// Expired field format.
+	ExpiredFieldFormat *string `pulumi:"expiredFieldFormat"`
+	// Whether to enable lifecycle.
+	LifecycleEnable *string `pulumi:"lifecycleEnable"`
+}
+
+// MetaDatabaseSmartPolicyPolicyLifecycleInput is an input type that accepts MetaDatabaseSmartPolicyPolicyLifecycleArgs and MetaDatabaseSmartPolicyPolicyLifecycleOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyLifecycleInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyLifecycleArgs{...}
+type MetaDatabaseSmartPolicyPolicyLifecycleInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyLifecycleOutput() MetaDatabaseSmartPolicyPolicyLifecycleOutput
+	ToMetaDatabaseSmartPolicyPolicyLifecycleOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyLifecycleOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyLifecycleArgs struct {
+	// Whether to drop table (deprecated, use tableExpiration instead).
+	DropTable pulumi.BoolPtrInput `pulumi:"dropTable"`
+	// Expiration time.
+	Expiration pulumi.IntPtrInput `pulumi:"expiration"`
+	// Expired field.
+	ExpiredField pulumi.StringPtrInput `pulumi:"expiredField"`
+	// Expired field format.
+	ExpiredFieldFormat pulumi.StringPtrInput `pulumi:"expiredFieldFormat"`
+	// Whether to enable lifecycle.
+	LifecycleEnable pulumi.StringPtrInput `pulumi:"lifecycleEnable"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyLifecycleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyLifecycle)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyLifecycleArgs) ToMetaDatabaseSmartPolicyPolicyLifecycleOutput() MetaDatabaseSmartPolicyPolicyLifecycleOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyLifecycleOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyLifecycleArgs) ToMetaDatabaseSmartPolicyPolicyLifecycleOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyLifecycleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyLifecycleOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyLifecycleArgs) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutput() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyLifecycleArgs) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyLifecycleOutput).ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyLifecyclePtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyLifecycleArgs, MetaDatabaseSmartPolicyPolicyLifecyclePtr and MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyLifecyclePtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyLifecycleArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyLifecyclePtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutput() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput
+	ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyLifecyclePtrType MetaDatabaseSmartPolicyPolicyLifecycleArgs
+
+func MetaDatabaseSmartPolicyPolicyLifecyclePtr(v *MetaDatabaseSmartPolicyPolicyLifecycleArgs) MetaDatabaseSmartPolicyPolicyLifecyclePtrInput {
+	return (*metaDatabaseSmartPolicyPolicyLifecyclePtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyLifecyclePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyLifecycle)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyLifecyclePtrType) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutput() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyLifecyclePtrType) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyLifecycleOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyLifecycleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyLifecycle)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) ToMetaDatabaseSmartPolicyPolicyLifecycleOutput() MetaDatabaseSmartPolicyPolicyLifecycleOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) ToMetaDatabaseSmartPolicyPolicyLifecycleOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyLifecycleOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutput() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyLifecycle) *MetaDatabaseSmartPolicyPolicyLifecycle {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput)
+}
+
+// Whether to drop table (deprecated, use tableExpiration instead).
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) DropTable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyLifecycle) *bool { return v.DropTable }).(pulumi.BoolPtrOutput)
+}
+
+// Expiration time.
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) Expiration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyLifecycle) *int { return v.Expiration }).(pulumi.IntPtrOutput)
+}
+
+// Expired field.
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) ExpiredField() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyLifecycle) *string { return v.ExpiredField }).(pulumi.StringPtrOutput)
+}
+
+// Expired field format.
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) ExpiredFieldFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyLifecycle) *string { return v.ExpiredFieldFormat }).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable lifecycle.
+func (o MetaDatabaseSmartPolicyPolicyLifecycleOutput) LifecycleEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyLifecycle) *string { return v.LifecycleEnable }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyLifecycle)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutput() MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) ToMetaDatabaseSmartPolicyPolicyLifecyclePtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) Elem() MetaDatabaseSmartPolicyPolicyLifecycleOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyLifecycle) MetaDatabaseSmartPolicyPolicyLifecycle {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyLifecycle
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyLifecycleOutput)
+}
+
+// Whether to drop table (deprecated, use tableExpiration instead).
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) DropTable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyLifecycle) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DropTable
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Expiration time.
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) Expiration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyLifecycle) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Expiration
+	}).(pulumi.IntPtrOutput)
+}
+
+// Expired field.
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) ExpiredField() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyLifecycle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExpiredField
+	}).(pulumi.StringPtrOutput)
+}
+
+// Expired field format.
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) ExpiredFieldFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyLifecycle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExpiredFieldFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable lifecycle.
+func (o MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput) LifecycleEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyLifecycle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LifecycleEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResource struct {
+	// Attribution type.
+	AttributionType *string `pulumi:"attributionType"`
+	// Affinity info.
+	Favors []MetaDatabaseSmartPolicyPolicyResourceFavor `pulumi:"favors"`
+	// Instance name.
+	Instance *string `pulumi:"instance"`
+	// Engine name.
+	Name *string `pulumi:"name"`
+	// Resource config info.
+	ResourceConf *MetaDatabaseSmartPolicyPolicyResourceResourceConf `pulumi:"resourceConf"`
+	// Standard engine resource group name.
+	ResourceGroupName *string `pulumi:"resourceGroupName"`
+	// Resource type.
+	ResourceType *string `pulumi:"resourceType"`
+	// Status.
+	Status *int `pulumi:"status"`
+}
+
+// MetaDatabaseSmartPolicyPolicyResourceInput is an input type that accepts MetaDatabaseSmartPolicyPolicyResourceArgs and MetaDatabaseSmartPolicyPolicyResourceOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyResourceInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyResourceArgs{...}
+type MetaDatabaseSmartPolicyPolicyResourceInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyResourceOutput() MetaDatabaseSmartPolicyPolicyResourceOutput
+	ToMetaDatabaseSmartPolicyPolicyResourceOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyResourceOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceArgs struct {
+	// Attribution type.
+	AttributionType pulumi.StringPtrInput `pulumi:"attributionType"`
+	// Affinity info.
+	Favors MetaDatabaseSmartPolicyPolicyResourceFavorArrayInput `pulumi:"favors"`
+	// Instance name.
+	Instance pulumi.StringPtrInput `pulumi:"instance"`
+	// Engine name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Resource config info.
+	ResourceConf MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrInput `pulumi:"resourceConf"`
+	// Standard engine resource group name.
+	ResourceGroupName pulumi.StringPtrInput `pulumi:"resourceGroupName"`
+	// Resource type.
+	ResourceType pulumi.StringPtrInput `pulumi:"resourceType"`
+	// Status.
+	Status pulumi.IntPtrInput `pulumi:"status"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResource)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceArgs) ToMetaDatabaseSmartPolicyPolicyResourceOutput() MetaDatabaseSmartPolicyPolicyResourceOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceArgs) ToMetaDatabaseSmartPolicyPolicyResourceOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceOutput)
+}
+
+// MetaDatabaseSmartPolicyPolicyResourceArrayInput is an input type that accepts MetaDatabaseSmartPolicyPolicyResourceArray and MetaDatabaseSmartPolicyPolicyResourceArrayOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyResourceArrayInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyResourceArray{ MetaDatabaseSmartPolicyPolicyResourceArgs{...} }
+type MetaDatabaseSmartPolicyPolicyResourceArrayInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyResourceArrayOutput() MetaDatabaseSmartPolicyPolicyResourceArrayOutput
+	ToMetaDatabaseSmartPolicyPolicyResourceArrayOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyResourceArrayOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceArray []MetaDatabaseSmartPolicyPolicyResourceInput
+
+func (MetaDatabaseSmartPolicyPolicyResourceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseSmartPolicyPolicyResource)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceArray) ToMetaDatabaseSmartPolicyPolicyResourceArrayOutput() MetaDatabaseSmartPolicyPolicyResourceArrayOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceArrayOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceArray) ToMetaDatabaseSmartPolicyPolicyResourceArrayOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceArrayOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResource)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) ToMetaDatabaseSmartPolicyPolicyResourceOutput() MetaDatabaseSmartPolicyPolicyResourceOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) ToMetaDatabaseSmartPolicyPolicyResourceOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceOutput {
+	return o
+}
+
+// Attribution type.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) AttributionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *string { return v.AttributionType }).(pulumi.StringPtrOutput)
+}
+
+// Affinity info.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) Favors() MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) []MetaDatabaseSmartPolicyPolicyResourceFavor {
+		return v.Favors
+	}).(MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput)
+}
+
+// Instance name.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) Instance() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *string { return v.Instance }).(pulumi.StringPtrOutput)
+}
+
+// Engine name.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Resource config info.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) ResourceConf() MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *MetaDatabaseSmartPolicyPolicyResourceResourceConf {
+		return v.ResourceConf
+	}).(MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput)
+}
+
+// Standard engine resource group name.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) ResourceGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *string { return v.ResourceGroupName }).(pulumi.StringPtrOutput)
+}
+
+// Resource type.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) ResourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *string { return v.ResourceType }).(pulumi.StringPtrOutput)
+}
+
+// Status.
+func (o MetaDatabaseSmartPolicyPolicyResourceOutput) Status() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResource) *int { return v.Status }).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceArrayOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyResourceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseSmartPolicyPolicyResource)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceArrayOutput) ToMetaDatabaseSmartPolicyPolicyResourceArrayOutput() MetaDatabaseSmartPolicyPolicyResourceArrayOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceArrayOutput) ToMetaDatabaseSmartPolicyPolicyResourceArrayOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceArrayOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceArrayOutput) Index(i pulumi.IntInput) MetaDatabaseSmartPolicyPolicyResourceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetaDatabaseSmartPolicyPolicyResource {
+		return vs[0].([]MetaDatabaseSmartPolicyPolicyResource)[vs[1].(int)]
+	}).(MetaDatabaseSmartPolicyPolicyResourceOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceFavor struct {
+	// Catalog name.
+	Catalog *string `pulumi:"catalog"`
+	// Database name.
+	DataBase *string `pulumi:"dataBase"`
+	// Priority.
+	Priority *int `pulumi:"priority"`
+	// Table name.
+	Table *string `pulumi:"table"`
+}
+
+// MetaDatabaseSmartPolicyPolicyResourceFavorInput is an input type that accepts MetaDatabaseSmartPolicyPolicyResourceFavorArgs and MetaDatabaseSmartPolicyPolicyResourceFavorOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyResourceFavorInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyResourceFavorArgs{...}
+type MetaDatabaseSmartPolicyPolicyResourceFavorInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyResourceFavorOutput() MetaDatabaseSmartPolicyPolicyResourceFavorOutput
+	ToMetaDatabaseSmartPolicyPolicyResourceFavorOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyResourceFavorOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceFavorArgs struct {
+	// Catalog name.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// Database name.
+	DataBase pulumi.StringPtrInput `pulumi:"dataBase"`
+	// Priority.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// Table name.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyResourceFavorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceFavor)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceFavorArgs) ToMetaDatabaseSmartPolicyPolicyResourceFavorOutput() MetaDatabaseSmartPolicyPolicyResourceFavorOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceFavorOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceFavorArgs) ToMetaDatabaseSmartPolicyPolicyResourceFavorOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceFavorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceFavorOutput)
+}
+
+// MetaDatabaseSmartPolicyPolicyResourceFavorArrayInput is an input type that accepts MetaDatabaseSmartPolicyPolicyResourceFavorArray and MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyResourceFavorArrayInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyResourceFavorArray{ MetaDatabaseSmartPolicyPolicyResourceFavorArgs{...} }
+type MetaDatabaseSmartPolicyPolicyResourceFavorArrayInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput() MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput
+	ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceFavorArray []MetaDatabaseSmartPolicyPolicyResourceFavorInput
+
+func (MetaDatabaseSmartPolicyPolicyResourceFavorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseSmartPolicyPolicyResourceFavor)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceFavorArray) ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput() MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceFavorArray) ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceFavorOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyResourceFavorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceFavor)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorOutput) ToMetaDatabaseSmartPolicyPolicyResourceFavorOutput() MetaDatabaseSmartPolicyPolicyResourceFavorOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorOutput) ToMetaDatabaseSmartPolicyPolicyResourceFavorOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceFavorOutput {
+	return o
+}
+
+// Catalog name.
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResourceFavor) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorOutput) DataBase() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResourceFavor) *string { return v.DataBase }).(pulumi.StringPtrOutput)
+}
+
+// Priority.
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResourceFavor) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+// Table name.
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResourceFavor) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseSmartPolicyPolicyResourceFavor)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput) ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput() MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput) ToMetaDatabaseSmartPolicyPolicyResourceFavorArrayOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput) Index(i pulumi.IntInput) MetaDatabaseSmartPolicyPolicyResourceFavorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetaDatabaseSmartPolicyPolicyResourceFavor {
+		return vs[0].([]MetaDatabaseSmartPolicyPolicyResourceFavor)[vs[1].(int)]
+	}).(MetaDatabaseSmartPolicyPolicyResourceFavorOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceResourceConf struct {
+	// Parallelism of the optimize task.
+	Parallelism *int `pulumi:"parallelism"`
+}
+
+// MetaDatabaseSmartPolicyPolicyResourceResourceConfInput is an input type that accepts MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs and MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyResourceResourceConfInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs{...}
+type MetaDatabaseSmartPolicyPolicyResourceResourceConfInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput
+	ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs struct {
+	// Parallelism of the optimize task.
+	Parallelism pulumi.IntPtrInput `pulumi:"parallelism"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceResourceConf)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput).ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs, MetaDatabaseSmartPolicyPolicyResourceResourceConfPtr and MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput
+	ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyResourceResourceConfPtrType MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs
+
+func MetaDatabaseSmartPolicyPolicyResourceResourceConfPtr(v *MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs) MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrInput {
+	return (*metaDatabaseSmartPolicyPolicyResourceResourceConfPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyResourceResourceConfPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyResourceResourceConf)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyResourceResourceConfPtrType) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyResourceResourceConfPtrType) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceResourceConf)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyResourceResourceConf) *MetaDatabaseSmartPolicyPolicyResourceResourceConf {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput)
+}
+
+// Parallelism of the optimize task.
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput) Parallelism() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyResourceResourceConf) *int { return v.Parallelism }).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyResourceResourceConf)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput() MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput) ToMetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput) Elem() MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyResourceResourceConf) MetaDatabaseSmartPolicyPolicyResourceResourceConf {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyResourceResourceConf
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput)
+}
+
+// Parallelism of the optimize task.
+func (o MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput) Parallelism() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyResourceResourceConf) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Parallelism
+	}).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyTableExpiration struct {
+	// Whether to enable the policy.
+	Enabled bool `pulumi:"enabled"`
+	// Table expiration time, in days.
+	Expiration int `pulumi:"expiration"`
+}
+
+// MetaDatabaseSmartPolicyPolicyTableExpirationInput is an input type that accepts MetaDatabaseSmartPolicyPolicyTableExpirationArgs and MetaDatabaseSmartPolicyPolicyTableExpirationOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyTableExpirationInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyTableExpirationArgs{...}
+type MetaDatabaseSmartPolicyPolicyTableExpirationInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyTableExpirationOutput() MetaDatabaseSmartPolicyPolicyTableExpirationOutput
+	ToMetaDatabaseSmartPolicyPolicyTableExpirationOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyTableExpirationArgs struct {
+	// Whether to enable the policy.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Table expiration time, in days.
+	Expiration pulumi.IntInput `pulumi:"expiration"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyTableExpirationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyTableExpiration)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyTableExpirationArgs) ToMetaDatabaseSmartPolicyPolicyTableExpirationOutput() MetaDatabaseSmartPolicyPolicyTableExpirationOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyTableExpirationOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyTableExpirationArgs) ToMetaDatabaseSmartPolicyPolicyTableExpirationOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyTableExpirationOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyTableExpirationArgs) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyTableExpirationArgs) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyTableExpirationOutput).ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyTableExpirationPtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyTableExpirationArgs, MetaDatabaseSmartPolicyPolicyTableExpirationPtr and MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyTableExpirationPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyTableExpirationArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyTableExpirationPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput
+	ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyTableExpirationPtrType MetaDatabaseSmartPolicyPolicyTableExpirationArgs
+
+func MetaDatabaseSmartPolicyPolicyTableExpirationPtr(v *MetaDatabaseSmartPolicyPolicyTableExpirationArgs) MetaDatabaseSmartPolicyPolicyTableExpirationPtrInput {
+	return (*metaDatabaseSmartPolicyPolicyTableExpirationPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyTableExpirationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyTableExpiration)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyTableExpirationPtrType) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyTableExpirationPtrType) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyTableExpirationOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyTableExpirationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyTableExpiration)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationOutput) ToMetaDatabaseSmartPolicyPolicyTableExpirationOutput() MetaDatabaseSmartPolicyPolicyTableExpirationOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationOutput) ToMetaDatabaseSmartPolicyPolicyTableExpirationOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationOutput) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationOutput) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyTableExpiration) *MetaDatabaseSmartPolicyPolicyTableExpiration {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput)
+}
+
+// Whether to enable the policy.
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyTableExpiration) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Table expiration time, in days.
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationOutput) Expiration() pulumi.IntOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyTableExpiration) int { return v.Expiration }).(pulumi.IntOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyTableExpiration)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput() MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput) ToMetaDatabaseSmartPolicyPolicyTableExpirationPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput) Elem() MetaDatabaseSmartPolicyPolicyTableExpirationOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyTableExpiration) MetaDatabaseSmartPolicyPolicyTableExpiration {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyTableExpiration
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyTableExpirationOutput)
+}
+
+// Whether to enable the policy.
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyTableExpiration) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Table expiration time, in days.
+func (o MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput) Expiration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyTableExpiration) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Expiration
+	}).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWritten struct {
+	// User custom advance params.
+	AdvancePolicy *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy `pulumi:"advancePolicy"`
+	// Whether to enable, `none`/`enable`/`disable`/`default`.
+	WrittenEnable *string `pulumi:"writtenEnable"`
+}
+
+// MetaDatabaseSmartPolicyPolicyWrittenInput is an input type that accepts MetaDatabaseSmartPolicyPolicyWrittenArgs and MetaDatabaseSmartPolicyPolicyWrittenOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyWrittenInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyWrittenArgs{...}
+type MetaDatabaseSmartPolicyPolicyWrittenInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyWrittenOutput() MetaDatabaseSmartPolicyPolicyWrittenOutput
+	ToMetaDatabaseSmartPolicyPolicyWrittenOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyWrittenOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenArgs struct {
+	// User custom advance params.
+	AdvancePolicy MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrInput `pulumi:"advancePolicy"`
+	// Whether to enable, `none`/`enable`/`disable`/`default`.
+	WrittenEnable pulumi.StringPtrInput `pulumi:"writtenEnable"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyWrittenArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWritten)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenArgs) ToMetaDatabaseSmartPolicyPolicyWrittenOutput() MetaDatabaseSmartPolicyPolicyWrittenOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenArgs) ToMetaDatabaseSmartPolicyPolicyWrittenOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenArgs) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenArgs) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenOutput).ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyWrittenPtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyWrittenArgs, MetaDatabaseSmartPolicyPolicyWrittenPtr and MetaDatabaseSmartPolicyPolicyWrittenPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyWrittenPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyWrittenArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyWrittenPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput
+	ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyWrittenPtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyWrittenPtrType MetaDatabaseSmartPolicyPolicyWrittenArgs
+
+func MetaDatabaseSmartPolicyPolicyWrittenPtr(v *MetaDatabaseSmartPolicyPolicyWrittenArgs) MetaDatabaseSmartPolicyPolicyWrittenPtrInput {
+	return (*metaDatabaseSmartPolicyPolicyWrittenPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyWrittenPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyWritten)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyWrittenPtrType) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyWrittenPtrType) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyWrittenOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWritten)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenOutput) ToMetaDatabaseSmartPolicyPolicyWrittenOutput() MetaDatabaseSmartPolicyPolicyWrittenOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenOutput) ToMetaDatabaseSmartPolicyPolicyWrittenOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenOutput) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenOutput) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyWritten) *MetaDatabaseSmartPolicyPolicyWritten {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyWrittenPtrOutput)
+}
+
+// User custom advance params.
+func (o MetaDatabaseSmartPolicyPolicyWrittenOutput) AdvancePolicy() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWritten) *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy {
+		return v.AdvancePolicy
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput)
+}
+
+// Whether to enable, `none`/`enable`/`disable`/`default`.
+func (o MetaDatabaseSmartPolicyPolicyWrittenOutput) WrittenEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWritten) *string { return v.WrittenEnable }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyWrittenPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyWritten)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenPtrOutput) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenPtrOutput) ToMetaDatabaseSmartPolicyPolicyWrittenPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenPtrOutput) Elem() MetaDatabaseSmartPolicyPolicyWrittenOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWritten) MetaDatabaseSmartPolicyPolicyWritten {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyWritten
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyWrittenOutput)
+}
+
+// User custom advance params.
+func (o MetaDatabaseSmartPolicyPolicyWrittenPtrOutput) AdvancePolicy() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWritten) *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy {
+		if v == nil {
+			return nil
+		}
+		return v.AdvancePolicy
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput)
+}
+
+// Whether to enable, `none`/`enable`/`disable`/`default`.
+func (o MetaDatabaseSmartPolicyPolicyWrittenPtrOutput) WrittenEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWritten) *string {
+		if v == nil {
+			return nil
+		}
+		return v.WrittenEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy struct {
+	// Snapshot expire before days.
+	BeforeDays *int `pulumi:"beforeDays"`
+	// Whether to enable compact.
+	CompactEnable *string `pulumi:"compactEnable"`
+	// File compact strategy.
+	CompactStrategy *string `pulumi:"compactStrategy"`
+	// Whether to enable COW table compact.
+	CowCompactEnable *string `pulumi:"cowCompactEnable"`
+	// Whether to enable history data cleanup.
+	DeleteEnable *string `pulumi:"deleteEnable"`
+	// Snapshot expire interval in minutes.
+	ExpiredSnapshotsIntervalMin *int `pulumi:"expiredSnapshotsIntervalMin"`
+	// Min input files to compact.
+	MinInputFiles *int `pulumi:"minInputFiles"`
+	// Remove orphan files interval in minutes.
+	RemoveOrphanIntervalMin *int `pulumi:"removeOrphanIntervalMin"`
+	// Retain last snapshot count.
+	RetainLast *int `pulumi:"retainLast"`
+	// Sort compact strategy rules.
+	SortOrders []MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder `pulumi:"sortOrders"`
+	// Target file size after compact.
+	TargetFileSizeBytes *int `pulumi:"targetFileSizeBytes"`
+}
+
+// MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyInput is an input type that accepts MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs and MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs{...}
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs struct {
+	// Snapshot expire before days.
+	BeforeDays pulumi.IntPtrInput `pulumi:"beforeDays"`
+	// Whether to enable compact.
+	CompactEnable pulumi.StringPtrInput `pulumi:"compactEnable"`
+	// File compact strategy.
+	CompactStrategy pulumi.StringPtrInput `pulumi:"compactStrategy"`
+	// Whether to enable COW table compact.
+	CowCompactEnable pulumi.StringPtrInput `pulumi:"cowCompactEnable"`
+	// Whether to enable history data cleanup.
+	DeleteEnable pulumi.StringPtrInput `pulumi:"deleteEnable"`
+	// Snapshot expire interval in minutes.
+	ExpiredSnapshotsIntervalMin pulumi.IntPtrInput `pulumi:"expiredSnapshotsIntervalMin"`
+	// Min input files to compact.
+	MinInputFiles pulumi.IntPtrInput `pulumi:"minInputFiles"`
+	// Remove orphan files interval in minutes.
+	RemoveOrphanIntervalMin pulumi.IntPtrInput `pulumi:"removeOrphanIntervalMin"`
+	// Retain last snapshot count.
+	RetainLast pulumi.IntPtrInput `pulumi:"retainLast"`
+	// Sort compact strategy rules.
+	SortOrders MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayInput `pulumi:"sortOrders"`
+	// Target file size after compact.
+	TargetFileSizeBytes pulumi.IntPtrInput `pulumi:"targetFileSizeBytes"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput)
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput).ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(ctx)
+}
+
+// MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrInput is an input type that accepts MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs, MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtr and MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrInput` via:
+//
+//	        MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput
+}
+
+type metaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrType MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs
+
+func MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtr(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrInput {
+	return (*metaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrType)(v)
+}
+
+func (*metaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy)(nil)).Elem()
+}
+
+func (i *metaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrType) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *metaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrType) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return o.ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(context.Background())
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy {
+		return &v
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput)
+}
+
+// Snapshot expire before days.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) BeforeDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int { return v.BeforeDays }).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) CompactEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string { return v.CompactEnable }).(pulumi.StringPtrOutput)
+}
+
+// File compact strategy.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) CompactStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string { return v.CompactStrategy }).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable COW table compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) CowCompactEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string { return v.CowCompactEnable }).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable history data cleanup.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) DeleteEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string { return v.DeleteEnable }).(pulumi.StringPtrOutput)
+}
+
+// Snapshot expire interval in minutes.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) ExpiredSnapshotsIntervalMin() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int { return v.ExpiredSnapshotsIntervalMin }).(pulumi.IntPtrOutput)
+}
+
+// Min input files to compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) MinInputFiles() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int { return v.MinInputFiles }).(pulumi.IntPtrOutput)
+}
+
+// Remove orphan files interval in minutes.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) RemoveOrphanIntervalMin() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int { return v.RemoveOrphanIntervalMin }).(pulumi.IntPtrOutput)
+}
+
+// Retain last snapshot count.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) RetainLast() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int { return v.RetainLast }).(pulumi.IntPtrOutput)
+}
+
+// Sort compact strategy rules.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) SortOrders() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) []MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder {
+		return v.SortOrders
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput)
+}
+
+// Target file size after compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput) TargetFileSizeBytes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int { return v.TargetFileSizeBytes }).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) Elem() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy {
+		if v != nil {
+			return *v
+		}
+		var ret MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy
+		return ret
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput)
+}
+
+// Snapshot expire before days.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) BeforeDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BeforeDays
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) CompactEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CompactEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+// File compact strategy.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) CompactStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CompactStrategy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable COW table compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) CowCompactEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CowCompactEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable history data cleanup.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) DeleteEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DeleteEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+// Snapshot expire interval in minutes.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) ExpiredSnapshotsIntervalMin() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ExpiredSnapshotsIntervalMin
+	}).(pulumi.IntPtrOutput)
+}
+
+// Min input files to compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) MinInputFiles() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MinInputFiles
+	}).(pulumi.IntPtrOutput)
+}
+
+// Remove orphan files interval in minutes.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) RemoveOrphanIntervalMin() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RemoveOrphanIntervalMin
+	}).(pulumi.IntPtrOutput)
+}
+
+// Retain last snapshot count.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) RetainLast() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RetainLast
+	}).(pulumi.IntPtrOutput)
+}
+
+// Sort compact strategy rules.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) SortOrders() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) []MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder {
+		if v == nil {
+			return nil
+		}
+		return v.SortOrders
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput)
+}
+
+// Target file size after compact.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput) TargetFileSizeBytes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TargetFileSizeBytes
+	}).(pulumi.IntPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder struct {
+	// Sort column name.
+	Column *string `pulumi:"column"`
+	// Null order, `first` or `last`.
+	NullOrder *string `pulumi:"nullOrder"`
+	// Sort direction, `asc` or `desc`.
+	SortDirection *string `pulumi:"sortDirection"`
+}
+
+// MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderInput is an input type that accepts MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs and MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs{...}
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs struct {
+	// Sort column name.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// Null order, `first` or `last`.
+	NullOrder pulumi.StringPtrInput `pulumi:"nullOrder"`
+	// Sort direction, `asc` or `desc`.
+	SortDirection pulumi.StringPtrInput `pulumi:"sortDirection"`
+}
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput)
+}
+
+// MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayInput is an input type that accepts MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray and MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput values.
+// You can construct a concrete instance of `MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayInput` via:
+//
+//	MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray{ MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs{...} }
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayInput interface {
+	pulumi.Input
+
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput
+	ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutputWithContext(context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray []MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderInput
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder)(nil)).Elem()
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput {
+	return i.ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutputWithContext(context.Background())
+}
+
+func (i MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput {
+	return o
+}
+
+// Sort column name.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput) Column() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder) *string { return v.Column }).(pulumi.StringPtrOutput)
+}
+
+// Null order, `first` or `last`.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput) NullOrder() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder) *string { return v.NullOrder }).(pulumi.StringPtrOutput)
+}
+
+// Sort direction, `asc` or `desc`.
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput) SortDirection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder) *string { return v.SortDirection }).(pulumi.StringPtrOutput)
+}
+
+type MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput struct{ *pulumi.OutputState }
+
+func (MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder)(nil)).Elem()
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput() MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput) ToMetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutputWithContext(ctx context.Context) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput {
+	return o
+}
+
+func (o MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput) Index(i pulumi.IntInput) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder {
+		return vs[0].([]MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder)[vs[1].(int)]
+	}).(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput)
 }
 
 type StandardEngineResourceGroupConfigInfoDynamicConfContext struct {
@@ -18587,6 +21316,38 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DetachUserPolicyOperationPolicySetArrayInput)(nil)).Elem(), DetachUserPolicyOperationPolicySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DetachWorkGroupPolicyOperationPolicySetInput)(nil)).Elem(), DetachWorkGroupPolicyOperationPolicySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DetachWorkGroupPolicyOperationPolicySetArrayInput)(nil)).Elem(), DetachWorkGroupPolicyOperationPolicySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseGovernPolicyInput)(nil)).Elem(), MetaDatabaseGovernPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseGovernPolicyPtrInput)(nil)).Elem(), MetaDatabaseGovernPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseMetaDatabaseInfoInput)(nil)).Elem(), MetaDatabaseMetaDatabaseInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseMetaDatabaseInfoPtrInput)(nil)).Elem(), MetaDatabaseMetaDatabaseInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabasePropertyInput)(nil)).Elem(), MetaDatabasePropertyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabasePropertyArrayInput)(nil)).Elem(), MetaDatabasePropertyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyInput)(nil)).Elem(), MetaDatabaseSmartPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyBaseInfoInput)(nil)).Elem(), MetaDatabaseSmartPolicyBaseInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyBaseInfoPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyBaseInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyChangeTableInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyChangeTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyChangeTablePtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyChangeTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyIndexInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyIndexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyIndexPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyIndexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyLifecycleInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyLifecycleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyLifecyclePtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyLifecycleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceArrayInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyResourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceFavorInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyResourceFavorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceFavorArrayInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyResourceFavorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceResourceConfInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyTableExpirationInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyTableExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyTableExpirationPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyTableExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyWrittenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyWrittenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayInput)(nil)).Elem(), MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*StandardEngineResourceGroupConfigInfoDynamicConfContextInput)(nil)).Elem(), StandardEngineResourceGroupConfigInfoDynamicConfContextArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*StandardEngineResourceGroupConfigInfoDynamicConfContextPtrInput)(nil)).Elem(), StandardEngineResourceGroupConfigInfoDynamicConfContextArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*StandardEngineResourceGroupConfigInfoDynamicConfContextParamInput)(nil)).Elem(), StandardEngineResourceGroupConfigInfoDynamicConfContextParamArgs{})
@@ -18789,6 +21550,38 @@ func init() {
 	pulumi.RegisterOutputType(DetachUserPolicyOperationPolicySetArrayOutput{})
 	pulumi.RegisterOutputType(DetachWorkGroupPolicyOperationPolicySetOutput{})
 	pulumi.RegisterOutputType(DetachWorkGroupPolicyOperationPolicySetArrayOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseGovernPolicyOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseGovernPolicyPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseMetaDatabaseInfoOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseMetaDatabaseInfoPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabasePropertyOutput{})
+	pulumi.RegisterOutputType(MetaDatabasePropertyArrayOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyBaseInfoOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyBaseInfoPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyChangeTableOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyChangeTablePtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyIndexOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyIndexPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyLifecycleOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyLifecyclePtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyResourceOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyResourceArrayOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyResourceFavorOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyResourceFavorArrayOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyResourceResourceConfOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyResourceResourceConfPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyTableExpirationOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyTableExpirationPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyWrittenOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyWrittenPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyPtrOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderOutput{})
+	pulumi.RegisterOutputType(MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArrayOutput{})
 	pulumi.RegisterOutputType(StandardEngineResourceGroupConfigInfoDynamicConfContextOutput{})
 	pulumi.RegisterOutputType(StandardEngineResourceGroupConfigInfoDynamicConfContextPtrOutput{})
 	pulumi.RegisterOutputType(StandardEngineResourceGroupConfigInfoDynamicConfContextParamOutput{})

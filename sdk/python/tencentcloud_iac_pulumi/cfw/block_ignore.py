@@ -306,6 +306,15 @@ class BlockIgnore(pulumi.CustomResource):
             rule_type=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateBlockIgnoreRuleList](https://www.tencentcloud.com/search/?wd=CreateBlockIgnoreRuleList&type=document&lang=en)
+        * Read: [DescribeBlockIgnoreList](https://www.tencentcloud.com/document/api/1160/54826)
+        * Update: [ModifyBlockIgnoreRule](https://www.tencentcloud.com/search/?wd=ModifyBlockIgnoreRule&type=document&lang=en)
+        * Delete: [DeleteBlockIgnoreRuleList](https://www.tencentcloud.com/search/?wd=DeleteBlockIgnoreRuleList&type=document&lang=en)
+
         ## Import
 
         cfw block_ignore_list can be imported using the id, e.g.
@@ -375,6 +384,15 @@ class BlockIgnore(pulumi.CustomResource):
             end_time="2023-10-01 00:00:00",
             rule_type=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateBlockIgnoreRuleList](https://www.tencentcloud.com/search/?wd=CreateBlockIgnoreRuleList&type=document&lang=en)
+        * Read: [DescribeBlockIgnoreList](https://www.tencentcloud.com/document/api/1160/54826)
+        * Update: [ModifyBlockIgnoreRule](https://www.tencentcloud.com/search/?wd=ModifyBlockIgnoreRule&type=document&lang=en)
+        * Delete: [DeleteBlockIgnoreRuleList](https://www.tencentcloud.com/search/?wd=DeleteBlockIgnoreRuleList&type=document&lang=en)
 
         ## Import
 

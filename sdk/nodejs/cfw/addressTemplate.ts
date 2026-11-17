@@ -37,6 +37,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAddressTemplate](https://www.tencentcloud.com/search/?wd=CreateAddressTemplate&type=document&lang=en)
+ * * Read: [DescribeAddressTemplateList](https://www.tencentcloud.com/search/?wd=DescribeAddressTemplateList&type=document&lang=en)
+ * * Update: [ModifyAddressTemplate](https://www.tencentcloud.com/search/?wd=ModifyAddressTemplate&type=document&lang=en)
+ * * Delete: [DeleteAddressTemplate](https://www.tencentcloud.com/search/?wd=DeleteAddressTemplate&type=document&lang=en)
+ *
  * ## Import
  *
  * cfw addressTemplate can be imported using the id, e.g.

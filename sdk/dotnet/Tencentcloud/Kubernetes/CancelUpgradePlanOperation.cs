@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CancelUpgradePlan](https://www.tencentcloud.com/search/?wd=CancelUpgradePlan&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/cancelUpgradePlanOperation:CancelUpgradePlanOperation")]
     public partial class CancelUpgradePlanOperation : global::Pulumi.CustomResource

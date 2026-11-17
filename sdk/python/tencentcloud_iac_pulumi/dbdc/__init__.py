@@ -4,6 +4,7 @@
 # Export this package's modules as members:
 from ._inputs import *
 from .db_custom_cluster import *
+from .db_custom_disaster_recover_group import *
 from .db_custom_node import *
 from .get_db_custom_cluster_node_config_list import *
 from .get_db_custom_cluster_node_resources import *

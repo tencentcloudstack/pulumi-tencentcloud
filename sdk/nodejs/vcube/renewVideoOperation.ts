@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.vcube.RenewVideoOperation("example", {licenseId: 1513});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RenewVideo](https://www.tencentcloud.com/search/?wd=RenewVideo&type=document&lang=en)
  */
 export class RenewVideoOperation extends pulumi.CustomResource {
     /**

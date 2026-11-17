@@ -150,6 +150,12 @@ def get_topic(filters: Optional[Sequence[Union['GetTopicFilterArgs', 'GetTopicFi
     topic = tencentcloud.tcmq.get_topic(topic_name="topic_name")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&type=document&lang=en)
+
 
     :param Sequence[Union['GetTopicFilterArgs', 'GetTopicFilterArgsDict']] filters: Filter. Currently, you can filter by tag. The tag name must be prefixed with `tag:`, such as `tag: owner`, `tag: environment`, or `tag: business`.
     :param _builtins.bool is_tag_filter: For filtering by tag, this parameter must be set to `true`.
@@ -199,6 +205,12 @@ def get_topic_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['Get
 
     topic = tencentcloud.tcmq.get_topic(topic_name="topic_name")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&type=document&lang=en)
 
 
     :param Sequence[Union['GetTopicFilterArgs', 'GetTopicFilterArgsDict']] filters: Filter. Currently, you can filter by tag. The tag name must be prefixed with `tag:`, such as `tag: owner`, `tag: environment`, or `tag: business`.

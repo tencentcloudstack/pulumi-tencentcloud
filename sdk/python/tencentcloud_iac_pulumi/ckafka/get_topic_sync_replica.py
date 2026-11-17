@@ -117,6 +117,12 @@ def get_topic_sync_replica(instance_id: Optional[_builtins.str] = None,
         topic_name="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
+
 
     :param _builtins.str instance_id: InstanceId.
     :param _builtins.bool out_of_sync_replica_only: Filter only unsynced replicas.
@@ -155,6 +161,12 @@ def get_topic_sync_replica_output(instance_id: pulumi.Input[Optional[_builtins.s
     topic_sync_replica = tencentcloud.ckafka.get_topic_sync_replica(instance_id="ckafka-xxxxxx",
         topic_name="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
 
 
     :param _builtins.str instance_id: InstanceId.

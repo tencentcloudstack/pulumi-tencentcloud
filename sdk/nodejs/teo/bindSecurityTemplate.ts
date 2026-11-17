@@ -23,7 +23,18 @@ import * as utilities from "../utilities";
  *     entity: "tf.example.com",
  *     operate: "unbind-use-default",
  * });
+ * export const bindMessage = example.message;
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
+ * * Read:
+ *   - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+ *   - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+ * * Delete: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
  *
  * ## Import
  *
@@ -65,6 +76,10 @@ export class BindSecurityTemplate extends pulumi.CustomResource {
      * The domain name to be bound to the policy template (or unbound from the policy template).
      */
     declare public readonly entity: pulumi.Output<string>;
+    /**
+     * Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+     */
+    declare public /*out*/ readonly message: pulumi.Output<string>;
     /**
      * Bind or unbind operation option. Valid values:
      * <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
@@ -109,6 +124,7 @@ export class BindSecurityTemplate extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as BindSecurityTemplateState | undefined;
             resourceInputs["entity"] = state?.entity;
+            resourceInputs["message"] = state?.message;
             resourceInputs["operate"] = state?.operate;
             resourceInputs["overWrite"] = state?.overWrite;
             resourceInputs["status"] = state?.status;
@@ -130,6 +146,7 @@ export class BindSecurityTemplate extends pulumi.CustomResource {
             resourceInputs["overWrite"] = args?.overWrite;
             resourceInputs["templateId"] = args?.templateId;
             resourceInputs["zoneId"] = args?.zoneId;
+            resourceInputs["message"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -145,6 +162,10 @@ export interface BindSecurityTemplateState {
      * The domain name to be bound to the policy template (or unbound from the policy template).
      */
     entity?: pulumi.Input<string | undefined>;
+    /**
+     * Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+     */
+    message?: pulumi.Input<string | undefined>;
     /**
      * Bind or unbind operation option. Valid values:
      * <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>

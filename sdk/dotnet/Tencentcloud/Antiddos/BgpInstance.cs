@@ -126,6 +126,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateBgpInstance](https://www.tencentcloud.com/document/api/1213/83618)
+    /// * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// AntiDDoS bgp instance can be imported using the resourceId#packageRegion, e.g.

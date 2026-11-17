@@ -117,6 +117,12 @@ def get_backup_upload_size(backup_migration_id: Optional[_builtins.str] = None,
         backup_migration_id="mssql-backup-migration-9tj0sxnz")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupUploadSize](https://www.tencentcloud.com/document/api/238/39837)
+
 
     :param _builtins.str backup_migration_id: Backup import task ID, which is returned through the API CreateBackupMigration.
     :param _builtins.str incremental_migration_id: Incremental import task ID.
@@ -155,6 +161,12 @@ def get_backup_upload_size_output(backup_migration_id: pulumi.Input[Optional[_bu
     example = tencentcloud.sqlserver.get_backup_upload_size(instance_id="mssql-4gmc5805",
         backup_migration_id="mssql-backup-migration-9tj0sxnz")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupUploadSize](https://www.tencentcloud.com/document/api/238/39837)
 
 
     :param _builtins.str backup_migration_id: Backup import task ID, which is returned through the API CreateBackupMigration.

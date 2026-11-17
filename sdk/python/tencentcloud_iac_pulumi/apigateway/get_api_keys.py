@@ -114,6 +114,12 @@ def get_api_keys(api_key_id: Optional[_builtins.str] = None,
     id = tencentcloud.apigateway.get_api_keys_output(api_key_id=test.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
+
 
     :param _builtins.str api_key_id: Created API key ID, this field is exactly the same as ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -152,6 +158,12 @@ def get_api_keys_output(api_key_id: pulumi.Input[Optional[Optional[_builtins.str
     name = tencentcloud.apigateway.get_api_keys_output(secret_name=test.secret_name)
     id = tencentcloud.apigateway.get_api_keys_output(api_key_id=test.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
 
 
     :param _builtins.str api_key_id: Created API key ID, this field is exactly the same as ID.

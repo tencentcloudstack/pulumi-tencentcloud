@@ -147,6 +147,14 @@ def get_file_systems(availability_zone: Optional[_builtins.str] = None,
         availability_zone="ap-guangzhou-3")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+      - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+
 
     :param _builtins.str availability_zone: The available zone that the file system locates at.
     :param _builtins.str file_system_id: A specified file system ID used to query.
@@ -194,6 +202,14 @@ def get_file_systems_output(availability_zone: pulumi.Input[Optional[Optional[_b
         name="test",
         availability_zone="ap-guangzhou-3")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+      - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
 
 
     :param _builtins.str availability_zone: The available zone that the file system locates at.

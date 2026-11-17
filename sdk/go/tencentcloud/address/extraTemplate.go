@@ -60,6 +60,20 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAddressTemplate](https://www.tencentcloud.com/document/api/215/16708)
+// * Read: [DescribeAddressTemplates](https://www.tencentcloud.com/document/api/215/16717)
+// * Update:
+//   - [ModifyAddressTemplateAttribute](https://www.tencentcloud.com/document/api/215/16720)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Delete:
+//   - [DeleteAddressTemplate](https://www.tencentcloud.com/document/api/215/16712)
+//   - [DescribeAddressTemplates](https://www.tencentcloud.com/document/api/215/16717)
+//
 // ## Import
 //
 // Address template can be imported using the id, e.g.

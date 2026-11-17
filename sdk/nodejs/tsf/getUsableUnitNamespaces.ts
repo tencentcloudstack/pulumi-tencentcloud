@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     searchWord: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUsableUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUsableUnitNamespaces&type=document&lang=en)
  */
 export function getUsableUnitNamespaces(args?: GetUsableUnitNamespacesArgs, opts?: pulumi.InvokeOptions): Promise<GetUsableUnitNamespacesResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetUsableUnitNamespacesResult {
  *     searchWord: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUsableUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUsableUnitNamespaces&type=document&lang=en)
  */
 export function getUsableUnitNamespacesOutput(args?: GetUsableUnitNamespacesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUsableUnitNamespacesResult> {
     args = args || {};

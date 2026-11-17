@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
 func GetTopicSyncReplica(ctx *pulumi.Context, args *GetTopicSyncReplicaArgs, opts ...pulumi.InvokeOption) (*GetTopicSyncReplicaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopicSyncReplicaResult

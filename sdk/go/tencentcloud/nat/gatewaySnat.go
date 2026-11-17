@@ -16,158 +16,28 @@ import (
 //
 // ## Example Usage
 //
+// ### If resourceType is SUBNET
+//
 // ```go
 // package main
 //
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instance"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/route"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-//				Product: "nat",
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
-//				OsName: pulumi.StringRef("centos"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			instanceTypes, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
-//				Filters: []instance.GetTypesFilter{
-//					{
-//						Name: "zone",
-//						Values: pulumi.StringArray{
-//							zones.Zones[0].Name,
-//						},
-//					},
-//					{
-//						Name: "instance-family",
-//						Values: []string{
-//							"S5",
-//						},
-//					},
-//				},
-//				CpuCoreCount:   pulumi.IntRef(2),
-//				ExcludeSoldOut: pulumi.BoolRef(true),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
-//				Name:      pulumi.String("vpc-example"),
-//				CidrBlock: pulumi.String("10.0.0.0/16"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			// Create route_table and entry
-//			routeTable, err := route.NewTable(ctx, "route_table", &route.TableArgs{
-//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
-//				Name:  pulumi.String("tf_example"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
-//				Name:             pulumi.String("subnet-example"),
-//				CidrBlock:        pulumi.String("10.0.0.0/16"),
-//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-//				RouteTableId:     routeTable.ID().ToIDOutput().ToStringOutput(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			eipExample1, err := eip.NewInstance(ctx, "eip_example1", &eip.InstanceArgs{
-//				Name: pulumi.String("eip_example1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			eipExample2, err := eip.NewInstance(ctx, "eip_example2", &eip.InstanceArgs{
-//				Name: pulumi.String("eip_example2"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			// Create NAT Gateway
-//			myNat, err := nat.NewGateway(ctx, "my_nat", &nat.GatewayArgs{
-//				VpcId:         vpc2.ID().ToIDOutput().ToStringOutput(),
-//				Name:          pulumi.String("tf_example_nat_gateway"),
-//				MaxConcurrent: pulumi.Int(3000000),
-//				Bandwidth:     pulumi.Int(500),
-//				AssignedEipSets: pulumi.StringArray{
-//					eipExample1.PublicIp,
-//					eipExample2.PublicIp,
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = route.NewTableEntry(ctx, "route_entry", &route.TableEntryArgs{
-//				RouteTableId:         routeTable.ID().ToIDOutput().ToStringOutput(),
-//				DestinationCidrBlock: pulumi.String("10.0.0.0/8"),
-//				NextType:             pulumi.String("NAT"),
-//				NextHub:              myNat.ID().ToIDOutput().ToStringOutput(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			// Subnet Nat gateway snat
-//			_, err = nat.NewGatewaySnat(ctx, "subnet_snat", &nat.GatewaySnatArgs{
-//				NatGatewayId:    myNat.ID().ToIDOutput().ToStringOutput(),
+//			_, err := nat.NewGatewaySnat(ctx, "example", &nat.GatewaySnatArgs{
+//				NatGatewayId:    pulumi.String("nat-jmf9955g"),
 //				ResourceType:    pulumi.String("SUBNET"),
-//				SubnetId:        subnet2.ID().ToIDOutput().ToStringOutput(),
-//				SubnetCidrBlock: subnet2.CidrBlock,
-//				Description:     pulumi.String("terraform test"),
+//				SubnetId:        pulumi.String("subnet-hhi88a58"),
+//				SubnetCidrBlock: pulumi.String("10.0.30.0/24"),
+//				Description:     pulumi.String("remark."),
 //				PublicIpAddrs: pulumi.StringArray{
-//					eipExample1.PublicIp,
-//					eipExample2.PublicIp,
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			// Create instance
-//			example, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
-//				InstanceName:     pulumi.String("tf_example"),
-//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-//				ImageId:          pulumi.String(image.Images[0].ImageId),
-//				InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
-//				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
-//				SystemDiskSize:   pulumi.Int(50),
-//				Hostname:         pulumi.String("user"),
-//				ProjectId:        pulumi.Int(0),
-//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
-//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			// NetWorkInterface Nat gateway snat
-//			_, err = nat.NewGatewaySnat(ctx, "my_instance_snat", &nat.GatewaySnatArgs{
-//				NatGatewayId:          myNat.ID().ToIDOutput().ToStringOutput(),
-//				ResourceType:          pulumi.String("NETWORKINTERFACE"),
-//				InstanceId:            example.ID().ToIDOutput().ToStringOutput(),
-//				InstancePrivateIpAddr: example.PrivateIp,
-//				Description:           pulumi.String("terraform test"),
-//				PublicIpAddrs: pulumi.StringArray{
-//					eipExample1.PublicIp,
+//					pulumi.String("106.55.167.123"),
 //				},
 //			})
 //			if err != nil {
@@ -179,18 +49,103 @@ import (
 //
 // ```
 //
-// ## Import
+// ### If resourceType is NETWORKINTERFACE
 //
-// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId`, e.g.
+// ```go
+// package main
 //
-// SUBNET SNat
-// ```sh
-// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nat.NewGatewaySnat(ctx, "example", &nat.GatewaySnatArgs{
+//				NatGatewayId:          pulumi.String("nat-jmf9955g"),
+//				ResourceType:          pulumi.String("NETWORKINTERFACE"),
+//				InstanceId:            pulumi.String("ins-p97oyxt6"),
+//				InstancePrivateIpAddr: pulumi.String("10.0.30.62"),
+//				Description:           pulumi.String("remark."),
+//				PublicIpAddrs: pulumi.StringArray{
+//					pulumi.String("106.55.167.123"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
-// NETWORKINTERFACT SNat
+// ### If resourceType is USERDEFINED
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nat.NewGatewaySnat(ctx, "example", &nat.GatewaySnatArgs{
+//				NatGatewayId:          pulumi.String("nat-jmf9955g"),
+//				ResourceType:          pulumi.String("USERDEFINED"),
+//				InstancePrivateIpAddr: pulumi.String("10.0.40.0/24"),
+//				Description:           pulumi.String("remark."),
+//				PublicIpAddrs: pulumi.StringArray{
+//					pulumi.String("106.55.167.123"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39646)
+//   - [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+//
+// * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+// * Update: [ModifyNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39643)
+// * Delete: [DeleteNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39645)
+//
+// ## Import
+//
+// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId` and `""`, e.g.
+//
+// # SUBNET SNat
+//
 // ```sh
-// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#subnet-hhi88a58
+// ```
+//
+// # NETWORKINTERFACT SNat
+//
+// ```sh
+// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#ins-p97oyxt6
+// ```
+//
+// # USERDEFINED SNat
+//
+// ```sh
+// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#
 // ```
 type GatewaySnat struct {
 	pulumi.CustomResourceState
@@ -201,13 +156,13 @@ type GatewaySnat struct {
 	Description pulumi.StringOutput `pulumi:"description"`
 	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId pulumi.StringPtrOutput `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr pulumi.StringPtrOutput `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringOutput `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs pulumi.StringArrayOutput `pulumi:"publicIpAddrs"`
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType pulumi.StringOutput `pulumi:"resourceType"`
 	// SNAT rule ID.
 	SnatId pulumi.StringOutput `pulumi:"snatId"`
@@ -265,13 +220,13 @@ type gatewaySnatState struct {
 	Description *string `pulumi:"description"`
 	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId *string `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr *string `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId *string `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs []string `pulumi:"publicIpAddrs"`
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType *string `pulumi:"resourceType"`
 	// SNAT rule ID.
 	SnatId *string `pulumi:"snatId"`
@@ -288,13 +243,13 @@ type GatewaySnatState struct {
 	Description pulumi.StringPtrInput
 	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId pulumi.StringPtrInput
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr pulumi.StringPtrInput
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringPtrInput
 	// Elastic IP address pool.
 	PublicIpAddrs pulumi.StringArrayInput
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType pulumi.StringPtrInput
 	// SNAT rule ID.
 	SnatId pulumi.StringPtrInput
@@ -313,13 +268,13 @@ type gatewaySnatArgs struct {
 	Description string `pulumi:"description"`
 	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId *string `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr *string `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId string `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs []string `pulumi:"publicIpAddrs"`
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType string `pulumi:"resourceType"`
 	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock *string `pulumi:"subnetCidrBlock"`
@@ -333,13 +288,13 @@ type GatewaySnatArgs struct {
 	Description pulumi.StringInput
 	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId pulumi.StringPtrInput
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr pulumi.StringPtrInput
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringInput
 	// Elastic IP address pool.
 	PublicIpAddrs pulumi.StringArrayInput
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType pulumi.StringInput
 	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock pulumi.StringPtrInput
@@ -449,7 +404,7 @@ func (o GatewaySnatOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringPtrOutput { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 func (o GatewaySnatOutput) InstancePrivateIpAddr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringPtrOutput { return v.InstancePrivateIpAddr }).(pulumi.StringPtrOutput)
 }
@@ -464,7 +419,7 @@ func (o GatewaySnatOutput) PublicIpAddrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringArrayOutput { return v.PublicIpAddrs }).(pulumi.StringArrayOutput)
 }
 
-// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 func (o GatewaySnatOutput) ResourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringOutput { return v.ResourceType }).(pulumi.StringOutput)
 }

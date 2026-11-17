@@ -192,6 +192,12 @@ def get_ins_attribute(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_ins_attribute(instance_id="mssql-gyg9xycl")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -229,6 +235,12 @@ def get_ins_attribute_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
 
     example = tencentcloud.sqlserver.get_ins_attribute(instance_id="mssql-gyg9xycl")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
 
 
     :param _builtins.str instance_id: Instance ID.

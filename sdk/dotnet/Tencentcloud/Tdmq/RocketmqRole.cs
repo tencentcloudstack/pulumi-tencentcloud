@@ -39,6 +39,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRole](https://www.tencentcloud.com/search/?wd=CreateRole&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyRole](https://www.tencentcloud.com/search/?wd=ModifyRole&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteRoles](https://www.tencentcloud.com/search/?wd=DeleteRoles&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tdmqRocketmq role can be imported using the id, e.g.

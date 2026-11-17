@@ -44,6 +44,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeOriginStreamInfo](https://www.tencentcloud.com/search/?wd=DescribeOriginStreamInfo&amp;type=document&amp;lang=en)
+    ///   - [ModifyOriginStreamInfo](https://www.tencentcloud.com/search/?wd=ModifyOriginStreamInfo&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeOriginStreamInfo](https://www.tencentcloud.com/search/?wd=DescribeOriginStreamInfo&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeOriginStreamInfo](https://www.tencentcloud.com/search/?wd=DescribeOriginStreamInfo&amp;type=document&amp;lang=en)
+    ///   - [ModifyOriginStreamInfo](https://www.tencentcloud.com/search/?wd=ModifyOriginStreamInfo&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [CloseSourceStream](https://www.tencentcloud.com/search/?wd=CloseSourceStream&amp;type=document&amp;lang=en)
+    ///   - [DescribeOriginStreamInfo](https://www.tencentcloud.com/search/?wd=DescribeOriginStreamInfo&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CSS origin stream info can be imported using the domain name, e.g.

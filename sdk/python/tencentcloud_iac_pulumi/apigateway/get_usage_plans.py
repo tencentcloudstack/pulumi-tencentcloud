@@ -119,6 +119,12 @@ def get_usage_plans(result_output_file: Optional[_builtins.str] = None,
     id = tencentcloud.apigateway.get_usage_plans_output(usage_plan_id=plan.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsagePlansStatus](https://www.tencentcloud.com/search/?wd=DescribeUsagePlansStatus&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str usage_plan_id: ID of the usage plan.
@@ -159,6 +165,12 @@ def get_usage_plans_output(result_output_file: pulumi.Input[Optional[Optional[_b
     name = tencentcloud.apigateway.get_usage_plans_output(usage_plan_name=plan.usage_plan_name)
     id = tencentcloud.apigateway.get_usage_plans_output(usage_plan_id=plan.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsagePlansStatus](https://www.tencentcloud.com/search/?wd=DescribeUsagePlansStatus&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

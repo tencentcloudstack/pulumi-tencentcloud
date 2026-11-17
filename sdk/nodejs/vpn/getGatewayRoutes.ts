@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     instanceId: "vpnx-m16m4sw4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
  */
 export function getGatewayRoutes(args: GetGatewayRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetGatewayRoutesResult {
  *     instanceId: "vpnx-m16m4sw4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
  */
 export function getGatewayRoutesOutput(args: GetGatewayRoutesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

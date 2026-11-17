@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
         /// </summary>
         public static Task<GetListenersByTargetsResult> InvokeAsync(GetListenersByTargetsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
         /// </summary>
         public static Output<GetListenersByTargetsResult> Invoke(GetListenersByTargetsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
         /// </summary>
         public static Output<GetListenersByTargetsResult> Invoke(GetListenersByTargetsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsInvokeArgs(), options.WithDefaults());

@@ -44,6 +44,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+    /// * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
+    /// * Update: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+    /// * Delete: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+    /// 
     /// ## Import
     /// 
     /// gaap CustomHeader can be imported using the id, e.g.

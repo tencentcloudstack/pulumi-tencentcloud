@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&type=document&lang=en)
 func LookupDiagnose(ctx *pulumi.Context, args *LookupDiagnoseArgs, opts ...pulumi.InvokeOption) (*LookupDiagnoseResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupDiagnoseResult

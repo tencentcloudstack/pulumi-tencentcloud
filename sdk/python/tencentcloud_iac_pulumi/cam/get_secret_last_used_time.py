@@ -96,6 +96,12 @@ def get_secret_last_used_time(result_output_file: Optional[_builtins.str] = None
     secret_last_used_time = tencentcloud.cam.get_secret_last_used_time(secret_id_lists=["xxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[_builtins.str] secret_id_lists: Query the key ID list. Supports up to 10.
@@ -125,6 +131,12 @@ def get_secret_last_used_time_output(result_output_file: pulumi.Input[Optional[O
 
     secret_last_used_time = tencentcloud.cam.get_secret_last_used_time(secret_id_lists=["xxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
 
 
     :param _builtins.str result_output_file: Used to save results.

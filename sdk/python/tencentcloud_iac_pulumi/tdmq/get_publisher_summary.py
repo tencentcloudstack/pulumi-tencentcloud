@@ -152,6 +152,12 @@ def get_publisher_summary(cluster_id: Optional[_builtins.str] = None,
         topic="keep-topic")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str namespace: namespace name.
@@ -194,6 +200,12 @@ def get_publisher_summary_output(cluster_id: pulumi.Input[Optional[_builtins.str
         namespace="keep-ns",
         topic="keep-topic")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

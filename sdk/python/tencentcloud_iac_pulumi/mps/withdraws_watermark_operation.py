@@ -171,6 +171,12 @@ class WithdrawsWatermarkOperation(pulumi.CustomResource):
             session_context="this is a example session context")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [WithdrawsWatermark](https://www.tencentcloud.com/search/?wd=WithdrawsWatermark&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -213,6 +219,12 @@ class WithdrawsWatermarkOperation(pulumi.CustomResource):
             },
             session_context="this is a example session context")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [WithdrawsWatermark](https://www.tencentcloud.com/search/?wd=WithdrawsWatermark&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

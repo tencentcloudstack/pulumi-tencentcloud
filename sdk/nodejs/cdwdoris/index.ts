@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { GetInstanceNodesArgs, GetInstanceNodesResult, GetInstanceNodesOutputArgs } from "./getInstanceNodes";
+export const getInstanceNodes: typeof import("./getInstanceNodes").getInstanceNodes = null as any;
+export const getInstanceNodesOutput: typeof import("./getInstanceNodes").getInstanceNodesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceNodes","getInstanceNodesOutput"], () => require("./getInstanceNodes"));
+
 export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
 export const getInstances: typeof import("./getInstances").getInstances = null as any;
 export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;

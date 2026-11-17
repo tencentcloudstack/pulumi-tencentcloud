@@ -96,6 +96,12 @@ def get_backup_tables(instance_id: Optional[_builtins.str] = None,
     backup_tables = tencentcloud.clickhouse.get_backup_tables(instance_id="cdwch-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_backup_tables_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
 
     backup_tables = tencentcloud.clickhouse.get_backup_tables(instance_id="cdwch-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Instance id.

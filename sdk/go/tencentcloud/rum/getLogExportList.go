@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
 func GetLogExportList(ctx *pulumi.Context, args *GetLogExportListArgs, opts ...pulumi.InvokeOption) (*GetLogExportListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogExportListResult

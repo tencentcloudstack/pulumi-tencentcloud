@@ -143,6 +143,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeTasks](https://www.tencentcloud.com/search/?wd=DescribeTasks&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterSchedulerPolicy](https://www.tencentcloud.com/search/?wd=ModifyClusterSchedulerPolicy&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeClusterSchedulerPolicy](https://www.tencentcloud.com/search/?wd=DescribeClusterSchedulerPolicy&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeTasks](https://www.tencentcloud.com/search/?wd=DescribeTasks&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterSchedulerPolicy](https://www.tencentcloud.com/search/?wd=ModifyClusterSchedulerPolicy&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// TKE cluster scheduler policy config can be imported using the cluster ID, e.g.

@@ -90,6 +90,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50609)
+    /// * Read: [DescribeBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50607)
+    /// * Delete: [DeleteBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50608)
+    /// 
     /// ## Import
     /// 
     /// sqlserver BusinessIntelligenceFile can be imported using the id, e.g.

@@ -25,23 +25,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// {
     ///     var example = new Tencentcloud.Ckafka.Route("example", new()
     ///     {
-    ///         InstanceId = "ckafka-8j4rodrr",
+    ///         InstanceId = "ckafka-8j4ra928",
     ///         VipType = 3,
-    ///         VpcId = "vpc-axrsmmrv",
-    ///         SubnetId = "subnet-j5vja918",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         AccessType = 0,
     ///         PublicNetwork = 3,
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             "sg-8ztqghor",
+    ///             "sg-rc9644tr",
+    ///             "sg-n8zf5ry9",
+    ///         },
     ///     });
     /// 
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateRoute](https://www.tencentcloud.com/document/api/597/74258)
+    ///   - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+    /// * Read:
+    ///   - [DescribeRoute](https://www.tencentcloud.com/document/api/597/37090)
+    ///   - [DescribeSecurityGroupRoutes](https://www.tencentcloud.com/document/api/597/74257)
+    /// * Update: [ModifyRouteSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyRouteSecurityGroups&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteRoute](https://www.tencentcloud.com/document/api/597/47140)
+    /// 
     /// ## Import
     /// 
-    /// ckafka route can be imported using the id, e.g.
+    /// ckafka route can be imported using the instanceId#routeId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
+    /// $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4ra928#135912
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/route:Route")]
@@ -92,6 +111,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// </summary>
         [Output("publicNetwork")]
         public Output<int?> PublicNetwork { get; private set; } = null!;
+
+        /// <summary>
+        /// Route ID.
+        /// </summary>
+        [Output("routeId")]
+        public Output<int> RouteId { get; private set; } = null!;
+
+        /// <summary>
+        /// List of associated security group IDs in order.
+        /// </summary>
+        [Output("securityGroupIds")]
+        public Output<ImmutableArray<string>> SecurityGroupIds { get; private set; } = null!;
 
         /// <summary>
         /// Subnet id.
@@ -204,6 +235,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
 
+        [Input("securityGroupIds")]
+        private InputList<string>? _securityGroupIds;
+
+        /// <summary>
+        /// List of associated security group IDs in order.
+        /// </summary>
+        public InputList<string> SecurityGroupIds
+        {
+            get => _securityGroupIds ?? (_securityGroupIds = new InputList<string>());
+            set => _securityGroupIds = value;
+        }
+
         /// <summary>
         /// Subnet id.
         /// </summary>
@@ -281,6 +324,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
+
+        /// <summary>
+        /// Route ID.
+        /// </summary>
+        [Input("routeId")]
+        public Input<int>? RouteId { get; set; }
+
+        [Input("securityGroupIds")]
+        private InputList<string>? _securityGroupIds;
+
+        /// <summary>
+        /// List of associated security group IDs in order.
+        /// </summary>
+        public InputList<string> SecurityGroupIds
+        {
+            get => _securityGroupIds ?? (_securityGroupIds = new InputList<string>());
+            set => _securityGroupIds = value;
+        }
 
         /// <summary>
         /// Subnet id.

@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&type=document&lang=en)
  */
 export function getMonitors(args?: GetMonitorsArgs, opts?: pulumi.InvokeOptions): Promise<GetMonitorsResult> {
     args = args || {};
@@ -107,6 +113,12 @@ export interface GetMonitorsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&type=document&lang=en)
  */
 export function getMonitorsOutput(args?: GetMonitorsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMonitorsResult> {
     args = args || {};

@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
 func GetUserDomains(ctx *pulumi.Context, args *GetUserDomainsArgs, opts ...pulumi.InvokeOption) (*GetUserDomainsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUserDomainsResult

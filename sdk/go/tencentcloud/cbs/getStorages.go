@@ -139,6 +139,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
 func GetStorages(ctx *pulumi.Context, args *GetStoragesArgs, opts ...pulumi.InvokeOption) (*GetStoragesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStoragesResult

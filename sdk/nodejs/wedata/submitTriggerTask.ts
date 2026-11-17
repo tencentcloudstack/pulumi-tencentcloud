@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     versionRemark: "v1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SubmitTriggerTask](https://www.tencentcloud.com/document/api/1174/77915)
  */
 export class SubmitTriggerTask extends pulumi.CustomResource {
     /**

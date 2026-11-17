@@ -33,6 +33,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ReleasePublicConfig](https://www.tencentcloud.com/search/?wd=ReleasePublicConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePublicConfigReleases](https://www.tencentcloud.com/search/?wd=DescribePublicConfigReleases&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribePublicConfigReleases](https://www.tencentcloud.com/search/?wd=DescribePublicConfigReleases&amp;type=document&amp;lang=en)
+    ///   - [RevocationPublicConfig](https://www.tencentcloud.com/search/?wd=RevocationPublicConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf ApplicationPublicConfigRelease can be imported using the id, e.g.

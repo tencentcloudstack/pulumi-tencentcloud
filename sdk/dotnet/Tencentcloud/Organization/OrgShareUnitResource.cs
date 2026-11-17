@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddShareUnitResources](https://www.tencentcloud.com/document/api/1031/68235)
+    /// * Read: [DescribeShareUnitResources](https://www.tencentcloud.com/document/api/1031/68229)
+    /// * Delete: [DeleteShareUnitResources](https://www.tencentcloud.com/document/api/1031/68232)
+    /// 
     /// ## Import
     /// 
     /// organization OrganizationOrgShareUnitResource can be imported using the id, e.g.

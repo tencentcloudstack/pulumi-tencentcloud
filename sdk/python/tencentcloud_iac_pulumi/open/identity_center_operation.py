@@ -101,6 +101,12 @@ class IdentityCenterOperation(pulumi.CustomResource):
         open_identity_center_operation = tencentcloud.open.IdentityCenterOperation("open_identity_center_operation", zone_name="test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [OpenIdentityCenter](https://www.tencentcloud.com/document/api/1031/63591)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -123,6 +129,12 @@ class IdentityCenterOperation(pulumi.CustomResource):
 
         open_identity_center_operation = tencentcloud.open.IdentityCenterOperation("open_identity_center_operation", zone_name="test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [OpenIdentityCenter](https://www.tencentcloud.com/document/api/1031/63591)
 
 
         :param str resource_name: The name of the resource.

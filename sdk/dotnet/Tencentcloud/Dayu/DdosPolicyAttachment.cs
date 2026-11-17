@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&amp;type=document&amp;lang=en)
+    ///   - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&amp;type=document&amp;lang=en)
+    ///   - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment")]
     public partial class DdosPolicyAttachment : global::Pulumi.CustomResource

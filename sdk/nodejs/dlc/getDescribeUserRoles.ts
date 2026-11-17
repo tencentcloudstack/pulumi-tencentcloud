@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     sorting: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
  */
 export function getDescribeUserRoles(args?: GetDescribeUserRolesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeUserRolesResult> {
     args = args || {};
@@ -87,6 +93,12 @@ export interface GetDescribeUserRolesResult {
  *     sorting: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
  */
 export function getDescribeUserRolesOutput(args?: GetDescribeUserRolesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeUserRolesResult> {
     args = args || {};

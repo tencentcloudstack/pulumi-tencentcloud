@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
 func LookupOriginAcl(ctx *pulumi.Context, args *LookupOriginAclArgs, opts ...pulumi.InvokeOption) (*LookupOriginAclResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupOriginAclResult

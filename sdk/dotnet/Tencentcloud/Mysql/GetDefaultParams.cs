@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
         /// </summary>
         public static Task<GetDefaultParamsResult> InvokeAsync(GetDefaultParamsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
         /// </summary>
         public static Output<GetDefaultParamsResult> Invoke(GetDefaultParamsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
         /// </summary>
         public static Output<GetDefaultParamsResult> Invoke(GetDefaultParamsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultParamsResult>("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args ?? new GetDefaultParamsInvokeArgs(), options.WithDefaults());

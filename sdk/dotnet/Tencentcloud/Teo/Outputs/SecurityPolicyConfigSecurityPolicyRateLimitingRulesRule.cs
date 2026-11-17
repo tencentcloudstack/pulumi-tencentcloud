@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class SecurityPolicyConfigSecurityPolicyRateLimitingRulesRule
     {
         /// <summary>
-        /// The precise rate limit handling method. The values are: &lt;li&gt;Monitor: Observe; &lt;/li&gt;&lt;li&gt;Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; &lt;/li&gt;&lt;li&gt;Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; &lt;/li&gt;&lt;li&gt;Redirect: Redirect to URL; &lt;/li&gt;.
+        /// The precise rate limit handling method. The values are: &lt;li&gt;Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; &lt;/li&gt;&lt;li&gt;Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; &lt;/li&gt;&lt;li&gt;Monitor: observe; &lt;/li&gt;&lt;li&gt;Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; &lt;/li&gt;&lt;li&gt;Redirect: redirect to a URL.&lt;/li&gt;.
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleAction? Action;
         /// <summary>

@@ -118,6 +118,12 @@ def get_ccn_instance_region_status(ccn_id: Optional[_builtins.str] = None,
         routing_mode=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&type=document&lang=en)
+
 
     :param _builtins.str ccn_id: CCN ID.
     :param Sequence[_builtins.str] instance_ids: List of instance IDs associated with CCN for querying traffic steering network deployment status.
@@ -157,6 +163,12 @@ def get_ccn_instance_region_status_output(ccn_id: pulumi.Input[Optional[_builtin
         instance_ids=["vpc-axbsvrrg"],
         routing_mode=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&type=document&lang=en)
 
 
     :param _builtins.str ccn_id: CCN ID.

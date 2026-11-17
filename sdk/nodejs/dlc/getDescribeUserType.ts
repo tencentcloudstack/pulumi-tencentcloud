@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     userId: "100021240183",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
  */
 export function getDescribeUserType(args?: GetDescribeUserTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeUserTypeResult> {
     args = args || {};
@@ -69,6 +75,12 @@ export interface GetDescribeUserTypeResult {
  *     userId: "100021240183",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
  */
 export function getDescribeUserTypeOutput(args?: GetDescribeUserTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeUserTypeResult> {
     args = args || {};

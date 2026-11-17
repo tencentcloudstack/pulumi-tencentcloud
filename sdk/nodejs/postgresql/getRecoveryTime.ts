@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     dbInstanceId: pgsqlId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
  */
 export function getRecoveryTime(args: GetRecoveryTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetRecoveryTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -72,6 +78,12 @@ export interface GetRecoveryTimeResult {
  *     dbInstanceId: pgsqlId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
  */
 export function getRecoveryTimeOutput(args: GetRecoveryTimeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRecoveryTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

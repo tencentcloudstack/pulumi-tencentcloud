@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&type=document&lang=en)
 func GetRenewalPrice(ctx *pulumi.Context, args *GetRenewalPriceArgs, opts ...pulumi.InvokeOption) (*GetRenewalPriceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRenewalPriceResult

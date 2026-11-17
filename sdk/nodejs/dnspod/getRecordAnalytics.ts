@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     dnsFormat: "HOUR",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
  */
 export function getRecordAnalytics(args: GetRecordAnalyticsArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordAnalyticsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -131,6 +137,12 @@ export interface GetRecordAnalyticsResult {
  *     dnsFormat: "HOUR",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
  */
 export function getRecordAnalyticsOutput(args: GetRecordAnalyticsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRecordAnalyticsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

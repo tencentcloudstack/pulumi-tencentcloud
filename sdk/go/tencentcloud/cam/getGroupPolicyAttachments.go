@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
 func GetGroupPolicyAttachments(ctx *pulumi.Context, args *GetGroupPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetGroupPolicyAttachmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGroupPolicyAttachmentsResult

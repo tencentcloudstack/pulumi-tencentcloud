@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class GetEnvironmentsEnvInfoResult
     {
         /// <summary>
-        /// Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+        /// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
         /// </summary>
         public readonly string CreateTime;
         /// <summary>

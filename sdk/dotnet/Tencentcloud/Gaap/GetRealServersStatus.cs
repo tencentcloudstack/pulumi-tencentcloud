@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
         /// </summary>
         public static Task<GetRealServersStatusResult> InvokeAsync(GetRealServersStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
         /// </summary>
         public static Output<GetRealServersStatusResult> Invoke(GetRealServersStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
         /// </summary>
         public static Output<GetRealServersStatusResult> Invoke(GetRealServersStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRealServersStatusResult>("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args ?? new GetRealServersStatusInvokeArgs(), options.WithDefaults());

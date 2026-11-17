@@ -99,6 +99,12 @@ def get_instance_param_records(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_instance_param_records(instance_id="mssql-qelbzgwf")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
+
 
     :param _builtins.str instance_id: Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_instance_param_records_output(instance_id: pulumi.Input[Optional[_builti
 
     example = tencentcloud.sqlserver.get_instance_param_records(instance_id="mssql-qelbzgwf")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
 
 
     :param _builtins.str instance_id: Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter InstanceId of the DescribeDBInstances API.

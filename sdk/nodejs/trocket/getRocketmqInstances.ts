@@ -43,6 +43,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
  */
 export function getRocketmqInstances(args?: GetRocketmqInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqInstancesResult> {
     args = args || {};
@@ -125,6 +131,12 @@ export interface GetRocketmqInstancesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
  */
 export function getRocketmqInstancesOutput(args?: GetRocketmqInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqInstancesResult> {
     args = args || {};

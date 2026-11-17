@@ -219,6 +219,14 @@ class BotStatusConfig(pulumi.CustomResource):
             status="0")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+        * Read: [DescribeBotSceneOverview](https://www.tencentcloud.com/search/?wd=DescribeBotSceneOverview&type=document&lang=en)
+        * Update: [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+
         ## Import
 
         WAF bot status config can be imported using the id, e.g.
@@ -254,6 +262,14 @@ class BotStatusConfig(pulumi.CustomResource):
             domain="example.com",
             status="0")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+        * Read: [DescribeBotSceneOverview](https://www.tencentcloud.com/search/?wd=DescribeBotSceneOverview&type=document&lang=en)
+        * Update: [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
 
         ## Import
 

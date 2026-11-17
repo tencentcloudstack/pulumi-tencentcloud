@@ -64,6 +64,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
 func GetSecurityRules(ctx *pulumi.Context, args *GetSecurityRulesArgs, opts ...pulumi.InvokeOption) (*GetSecurityRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityRulesResult

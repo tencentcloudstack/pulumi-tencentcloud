@@ -96,6 +96,12 @@ def get_slow_log(instance_id: Optional[_builtins.str] = None,
     slow_log = tencentcloud.mysql.get_slow_log(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
+
 
     :param _builtins.str instance_id: Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_slow_log_output(instance_id: pulumi.Input[Optional[_builtins.str]] = Non
 
     slow_log = tencentcloud.mysql.get_slow_log(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
 
 
     :param _builtins.str instance_id: Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.

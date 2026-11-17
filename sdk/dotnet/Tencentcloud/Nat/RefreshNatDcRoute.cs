@@ -78,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RefreshDirectConnectGatewayRouteToNatGateway](https://www.tencentcloud.com/document/api/215/48123)
+    /// 
     /// ## Import
     /// 
     /// vpc RefreshNatDcRoute can be imported using the id, e.g.

@@ -96,6 +96,12 @@ def get_get_table_columns(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.wedata.get_get_table_columns(table_guid="ktDR4ymhp2_nlfClXhwxRQ")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str table_guid: Table GUID.
@@ -125,6 +131,12 @@ def get_get_table_columns_output(result_output_file: pulumi.Input[Optional[Optio
 
     example = tencentcloud.wedata.get_get_table_columns(table_guid="ktDR4ymhp2_nlfClXhwxRQ")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     backupMigrationId: "mssql-backup-migration-kpl74n9l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [StartBackupMigration](https://www.tencentcloud.com/document/api/238/39832)
  */
 export class StartBackupFullMigration extends pulumi.CustomResource {
     /**

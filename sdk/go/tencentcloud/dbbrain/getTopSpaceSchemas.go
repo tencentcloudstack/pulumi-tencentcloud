@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopSpaceSchemas](https://www.tencentcloud.com/document/api/1035/41189)
 func GetTopSpaceSchemas(ctx *pulumi.Context, args *GetTopSpaceSchemasArgs, opts ...pulumi.InvokeOption) (*GetTopSpaceSchemasResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopSpaceSchemasResult

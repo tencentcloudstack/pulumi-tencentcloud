@@ -35,6 +35,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeBlueprintsShareAcrossAccountInfos](https://www.tencentcloud.com/search/?wd=DescribeBlueprintsShareAcrossAccountInfos&amp;type=document&amp;lang=en)
+    ///   - [ShareBlueprintAcrossAccounts](https://www.tencentcloud.com/document/api/1103/75693)
+    /// * Read: [DescribeBlueprintsShareAcrossAccountInfos](https://www.tencentcloud.com/search/?wd=DescribeBlueprintsShareAcrossAccountInfos&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CancelShareBlueprintAcrossAccounts](https://www.tencentcloud.com/document/api/1103/75613)
+    ///   - [DescribeBlueprintsShareAcrossAccountInfos](https://www.tencentcloud.com/search/?wd=DescribeBlueprintsShareAcrossAccountInfos&amp;type=document&amp;lang=en)
+    ///   - [ShareBlueprintAcrossAccounts](https://www.tencentcloud.com/document/api/1103/75693)
+    /// * Delete: [CancelShareBlueprintAcrossAccounts](https://www.tencentcloud.com/document/api/1103/75613)
+    /// 
     /// ## Import
     /// 
     /// tencentcloud.Lighthouse.ShareBlueprintAcrossAccountAttachment can be imported using the blueprint_id, e.g.

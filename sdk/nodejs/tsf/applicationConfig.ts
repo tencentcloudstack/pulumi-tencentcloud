@@ -22,6 +22,14 @@ import * as utilities from "../utilities";
  *     encodeWithBase64: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateConfigWithDetailResp&type=document&lang=en)
+ * * Read: [DescribeConfigs](https://www.tencentcloud.com/search/?wd=DescribeConfigs&type=document&lang=en)
+ * * Delete: [DeleteConfig](https://www.tencentcloud.com/search/?wd=DeleteConfig&type=document&lang=en)
  */
 export class ApplicationConfig extends pulumi.CustomResource {
     /**

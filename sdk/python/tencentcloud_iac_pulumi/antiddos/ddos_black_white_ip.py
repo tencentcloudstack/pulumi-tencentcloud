@@ -185,6 +185,15 @@ class DdosBlackWhiteIp(pulumi.CustomResource):
             type="black")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&type=document&lang=en)
+        * Read: [DescribeDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DescribeDDoSBlackWhiteIpList&type=document&lang=en)
+        * Update: [ModifyDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=ModifyDDoSBlackWhiteIpList&type=document&lang=en)
+        * Delete: [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&type=document&lang=en)
+
         ## Import
 
         antiddos ddos_black_white_ip can be imported using the id, e.g.
@@ -222,6 +231,15 @@ class DdosBlackWhiteIp(pulumi.CustomResource):
             mask=0,
             type="black")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&type=document&lang=en)
+        * Read: [DescribeDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DescribeDDoSBlackWhiteIpList&type=document&lang=en)
+        * Update: [ModifyDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=ModifyDDoSBlackWhiteIpList&type=document&lang=en)
+        * Delete: [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&type=document&lang=en)
 
         ## Import
 

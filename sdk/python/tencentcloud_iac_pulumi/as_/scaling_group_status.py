@@ -163,6 +163,18 @@ class ScalingGroupStatus(pulumi.CustomResource):
             enable=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31010)
+          - [EnableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31009)
+        * Read: [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
+        * Update:
+          - [DisableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31010)
+          - [EnableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31009)
+
         ## Import
 
         as scaling_group_status can be imported using the id, e.g.
@@ -240,6 +252,18 @@ class ScalingGroupStatus(pulumi.CustomResource):
             auto_scaling_group_id=example["id"],
             enable=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31010)
+          - [EnableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31009)
+        * Read: [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
+        * Update:
+          - [DisableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31010)
+          - [EnableAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31009)
 
         ## Import
 

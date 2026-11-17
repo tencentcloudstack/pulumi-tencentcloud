@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     endTime: "2023-08-10 00:00:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
  */
 export function getQueryXevent(args: GetQueryXeventArgs, opts?: pulumi.InvokeOptions): Promise<GetQueryXeventResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -103,6 +109,12 @@ export interface GetQueryXeventResult {
  *     endTime: "2023-08-10 00:00:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
  */
 export function getQueryXeventOutput(args: GetQueryXeventOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetQueryXeventResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -189,6 +189,12 @@ def get_environment_attributes(cluster_id: Optional[_builtins.str] = None,
         cluster_id=example_instance.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: ID of the Pulsar cluster.
     :param _builtins.str environment_id: Environment (namespace) name.
@@ -241,6 +247,12 @@ def get_environment_attributes_output(cluster_id: pulumi.Input[Optional[Optional
     example = tencentcloud.tdmq.get_environment_attributes_output(environment_id=example_namespace.environ_name,
         cluster_id=example_instance.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: ID of the Pulsar cluster.

@@ -31,6 +31,14 @@ import * as utilities from "../utilities";
  *     outputCosKeyPrefix: "log",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RunCommand](https://www.tencentcloud.com/document/api/1147/46686)
+ * * Read: [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+ * * Delete: [CancelInvocation](https://www.tencentcloud.com/document/api/1147/46703)
  */
 export class InvocationCommandAttachment extends pulumi.CustomResource {
     /**

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
         /// </summary>
         public static Task<GetRollbackTimeRangeResult> InvokeAsync(GetRollbackTimeRangeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
         /// </summary>
         public static Output<GetRollbackTimeRangeResult> Invoke(GetRollbackTimeRangeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
         /// </summary>
         public static Output<GetRollbackTimeRangeResult> Invoke(GetRollbackTimeRangeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeInvokeArgs(), options.WithDefaults());

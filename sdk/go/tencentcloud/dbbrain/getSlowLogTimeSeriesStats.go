@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSlowLogTimeSeriesStats](https://www.tencentcloud.com/document/api/1035/41184)
 func GetSlowLogTimeSeriesStats(ctx *pulumi.Context, args *GetSlowLogTimeSeriesStatsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogTimeSeriesStatsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogTimeSeriesStatsResult

@@ -135,6 +135,15 @@ class DiskBackupRollbackOperation(pulumi.CustomResource):
             disk_id="disk-xxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ApplyDiskBackup](https://www.tencentcloud.com/document/api/362/50790)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +169,15 @@ class DiskBackupRollbackOperation(pulumi.CustomResource):
             disk_backup_id="dbp-xxx",
             disk_id="disk-xxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ApplyDiskBackup](https://www.tencentcloud.com/document/api/362/50790)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
 
 
         :param str resource_name: The name of the resource.

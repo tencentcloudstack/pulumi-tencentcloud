@@ -13,22 +13,54 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.dcdb.Account("account", {
- *     instanceId: "tdsqlshard-kkpoxvnv",
+ * const example = new tencentcloud.dcdb.HourdbInstance("example", {
+ *     instanceName: "tf-example",
+ *     zones: [
+ *         "ap-guangzhou-6",
+ *         "ap-guangzhou-7",
+ *     ],
+ *     shardMemory: 4,
+ *     shardStorage: 100,
+ *     shardNodeCount: 2,
+ *     shardCount: 2,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     securityGroupId: "sg-4z20n68d",
+ *     dbVersionId: "8.0",
+ *     resourceTags: [{
+ *         tagKey: "tagKey",
+ *         tagValue: "tagValue",
+ *     }],
+ * });
+ * const exampleAccount = new tencentcloud.dcdb.Account("example", {
+ *     instanceId: example.id,
  *     userName: "mysql",
  *     host: "127.0.0.1",
- *     password: "===password===",
+ *     password: "Password@2026",
  *     readOnly: 0,
  *     description: "this is a test account",
  *     maxUserConnections: 10,
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAccount](https://www.tencentcloud.com/document/api/1042/34449)
+ * * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+ * * Update:
+ *   - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1042/34435)
+ *   - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1042/34430)
+ * * Delete:
+ *   - [DeleteAccount](https://www.tencentcloud.com/document/api/1042/34448)
+ *   - [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+ *
  * ## Import
  *
- * dcdb account can be imported using the id, e.g.
+ * dcdb account can be imported using the instanceId#userName, e.g.
  * ```sh
- * $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+ * $ pulumi import tencentcloud:Dcdb/account:Account example tdsqlshard-0tyhkwkzj5#mysql
  * ```
  */
 export class Account extends pulumi.CustomResource {

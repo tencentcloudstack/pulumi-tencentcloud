@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+    ///   - [ResizeSyncJob](https://www.tencentcloud.com/document/api/571/51789)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncJobResizeOperation:SyncJobResizeOperation")]
     public partial class SyncJobResizeOperation : global::Pulumi.CustomResource

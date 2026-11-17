@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const internetAddressStatistics = tencentcloud.dc.getInternetAddressStatistics({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
  */
 export function getInternetAddressStatistics(args?: GetInternetAddressStatisticsArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetAddressStatisticsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetInternetAddressStatisticsResult {
  *
  * const internetAddressStatistics = tencentcloud.dc.getInternetAddressStatistics({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
  */
 export function getInternetAddressStatisticsOutput(args?: GetInternetAddressStatisticsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInternetAddressStatisticsResult> {
     args = args || {};

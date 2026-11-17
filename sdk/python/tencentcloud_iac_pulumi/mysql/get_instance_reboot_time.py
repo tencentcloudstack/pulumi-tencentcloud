@@ -96,6 +96,12 @@ def get_instance_reboot_time(instance_ids: Optional[Sequence[_builtins.str]] = N
     instance_reboot_time = tencentcloud.mysql.get_instance_reboot_time(instance_ids=["cdb-fitq5t9h"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
+
 
     :param Sequence[_builtins.str] instance_ids: The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_reboot_time_output(instance_ids: pulumi.Input[Optional[Sequence
 
     instance_reboot_time = tencentcloud.mysql.get_instance_reboot_time(instance_ids=["cdb-fitq5t9h"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
 
 
     :param Sequence[_builtins.str] instance_ids: The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.

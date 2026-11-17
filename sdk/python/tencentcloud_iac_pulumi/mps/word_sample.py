@@ -161,6 +161,15 @@ class WordSample(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWordSamples](https://www.tencentcloud.com/document/api/1041/33688)
+        * Read: [DescribeWordSamples](https://www.tencentcloud.com/document/api/1041/33684)
+        * Update: [ModifyWordSample](https://www.tencentcloud.com/document/api/1041/33682)
+        * Delete: [DeleteWordSamples](https://www.tencentcloud.com/document/api/1041/33686)
+
         ## Import
 
         mps word_sample can be imported using the id, e.g.
@@ -203,6 +212,15 @@ class WordSample(pulumi.CustomResource):
                 "tags_2",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWordSamples](https://www.tencentcloud.com/document/api/1041/33688)
+        * Read: [DescribeWordSamples](https://www.tencentcloud.com/document/api/1041/33684)
+        * Update: [ModifyWordSample](https://www.tencentcloud.com/document/api/1041/33682)
+        * Delete: [DeleteWordSamples](https://www.tencentcloud.com/document/api/1041/33686)
 
         ## Import
 

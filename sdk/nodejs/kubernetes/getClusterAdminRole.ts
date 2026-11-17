@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  * });
  * export const requestId = foo.then(foo => foo.requestId);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
  */
 export function getClusterAdminRole(args: GetClusterAdminRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterAdminRoleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetClusterAdminRoleResult {
  * });
  * export const requestId = foo.then(foo => foo.requestId);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
  */
 export function getClusterAdminRoleOutput(args: GetClusterAdminRoleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterAdminRoleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

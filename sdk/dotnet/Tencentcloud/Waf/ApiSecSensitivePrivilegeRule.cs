@@ -55,6 +55,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeApiSecSensitiveRuleList](https://www.tencentcloud.com/search/?wd=DescribeApiSecSensitiveRuleList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&amp;type=document&amp;lang=en)
+    /// * Delete: [ModifyApiSecSensitiveRule](https://www.tencentcloud.com/search/?wd=ModifyApiSecSensitiveRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// WAF api sec sensitive privilege rule can be imported using the domain#ruleName, e.g.

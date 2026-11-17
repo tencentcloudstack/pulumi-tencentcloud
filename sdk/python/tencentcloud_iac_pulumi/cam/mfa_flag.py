@@ -166,6 +166,14 @@ class MfaFlag(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetMfaFlag](https://www.tencentcloud.com/document/api/598/36305)
+        * Read: [DescribeSafeAuthFlagColl](https://www.tencentcloud.com/document/api/598/38353)
+        * Update: [SetMfaFlag](https://www.tencentcloud.com/document/api/598/36305)
+
         ## Import
 
         CAM mfa flag can be imported using the id, e.g.
@@ -211,6 +219,14 @@ class MfaFlag(pulumi.CustomResource):
                 "wechat": 0,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetMfaFlag](https://www.tencentcloud.com/document/api/598/36305)
+        * Read: [DescribeSafeAuthFlagColl](https://www.tencentcloud.com/document/api/598/38353)
+        * Update: [SetMfaFlag](https://www.tencentcloud.com/document/api/598/36305)
 
         ## Import
 

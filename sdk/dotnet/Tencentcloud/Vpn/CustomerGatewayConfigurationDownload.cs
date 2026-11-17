@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DownloadCustomerGatewayConfiguration](https://www.tencentcloud.com/document/api/215/17513)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/customerGatewayConfigurationDownload:CustomerGatewayConfigurationDownload")]
     public partial class CustomerGatewayConfigurationDownload : global::Pulumi.CustomResource

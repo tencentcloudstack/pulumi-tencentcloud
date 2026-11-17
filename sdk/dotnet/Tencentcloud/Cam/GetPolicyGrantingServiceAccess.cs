@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPolicyGrantingServiceAccessResult> InvokeAsync(GetPolicyGrantingServiceAccessArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPolicyGrantingServiceAccessResult> Invoke(GetPolicyGrantingServiceAccessInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPolicyGrantingServiceAccessResult> Invoke(GetPolicyGrantingServiceAccessInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPolicyGrantingServiceAccessResult>("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args ?? new GetPolicyGrantingServiceAccessInvokeArgs(), options.WithDefaults());

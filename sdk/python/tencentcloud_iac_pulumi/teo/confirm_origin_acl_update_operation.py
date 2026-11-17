@@ -76,14 +76,22 @@ class ConfirmOriginAclUpdateOperation(pulumi.CustomResource):
         """
         Provides a resource to confirm TEO origin ACL update for a zone. When the origin IP ranges of TEO change, you can use this resource to confirm that the latest origin IP ranges have been updated to the origin firewall, and the change notification will stop being pushed.
 
+        > **NOTE:** Suggest using action resource `tencentcloud_teo_confirm_origin_acl_update` instead
+
         ## Example Usage
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.teo.ConfirmOriginAclUpdateOperation("example", zone_id="zone-12345678")
+        example = tencentcloud.teo.ConfirmOriginAclUpdateOperation("example", zone_id="zone-3fkff38fyw8s")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ConfirmOriginACLUpdate](https://www.tencentcloud.com/document/api/1145/71119)
 
 
         :param str resource_name: The name of the resource.
@@ -99,14 +107,22 @@ class ConfirmOriginAclUpdateOperation(pulumi.CustomResource):
         """
         Provides a resource to confirm TEO origin ACL update for a zone. When the origin IP ranges of TEO change, you can use this resource to confirm that the latest origin IP ranges have been updated to the origin firewall, and the change notification will stop being pushed.
 
+        > **NOTE:** Suggest using action resource `tencentcloud_teo_confirm_origin_acl_update` instead
+
         ## Example Usage
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.teo.ConfirmOriginAclUpdateOperation("example", zone_id="zone-12345678")
+        example = tencentcloud.teo.ConfirmOriginAclUpdateOperation("example", zone_id="zone-3fkff38fyw8s")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ConfirmOriginACLUpdate](https://www.tencentcloud.com/document/api/1145/71119)
 
 
         :param str resource_name: The name of the resource.

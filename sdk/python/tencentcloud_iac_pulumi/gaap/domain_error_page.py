@@ -302,6 +302,18 @@ class DomainErrorPage(pulumi.CustomResource):
             body="bad request")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33137)
+          - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
+        * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
+        * Delete:
+          - [DeleteDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33136)
+          - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -351,6 +363,18 @@ class DomainErrorPage(pulumi.CustomResource):
             ],
             body="bad request")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33137)
+          - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
+        * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
+        * Delete:
+          - [DeleteDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33136)
+          - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
 
 
         :param str resource_name: The name of the resource.

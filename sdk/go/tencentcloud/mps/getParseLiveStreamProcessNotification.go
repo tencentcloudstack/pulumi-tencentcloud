@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
 func GetParseLiveStreamProcessNotification(ctx *pulumi.Context, args *GetParseLiveStreamProcessNotificationArgs, opts ...pulumi.InvokeOption) (*GetParseLiveStreamProcessNotificationResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetParseLiveStreamProcessNotificationResult

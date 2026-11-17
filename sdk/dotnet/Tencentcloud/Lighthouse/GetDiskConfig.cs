@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
         /// </summary>
         public static Task<GetDiskConfigResult> InvokeAsync(GetDiskConfigArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
         /// </summary>
         public static Output<GetDiskConfigResult> Invoke(GetDiskConfigInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
         /// </summary>
         public static Output<GetDiskConfigResult> Invoke(GetDiskConfigInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiskConfigResult>("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args ?? new GetDiskConfigInvokeArgs(), options.WithDefaults());

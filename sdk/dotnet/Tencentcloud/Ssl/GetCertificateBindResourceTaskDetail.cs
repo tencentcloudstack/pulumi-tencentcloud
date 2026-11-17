@@ -85,6 +85,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
         /// </summary>
         public static Task<GetCertificateBindResourceTaskDetailResult> InvokeAsync(GetCertificateBindResourceTaskDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCertificateBindResourceTaskDetailResult>("tencentcloud:Ssl/getCertificateBindResourceTaskDetail:getCertificateBindResourceTaskDetail", args ?? new GetCertificateBindResourceTaskDetailArgs(), options.WithDefaults());
@@ -162,6 +168,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
         /// </summary>
         public static Output<GetCertificateBindResourceTaskDetailResult> Invoke(GetCertificateBindResourceTaskDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCertificateBindResourceTaskDetailResult>("tencentcloud:Ssl/getCertificateBindResourceTaskDetail:getCertificateBindResourceTaskDetail", args ?? new GetCertificateBindResourceTaskDetailInvokeArgs(), options.WithDefaults());
@@ -239,6 +251,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
         /// </summary>
         public static Output<GetCertificateBindResourceTaskDetailResult> Invoke(GetCertificateBindResourceTaskDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCertificateBindResourceTaskDetailResult>("tencentcloud:Ssl/getCertificateBindResourceTaskDetail:getCertificateBindResourceTaskDetail", args ?? new GetCertificateBindResourceTaskDetailInvokeArgs(), options.WithDefaults());

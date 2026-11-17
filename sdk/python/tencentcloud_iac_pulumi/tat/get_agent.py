@@ -110,6 +110,12 @@ def get_agent(filters: Optional[Sequence[Union['GetAgentFilterArgs', 'GetAgentFi
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
+
 
     :param Sequence[Union['GetAgentFilterArgs', 'GetAgentFilterArgsDict']] filters: Filter conditions. agent-status - String - Required: No - (Filter condition) Filter by agent status. Valid values: Online, Offline. environment - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: Linux. instance-id - String - Required: No - (Filter condition) Filter by the instance ID. Up to 10 Filters allowed in one request. For each filter, five Filter.Values can be specified. InstanceIds and Filters cannot be specified at the same time.
     :param Sequence[_builtins.str] instance_ids: List of instance IDs for the query.
@@ -146,6 +152,12 @@ def get_agent_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['Get
         "values": ["Linux"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
 
 
     :param Sequence[Union['GetAgentFilterArgs', 'GetAgentFilterArgsDict']] filters: Filter conditions. agent-status - String - Required: No - (Filter condition) Filter by agent status. Valid values: Online, Offline. environment - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: Linux. instance-id - String - Required: No - (Filter condition) Filter by the instance ID. Up to 10 Filters allowed in one request. For each filter, five Filter.Values can be specified. InstanceIds and Filters cannot be specified at the same time.

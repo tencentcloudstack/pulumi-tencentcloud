@@ -31,6 +31,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&amp;type=document&amp;lang=en)
+    ///   - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&amp;type=document&amp;lang=en)
+    ///   - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&amp;type=document&amp;lang=en)
+    ///   - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&amp;type=document&amp;lang=en)
+    ///   - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/operateContainerGroup:OperateContainerGroup")]
     public partial class OperateContainerGroup : global::Pulumi.CustomResource

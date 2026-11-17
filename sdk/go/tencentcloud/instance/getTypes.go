@@ -90,6 +90,14 @@ import (
 // ### Query with Local Disk Support
 //
 // ### Query Price Information
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+//   - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
 func GetTypes(ctx *pulumi.Context, args *GetTypesArgs, opts ...pulumi.InvokeOption) (*GetTypesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTypesResult

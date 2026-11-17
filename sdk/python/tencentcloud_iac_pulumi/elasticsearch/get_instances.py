@@ -131,6 +131,12 @@ def get_instances(instance_id: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+
 
     :param _builtins.str instance_id: ID of the instance to be queried.
     :param _builtins.str instance_name: Name of the instance to be queried.
@@ -174,6 +180,12 @@ def get_instances_output(instance_id: pulumi.Input[Optional[Optional[_builtins.s
             "createBy": "Terraform",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
 
 
     :param _builtins.str instance_id: ID of the instance to be queried.

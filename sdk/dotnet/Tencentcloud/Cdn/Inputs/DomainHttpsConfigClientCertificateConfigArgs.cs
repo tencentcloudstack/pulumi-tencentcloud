@@ -20,19 +20,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public Input<string> CertificateContent { get; set; } = null!;
 
         /// <summary>
-        /// Client certificate name.
+        /// Server certificate name.
         /// </summary>
         [Input("certificateName")]
         public Input<string>? CertificateName { get; set; }
 
         /// <summary>
-        /// Deploy time of client certificate.
+        /// Deploy time of server certificate.
         /// </summary>
         [Input("deployTime")]
         public Input<string>? DeployTime { get; set; }
 
         /// <summary>
-        /// Expire time of client certificate.
+        /// Expire time of server certificate.
         /// </summary>
         [Input("expireTime")]
         public Input<string>? ExpireTime { get; set; }

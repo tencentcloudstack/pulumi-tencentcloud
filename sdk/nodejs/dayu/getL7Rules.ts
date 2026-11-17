@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     ruleId: testRule.ruleId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
  */
 export function getL7Rules(args: GetL7RulesArgs, opts?: pulumi.InvokeOptions): Promise<GetL7RulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -108,6 +114,12 @@ export interface GetL7RulesResult {
  *     ruleId: testRule.ruleId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
  */
 export function getL7RulesOutput(args: GetL7RulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetL7RulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

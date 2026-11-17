@@ -97,6 +97,12 @@ def get_zone_config(region: Optional[_builtins.str] = None,
         result_output_file="mytestpath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCdbZoneConfig](https://www.tencentcloud.com/document/api/236/50285)
+
 
     :param _builtins.str region: Region parameter, which is used to identify the region to which the data you want to work with belongs.
     :param _builtins.str result_output_file: Used to store results.
@@ -127,6 +133,12 @@ def get_zone_config_output(region: pulumi.Input[Optional[Optional[_builtins.str]
     mysql = tencentcloud.mysql.get_zone_config(region="ap-guangzhou",
         result_output_file="mytestpath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCdbZoneConfig](https://www.tencentcloud.com/document/api/236/50285)
 
 
     :param _builtins.str region: Region parameter, which is used to identify the region to which the data you want to work with belongs.

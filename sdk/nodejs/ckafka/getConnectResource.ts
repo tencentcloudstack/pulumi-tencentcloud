@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const connectResource = tencentcloud.ckafka.getConnectResource({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&type=document&lang=en)
  */
 export function getConnectResource(args?: GetConnectResourceArgs, opts?: pulumi.InvokeOptions): Promise<GetConnectResourceResult> {
     args = args || {};
@@ -94,6 +100,12 @@ export interface GetConnectResourceResult {
  *
  * const connectResource = tencentcloud.ckafka.getConnectResource({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&type=document&lang=en)
  */
 export function getConnectResourceOutput(args?: GetConnectResourceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConnectResourceResult> {
     args = args || {};

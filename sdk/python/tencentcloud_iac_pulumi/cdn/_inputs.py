@@ -87,6 +87,8 @@ __all__ = [
     'DomainOriginArgsDict',
     'DomainOriginCombineArgs',
     'DomainOriginCombineArgsDict',
+    'DomainOriginPathRuleArgs',
+    'DomainOriginPathRuleArgsDict',
     'DomainOriginPullOptimizationArgs',
     'DomainOriginPullOptimizationArgsDict',
     'DomainOriginPullTimeoutArgs',
@@ -2518,15 +2520,15 @@ class DomainHttpsConfigClientCertificateConfigArgsDict(TypedDict):
     """
     certificate_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Client certificate name.
+    Server certificate name.
     """
     deploy_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Deploy time of client certificate.
+    Deploy time of server certificate.
     """
     expire_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Expire time of client certificate.
+    Expire time of server certificate.
     """
 
 @pulumi.input_type
@@ -2538,9 +2540,9 @@ class DomainHttpsConfigClientCertificateConfigArgs:
                  expire_time: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] certificate_content: Client Certificate PEM format, requires Base64 encoding.
-        :param pulumi.Input[_builtins.str] certificate_name: Client certificate name.
-        :param pulumi.Input[_builtins.str] deploy_time: Deploy time of client certificate.
-        :param pulumi.Input[_builtins.str] expire_time: Expire time of client certificate.
+        :param pulumi.Input[_builtins.str] certificate_name: Server certificate name.
+        :param pulumi.Input[_builtins.str] deploy_time: Deploy time of server certificate.
+        :param pulumi.Input[_builtins.str] expire_time: Expire time of server certificate.
         """
         pulumi.set(__self__, "certificate_content", certificate_content)
         if certificate_name is not None:
@@ -2566,7 +2568,7 @@ class DomainHttpsConfigClientCertificateConfigArgs:
     @pulumi.getter(name="certificateName")
     def certificate_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Client certificate name.
+        Server certificate name.
         """
         return pulumi.get(self, "certificate_name")
 
@@ -2578,7 +2580,7 @@ class DomainHttpsConfigClientCertificateConfigArgs:
     @pulumi.getter(name="deployTime")
     def deploy_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Deploy time of client certificate.
+        Deploy time of server certificate.
         """
         return pulumi.get(self, "deploy_time")
 
@@ -2590,7 +2592,7 @@ class DomainHttpsConfigClientCertificateConfigArgs:
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Expire time of client certificate.
+        Expire time of server certificate.
         """
         return pulumi.get(self, "expire_time")
 
@@ -3401,9 +3403,13 @@ class DomainOriginArgsDict(TypedDict):
     """
     Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
     """
+    path_rules: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['DomainOriginPathRuleArgsDict']]]]]
+    """
+    Origin path rewrite rules. Each element configures a path-based origin routing rule.
+    """
     server_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+    Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
     """
 
 @pulumi.input_type
@@ -3417,6 +3423,7 @@ class DomainOriginArgs:
                  cos_private_access: pulumi.Input[Optional[_builtins.str]] = None,
                  origin_company: pulumi.Input[Optional[_builtins.str]] = None,
                  origin_pull_protocol: pulumi.Input[Optional[_builtins.str]] = None,
+                 path_rules: pulumi.Input[Optional[Sequence[pulumi.Input['DomainOriginPathRuleArgs']]]] = None,
                  server_name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] origin_lists: Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `origin_type`.
@@ -3427,7 +3434,8 @@ class DomainOriginArgs:
         :param pulumi.Input[_builtins.str] cos_private_access: When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
         :param pulumi.Input[_builtins.str] origin_company: Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `aws_s3`: AWS S3; `ali_oss`: Alibaba Cloud OSS; `hw_obs`: Huawei OBS; `qiniu_kodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hw_obs`.
         :param pulumi.Input[_builtins.str] origin_pull_protocol: Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
-        :param pulumi.Input[_builtins.str] server_name: Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainOriginPathRuleArgs']]] path_rules: Origin path rewrite rules. Each element configures a path-based origin routing rule.
+        :param pulumi.Input[_builtins.str] server_name: Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
         """
         pulumi.set(__self__, "origin_lists", origin_lists)
         pulumi.set(__self__, "origin_type", origin_type)
@@ -3443,6 +3451,8 @@ class DomainOriginArgs:
             pulumi.set(__self__, "origin_company", origin_company)
         if origin_pull_protocol is not None:
             pulumi.set(__self__, "origin_pull_protocol", origin_pull_protocol)
+        if path_rules is not None:
+            pulumi.set(__self__, "path_rules", path_rules)
         if server_name is not None:
             pulumi.set(__self__, "server_name", server_name)
 
@@ -3543,10 +3553,22 @@ class DomainOriginArgs:
         pulumi.set(self, "origin_pull_protocol", value)
 
     @_builtins.property
+    @pulumi.getter(name="pathRules")
+    def path_rules(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['DomainOriginPathRuleArgs']]]]:
+        """
+        Origin path rewrite rules. Each element configures a path-based origin routing rule.
+        """
+        return pulumi.get(self, "path_rules")
+
+    @path_rules.setter
+    def path_rules(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['DomainOriginPathRuleArgs']]]]):
+        pulumi.set(self, "path_rules", value)
+
+    @_builtins.property
     @pulumi.getter(name="serverName")
     def server_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
         """
         return pulumi.get(self, "server_name")
 
@@ -3581,6 +3603,95 @@ class DomainOriginCombineArgs:
     @switch.setter
     def switch(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "switch", value)
+
+
+class DomainOriginPathRuleArgsDict(TypedDict):
+    forward_uri: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+    """
+    full_match: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to use full path match.
+    """
+    path: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+    """
+    server_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+    """
+
+@pulumi.input_type
+class DomainOriginPathRuleArgs:
+    def __init__(__self__, *,
+                 forward_uri: pulumi.Input[Optional[_builtins.str]] = None,
+                 full_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 server_name: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] forward_uri: URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+        :param pulumi.Input[_builtins.bool] full_match: Whether to use full path match.
+        :param pulumi.Input[_builtins.str] path: Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+        :param pulumi.Input[_builtins.str] server_name: Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+        """
+        if forward_uri is not None:
+            pulumi.set(__self__, "forward_uri", forward_uri)
+        if full_match is not None:
+            pulumi.set(__self__, "full_match", full_match)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if server_name is not None:
+            pulumi.set(__self__, "server_name", server_name)
+
+    @_builtins.property
+    @pulumi.getter(name="forwardUri")
+    def forward_uri(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+        """
+        return pulumi.get(self, "forward_uri")
+
+    @forward_uri.setter
+    def forward_uri(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "forward_uri", value)
+
+    @_builtins.property
+    @pulumi.getter(name="fullMatch")
+    def full_match(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to use full path match.
+        """
+        return pulumi.get(self, "full_match")
+
+    @full_match.setter
+    def full_match(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "full_match", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def path(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "path", value)
+
+    @_builtins.property
+    @pulumi.getter(name="serverName")
+    def server_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+        """
+        return pulumi.get(self, "server_name")
+
+    @server_name.setter
+    def server_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "server_name", value)
 
 
 class DomainOriginPullOptimizationArgsDict(TypedDict):

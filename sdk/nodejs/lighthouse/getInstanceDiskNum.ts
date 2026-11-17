@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["lhins-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
  */
 export function getInstanceDiskNum(args: GetInstanceDiskNumArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceDiskNumResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetInstanceDiskNumResult {
  *     instanceIds: ["lhins-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
  */
 export function getInstanceDiskNumOutput(args: GetInstanceDiskNumOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceDiskNumResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

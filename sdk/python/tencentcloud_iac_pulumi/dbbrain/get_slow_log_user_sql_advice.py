@@ -186,6 +186,12 @@ def get_slow_log_user_sql_advice(instance_id: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserSqlAdvice](https://www.tencentcloud.com/document/api/1035/41181)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str product: Service product type, supported values: `mysql` - cloud database MySQL; `cynosdb` - cloud database TDSQL-C for MySQL; `dbbrain-mysql` - self-built MySQL, the default is `mysql`.
@@ -234,6 +240,12 @@ def get_slow_log_user_sql_advice_output(instance_id: pulumi.Input[Optional[_buil
         sql_text="%s",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserSqlAdvice](https://www.tencentcloud.com/document/api/1035/41181)
 
 
     :param _builtins.str instance_id: instance id.

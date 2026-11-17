@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
         /// </summary>
         public static Task<GetSignResult> InvokeAsync(GetSignArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
         /// </summary>
         public static Output<GetSignResult> Invoke(GetSignInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
         /// </summary>
         public static Output<GetSignResult> Invoke(GetSignInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignInvokeArgs(), options.WithDefaults());

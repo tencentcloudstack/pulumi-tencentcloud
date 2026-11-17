@@ -199,6 +199,12 @@ def get_slow_logs(db: Optional[_builtins.str] = None,
         slave=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/237/16159)
+
 
     :param _builtins.str db: Specific name of the database to be queried.
     :param _builtins.str end_time: Query end time in the format of 2016-08-22 14:55:20.
@@ -259,6 +265,12 @@ def get_slow_logs_output(db: pulumi.Input[Optional[Optional[_builtins.str]]] = N
         order_by_type="desc",
         slave=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/237/16159)
 
 
     :param _builtins.str db: Specific name of the database to be queried.

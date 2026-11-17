@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskInstanceLog](https://www.tencentcloud.com/document/api/1174/73827)
         /// </summary>
         public static Task<GetTaskInstanceLogResult> InvokeAsync(GetTaskInstanceLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskInstanceLogResult>("tencentcloud:Wedata/getTaskInstanceLog:getTaskInstanceLog", args ?? new GetTaskInstanceLogArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskInstanceLog](https://www.tencentcloud.com/document/api/1174/73827)
         /// </summary>
         public static Output<GetTaskInstanceLogResult> Invoke(GetTaskInstanceLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskInstanceLogResult>("tencentcloud:Wedata/getTaskInstanceLog:getTaskInstanceLog", args ?? new GetTaskInstanceLogInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskInstanceLog](https://www.tencentcloud.com/document/api/1174/73827)
         /// </summary>
         public static Output<GetTaskInstanceLogResult> Invoke(GetTaskInstanceLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskInstanceLogResult>("tencentcloud:Wedata/getTaskInstanceLog:getTaskInstanceLog", args ?? new GetTaskInstanceLogInvokeArgs(), options.WithDefaults());

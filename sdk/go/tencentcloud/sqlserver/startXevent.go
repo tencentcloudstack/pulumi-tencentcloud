@@ -107,6 +107,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [StartInstanceXEvent](https://www.tencentcloud.com/document/api/238/54813)
 type StartXevent struct {
 	pulumi.CustomResourceState
 

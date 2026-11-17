@@ -96,6 +96,12 @@ def get_instance_blueprint(instance_ids: Optional[Sequence[_builtins.str]] = Non
     instance_blueprint = tencentcloud.lighthouse.get_instance_blueprint(instance_ids=["lhins-xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
+
 
     :param Sequence[_builtins.str] instance_ids: Instance ID list, which currently can contain only one instance.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_blueprint_output(instance_ids: pulumi.Input[Optional[Sequence[_
 
     instance_blueprint = tencentcloud.lighthouse.get_instance_blueprint(instance_ids=["lhins-xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
 
 
     :param Sequence[_builtins.str] instance_ids: Instance ID list, which currently can contain only one instance.

@@ -46,6 +46,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindDeviceAccountPrivateKey](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPrivateKey&amp;type=document&amp;lang=en)
+    /// * Delete: [ResetDeviceAccountPrivateKey](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPrivateKey&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/bindDeviceAccountPrivateKey:BindDeviceAccountPrivateKey")]
     public partial class BindDeviceAccountPrivateKey : global::Pulumi.CustomResource

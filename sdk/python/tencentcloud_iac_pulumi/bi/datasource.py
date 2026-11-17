@@ -581,6 +581,15 @@ class Datasource(pulumi.CustomResource):
             source_name="tf-source-name")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatasource](https://www.tencentcloud.com/document/api/1270/72255)
+        * Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+        * Update: [ModifyDatasource](https://www.tencentcloud.com/document/api/1270/72633)
+        * Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
+
         ## Import
 
         bi datasource can be imported using the id, e.g.
@@ -635,6 +644,15 @@ class Datasource(pulumi.CustomResource):
             project_id=11015030,
             source_name="tf-source-name")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatasource](https://www.tencentcloud.com/document/api/1270/72255)
+        * Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+        * Update: [ModifyDatasource](https://www.tencentcloud.com/document/api/1270/72633)
+        * Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
 
         ## Import
 

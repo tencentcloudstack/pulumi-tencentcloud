@@ -121,6 +121,12 @@ def get_instances(filters: Optional[Sequence[Union['GetInstancesFilterArgs', 'Ge
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+
 
     :param Sequence[Union['GetInstancesFilterArgs', 'GetInstancesFilterArgsDict']] filters: Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.
     :param Sequence[_builtins.str] instance_ids: Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.
@@ -168,6 +174,12 @@ def get_instances_output(filters: pulumi.Input[Optional[Optional[Sequence[Union[
         "values": [scaling_group.id],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
 
 
     :param Sequence[Union['GetInstancesFilterArgs', 'GetInstancesFilterArgsDict']] filters: Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
         /// </summary>
         public static Task<GetShipperTasksResult> InvokeAsync(GetShipperTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
         /// </summary>
         public static Output<GetShipperTasksResult> Invoke(GetShipperTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
         /// </summary>
         public static Output<GetShipperTasksResult> Invoke(GetShipperTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetShipperTasksResult>("tencentcloud:Cls/getShipperTasks:getShipperTasks", args ?? new GetShipperTasksInvokeArgs(), options.WithDefaults());

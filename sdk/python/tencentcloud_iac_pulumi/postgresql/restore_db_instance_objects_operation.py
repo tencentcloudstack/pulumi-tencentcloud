@@ -206,6 +206,14 @@ class RestoreDbInstanceObjectsOperation(pulumi.CustomResource):
             restore_target_time="2024-04-30 00:20:27")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+          - [RestoreDBInstanceObjects](https://www.tencentcloud.com/document/api/409/60785)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -253,6 +261,14 @@ class RestoreDbInstanceObjectsOperation(pulumi.CustomResource):
             ],
             restore_target_time="2024-04-30 00:20:27")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+          - [RestoreDBInstanceObjects](https://www.tencentcloud.com/document/api/409/60785)
 
 
         :param str resource_name: The name of the resource.

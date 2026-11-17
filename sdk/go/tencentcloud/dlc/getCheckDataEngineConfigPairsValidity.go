@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [CheckDataEngineConfigPairsValidity](https://www.tencentcloud.com/document/api/1155/62696)
 func GetCheckDataEngineConfigPairsValidity(ctx *pulumi.Context, args *GetCheckDataEngineConfigPairsValidityArgs, opts ...pulumi.InvokeOption) (*GetCheckDataEngineConfigPairsValidityResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckDataEngineConfigPairsValidityResult

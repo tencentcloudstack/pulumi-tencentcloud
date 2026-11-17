@@ -124,6 +124,12 @@ def get_slowlogs(end_time: Optional[_builtins.str] = None,
         end_time="2023-08-07 00:00:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
+
 
     :param _builtins.str end_time: Query end time.
     :param _builtins.str instance_id: Instance ID.
@@ -163,6 +169,12 @@ def get_slowlogs_output(end_time: pulumi.Input[Optional[_builtins.str]] = None,
         start_time="2023-08-01 00:00:00",
         end_time="2023-08-07 00:00:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
 
 
     :param _builtins.str end_time: Query end time.

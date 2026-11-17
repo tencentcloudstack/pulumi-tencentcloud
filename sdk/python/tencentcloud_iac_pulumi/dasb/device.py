@@ -254,6 +254,15 @@ class Device(pulumi.CustomResource):
             department_id="1.2.3")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ImportExternalDevice](https://www.tencentcloud.com/search/?wd=ImportExternalDevice&type=document&lang=en)
+        * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&type=document&lang=en)
+        * Update: [ModifyDevice](https://www.tencentcloud.com/search/?wd=ModifyDevice&type=document&lang=en)
+        * Delete: [DeleteDevices](https://www.tencentcloud.com/search/?wd=DeleteDevices&type=document&lang=en)
+
         ## Import
 
         dasb device can be imported using the id, e.g.
@@ -294,6 +303,15 @@ class Device(pulumi.CustomResource):
             name="tf_example",
             department_id="1.2.3")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ImportExternalDevice](https://www.tencentcloud.com/search/?wd=ImportExternalDevice&type=document&lang=en)
+        * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&type=document&lang=en)
+        * Update: [ModifyDevice](https://www.tencentcloud.com/search/?wd=ModifyDevice&type=document&lang=en)
+        * Delete: [DeleteDevices](https://www.tencentcloud.com/search/?wd=DeleteDevices&type=document&lang=en)
 
         ## Import
 

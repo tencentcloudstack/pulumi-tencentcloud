@@ -32,6 +32,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+    ///   - [PauseOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73814)
+    ///   - [StartOpsTasks](https://www.tencentcloud.com/document/api/1174/77883)
+    /// * Read: [GetOpsTask](https://www.tencentcloud.com/document/api/1174/73831)
+    /// * Update:
+    ///   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+    ///   - [PauseOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73814)
+    ///   - [StartOpsTasks](https://www.tencentcloud.com/document/api/1174/77883)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/opsTask:OpsTask")]
     public partial class OpsTask : global::Pulumi.CustomResource

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
 func GetProxyVersion(ctx *pulumi.Context, args *GetProxyVersionArgs, opts ...pulumi.InvokeOption) (*GetProxyVersionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyVersionResult

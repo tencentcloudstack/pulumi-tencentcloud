@@ -114,6 +114,12 @@ def get_namespaces(description: Optional[_builtins.str] = None,
     foo = tencentcloud.scf.get_namespaces_output(namespace=foo_namespace.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
+
 
     :param _builtins.str description: Description of the SCF namespace to be queried.
     :param _builtins.str namespace: Name of the SCF namespace to be queried.
@@ -149,6 +155,12 @@ def get_namespaces_output(description: pulumi.Input[Optional[Optional[_builtins.
     foo_namespace = tencentcloud.scf.Namespace("foo", namespace="ci-test-scf")
     foo = tencentcloud.scf.get_namespaces_output(namespace=foo_namespace.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
 
 
     :param _builtins.str description: Description of the SCF namespace to be queried.

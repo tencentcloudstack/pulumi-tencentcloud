@@ -96,6 +96,12 @@ def get_upgrade_task_detail(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.kubernetes.get_upgrade_task_detail(task_id=21)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.int task_id: Upgrade task ID.
@@ -125,6 +131,12 @@ def get_upgrade_task_detail_output(result_output_file: pulumi.Input[Optional[Opt
 
     example = tencentcloud.kubernetes.get_upgrade_task_detail(task_id=21)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     product: "mariadb",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
  */
 export function getSecurityGroups(args: GetSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetSecurityGroupsResult {
  *     product: "mariadb",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
  */
 export function getSecurityGroupsOutput(args: GetSecurityGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

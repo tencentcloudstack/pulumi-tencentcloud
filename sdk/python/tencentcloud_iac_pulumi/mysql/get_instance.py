@@ -251,6 +251,12 @@ def get_instance(charge_type: Optional[_builtins.str] = None,
     mysql = tencentcloud.mysql.get_instance(mysql_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+
 
     :param _builtins.str charge_type: Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
     :param _builtins.str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
@@ -332,6 +338,12 @@ def get_instance_output(charge_type: pulumi.Input[Optional[Optional[_builtins.st
 
     mysql = tencentcloud.mysql.get_instance(mysql_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 
 
     :param _builtins.str charge_type: Pay type of instance, valid values are `PREPAID` and `POSTPAID`.

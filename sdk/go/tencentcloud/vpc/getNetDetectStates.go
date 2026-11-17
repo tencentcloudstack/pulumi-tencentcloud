@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
 func GetNetDetectStates(ctx *pulumi.Context, args *GetNetDetectStatesArgs, opts ...pulumi.InvokeOption) (*GetNetDetectStatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNetDetectStatesResult

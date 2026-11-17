@@ -67,6 +67,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Billing
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&amp;type=document&amp;lang=en)
+    ///   - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeRenewInstances](https://www.tencentcloud.com/search/?wd=DescribeRenewInstances&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&amp;type=document&amp;lang=en)
+    ///   - [RenewInstance](https://www.tencentcloud.com/search/?wd=RenewInstance&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&amp;type=document&amp;lang=en)
+    ///   - [RefundInstance](https://www.tencentcloud.com/search/?wd=RefundInstance&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Billing/instance:Instance")]
     public partial class Instance : global::Pulumi.CustomResource

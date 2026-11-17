@@ -82,6 +82,12 @@ def get_parse_live_stream_process_notification(content: Optional[_builtins.str] 
     parse_live_stream_process_notification = tencentcloud.mps.get_parse_live_stream_process_notification(content="your_content")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
+
 
     :param _builtins.str content: Live stream event notification obtained from CMQ.
     :param _builtins.str result_output_file: Used to save results.
@@ -110,6 +116,12 @@ def get_parse_live_stream_process_notification_output(content: pulumi.Input[Opti
 
     parse_live_stream_process_notification = tencentcloud.mps.get_parse_live_stream_process_notification(content="your_content")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
 
 
     :param _builtins.str content: Live stream event notification obtained from CMQ.

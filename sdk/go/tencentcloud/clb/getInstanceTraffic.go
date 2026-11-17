@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
 func GetInstanceTraffic(ctx *pulumi.Context, args *GetInstanceTrafficArgs, opts ...pulumi.InvokeOption) (*GetInstanceTrafficResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceTrafficResult

@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1042/40887)
+ *   - [SwitchDBInstanceHA](https://www.tencentcloud.com/document/api/1042/45175)
  */
 export class SwitchDbInstanceHaOperation extends pulumi.CustomResource {
     /**

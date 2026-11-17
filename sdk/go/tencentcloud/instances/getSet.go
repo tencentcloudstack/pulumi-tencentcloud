@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
 func GetSet(ctx *pulumi.Context, args *GetSetArgs, opts ...pulumi.InvokeOption) (*GetSetResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSetResult

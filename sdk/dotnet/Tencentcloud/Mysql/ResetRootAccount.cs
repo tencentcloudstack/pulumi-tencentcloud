@@ -87,6 +87,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ResetRootAccount](https://www.tencentcloud.com/document/api/236/46757)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/resetRootAccount:ResetRootAccount")]
     public partial class ResetRootAccount : global::Pulumi.CustomResource

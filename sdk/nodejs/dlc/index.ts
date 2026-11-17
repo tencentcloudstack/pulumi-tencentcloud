@@ -165,6 +165,16 @@ export const getTaskResult: typeof import("./getTaskResult").getTaskResult = nul
 export const getTaskResultOutput: typeof import("./getTaskResult").getTaskResultOutput = null as any;
 utilities.lazyLoad(exports, ["getTaskResult","getTaskResultOutput"], () => require("./getTaskResult"));
 
+export { GetTcLakeMetaInstanceArgs, GetTcLakeMetaInstanceResult, GetTcLakeMetaInstanceOutputArgs } from "./getTcLakeMetaInstance";
+export const getTcLakeMetaInstance: typeof import("./getTcLakeMetaInstance").getTcLakeMetaInstance = null as any;
+export const getTcLakeMetaInstanceOutput: typeof import("./getTcLakeMetaInstance").getTcLakeMetaInstanceOutput = null as any;
+utilities.lazyLoad(exports, ["getTcLakeMetaInstance","getTcLakeMetaInstanceOutput"], () => require("./getTcLakeMetaInstance"));
+
+export { MetaDatabaseArgs, MetaDatabaseState } from "./metaDatabase";
+export type MetaDatabase = import("./metaDatabase").MetaDatabase;
+export const MetaDatabase: typeof import("./metaDatabase").MetaDatabase = null as any;
+utilities.lazyLoad(exports, ["MetaDatabase"], () => require("./metaDatabase"));
+
 export { ModifyDataEngineDescriptionOperationArgs, ModifyDataEngineDescriptionOperationState } from "./modifyDataEngineDescriptionOperation";
 export type ModifyDataEngineDescriptionOperation = import("./modifyDataEngineDescriptionOperation").ModifyDataEngineDescriptionOperation;
 export const ModifyDataEngineDescriptionOperation: typeof import("./modifyDataEngineDescriptionOperation").ModifyDataEngineDescriptionOperation = null as any;
@@ -279,6 +289,8 @@ const _module = {
                 return new DetachUserPolicyOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/detachWorkGroupPolicyOperation:DetachWorkGroupPolicyOperation":
                 return new DetachWorkGroupPolicyOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dlc/metaDatabase:MetaDatabase":
+                return new MetaDatabase(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation":
                 return new ModifyDataEngineDescriptionOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation":
@@ -330,6 +342,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/dataMaskStrategy", _m
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/datasourceHouseAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/detachUserPolicyOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/detachWorkGroupPolicyOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/metaDatabase", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/modifyDataEngineDescriptionOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/modifyUserTypOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/renewDataEngineOperation", _module)

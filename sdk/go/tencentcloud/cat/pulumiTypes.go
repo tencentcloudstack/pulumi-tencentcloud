@@ -169,6 +169,714 @@ func (o TaskSetBatchTasksPtrOutput) TargetAddress() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetInstantTasksTask struct {
+	// Node count.
+	NodeCount int `pulumi:"nodeCount"`
+	// Probe time.
+	ProbeTime int `pulumi:"probeTime"`
+	// Task status.
+	Status string `pulumi:"status"`
+	// Success rate.
+	SuccessRate float64 `pulumi:"successRate"`
+	// Target address.
+	TargetAddress string `pulumi:"targetAddress"`
+	// Task category.
+	TaskCategory int `pulumi:"taskCategory"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task type.
+	TaskType int `pulumi:"taskType"`
+}
+
+// GetInstantTasksTaskInput is an input type that accepts GetInstantTasksTaskArgs and GetInstantTasksTaskOutput values.
+// You can construct a concrete instance of `GetInstantTasksTaskInput` via:
+//
+//	GetInstantTasksTaskArgs{...}
+type GetInstantTasksTaskInput interface {
+	pulumi.Input
+
+	ToGetInstantTasksTaskOutput() GetInstantTasksTaskOutput
+	ToGetInstantTasksTaskOutputWithContext(context.Context) GetInstantTasksTaskOutput
+}
+
+type GetInstantTasksTaskArgs struct {
+	// Node count.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// Probe time.
+	ProbeTime pulumi.IntInput `pulumi:"probeTime"`
+	// Task status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Success rate.
+	SuccessRate pulumi.Float64Input `pulumi:"successRate"`
+	// Target address.
+	TargetAddress pulumi.StringInput `pulumi:"targetAddress"`
+	// Task category.
+	TaskCategory pulumi.IntInput `pulumi:"taskCategory"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task type.
+	TaskType pulumi.IntInput `pulumi:"taskType"`
+}
+
+func (GetInstantTasksTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstantTasksTask)(nil)).Elem()
+}
+
+func (i GetInstantTasksTaskArgs) ToGetInstantTasksTaskOutput() GetInstantTasksTaskOutput {
+	return i.ToGetInstantTasksTaskOutputWithContext(context.Background())
+}
+
+func (i GetInstantTasksTaskArgs) ToGetInstantTasksTaskOutputWithContext(ctx context.Context) GetInstantTasksTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstantTasksTaskOutput)
+}
+
+// GetInstantTasksTaskArrayInput is an input type that accepts GetInstantTasksTaskArray and GetInstantTasksTaskArrayOutput values.
+// You can construct a concrete instance of `GetInstantTasksTaskArrayInput` via:
+//
+//	GetInstantTasksTaskArray{ GetInstantTasksTaskArgs{...} }
+type GetInstantTasksTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetInstantTasksTaskArrayOutput() GetInstantTasksTaskArrayOutput
+	ToGetInstantTasksTaskArrayOutputWithContext(context.Context) GetInstantTasksTaskArrayOutput
+}
+
+type GetInstantTasksTaskArray []GetInstantTasksTaskInput
+
+func (GetInstantTasksTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstantTasksTask)(nil)).Elem()
+}
+
+func (i GetInstantTasksTaskArray) ToGetInstantTasksTaskArrayOutput() GetInstantTasksTaskArrayOutput {
+	return i.ToGetInstantTasksTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstantTasksTaskArray) ToGetInstantTasksTaskArrayOutputWithContext(ctx context.Context) GetInstantTasksTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstantTasksTaskArrayOutput)
+}
+
+type GetInstantTasksTaskOutput struct{ *pulumi.OutputState }
+
+func (GetInstantTasksTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstantTasksTask)(nil)).Elem()
+}
+
+func (o GetInstantTasksTaskOutput) ToGetInstantTasksTaskOutput() GetInstantTasksTaskOutput {
+	return o
+}
+
+func (o GetInstantTasksTaskOutput) ToGetInstantTasksTaskOutputWithContext(ctx context.Context) GetInstantTasksTaskOutput {
+	return o
+}
+
+// Node count.
+func (o GetInstantTasksTaskOutput) NodeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) int { return v.NodeCount }).(pulumi.IntOutput)
+}
+
+// Probe time.
+func (o GetInstantTasksTaskOutput) ProbeTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) int { return v.ProbeTime }).(pulumi.IntOutput)
+}
+
+// Task status.
+func (o GetInstantTasksTaskOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Success rate.
+func (o GetInstantTasksTaskOutput) SuccessRate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstantTasksTask) float64 { return v.SuccessRate }).(pulumi.Float64Output)
+}
+
+// Target address.
+func (o GetInstantTasksTaskOutput) TargetAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) string { return v.TargetAddress }).(pulumi.StringOutput)
+}
+
+// Task category.
+func (o GetInstantTasksTaskOutput) TaskCategory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) int { return v.TaskCategory }).(pulumi.IntOutput)
+}
+
+// Task ID.
+func (o GetInstantTasksTaskOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task type.
+func (o GetInstantTasksTaskOutput) TaskType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstantTasksTask) int { return v.TaskType }).(pulumi.IntOutput)
+}
+
+type GetInstantTasksTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstantTasksTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstantTasksTask)(nil)).Elem()
+}
+
+func (o GetInstantTasksTaskArrayOutput) ToGetInstantTasksTaskArrayOutput() GetInstantTasksTaskArrayOutput {
+	return o
+}
+
+func (o GetInstantTasksTaskArrayOutput) ToGetInstantTasksTaskArrayOutputWithContext(ctx context.Context) GetInstantTasksTaskArrayOutput {
+	return o
+}
+
+func (o GetInstantTasksTaskArrayOutput) Index(i pulumi.IntInput) GetInstantTasksTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstantTasksTask {
+		return vs[0].([]GetInstantTasksTask)[vs[1].(int)]
+	}).(GetInstantTasksTaskOutput)
+}
+
+type GetNodeGroupsDistrictList struct {
+	// Node ID.
+	Id string `pulumi:"id"`
+	// Probe node description keyword.
+	Name string `pulumi:"name"`
+}
+
+// GetNodeGroupsDistrictListInput is an input type that accepts GetNodeGroupsDistrictListArgs and GetNodeGroupsDistrictListOutput values.
+// You can construct a concrete instance of `GetNodeGroupsDistrictListInput` via:
+//
+//	GetNodeGroupsDistrictListArgs{...}
+type GetNodeGroupsDistrictListInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsDistrictListOutput() GetNodeGroupsDistrictListOutput
+	ToGetNodeGroupsDistrictListOutputWithContext(context.Context) GetNodeGroupsDistrictListOutput
+}
+
+type GetNodeGroupsDistrictListArgs struct {
+	// Node ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Probe node description keyword.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetNodeGroupsDistrictListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsDistrictList)(nil)).Elem()
+}
+
+func (i GetNodeGroupsDistrictListArgs) ToGetNodeGroupsDistrictListOutput() GetNodeGroupsDistrictListOutput {
+	return i.ToGetNodeGroupsDistrictListOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsDistrictListArgs) ToGetNodeGroupsDistrictListOutputWithContext(ctx context.Context) GetNodeGroupsDistrictListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsDistrictListOutput)
+}
+
+// GetNodeGroupsDistrictListArrayInput is an input type that accepts GetNodeGroupsDistrictListArray and GetNodeGroupsDistrictListArrayOutput values.
+// You can construct a concrete instance of `GetNodeGroupsDistrictListArrayInput` via:
+//
+//	GetNodeGroupsDistrictListArray{ GetNodeGroupsDistrictListArgs{...} }
+type GetNodeGroupsDistrictListArrayInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsDistrictListArrayOutput() GetNodeGroupsDistrictListArrayOutput
+	ToGetNodeGroupsDistrictListArrayOutputWithContext(context.Context) GetNodeGroupsDistrictListArrayOutput
+}
+
+type GetNodeGroupsDistrictListArray []GetNodeGroupsDistrictListInput
+
+func (GetNodeGroupsDistrictListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsDistrictList)(nil)).Elem()
+}
+
+func (i GetNodeGroupsDistrictListArray) ToGetNodeGroupsDistrictListArrayOutput() GetNodeGroupsDistrictListArrayOutput {
+	return i.ToGetNodeGroupsDistrictListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsDistrictListArray) ToGetNodeGroupsDistrictListArrayOutputWithContext(ctx context.Context) GetNodeGroupsDistrictListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsDistrictListArrayOutput)
+}
+
+type GetNodeGroupsDistrictListOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsDistrictListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsDistrictList)(nil)).Elem()
+}
+
+func (o GetNodeGroupsDistrictListOutput) ToGetNodeGroupsDistrictListOutput() GetNodeGroupsDistrictListOutput {
+	return o
+}
+
+func (o GetNodeGroupsDistrictListOutput) ToGetNodeGroupsDistrictListOutputWithContext(ctx context.Context) GetNodeGroupsDistrictListOutput {
+	return o
+}
+
+// Node ID.
+func (o GetNodeGroupsDistrictListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsDistrictList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Probe node description keyword.
+func (o GetNodeGroupsDistrictListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsDistrictList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetNodeGroupsDistrictListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsDistrictListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsDistrictList)(nil)).Elem()
+}
+
+func (o GetNodeGroupsDistrictListArrayOutput) ToGetNodeGroupsDistrictListArrayOutput() GetNodeGroupsDistrictListArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsDistrictListArrayOutput) ToGetNodeGroupsDistrictListArrayOutputWithContext(ctx context.Context) GetNodeGroupsDistrictListArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsDistrictListArrayOutput) Index(i pulumi.IntInput) GetNodeGroupsDistrictListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodeGroupsDistrictList {
+		return vs[0].([]GetNodeGroupsDistrictList)[vs[1].(int)]
+	}).(GetNodeGroupsDistrictListOutput)
+}
+
+type GetNodeGroupsNetServiceList struct {
+	// Node ID.
+	Id string `pulumi:"id"`
+	// Probe node description keyword.
+	Name string `pulumi:"name"`
+}
+
+// GetNodeGroupsNetServiceListInput is an input type that accepts GetNodeGroupsNetServiceListArgs and GetNodeGroupsNetServiceListOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNetServiceListInput` via:
+//
+//	GetNodeGroupsNetServiceListArgs{...}
+type GetNodeGroupsNetServiceListInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNetServiceListOutput() GetNodeGroupsNetServiceListOutput
+	ToGetNodeGroupsNetServiceListOutputWithContext(context.Context) GetNodeGroupsNetServiceListOutput
+}
+
+type GetNodeGroupsNetServiceListArgs struct {
+	// Node ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Probe node description keyword.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetNodeGroupsNetServiceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNetServiceList)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNetServiceListArgs) ToGetNodeGroupsNetServiceListOutput() GetNodeGroupsNetServiceListOutput {
+	return i.ToGetNodeGroupsNetServiceListOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNetServiceListArgs) ToGetNodeGroupsNetServiceListOutputWithContext(ctx context.Context) GetNodeGroupsNetServiceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNetServiceListOutput)
+}
+
+// GetNodeGroupsNetServiceListArrayInput is an input type that accepts GetNodeGroupsNetServiceListArray and GetNodeGroupsNetServiceListArrayOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNetServiceListArrayInput` via:
+//
+//	GetNodeGroupsNetServiceListArray{ GetNodeGroupsNetServiceListArgs{...} }
+type GetNodeGroupsNetServiceListArrayInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNetServiceListArrayOutput() GetNodeGroupsNetServiceListArrayOutput
+	ToGetNodeGroupsNetServiceListArrayOutputWithContext(context.Context) GetNodeGroupsNetServiceListArrayOutput
+}
+
+type GetNodeGroupsNetServiceListArray []GetNodeGroupsNetServiceListInput
+
+func (GetNodeGroupsNetServiceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNetServiceList)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNetServiceListArray) ToGetNodeGroupsNetServiceListArrayOutput() GetNodeGroupsNetServiceListArrayOutput {
+	return i.ToGetNodeGroupsNetServiceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNetServiceListArray) ToGetNodeGroupsNetServiceListArrayOutputWithContext(ctx context.Context) GetNodeGroupsNetServiceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNetServiceListArrayOutput)
+}
+
+type GetNodeGroupsNetServiceListOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNetServiceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNetServiceList)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNetServiceListOutput) ToGetNodeGroupsNetServiceListOutput() GetNodeGroupsNetServiceListOutput {
+	return o
+}
+
+func (o GetNodeGroupsNetServiceListOutput) ToGetNodeGroupsNetServiceListOutputWithContext(ctx context.Context) GetNodeGroupsNetServiceListOutput {
+	return o
+}
+
+// Node ID.
+func (o GetNodeGroupsNetServiceListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNetServiceList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Probe node description keyword.
+func (o GetNodeGroupsNetServiceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNetServiceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetNodeGroupsNetServiceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNetServiceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNetServiceList)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNetServiceListArrayOutput) ToGetNodeGroupsNetServiceListArrayOutput() GetNodeGroupsNetServiceListArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNetServiceListArrayOutput) ToGetNodeGroupsNetServiceListArrayOutputWithContext(ctx context.Context) GetNodeGroupsNetServiceListArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNetServiceListArrayOutput) Index(i pulumi.IntInput) GetNodeGroupsNetServiceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodeGroupsNetServiceList {
+		return vs[0].([]GetNodeGroupsNetServiceList)[vs[1].(int)]
+	}).(GetNodeGroupsNetServiceListOutput)
+}
+
+type GetNodeGroupsNodeList struct {
+	// Node list.
+	Childrens []GetNodeGroupsNodeListChildren `pulumi:"childrens"`
+	// Node name.
+	Content string `pulumi:"content"`
+	// Node ID.
+	Id string `pulumi:"id"`
+}
+
+// GetNodeGroupsNodeListInput is an input type that accepts GetNodeGroupsNodeListArgs and GetNodeGroupsNodeListOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNodeListInput` via:
+//
+//	GetNodeGroupsNodeListArgs{...}
+type GetNodeGroupsNodeListInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNodeListOutput() GetNodeGroupsNodeListOutput
+	ToGetNodeGroupsNodeListOutputWithContext(context.Context) GetNodeGroupsNodeListOutput
+}
+
+type GetNodeGroupsNodeListArgs struct {
+	// Node list.
+	Childrens GetNodeGroupsNodeListChildrenArrayInput `pulumi:"childrens"`
+	// Node name.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Node ID.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (GetNodeGroupsNodeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNodeList)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNodeListArgs) ToGetNodeGroupsNodeListOutput() GetNodeGroupsNodeListOutput {
+	return i.ToGetNodeGroupsNodeListOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNodeListArgs) ToGetNodeGroupsNodeListOutputWithContext(ctx context.Context) GetNodeGroupsNodeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNodeListOutput)
+}
+
+// GetNodeGroupsNodeListArrayInput is an input type that accepts GetNodeGroupsNodeListArray and GetNodeGroupsNodeListArrayOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNodeListArrayInput` via:
+//
+//	GetNodeGroupsNodeListArray{ GetNodeGroupsNodeListArgs{...} }
+type GetNodeGroupsNodeListArrayInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNodeListArrayOutput() GetNodeGroupsNodeListArrayOutput
+	ToGetNodeGroupsNodeListArrayOutputWithContext(context.Context) GetNodeGroupsNodeListArrayOutput
+}
+
+type GetNodeGroupsNodeListArray []GetNodeGroupsNodeListInput
+
+func (GetNodeGroupsNodeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNodeList)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNodeListArray) ToGetNodeGroupsNodeListArrayOutput() GetNodeGroupsNodeListArrayOutput {
+	return i.ToGetNodeGroupsNodeListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNodeListArray) ToGetNodeGroupsNodeListArrayOutputWithContext(ctx context.Context) GetNodeGroupsNodeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNodeListArrayOutput)
+}
+
+type GetNodeGroupsNodeListOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNodeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNodeList)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNodeListOutput) ToGetNodeGroupsNodeListOutput() GetNodeGroupsNodeListOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListOutput) ToGetNodeGroupsNodeListOutputWithContext(ctx context.Context) GetNodeGroupsNodeListOutput {
+	return o
+}
+
+// Node list.
+func (o GetNodeGroupsNodeListOutput) Childrens() GetNodeGroupsNodeListChildrenArrayOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeList) []GetNodeGroupsNodeListChildren { return v.Childrens }).(GetNodeGroupsNodeListChildrenArrayOutput)
+}
+
+// Node name.
+func (o GetNodeGroupsNodeListOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeList) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Node ID.
+func (o GetNodeGroupsNodeListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type GetNodeGroupsNodeListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNodeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNodeList)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNodeListArrayOutput) ToGetNodeGroupsNodeListArrayOutput() GetNodeGroupsNodeListArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListArrayOutput) ToGetNodeGroupsNodeListArrayOutputWithContext(ctx context.Context) GetNodeGroupsNodeListArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListArrayOutput) Index(i pulumi.IntInput) GetNodeGroupsNodeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodeGroupsNodeList {
+		return vs[0].([]GetNodeGroupsNodeList)[vs[1].(int)]
+	}).(GetNodeGroupsNodeListOutput)
+}
+
+type GetNodeGroupsNodeListChildren struct {
+	// Node list.
+	Childrens []GetNodeGroupsNodeListChildrenChildren `pulumi:"childrens"`
+	// Node name.
+	Content string `pulumi:"content"`
+	// Node ID.
+	Id string `pulumi:"id"`
+}
+
+// GetNodeGroupsNodeListChildrenInput is an input type that accepts GetNodeGroupsNodeListChildrenArgs and GetNodeGroupsNodeListChildrenOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNodeListChildrenInput` via:
+//
+//	GetNodeGroupsNodeListChildrenArgs{...}
+type GetNodeGroupsNodeListChildrenInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNodeListChildrenOutput() GetNodeGroupsNodeListChildrenOutput
+	ToGetNodeGroupsNodeListChildrenOutputWithContext(context.Context) GetNodeGroupsNodeListChildrenOutput
+}
+
+type GetNodeGroupsNodeListChildrenArgs struct {
+	// Node list.
+	Childrens GetNodeGroupsNodeListChildrenChildrenArrayInput `pulumi:"childrens"`
+	// Node name.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Node ID.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (GetNodeGroupsNodeListChildrenArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNodeListChildren)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNodeListChildrenArgs) ToGetNodeGroupsNodeListChildrenOutput() GetNodeGroupsNodeListChildrenOutput {
+	return i.ToGetNodeGroupsNodeListChildrenOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNodeListChildrenArgs) ToGetNodeGroupsNodeListChildrenOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNodeListChildrenOutput)
+}
+
+// GetNodeGroupsNodeListChildrenArrayInput is an input type that accepts GetNodeGroupsNodeListChildrenArray and GetNodeGroupsNodeListChildrenArrayOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNodeListChildrenArrayInput` via:
+//
+//	GetNodeGroupsNodeListChildrenArray{ GetNodeGroupsNodeListChildrenArgs{...} }
+type GetNodeGroupsNodeListChildrenArrayInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNodeListChildrenArrayOutput() GetNodeGroupsNodeListChildrenArrayOutput
+	ToGetNodeGroupsNodeListChildrenArrayOutputWithContext(context.Context) GetNodeGroupsNodeListChildrenArrayOutput
+}
+
+type GetNodeGroupsNodeListChildrenArray []GetNodeGroupsNodeListChildrenInput
+
+func (GetNodeGroupsNodeListChildrenArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNodeListChildren)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNodeListChildrenArray) ToGetNodeGroupsNodeListChildrenArrayOutput() GetNodeGroupsNodeListChildrenArrayOutput {
+	return i.ToGetNodeGroupsNodeListChildrenArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNodeListChildrenArray) ToGetNodeGroupsNodeListChildrenArrayOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNodeListChildrenArrayOutput)
+}
+
+type GetNodeGroupsNodeListChildrenOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNodeListChildrenOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNodeListChildren)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNodeListChildrenOutput) ToGetNodeGroupsNodeListChildrenOutput() GetNodeGroupsNodeListChildrenOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListChildrenOutput) ToGetNodeGroupsNodeListChildrenOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenOutput {
+	return o
+}
+
+// Node list.
+func (o GetNodeGroupsNodeListChildrenOutput) Childrens() GetNodeGroupsNodeListChildrenChildrenArrayOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeListChildren) []GetNodeGroupsNodeListChildrenChildren { return v.Childrens }).(GetNodeGroupsNodeListChildrenChildrenArrayOutput)
+}
+
+// Node name.
+func (o GetNodeGroupsNodeListChildrenOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeListChildren) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Node ID.
+func (o GetNodeGroupsNodeListChildrenOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeListChildren) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type GetNodeGroupsNodeListChildrenArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNodeListChildrenArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNodeListChildren)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNodeListChildrenArrayOutput) ToGetNodeGroupsNodeListChildrenArrayOutput() GetNodeGroupsNodeListChildrenArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListChildrenArrayOutput) ToGetNodeGroupsNodeListChildrenArrayOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListChildrenArrayOutput) Index(i pulumi.IntInput) GetNodeGroupsNodeListChildrenOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodeGroupsNodeListChildren {
+		return vs[0].([]GetNodeGroupsNodeListChildren)[vs[1].(int)]
+	}).(GetNodeGroupsNodeListChildrenOutput)
+}
+
+type GetNodeGroupsNodeListChildrenChildren struct {
+	// Node name.
+	Content string `pulumi:"content"`
+	// Node ID.
+	Id string `pulumi:"id"`
+}
+
+// GetNodeGroupsNodeListChildrenChildrenInput is an input type that accepts GetNodeGroupsNodeListChildrenChildrenArgs and GetNodeGroupsNodeListChildrenChildrenOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNodeListChildrenChildrenInput` via:
+//
+//	GetNodeGroupsNodeListChildrenChildrenArgs{...}
+type GetNodeGroupsNodeListChildrenChildrenInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNodeListChildrenChildrenOutput() GetNodeGroupsNodeListChildrenChildrenOutput
+	ToGetNodeGroupsNodeListChildrenChildrenOutputWithContext(context.Context) GetNodeGroupsNodeListChildrenChildrenOutput
+}
+
+type GetNodeGroupsNodeListChildrenChildrenArgs struct {
+	// Node name.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Node ID.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (GetNodeGroupsNodeListChildrenChildrenArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNodeListChildrenChildren)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNodeListChildrenChildrenArgs) ToGetNodeGroupsNodeListChildrenChildrenOutput() GetNodeGroupsNodeListChildrenChildrenOutput {
+	return i.ToGetNodeGroupsNodeListChildrenChildrenOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNodeListChildrenChildrenArgs) ToGetNodeGroupsNodeListChildrenChildrenOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenChildrenOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNodeListChildrenChildrenOutput)
+}
+
+// GetNodeGroupsNodeListChildrenChildrenArrayInput is an input type that accepts GetNodeGroupsNodeListChildrenChildrenArray and GetNodeGroupsNodeListChildrenChildrenArrayOutput values.
+// You can construct a concrete instance of `GetNodeGroupsNodeListChildrenChildrenArrayInput` via:
+//
+//	GetNodeGroupsNodeListChildrenChildrenArray{ GetNodeGroupsNodeListChildrenChildrenArgs{...} }
+type GetNodeGroupsNodeListChildrenChildrenArrayInput interface {
+	pulumi.Input
+
+	ToGetNodeGroupsNodeListChildrenChildrenArrayOutput() GetNodeGroupsNodeListChildrenChildrenArrayOutput
+	ToGetNodeGroupsNodeListChildrenChildrenArrayOutputWithContext(context.Context) GetNodeGroupsNodeListChildrenChildrenArrayOutput
+}
+
+type GetNodeGroupsNodeListChildrenChildrenArray []GetNodeGroupsNodeListChildrenChildrenInput
+
+func (GetNodeGroupsNodeListChildrenChildrenArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNodeListChildrenChildren)(nil)).Elem()
+}
+
+func (i GetNodeGroupsNodeListChildrenChildrenArray) ToGetNodeGroupsNodeListChildrenChildrenArrayOutput() GetNodeGroupsNodeListChildrenChildrenArrayOutput {
+	return i.ToGetNodeGroupsNodeListChildrenChildrenArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodeGroupsNodeListChildrenChildrenArray) ToGetNodeGroupsNodeListChildrenChildrenArrayOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenChildrenArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodeGroupsNodeListChildrenChildrenArrayOutput)
+}
+
+type GetNodeGroupsNodeListChildrenChildrenOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNodeListChildrenChildrenOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodeGroupsNodeListChildrenChildren)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNodeListChildrenChildrenOutput) ToGetNodeGroupsNodeListChildrenChildrenOutput() GetNodeGroupsNodeListChildrenChildrenOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListChildrenChildrenOutput) ToGetNodeGroupsNodeListChildrenChildrenOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenChildrenOutput {
+	return o
+}
+
+// Node name.
+func (o GetNodeGroupsNodeListChildrenChildrenOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeListChildrenChildren) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Node ID.
+func (o GetNodeGroupsNodeListChildrenChildrenOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodeGroupsNodeListChildrenChildren) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type GetNodeGroupsNodeListChildrenChildrenArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodeGroupsNodeListChildrenChildrenArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodeGroupsNodeListChildrenChildren)(nil)).Elem()
+}
+
+func (o GetNodeGroupsNodeListChildrenChildrenArrayOutput) ToGetNodeGroupsNodeListChildrenChildrenArrayOutput() GetNodeGroupsNodeListChildrenChildrenArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListChildrenChildrenArrayOutput) ToGetNodeGroupsNodeListChildrenChildrenArrayOutputWithContext(ctx context.Context) GetNodeGroupsNodeListChildrenChildrenArrayOutput {
+	return o
+}
+
+func (o GetNodeGroupsNodeListChildrenChildrenArrayOutput) Index(i pulumi.IntInput) GetNodeGroupsNodeListChildrenChildrenOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodeGroupsNodeListChildrenChildren {
+		return vs[0].([]GetNodeGroupsNodeListChildrenChildren)[vs[1].(int)]
+	}).(GetNodeGroupsNodeListChildrenChildrenOutput)
+}
+
 type GetNodeNodeDefine struct {
 	// City.
 	City string `pulumi:"city"`
@@ -705,9 +1413,474 @@ func (o GetProbeDataDetailedSingleDataDefineLabelArrayOutput) Index(i pulumi.Int
 	}).(GetProbeDataDetailedSingleDataDefineLabelOutput)
 }
 
+type GetProbeTasksTagFilter struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetProbeTasksTagFilterInput is an input type that accepts GetProbeTasksTagFilterArgs and GetProbeTasksTagFilterOutput values.
+// You can construct a concrete instance of `GetProbeTasksTagFilterInput` via:
+//
+//	GetProbeTasksTagFilterArgs{...}
+type GetProbeTasksTagFilterInput interface {
+	pulumi.Input
+
+	ToGetProbeTasksTagFilterOutput() GetProbeTasksTagFilterOutput
+	ToGetProbeTasksTagFilterOutputWithContext(context.Context) GetProbeTasksTagFilterOutput
+}
+
+type GetProbeTasksTagFilterArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetProbeTasksTagFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProbeTasksTagFilter)(nil)).Elem()
+}
+
+func (i GetProbeTasksTagFilterArgs) ToGetProbeTasksTagFilterOutput() GetProbeTasksTagFilterOutput {
+	return i.ToGetProbeTasksTagFilterOutputWithContext(context.Background())
+}
+
+func (i GetProbeTasksTagFilterArgs) ToGetProbeTasksTagFilterOutputWithContext(ctx context.Context) GetProbeTasksTagFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProbeTasksTagFilterOutput)
+}
+
+// GetProbeTasksTagFilterArrayInput is an input type that accepts GetProbeTasksTagFilterArray and GetProbeTasksTagFilterArrayOutput values.
+// You can construct a concrete instance of `GetProbeTasksTagFilterArrayInput` via:
+//
+//	GetProbeTasksTagFilterArray{ GetProbeTasksTagFilterArgs{...} }
+type GetProbeTasksTagFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetProbeTasksTagFilterArrayOutput() GetProbeTasksTagFilterArrayOutput
+	ToGetProbeTasksTagFilterArrayOutputWithContext(context.Context) GetProbeTasksTagFilterArrayOutput
+}
+
+type GetProbeTasksTagFilterArray []GetProbeTasksTagFilterInput
+
+func (GetProbeTasksTagFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProbeTasksTagFilter)(nil)).Elem()
+}
+
+func (i GetProbeTasksTagFilterArray) ToGetProbeTasksTagFilterArrayOutput() GetProbeTasksTagFilterArrayOutput {
+	return i.ToGetProbeTasksTagFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetProbeTasksTagFilterArray) ToGetProbeTasksTagFilterArrayOutputWithContext(ctx context.Context) GetProbeTasksTagFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProbeTasksTagFilterArrayOutput)
+}
+
+type GetProbeTasksTagFilterOutput struct{ *pulumi.OutputState }
+
+func (GetProbeTasksTagFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProbeTasksTagFilter)(nil)).Elem()
+}
+
+func (o GetProbeTasksTagFilterOutput) ToGetProbeTasksTagFilterOutput() GetProbeTasksTagFilterOutput {
+	return o
+}
+
+func (o GetProbeTasksTagFilterOutput) ToGetProbeTasksTagFilterOutputWithContext(ctx context.Context) GetProbeTasksTagFilterOutput {
+	return o
+}
+
+// Tag key.
+func (o GetProbeTasksTagFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTagFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetProbeTasksTagFilterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTagFilter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetProbeTasksTagFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProbeTasksTagFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProbeTasksTagFilter)(nil)).Elem()
+}
+
+func (o GetProbeTasksTagFilterArrayOutput) ToGetProbeTasksTagFilterArrayOutput() GetProbeTasksTagFilterArrayOutput {
+	return o
+}
+
+func (o GetProbeTasksTagFilterArrayOutput) ToGetProbeTasksTagFilterArrayOutputWithContext(ctx context.Context) GetProbeTasksTagFilterArrayOutput {
+	return o
+}
+
+func (o GetProbeTasksTagFilterArrayOutput) Index(i pulumi.IntInput) GetProbeTasksTagFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProbeTasksTagFilter {
+		return vs[0].([]GetProbeTasksTagFilter)[vs[1].(int)]
+	}).(GetProbeTasksTagFilterOutput)
+}
+
+type GetProbeTasksTaskSet struct {
+	// Created time.
+	CreatedAt string `pulumi:"createdAt"`
+	// Cron expression for scheduled task.
+	Cron string `pulumi:"cron"`
+	// Scheduled task start status.
+	CronState int `pulumi:"cronState"`
+	// Probe interval in minutes.
+	Interval int `pulumi:"interval"`
+	// Task name.
+	Name string `pulumi:"name"`
+	// Probe node IP type.
+	NodeIpType int `pulumi:"nodeIpType"`
+	// Probe node list.
+	Nodes []string `pulumi:"nodes"`
+	// Order state.
+	OrderState int `pulumi:"orderState"`
+	// Probe parameters.
+	Parameters string `pulumi:"parameters"`
+	// Pay mode.
+	PayMode int `pulumi:"payMode"`
+	// Task status.
+	Status int `pulumi:"status"`
+	// Whether it is a sync account.
+	SubSyncFlag int `pulumi:"subSyncFlag"`
+	// Tag info list.
+	TagInfoLists []GetProbeTasksTaskSetTagInfoList `pulumi:"tagInfoLists"`
+	// Target address.
+	TargetAddress string `pulumi:"targetAddress"`
+	// Task category list.
+	TaskCategory int `pulumi:"taskCategory"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task type list.
+	TaskType int `pulumi:"taskType"`
+}
+
+// GetProbeTasksTaskSetInput is an input type that accepts GetProbeTasksTaskSetArgs and GetProbeTasksTaskSetOutput values.
+// You can construct a concrete instance of `GetProbeTasksTaskSetInput` via:
+//
+//	GetProbeTasksTaskSetArgs{...}
+type GetProbeTasksTaskSetInput interface {
+	pulumi.Input
+
+	ToGetProbeTasksTaskSetOutput() GetProbeTasksTaskSetOutput
+	ToGetProbeTasksTaskSetOutputWithContext(context.Context) GetProbeTasksTaskSetOutput
+}
+
+type GetProbeTasksTaskSetArgs struct {
+	// Created time.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Cron expression for scheduled task.
+	Cron pulumi.StringInput `pulumi:"cron"`
+	// Scheduled task start status.
+	CronState pulumi.IntInput `pulumi:"cronState"`
+	// Probe interval in minutes.
+	Interval pulumi.IntInput `pulumi:"interval"`
+	// Task name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Probe node IP type.
+	NodeIpType pulumi.IntInput `pulumi:"nodeIpType"`
+	// Probe node list.
+	Nodes pulumi.StringArrayInput `pulumi:"nodes"`
+	// Order state.
+	OrderState pulumi.IntInput `pulumi:"orderState"`
+	// Probe parameters.
+	Parameters pulumi.StringInput `pulumi:"parameters"`
+	// Pay mode.
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+	// Task status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Whether it is a sync account.
+	SubSyncFlag pulumi.IntInput `pulumi:"subSyncFlag"`
+	// Tag info list.
+	TagInfoLists GetProbeTasksTaskSetTagInfoListArrayInput `pulumi:"tagInfoLists"`
+	// Target address.
+	TargetAddress pulumi.StringInput `pulumi:"targetAddress"`
+	// Task category list.
+	TaskCategory pulumi.IntInput `pulumi:"taskCategory"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task type list.
+	TaskType pulumi.IntInput `pulumi:"taskType"`
+}
+
+func (GetProbeTasksTaskSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProbeTasksTaskSet)(nil)).Elem()
+}
+
+func (i GetProbeTasksTaskSetArgs) ToGetProbeTasksTaskSetOutput() GetProbeTasksTaskSetOutput {
+	return i.ToGetProbeTasksTaskSetOutputWithContext(context.Background())
+}
+
+func (i GetProbeTasksTaskSetArgs) ToGetProbeTasksTaskSetOutputWithContext(ctx context.Context) GetProbeTasksTaskSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProbeTasksTaskSetOutput)
+}
+
+// GetProbeTasksTaskSetArrayInput is an input type that accepts GetProbeTasksTaskSetArray and GetProbeTasksTaskSetArrayOutput values.
+// You can construct a concrete instance of `GetProbeTasksTaskSetArrayInput` via:
+//
+//	GetProbeTasksTaskSetArray{ GetProbeTasksTaskSetArgs{...} }
+type GetProbeTasksTaskSetArrayInput interface {
+	pulumi.Input
+
+	ToGetProbeTasksTaskSetArrayOutput() GetProbeTasksTaskSetArrayOutput
+	ToGetProbeTasksTaskSetArrayOutputWithContext(context.Context) GetProbeTasksTaskSetArrayOutput
+}
+
+type GetProbeTasksTaskSetArray []GetProbeTasksTaskSetInput
+
+func (GetProbeTasksTaskSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProbeTasksTaskSet)(nil)).Elem()
+}
+
+func (i GetProbeTasksTaskSetArray) ToGetProbeTasksTaskSetArrayOutput() GetProbeTasksTaskSetArrayOutput {
+	return i.ToGetProbeTasksTaskSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetProbeTasksTaskSetArray) ToGetProbeTasksTaskSetArrayOutputWithContext(ctx context.Context) GetProbeTasksTaskSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProbeTasksTaskSetArrayOutput)
+}
+
+type GetProbeTasksTaskSetOutput struct{ *pulumi.OutputState }
+
+func (GetProbeTasksTaskSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProbeTasksTaskSet)(nil)).Elem()
+}
+
+func (o GetProbeTasksTaskSetOutput) ToGetProbeTasksTaskSetOutput() GetProbeTasksTaskSetOutput {
+	return o
+}
+
+func (o GetProbeTasksTaskSetOutput) ToGetProbeTasksTaskSetOutputWithContext(ctx context.Context) GetProbeTasksTaskSetOutput {
+	return o
+}
+
+// Created time.
+func (o GetProbeTasksTaskSetOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Cron expression for scheduled task.
+func (o GetProbeTasksTaskSetOutput) Cron() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) string { return v.Cron }).(pulumi.StringOutput)
+}
+
+// Scheduled task start status.
+func (o GetProbeTasksTaskSetOutput) CronState() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.CronState }).(pulumi.IntOutput)
+}
+
+// Probe interval in minutes.
+func (o GetProbeTasksTaskSetOutput) Interval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.Interval }).(pulumi.IntOutput)
+}
+
+// Task name.
+func (o GetProbeTasksTaskSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Probe node IP type.
+func (o GetProbeTasksTaskSetOutput) NodeIpType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.NodeIpType }).(pulumi.IntOutput)
+}
+
+// Probe node list.
+func (o GetProbeTasksTaskSetOutput) Nodes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) []string { return v.Nodes }).(pulumi.StringArrayOutput)
+}
+
+// Order state.
+func (o GetProbeTasksTaskSetOutput) OrderState() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.OrderState }).(pulumi.IntOutput)
+}
+
+// Probe parameters.
+func (o GetProbeTasksTaskSetOutput) Parameters() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) string { return v.Parameters }).(pulumi.StringOutput)
+}
+
+// Pay mode.
+func (o GetProbeTasksTaskSetOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+// Task status.
+func (o GetProbeTasksTaskSetOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Whether it is a sync account.
+func (o GetProbeTasksTaskSetOutput) SubSyncFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.SubSyncFlag }).(pulumi.IntOutput)
+}
+
+// Tag info list.
+func (o GetProbeTasksTaskSetOutput) TagInfoLists() GetProbeTasksTaskSetTagInfoListArrayOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) []GetProbeTasksTaskSetTagInfoList { return v.TagInfoLists }).(GetProbeTasksTaskSetTagInfoListArrayOutput)
+}
+
+// Target address.
+func (o GetProbeTasksTaskSetOutput) TargetAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) string { return v.TargetAddress }).(pulumi.StringOutput)
+}
+
+// Task category list.
+func (o GetProbeTasksTaskSetOutput) TaskCategory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.TaskCategory }).(pulumi.IntOutput)
+}
+
+// Task ID.
+func (o GetProbeTasksTaskSetOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task type list.
+func (o GetProbeTasksTaskSetOutput) TaskType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSet) int { return v.TaskType }).(pulumi.IntOutput)
+}
+
+type GetProbeTasksTaskSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProbeTasksTaskSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProbeTasksTaskSet)(nil)).Elem()
+}
+
+func (o GetProbeTasksTaskSetArrayOutput) ToGetProbeTasksTaskSetArrayOutput() GetProbeTasksTaskSetArrayOutput {
+	return o
+}
+
+func (o GetProbeTasksTaskSetArrayOutput) ToGetProbeTasksTaskSetArrayOutputWithContext(ctx context.Context) GetProbeTasksTaskSetArrayOutput {
+	return o
+}
+
+func (o GetProbeTasksTaskSetArrayOutput) Index(i pulumi.IntInput) GetProbeTasksTaskSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProbeTasksTaskSet {
+		return vs[0].([]GetProbeTasksTaskSet)[vs[1].(int)]
+	}).(GetProbeTasksTaskSetOutput)
+}
+
+type GetProbeTasksTaskSetTagInfoList struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetProbeTasksTaskSetTagInfoListInput is an input type that accepts GetProbeTasksTaskSetTagInfoListArgs and GetProbeTasksTaskSetTagInfoListOutput values.
+// You can construct a concrete instance of `GetProbeTasksTaskSetTagInfoListInput` via:
+//
+//	GetProbeTasksTaskSetTagInfoListArgs{...}
+type GetProbeTasksTaskSetTagInfoListInput interface {
+	pulumi.Input
+
+	ToGetProbeTasksTaskSetTagInfoListOutput() GetProbeTasksTaskSetTagInfoListOutput
+	ToGetProbeTasksTaskSetTagInfoListOutputWithContext(context.Context) GetProbeTasksTaskSetTagInfoListOutput
+}
+
+type GetProbeTasksTaskSetTagInfoListArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetProbeTasksTaskSetTagInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProbeTasksTaskSetTagInfoList)(nil)).Elem()
+}
+
+func (i GetProbeTasksTaskSetTagInfoListArgs) ToGetProbeTasksTaskSetTagInfoListOutput() GetProbeTasksTaskSetTagInfoListOutput {
+	return i.ToGetProbeTasksTaskSetTagInfoListOutputWithContext(context.Background())
+}
+
+func (i GetProbeTasksTaskSetTagInfoListArgs) ToGetProbeTasksTaskSetTagInfoListOutputWithContext(ctx context.Context) GetProbeTasksTaskSetTagInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProbeTasksTaskSetTagInfoListOutput)
+}
+
+// GetProbeTasksTaskSetTagInfoListArrayInput is an input type that accepts GetProbeTasksTaskSetTagInfoListArray and GetProbeTasksTaskSetTagInfoListArrayOutput values.
+// You can construct a concrete instance of `GetProbeTasksTaskSetTagInfoListArrayInput` via:
+//
+//	GetProbeTasksTaskSetTagInfoListArray{ GetProbeTasksTaskSetTagInfoListArgs{...} }
+type GetProbeTasksTaskSetTagInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetProbeTasksTaskSetTagInfoListArrayOutput() GetProbeTasksTaskSetTagInfoListArrayOutput
+	ToGetProbeTasksTaskSetTagInfoListArrayOutputWithContext(context.Context) GetProbeTasksTaskSetTagInfoListArrayOutput
+}
+
+type GetProbeTasksTaskSetTagInfoListArray []GetProbeTasksTaskSetTagInfoListInput
+
+func (GetProbeTasksTaskSetTagInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProbeTasksTaskSetTagInfoList)(nil)).Elem()
+}
+
+func (i GetProbeTasksTaskSetTagInfoListArray) ToGetProbeTasksTaskSetTagInfoListArrayOutput() GetProbeTasksTaskSetTagInfoListArrayOutput {
+	return i.ToGetProbeTasksTaskSetTagInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetProbeTasksTaskSetTagInfoListArray) ToGetProbeTasksTaskSetTagInfoListArrayOutputWithContext(ctx context.Context) GetProbeTasksTaskSetTagInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProbeTasksTaskSetTagInfoListArrayOutput)
+}
+
+type GetProbeTasksTaskSetTagInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetProbeTasksTaskSetTagInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProbeTasksTaskSetTagInfoList)(nil)).Elem()
+}
+
+func (o GetProbeTasksTaskSetTagInfoListOutput) ToGetProbeTasksTaskSetTagInfoListOutput() GetProbeTasksTaskSetTagInfoListOutput {
+	return o
+}
+
+func (o GetProbeTasksTaskSetTagInfoListOutput) ToGetProbeTasksTaskSetTagInfoListOutputWithContext(ctx context.Context) GetProbeTasksTaskSetTagInfoListOutput {
+	return o
+}
+
+// Tag key.
+func (o GetProbeTasksTaskSetTagInfoListOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSetTagInfoList) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetProbeTasksTaskSetTagInfoListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProbeTasksTaskSetTagInfoList) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetProbeTasksTaskSetTagInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProbeTasksTaskSetTagInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProbeTasksTaskSetTagInfoList)(nil)).Elem()
+}
+
+func (o GetProbeTasksTaskSetTagInfoListArrayOutput) ToGetProbeTasksTaskSetTagInfoListArrayOutput() GetProbeTasksTaskSetTagInfoListArrayOutput {
+	return o
+}
+
+func (o GetProbeTasksTaskSetTagInfoListArrayOutput) ToGetProbeTasksTaskSetTagInfoListArrayOutputWithContext(ctx context.Context) GetProbeTasksTaskSetTagInfoListArrayOutput {
+	return o
+}
+
+func (o GetProbeTasksTaskSetTagInfoListArrayOutput) Index(i pulumi.IntInput) GetProbeTasksTaskSetTagInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProbeTasksTaskSetTagInfoList {
+		return vs[0].([]GetProbeTasksTaskSetTagInfoList)[vs[1].(int)]
+	}).(GetProbeTasksTaskSetTagInfoListOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TaskSetBatchTasksInput)(nil)).Elem(), TaskSetBatchTasksArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TaskSetBatchTasksPtrInput)(nil)).Elem(), TaskSetBatchTasksArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstantTasksTaskInput)(nil)).Elem(), GetInstantTasksTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstantTasksTaskArrayInput)(nil)).Elem(), GetInstantTasksTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsDistrictListInput)(nil)).Elem(), GetNodeGroupsDistrictListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsDistrictListArrayInput)(nil)).Elem(), GetNodeGroupsDistrictListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNetServiceListInput)(nil)).Elem(), GetNodeGroupsNetServiceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNetServiceListArrayInput)(nil)).Elem(), GetNodeGroupsNetServiceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNodeListInput)(nil)).Elem(), GetNodeGroupsNodeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNodeListArrayInput)(nil)).Elem(), GetNodeGroupsNodeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNodeListChildrenInput)(nil)).Elem(), GetNodeGroupsNodeListChildrenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNodeListChildrenArrayInput)(nil)).Elem(), GetNodeGroupsNodeListChildrenArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNodeListChildrenChildrenInput)(nil)).Elem(), GetNodeGroupsNodeListChildrenChildrenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeGroupsNodeListChildrenChildrenArrayInput)(nil)).Elem(), GetNodeGroupsNodeListChildrenChildrenArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeNodeDefineInput)(nil)).Elem(), GetNodeNodeDefineArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodeNodeDefineArrayInput)(nil)).Elem(), GetNodeNodeDefineArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeDataDetailedSingleDataDefineInput)(nil)).Elem(), GetProbeDataDetailedSingleDataDefineArgs{})
@@ -716,8 +1889,26 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeDataDetailedSingleDataDefineFieldArrayInput)(nil)).Elem(), GetProbeDataDetailedSingleDataDefineFieldArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeDataDetailedSingleDataDefineLabelInput)(nil)).Elem(), GetProbeDataDetailedSingleDataDefineLabelArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeDataDetailedSingleDataDefineLabelArrayInput)(nil)).Elem(), GetProbeDataDetailedSingleDataDefineLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeTasksTagFilterInput)(nil)).Elem(), GetProbeTasksTagFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeTasksTagFilterArrayInput)(nil)).Elem(), GetProbeTasksTagFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeTasksTaskSetInput)(nil)).Elem(), GetProbeTasksTaskSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeTasksTaskSetArrayInput)(nil)).Elem(), GetProbeTasksTaskSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeTasksTaskSetTagInfoListInput)(nil)).Elem(), GetProbeTasksTaskSetTagInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProbeTasksTaskSetTagInfoListArrayInput)(nil)).Elem(), GetProbeTasksTaskSetTagInfoListArray{})
 	pulumi.RegisterOutputType(TaskSetBatchTasksOutput{})
 	pulumi.RegisterOutputType(TaskSetBatchTasksPtrOutput{})
+	pulumi.RegisterOutputType(GetInstantTasksTaskOutput{})
+	pulumi.RegisterOutputType(GetInstantTasksTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsDistrictListOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsDistrictListArrayOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNetServiceListOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNetServiceListArrayOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNodeListOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNodeListArrayOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNodeListChildrenOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNodeListChildrenArrayOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNodeListChildrenChildrenOutput{})
+	pulumi.RegisterOutputType(GetNodeGroupsNodeListChildrenChildrenArrayOutput{})
 	pulumi.RegisterOutputType(GetNodeNodeDefineOutput{})
 	pulumi.RegisterOutputType(GetNodeNodeDefineArrayOutput{})
 	pulumi.RegisterOutputType(GetProbeDataDetailedSingleDataDefineOutput{})
@@ -726,4 +1917,10 @@ func init() {
 	pulumi.RegisterOutputType(GetProbeDataDetailedSingleDataDefineFieldArrayOutput{})
 	pulumi.RegisterOutputType(GetProbeDataDetailedSingleDataDefineLabelOutput{})
 	pulumi.RegisterOutputType(GetProbeDataDetailedSingleDataDefineLabelArrayOutput{})
+	pulumi.RegisterOutputType(GetProbeTasksTagFilterOutput{})
+	pulumi.RegisterOutputType(GetProbeTasksTagFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetProbeTasksTaskSetOutput{})
+	pulumi.RegisterOutputType(GetProbeTasksTaskSetArrayOutput{})
+	pulumi.RegisterOutputType(GetProbeTasksTaskSetTagInfoListOutput{})
+	pulumi.RegisterOutputType(GetProbeTasksTaskSetTagInfoListArrayOutput{})
 }

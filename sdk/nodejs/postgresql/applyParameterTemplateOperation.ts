@@ -18,6 +18,17 @@ import * as utilities from "../utilities";
  *     templateId: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+ *   - [DescribeDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43284)
+ *   - [DescribeParameterTemplateAttributes](https://www.tencentcloud.com/document/api/409/52652)
+ *   - [DescribeParamsEvent](https://www.tencentcloud.com/document/api/409/43283)
+ *   - [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
  */
 export class ApplyParameterTemplateOperation extends pulumi.CustomResource {
     /**

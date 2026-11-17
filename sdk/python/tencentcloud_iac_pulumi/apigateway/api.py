@@ -2206,6 +2206,24 @@ class Api(pulumi.CustomResource):
             test_limit=500)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateApi](https://www.tencentcloud.com/search/?wd=CreateApi&type=document&lang=en)
+          - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+          - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&type=document&lang=en)
+        * Read:
+          - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+          - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+        * Update:
+          - [ModifyApi](https://www.tencentcloud.com/search/?wd=ModifyApi&type=document&lang=en)
+          - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&type=document&lang=en)
+        * Delete:
+          - [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&type=document&lang=en)
+          - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -2332,6 +2350,24 @@ class Api(pulumi.CustomResource):
             pre_limit=500,
             test_limit=500)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateApi](https://www.tencentcloud.com/search/?wd=CreateApi&type=document&lang=en)
+          - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+          - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&type=document&lang=en)
+        * Read:
+          - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+          - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+        * Update:
+          - [ModifyApi](https://www.tencentcloud.com/search/?wd=ModifyApi&type=document&lang=en)
+          - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&type=document&lang=en)
+        * Delete:
+          - [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&type=document&lang=en)
+          - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

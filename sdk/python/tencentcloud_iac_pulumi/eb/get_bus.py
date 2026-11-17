@@ -131,6 +131,12 @@ def get_bus(filters: Optional[Sequence[Union['GetBusFilterArgs', 'GetBusFilterAr
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
+
 
     :param Sequence[Union['GetBusFilterArgs', 'GetBusFilterArgsDict']] filters: Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.
     :param _builtins.str order: Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).
@@ -182,6 +188,12 @@ def get_bus_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['GetBu
             },
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
 
 
     :param Sequence[Union['GetBusFilterArgs', 'GetBusFilterArgsDict']] filters: Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.

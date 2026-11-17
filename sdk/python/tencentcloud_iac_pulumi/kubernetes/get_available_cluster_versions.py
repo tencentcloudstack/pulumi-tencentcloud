@@ -124,6 +124,12 @@ def get_available_cluster_versions(cluster_id: Optional[_builtins.str] = None,
     pulumi.export("versionsIds", query_by_ids.clusters)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
+
 
     :param _builtins.str cluster_id: Cluster Id.
     :param Sequence[_builtins.str] cluster_ids: list of cluster IDs.
@@ -161,6 +167,12 @@ def get_available_cluster_versions_output(cluster_id: pulumi.Input[Optional[Opti
     query_by_ids = tencentcloud.kubernetes.get_available_cluster_versions(cluster_ids=["xxx"])
     pulumi.export("versionsIds", query_by_ids.clusters)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
 
 
     :param _builtins.str cluster_id: Cluster Id.

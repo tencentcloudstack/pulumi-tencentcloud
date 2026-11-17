@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
         /// </summary>
         public static Task<GetScenarioWithJobsResult> InvokeAsync(GetScenarioWithJobsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
         /// </summary>
         public static Output<GetScenarioWithJobsResult> Invoke(GetScenarioWithJobsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
         /// </summary>
         public static Output<GetScenarioWithJobsResult> Invoke(GetScenarioWithJobsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsInvokeArgs(), options.WithDefaults());

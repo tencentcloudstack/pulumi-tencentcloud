@@ -72,6 +72,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateConfigExtra](https://www.tencentcloud.com/search/?wd=CreateConfigExtra&type=document&lang=en)
+ * * Read: [DescribeConfigExtras](https://www.tencentcloud.com/search/?wd=DescribeConfigExtras&type=document&lang=en)
+ * * Update: [ModifyConfigExtra](https://www.tencentcloud.com/search/?wd=ModifyConfigExtra&type=document&lang=en)
+ * * Delete: [DeleteConfigExtra](https://www.tencentcloud.com/search/?wd=DeleteConfigExtra&type=document&lang=en)
+ *
  * ## Import
  *
  * cls configExtra can be imported using the id, e.g.

@@ -12008,6 +12008,8 @@ type ProjectProject struct {
 	ProjectModel *string `pulumi:"projectModel"`
 	// Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
 	ProjectName string `pulumi:"projectName"`
+	// Project schedule mode. task: Task mode; workflow: Workflow mode.
+	ScheduleMode *string `pulumi:"scheduleMode"`
 }
 
 // ProjectProjectInput is an input type that accepts ProjectProjectArgs and ProjectProjectOutput values.
@@ -12028,6 +12030,8 @@ type ProjectProjectArgs struct {
 	ProjectModel pulumi.StringPtrInput `pulumi:"projectModel"`
 	// Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
 	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// Project schedule mode. task: Task mode; workflow: Workflow mode.
+	ScheduleMode pulumi.StringPtrInput `pulumi:"scheduleMode"`
 }
 
 func (ProjectProjectArgs) ElementType() reflect.Type {
@@ -12122,6 +12126,11 @@ func (o ProjectProjectOutput) ProjectName() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectProject) string { return v.ProjectName }).(pulumi.StringOutput)
 }
 
+// Project schedule mode. task: Task mode; workflow: Workflow mode.
+func (o ProjectProjectOutput) ScheduleMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProject) *string { return v.ScheduleMode }).(pulumi.StringPtrOutput)
+}
+
 type ProjectProjectPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectProjectPtrOutput) ElementType() reflect.Type {
@@ -12173,6 +12182,16 @@ func (o ProjectProjectPtrOutput) ProjectName() pulumi.StringPtrOutput {
 			return nil
 		}
 		return &v.ProjectName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Project schedule mode. task: Task mode; workflow: Workflow mode.
+func (o ProjectProjectPtrOutput) ScheduleMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ScheduleMode
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -19751,11 +19770,15 @@ type TriggerWorkflowTriggerWorkflowSchedulerConfiguration struct {
 	StartTime *string `pulumi:"startTime"`
 	// Trigger ID (UUID).
 	TriggerId *string `pulumi:"triggerId"`
-	// Minimum trigger interval in file arrival mode (seconds).
+	// This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version.
 	TriggerMinimumIntervalSecond *int `pulumi:"triggerMinimumIntervalSecond"`
 	// Trigger mode: Scheduled trigger:  `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. Notes: For `TIME_TRIGGER` and `CONTINUE_RUN` modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required; For `FILE_ARRIVAL` mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
 	TriggerMode string `pulumi:"triggerMode"`
-	// Trigger wait time in file arrival mode (seconds).
+	// This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version.
 	TriggerWaitTimeSecond *int `pulumi:"triggerWaitTimeSecond"`
 }
 
@@ -19791,11 +19814,15 @@ type TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs struct {
 	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
 	// Trigger ID (UUID).
 	TriggerId pulumi.StringPtrInput `pulumi:"triggerId"`
-	// Minimum trigger interval in file arrival mode (seconds).
+	// This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version.
 	TriggerMinimumIntervalSecond pulumi.IntPtrInput `pulumi:"triggerMinimumIntervalSecond"`
 	// Trigger mode: Scheduled trigger:  `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. Notes: For `TIME_TRIGGER` and `CONTINUE_RUN` modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required; For `FILE_ARRIVAL` mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
 	TriggerMode pulumi.StringInput `pulumi:"triggerMode"`
-	// Trigger wait time in file arrival mode (seconds).
+	// This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version.
 	TriggerWaitTimeSecond pulumi.IntPtrInput `pulumi:"triggerWaitTimeSecond"`
 }
 
@@ -19900,7 +19927,9 @@ func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerId() 
 	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.TriggerId }).(pulumi.StringPtrOutput)
 }
 
-// Minimum trigger interval in file arrival mode (seconds).
+// This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+//
+// Deprecated: This parameter is deprecated and will be removed in a future version.
 func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerMinimumIntervalSecond() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *int {
 		return v.TriggerMinimumIntervalSecond
@@ -19912,7 +19941,9 @@ func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerMode(
 	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) string { return v.TriggerMode }).(pulumi.StringOutput)
 }
 
-// Trigger wait time in file arrival mode (seconds).
+// This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
+//
+// Deprecated: This parameter is deprecated and will be removed in a future version.
 func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerWaitTimeSecond() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *int { return v.TriggerWaitTimeSecond }).(pulumi.IntPtrOutput)
 }

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SyncDevicesToIOA](https://www.tencentcloud.com/search/?wd=SyncDevicesToIOA&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bh/syncDevicesToIoaOperation:SyncDevicesToIoaOperation")]
     public partial class SyncDevicesToIoaOperation : global::Pulumi.CustomResource

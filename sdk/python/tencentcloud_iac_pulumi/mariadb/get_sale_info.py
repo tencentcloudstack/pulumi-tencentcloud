@@ -86,6 +86,12 @@ def get_sale_info(result_output_file: Optional[_builtins.str] = None,
     sale_info = tencentcloud.mariadb.get_sale_info()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_sale_info_output(result_output_file: pulumi.Input[Optional[Optional[_bui
 
     sale_info = tencentcloud.mariadb.get_sale_info()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

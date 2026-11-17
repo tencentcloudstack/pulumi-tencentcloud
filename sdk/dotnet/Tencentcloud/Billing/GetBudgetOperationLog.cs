@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Billing
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetBudgetOperationLogResult> InvokeAsync(GetBudgetOperationLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBudgetOperationLogResult>("tencentcloud:Billing/getBudgetOperationLog:getBudgetOperationLog", args ?? new GetBudgetOperationLogArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Billing
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBudgetOperationLogResult> Invoke(GetBudgetOperationLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBudgetOperationLogResult>("tencentcloud:Billing/getBudgetOperationLog:getBudgetOperationLog", args ?? new GetBudgetOperationLogInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Billing
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBudgetOperationLogResult> Invoke(GetBudgetOperationLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBudgetOperationLogResult>("tencentcloud:Billing/getBudgetOperationLog:getBudgetOperationLog", args ?? new GetBudgetOperationLogInvokeArgs(), options.WithDefaults());

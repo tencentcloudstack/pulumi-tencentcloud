@@ -287,6 +287,14 @@ class PurgeTask(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePurgeTask](https://www.tencentcloud.com/document/api/1145/50536)
+          - [DescribePurgeTasks](https://www.tencentcloud.com/document/api/1145/50532)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -349,6 +357,14 @@ class PurgeTask(pulumi.CustomResource):
                 ],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePurgeTask](https://www.tencentcloud.com/document/api/1145/50536)
+          - [DescribePurgeTasks](https://www.tencentcloud.com/document/api/1145/50532)
 
 
         :param str resource_name: The name of the resource.

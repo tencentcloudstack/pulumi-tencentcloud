@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AssociateDirectConnectGatewayNatGateway](https://www.tencentcloud.com/document/api/215/38101)
+    /// * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+    /// * Delete: [DisassociateDirectConnectGatewayNatGateway](https://www.tencentcloud.com/document/api/215/38100)
+    /// 
     /// ## Import
     /// 
     /// DcGatewayAttachment can be imported using the id, e.g.

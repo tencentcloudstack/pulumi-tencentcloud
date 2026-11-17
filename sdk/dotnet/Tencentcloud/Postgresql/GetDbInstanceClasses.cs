@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
         /// </summary>
         public static Task<GetDbInstanceClassesResult> InvokeAsync(GetDbInstanceClassesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
         /// </summary>
         public static Output<GetDbInstanceClassesResult> Invoke(GetDbInstanceClassesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
         /// </summary>
         public static Output<GetDbInstanceClassesResult> Invoke(GetDbInstanceClassesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesInvokeArgs(), options.WithDefaults());

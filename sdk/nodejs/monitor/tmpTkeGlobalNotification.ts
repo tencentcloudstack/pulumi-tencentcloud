@@ -158,6 +158,14 @@ import * as utilities from "../utilities";
  *     dependsOn: [fooTmpTkeClusterAgent],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53768)
+ * * Update: [ModifyPrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53764)
+ * * Delete: [ModifyPrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53764)
  */
 export class TmpTkeGlobalNotification extends pulumi.CustomResource {
     /**

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
         /// </summary>
         public static Task<GetBinLogResult> InvokeAsync(GetBinLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
         /// </summary>
         public static Output<GetBinLogResult> Invoke(GetBinLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
         /// </summary>
         public static Output<GetBinLogResult> Invoke(GetBinLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogInvokeArgs(), options.WithDefaults());

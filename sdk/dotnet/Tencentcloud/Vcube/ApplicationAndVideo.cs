@@ -71,6 +71,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vcube
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateApplicationAndVideo](https://www.tencentcloud.com/search/?wd=CreateApplicationAndVideo&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeVcubeApplicationAndPlayList](https://www.tencentcloud.com/search/?wd=DescribeVcubeApplicationAndPlayList&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteApplicationAndVideoLicense](https://www.tencentcloud.com/search/?wd=DeleteApplicationAndVideoLicense&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// VCube application and video can be imported using the id, e.g.

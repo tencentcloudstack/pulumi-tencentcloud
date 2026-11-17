@@ -113,6 +113,12 @@ def get_snapshot_policies(result_output_file: Optional[_builtins.str] = None,
         snapshot_policy_name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str snapshot_policy_id: ID of the snapshot policy to be queried.
@@ -147,6 +153,12 @@ def get_snapshot_policies_output(result_output_file: pulumi.Input[Optional[Optio
     policies = tencentcloud.cbs.get_snapshot_policies(snapshot_policy_id="snap-f3io7adt",
         snapshot_policy_name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
 
 
     :param _builtins.str result_output_file: Used to save results.

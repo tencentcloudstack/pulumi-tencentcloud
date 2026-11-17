@@ -52,6 +52,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
 func LookupTawInstance(ctx *pulumi.Context, args *LookupTawInstanceArgs, opts ...pulumi.InvokeOption) (*LookupTawInstanceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTawInstanceResult

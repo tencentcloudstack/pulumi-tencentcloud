@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.cfw.SyncAsset("example", {});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAssetSync](https://www.tencentcloud.com/search/?wd=DescribeAssetSync&type=document&lang=en)
+ *   - [ModifyAssetSync](https://www.tencentcloud.com/search/?wd=ModifyAssetSync&type=document&lang=en)
  */
 export class SyncAsset extends pulumi.CustomResource {
     /**

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
         /// </summary>
         public static Task<GetListKeysResult> InvokeAsync(GetListKeysArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
         /// </summary>
         public static Output<GetListKeysResult> Invoke(GetListKeysInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
         /// </summary>
         public static Output<GetListKeysResult> Invoke(GetListKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListKeysResult>("tencentcloud:Kms/getListKeys:getListKeys", args ?? new GetListKeysInvokeArgs(), options.WithDefaults());

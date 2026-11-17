@@ -154,6 +154,15 @@ class SecurityGroups(pulumi.CustomResource):
             product="mariadb")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/237/39450)
+        * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
+        * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/237/39446)
+        * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/237/39447)
+
         ## Import
 
         mariadb security_groups can be imported using the id, e.g.
@@ -190,6 +199,15 @@ class SecurityGroups(pulumi.CustomResource):
             security_group_id="sg-7kpsbxdb",
             product="mariadb")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/237/39450)
+        * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
+        * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/237/39446)
+        * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/237/39447)
 
         ## Import
 

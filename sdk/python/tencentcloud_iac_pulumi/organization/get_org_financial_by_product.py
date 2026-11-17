@@ -140,6 +140,12 @@ def get_org_financial_by_product(end_month: Optional[_builtins.str] = None,
         product_codes=["p_eip"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationFinancialByProduct](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByProduct&type=document&lang=en)
+
 
     :param _builtins.str end_month: Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.
     :param Sequence[_builtins.int] member_uins: Member uin list. Up to 100.
@@ -184,6 +190,12 @@ def get_org_financial_by_product_output(end_month: pulumi.Input[Optional[Optiona
         end_month="2023-09",
         product_codes=["p_eip"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationFinancialByProduct](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByProduct&type=document&lang=en)
 
 
     :param _builtins.str end_month: Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.

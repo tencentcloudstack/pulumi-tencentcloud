@@ -165,6 +165,12 @@ def get_net_detect_state_check(detect_destination_ips: Optional[Sequence[_builti
         next_hop_destination="10.0.0.4")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
+
 
     :param Sequence[_builtins.str] detect_destination_ips: The array of detection destination IPv4 addresses, which contains at most two IP addresses.
     :param _builtins.str net_detect_id: ID of a network inspector instance, e.g. netd-12345678. Enter at least one of this parameter, VpcId, SubnetId, and NetDetectName. Use NetDetectId if it is present.
@@ -224,6 +230,12 @@ def get_net_detect_state_check_output(detect_destination_ips: pulumi.Input[Optio
         next_hop_type="NORMAL_CVM",
         next_hop_destination="10.0.0.4")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
 
 
     :param Sequence[_builtins.str] detect_destination_ips: The array of detection destination IPv4 addresses, which contains at most two IP addresses.

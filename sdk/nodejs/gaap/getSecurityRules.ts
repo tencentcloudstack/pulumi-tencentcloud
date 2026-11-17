@@ -39,6 +39,12 @@ import * as utilities from "../utilities";
  *     protocol: fooSecurityRule.protocol,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
  */
 export function getSecurityRules(args: GetSecurityRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -161,6 +167,12 @@ export interface GetSecurityRulesResult {
  *     protocol: fooSecurityRule.protocol,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
  */
 export function getSecurityRulesOutput(args: GetSecurityRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTriggerTaskVersions](https://www.tencentcloud.com/document/api/1174/77920)
         /// </summary>
         public static Task<GetTriggerTaskVersionsResult> InvokeAsync(GetTriggerTaskVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggerTaskVersionsResult>("tencentcloud:Wedata/getTriggerTaskVersions:getTriggerTaskVersions", args ?? new GetTriggerTaskVersionsArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTriggerTaskVersions](https://www.tencentcloud.com/document/api/1174/77920)
         /// </summary>
         public static Output<GetTriggerTaskVersionsResult> Invoke(GetTriggerTaskVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerTaskVersionsResult>("tencentcloud:Wedata/getTriggerTaskVersions:getTriggerTaskVersions", args ?? new GetTriggerTaskVersionsInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTriggerTaskVersions](https://www.tencentcloud.com/document/api/1174/77920)
         /// </summary>
         public static Output<GetTriggerTaskVersionsResult> Invoke(GetTriggerTaskVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerTaskVersionsResult>("tencentcloud:Wedata/getTriggerTaskVersions:getTriggerTaskVersions", args ?? new GetTriggerTaskVersionsInvokeArgs(), options.WithDefaults());

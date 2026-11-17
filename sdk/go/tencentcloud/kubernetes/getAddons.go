@@ -65,6 +65,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
 func GetAddons(ctx *pulumi.Context, args *GetAddonsArgs, opts ...pulumi.InvokeOption) (*GetAddonsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAddonsResult

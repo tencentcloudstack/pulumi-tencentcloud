@@ -119,6 +119,18 @@ class GrafanaVersionUpgrade(pulumi.CustomResource):
             alias="v8.2.7")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpgradeGrafanaInstance](https://www.tencentcloud.com/document/api/248/49739)
+        * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpgradeGrafanaInstance](https://www.tencentcloud.com/document/api/248/49739)
+
         ## Import
 
         monitor grafana_version_upgrade can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class GrafanaVersionUpgrade(pulumi.CustomResource):
             instance_id="grafana-dp2hnnfa",
             alias="v8.2.7")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpgradeGrafanaInstance](https://www.tencentcloud.com/document/api/248/49739)
+        * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpgradeGrafanaInstance](https://www.tencentcloud.com/document/api/248/49739)
 
         ## Import
 

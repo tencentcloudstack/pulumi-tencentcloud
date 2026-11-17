@@ -51,6 +51,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateL7HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL7HealthConfig&amp;type=document&amp;lang=en)
+    ///   - [CreateL7Rules](https://www.tencentcloud.com/search/?wd=CreateL7Rules&amp;type=document&amp;lang=en)
+    ///   - [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&amp;type=document&amp;lang=en)
+    ///   - [ModifyCCHostProtection](https://www.tencentcloud.com/search/?wd=ModifyCCHostProtection&amp;type=document&amp;lang=en)
+    ///   - [ModifyCCThreshold](https://www.tencentcloud.com/search/?wd=ModifyCCThreshold&amp;type=document&amp;lang=en)
+    /// * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CreateL7HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL7HealthConfig&amp;type=document&amp;lang=en)
+    ///   - [ModifyCCHostProtection](https://www.tencentcloud.com/search/?wd=ModifyCCHostProtection&amp;type=document&amp;lang=en)
+    ///   - [ModifyCCThreshold](https://www.tencentcloud.com/search/?wd=ModifyCCThreshold&amp;type=document&amp;lang=en)
+    ///   - [ModifyL7Rules](https://www.tencentcloud.com/search/?wd=ModifyL7Rules&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteL7Rules](https://www.tencentcloud.com/search/?wd=DeleteL7Rules&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l7Rule:L7Rule")]
     public partial class L7Rule : global::Pulumi.CustomResource

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifySwitchTimePeriod](https://www.tencentcloud.com/document/api/409/41612)
 type ModifySwitchTimePeriodOperation struct {
 	pulumi.CustomResourceState
 

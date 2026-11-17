@@ -294,6 +294,15 @@ class AclRule(pulumi.CustomResource):
             is_applied=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAclRule](https://www.tencentcloud.com/document/api/597/54585)
+        * Read: [DescribeAclRule](https://www.tencentcloud.com/document/api/597/54584)
+        * Update: [ModifyAclRule](https://www.tencentcloud.com/document/api/597/54583)
+        * Delete: [DeleteAclRule](https://www.tencentcloud.com/document/api/597/74428)
+
         ## Import
 
         ckafka acl_rule can be imported using the id, e.g.
@@ -342,6 +351,15 @@ class AclRule(pulumi.CustomResource):
             pattern="prefix",
             is_applied=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAclRule](https://www.tencentcloud.com/document/api/597/54585)
+        * Read: [DescribeAclRule](https://www.tencentcloud.com/document/api/597/54584)
+        * Update: [ModifyAclRule](https://www.tencentcloud.com/document/api/597/54583)
+        * Delete: [DeleteAclRule](https://www.tencentcloud.com/document/api/597/74428)
 
         ## Import
 

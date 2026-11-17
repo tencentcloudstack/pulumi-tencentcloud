@@ -1051,6 +1051,229 @@ func (o WorkloadGroupWorkloadGroupPtrOutput) WorkloadGroupName() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetInstanceNodesInstanceNodesList struct {
+	// Compute group ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ComputeGroupId string `pulumi:"computeGroupId"`
+	// Number of CPU cores. Note: This field may return null, indicating that no valid values can be obtained.
+	Core int `pulumi:"core"`
+	// Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk type. Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType string `pulumi:"diskType"`
+	// FE node role. Note: This field may return null, indicating that no valid values can be obtained.
+	FeRole string `pulumi:"feRole"`
+	// IP address. Note: This field may return null, indicating that no valid values can be obtained.
+	Ip string `pulumi:"ip"`
+	// Memory size. Note: This field may return null, indicating that no valid values can be obtained.
+	Memory int `pulumi:"memory"`
+	// Rip. Note: This field may return null, indicating that no valid values can be obtained.
+	Rip string `pulumi:"rip"`
+	// Name of the clickhouse cluster to which it belongs. Note: This field may return null, indicating that no valid values can be obtained.
+	Role string `pulumi:"role"`
+	// Model, such as S1. Note: This field may return null, indicating that no valid values can be obtained.
+	Spec string `pulumi:"spec"`
+	// Status. Note: This field may return null, indicating that no valid values can be obtained.
+	Status string `pulumi:"status"`
+	// UUID. Note: This field may return null, indicating that no valid values can be obtained.
+	Uuid string `pulumi:"uuid"`
+	// Virtual availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+	VirtualZone string `pulumi:"virtualZone"`
+	// Availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstanceNodesInstanceNodesListInput is an input type that accepts GetInstanceNodesInstanceNodesListArgs and GetInstanceNodesInstanceNodesListOutput values.
+// You can construct a concrete instance of `GetInstanceNodesInstanceNodesListInput` via:
+//
+//	GetInstanceNodesInstanceNodesListArgs{...}
+type GetInstanceNodesInstanceNodesListInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodesInstanceNodesListOutput() GetInstanceNodesInstanceNodesListOutput
+	ToGetInstanceNodesInstanceNodesListOutputWithContext(context.Context) GetInstanceNodesInstanceNodesListOutput
+}
+
+type GetInstanceNodesInstanceNodesListArgs struct {
+	// Compute group ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ComputeGroupId pulumi.StringInput `pulumi:"computeGroupId"`
+	// Number of CPU cores. Note: This field may return null, indicating that no valid values can be obtained.
+	Core pulumi.IntInput `pulumi:"core"`
+	// Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk type. Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// FE node role. Note: This field may return null, indicating that no valid values can be obtained.
+	FeRole pulumi.StringInput `pulumi:"feRole"`
+	// IP address. Note: This field may return null, indicating that no valid values can be obtained.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Memory size. Note: This field may return null, indicating that no valid values can be obtained.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Rip. Note: This field may return null, indicating that no valid values can be obtained.
+	Rip pulumi.StringInput `pulumi:"rip"`
+	// Name of the clickhouse cluster to which it belongs. Note: This field may return null, indicating that no valid values can be obtained.
+	Role pulumi.StringInput `pulumi:"role"`
+	// Model, such as S1. Note: This field may return null, indicating that no valid values can be obtained.
+	Spec pulumi.StringInput `pulumi:"spec"`
+	// Status. Note: This field may return null, indicating that no valid values can be obtained.
+	Status pulumi.StringInput `pulumi:"status"`
+	// UUID. Note: This field may return null, indicating that no valid values can be obtained.
+	Uuid pulumi.StringInput `pulumi:"uuid"`
+	// Virtual availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+	VirtualZone pulumi.StringInput `pulumi:"virtualZone"`
+	// Availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstanceNodesInstanceNodesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodesInstanceNodesList)(nil)).Elem()
+}
+
+func (i GetInstanceNodesInstanceNodesListArgs) ToGetInstanceNodesInstanceNodesListOutput() GetInstanceNodesInstanceNodesListOutput {
+	return i.ToGetInstanceNodesInstanceNodesListOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodesInstanceNodesListArgs) ToGetInstanceNodesInstanceNodesListOutputWithContext(ctx context.Context) GetInstanceNodesInstanceNodesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodesInstanceNodesListOutput)
+}
+
+// GetInstanceNodesInstanceNodesListArrayInput is an input type that accepts GetInstanceNodesInstanceNodesListArray and GetInstanceNodesInstanceNodesListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceNodesInstanceNodesListArrayInput` via:
+//
+//	GetInstanceNodesInstanceNodesListArray{ GetInstanceNodesInstanceNodesListArgs{...} }
+type GetInstanceNodesInstanceNodesListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceNodesInstanceNodesListArrayOutput() GetInstanceNodesInstanceNodesListArrayOutput
+	ToGetInstanceNodesInstanceNodesListArrayOutputWithContext(context.Context) GetInstanceNodesInstanceNodesListArrayOutput
+}
+
+type GetInstanceNodesInstanceNodesListArray []GetInstanceNodesInstanceNodesListInput
+
+func (GetInstanceNodesInstanceNodesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodesInstanceNodesList)(nil)).Elem()
+}
+
+func (i GetInstanceNodesInstanceNodesListArray) ToGetInstanceNodesInstanceNodesListArrayOutput() GetInstanceNodesInstanceNodesListArrayOutput {
+	return i.ToGetInstanceNodesInstanceNodesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceNodesInstanceNodesListArray) ToGetInstanceNodesInstanceNodesListArrayOutputWithContext(ctx context.Context) GetInstanceNodesInstanceNodesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceNodesInstanceNodesListArrayOutput)
+}
+
+type GetInstanceNodesInstanceNodesListOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodesInstanceNodesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceNodesInstanceNodesList)(nil)).Elem()
+}
+
+func (o GetInstanceNodesInstanceNodesListOutput) ToGetInstanceNodesInstanceNodesListOutput() GetInstanceNodesInstanceNodesListOutput {
+	return o
+}
+
+func (o GetInstanceNodesInstanceNodesListOutput) ToGetInstanceNodesInstanceNodesListOutputWithContext(ctx context.Context) GetInstanceNodesInstanceNodesListOutput {
+	return o
+}
+
+// Compute group ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) ComputeGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.ComputeGroupId }).(pulumi.StringOutput)
+}
+
+// Number of CPU cores. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Core() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) int { return v.Core }).(pulumi.IntOutput)
+}
+
+// Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk type. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// FE node role. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) FeRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.FeRole }).(pulumi.StringOutput)
+}
+
+// IP address. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Memory size. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Rip. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Rip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Rip }).(pulumi.StringOutput)
+}
+
+// Name of the clickhouse cluster to which it belongs. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// Model, such as S1. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Spec() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Spec }).(pulumi.StringOutput)
+}
+
+// Status. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// UUID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Uuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Uuid }).(pulumi.StringOutput)
+}
+
+// Virtual availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) VirtualZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.VirtualZone }).(pulumi.StringOutput)
+}
+
+// Availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstanceNodesInstanceNodesListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceNodesInstanceNodesList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstanceNodesInstanceNodesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceNodesInstanceNodesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceNodesInstanceNodesList)(nil)).Elem()
+}
+
+func (o GetInstanceNodesInstanceNodesListArrayOutput) ToGetInstanceNodesInstanceNodesListArrayOutput() GetInstanceNodesInstanceNodesListArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodesInstanceNodesListArrayOutput) ToGetInstanceNodesInstanceNodesListArrayOutputWithContext(ctx context.Context) GetInstanceNodesInstanceNodesListArrayOutput {
+	return o
+}
+
+func (o GetInstanceNodesInstanceNodesListArrayOutput) Index(i pulumi.IntInput) GetInstanceNodesInstanceNodesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceNodesInstanceNodesList {
+		return vs[0].([]GetInstanceNodesInstanceNodesList)[vs[1].(int)]
+	}).(GetInstanceNodesInstanceNodesListOutput)
+}
+
 type GetInstancesInstancesList struct {
 	// Access address. Example: 10.0.0.1:9000. Note: This field may return null, indicating that no valid values can be obtained.
 	AccessInfo string `pulumi:"accessInfo"`
@@ -2467,6 +2690,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceUserMultiZoneInfosPtrInput)(nil)).Elem(), InstanceUserMultiZoneInfosArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadGroupWorkloadGroupInput)(nil)).Elem(), WorkloadGroupWorkloadGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadGroupWorkloadGroupPtrInput)(nil)).Elem(), WorkloadGroupWorkloadGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodesInstanceNodesListInput)(nil)).Elem(), GetInstanceNodesInstanceNodesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodesInstanceNodesListArrayInput)(nil)).Elem(), GetInstanceNodesInstanceNodesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstancesListInput)(nil)).Elem(), GetInstancesInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstancesListArrayInput)(nil)).Elem(), GetInstancesInstancesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstancesListCoreSummaryInput)(nil)).Elem(), GetInstancesInstancesListCoreSummaryArgs{})
@@ -2493,6 +2718,8 @@ func init() {
 	pulumi.RegisterOutputType(InstanceUserMultiZoneInfosPtrOutput{})
 	pulumi.RegisterOutputType(WorkloadGroupWorkloadGroupOutput{})
 	pulumi.RegisterOutputType(WorkloadGroupWorkloadGroupPtrOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodesInstanceNodesListOutput{})
+	pulumi.RegisterOutputType(GetInstanceNodesInstanceNodesListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstancesListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstancesListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstancesListCoreSummaryOutput{})

@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetStandardEngineResourceGroupConfigInformationResult> InvokeAsync(GetStandardEngineResourceGroupConfigInformationArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStandardEngineResourceGroupConfigInformationResult>("tencentcloud:Dlc/getStandardEngineResourceGroupConfigInformation:getStandardEngineResourceGroupConfigInformation", args ?? new GetStandardEngineResourceGroupConfigInformationArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetStandardEngineResourceGroupConfigInformationResult> Invoke(GetStandardEngineResourceGroupConfigInformationInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStandardEngineResourceGroupConfigInformationResult>("tencentcloud:Dlc/getStandardEngineResourceGroupConfigInformation:getStandardEngineResourceGroupConfigInformation", args ?? new GetStandardEngineResourceGroupConfigInformationInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetStandardEngineResourceGroupConfigInformationResult> Invoke(GetStandardEngineResourceGroupConfigInformationInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStandardEngineResourceGroupConfigInformationResult>("tencentcloud:Dlc/getStandardEngineResourceGroupConfigInformation:getStandardEngineResourceGroupConfigInformation", args ?? new GetStandardEngineResourceGroupConfigInformationInvokeArgs(), options.WithDefaults());

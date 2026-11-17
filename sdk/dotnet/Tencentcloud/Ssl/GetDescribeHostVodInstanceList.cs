@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDescribeHostVodInstanceListResult> InvokeAsync(GetDescribeHostVodInstanceListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostVodInstanceListResult>("tencentcloud:Ssl/getDescribeHostVodInstanceList:getDescribeHostVodInstanceList", args ?? new GetDescribeHostVodInstanceListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeHostVodInstanceListResult> Invoke(GetDescribeHostVodInstanceListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostVodInstanceListResult>("tencentcloud:Ssl/getDescribeHostVodInstanceList:getDescribeHostVodInstanceList", args ?? new GetDescribeHostVodInstanceListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeHostVodInstanceListResult> Invoke(GetDescribeHostVodInstanceListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostVodInstanceListResult>("tencentcloud:Ssl/getDescribeHostVodInstanceList:getDescribeHostVodInstanceList", args ?? new GetDescribeHostVodInstanceListInvokeArgs(), options.WithDefaults());

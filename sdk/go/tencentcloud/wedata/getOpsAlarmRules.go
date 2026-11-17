@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
 func GetOpsAlarmRules(ctx *pulumi.Context, args *GetOpsAlarmRulesArgs, opts ...pulumi.InvokeOption) (*GetOpsAlarmRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOpsAlarmRulesResult

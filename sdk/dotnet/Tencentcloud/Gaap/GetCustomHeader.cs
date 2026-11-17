@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
         /// </summary>
         public static Task<GetCustomHeaderResult> InvokeAsync(GetCustomHeaderArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
         /// </summary>
         public static Output<GetCustomHeaderResult> Invoke(GetCustomHeaderInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
         /// </summary>
         public static Output<GetCustomHeaderResult> Invoke(GetCustomHeaderInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderInvokeArgs(), options.WithDefaults());

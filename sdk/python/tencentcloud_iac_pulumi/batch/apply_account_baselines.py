@@ -128,6 +128,12 @@ class ApplyAccountBaselines(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BatchApplyAccountBaselines](https://www.tencentcloud.com/document/api/1220/63390)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -159,6 +165,12 @@ class ApplyAccountBaselines(pulumi.CustomResource):
                 "configuration": "{\\"Images\\":[{\\"Region\\":\\"ap-guangzhou\\",\\"ImageId\\":\\"img-mcdsiqrx\\",\\"ImageName\\":\\"demo1\\"}, {\\"Region\\":\\"ap-guangzhou\\",\\"ImageId\\":\\"img-esxgkots\\",\\"ImageName\\":\\"demo2\\"}]}",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BatchApplyAccountBaselines](https://www.tencentcloud.com/document/api/1220/63390)
 
 
         :param str resource_name: The name of the resource.

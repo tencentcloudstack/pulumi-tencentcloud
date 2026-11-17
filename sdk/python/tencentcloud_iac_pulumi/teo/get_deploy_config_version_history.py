@@ -118,6 +118,12 @@ def get_deploy_config_version_history(env_id: Optional[_builtins.str] = None,
         env_id="env-2quhspyeq8r6")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
+
 
     :param _builtins.str env_id: Environment ID.
     :param Sequence[Union['GetDeployConfigVersionHistoryFilterArgs', 'GetDeployConfigVersionHistoryFilterArgsDict']] filters: Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: record-id (Filter by release record ID).
@@ -156,6 +162,12 @@ def get_deploy_config_version_history_output(env_id: pulumi.Input[Optional[_buil
     teo_deploy_config_version_history = tencentcloud.teo.get_deploy_config_version_history(zone_id="zone-2qtuhspy7cr6",
         env_id="env-2quhspyeq8r6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
 
 
     :param _builtins.str env_id: Environment ID.

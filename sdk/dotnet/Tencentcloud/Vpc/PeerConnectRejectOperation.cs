@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RejectVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=RejectVpcPeeringConnection&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/peerConnectRejectOperation:PeerConnectRejectOperation")]
     public partial class PeerConnectRejectOperation : global::Pulumi.CustomResource

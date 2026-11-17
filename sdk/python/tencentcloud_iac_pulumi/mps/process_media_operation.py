@@ -554,6 +554,12 @@ class ProcessMediaOperation(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ProcessMedia](https://www.tencentcloud.com/document/api/1041/33640)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -627,6 +633,12 @@ class ProcessMediaOperation(pulumi.CustomResource):
                 "notify_type": "CMQ",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ProcessMedia](https://www.tencentcloud.com/document/api/1041/33640)
 
 
         :param str resource_name: The name of the resource.

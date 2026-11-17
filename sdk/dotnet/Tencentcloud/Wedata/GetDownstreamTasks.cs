@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamTasks](https://www.tencentcloud.com/document/api/1174/73872)
         /// </summary>
         public static Task<GetDownstreamTasksResult> InvokeAsync(GetDownstreamTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDownstreamTasksResult>("tencentcloud:Wedata/getDownstreamTasks:getDownstreamTasks", args ?? new GetDownstreamTasksArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamTasks](https://www.tencentcloud.com/document/api/1174/73872)
         /// </summary>
         public static Output<GetDownstreamTasksResult> Invoke(GetDownstreamTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDownstreamTasksResult>("tencentcloud:Wedata/getDownstreamTasks:getDownstreamTasks", args ?? new GetDownstreamTasksInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamTasks](https://www.tencentcloud.com/document/api/1174/73872)
         /// </summary>
         public static Output<GetDownstreamTasksResult> Invoke(GetDownstreamTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDownstreamTasksResult>("tencentcloud:Wedata/getDownstreamTasks:getDownstreamTasks", args ?? new GetDownstreamTasksInvokeArgs(), options.WithDefaults());

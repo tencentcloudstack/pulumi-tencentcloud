@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [SendRocketMQMessage](https://www.tencentcloud.com/search/?wd=SendRocketMQMessage&type=document&lang=en)
 type SendRocketmqMessage struct {
 	pulumi.CustomResourceState
 

@@ -75,6 +75,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
         /// </summary>
         public static Task<GetPermissionPoliciesInRoleConfigurationResult> InvokeAsync(GetPermissionPoliciesInRoleConfigurationArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPermissionPoliciesInRoleConfigurationResult>("tencentcloud:Organization/getPermissionPoliciesInRoleConfiguration:getPermissionPoliciesInRoleConfiguration", args ?? new GetPermissionPoliciesInRoleConfigurationArgs(), options.WithDefaults());
@@ -142,6 +148,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
         /// </summary>
         public static Output<GetPermissionPoliciesInRoleConfigurationResult> Invoke(GetPermissionPoliciesInRoleConfigurationInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPermissionPoliciesInRoleConfigurationResult>("tencentcloud:Organization/getPermissionPoliciesInRoleConfiguration:getPermissionPoliciesInRoleConfiguration", args ?? new GetPermissionPoliciesInRoleConfigurationInvokeArgs(), options.WithDefaults());
@@ -209,6 +221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
         /// </summary>
         public static Output<GetPermissionPoliciesInRoleConfigurationResult> Invoke(GetPermissionPoliciesInRoleConfigurationInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPermissionPoliciesInRoleConfigurationResult>("tencentcloud:Organization/getPermissionPoliciesInRoleConfiguration:getPermissionPoliciesInRoleConfiguration", args ?? new GetPermissionPoliciesInRoleConfigurationInvokeArgs(), options.WithDefaults());

@@ -49,6 +49,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&type=document&lang=en)
+// * Read: [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&type=document&lang=en)
+// * Delete: [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&type=document&lang=en)
+//
 // ## Import
 //
 // antiddos portAclConfig can be imported using the id, e.g.

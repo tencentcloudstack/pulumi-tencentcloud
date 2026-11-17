@@ -182,6 +182,12 @@ def get_keys(hsm_cluster_id: Optional[_builtins.str] = None,
         hsm_cluster_id="cls-hsm-mwpd9cjm")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListKeyDetail](https://www.tencentcloud.com/document/api/1030/32185)
+
 
     :param _builtins.str hsm_cluster_id: The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).
     :param _builtins.int key_state: Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
@@ -243,6 +249,12 @@ def get_keys_output(hsm_cluster_id: pulumi.Input[Optional[Optional[_builtins.str
         key_usage="ALL",
         hsm_cluster_id="cls-hsm-mwpd9cjm")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListKeyDetail](https://www.tencentcloud.com/document/api/1030/32185)
 
 
     :param _builtins.str hsm_cluster_id: The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).

@@ -107,6 +107,22 @@ __all__ = [
     'GetStandardEngineResourceGroupConfigInformationStandardEngineResourceGroupConfigInfoStaticConfigPairResult',
     'GetTaskResultTaskInfoResult',
     'GetTaskResultTaskInfoResultSchemaResult',
+    'MetaDatabaseGovernPolicy',
+    'MetaDatabaseMetaDatabaseInfo',
+    'MetaDatabaseProperty',
+    'MetaDatabaseSmartPolicy',
+    'MetaDatabaseSmartPolicyBaseInfo',
+    'MetaDatabaseSmartPolicyPolicy',
+    'MetaDatabaseSmartPolicyPolicyChangeTable',
+    'MetaDatabaseSmartPolicyPolicyIndex',
+    'MetaDatabaseSmartPolicyPolicyLifecycle',
+    'MetaDatabaseSmartPolicyPolicyResource',
+    'MetaDatabaseSmartPolicyPolicyResourceFavor',
+    'MetaDatabaseSmartPolicyPolicyResourceResourceConf',
+    'MetaDatabaseSmartPolicyPolicyTableExpiration',
+    'MetaDatabaseSmartPolicyPolicyWritten',
+    'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy',
+    'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder',
     'StandardEngineResourceGroupConfigInfoDynamicConfContext',
     'StandardEngineResourceGroupConfigInfoDynamicConfContextParam',
     'StandardEngineResourceGroupConfigInfoStaticConfContext',
@@ -347,7 +363,7 @@ class AttachUserPolicyAttachmentPolicySet(dict):
         :param _builtins.str database: The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
         :param _builtins.str engine_generation: Engine type.
         :param _builtins.str function: The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
-        :param _builtins.int id: ID of the resource.
+        :param _builtins.int id: The policy ID.
         :param _builtins.bool is_admin_policy: Whether the permission source is admin.
         :param _builtins.str mode: The grant mode, Valid values: `COMMON` and `SENIOR`.
         :param _builtins.str model: The name of the target Model. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
@@ -465,7 +481,7 @@ class AttachUserPolicyAttachmentPolicySet(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.int]:
         """
-        ID of the resource.
+        The policy ID.
         """
         return pulumi.get(self, "id")
 
@@ -875,7 +891,7 @@ class AttachWorkGroupPolicyAttachmentPolicySet(dict):
         :param _builtins.str data_engine: The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
         :param _builtins.str engine_generation: The engine generation/type.
         :param _builtins.str function: The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
-        :param _builtins.int id: ID of the resource.
+        :param _builtins.int id: The policy ID.
         :param _builtins.bool is_admin_policy: Whether the permission source is admin, which is not required as an input parameter.
         :param _builtins.str mode: The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
         :param _builtins.str model: The name of the target Model. `*` represents all models in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any model.
@@ -1003,7 +1019,7 @@ class AttachWorkGroupPolicyAttachmentPolicySet(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.int]:
         """
-        ID of the resource.
+        The policy ID.
         """
         return pulumi.get(self, "id")
 
@@ -4453,6 +4469,1085 @@ class DetachWorkGroupPolicyOperationPolicySet(dict):
         The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
         """
         return pulumi.get(self, "view")
+
+
+@pulumi.output_type
+class MetaDatabaseGovernPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "governEngine":
+            suggest = "govern_engine"
+        elif key == "ruleType":
+            suggest = "rule_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseGovernPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseGovernPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseGovernPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 govern_engine: Optional[_builtins.str] = None,
+                 rule_type: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str govern_engine: Govern engine.
+        :param _builtins.str rule_type: Govern rule type, `Customize` or `Intelligence`.
+        """
+        if govern_engine is not None:
+            pulumi.set(__self__, "govern_engine", govern_engine)
+        if rule_type is not None:
+            pulumi.set(__self__, "rule_type", rule_type)
+
+    @_builtins.property
+    @pulumi.getter(name="governEngine")
+    def govern_engine(self) -> Optional[_builtins.str]:
+        """
+        Govern engine.
+        """
+        return pulumi.get(self, "govern_engine")
+
+    @_builtins.property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> Optional[_builtins.str]:
+        """
+        Govern rule type, `Customize` or `Intelligence`.
+        """
+        return pulumi.get(self, "rule_type")
+
+
+@pulumi.output_type
+class MetaDatabaseMetaDatabaseInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "databaseName":
+            suggest = "database_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseMetaDatabaseInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseMetaDatabaseInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseMetaDatabaseInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 database_name: _builtins.str,
+                 comment: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str database_name: Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+        :param _builtins.str comment: Description of the DLC meta database, length 0~2048.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        if comment is not None:
+            pulumi.set(__self__, "comment", comment)
+
+    @_builtins.property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> _builtins.str:
+        """
+        Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+        """
+        return pulumi.get(self, "database_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def comment(self) -> Optional[_builtins.str]:
+        """
+        Description of the DLC meta database, length 0~2048.
+        """
+        return pulumi.get(self, "comment")
+
+
+@pulumi.output_type
+class MetaDatabaseProperty(dict):
+    def __init__(__self__, *,
+                 key: Optional[_builtins.str] = None,
+                 value: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str key: Property key.
+        :param _builtins.str value: Property value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> Optional[_builtins.str]:
+        """
+        Property key.
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> Optional[_builtins.str]:
+        """
+        Property value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "baseInfo":
+            suggest = "base_info"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 base_info: Optional['outputs.MetaDatabaseSmartPolicyBaseInfo'] = None,
+                 policy: Optional['outputs.MetaDatabaseSmartPolicyPolicy'] = None):
+        """
+        :param 'MetaDatabaseSmartPolicyBaseInfoArgs' base_info: Base info of smart policy.
+        :param 'MetaDatabaseSmartPolicyPolicyArgs' policy: Policy description of smart policy.
+        """
+        if base_info is not None:
+            pulumi.set(__self__, "base_info", base_info)
+        if policy is not None:
+            pulumi.set(__self__, "policy", policy)
+
+    @_builtins.property
+    @pulumi.getter(name="baseInfo")
+    def base_info(self) -> Optional['outputs.MetaDatabaseSmartPolicyBaseInfo']:
+        """
+        Base info of smart policy.
+        """
+        return pulumi.get(self, "base_info")
+
+    @_builtins.property
+    @pulumi.getter
+    def policy(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicy']:
+        """
+        Policy description of smart policy.
+        """
+        return pulumi.get(self, "policy")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyBaseInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "appId":
+            suggest = "app_id"
+        elif key == "policyType":
+            suggest = "policy_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyBaseInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyBaseInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyBaseInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 uin: _builtins.str,
+                 app_id: Optional[_builtins.str] = None,
+                 catalog: Optional[_builtins.str] = None,
+                 database: Optional[_builtins.str] = None,
+                 policy_type: Optional[_builtins.str] = None,
+                 table: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str uin: User UIN.
+        :param _builtins.str app_id: User AppID.
+        :param _builtins.str catalog: Catalog name.
+        :param _builtins.str database: Database name.
+        :param _builtins.str policy_type: Policy type.
+        :param _builtins.str table: Table name.
+        """
+        pulumi.set(__self__, "uin", uin)
+        if app_id is not None:
+            pulumi.set(__self__, "app_id", app_id)
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if database is not None:
+            pulumi.set(__self__, "database", database)
+        if policy_type is not None:
+            pulumi.set(__self__, "policy_type", policy_type)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+
+    @_builtins.property
+    @pulumi.getter
+    def uin(self) -> _builtins.str:
+        """
+        User UIN.
+        """
+        return pulumi.get(self, "uin")
+
+    @_builtins.property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> Optional[_builtins.str]:
+        """
+        User AppID.
+        """
+        return pulumi.get(self, "app_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def catalog(self) -> Optional[_builtins.str]:
+        """
+        Catalog name.
+        """
+        return pulumi.get(self, "catalog")
+
+    @_builtins.property
+    @pulumi.getter
+    def database(self) -> Optional[_builtins.str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @_builtins.property
+    @pulumi.getter(name="policyType")
+    def policy_type(self) -> Optional[_builtins.str]:
+        """
+        Policy type.
+        """
+        return pulumi.get(self, "policy_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def table(self) -> Optional[_builtins.str]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "changeTable":
+            suggest = "change_table"
+        elif key == "tableExpiration":
+            suggest = "table_expiration"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 change_table: Optional['outputs.MetaDatabaseSmartPolicyPolicyChangeTable'] = None,
+                 index: Optional['outputs.MetaDatabaseSmartPolicyPolicyIndex'] = None,
+                 inherit: Optional[_builtins.str] = None,
+                 lifecycle: Optional['outputs.MetaDatabaseSmartPolicyPolicyLifecycle'] = None,
+                 resources: Optional[Sequence['outputs.MetaDatabaseSmartPolicyPolicyResource']] = None,
+                 table_expiration: Optional['outputs.MetaDatabaseSmartPolicyPolicyTableExpiration'] = None,
+                 written: Optional['outputs.MetaDatabaseSmartPolicyPolicyWritten'] = None):
+        """
+        :param 'MetaDatabaseSmartPolicyPolicyChangeTableArgs' change_table: Change table policy.
+        :param 'MetaDatabaseSmartPolicyPolicyIndexArgs' index: Index policy.
+        :param _builtins.str inherit: Whether to inherit.
+        :param 'MetaDatabaseSmartPolicyPolicyLifecycleArgs' lifecycle: Data lifecycle policy.
+        :param Sequence['MetaDatabaseSmartPolicyPolicyResourceArgs'] resources: Data governance resources.
+        :param 'MetaDatabaseSmartPolicyPolicyTableExpirationArgs' table_expiration: Table expiration policy.
+        :param 'MetaDatabaseSmartPolicyPolicyWrittenArgs' written: Data rewrite policy.
+        """
+        if change_table is not None:
+            pulumi.set(__self__, "change_table", change_table)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if inherit is not None:
+            pulumi.set(__self__, "inherit", inherit)
+        if lifecycle is not None:
+            pulumi.set(__self__, "lifecycle", lifecycle)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+        if table_expiration is not None:
+            pulumi.set(__self__, "table_expiration", table_expiration)
+        if written is not None:
+            pulumi.set(__self__, "written", written)
+
+    @_builtins.property
+    @pulumi.getter(name="changeTable")
+    def change_table(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyChangeTable']:
+        """
+        Change table policy.
+        """
+        return pulumi.get(self, "change_table")
+
+    @_builtins.property
+    @pulumi.getter
+    def index(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyIndex']:
+        """
+        Index policy.
+        """
+        return pulumi.get(self, "index")
+
+    @_builtins.property
+    @pulumi.getter
+    def inherit(self) -> Optional[_builtins.str]:
+        """
+        Whether to inherit.
+        """
+        return pulumi.get(self, "inherit")
+
+    @_builtins.property
+    @pulumi.getter
+    def lifecycle(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyLifecycle']:
+        """
+        Data lifecycle policy.
+        """
+        return pulumi.get(self, "lifecycle")
+
+    @_builtins.property
+    @pulumi.getter
+    def resources(self) -> Optional[Sequence['outputs.MetaDatabaseSmartPolicyPolicyResource']]:
+        """
+        Data governance resources.
+        """
+        return pulumi.get(self, "resources")
+
+    @_builtins.property
+    @pulumi.getter(name="tableExpiration")
+    def table_expiration(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyTableExpiration']:
+        """
+        Table expiration policy.
+        """
+        return pulumi.get(self, "table_expiration")
+
+    @_builtins.property
+    @pulumi.getter
+    def written(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyWritten']:
+        """
+        Data rewrite policy.
+        """
+        return pulumi.get(self, "written")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyChangeTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dataRetentionTime":
+            suggest = "data_retention_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyChangeTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyChangeTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyChangeTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 data_retention_time: Optional[_builtins.int] = None):
+        """
+        :param _builtins.int data_retention_time: Data retention time of change table, in days.
+        """
+        if data_retention_time is not None:
+            pulumi.set(__self__, "data_retention_time", data_retention_time)
+
+    @_builtins.property
+    @pulumi.getter(name="dataRetentionTime")
+    def data_retention_time(self) -> Optional[_builtins.int]:
+        """
+        Data retention time of change table, in days.
+        """
+        return pulumi.get(self, "data_retention_time")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyIndex(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "indexEnable":
+            suggest = "index_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyIndex. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyIndex.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyIndex.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 index_enable: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str index_enable: Whether to enable index.
+        """
+        if index_enable is not None:
+            pulumi.set(__self__, "index_enable", index_enable)
+
+    @_builtins.property
+    @pulumi.getter(name="indexEnable")
+    def index_enable(self) -> Optional[_builtins.str]:
+        """
+        Whether to enable index.
+        """
+        return pulumi.get(self, "index_enable")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyLifecycle(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dropTable":
+            suggest = "drop_table"
+        elif key == "expiredField":
+            suggest = "expired_field"
+        elif key == "expiredFieldFormat":
+            suggest = "expired_field_format"
+        elif key == "lifecycleEnable":
+            suggest = "lifecycle_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyLifecycle. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyLifecycle.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyLifecycle.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 drop_table: Optional[_builtins.bool] = None,
+                 expiration: Optional[_builtins.int] = None,
+                 expired_field: Optional[_builtins.str] = None,
+                 expired_field_format: Optional[_builtins.str] = None,
+                 lifecycle_enable: Optional[_builtins.str] = None):
+        """
+        :param _builtins.bool drop_table: Whether to drop table (deprecated, use table_expiration instead).
+        :param _builtins.int expiration: Expiration time.
+        :param _builtins.str expired_field: Expired field.
+        :param _builtins.str expired_field_format: Expired field format.
+        :param _builtins.str lifecycle_enable: Whether to enable lifecycle.
+        """
+        if drop_table is not None:
+            pulumi.set(__self__, "drop_table", drop_table)
+        if expiration is not None:
+            pulumi.set(__self__, "expiration", expiration)
+        if expired_field is not None:
+            pulumi.set(__self__, "expired_field", expired_field)
+        if expired_field_format is not None:
+            pulumi.set(__self__, "expired_field_format", expired_field_format)
+        if lifecycle_enable is not None:
+            pulumi.set(__self__, "lifecycle_enable", lifecycle_enable)
+
+    @_builtins.property
+    @pulumi.getter(name="dropTable")
+    def drop_table(self) -> Optional[_builtins.bool]:
+        """
+        Whether to drop table (deprecated, use table_expiration instead).
+        """
+        return pulumi.get(self, "drop_table")
+
+    @_builtins.property
+    @pulumi.getter
+    def expiration(self) -> Optional[_builtins.int]:
+        """
+        Expiration time.
+        """
+        return pulumi.get(self, "expiration")
+
+    @_builtins.property
+    @pulumi.getter(name="expiredField")
+    def expired_field(self) -> Optional[_builtins.str]:
+        """
+        Expired field.
+        """
+        return pulumi.get(self, "expired_field")
+
+    @_builtins.property
+    @pulumi.getter(name="expiredFieldFormat")
+    def expired_field_format(self) -> Optional[_builtins.str]:
+        """
+        Expired field format.
+        """
+        return pulumi.get(self, "expired_field_format")
+
+    @_builtins.property
+    @pulumi.getter(name="lifecycleEnable")
+    def lifecycle_enable(self) -> Optional[_builtins.str]:
+        """
+        Whether to enable lifecycle.
+        """
+        return pulumi.get(self, "lifecycle_enable")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyResource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "attributionType":
+            suggest = "attribution_type"
+        elif key == "resourceConf":
+            suggest = "resource_conf"
+        elif key == "resourceGroupName":
+            suggest = "resource_group_name"
+        elif key == "resourceType":
+            suggest = "resource_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyResource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyResource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyResource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 attribution_type: Optional[_builtins.str] = None,
+                 favors: Optional[Sequence['outputs.MetaDatabaseSmartPolicyPolicyResourceFavor']] = None,
+                 instance: Optional[_builtins.str] = None,
+                 name: Optional[_builtins.str] = None,
+                 resource_conf: Optional['outputs.MetaDatabaseSmartPolicyPolicyResourceResourceConf'] = None,
+                 resource_group_name: Optional[_builtins.str] = None,
+                 resource_type: Optional[_builtins.str] = None,
+                 status: Optional[_builtins.int] = None):
+        """
+        :param _builtins.str attribution_type: Attribution type.
+        :param Sequence['MetaDatabaseSmartPolicyPolicyResourceFavorArgs'] favors: Affinity info.
+        :param _builtins.str instance: Instance name.
+        :param _builtins.str name: Engine name.
+        :param 'MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs' resource_conf: Resource config info.
+        :param _builtins.str resource_group_name: Standard engine resource group name.
+        :param _builtins.str resource_type: Resource type.
+        :param _builtins.int status: Status.
+        """
+        if attribution_type is not None:
+            pulumi.set(__self__, "attribution_type", attribution_type)
+        if favors is not None:
+            pulumi.set(__self__, "favors", favors)
+        if instance is not None:
+            pulumi.set(__self__, "instance", instance)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if resource_conf is not None:
+            pulumi.set(__self__, "resource_conf", resource_conf)
+        if resource_group_name is not None:
+            pulumi.set(__self__, "resource_group_name", resource_group_name)
+        if resource_type is not None:
+            pulumi.set(__self__, "resource_type", resource_type)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter(name="attributionType")
+    def attribution_type(self) -> Optional[_builtins.str]:
+        """
+        Attribution type.
+        """
+        return pulumi.get(self, "attribution_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def favors(self) -> Optional[Sequence['outputs.MetaDatabaseSmartPolicyPolicyResourceFavor']]:
+        """
+        Affinity info.
+        """
+        return pulumi.get(self, "favors")
+
+    @_builtins.property
+    @pulumi.getter
+    def instance(self) -> Optional[_builtins.str]:
+        """
+        Instance name.
+        """
+        return pulumi.get(self, "instance")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> Optional[_builtins.str]:
+        """
+        Engine name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceConf")
+    def resource_conf(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyResourceResourceConf']:
+        """
+        Resource config info.
+        """
+        return pulumi.get(self, "resource_conf")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceGroupName")
+    def resource_group_name(self) -> Optional[_builtins.str]:
+        """
+        Standard engine resource group name.
+        """
+        return pulumi.get(self, "resource_group_name")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> Optional[_builtins.str]:
+        """
+        Resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> Optional[_builtins.int]:
+        """
+        Status.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyResourceFavor(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dataBase":
+            suggest = "data_base"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyResourceFavor. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyResourceFavor.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyResourceFavor.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 catalog: Optional[_builtins.str] = None,
+                 data_base: Optional[_builtins.str] = None,
+                 priority: Optional[_builtins.int] = None,
+                 table: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str catalog: Catalog name.
+        :param _builtins.str data_base: Database name.
+        :param _builtins.int priority: Priority.
+        :param _builtins.str table: Table name.
+        """
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if data_base is not None:
+            pulumi.set(__self__, "data_base", data_base)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+
+    @_builtins.property
+    @pulumi.getter
+    def catalog(self) -> Optional[_builtins.str]:
+        """
+        Catalog name.
+        """
+        return pulumi.get(self, "catalog")
+
+    @_builtins.property
+    @pulumi.getter(name="dataBase")
+    def data_base(self) -> Optional[_builtins.str]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "data_base")
+
+    @_builtins.property
+    @pulumi.getter
+    def priority(self) -> Optional[_builtins.int]:
+        """
+        Priority.
+        """
+        return pulumi.get(self, "priority")
+
+    @_builtins.property
+    @pulumi.getter
+    def table(self) -> Optional[_builtins.str]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyResourceResourceConf(dict):
+    def __init__(__self__, *,
+                 parallelism: Optional[_builtins.int] = None):
+        """
+        :param _builtins.int parallelism: Parallelism of the optimize task.
+        """
+        if parallelism is not None:
+            pulumi.set(__self__, "parallelism", parallelism)
+
+    @_builtins.property
+    @pulumi.getter
+    def parallelism(self) -> Optional[_builtins.int]:
+        """
+        Parallelism of the optimize task.
+        """
+        return pulumi.get(self, "parallelism")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyTableExpiration(dict):
+    def __init__(__self__, *,
+                 enabled: _builtins.bool,
+                 expiration: _builtins.int):
+        """
+        :param _builtins.bool enabled: Whether to enable the policy.
+        :param _builtins.int expiration: Table expiration time, in days.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "expiration", expiration)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> _builtins.bool:
+        """
+        Whether to enable the policy.
+        """
+        return pulumi.get(self, "enabled")
+
+    @_builtins.property
+    @pulumi.getter
+    def expiration(self) -> _builtins.int:
+        """
+        Table expiration time, in days.
+        """
+        return pulumi.get(self, "expiration")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyWritten(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "advancePolicy":
+            suggest = "advance_policy"
+        elif key == "writtenEnable":
+            suggest = "written_enable"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyWritten. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyWritten.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyWritten.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 advance_policy: Optional['outputs.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy'] = None,
+                 written_enable: Optional[_builtins.str] = None):
+        """
+        :param 'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs' advance_policy: User custom advance params.
+        :param _builtins.str written_enable: Whether to enable, `none`/`enable`/`disable`/`default`.
+        """
+        if advance_policy is not None:
+            pulumi.set(__self__, "advance_policy", advance_policy)
+        if written_enable is not None:
+            pulumi.set(__self__, "written_enable", written_enable)
+
+    @_builtins.property
+    @pulumi.getter(name="advancePolicy")
+    def advance_policy(self) -> Optional['outputs.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy']:
+        """
+        User custom advance params.
+        """
+        return pulumi.get(self, "advance_policy")
+
+    @_builtins.property
+    @pulumi.getter(name="writtenEnable")
+    def written_enable(self) -> Optional[_builtins.str]:
+        """
+        Whether to enable, `none`/`enable`/`disable`/`default`.
+        """
+        return pulumi.get(self, "written_enable")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "beforeDays":
+            suggest = "before_days"
+        elif key == "compactEnable":
+            suggest = "compact_enable"
+        elif key == "compactStrategy":
+            suggest = "compact_strategy"
+        elif key == "cowCompactEnable":
+            suggest = "cow_compact_enable"
+        elif key == "deleteEnable":
+            suggest = "delete_enable"
+        elif key == "expiredSnapshotsIntervalMin":
+            suggest = "expired_snapshots_interval_min"
+        elif key == "minInputFiles":
+            suggest = "min_input_files"
+        elif key == "removeOrphanIntervalMin":
+            suggest = "remove_orphan_interval_min"
+        elif key == "retainLast":
+            suggest = "retain_last"
+        elif key == "sortOrders":
+            suggest = "sort_orders"
+        elif key == "targetFileSizeBytes":
+            suggest = "target_file_size_bytes"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 before_days: Optional[_builtins.int] = None,
+                 compact_enable: Optional[_builtins.str] = None,
+                 compact_strategy: Optional[_builtins.str] = None,
+                 cow_compact_enable: Optional[_builtins.str] = None,
+                 delete_enable: Optional[_builtins.str] = None,
+                 expired_snapshots_interval_min: Optional[_builtins.int] = None,
+                 min_input_files: Optional[_builtins.int] = None,
+                 remove_orphan_interval_min: Optional[_builtins.int] = None,
+                 retain_last: Optional[_builtins.int] = None,
+                 sort_orders: Optional[Sequence['outputs.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder']] = None,
+                 target_file_size_bytes: Optional[_builtins.int] = None):
+        """
+        :param _builtins.int before_days: Snapshot expire before days.
+        :param _builtins.str compact_enable: Whether to enable compact.
+        :param _builtins.str compact_strategy: File compact strategy.
+        :param _builtins.str cow_compact_enable: Whether to enable COW table compact.
+        :param _builtins.str delete_enable: Whether to enable history data cleanup.
+        :param _builtins.int expired_snapshots_interval_min: Snapshot expire interval in minutes.
+        :param _builtins.int min_input_files: Min input files to compact.
+        :param _builtins.int remove_orphan_interval_min: Remove orphan files interval in minutes.
+        :param _builtins.int retain_last: Retain last snapshot count.
+        :param Sequence['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs'] sort_orders: Sort compact strategy rules.
+        :param _builtins.int target_file_size_bytes: Target file size after compact.
+        """
+        if before_days is not None:
+            pulumi.set(__self__, "before_days", before_days)
+        if compact_enable is not None:
+            pulumi.set(__self__, "compact_enable", compact_enable)
+        if compact_strategy is not None:
+            pulumi.set(__self__, "compact_strategy", compact_strategy)
+        if cow_compact_enable is not None:
+            pulumi.set(__self__, "cow_compact_enable", cow_compact_enable)
+        if delete_enable is not None:
+            pulumi.set(__self__, "delete_enable", delete_enable)
+        if expired_snapshots_interval_min is not None:
+            pulumi.set(__self__, "expired_snapshots_interval_min", expired_snapshots_interval_min)
+        if min_input_files is not None:
+            pulumi.set(__self__, "min_input_files", min_input_files)
+        if remove_orphan_interval_min is not None:
+            pulumi.set(__self__, "remove_orphan_interval_min", remove_orphan_interval_min)
+        if retain_last is not None:
+            pulumi.set(__self__, "retain_last", retain_last)
+        if sort_orders is not None:
+            pulumi.set(__self__, "sort_orders", sort_orders)
+        if target_file_size_bytes is not None:
+            pulumi.set(__self__, "target_file_size_bytes", target_file_size_bytes)
+
+    @_builtins.property
+    @pulumi.getter(name="beforeDays")
+    def before_days(self) -> Optional[_builtins.int]:
+        """
+        Snapshot expire before days.
+        """
+        return pulumi.get(self, "before_days")
+
+    @_builtins.property
+    @pulumi.getter(name="compactEnable")
+    def compact_enable(self) -> Optional[_builtins.str]:
+        """
+        Whether to enable compact.
+        """
+        return pulumi.get(self, "compact_enable")
+
+    @_builtins.property
+    @pulumi.getter(name="compactStrategy")
+    def compact_strategy(self) -> Optional[_builtins.str]:
+        """
+        File compact strategy.
+        """
+        return pulumi.get(self, "compact_strategy")
+
+    @_builtins.property
+    @pulumi.getter(name="cowCompactEnable")
+    def cow_compact_enable(self) -> Optional[_builtins.str]:
+        """
+        Whether to enable COW table compact.
+        """
+        return pulumi.get(self, "cow_compact_enable")
+
+    @_builtins.property
+    @pulumi.getter(name="deleteEnable")
+    def delete_enable(self) -> Optional[_builtins.str]:
+        """
+        Whether to enable history data cleanup.
+        """
+        return pulumi.get(self, "delete_enable")
+
+    @_builtins.property
+    @pulumi.getter(name="expiredSnapshotsIntervalMin")
+    def expired_snapshots_interval_min(self) -> Optional[_builtins.int]:
+        """
+        Snapshot expire interval in minutes.
+        """
+        return pulumi.get(self, "expired_snapshots_interval_min")
+
+    @_builtins.property
+    @pulumi.getter(name="minInputFiles")
+    def min_input_files(self) -> Optional[_builtins.int]:
+        """
+        Min input files to compact.
+        """
+        return pulumi.get(self, "min_input_files")
+
+    @_builtins.property
+    @pulumi.getter(name="removeOrphanIntervalMin")
+    def remove_orphan_interval_min(self) -> Optional[_builtins.int]:
+        """
+        Remove orphan files interval in minutes.
+        """
+        return pulumi.get(self, "remove_orphan_interval_min")
+
+    @_builtins.property
+    @pulumi.getter(name="retainLast")
+    def retain_last(self) -> Optional[_builtins.int]:
+        """
+        Retain last snapshot count.
+        """
+        return pulumi.get(self, "retain_last")
+
+    @_builtins.property
+    @pulumi.getter(name="sortOrders")
+    def sort_orders(self) -> Optional[Sequence['outputs.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder']]:
+        """
+        Sort compact strategy rules.
+        """
+        return pulumi.get(self, "sort_orders")
+
+    @_builtins.property
+    @pulumi.getter(name="targetFileSizeBytes")
+    def target_file_size_bytes(self) -> Optional[_builtins.int]:
+        """
+        Target file size after compact.
+        """
+        return pulumi.get(self, "target_file_size_bytes")
+
+
+@pulumi.output_type
+class MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "nullOrder":
+            suggest = "null_order"
+        elif key == "sortDirection":
+            suggest = "sort_direction"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column: Optional[_builtins.str] = None,
+                 null_order: Optional[_builtins.str] = None,
+                 sort_direction: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str column: Sort column name.
+        :param _builtins.str null_order: Null order, `first` or `last`.
+        :param _builtins.str sort_direction: Sort direction, `asc` or `desc`.
+        """
+        if column is not None:
+            pulumi.set(__self__, "column", column)
+        if null_order is not None:
+            pulumi.set(__self__, "null_order", null_order)
+        if sort_direction is not None:
+            pulumi.set(__self__, "sort_direction", sort_direction)
+
+    @_builtins.property
+    @pulumi.getter
+    def column(self) -> Optional[_builtins.str]:
+        """
+        Sort column name.
+        """
+        return pulumi.get(self, "column")
+
+    @_builtins.property
+    @pulumi.getter(name="nullOrder")
+    def null_order(self) -> Optional[_builtins.str]:
+        """
+        Null order, `first` or `last`.
+        """
+        return pulumi.get(self, "null_order")
+
+    @_builtins.property
+    @pulumi.getter(name="sortDirection")
+    def sort_direction(self) -> Optional[_builtins.str]:
+        """
+        Sort direction, `asc` or `desc`.
+        """
+        return pulumi.get(self, "sort_direction")
 
 
 @pulumi.output_type

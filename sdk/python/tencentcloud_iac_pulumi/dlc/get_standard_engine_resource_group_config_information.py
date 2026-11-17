@@ -122,6 +122,12 @@ def get_standard_engine_resource_group_config_information(filters: Optional[Sequ
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+
 
     :param Sequence[Union['GetStandardEngineResourceGroupConfigInformationFilterArgs', 'GetStandardEngineResourceGroupConfigInformationFilterArgsDict']] filters: Filter conditions are optional, engine-resource-group-id or engine-id.
     :param _builtins.str result_output_file: Used to save results.
@@ -164,6 +170,12 @@ def get_standard_engine_resource_group_config_information_output(filters: pulumi
             "values": ["DataEngine-5plqp7q7"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
 
 
     :param Sequence[Union['GetStandardEngineResourceGroupConfigInformationFilterArgs', 'GetStandardEngineResourceGroupConfigInformationFilterArgsDict']] filters: Filter conditions are optional, engine-resource-group-id or engine-id.

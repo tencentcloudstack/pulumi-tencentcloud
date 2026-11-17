@@ -41,6 +41,12 @@ import * as utilities from "../utilities";
  *     name: "tf-super-player",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&type=document&lang=en)
  */
 export function getSuperPlayerConfigs(args?: GetSuperPlayerConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetSuperPlayerConfigsResult> {
     args = args || {};
@@ -133,6 +139,12 @@ export interface GetSuperPlayerConfigsResult {
  *     name: "tf-super-player",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&type=document&lang=en)
  */
 export function getSuperPlayerConfigsOutput(args?: GetSuperPlayerConfigsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSuperPlayerConfigsResult> {
     args = args || {};

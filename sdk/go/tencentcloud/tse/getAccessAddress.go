@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&type=document&lang=en)
 func GetAccessAddress(ctx *pulumi.Context, args *GetAccessAddressArgs, opts ...pulumi.InvokeOption) (*GetAccessAddressResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccessAddressResult

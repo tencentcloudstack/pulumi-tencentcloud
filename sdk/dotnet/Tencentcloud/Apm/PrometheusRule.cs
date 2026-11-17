@@ -36,6 +36,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateApmPrometheusRule](https://www.tencentcloud.com/document/api/1166/74315)
+    ///   - [ModifyApmPrometheusRule](https://www.tencentcloud.com/document/api/1166/74308)
+    /// * Read: [DescribeApmPrometheusRule](https://www.tencentcloud.com/document/api/1166/74311)
+    /// * Update: [ModifyApmPrometheusRule](https://www.tencentcloud.com/document/api/1166/74308)
+    /// * Delete: [ModifyApmPrometheusRule](https://www.tencentcloud.com/document/api/1166/74308)
+    /// 
     /// ## Import
     /// 
     /// APM prometheus rule can be imported using the instanceId#ruleId, e.g.

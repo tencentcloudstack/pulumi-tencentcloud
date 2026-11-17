@@ -133,6 +133,12 @@ class AuthenticateDomainOwnerOperation(pulumi.CustomResource):
             verify_type="fileCheck")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -171,6 +177,12 @@ class AuthenticateDomainOwnerOperation(pulumi.CustomResource):
             domain_name="your_domain_name",
             verify_type="fileCheck")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
 
 
         :param str resource_name: The name of the resource.

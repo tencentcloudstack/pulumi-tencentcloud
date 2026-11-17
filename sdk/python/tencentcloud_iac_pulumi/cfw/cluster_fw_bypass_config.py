@@ -200,6 +200,18 @@ class ClusterFwBypassConfig(pulumi.CustomResource):
             enable=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [ModifyClusterFwBypass](https://www.tencentcloud.com/search/?wd=ModifyClusterFwBypass&type=document&lang=en)
+        * Read: [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+        * Update:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [ModifyClusterFwBypass](https://www.tencentcloud.com/search/?wd=ModifyClusterFwBypass&type=document&lang=en)
+
         ## Import
 
         CFW cluster firewall bypass config can be imported using the composite ID.
@@ -259,6 +271,18 @@ class ClusterFwBypassConfig(pulumi.CustomResource):
             nat_ins_id="nat-h1i1mf4n",
             enable=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [ModifyClusterFwBypass](https://www.tencentcloud.com/search/?wd=ModifyClusterFwBypass&type=document&lang=en)
+        * Read: [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+        * Update:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [ModifyClusterFwBypass](https://www.tencentcloud.com/search/?wd=ModifyClusterFwBypass&type=document&lang=en)
 
         ## Import
 

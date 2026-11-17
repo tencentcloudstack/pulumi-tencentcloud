@@ -146,6 +146,12 @@ def get_listener_statistics(end_time: Optional[_builtins.str] = None,
         granularity=300)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListenerStatistics](https://www.tencentcloud.com/document/api/608/33054)
+
 
     :param _builtins.str end_time: End Time.
     :param _builtins.int granularity: Monitoring granularity, currently supporting 300 3600 86400, in seconds.The query time range does not exceed 1 day and supports a minimum granularity of 300 seconds;The query interval should not exceed 7 days and support a minimum granularity of 3600 seconds;The query interval exceeds 7 days and supports a minimum granularity of 86400 seconds.
@@ -201,6 +207,12 @@ def get_listener_statistics_output(end_time: pulumi.Input[Optional[_builtins.str
         ],
         granularity=300)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListenerStatistics](https://www.tencentcloud.com/document/api/608/33054)
 
 
     :param _builtins.str end_time: End Time.

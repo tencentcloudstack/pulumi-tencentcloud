@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTriggerTaskRun](https://www.tencentcloud.com/document/api/1174/77889)
         /// </summary>
         public static Task<GetTriggerTaskRunResult> InvokeAsync(GetTriggerTaskRunArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggerTaskRunResult>("tencentcloud:Wedata/getTriggerTaskRun:getTriggerTaskRun", args ?? new GetTriggerTaskRunArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTriggerTaskRun](https://www.tencentcloud.com/document/api/1174/77889)
         /// </summary>
         public static Output<GetTriggerTaskRunResult> Invoke(GetTriggerTaskRunInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerTaskRunResult>("tencentcloud:Wedata/getTriggerTaskRun:getTriggerTaskRun", args ?? new GetTriggerTaskRunInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTriggerTaskRun](https://www.tencentcloud.com/document/api/1174/77889)
         /// </summary>
         public static Output<GetTriggerTaskRunResult> Invoke(GetTriggerTaskRunInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerTaskRunResult>("tencentcloud:Wedata/getTriggerTaskRun:getTriggerTaskRun", args ?? new GetTriggerTaskRunInvokeArgs(), options.WithDefaults());

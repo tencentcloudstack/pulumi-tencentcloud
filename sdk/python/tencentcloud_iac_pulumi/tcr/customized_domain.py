@@ -197,6 +197,20 @@ class CustomizedDomain(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50714)
+          - [DescribeInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50706)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50706)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update: [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50710)
+
         ## Import
 
         tcr customized domain can be imported using the id, e.g.
@@ -244,6 +258,20 @@ class CustomizedDomain(pulumi.CustomResource):
                 "createdBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50714)
+          - [DescribeInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50706)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50706)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update: [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteInstanceCustomizedDomain](https://www.tencentcloud.com/document/api/1051/50710)
 
         ## Import
 

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEngineNodeSpec](https://www.tencentcloud.com/search/?wd=DescribeEngineNodeSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetEngineNodeSpecificationsResult> InvokeAsync(GetEngineNodeSpecificationsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEngineNodeSpecificationsResult>("tencentcloud:Dlc/getEngineNodeSpecifications:getEngineNodeSpecifications", args ?? new GetEngineNodeSpecificationsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEngineNodeSpec](https://www.tencentcloud.com/search/?wd=DescribeEngineNodeSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEngineNodeSpecificationsResult> Invoke(GetEngineNodeSpecificationsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEngineNodeSpecificationsResult>("tencentcloud:Dlc/getEngineNodeSpecifications:getEngineNodeSpecifications", args ?? new GetEngineNodeSpecificationsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEngineNodeSpec](https://www.tencentcloud.com/search/?wd=DescribeEngineNodeSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEngineNodeSpecificationsResult> Invoke(GetEngineNodeSpecificationsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEngineNodeSpecificationsResult>("tencentcloud:Dlc/getEngineNodeSpecifications:getEngineNodeSpecifications", args ?? new GetEngineNodeSpecificationsInvokeArgs(), options.WithDefaults());

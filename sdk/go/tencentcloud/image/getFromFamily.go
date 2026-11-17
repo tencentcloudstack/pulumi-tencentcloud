@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
 func GetFromFamily(ctx *pulumi.Context, args *GetFromFamilyArgs, opts ...pulumi.InvokeOption) (*GetFromFamilyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFromFamilyResult

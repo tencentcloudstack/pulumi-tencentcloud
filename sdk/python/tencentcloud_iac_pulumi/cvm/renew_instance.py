@@ -207,6 +207,12 @@ class RenewInstance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewInstances](https://www.tencentcloud.com/document/api/213/72769)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -276,6 +282,12 @@ class RenewInstance(pulumi.CustomResource):
                 "renew_flag": "NOTIFY_AND_MANUAL_RENEW",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewInstances](https://www.tencentcloud.com/document/api/213/72769)
 
 
         :param str resource_name: The name of the resource.

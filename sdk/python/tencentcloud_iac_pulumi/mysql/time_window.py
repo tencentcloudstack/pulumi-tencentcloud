@@ -231,6 +231,15 @@ class TimeWindow(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyTimeWindow](https://www.tencentcloud.com/document/api/236/34476)
+        * Read: [DescribeTimeWindow](https://www.tencentcloud.com/document/api/236/34480)
+        * Update: [ModifyTimeWindow](https://www.tencentcloud.com/document/api/236/34476)
+        * Delete: [DeleteTimeWindow](https://www.tencentcloud.com/document/api/236/34483)
+
         ## Import
 
         mysql time_window can be imported using the id, e.g.
@@ -311,6 +320,15 @@ class TimeWindow(pulumi.CustomResource):
                 "wednesday",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyTimeWindow](https://www.tencentcloud.com/document/api/236/34476)
+        * Read: [DescribeTimeWindow](https://www.tencentcloud.com/document/api/236/34480)
+        * Update: [ModifyTimeWindow](https://www.tencentcloud.com/document/api/236/34476)
+        * Delete: [DeleteTimeWindow](https://www.tencentcloud.com/document/api/236/34483)
 
         ## Import
 

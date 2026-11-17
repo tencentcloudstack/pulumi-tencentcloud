@@ -142,6 +142,12 @@ def get_role_policy_attachments(create_mode: Optional[_builtins.int] = None,
         policy_id=foo_tencentcloud_cam_policy["id"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
+
 
     :param _builtins.int create_mode: Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
     :param _builtins.str policy_id: ID of CAM policy to be queried.
@@ -187,6 +193,12 @@ def get_role_policy_attachments_output(create_mode: pulumi.Input[Optional[Option
     bar = tencentcloud.cam.get_role_policy_attachments(role_id=foo_tencentcloud_cam_role["id"],
         policy_id=foo_tencentcloud_cam_policy["id"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
 
 
     :param _builtins.int create_mode: Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.

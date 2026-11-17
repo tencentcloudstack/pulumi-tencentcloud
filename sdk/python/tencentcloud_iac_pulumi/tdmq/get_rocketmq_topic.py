@@ -142,6 +142,12 @@ def get_rocketmq_topic(cluster_id: Optional[_builtins.str] = None,
         filter_name=example_rocketmq_topic.topic_name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str filter_name: Search by topic name. Fuzzy query is supported.
@@ -199,6 +205,12 @@ def get_rocketmq_topic_output(cluster_id: pulumi.Input[Optional[_builtins.str]] 
         namespace_id=example_rocketmq_namespace.namespace_name,
         filter_name=example_rocketmq_topic.topic_name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

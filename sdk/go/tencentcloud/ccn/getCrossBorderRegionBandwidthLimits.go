@@ -53,6 +53,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&type=document&lang=en)
 func GetCrossBorderRegionBandwidthLimits(ctx *pulumi.Context, args *GetCrossBorderRegionBandwidthLimitsArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderRegionBandwidthLimitsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossBorderRegionBandwidthLimitsResult

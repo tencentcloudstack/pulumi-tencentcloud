@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
         /// </summary>
         public static Task<GetEipResult> InvokeAsync(GetEipArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
         /// </summary>
         public static Output<GetEipResult> Invoke(GetEipInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
         /// </summary>
         public static Output<GetEipResult> Invoke(GetEipInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipInvokeArgs(), options.WithDefaults());

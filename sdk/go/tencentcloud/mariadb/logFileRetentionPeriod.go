@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16151)
+// * Read: [DescribeLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16152)
+// * Update: [ModifyLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16151)
+//
 // ## Import
 //
 // mariadb logFileRetentionPeriod can be imported using the id, e.g.

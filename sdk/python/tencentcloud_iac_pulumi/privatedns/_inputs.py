@@ -3,6 +3,7 @@
 
 import builtins as _builtins
 import sys
+import warnings
 from collections.abc import Sequence
 from typing import Optional
 
@@ -13,6 +14,7 @@ if sys.version_info >= (3, 11):
     from typing import NotRequired, TypedDict
 else:
     from typing_extensions import NotRequired, TypedDict
+from .. import _utilities
 
 __all__ = [
     'ExtendEndPointForwardIpArgs',
@@ -326,9 +328,9 @@ class ZoneAccountVpcSetArgsDict(TypedDict):
     """
     VPC ID.
     """
-    vpc_name: pulumi.Input[_builtins.str]
+    vpc_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    VPC NAME.
+    It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
     """
 
 @pulumi.input_type
@@ -337,17 +339,21 @@ class ZoneAccountVpcSetArgs:
                  region: pulumi.Input[_builtins.str],
                  uin: pulumi.Input[_builtins.str],
                  uniq_vpc_id: pulumi.Input[_builtins.str],
-                 vpc_name: pulumi.Input[_builtins.str]):
+                 vpc_name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] region: Region.
         :param pulumi.Input[_builtins.str] uin: UIN of the VPC account.
         :param pulumi.Input[_builtins.str] uniq_vpc_id: VPC ID.
-        :param pulumi.Input[_builtins.str] vpc_name: VPC NAME.
+        :param pulumi.Input[_builtins.str] vpc_name: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
         """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "uin", uin)
         pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
-        pulumi.set(__self__, "vpc_name", vpc_name)
+        if vpc_name is not None:
+            warnings.warn("""It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.""", DeprecationWarning)
+            pulumi.log.warn("""vpc_name is deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.""")
+        if vpc_name is not None:
+            pulumi.set(__self__, "vpc_name", vpc_name)
 
     @_builtins.property
     @pulumi.getter
@@ -387,14 +393,15 @@ class ZoneAccountVpcSetArgs:
 
     @_builtins.property
     @pulumi.getter(name="vpcName")
-    def vpc_name(self) -> pulumi.Input[_builtins.str]:
+    @_utilities.deprecated("""It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.""")
+    def vpc_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        VPC NAME.
+        It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
         """
         return pulumi.get(self, "vpc_name")
 
     @vpc_name.setter
-    def vpc_name(self, value: pulumi.Input[_builtins.str]):
+    def vpc_name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "vpc_name", value)
 
 

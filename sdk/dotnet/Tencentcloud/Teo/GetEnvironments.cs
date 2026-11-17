@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public static class GetEnvironments
     {
         /// <summary>
-        /// Use this data source to query detailed information of teo environments
+        /// Use this data source to query detailed information of TEO environments, including the environment list and the source version (`SourceVersion`) of each effective config group version.
         /// 
         /// ## Example Usage
         /// 
@@ -32,12 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
         /// </summary>
         public static Task<GetEnvironmentsResult> InvokeAsync(GetEnvironmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentsResult>("tencentcloud:Teo/getEnvironments:getEnvironments", args ?? new GetEnvironmentsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of teo environments
+        /// Use this data source to query detailed information of TEO environments, including the environment list and the source version (`SourceVersion`) of each effective config group version.
         /// 
         /// ## Example Usage
         /// 
@@ -56,12 +62,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
         /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("tencentcloud:Teo/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of teo environments
+        /// Use this data source to query detailed information of TEO environments, including the environment list and the source version (`SourceVersion`) of each effective config group version.
         /// 
         /// ## Example Usage
         /// 
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
         /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("tencentcloud:Teo/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());

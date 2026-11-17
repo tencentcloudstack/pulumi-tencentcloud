@@ -112,6 +112,14 @@ def get_repositories(instance_id: Optional[_builtins.str] = None,
 
     ## Example Usage
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+      - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
+
 
     :param _builtins.str instance_id: ID of the TCR instance that the repository belongs to.
     :param _builtins.str namespace_name: Name of the namespace that the repository belongs to.
@@ -142,6 +150,14 @@ def get_repositories_output(instance_id: pulumi.Input[Optional[_builtins.str]] =
     Use this data source to query detailed information of TCR repositories.
 
     ## Example Usage
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+      - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
 
 
     :param _builtins.str instance_id: ID of the TCR instance that the repository belongs to.

@@ -61,6 +61,12 @@ import * as utilities from "../utilities";
  *     definition: fooAdaptiveDynamicStreamingTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
  */
 export function getAdaptiveDynamicStreamingTemplates(args?: GetAdaptiveDynamicStreamingTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetAdaptiveDynamicStreamingTemplatesResult> {
     args = args || {};
@@ -173,6 +179,12 @@ export interface GetAdaptiveDynamicStreamingTemplatesResult {
  *     definition: fooAdaptiveDynamicStreamingTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
  */
 export function getAdaptiveDynamicStreamingTemplatesOutput(args?: GetAdaptiveDynamicStreamingTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAdaptiveDynamicStreamingTemplatesResult> {
     args = args || {};

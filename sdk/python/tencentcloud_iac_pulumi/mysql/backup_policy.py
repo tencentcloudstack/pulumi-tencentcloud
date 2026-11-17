@@ -328,6 +328,14 @@ class BackupPolicy(pulumi.CustomResource):
             binlog_standby_days=31)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribeBackupConfig](https://www.tencentcloud.com/document/api/236/15837)
+        * Update: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/236/15839)
+        * Delete: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/236/15839)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -401,6 +409,14 @@ class BackupPolicy(pulumi.CustomResource):
             enable_binlog_standby="off",
             binlog_standby_days=31)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribeBackupConfig](https://www.tencentcloud.com/document/api/236/15837)
+        * Update: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/236/15839)
+        * Delete: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/236/15839)
 
 
         :param str resource_name: The name of the resource.

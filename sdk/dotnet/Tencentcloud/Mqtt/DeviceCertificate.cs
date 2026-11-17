@@ -57,6 +57,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RegisterDeviceCertificate](https://www.tencentcloud.com/search/?wd=RegisterDeviceCertificate&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDeviceCertificate](https://www.tencentcloud.com/document/api/1294/79802)
+    /// * Update:
+    ///   - [ActivateDeviceCertificate](https://www.tencentcloud.com/search/?wd=ActivateDeviceCertificate&amp;type=document&amp;lang=en)
+    ///   - [DeactivateDeviceCertificate](https://www.tencentcloud.com/search/?wd=DeactivateDeviceCertificate&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeactivateDeviceCertificate](https://www.tencentcloud.com/search/?wd=DeactivateDeviceCertificate&amp;type=document&amp;lang=en)
+    ///   - [DeleteDeviceCertificate](https://www.tencentcloud.com/search/?wd=DeleteDeviceCertificate&amp;type=document&amp;lang=en)
+    ///   - [DescribeDeviceCertificate](https://www.tencentcloud.com/document/api/1294/79802)
+    /// 
     /// ## Import
     /// 
     /// MQTT device certificate can be imported using the id, e.g.

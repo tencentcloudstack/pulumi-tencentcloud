@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&type=document&lang=en)
 func GetDataEngineSessionParameters(ctx *pulumi.Context, args *GetDataEngineSessionParametersArgs, opts ...pulumi.InvokeOption) (*GetDataEngineSessionParametersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDataEngineSessionParametersResult

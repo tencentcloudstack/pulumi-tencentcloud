@@ -117,6 +117,12 @@ def get_scene(limit: Optional[_builtins.int] = None,
         limit=20)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScenes](https://www.tencentcloud.com/document/api/1103/52166)
+
 
     :param _builtins.int limit: Number of returned results. Default value is 20. Maximum value is 100.
     :param _builtins.int offset: Offset. Default value is 0.
@@ -155,6 +161,12 @@ def get_scene_output(limit: pulumi.Input[Optional[Optional[_builtins.int]]] = No
     scene = tencentcloud.lighthouse.get_scene(offset=0,
         limit=20)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScenes](https://www.tencentcloud.com/document/api/1103/52166)
 
 
     :param _builtins.int limit: Number of returned results. Default value is 20. Maximum value is 100.

@@ -33,7 +33,7 @@ class LoadBalancerArgs:
         The set of arguments for constructing a LoadBalancer resource.
 
         :param pulumi.Input[Sequence[pulumi.Input['LoadBalancerOriginGroupArgs']]] origin_groups: Source origin group list with failover priority.
-        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         :param pulumi.Input[_builtins.str] zone_id: Site ID.
         :param pulumi.Input[_builtins.str] failover_policy: Retry policy on request failure. Valid values: `OtherOriginGroup` (retry next priority origin group); `OtherRecordInOriginGroup` (retry another origin in the same group). Default: `OtherRecordInOriginGroup`.
         :param pulumi.Input['LoadBalancerHealthCheckerArgs'] health_checker: Health check policy. If not set, health check is disabled by default.
@@ -68,7 +68,7 @@ class LoadBalancerArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[_builtins.str]:
         """
-        Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         """
         return pulumi.get(self, "type")
 
@@ -157,7 +157,7 @@ class _LoadBalancerState:
         :param pulumi.Input[_builtins.str] name: Load balancer instance name, 1-200 characters, allowed characters: `a-z`, `A-Z`, `0-9`, `_`, `-`.
         :param pulumi.Input[Sequence[pulumi.Input['LoadBalancerOriginGroupArgs']]] origin_groups: Source origin group list with failover priority.
         :param pulumi.Input[_builtins.str] steering_policy: Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
-        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         :param pulumi.Input[_builtins.str] zone_id: Site ID.
         """
         if failover_policy is not None:
@@ -253,7 +253,7 @@ class _LoadBalancerState:
     @pulumi.getter
     def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         """
         return pulumi.get(self, "type")
 
@@ -322,6 +322,50 @@ class LoadBalancer(pulumi.CustomResource):
             failover_policy="OtherOriginGroup")
         ```
 
+        ### Example Usage - HTTP_V2 with probe_cluster
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.teo.LoadBalancer("example",
+            zone_id="zone-3fkff38fyw8s",
+            name="tf-example-v2",
+            type="HTTP_V2",
+            origin_groups=[{
+                "priority": "priority_1",
+                "origin_group_id": "og-3w0nrwiw4c6v",
+            }],
+            health_checker={
+                "type": "HTTP",
+                "path": "www.example.com/test",
+                "port": 80,
+                "interval": 30,
+                "timeout": 5,
+                "health_threshold": 3,
+                "critical_threshold": 2,
+                "method": "HEAD",
+                "expected_codes": ["200"],
+                "follow_redirect": "false",
+                "probe_cluster": "global",
+            },
+            steering_policy="Pritory",
+            failover_policy="OtherOriginGroup")
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLoadBalancer](https://www.tencentcloud.com/document/api/1145/66031)
+          - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+        * Read: [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+        * Update:
+          - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+          - [ModifyLoadBalancer](https://www.tencentcloud.com/document/api/1145/66027)
+        * Delete: [DeleteLoadBalancer](https://www.tencentcloud.com/document/api/1145/66030)
+
         ## Import
 
         TEO load balancer can be imported using the zoneId#instanceId, e.g.
@@ -338,7 +382,7 @@ class LoadBalancer(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Load balancer instance name, 1-200 characters, allowed characters: `a-z`, `A-Z`, `0-9`, `_`, `-`.
         :param pulumi.Input[Sequence[pulumi.Input[Union['LoadBalancerOriginGroupArgs', 'LoadBalancerOriginGroupArgsDict']]]] origin_groups: Source origin group list with failover priority.
         :param pulumi.Input[_builtins.str] steering_policy: Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
-        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         :param pulumi.Input[_builtins.str] zone_id: Site ID.
         """
         ...
@@ -380,6 +424,50 @@ class LoadBalancer(pulumi.CustomResource):
             steering_policy="Pritory",
             failover_policy="OtherOriginGroup")
         ```
+
+        ### Example Usage - HTTP_V2 with probe_cluster
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.teo.LoadBalancer("example",
+            zone_id="zone-3fkff38fyw8s",
+            name="tf-example-v2",
+            type="HTTP_V2",
+            origin_groups=[{
+                "priority": "priority_1",
+                "origin_group_id": "og-3w0nrwiw4c6v",
+            }],
+            health_checker={
+                "type": "HTTP",
+                "path": "www.example.com/test",
+                "port": 80,
+                "interval": 30,
+                "timeout": 5,
+                "health_threshold": 3,
+                "critical_threshold": 2,
+                "method": "HEAD",
+                "expected_codes": ["200"],
+                "follow_redirect": "false",
+                "probe_cluster": "global",
+            },
+            steering_policy="Pritory",
+            failover_policy="OtherOriginGroup")
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLoadBalancer](https://www.tencentcloud.com/document/api/1145/66031)
+          - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+        * Read: [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+        * Update:
+          - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+          - [ModifyLoadBalancer](https://www.tencentcloud.com/document/api/1145/66027)
+        * Delete: [DeleteLoadBalancer](https://www.tencentcloud.com/document/api/1145/66030)
 
         ## Import
 
@@ -466,7 +554,7 @@ class LoadBalancer(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Load balancer instance name, 1-200 characters, allowed characters: `a-z`, `A-Z`, `0-9`, `_`, `-`.
         :param pulumi.Input[Sequence[pulumi.Input[Union['LoadBalancerOriginGroupArgs', 'LoadBalancerOriginGroupArgsDict']]]] origin_groups: Source origin group list with failover priority.
         :param pulumi.Input[_builtins.str] steering_policy: Traffic steering policy between origin groups. Valid value: `Pritory` (failover by priority). Default: `Pritory`.
-        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        :param pulumi.Input[_builtins.str] type: Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         :param pulumi.Input[_builtins.str] zone_id: Site ID.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -535,7 +623,7 @@ class LoadBalancer(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[_builtins.str]:
         """
-        Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         """
         return pulumi.get(self, "type")
 

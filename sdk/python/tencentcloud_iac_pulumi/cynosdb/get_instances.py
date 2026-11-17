@@ -142,6 +142,12 @@ def get_instances(cluster_id: Optional[_builtins.str] = None,
         instance_name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+
 
     :param _builtins.str cluster_id: ID of the cluster.
     :param _builtins.str db_type: Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
@@ -190,6 +196,12 @@ def get_instances_output(cluster_id: pulumi.Input[Optional[Optional[_builtins.st
         db_type="MYSQL",
         instance_name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
 
 
     :param _builtins.str cluster_id: ID of the cluster.

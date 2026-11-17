@@ -26,6 +26,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateOrModifyCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=CreateOrModifyCloudNativeAPIGatewayIPRestriction&type=document&lang=en)
+ *   - [DescribeCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DescribeCloudNativeAPIGatewayIPRestriction&type=document&lang=en)
+ * * Read: [DescribeCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DescribeCloudNativeAPIGatewayIPRestriction&type=document&lang=en)
+ * * Update:
+ *   - [CreateOrModifyCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=CreateOrModifyCloudNativeAPIGatewayIPRestriction&type=document&lang=en)
+ *   - [DescribeCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DescribeCloudNativeAPIGatewayIPRestriction&type=document&lang=en)
+ * * Delete: [DeleteCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DeleteCloudNativeAPIGatewayIPRestriction&type=document&lang=en)
+ *
  * ## Import
  *
  * tse cloud native api gateway ip restriction can be imported using the composite id, e.g.

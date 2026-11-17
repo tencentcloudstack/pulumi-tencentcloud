@@ -152,6 +152,14 @@ class OpsTaskOwner(pulumi.CustomResource):
             task_id="20251009144419600")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateOpsTasksOwner](https://www.tencentcloud.com/document/api/1174/73809)
+        * Read: [GetOpsTask](https://www.tencentcloud.com/document/api/1174/73831)
+        * Update: [UpdateOpsTasksOwner](https://www.tencentcloud.com/document/api/1174/73809)
+
         ## Import
 
         wedata ops task owner can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class OpsTaskOwner(pulumi.CustomResource):
             project_id="2430455587205529600",
             task_id="20251009144419600")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateOpsTasksOwner](https://www.tencentcloud.com/document/api/1174/73809)
+        * Read: [GetOpsTask](https://www.tencentcloud.com/document/api/1174/73831)
+        * Update: [UpdateOpsTasksOwner](https://www.tencentcloud.com/document/api/1174/73809)
 
         ## Import
 

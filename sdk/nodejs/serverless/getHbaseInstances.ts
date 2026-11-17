@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     displayStrategy: "clusterList",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
  */
 export function getHbaseInstances(args: GetHbaseInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetHbaseInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetHbaseInstancesResult {
  *     displayStrategy: "clusterList",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
  */
 export function getHbaseInstancesOutput(args: GetHbaseInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetHbaseInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

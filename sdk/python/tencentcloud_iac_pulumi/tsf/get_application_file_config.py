@@ -151,6 +151,12 @@ def get_application_file_config(application_id: Optional[_builtins.str] = None,
         config_version="1.2")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
+
 
     :param _builtins.str application_id: Application ID.
     :param _builtins.str config_id: Configuration ID.
@@ -199,6 +205,12 @@ def get_application_file_config_output(application_id: pulumi.Input[Optional[Opt
         application_id="application-2vzk6n3v",
         config_version="1.2")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
 
 
     :param _builtins.str application_id: Application ID.

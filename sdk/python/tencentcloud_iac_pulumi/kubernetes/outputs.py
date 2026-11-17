@@ -1933,7 +1933,7 @@ class ClusterMaintenanceWindowAndExclusionExclusion(dict):
         :param _builtins.str end_at: Maintenance exclusion end time.
         :param _builtins.str name: Maintenance exclusion name.
         :param _builtins.str start_at: Maintenance exclusion start time.
-        :param _builtins.int id: ID of the resource.
+        :param _builtins.int id: Maintenance exclusion ID.
         """
         pulumi.set(__self__, "end_at", end_at)
         pulumi.set(__self__, "name", name)
@@ -1969,7 +1969,7 @@ class ClusterMaintenanceWindowAndExclusionExclusion(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.int]:
         """
-        ID of the resource.
+        Maintenance exclusion ID.
         """
         return pulumi.get(self, "id")
 
@@ -4519,7 +4519,7 @@ class GlobalMaintenanceWindowAndExclusionExclusion(dict):
         :param _builtins.str end_at: Maintenance exclusion end time.
         :param _builtins.str name: Maintenance exclusion name.
         :param _builtins.str start_at: Maintenance exclusion start time.
-        :param _builtins.int id: ID of the resource.
+        :param _builtins.int id: Maintenance exclusion ID.
         """
         pulumi.set(__self__, "end_at", end_at)
         pulumi.set(__self__, "name", name)
@@ -4555,7 +4555,7 @@ class GlobalMaintenanceWindowAndExclusionExclusion(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.int]:
         """
-        ID of the resource.
+        Maintenance exclusion ID.
         """
         return pulumi.get(self, "id")
 
@@ -4692,6 +4692,8 @@ class NativeNodePoolNative(dict):
             suggest = "system_disk"
         elif key == "autoRepair":
             suggest = "auto_repair"
+        elif key == "customImage":
+            suggest = "custom_image"
         elif key == "dataDisks":
             suggest = "data_disks"
         elif key == "enableAutoscaling":
@@ -4731,6 +4733,7 @@ class NativeNodePoolNative(dict):
                  subnet_ids: Sequence[_builtins.str],
                  system_disk: 'outputs.NativeNodePoolNativeSystemDisk',
                  auto_repair: Optional[_builtins.bool] = None,
+                 custom_image: Optional[_builtins.str] = None,
                  data_disks: Optional[Sequence['outputs.NativeNodePoolNativeDataDisk']] = None,
                  enable_autoscaling: Optional[_builtins.bool] = None,
                  health_check_policy_name: Optional[_builtins.str] = None,
@@ -4752,6 +4755,7 @@ class NativeNodePoolNative(dict):
         :param Sequence[_builtins.str] subnet_ids: Subnet list.
         :param 'NativeNodePoolNativeSystemDiskArgs' system_disk: System disk configuration.
         :param _builtins.bool auto_repair: Whether to enable self-healing ability.
+        :param _builtins.str custom_image: Custom image ID.
         :param Sequence['NativeNodePoolNativeDataDiskArgs'] data_disks: Native node pool data disk list.
         :param _builtins.bool enable_autoscaling: Whether to enable elastic scaling.
         :param _builtins.str health_check_policy_name: Fault self-healing rule name.
@@ -4774,6 +4778,8 @@ class NativeNodePoolNative(dict):
         pulumi.set(__self__, "system_disk", system_disk)
         if auto_repair is not None:
             pulumi.set(__self__, "auto_repair", auto_repair)
+        if custom_image is not None:
+            pulumi.set(__self__, "custom_image", custom_image)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
         if enable_autoscaling is not None:
@@ -4850,6 +4856,14 @@ class NativeNodePoolNative(dict):
         Whether to enable self-healing ability.
         """
         return pulumi.get(self, "auto_repair")
+
+    @_builtins.property
+    @pulumi.getter(name="customImage")
+    def custom_image(self) -> Optional[_builtins.str]:
+        """
+        Custom image ID.
+        """
+        return pulumi.get(self, "custom_image")
 
     @_builtins.property
     @pulumi.getter(name="dataDisks")
@@ -6186,7 +6200,7 @@ class NodePoolNodeConfig(dict):
         :param Sequence['NodePoolNodeConfigDataDiskArgs'] data_disks: Configurations of data disk.
         :param _builtins.int desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
         :param _builtins.str docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
-        :param Sequence[_builtins.str] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param Sequence[_builtins.str] extra_args: Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
         :param 'NodePoolNodeConfigGpuArgsArgs' gpu_args: GPU driver parameters.
         :param _builtins.bool is_schedule: Indicate to schedule the adding node or not. Default is true.
         :param _builtins.str mount_target: Mount target. Default is not mounting.
@@ -6240,7 +6254,7 @@ class NodePoolNodeConfig(dict):
     @pulumi.getter(name="extraArgs")
     def extra_args(self) -> Optional[Sequence[_builtins.str]]:
         """
-        Custom parameter information related to the node. This is a white-list parameter.
+        Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
         """
         return pulumi.get(self, "extra_args")
 

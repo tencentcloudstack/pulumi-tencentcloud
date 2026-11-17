@@ -117,6 +117,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTask](https://www.tencentcloud.com/document/api/1174/60982)
+    /// * Read: [GetTask](https://www.tencentcloud.com/document/api/1174/73876)
+    /// * Update: [UpdateTask](https://www.tencentcloud.com/document/api/1174/73861)
+    /// * Delete: [DeleteTask](https://www.tencentcloud.com/document/api/1174/73880)
+    /// 
     /// ## Import
     /// 
     /// wedata WedataTask can be imported using the id, e.g.

@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
         /// </summary>
         public static Task<GetAccountPrivilegesResult> InvokeAsync(GetAccountPrivilegesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountPrivilegesResult>("tencentcloud:Postgresql/getAccountPrivileges:getAccountPrivileges", args ?? new GetAccountPrivilegesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
         /// </summary>
         public static Output<GetAccountPrivilegesResult> Invoke(GetAccountPrivilegesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountPrivilegesResult>("tencentcloud:Postgresql/getAccountPrivileges:getAccountPrivileges", args ?? new GetAccountPrivilegesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
         /// </summary>
         public static Output<GetAccountPrivilegesResult> Invoke(GetAccountPrivilegesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountPrivilegesResult>("tencentcloud:Postgresql/getAccountPrivileges:getAccountPrivileges", args ?? new GetAccountPrivilegesInvokeArgs(), options.WithDefaults());

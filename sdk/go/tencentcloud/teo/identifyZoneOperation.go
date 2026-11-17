@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [IdentifyZone](https://www.tencentcloud.com/document/api/1145/50480)
 type IdentifyZoneOperation struct {
 	pulumi.CustomResourceState
 

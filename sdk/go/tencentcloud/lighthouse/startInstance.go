@@ -39,6 +39,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+//   - [StartInstances](https://www.tencentcloud.com/document/api/1103/42488)
 type StartInstance struct {
 	pulumi.CustomResourceState
 

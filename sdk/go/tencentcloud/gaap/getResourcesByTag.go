@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
 func GetResourcesByTag(ctx *pulumi.Context, args *GetResourcesByTagArgs, opts ...pulumi.InvokeOption) (*GetResourcesByTagResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResourcesByTagResult

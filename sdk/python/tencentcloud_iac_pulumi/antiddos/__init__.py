@@ -13,6 +13,7 @@ from .default_alarm_threshold import *
 from .get_basic_device_status import *
 from .get_bgp_biz_trend import *
 from .get_bgp_instances import *
+from .get_ddos_block_records import *
 from .get_list_listener import *
 from .get_overview_attack_trend import *
 from .get_overview_cc_trend import *

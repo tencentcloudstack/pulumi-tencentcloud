@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&type=document&lang=en)
 func LookupDeliveryConfigByGroupId(ctx *pulumi.Context, args *LookupDeliveryConfigByGroupIdArgs, opts ...pulumi.InvokeOption) (*LookupDeliveryConfigByGroupIdResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupDeliveryConfigByGroupIdResult

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
         /// </summary>
         public static Task<GetSecurityIpGroupContentResult> InvokeAsync(GetSecurityIpGroupContentArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityIpGroupContentResult>("tencentcloud:Teo/getSecurityIpGroupContent:getSecurityIpGroupContent", args ?? new GetSecurityIpGroupContentArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
         /// </summary>
         public static Output<GetSecurityIpGroupContentResult> Invoke(GetSecurityIpGroupContentInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityIpGroupContentResult>("tencentcloud:Teo/getSecurityIpGroupContent:getSecurityIpGroupContent", args ?? new GetSecurityIpGroupContentInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
         /// </summary>
         public static Output<GetSecurityIpGroupContentResult> Invoke(GetSecurityIpGroupContentInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityIpGroupContentResult>("tencentcloud:Teo/getSecurityIpGroupContent:getSecurityIpGroupContent", args ?? new GetSecurityIpGroupContentInvokeArgs(), options.WithDefaults());

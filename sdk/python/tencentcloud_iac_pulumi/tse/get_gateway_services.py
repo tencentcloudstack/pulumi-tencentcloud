@@ -111,6 +111,12 @@ def get_gateway_services(filters: Optional[Sequence[Union['GetGatewayServicesFil
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayServices](https://www.tencentcloud.com/document/api/1290/79257)
+
 
     :param Sequence[Union['GetGatewayServicesFilterArgs', 'GetGatewayServicesFilterArgsDict']] filters: filter conditions, valid value:name,upstreamType.
     :param _builtins.str gateway_id: gateway ID.
@@ -148,6 +154,12 @@ def get_gateway_services_output(filters: pulumi.Input[Optional[Optional[Sequence
             "value": "test",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayServices](https://www.tencentcloud.com/document/api/1290/79257)
 
 
     :param Sequence[Union['GetGatewayServicesFilterArgs', 'GetGatewayServicesFilterArgsDict']] filters: filter conditions, valid value:name,upstreamType.

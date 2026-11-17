@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetL7RulesV2Result> InvokeAsync(GetL7RulesV2Args args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetL7RulesV2Result>("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args ?? new GetL7RulesV2Args(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetL7RulesV2Result> Invoke(GetL7RulesV2InvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetL7RulesV2Result>("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args ?? new GetL7RulesV2InvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetL7RulesV2Result> Invoke(GetL7RulesV2InvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetL7RulesV2Result>("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args ?? new GetL7RulesV2InvokeArgs(), options.WithDefaults());

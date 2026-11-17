@@ -45,6 +45,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateInstanceToken](https://www.tencentcloud.com/document/api/1051/45154)
+    ///   - [ModifyInstanceToken](https://www.tencentcloud.com/document/api/1051/50701)
+    /// * Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
+    /// * Update: [ModifyInstanceToken](https://www.tencentcloud.com/document/api/1051/50701)
+    /// * Delete:
+    ///   - [DeleteInstanceToken](https://www.tencentcloud.com/document/api/1051/50709)
+    ///   - [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
+    /// 
     /// ## Import
     /// 
     /// tcr token can be imported using the id, e.g.

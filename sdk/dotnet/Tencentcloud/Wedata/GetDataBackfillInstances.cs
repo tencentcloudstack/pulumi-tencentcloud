@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDataBackfillInstances](https://www.tencentcloud.com/document/api/1174/73824)
         /// </summary>
         public static Task<GetDataBackfillInstancesResult> InvokeAsync(GetDataBackfillInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataBackfillInstancesResult>("tencentcloud:Wedata/getDataBackfillInstances:getDataBackfillInstances", args ?? new GetDataBackfillInstancesArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDataBackfillInstances](https://www.tencentcloud.com/document/api/1174/73824)
         /// </summary>
         public static Output<GetDataBackfillInstancesResult> Invoke(GetDataBackfillInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataBackfillInstancesResult>("tencentcloud:Wedata/getDataBackfillInstances:getDataBackfillInstances", args ?? new GetDataBackfillInstancesInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDataBackfillInstances](https://www.tencentcloud.com/document/api/1174/73824)
         /// </summary>
         public static Output<GetDataBackfillInstancesResult> Invoke(GetDataBackfillInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataBackfillInstancesResult>("tencentcloud:Wedata/getDataBackfillInstances:getDataBackfillInstances", args ?? new GetDataBackfillInstancesInvokeArgs(), options.WithDefaults());

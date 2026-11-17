@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
         /// </summary>
         public static Task<GetServiceNodeInfosResult> InvokeAsync(GetServiceNodeInfosArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceNodeInfosResult>("tencentcloud:Emr/getServiceNodeInfos:getServiceNodeInfos", args ?? new GetServiceNodeInfosArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
         /// </summary>
         public static Output<GetServiceNodeInfosResult> Invoke(GetServiceNodeInfosInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceNodeInfosResult>("tencentcloud:Emr/getServiceNodeInfos:getServiceNodeInfos", args ?? new GetServiceNodeInfosInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
         /// </summary>
         public static Output<GetServiceNodeInfosResult> Invoke(GetServiceNodeInfosInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceNodeInfosResult>("tencentcloud:Emr/getServiceNodeInfos:getServiceNodeInfos", args ?? new GetServiceNodeInfosInvokeArgs(), options.WithDefaults());

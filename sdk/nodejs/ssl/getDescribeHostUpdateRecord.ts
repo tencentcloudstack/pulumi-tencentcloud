@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     oldCertificateId: "8u8DII0l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
  */
 export function getDescribeHostUpdateRecord(args?: GetDescribeHostUpdateRecordArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostUpdateRecordResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetDescribeHostUpdateRecordResult {
  *     oldCertificateId: "8u8DII0l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
  */
 export function getDescribeHostUpdateRecordOutput(args?: GetDescribeHostUpdateRecordOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostUpdateRecordResult> {
     args = args || {};

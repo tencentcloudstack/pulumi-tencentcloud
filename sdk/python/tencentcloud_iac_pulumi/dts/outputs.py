@@ -92,6 +92,27 @@ __all__ = [
     'SyncConfigOptionsDdlOption',
     'SyncConfigOptionsRateLimitOption',
     'SyncConfigSrcInfo',
+    'SyncJobConfigDynamicObjects',
+    'SyncJobConfigDynamicObjectsDatabase',
+    'SyncJobConfigDynamicObjectsDatabaseTable',
+    'SyncJobConfigDynamicObjectsDatabaseTableColumn',
+    'SyncJobConfigDynamicObjectsDatabaseView',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilter',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterTable',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterView',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter',
+    'SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption',
+    'SyncJobConfigDynamicObjectsOnlineDdl',
+    'SyncJobConfigDynamicOptions',
+    'SyncJobConfigDynamicOptionsConflictHandleOption',
+    'SyncJobConfigDynamicOptionsDdlOption',
+    'SyncJobConfigDynamicOptionsKafkaOption',
+    'SyncJobConfigDynamicOptionsKafkaOptionDataOption',
+    'SyncJobConfigDynamicOptionsKafkaOptionTopicRule',
     'SyncJobTag',
 ]
 
@@ -3669,6 +3690,1566 @@ class SyncConfigSrcInfo(dict):
 
 
 @pulumi.output_type
+class SyncJobConfigDynamicObjects(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "advancedObjects":
+            suggest = "advanced_objects"
+        elif key == "databasesOpFilters":
+            suggest = "databases_op_filters"
+        elif key == "onlineDdl":
+            suggest = "online_ddl"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjects. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjects.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjects.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 advanced_objects: Optional[Sequence[_builtins.str]] = None,
+                 databases: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabase']] = None,
+                 databases_op_filters: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilter']] = None,
+                 mode: Optional[_builtins.str] = None,
+                 online_ddl: Optional['outputs.SyncJobConfigDynamicObjectsOnlineDdl'] = None):
+        """
+        :param Sequence[_builtins.str] advanced_objects: For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabaseArgs'] databases: Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabasesOpFilterArgs'] databases_op_filters: Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str mode: Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'SyncJobConfigDynamicObjectsOnlineDdlArgs' online_ddl: It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if advanced_objects is not None:
+            pulumi.set(__self__, "advanced_objects", advanced_objects)
+        if databases is not None:
+            pulumi.set(__self__, "databases", databases)
+        if databases_op_filters is not None:
+            pulumi.set(__self__, "databases_op_filters", databases_op_filters)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+        if online_ddl is not None:
+            pulumi.set(__self__, "online_ddl", online_ddl)
+
+    @_builtins.property
+    @pulumi.getter(name="advancedObjects")
+    def advanced_objects(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "advanced_objects")
+
+    @_builtins.property
+    @pulumi.getter
+    def databases(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabase']]:
+        """
+        Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "databases")
+
+    @_builtins.property
+    @pulumi.getter(name="databasesOpFilters")
+    def databases_op_filters(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilter']]:
+        """
+        Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "databases_op_filters")
+
+    @_builtins.property
+    @pulumi.getter
+    def mode(self) -> Optional[_builtins.str]:
+        """
+        Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "mode")
+
+    @_builtins.property
+    @pulumi.getter(name="onlineDdl")
+    @_utilities.deprecated("""It has been deprecated.""")
+    def online_ddl(self) -> Optional['outputs.SyncJobConfigDynamicObjectsOnlineDdl']:
+        """
+        It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "online_ddl")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabase(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbMode":
+            suggest = "db_mode"
+        elif key == "dbName":
+            suggest = "db_name"
+        elif key == "eventMode":
+            suggest = "event_mode"
+        elif key == "functionMode":
+            suggest = "function_mode"
+        elif key == "newDbName":
+            suggest = "new_db_name"
+        elif key == "newSchemaName":
+            suggest = "new_schema_name"
+        elif key == "procedureMode":
+            suggest = "procedure_mode"
+        elif key == "schemaMode":
+            suggest = "schema_mode"
+        elif key == "schemaName":
+            suggest = "schema_name"
+        elif key == "tableMode":
+            suggest = "table_mode"
+        elif key == "triggerMode":
+            suggest = "trigger_mode"
+        elif key == "viewMode":
+            suggest = "view_mode"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabase. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabase.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabase.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_mode: Optional[_builtins.str] = None,
+                 db_name: Optional[_builtins.str] = None,
+                 event_mode: Optional[_builtins.str] = None,
+                 events: Optional[Sequence[_builtins.str]] = None,
+                 function_mode: Optional[_builtins.str] = None,
+                 functions: Optional[Sequence[_builtins.str]] = None,
+                 new_db_name: Optional[_builtins.str] = None,
+                 new_schema_name: Optional[_builtins.str] = None,
+                 procedure_mode: Optional[_builtins.str] = None,
+                 procedures: Optional[Sequence[_builtins.str]] = None,
+                 schema_mode: Optional[_builtins.str] = None,
+                 schema_name: Optional[_builtins.str] = None,
+                 table_mode: Optional[_builtins.str] = None,
+                 tables: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabaseTable']] = None,
+                 trigger_mode: Optional[_builtins.str] = None,
+                 triggers: Optional[Sequence[_builtins.str]] = None,
+                 view_mode: Optional[_builtins.str] = None,
+                 views: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabaseView']] = None):
+        """
+        :param _builtins.str db_mode: DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str db_name: The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str event_mode: Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] events: When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str function_mode: Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] functions: Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str new_db_name: The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str new_schema_name: Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str procedure_mode: Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] procedures: Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str schema_mode: Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str schema_name: Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str table_mode: Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabaseTableArgs'] tables: A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str trigger_mode: Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] triggers: When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str view_mode: View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabaseViewArgs'] views: View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if db_mode is not None:
+            pulumi.set(__self__, "db_mode", db_mode)
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if event_mode is not None:
+            pulumi.set(__self__, "event_mode", event_mode)
+        if events is not None:
+            pulumi.set(__self__, "events", events)
+        if function_mode is not None:
+            pulumi.set(__self__, "function_mode", function_mode)
+        if functions is not None:
+            pulumi.set(__self__, "functions", functions)
+        if new_db_name is not None:
+            pulumi.set(__self__, "new_db_name", new_db_name)
+        if new_schema_name is not None:
+            pulumi.set(__self__, "new_schema_name", new_schema_name)
+        if procedure_mode is not None:
+            pulumi.set(__self__, "procedure_mode", procedure_mode)
+        if procedures is not None:
+            pulumi.set(__self__, "procedures", procedures)
+        if schema_mode is not None:
+            pulumi.set(__self__, "schema_mode", schema_mode)
+        if schema_name is not None:
+            pulumi.set(__self__, "schema_name", schema_name)
+        if table_mode is not None:
+            pulumi.set(__self__, "table_mode", table_mode)
+        if tables is not None:
+            pulumi.set(__self__, "tables", tables)
+        if trigger_mode is not None:
+            pulumi.set(__self__, "trigger_mode", trigger_mode)
+        if triggers is not None:
+            pulumi.set(__self__, "triggers", triggers)
+        if view_mode is not None:
+            pulumi.set(__self__, "view_mode", view_mode)
+        if views is not None:
+            pulumi.set(__self__, "views", views)
+
+    @_builtins.property
+    @pulumi.getter(name="dbMode")
+    def db_mode(self) -> Optional[_builtins.str]:
+        """
+        DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[_builtins.str]:
+        """
+        The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "db_name")
+
+    @_builtins.property
+    @pulumi.getter(name="eventMode")
+    def event_mode(self) -> Optional[_builtins.str]:
+        """
+        Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "event_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def events(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "events")
+
+    @_builtins.property
+    @pulumi.getter(name="functionMode")
+    def function_mode(self) -> Optional[_builtins.str]:
+        """
+        Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "function_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def functions(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "functions")
+
+    @_builtins.property
+    @pulumi.getter(name="newDbName")
+    def new_db_name(self) -> Optional[_builtins.str]:
+        """
+        The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_db_name")
+
+    @_builtins.property
+    @pulumi.getter(name="newSchemaName")
+    def new_schema_name(self) -> Optional[_builtins.str]:
+        """
+        Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_schema_name")
+
+    @_builtins.property
+    @pulumi.getter(name="procedureMode")
+    def procedure_mode(self) -> Optional[_builtins.str]:
+        """
+        Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "procedure_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def procedures(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "procedures")
+
+    @_builtins.property
+    @pulumi.getter(name="schemaMode")
+    def schema_mode(self) -> Optional[_builtins.str]:
+        """
+        Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "schema_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="schemaName")
+    def schema_name(self) -> Optional[_builtins.str]:
+        """
+        Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "schema_name")
+
+    @_builtins.property
+    @pulumi.getter(name="tableMode")
+    def table_mode(self) -> Optional[_builtins.str]:
+        """
+        Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def tables(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabaseTable']]:
+        """
+        A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tables")
+
+    @_builtins.property
+    @pulumi.getter(name="triggerMode")
+    def trigger_mode(self) -> Optional[_builtins.str]:
+        """
+        Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "trigger_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def triggers(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "triggers")
+
+    @_builtins.property
+    @pulumi.getter(name="viewMode")
+    def view_mode(self) -> Optional[_builtins.str]:
+        """
+        View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "view_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def views(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabaseView']]:
+        """
+        View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "views")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabaseTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnMode":
+            suggest = "column_mode"
+        elif key == "filterCondition":
+            suggest = "filter_condition"
+        elif key == "newTableName":
+            suggest = "new_table_name"
+        elif key == "tableEditMode":
+            suggest = "table_edit_mode"
+        elif key == "tableName":
+            suggest = "table_name"
+        elif key == "tmpTables":
+            suggest = "tmp_tables"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabaseTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabaseTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabaseTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_mode: Optional[_builtins.str] = None,
+                 columns: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabaseTableColumn']] = None,
+                 filter_condition: Optional[_builtins.str] = None,
+                 new_table_name: Optional[_builtins.str] = None,
+                 table_edit_mode: Optional[_builtins.str] = None,
+                 table_name: Optional[_builtins.str] = None,
+                 tmp_tables: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str column_mode: Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabaseTableColumnArgs'] columns: Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str filter_condition: Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str new_table_name: New table name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str table_edit_mode: Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str table_name: Table name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] tmp_tables: Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if column_mode is not None:
+            pulumi.set(__self__, "column_mode", column_mode)
+        if columns is not None:
+            pulumi.set(__self__, "columns", columns)
+        if filter_condition is not None:
+            pulumi.set(__self__, "filter_condition", filter_condition)
+        if new_table_name is not None:
+            pulumi.set(__self__, "new_table_name", new_table_name)
+        if table_edit_mode is not None:
+            pulumi.set(__self__, "table_edit_mode", table_edit_mode)
+        if table_name is not None:
+            pulumi.set(__self__, "table_name", table_name)
+        if tmp_tables is not None:
+            pulumi.set(__self__, "tmp_tables", tmp_tables)
+
+    @_builtins.property
+    @pulumi.getter(name="columnMode")
+    def column_mode(self) -> Optional[_builtins.str]:
+        """
+        Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "column_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def columns(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabaseTableColumn']]:
+        """
+        Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "columns")
+
+    @_builtins.property
+    @pulumi.getter(name="filterCondition")
+    def filter_condition(self) -> Optional[_builtins.str]:
+        """
+        Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "filter_condition")
+
+    @_builtins.property
+    @pulumi.getter(name="newTableName")
+    def new_table_name(self) -> Optional[_builtins.str]:
+        """
+        New table name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_table_name")
+
+    @_builtins.property
+    @pulumi.getter(name="tableEditMode")
+    def table_edit_mode(self) -> Optional[_builtins.str]:
+        """
+        Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_edit_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> Optional[_builtins.str]:
+        """
+        Table name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_name")
+
+    @_builtins.property
+    @pulumi.getter(name="tmpTables")
+    def tmp_tables(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tmp_tables")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabaseTableColumn(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+        elif key == "newColumnName":
+            suggest = "new_column_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabaseTableColumn. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabaseTableColumn.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabaseTableColumn.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_name: Optional[_builtins.str] = None,
+                 new_column_name: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str column_name: Column name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str new_column_name: New column name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if new_column_name is not None:
+            pulumi.set(__self__, "new_column_name", new_column_name)
+
+    @_builtins.property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[_builtins.str]:
+        """
+        Column name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "column_name")
+
+    @_builtins.property
+    @pulumi.getter(name="newColumnName")
+    def new_column_name(self) -> Optional[_builtins.str]:
+        """
+        New column name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_column_name")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabaseView(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "newViewName":
+            suggest = "new_view_name"
+        elif key == "viewName":
+            suggest = "view_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabaseView. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabaseView.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabaseView.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 new_view_name: Optional[_builtins.str] = None,
+                 view_name: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str new_view_name: New view name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str view_name: View name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if new_view_name is not None:
+            pulumi.set(__self__, "new_view_name", new_view_name)
+        if view_name is not None:
+            pulumi.set(__self__, "view_name", view_name)
+
+    @_builtins.property
+    @pulumi.getter(name="newViewName")
+    def new_view_name(self) -> Optional[_builtins.str]:
+        """
+        New view name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "new_view_name")
+
+    @_builtins.property
+    @pulumi.getter(name="viewName")
+    def view_name(self) -> Optional[_builtins.str]:
+        """
+        View name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "view_name")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilter(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbName":
+            suggest = "db_name"
+        elif key == "opFilter":
+            suggest = "op_filter"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilter. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilter.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilter.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 db_name: _builtins.str,
+                 op_filter: Optional['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter'] = None,
+                 tables: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterTable']] = None,
+                 views: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterView']] = None):
+        """
+        :param _builtins.str db_name: Database name that the rule takes effect on.
+        :param 'SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs' op_filter: View level DDL/DML filter rule.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs'] tables: Table level DDL/DML filter info.
+        :param Sequence['SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs'] views: View level DDL/DML filter info.
+        """
+        pulumi.set(__self__, "db_name", db_name)
+        if op_filter is not None:
+            pulumi.set(__self__, "op_filter", op_filter)
+        if tables is not None:
+            pulumi.set(__self__, "tables", tables)
+        if views is not None:
+            pulumi.set(__self__, "views", views)
+
+    @_builtins.property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> _builtins.str:
+        """
+        Database name that the rule takes effect on.
+        """
+        return pulumi.get(self, "db_name")
+
+    @_builtins.property
+    @pulumi.getter(name="opFilter")
+    def op_filter(self) -> Optional['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter']:
+        """
+        View level DDL/DML filter rule.
+        """
+        return pulumi.get(self, "op_filter")
+
+    @_builtins.property
+    @pulumi.getter
+    def tables(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterTable']]:
+        """
+        Table level DDL/DML filter info.
+        """
+        return pulumi.get(self, "tables")
+
+    @_builtins.property
+    @pulumi.getter
+    def views(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterView']]:
+        """
+        View level DDL/DML filter info.
+        """
+        return pulumi.get(self, "views")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlOptions":
+            suggest = "ddl_options"
+        elif key == "opTypes":
+            suggest = "op_types"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_options: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption']] = None,
+                 op_types: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param Sequence['SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs'] ddl_options: DDL white list.
+        :param Sequence[_builtins.str] op_types: DML white list.
+        """
+        if ddl_options is not None:
+            pulumi.set(__self__, "ddl_options", ddl_options)
+        if op_types is not None:
+            pulumi.set(__self__, "op_types", op_types)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlOptions")
+    def ddl_options(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption']]:
+        """
+        DDL white list.
+        """
+        return pulumi.get(self, "ddl_options")
+
+    @_builtins.property
+    @pulumi.getter(name="opTypes")
+    def op_types(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        DML white list.
+        """
+        return pulumi.get(self, "op_types")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlObject":
+            suggest = "ddl_object"
+        elif key == "ddlValues":
+            suggest = "ddl_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_object: Optional[_builtins.str] = None,
+                 ddl_values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str ddl_object: Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] ddl_values: The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if ddl_object is not None:
+            pulumi.set(__self__, "ddl_object", ddl_object)
+        if ddl_values is not None:
+            pulumi.set(__self__, "ddl_values", ddl_values)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlObject")
+    def ddl_object(self) -> Optional[_builtins.str]:
+        """
+        Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_object")
+
+    @_builtins.property
+    @pulumi.getter(name="ddlValues")
+    def ddl_values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_values")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterTable(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tableName":
+            suggest = "table_name"
+        elif key == "opFilter":
+            suggest = "op_filter"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterTable. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterTable.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterTable.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 table_name: _builtins.str,
+                 op_filter: Optional['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter'] = None):
+        """
+        :param _builtins.str table_name: Table name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs' op_filter: Table level DDL/DML filter rule.
+        """
+        pulumi.set(__self__, "table_name", table_name)
+        if op_filter is not None:
+            pulumi.set(__self__, "op_filter", op_filter)
+
+    @_builtins.property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> _builtins.str:
+        """
+        Table name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_name")
+
+    @_builtins.property
+    @pulumi.getter(name="opFilter")
+    def op_filter(self) -> Optional['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter']:
+        """
+        Table level DDL/DML filter rule.
+        """
+        return pulumi.get(self, "op_filter")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlOptions":
+            suggest = "ddl_options"
+        elif key == "opTypes":
+            suggest = "op_types"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_options: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption']] = None,
+                 op_types: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param Sequence['SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs'] ddl_options: DDL white list.
+        :param Sequence[_builtins.str] op_types: DML white list.
+        """
+        if ddl_options is not None:
+            pulumi.set(__self__, "ddl_options", ddl_options)
+        if op_types is not None:
+            pulumi.set(__self__, "op_types", op_types)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlOptions")
+    def ddl_options(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption']]:
+        """
+        DDL white list.
+        """
+        return pulumi.get(self, "ddl_options")
+
+    @_builtins.property
+    @pulumi.getter(name="opTypes")
+    def op_types(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        DML white list.
+        """
+        return pulumi.get(self, "op_types")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlObject":
+            suggest = "ddl_object"
+        elif key == "ddlValues":
+            suggest = "ddl_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_object: Optional[_builtins.str] = None,
+                 ddl_values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str ddl_object: Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] ddl_values: The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if ddl_object is not None:
+            pulumi.set(__self__, "ddl_object", ddl_object)
+        if ddl_values is not None:
+            pulumi.set(__self__, "ddl_values", ddl_values)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlObject")
+    def ddl_object(self) -> Optional[_builtins.str]:
+        """
+        Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_object")
+
+    @_builtins.property
+    @pulumi.getter(name="ddlValues")
+    def ddl_values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_values")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterView(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "viewName":
+            suggest = "view_name"
+        elif key == "opFilter":
+            suggest = "op_filter"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterView. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterView.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterView.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 view_name: _builtins.str,
+                 op_filter: Optional['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter'] = None):
+        """
+        :param _builtins.str view_name: View name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs' op_filter: View level DDL/DML filter rule.
+        """
+        pulumi.set(__self__, "view_name", view_name)
+        if op_filter is not None:
+            pulumi.set(__self__, "op_filter", op_filter)
+
+    @_builtins.property
+    @pulumi.getter(name="viewName")
+    def view_name(self) -> _builtins.str:
+        """
+        View name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "view_name")
+
+    @_builtins.property
+    @pulumi.getter(name="opFilter")
+    def op_filter(self) -> Optional['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter']:
+        """
+        View level DDL/DML filter rule.
+        """
+        return pulumi.get(self, "op_filter")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlOptions":
+            suggest = "ddl_options"
+        elif key == "opTypes":
+            suggest = "op_types"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_options: Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption']] = None,
+                 op_types: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param Sequence['SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs'] ddl_options: DDL white list.
+        :param Sequence[_builtins.str] op_types: DML white list.
+        """
+        if ddl_options is not None:
+            pulumi.set(__self__, "ddl_options", ddl_options)
+        if op_types is not None:
+            pulumi.set(__self__, "op_types", op_types)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlOptions")
+    def ddl_options(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption']]:
+        """
+        DDL white list.
+        """
+        return pulumi.get(self, "ddl_options")
+
+    @_builtins.property
+    @pulumi.getter(name="opTypes")
+    def op_types(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        DML white list.
+        """
+        return pulumi.get(self, "op_types")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlObject":
+            suggest = "ddl_object"
+        elif key == "ddlValues":
+            suggest = "ddl_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_object: Optional[_builtins.str] = None,
+                 ddl_values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str ddl_object: Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] ddl_values: The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if ddl_object is not None:
+            pulumi.set(__self__, "ddl_object", ddl_object)
+        if ddl_values is not None:
+            pulumi.set(__self__, "ddl_values", ddl_values)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlObject")
+    def ddl_object(self) -> Optional[_builtins.str]:
+        """
+        Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_object")
+
+    @_builtins.property
+    @pulumi.getter(name="ddlValues")
+    def ddl_values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_values")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicObjectsOnlineDdl(dict):
+    def __init__(__self__, *,
+                 status: _builtins.str):
+        """
+        :param _builtins.str status: It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+        """
+        pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter
+    @_utilities.deprecated("""It has been deprecated.""")
+    def status(self) -> _builtins.str:
+        """
+        It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicOptions(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlOptions":
+            suggest = "ddl_options"
+        elif key == "opTypes":
+            suggest = "op_types"
+        elif key == "conflictHandleOption":
+            suggest = "conflict_handle_option"
+        elif key == "conflictHandleType":
+            suggest = "conflict_handle_type"
+        elif key == "dealOfExistSameTable":
+            suggest = "deal_of_exist_same_table"
+        elif key == "filterBeginCommit":
+            suggest = "filter_begin_commit"
+        elif key == "filterCheckpoint":
+            suggest = "filter_checkpoint"
+        elif key == "kafkaOption":
+            suggest = "kafka_option"
+        elif key == "startPosition":
+            suggest = "start_position"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicOptions. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicOptions.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicOptions.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_options: Sequence['outputs.SyncJobConfigDynamicOptionsDdlOption'],
+                 op_types: Sequence[_builtins.str],
+                 conflict_handle_option: Optional['outputs.SyncJobConfigDynamicOptionsConflictHandleOption'] = None,
+                 conflict_handle_type: Optional[_builtins.str] = None,
+                 deal_of_exist_same_table: Optional[_builtins.str] = None,
+                 filter_begin_commit: Optional[_builtins.bool] = None,
+                 filter_checkpoint: Optional[_builtins.bool] = None,
+                 kafka_option: Optional['outputs.SyncJobConfigDynamicOptionsKafkaOption'] = None,
+                 start_position: Optional[_builtins.str] = None):
+        """
+        :param Sequence['SyncJobConfigDynamicOptionsDdlOptionArgs'] ddl_options: DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+        :param Sequence[_builtins.str] op_types: DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+        :param 'SyncJobConfigDynamicOptionsConflictHandleOptionArgs' conflict_handle_option: Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str conflict_handle_type: Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str deal_of_exist_same_table: The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.bool filter_begin_commit: Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+        :param _builtins.bool filter_checkpoint: Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+        :param 'SyncJobConfigDynamicOptionsKafkaOptionArgs' kafka_option: Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str start_position: Only incremental tasks reset the designated site.
+        """
+        pulumi.set(__self__, "ddl_options", ddl_options)
+        pulumi.set(__self__, "op_types", op_types)
+        if conflict_handle_option is not None:
+            pulumi.set(__self__, "conflict_handle_option", conflict_handle_option)
+        if conflict_handle_type is not None:
+            pulumi.set(__self__, "conflict_handle_type", conflict_handle_type)
+        if deal_of_exist_same_table is not None:
+            pulumi.set(__self__, "deal_of_exist_same_table", deal_of_exist_same_table)
+        if filter_begin_commit is not None:
+            pulumi.set(__self__, "filter_begin_commit", filter_begin_commit)
+        if filter_checkpoint is not None:
+            pulumi.set(__self__, "filter_checkpoint", filter_checkpoint)
+        if kafka_option is not None:
+            pulumi.set(__self__, "kafka_option", kafka_option)
+        if start_position is not None:
+            pulumi.set(__self__, "start_position", start_position)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlOptions")
+    def ddl_options(self) -> Sequence['outputs.SyncJobConfigDynamicOptionsDdlOption']:
+        """
+        DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+        """
+        return pulumi.get(self, "ddl_options")
+
+    @_builtins.property
+    @pulumi.getter(name="opTypes")
+    def op_types(self) -> Sequence[_builtins.str]:
+        """
+        DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+        """
+        return pulumi.get(self, "op_types")
+
+    @_builtins.property
+    @pulumi.getter(name="conflictHandleOption")
+    def conflict_handle_option(self) -> Optional['outputs.SyncJobConfigDynamicOptionsConflictHandleOption']:
+        """
+        Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "conflict_handle_option")
+
+    @_builtins.property
+    @pulumi.getter(name="conflictHandleType")
+    def conflict_handle_type(self) -> Optional[_builtins.str]:
+        """
+        Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "conflict_handle_type")
+
+    @_builtins.property
+    @pulumi.getter(name="dealOfExistSameTable")
+    def deal_of_exist_same_table(self) -> Optional[_builtins.str]:
+        """
+        The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "deal_of_exist_same_table")
+
+    @_builtins.property
+    @pulumi.getter(name="filterBeginCommit")
+    def filter_begin_commit(self) -> Optional[_builtins.bool]:
+        """
+        Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+        """
+        return pulumi.get(self, "filter_begin_commit")
+
+    @_builtins.property
+    @pulumi.getter(name="filterCheckpoint")
+    def filter_checkpoint(self) -> Optional[_builtins.bool]:
+        """
+        Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+        """
+        return pulumi.get(self, "filter_checkpoint")
+
+    @_builtins.property
+    @pulumi.getter(name="kafkaOption")
+    def kafka_option(self) -> Optional['outputs.SyncJobConfigDynamicOptionsKafkaOption']:
+        """
+        Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "kafka_option")
+
+    @_builtins.property
+    @pulumi.getter(name="startPosition")
+    def start_position(self) -> Optional[_builtins.str]:
+        """
+        Only incremental tasks reset the designated site.
+        """
+        return pulumi.get(self, "start_position")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicOptionsConflictHandleOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "conditionColumn":
+            suggest = "condition_column"
+        elif key == "conditionOperator":
+            suggest = "condition_operator"
+        elif key == "conditionOrderInSrcAndDst":
+            suggest = "condition_order_in_src_and_dst"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicOptionsConflictHandleOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicOptionsConflictHandleOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicOptionsConflictHandleOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 condition_column: Optional[_builtins.str] = None,
+                 condition_operator: Optional[_builtins.str] = None,
+                 condition_order_in_src_and_dst: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str condition_column: Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str condition_operator: Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+        :param _builtins.str condition_order_in_src_and_dst: Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if condition_column is not None:
+            pulumi.set(__self__, "condition_column", condition_column)
+        if condition_operator is not None:
+            pulumi.set(__self__, "condition_operator", condition_operator)
+        if condition_order_in_src_and_dst is not None:
+            pulumi.set(__self__, "condition_order_in_src_and_dst", condition_order_in_src_and_dst)
+
+    @_builtins.property
+    @pulumi.getter(name="conditionColumn")
+    def condition_column(self) -> Optional[_builtins.str]:
+        """
+        Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "condition_column")
+
+    @_builtins.property
+    @pulumi.getter(name="conditionOperator")
+    def condition_operator(self) -> Optional[_builtins.str]:
+        """
+        Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "condition_operator")
+
+    @_builtins.property
+    @pulumi.getter(name="conditionOrderInSrcAndDst")
+    def condition_order_in_src_and_dst(self) -> Optional[_builtins.str]:
+        """
+        Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "condition_order_in_src_and_dst")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicOptionsDdlOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ddlObject":
+            suggest = "ddl_object"
+        elif key == "ddlValues":
+            suggest = "ddl_values"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicOptionsDdlOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicOptionsDdlOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicOptionsDdlOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ddl_object: Optional[_builtins.str] = None,
+                 ddl_values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str ddl_object: Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        :param Sequence[_builtins.str] ddl_values: The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if ddl_object is not None:
+            pulumi.set(__self__, "ddl_object", ddl_object)
+        if ddl_values is not None:
+            pulumi.set(__self__, "ddl_values", ddl_values)
+
+    @_builtins.property
+    @pulumi.getter(name="ddlObject")
+    def ddl_object(self) -> Optional[_builtins.str]:
+        """
+        Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_object")
+
+    @_builtins.property
+    @pulumi.getter(name="ddlValues")
+    def ddl_values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ddl_values")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicOptionsKafkaOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dataOptions":
+            suggest = "data_options"
+        elif key == "dataType":
+            suggest = "data_type"
+        elif key == "ddlTopicName":
+            suggest = "ddl_topic_name"
+        elif key == "topicRules":
+            suggest = "topic_rules"
+        elif key == "topicType":
+            suggest = "topic_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicOptionsKafkaOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicOptionsKafkaOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicOptionsKafkaOption.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 data_options: Optional[Sequence['outputs.SyncJobConfigDynamicOptionsKafkaOptionDataOption']] = None,
+                 data_type: Optional[_builtins.str] = None,
+                 ddl_topic_name: Optional[_builtins.str] = None,
+                 topic_rules: Optional[Sequence['outputs.SyncJobConfigDynamicOptionsKafkaOptionTopicRule']] = None,
+                 topic_type: Optional[_builtins.str] = None):
+        """
+        :param Sequence['SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs'] data_options: Other additional information, for specific data types extra parameters can be set.
+        :param _builtins.str data_type: Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+        :param _builtins.str ddl_topic_name: Topic used to store ddl.
+        :param Sequence['SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs'] topic_rules: Description of single topic and custom topic.
+        :param _builtins.str topic_type: Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+        """
+        if data_options is not None:
+            pulumi.set(__self__, "data_options", data_options)
+        if data_type is not None:
+            pulumi.set(__self__, "data_type", data_type)
+        if ddl_topic_name is not None:
+            pulumi.set(__self__, "ddl_topic_name", ddl_topic_name)
+        if topic_rules is not None:
+            pulumi.set(__self__, "topic_rules", topic_rules)
+        if topic_type is not None:
+            pulumi.set(__self__, "topic_type", topic_type)
+
+    @_builtins.property
+    @pulumi.getter(name="dataOptions")
+    def data_options(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicOptionsKafkaOptionDataOption']]:
+        """
+        Other additional information, for specific data types extra parameters can be set.
+        """
+        return pulumi.get(self, "data_options")
+
+    @_builtins.property
+    @pulumi.getter(name="dataType")
+    def data_type(self) -> Optional[_builtins.str]:
+        """
+        Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+        """
+        return pulumi.get(self, "data_type")
+
+    @_builtins.property
+    @pulumi.getter(name="ddlTopicName")
+    def ddl_topic_name(self) -> Optional[_builtins.str]:
+        """
+        Topic used to store ddl.
+        """
+        return pulumi.get(self, "ddl_topic_name")
+
+    @_builtins.property
+    @pulumi.getter(name="topicRules")
+    def topic_rules(self) -> Optional[Sequence['outputs.SyncJobConfigDynamicOptionsKafkaOptionTopicRule']]:
+        """
+        Description of single topic and custom topic.
+        """
+        return pulumi.get(self, "topic_rules")
+
+    @_builtins.property
+    @pulumi.getter(name="topicType")
+    def topic_type(self) -> Optional[_builtins.str]:
+        """
+        Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+        """
+        return pulumi.get(self, "topic_type")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicOptionsKafkaOptionDataOption(dict):
+    def __init__(__self__, *,
+                 key: Optional[_builtins.str] = None,
+                 value: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str key: Option key.
+        :param _builtins.str value: Option value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> Optional[_builtins.str]:
+        """
+        Option key.
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> Optional[_builtins.str]:
+        """
+        Option value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class SyncJobConfigDynamicOptionsKafkaOptionTopicRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dbMatchMode":
+            suggest = "db_match_mode"
+        elif key == "dbName":
+            suggest = "db_name"
+        elif key == "partitionType":
+            suggest = "partition_type"
+        elif key == "tableMatchMode":
+            suggest = "table_match_mode"
+        elif key == "tableName":
+            suggest = "table_name"
+        elif key == "topicName":
+            suggest = "topic_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SyncJobConfigDynamicOptionsKafkaOptionTopicRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SyncJobConfigDynamicOptionsKafkaOptionTopicRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SyncJobConfigDynamicOptionsKafkaOptionTopicRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 columns: Optional[Sequence[_builtins.str]] = None,
+                 db_match_mode: Optional[_builtins.str] = None,
+                 db_name: Optional[_builtins.str] = None,
+                 partition_type: Optional[_builtins.str] = None,
+                 table_match_mode: Optional[_builtins.str] = None,
+                 table_name: Optional[_builtins.str] = None,
+                 topic_name: Optional[_builtins.str] = None):
+        """
+        :param Sequence[_builtins.str] columns: Column names for partition by columns, multiple columns can be selected.
+        :param _builtins.str db_match_mode: Database name matching rule, such as Regular, Default.
+        :param _builtins.str db_name: Database name, takes effect when DbMatchMode=Regular.
+        :param _builtins.str partition_type: Topic partition strategy.
+        :param _builtins.str table_match_mode: Table name matching rule, such as Regular, Default.
+        :param _builtins.str table_name: Table name, only takes effect when TableMatchMode=Regular.
+        :param _builtins.str topic_name: Topic name. When single topic, all TopicName must be the same.
+        """
+        if columns is not None:
+            pulumi.set(__self__, "columns", columns)
+        if db_match_mode is not None:
+            pulumi.set(__self__, "db_match_mode", db_match_mode)
+        if db_name is not None:
+            pulumi.set(__self__, "db_name", db_name)
+        if partition_type is not None:
+            pulumi.set(__self__, "partition_type", partition_type)
+        if table_match_mode is not None:
+            pulumi.set(__self__, "table_match_mode", table_match_mode)
+        if table_name is not None:
+            pulumi.set(__self__, "table_name", table_name)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
+
+    @_builtins.property
+    @pulumi.getter
+    def columns(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Column names for partition by columns, multiple columns can be selected.
+        """
+        return pulumi.get(self, "columns")
+
+    @_builtins.property
+    @pulumi.getter(name="dbMatchMode")
+    def db_match_mode(self) -> Optional[_builtins.str]:
+        """
+        Database name matching rule, such as Regular, Default.
+        """
+        return pulumi.get(self, "db_match_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="dbName")
+    def db_name(self) -> Optional[_builtins.str]:
+        """
+        Database name, takes effect when DbMatchMode=Regular.
+        """
+        return pulumi.get(self, "db_name")
+
+    @_builtins.property
+    @pulumi.getter(name="partitionType")
+    def partition_type(self) -> Optional[_builtins.str]:
+        """
+        Topic partition strategy.
+        """
+        return pulumi.get(self, "partition_type")
+
+    @_builtins.property
+    @pulumi.getter(name="tableMatchMode")
+    def table_match_mode(self) -> Optional[_builtins.str]:
+        """
+        Table name matching rule, such as Regular, Default.
+        """
+        return pulumi.get(self, "table_match_mode")
+
+    @_builtins.property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> Optional[_builtins.str]:
+        """
+        Table name, only takes effect when TableMatchMode=Regular.
+        """
+        return pulumi.get(self, "table_name")
+
+    @_builtins.property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> Optional[_builtins.str]:
+        """
+        Topic name. When single topic, all TopicName must be the same.
+        """
+        return pulumi.get(self, "topic_name")
+
+
+@pulumi.output_type
 class SyncJobTag(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -6795,6 +8376,7 @@ class GetSyncJobsListObjectDatabaseResult(dict):
                  new_schema_name: _builtins.str,
                  procedure_mode: _builtins.str,
                  procedures: Sequence[_builtins.str],
+                 schema_mode: _builtins.str,
                  schema_name: _builtins.str,
                  table_mode: _builtins.str,
                  tables: Sequence['outputs.GetSyncJobsListObjectDatabaseTableResult'],
@@ -6809,6 +8391,7 @@ class GetSyncJobsListObjectDatabaseResult(dict):
         :param _builtins.str new_schema_name: new schema name.
         :param _builtins.str procedure_mode: procedure mode.
         :param Sequence[_builtins.str] procedures: procedures.
+        :param _builtins.str schema_mode: schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
         :param _builtins.str schema_name: schema name.
         :param _builtins.str table_mode: table mode.
         :param Sequence['GetSyncJobsListObjectDatabaseTableArgs'] tables: table list.
@@ -6823,6 +8406,7 @@ class GetSyncJobsListObjectDatabaseResult(dict):
         pulumi.set(__self__, "new_schema_name", new_schema_name)
         pulumi.set(__self__, "procedure_mode", procedure_mode)
         pulumi.set(__self__, "procedures", procedures)
+        pulumi.set(__self__, "schema_mode", schema_mode)
         pulumi.set(__self__, "schema_name", schema_name)
         pulumi.set(__self__, "table_mode", table_mode)
         pulumi.set(__self__, "tables", tables)
@@ -6892,6 +8476,14 @@ class GetSyncJobsListObjectDatabaseResult(dict):
         procedures.
         """
         return pulumi.get(self, "procedures")
+
+    @_builtins.property
+    @pulumi.getter(name="schemaMode")
+    def schema_mode(self) -> _builtins.str:
+        """
+        schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
+        """
+        return pulumi.get(self, "schema_mode")
 
     @_builtins.property
     @pulumi.getter(name="schemaName")

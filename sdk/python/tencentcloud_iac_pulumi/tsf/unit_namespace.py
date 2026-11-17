@@ -184,6 +184,16 @@ class UnitNamespace(pulumi.CustomResource):
             namespace_name="keep-terraform-cls")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUnitNamespaces](https://www.tencentcloud.com/search/?wd=CreateUnitNamespaces&type=document&lang=en)
+        * Read: [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&type=document&lang=en)
+        * Delete:
+          - [DeleteUnitNamespaces](https://www.tencentcloud.com/search/?wd=DeleteUnitNamespaces&type=document&lang=en)
+          - [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&type=document&lang=en)
+
         ## Import
 
         tsf unit_namespace can be imported using the id, e.g.
@@ -219,6 +229,16 @@ class UnitNamespace(pulumi.CustomResource):
             namespace_id="namespace-vwgo38wy",
             namespace_name="keep-terraform-cls")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUnitNamespaces](https://www.tencentcloud.com/search/?wd=CreateUnitNamespaces&type=document&lang=en)
+        * Read: [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&type=document&lang=en)
+        * Delete:
+          - [DeleteUnitNamespaces](https://www.tencentcloud.com/search/?wd=DeleteUnitNamespaces&type=document&lang=en)
+          - [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&type=document&lang=en)
 
         ## Import
 

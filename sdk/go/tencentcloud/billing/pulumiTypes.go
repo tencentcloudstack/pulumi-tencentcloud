@@ -729,6 +729,1141 @@ func (o BudgetWaveThresholdJsonArrayOutput) Index(i pulumi.IntInput) BudgetWaveT
 	}).(BudgetWaveThresholdJsonOutput)
 }
 
+type GetBillDetailDetailSet struct {
+	// Transaction type name, such as prepay purchase, prepay renew, postpay deduction, etc.
+	ActionType string `pulumi:"actionType"`
+	// Transaction type.
+	ActionTypeName string `pulumi:"actionTypeName"`
+	// Associated transaction order.
+	AssociatedOrders []GetBillDetailDetailSetAssociatedOrder `pulumi:"associatedOrders"`
+	// Bill day.
+	BillDay string `pulumi:"billDay"`
+	// Transaction ID.
+	BillId string `pulumi:"billId"`
+	// Bill month.
+	BillMonth string `pulumi:"billMonth"`
+	// Product name code.
+	BusinessCode string `pulumi:"businessCode"`
+	// Product name.
+	BusinessCodeName string `pulumi:"businessCodeName"`
+	// Component list.
+	ComponentSets []GetBillDetailDetailSetComponentSet `pulumi:"componentSets"`
+	// Discount content.
+	DiscountContent string `pulumi:"discountContent"`
+	// Discount object.
+	DiscountObject string `pulumi:"discountObject"`
+	// Discount type.
+	DiscountType string `pulumi:"discountType"`
+	// Start time of use.
+	FeeBeginTime string `pulumi:"feeBeginTime"`
+	// End time of use.
+	FeeEndTime string `pulumi:"feeEndTime"`
+	// Calculation description.
+	Formula string `pulumi:"formula"`
+	// Billing rule link.
+	FormulaUrl string `pulumi:"formulaUrl"`
+	// Bill record ID.
+	Id string `pulumi:"id"`
+	// Operator UIN.
+	OperateUin string `pulumi:"operateUin"`
+	// Order ID.
+	OrderId string `pulumi:"orderId"`
+	// Owner UIN.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Billing mode.
+	PayModeName string `pulumi:"payModeName"`
+	// Deduction time.
+	PayTime string `pulumi:"payTime"`
+	// Payer account ID (the account ID is the user's unique account identifier on Tencent Cloud). Defaults to querying the current account's bill.
+	PayerUin string `pulumi:"payerUin"`
+	// Price attributes.
+	PriceInfos []string `pulumi:"priceInfos"`
+	// Sub-product code.
+	ProductCode string `pulumi:"productCode"`
+	// Sub-product name.
+	ProductCodeName string `pulumi:"productCodeName"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Project name.
+	ProjectName string `pulumi:"projectName"`
+	// Region ID.
+	RegionId string `pulumi:"regionId"`
+	// Region.
+	RegionName string `pulumi:"regionName"`
+	// Domestic/International code.
+	RegionType string `pulumi:"regionType"`
+	// Domestic/International name.
+	RegionTypeName string `pulumi:"regionTypeName"`
+	// Reserve detail (instance config).
+	ReserveDetail string `pulumi:"reserveDetail"`
+	// Resource ID.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource alias.
+	ResourceName string `pulumi:"resourceName"`
+	// Tag information list.
+	Tags []GetBillDetailDetailSetTag `pulumi:"tags"`
+	// Zone.
+	ZoneName string `pulumi:"zoneName"`
+}
+
+// GetBillDetailDetailSetInput is an input type that accepts GetBillDetailDetailSetArgs and GetBillDetailDetailSetOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetInput` via:
+//
+//	GetBillDetailDetailSetArgs{...}
+type GetBillDetailDetailSetInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetOutput() GetBillDetailDetailSetOutput
+	ToGetBillDetailDetailSetOutputWithContext(context.Context) GetBillDetailDetailSetOutput
+}
+
+type GetBillDetailDetailSetArgs struct {
+	// Transaction type name, such as prepay purchase, prepay renew, postpay deduction, etc.
+	ActionType pulumi.StringInput `pulumi:"actionType"`
+	// Transaction type.
+	ActionTypeName pulumi.StringInput `pulumi:"actionTypeName"`
+	// Associated transaction order.
+	AssociatedOrders GetBillDetailDetailSetAssociatedOrderArrayInput `pulumi:"associatedOrders"`
+	// Bill day.
+	BillDay pulumi.StringInput `pulumi:"billDay"`
+	// Transaction ID.
+	BillId pulumi.StringInput `pulumi:"billId"`
+	// Bill month.
+	BillMonth pulumi.StringInput `pulumi:"billMonth"`
+	// Product name code.
+	BusinessCode pulumi.StringInput `pulumi:"businessCode"`
+	// Product name.
+	BusinessCodeName pulumi.StringInput `pulumi:"businessCodeName"`
+	// Component list.
+	ComponentSets GetBillDetailDetailSetComponentSetArrayInput `pulumi:"componentSets"`
+	// Discount content.
+	DiscountContent pulumi.StringInput `pulumi:"discountContent"`
+	// Discount object.
+	DiscountObject pulumi.StringInput `pulumi:"discountObject"`
+	// Discount type.
+	DiscountType pulumi.StringInput `pulumi:"discountType"`
+	// Start time of use.
+	FeeBeginTime pulumi.StringInput `pulumi:"feeBeginTime"`
+	// End time of use.
+	FeeEndTime pulumi.StringInput `pulumi:"feeEndTime"`
+	// Calculation description.
+	Formula pulumi.StringInput `pulumi:"formula"`
+	// Billing rule link.
+	FormulaUrl pulumi.StringInput `pulumi:"formulaUrl"`
+	// Bill record ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Operator UIN.
+	OperateUin pulumi.StringInput `pulumi:"operateUin"`
+	// Order ID.
+	OrderId pulumi.StringInput `pulumi:"orderId"`
+	// Owner UIN.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Billing mode.
+	PayModeName pulumi.StringInput `pulumi:"payModeName"`
+	// Deduction time.
+	PayTime pulumi.StringInput `pulumi:"payTime"`
+	// Payer account ID (the account ID is the user's unique account identifier on Tencent Cloud). Defaults to querying the current account's bill.
+	PayerUin pulumi.StringInput `pulumi:"payerUin"`
+	// Price attributes.
+	PriceInfos pulumi.StringArrayInput `pulumi:"priceInfos"`
+	// Sub-product code.
+	ProductCode pulumi.StringInput `pulumi:"productCode"`
+	// Sub-product name.
+	ProductCodeName pulumi.StringInput `pulumi:"productCodeName"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// Region ID.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Region.
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// Domestic/International code.
+	RegionType pulumi.StringInput `pulumi:"regionType"`
+	// Domestic/International name.
+	RegionTypeName pulumi.StringInput `pulumi:"regionTypeName"`
+	// Reserve detail (instance config).
+	ReserveDetail pulumi.StringInput `pulumi:"reserveDetail"`
+	// Resource ID.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource alias.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// Tag information list.
+	Tags GetBillDetailDetailSetTagArrayInput `pulumi:"tags"`
+	// Zone.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+}
+
+func (GetBillDetailDetailSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSet)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetArgs) ToGetBillDetailDetailSetOutput() GetBillDetailDetailSetOutput {
+	return i.ToGetBillDetailDetailSetOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetArgs) ToGetBillDetailDetailSetOutputWithContext(ctx context.Context) GetBillDetailDetailSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetOutput)
+}
+
+// GetBillDetailDetailSetArrayInput is an input type that accepts GetBillDetailDetailSetArray and GetBillDetailDetailSetArrayOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetArrayInput` via:
+//
+//	GetBillDetailDetailSetArray{ GetBillDetailDetailSetArgs{...} }
+type GetBillDetailDetailSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetArrayOutput() GetBillDetailDetailSetArrayOutput
+	ToGetBillDetailDetailSetArrayOutputWithContext(context.Context) GetBillDetailDetailSetArrayOutput
+}
+
+type GetBillDetailDetailSetArray []GetBillDetailDetailSetInput
+
+func (GetBillDetailDetailSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSet)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetArray) ToGetBillDetailDetailSetArrayOutput() GetBillDetailDetailSetArrayOutput {
+	return i.ToGetBillDetailDetailSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetArray) ToGetBillDetailDetailSetArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetArrayOutput)
+}
+
+type GetBillDetailDetailSetOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSet)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetOutput) ToGetBillDetailDetailSetOutput() GetBillDetailDetailSetOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetOutput) ToGetBillDetailDetailSetOutputWithContext(ctx context.Context) GetBillDetailDetailSetOutput {
+	return o
+}
+
+// Transaction type name, such as prepay purchase, prepay renew, postpay deduction, etc.
+func (o GetBillDetailDetailSetOutput) ActionType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ActionType }).(pulumi.StringOutput)
+}
+
+// Transaction type.
+func (o GetBillDetailDetailSetOutput) ActionTypeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ActionTypeName }).(pulumi.StringOutput)
+}
+
+// Associated transaction order.
+func (o GetBillDetailDetailSetOutput) AssociatedOrders() GetBillDetailDetailSetAssociatedOrderArrayOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) []GetBillDetailDetailSetAssociatedOrder { return v.AssociatedOrders }).(GetBillDetailDetailSetAssociatedOrderArrayOutput)
+}
+
+// Bill day.
+func (o GetBillDetailDetailSetOutput) BillDay() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.BillDay }).(pulumi.StringOutput)
+}
+
+// Transaction ID.
+func (o GetBillDetailDetailSetOutput) BillId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.BillId }).(pulumi.StringOutput)
+}
+
+// Bill month.
+func (o GetBillDetailDetailSetOutput) BillMonth() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.BillMonth }).(pulumi.StringOutput)
+}
+
+// Product name code.
+func (o GetBillDetailDetailSetOutput) BusinessCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.BusinessCode }).(pulumi.StringOutput)
+}
+
+// Product name.
+func (o GetBillDetailDetailSetOutput) BusinessCodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.BusinessCodeName }).(pulumi.StringOutput)
+}
+
+// Component list.
+func (o GetBillDetailDetailSetOutput) ComponentSets() GetBillDetailDetailSetComponentSetArrayOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) []GetBillDetailDetailSetComponentSet { return v.ComponentSets }).(GetBillDetailDetailSetComponentSetArrayOutput)
+}
+
+// Discount content.
+func (o GetBillDetailDetailSetOutput) DiscountContent() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.DiscountContent }).(pulumi.StringOutput)
+}
+
+// Discount object.
+func (o GetBillDetailDetailSetOutput) DiscountObject() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.DiscountObject }).(pulumi.StringOutput)
+}
+
+// Discount type.
+func (o GetBillDetailDetailSetOutput) DiscountType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.DiscountType }).(pulumi.StringOutput)
+}
+
+// Start time of use.
+func (o GetBillDetailDetailSetOutput) FeeBeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.FeeBeginTime }).(pulumi.StringOutput)
+}
+
+// End time of use.
+func (o GetBillDetailDetailSetOutput) FeeEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.FeeEndTime }).(pulumi.StringOutput)
+}
+
+// Calculation description.
+func (o GetBillDetailDetailSetOutput) Formula() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.Formula }).(pulumi.StringOutput)
+}
+
+// Billing rule link.
+func (o GetBillDetailDetailSetOutput) FormulaUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.FormulaUrl }).(pulumi.StringOutput)
+}
+
+// Bill record ID.
+func (o GetBillDetailDetailSetOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Operator UIN.
+func (o GetBillDetailDetailSetOutput) OperateUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.OperateUin }).(pulumi.StringOutput)
+}
+
+// Order ID.
+func (o GetBillDetailDetailSetOutput) OrderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.OrderId }).(pulumi.StringOutput)
+}
+
+// Owner UIN.
+func (o GetBillDetailDetailSetOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Billing mode.
+func (o GetBillDetailDetailSetOutput) PayModeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.PayModeName }).(pulumi.StringOutput)
+}
+
+// Deduction time.
+func (o GetBillDetailDetailSetOutput) PayTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.PayTime }).(pulumi.StringOutput)
+}
+
+// Payer account ID (the account ID is the user's unique account identifier on Tencent Cloud). Defaults to querying the current account's bill.
+func (o GetBillDetailDetailSetOutput) PayerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.PayerUin }).(pulumi.StringOutput)
+}
+
+// Price attributes.
+func (o GetBillDetailDetailSetOutput) PriceInfos() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) []string { return v.PriceInfos }).(pulumi.StringArrayOutput)
+}
+
+// Sub-product code.
+func (o GetBillDetailDetailSetOutput) ProductCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ProductCode }).(pulumi.StringOutput)
+}
+
+// Sub-product name.
+func (o GetBillDetailDetailSetOutput) ProductCodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ProductCodeName }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetBillDetailDetailSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Project name.
+func (o GetBillDetailDetailSetOutput) ProjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ProjectName }).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetBillDetailDetailSetOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetBillDetailDetailSetOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// Domestic/International code.
+func (o GetBillDetailDetailSetOutput) RegionType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.RegionType }).(pulumi.StringOutput)
+}
+
+// Domestic/International name.
+func (o GetBillDetailDetailSetOutput) RegionTypeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.RegionTypeName }).(pulumi.StringOutput)
+}
+
+// Reserve detail (instance config).
+func (o GetBillDetailDetailSetOutput) ReserveDetail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ReserveDetail }).(pulumi.StringOutput)
+}
+
+// Resource ID.
+func (o GetBillDetailDetailSetOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource alias.
+func (o GetBillDetailDetailSetOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ResourceName }).(pulumi.StringOutput)
+}
+
+// Tag information list.
+func (o GetBillDetailDetailSetOutput) Tags() GetBillDetailDetailSetTagArrayOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) []GetBillDetailDetailSetTag { return v.Tags }).(GetBillDetailDetailSetTagArrayOutput)
+}
+
+// Zone.
+func (o GetBillDetailDetailSetOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSet) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+type GetBillDetailDetailSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSet)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetArrayOutput) ToGetBillDetailDetailSetArrayOutput() GetBillDetailDetailSetArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetArrayOutput) ToGetBillDetailDetailSetArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetArrayOutput) Index(i pulumi.IntInput) GetBillDetailDetailSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillDetailDetailSet {
+		return vs[0].([]GetBillDetailDetailSet)[vs[1].(int)]
+	}).(GetBillDetailDetailSetOutput)
+}
+
+type GetBillDetailDetailSetAssociatedOrder struct {
+	// Adjusted order after discount.
+	NewOrder string `pulumi:"newOrder"`
+	// Original order before discount adjustment.
+	Original string `pulumi:"original"`
+	// Upgrade order.
+	PrepayModifyUp string `pulumi:"prepayModifyUp"`
+	// New purchase order.
+	PrepayPurchase string `pulumi:"prepayPurchase"`
+	// Renewal order.
+	PrepayRenew string `pulumi:"prepayRenew"`
+	// Reverse order.
+	ReverseOrder string `pulumi:"reverseOrder"`
+}
+
+// GetBillDetailDetailSetAssociatedOrderInput is an input type that accepts GetBillDetailDetailSetAssociatedOrderArgs and GetBillDetailDetailSetAssociatedOrderOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetAssociatedOrderInput` via:
+//
+//	GetBillDetailDetailSetAssociatedOrderArgs{...}
+type GetBillDetailDetailSetAssociatedOrderInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetAssociatedOrderOutput() GetBillDetailDetailSetAssociatedOrderOutput
+	ToGetBillDetailDetailSetAssociatedOrderOutputWithContext(context.Context) GetBillDetailDetailSetAssociatedOrderOutput
+}
+
+type GetBillDetailDetailSetAssociatedOrderArgs struct {
+	// Adjusted order after discount.
+	NewOrder pulumi.StringInput `pulumi:"newOrder"`
+	// Original order before discount adjustment.
+	Original pulumi.StringInput `pulumi:"original"`
+	// Upgrade order.
+	PrepayModifyUp pulumi.StringInput `pulumi:"prepayModifyUp"`
+	// New purchase order.
+	PrepayPurchase pulumi.StringInput `pulumi:"prepayPurchase"`
+	// Renewal order.
+	PrepayRenew pulumi.StringInput `pulumi:"prepayRenew"`
+	// Reverse order.
+	ReverseOrder pulumi.StringInput `pulumi:"reverseOrder"`
+}
+
+func (GetBillDetailDetailSetAssociatedOrderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetAssociatedOrder)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetAssociatedOrderArgs) ToGetBillDetailDetailSetAssociatedOrderOutput() GetBillDetailDetailSetAssociatedOrderOutput {
+	return i.ToGetBillDetailDetailSetAssociatedOrderOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetAssociatedOrderArgs) ToGetBillDetailDetailSetAssociatedOrderOutputWithContext(ctx context.Context) GetBillDetailDetailSetAssociatedOrderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetAssociatedOrderOutput)
+}
+
+// GetBillDetailDetailSetAssociatedOrderArrayInput is an input type that accepts GetBillDetailDetailSetAssociatedOrderArray and GetBillDetailDetailSetAssociatedOrderArrayOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetAssociatedOrderArrayInput` via:
+//
+//	GetBillDetailDetailSetAssociatedOrderArray{ GetBillDetailDetailSetAssociatedOrderArgs{...} }
+type GetBillDetailDetailSetAssociatedOrderArrayInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetAssociatedOrderArrayOutput() GetBillDetailDetailSetAssociatedOrderArrayOutput
+	ToGetBillDetailDetailSetAssociatedOrderArrayOutputWithContext(context.Context) GetBillDetailDetailSetAssociatedOrderArrayOutput
+}
+
+type GetBillDetailDetailSetAssociatedOrderArray []GetBillDetailDetailSetAssociatedOrderInput
+
+func (GetBillDetailDetailSetAssociatedOrderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetAssociatedOrder)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetAssociatedOrderArray) ToGetBillDetailDetailSetAssociatedOrderArrayOutput() GetBillDetailDetailSetAssociatedOrderArrayOutput {
+	return i.ToGetBillDetailDetailSetAssociatedOrderArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetAssociatedOrderArray) ToGetBillDetailDetailSetAssociatedOrderArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetAssociatedOrderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetAssociatedOrderArrayOutput)
+}
+
+type GetBillDetailDetailSetAssociatedOrderOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetAssociatedOrderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetAssociatedOrder)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetAssociatedOrderOutput) ToGetBillDetailDetailSetAssociatedOrderOutput() GetBillDetailDetailSetAssociatedOrderOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetAssociatedOrderOutput) ToGetBillDetailDetailSetAssociatedOrderOutputWithContext(ctx context.Context) GetBillDetailDetailSetAssociatedOrderOutput {
+	return o
+}
+
+// Adjusted order after discount.
+func (o GetBillDetailDetailSetAssociatedOrderOutput) NewOrder() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetAssociatedOrder) string { return v.NewOrder }).(pulumi.StringOutput)
+}
+
+// Original order before discount adjustment.
+func (o GetBillDetailDetailSetAssociatedOrderOutput) Original() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetAssociatedOrder) string { return v.Original }).(pulumi.StringOutput)
+}
+
+// Upgrade order.
+func (o GetBillDetailDetailSetAssociatedOrderOutput) PrepayModifyUp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetAssociatedOrder) string { return v.PrepayModifyUp }).(pulumi.StringOutput)
+}
+
+// New purchase order.
+func (o GetBillDetailDetailSetAssociatedOrderOutput) PrepayPurchase() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetAssociatedOrder) string { return v.PrepayPurchase }).(pulumi.StringOutput)
+}
+
+// Renewal order.
+func (o GetBillDetailDetailSetAssociatedOrderOutput) PrepayRenew() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetAssociatedOrder) string { return v.PrepayRenew }).(pulumi.StringOutput)
+}
+
+// Reverse order.
+func (o GetBillDetailDetailSetAssociatedOrderOutput) ReverseOrder() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetAssociatedOrder) string { return v.ReverseOrder }).(pulumi.StringOutput)
+}
+
+type GetBillDetailDetailSetAssociatedOrderArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetAssociatedOrderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetAssociatedOrder)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetAssociatedOrderArrayOutput) ToGetBillDetailDetailSetAssociatedOrderArrayOutput() GetBillDetailDetailSetAssociatedOrderArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetAssociatedOrderArrayOutput) ToGetBillDetailDetailSetAssociatedOrderArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetAssociatedOrderArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetAssociatedOrderArrayOutput) Index(i pulumi.IntInput) GetBillDetailDetailSetAssociatedOrderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillDetailDetailSetAssociatedOrder {
+		return vs[0].([]GetBillDetailDetailSetAssociatedOrder)[vs[1].(int)]
+	}).(GetBillDetailDetailSetAssociatedOrderOutput)
+}
+
+type GetBillDetailDetailSetComponentSet struct {
+	// Blended discount rate.
+	BlendedDiscount string `pulumi:"blendedDiscount"`
+	// Cash account payment amount.
+	CashPayAmount string `pulumi:"cashPayAmount"`
+	// Component name code.
+	ComponentCode string `pulumi:"componentCode"`
+	// Component type.
+	ComponentCodeName string `pulumi:"componentCodeName"`
+	// Component config description list.
+	ComponentConfigs []GetBillDetailDetailSetComponentSetComponentConfig `pulumi:"componentConfigs"`
+	// Component unit price after discount.
+	ContractPrice string `pulumi:"contractPrice"`
+	// Component original price.
+	Cost string `pulumi:"cost"`
+	// Deducted usage/duration (including resource pack).
+	DeductedMeasure string `pulumi:"deductedMeasure"`
+	// Discount rate.
+	Discount string `pulumi:"discount"`
+	// Incentive account payment amount.
+	IncentivePayAmount string `pulumi:"incentivePayAmount"`
+	// Instance type.
+	InstanceType string `pulumi:"instanceType"`
+	// Component type code.
+	ItemCode string `pulumi:"itemCode"`
+	// Component name.
+	ItemCodeName string `pulumi:"itemCodeName"`
+	// Reserved instance deducted component original price.
+	OriginalCostWithRi string `pulumi:"originalCostWithRi"`
+	// Savings plan deducted component original price.
+	OriginalCostWithSp string `pulumi:"originalCostWithSp"`
+	// Component price unit.
+	PriceUnit string `pulumi:"priceUnit"`
+	// Discounted total price.
+	RealCost string `pulumi:"realCost"`
+	// Original usage/duration before resource pack deduction.
+	RealTotalMeasure string `pulumi:"realTotalMeasure"`
+	// Discount type.
+	ReduceType string `pulumi:"reduceType"`
+	// Reserved instance deducted usage duration.
+	RiTimeSpan string `pulumi:"riTimeSpan"`
+	// Component list price.
+	SinglePrice string `pulumi:"singlePrice"`
+	// Savings plan deduction amount. Deprecated.
+	SpDeduction string `pulumi:"spDeduction"`
+	// Savings plan deduction rate.
+	SpDeductionRate string `pulumi:"spDeductionRate"`
+	// Component specified price. Deprecated.
+	SpecifiedPrice string `pulumi:"specifiedPrice"`
+	// Usage duration.
+	TimeSpan string `pulumi:"timeSpan"`
+	// Duration unit.
+	TimeUnitName string `pulumi:"timeUnitName"`
+	// Transfer account payment amount.
+	TransferPayAmount string `pulumi:"transferPayAmount"`
+	// Component usage.
+	UsedAmount string `pulumi:"usedAmount"`
+	// Component usage unit.
+	UsedAmountUnit string `pulumi:"usedAmountUnit"`
+	// Voucher payment amount.
+	VoucherPayAmount string `pulumi:"voucherPayAmount"`
+}
+
+// GetBillDetailDetailSetComponentSetInput is an input type that accepts GetBillDetailDetailSetComponentSetArgs and GetBillDetailDetailSetComponentSetOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetComponentSetInput` via:
+//
+//	GetBillDetailDetailSetComponentSetArgs{...}
+type GetBillDetailDetailSetComponentSetInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetComponentSetOutput() GetBillDetailDetailSetComponentSetOutput
+	ToGetBillDetailDetailSetComponentSetOutputWithContext(context.Context) GetBillDetailDetailSetComponentSetOutput
+}
+
+type GetBillDetailDetailSetComponentSetArgs struct {
+	// Blended discount rate.
+	BlendedDiscount pulumi.StringInput `pulumi:"blendedDiscount"`
+	// Cash account payment amount.
+	CashPayAmount pulumi.StringInput `pulumi:"cashPayAmount"`
+	// Component name code.
+	ComponentCode pulumi.StringInput `pulumi:"componentCode"`
+	// Component type.
+	ComponentCodeName pulumi.StringInput `pulumi:"componentCodeName"`
+	// Component config description list.
+	ComponentConfigs GetBillDetailDetailSetComponentSetComponentConfigArrayInput `pulumi:"componentConfigs"`
+	// Component unit price after discount.
+	ContractPrice pulumi.StringInput `pulumi:"contractPrice"`
+	// Component original price.
+	Cost pulumi.StringInput `pulumi:"cost"`
+	// Deducted usage/duration (including resource pack).
+	DeductedMeasure pulumi.StringInput `pulumi:"deductedMeasure"`
+	// Discount rate.
+	Discount pulumi.StringInput `pulumi:"discount"`
+	// Incentive account payment amount.
+	IncentivePayAmount pulumi.StringInput `pulumi:"incentivePayAmount"`
+	// Instance type.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Component type code.
+	ItemCode pulumi.StringInput `pulumi:"itemCode"`
+	// Component name.
+	ItemCodeName pulumi.StringInput `pulumi:"itemCodeName"`
+	// Reserved instance deducted component original price.
+	OriginalCostWithRi pulumi.StringInput `pulumi:"originalCostWithRi"`
+	// Savings plan deducted component original price.
+	OriginalCostWithSp pulumi.StringInput `pulumi:"originalCostWithSp"`
+	// Component price unit.
+	PriceUnit pulumi.StringInput `pulumi:"priceUnit"`
+	// Discounted total price.
+	RealCost pulumi.StringInput `pulumi:"realCost"`
+	// Original usage/duration before resource pack deduction.
+	RealTotalMeasure pulumi.StringInput `pulumi:"realTotalMeasure"`
+	// Discount type.
+	ReduceType pulumi.StringInput `pulumi:"reduceType"`
+	// Reserved instance deducted usage duration.
+	RiTimeSpan pulumi.StringInput `pulumi:"riTimeSpan"`
+	// Component list price.
+	SinglePrice pulumi.StringInput `pulumi:"singlePrice"`
+	// Savings plan deduction amount. Deprecated.
+	SpDeduction pulumi.StringInput `pulumi:"spDeduction"`
+	// Savings plan deduction rate.
+	SpDeductionRate pulumi.StringInput `pulumi:"spDeductionRate"`
+	// Component specified price. Deprecated.
+	SpecifiedPrice pulumi.StringInput `pulumi:"specifiedPrice"`
+	// Usage duration.
+	TimeSpan pulumi.StringInput `pulumi:"timeSpan"`
+	// Duration unit.
+	TimeUnitName pulumi.StringInput `pulumi:"timeUnitName"`
+	// Transfer account payment amount.
+	TransferPayAmount pulumi.StringInput `pulumi:"transferPayAmount"`
+	// Component usage.
+	UsedAmount pulumi.StringInput `pulumi:"usedAmount"`
+	// Component usage unit.
+	UsedAmountUnit pulumi.StringInput `pulumi:"usedAmountUnit"`
+	// Voucher payment amount.
+	VoucherPayAmount pulumi.StringInput `pulumi:"voucherPayAmount"`
+}
+
+func (GetBillDetailDetailSetComponentSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetComponentSet)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetComponentSetArgs) ToGetBillDetailDetailSetComponentSetOutput() GetBillDetailDetailSetComponentSetOutput {
+	return i.ToGetBillDetailDetailSetComponentSetOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetComponentSetArgs) ToGetBillDetailDetailSetComponentSetOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetComponentSetOutput)
+}
+
+// GetBillDetailDetailSetComponentSetArrayInput is an input type that accepts GetBillDetailDetailSetComponentSetArray and GetBillDetailDetailSetComponentSetArrayOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetComponentSetArrayInput` via:
+//
+//	GetBillDetailDetailSetComponentSetArray{ GetBillDetailDetailSetComponentSetArgs{...} }
+type GetBillDetailDetailSetComponentSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetComponentSetArrayOutput() GetBillDetailDetailSetComponentSetArrayOutput
+	ToGetBillDetailDetailSetComponentSetArrayOutputWithContext(context.Context) GetBillDetailDetailSetComponentSetArrayOutput
+}
+
+type GetBillDetailDetailSetComponentSetArray []GetBillDetailDetailSetComponentSetInput
+
+func (GetBillDetailDetailSetComponentSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetComponentSet)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetComponentSetArray) ToGetBillDetailDetailSetComponentSetArrayOutput() GetBillDetailDetailSetComponentSetArrayOutput {
+	return i.ToGetBillDetailDetailSetComponentSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetComponentSetArray) ToGetBillDetailDetailSetComponentSetArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetComponentSetArrayOutput)
+}
+
+type GetBillDetailDetailSetComponentSetOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetComponentSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetComponentSet)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetComponentSetOutput) ToGetBillDetailDetailSetComponentSetOutput() GetBillDetailDetailSetComponentSetOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetComponentSetOutput) ToGetBillDetailDetailSetComponentSetOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetOutput {
+	return o
+}
+
+// Blended discount rate.
+func (o GetBillDetailDetailSetComponentSetOutput) BlendedDiscount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.BlendedDiscount }).(pulumi.StringOutput)
+}
+
+// Cash account payment amount.
+func (o GetBillDetailDetailSetComponentSetOutput) CashPayAmount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.CashPayAmount }).(pulumi.StringOutput)
+}
+
+// Component name code.
+func (o GetBillDetailDetailSetComponentSetOutput) ComponentCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.ComponentCode }).(pulumi.StringOutput)
+}
+
+// Component type.
+func (o GetBillDetailDetailSetComponentSetOutput) ComponentCodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.ComponentCodeName }).(pulumi.StringOutput)
+}
+
+// Component config description list.
+func (o GetBillDetailDetailSetComponentSetOutput) ComponentConfigs() GetBillDetailDetailSetComponentSetComponentConfigArrayOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) []GetBillDetailDetailSetComponentSetComponentConfig {
+		return v.ComponentConfigs
+	}).(GetBillDetailDetailSetComponentSetComponentConfigArrayOutput)
+}
+
+// Component unit price after discount.
+func (o GetBillDetailDetailSetComponentSetOutput) ContractPrice() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.ContractPrice }).(pulumi.StringOutput)
+}
+
+// Component original price.
+func (o GetBillDetailDetailSetComponentSetOutput) Cost() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.Cost }).(pulumi.StringOutput)
+}
+
+// Deducted usage/duration (including resource pack).
+func (o GetBillDetailDetailSetComponentSetOutput) DeductedMeasure() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.DeductedMeasure }).(pulumi.StringOutput)
+}
+
+// Discount rate.
+func (o GetBillDetailDetailSetComponentSetOutput) Discount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.Discount }).(pulumi.StringOutput)
+}
+
+// Incentive account payment amount.
+func (o GetBillDetailDetailSetComponentSetOutput) IncentivePayAmount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.IncentivePayAmount }).(pulumi.StringOutput)
+}
+
+// Instance type.
+func (o GetBillDetailDetailSetComponentSetOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Component type code.
+func (o GetBillDetailDetailSetComponentSetOutput) ItemCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.ItemCode }).(pulumi.StringOutput)
+}
+
+// Component name.
+func (o GetBillDetailDetailSetComponentSetOutput) ItemCodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.ItemCodeName }).(pulumi.StringOutput)
+}
+
+// Reserved instance deducted component original price.
+func (o GetBillDetailDetailSetComponentSetOutput) OriginalCostWithRi() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.OriginalCostWithRi }).(pulumi.StringOutput)
+}
+
+// Savings plan deducted component original price.
+func (o GetBillDetailDetailSetComponentSetOutput) OriginalCostWithSp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.OriginalCostWithSp }).(pulumi.StringOutput)
+}
+
+// Component price unit.
+func (o GetBillDetailDetailSetComponentSetOutput) PriceUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.PriceUnit }).(pulumi.StringOutput)
+}
+
+// Discounted total price.
+func (o GetBillDetailDetailSetComponentSetOutput) RealCost() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.RealCost }).(pulumi.StringOutput)
+}
+
+// Original usage/duration before resource pack deduction.
+func (o GetBillDetailDetailSetComponentSetOutput) RealTotalMeasure() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.RealTotalMeasure }).(pulumi.StringOutput)
+}
+
+// Discount type.
+func (o GetBillDetailDetailSetComponentSetOutput) ReduceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.ReduceType }).(pulumi.StringOutput)
+}
+
+// Reserved instance deducted usage duration.
+func (o GetBillDetailDetailSetComponentSetOutput) RiTimeSpan() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.RiTimeSpan }).(pulumi.StringOutput)
+}
+
+// Component list price.
+func (o GetBillDetailDetailSetComponentSetOutput) SinglePrice() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.SinglePrice }).(pulumi.StringOutput)
+}
+
+// Savings plan deduction amount. Deprecated.
+func (o GetBillDetailDetailSetComponentSetOutput) SpDeduction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.SpDeduction }).(pulumi.StringOutput)
+}
+
+// Savings plan deduction rate.
+func (o GetBillDetailDetailSetComponentSetOutput) SpDeductionRate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.SpDeductionRate }).(pulumi.StringOutput)
+}
+
+// Component specified price. Deprecated.
+func (o GetBillDetailDetailSetComponentSetOutput) SpecifiedPrice() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.SpecifiedPrice }).(pulumi.StringOutput)
+}
+
+// Usage duration.
+func (o GetBillDetailDetailSetComponentSetOutput) TimeSpan() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.TimeSpan }).(pulumi.StringOutput)
+}
+
+// Duration unit.
+func (o GetBillDetailDetailSetComponentSetOutput) TimeUnitName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.TimeUnitName }).(pulumi.StringOutput)
+}
+
+// Transfer account payment amount.
+func (o GetBillDetailDetailSetComponentSetOutput) TransferPayAmount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.TransferPayAmount }).(pulumi.StringOutput)
+}
+
+// Component usage.
+func (o GetBillDetailDetailSetComponentSetOutput) UsedAmount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.UsedAmount }).(pulumi.StringOutput)
+}
+
+// Component usage unit.
+func (o GetBillDetailDetailSetComponentSetOutput) UsedAmountUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.UsedAmountUnit }).(pulumi.StringOutput)
+}
+
+// Voucher payment amount.
+func (o GetBillDetailDetailSetComponentSetOutput) VoucherPayAmount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSet) string { return v.VoucherPayAmount }).(pulumi.StringOutput)
+}
+
+type GetBillDetailDetailSetComponentSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetComponentSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetComponentSet)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetComponentSetArrayOutput) ToGetBillDetailDetailSetComponentSetArrayOutput() GetBillDetailDetailSetComponentSetArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetComponentSetArrayOutput) ToGetBillDetailDetailSetComponentSetArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetComponentSetArrayOutput) Index(i pulumi.IntInput) GetBillDetailDetailSetComponentSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillDetailDetailSetComponentSet {
+		return vs[0].([]GetBillDetailDetailSetComponentSet)[vs[1].(int)]
+	}).(GetBillDetailDetailSetComponentSetOutput)
+}
+
+type GetBillDetailDetailSetComponentSetComponentConfig struct {
+	// Config description name.
+	Name string `pulumi:"name"`
+	// Config description value.
+	Value string `pulumi:"value"`
+}
+
+// GetBillDetailDetailSetComponentSetComponentConfigInput is an input type that accepts GetBillDetailDetailSetComponentSetComponentConfigArgs and GetBillDetailDetailSetComponentSetComponentConfigOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetComponentSetComponentConfigInput` via:
+//
+//	GetBillDetailDetailSetComponentSetComponentConfigArgs{...}
+type GetBillDetailDetailSetComponentSetComponentConfigInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetComponentSetComponentConfigOutput() GetBillDetailDetailSetComponentSetComponentConfigOutput
+	ToGetBillDetailDetailSetComponentSetComponentConfigOutputWithContext(context.Context) GetBillDetailDetailSetComponentSetComponentConfigOutput
+}
+
+type GetBillDetailDetailSetComponentSetComponentConfigArgs struct {
+	// Config description name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Config description value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetBillDetailDetailSetComponentSetComponentConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetComponentSetComponentConfig)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetComponentSetComponentConfigArgs) ToGetBillDetailDetailSetComponentSetComponentConfigOutput() GetBillDetailDetailSetComponentSetComponentConfigOutput {
+	return i.ToGetBillDetailDetailSetComponentSetComponentConfigOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetComponentSetComponentConfigArgs) ToGetBillDetailDetailSetComponentSetComponentConfigOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetComponentConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetComponentSetComponentConfigOutput)
+}
+
+// GetBillDetailDetailSetComponentSetComponentConfigArrayInput is an input type that accepts GetBillDetailDetailSetComponentSetComponentConfigArray and GetBillDetailDetailSetComponentSetComponentConfigArrayOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetComponentSetComponentConfigArrayInput` via:
+//
+//	GetBillDetailDetailSetComponentSetComponentConfigArray{ GetBillDetailDetailSetComponentSetComponentConfigArgs{...} }
+type GetBillDetailDetailSetComponentSetComponentConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutput() GetBillDetailDetailSetComponentSetComponentConfigArrayOutput
+	ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutputWithContext(context.Context) GetBillDetailDetailSetComponentSetComponentConfigArrayOutput
+}
+
+type GetBillDetailDetailSetComponentSetComponentConfigArray []GetBillDetailDetailSetComponentSetComponentConfigInput
+
+func (GetBillDetailDetailSetComponentSetComponentConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetComponentSetComponentConfig)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetComponentSetComponentConfigArray) ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutput() GetBillDetailDetailSetComponentSetComponentConfigArrayOutput {
+	return i.ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetComponentSetComponentConfigArray) ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetComponentConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetComponentSetComponentConfigArrayOutput)
+}
+
+type GetBillDetailDetailSetComponentSetComponentConfigOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetComponentSetComponentConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetComponentSetComponentConfig)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetComponentSetComponentConfigOutput) ToGetBillDetailDetailSetComponentSetComponentConfigOutput() GetBillDetailDetailSetComponentSetComponentConfigOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetComponentSetComponentConfigOutput) ToGetBillDetailDetailSetComponentSetComponentConfigOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetComponentConfigOutput {
+	return o
+}
+
+// Config description name.
+func (o GetBillDetailDetailSetComponentSetComponentConfigOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSetComponentConfig) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Config description value.
+func (o GetBillDetailDetailSetComponentSetComponentConfigOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetComponentSetComponentConfig) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetBillDetailDetailSetComponentSetComponentConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetComponentSetComponentConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetComponentSetComponentConfig)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetComponentSetComponentConfigArrayOutput) ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutput() GetBillDetailDetailSetComponentSetComponentConfigArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetComponentSetComponentConfigArrayOutput) ToGetBillDetailDetailSetComponentSetComponentConfigArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetComponentSetComponentConfigArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetComponentSetComponentConfigArrayOutput) Index(i pulumi.IntInput) GetBillDetailDetailSetComponentSetComponentConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillDetailDetailSetComponentSetComponentConfig {
+		return vs[0].([]GetBillDetailDetailSetComponentSetComponentConfig)[vs[1].(int)]
+	}).(GetBillDetailDetailSetComponentSetComponentConfigOutput)
+}
+
+type GetBillDetailDetailSetTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetBillDetailDetailSetTagInput is an input type that accepts GetBillDetailDetailSetTagArgs and GetBillDetailDetailSetTagOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetTagInput` via:
+//
+//	GetBillDetailDetailSetTagArgs{...}
+type GetBillDetailDetailSetTagInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetTagOutput() GetBillDetailDetailSetTagOutput
+	ToGetBillDetailDetailSetTagOutputWithContext(context.Context) GetBillDetailDetailSetTagOutput
+}
+
+type GetBillDetailDetailSetTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetBillDetailDetailSetTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetTag)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetTagArgs) ToGetBillDetailDetailSetTagOutput() GetBillDetailDetailSetTagOutput {
+	return i.ToGetBillDetailDetailSetTagOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetTagArgs) ToGetBillDetailDetailSetTagOutputWithContext(ctx context.Context) GetBillDetailDetailSetTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetTagOutput)
+}
+
+// GetBillDetailDetailSetTagArrayInput is an input type that accepts GetBillDetailDetailSetTagArray and GetBillDetailDetailSetTagArrayOutput values.
+// You can construct a concrete instance of `GetBillDetailDetailSetTagArrayInput` via:
+//
+//	GetBillDetailDetailSetTagArray{ GetBillDetailDetailSetTagArgs{...} }
+type GetBillDetailDetailSetTagArrayInput interface {
+	pulumi.Input
+
+	ToGetBillDetailDetailSetTagArrayOutput() GetBillDetailDetailSetTagArrayOutput
+	ToGetBillDetailDetailSetTagArrayOutputWithContext(context.Context) GetBillDetailDetailSetTagArrayOutput
+}
+
+type GetBillDetailDetailSetTagArray []GetBillDetailDetailSetTagInput
+
+func (GetBillDetailDetailSetTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetTag)(nil)).Elem()
+}
+
+func (i GetBillDetailDetailSetTagArray) ToGetBillDetailDetailSetTagArrayOutput() GetBillDetailDetailSetTagArrayOutput {
+	return i.ToGetBillDetailDetailSetTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillDetailDetailSetTagArray) ToGetBillDetailDetailSetTagArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillDetailDetailSetTagArrayOutput)
+}
+
+type GetBillDetailDetailSetTagOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillDetailDetailSetTag)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetTagOutput) ToGetBillDetailDetailSetTagOutput() GetBillDetailDetailSetTagOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetTagOutput) ToGetBillDetailDetailSetTagOutputWithContext(ctx context.Context) GetBillDetailDetailSetTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetBillDetailDetailSetTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetBillDetailDetailSetTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillDetailDetailSetTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetBillDetailDetailSetTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillDetailDetailSetTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillDetailDetailSetTag)(nil)).Elem()
+}
+
+func (o GetBillDetailDetailSetTagArrayOutput) ToGetBillDetailDetailSetTagArrayOutput() GetBillDetailDetailSetTagArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetTagArrayOutput) ToGetBillDetailDetailSetTagArrayOutputWithContext(ctx context.Context) GetBillDetailDetailSetTagArrayOutput {
+	return o
+}
+
+func (o GetBillDetailDetailSetTagArrayOutput) Index(i pulumi.IntInput) GetBillDetailDetailSetTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillDetailDetailSetTag {
+		return vs[0].([]GetBillDetailDetailSetTag)[vs[1].(int)]
+	}).(GetBillDetailDetailSetTagOutput)
+}
+
 type GetBudgetOperationLogRecord struct {
 	// Modification type: ADD, UPDATE.
 	Action string `pulumi:"action"`
@@ -1040,6 +2175,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BudgetWarnJsonArrayInput)(nil)).Elem(), BudgetWarnJsonArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BudgetWaveThresholdJsonInput)(nil)).Elem(), BudgetWaveThresholdJsonArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BudgetWaveThresholdJsonArrayInput)(nil)).Elem(), BudgetWaveThresholdJsonArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetInput)(nil)).Elem(), GetBillDetailDetailSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetArrayInput)(nil)).Elem(), GetBillDetailDetailSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetAssociatedOrderInput)(nil)).Elem(), GetBillDetailDetailSetAssociatedOrderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetAssociatedOrderArrayInput)(nil)).Elem(), GetBillDetailDetailSetAssociatedOrderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetComponentSetInput)(nil)).Elem(), GetBillDetailDetailSetComponentSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetComponentSetArrayInput)(nil)).Elem(), GetBillDetailDetailSetComponentSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetComponentSetComponentConfigInput)(nil)).Elem(), GetBillDetailDetailSetComponentSetComponentConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetComponentSetComponentConfigArrayInput)(nil)).Elem(), GetBillDetailDetailSetComponentSetComponentConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetTagInput)(nil)).Elem(), GetBillDetailDetailSetTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillDetailDetailSetTagArrayInput)(nil)).Elem(), GetBillDetailDetailSetTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBudgetOperationLogRecordInput)(nil)).Elem(), GetBudgetOperationLogRecordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBudgetOperationLogRecordArrayInput)(nil)).Elem(), GetBudgetOperationLogRecordArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBudgetOperationLogRecordDiffValueInput)(nil)).Elem(), GetBudgetOperationLogRecordDiffValueArgs{})
@@ -1052,6 +2197,16 @@ func init() {
 	pulumi.RegisterOutputType(BudgetWarnJsonArrayOutput{})
 	pulumi.RegisterOutputType(BudgetWaveThresholdJsonOutput{})
 	pulumi.RegisterOutputType(BudgetWaveThresholdJsonArrayOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetAssociatedOrderOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetAssociatedOrderArrayOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetComponentSetOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetComponentSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetComponentSetComponentConfigOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetComponentSetComponentConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetTagOutput{})
+	pulumi.RegisterOutputType(GetBillDetailDetailSetTagArrayOutput{})
 	pulumi.RegisterOutputType(GetBudgetOperationLogRecordOutput{})
 	pulumi.RegisterOutputType(GetBudgetOperationLogRecordArrayOutput{})
 	pulumi.RegisterOutputType(GetBudgetOperationLogRecordDiffValueOutput{})

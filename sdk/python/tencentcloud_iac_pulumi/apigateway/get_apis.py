@@ -152,6 +152,14 @@ def get_apis(api_id: Optional[_builtins.str] = None,
         api_name=api.api_name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+      - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&type=document&lang=en)
+
 
     :param _builtins.str api_id: Created API ID.
     :param _builtins.str api_name: Custom API name.
@@ -219,6 +227,14 @@ def get_apis_output(api_id: pulumi.Input[Optional[Optional[_builtins.str]]] = No
     name = tencentcloud.apigateway.get_apis_output(service_id=service.id,
         api_name=api.api_name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+      - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&type=document&lang=en)
 
 
     :param _builtins.str api_id: Created API ID.

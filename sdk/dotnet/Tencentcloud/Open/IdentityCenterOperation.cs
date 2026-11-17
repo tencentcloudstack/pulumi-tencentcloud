@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Open
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [OpenIdentityCenter](https://www.tencentcloud.com/document/api/1031/63591)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Open/identityCenterOperation:IdentityCenterOperation")]
     public partial class IdentityCenterOperation : global::Pulumi.CustomResource

@@ -151,6 +151,12 @@ def get_metric_data(analyze_task_type: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProbeMetricData](https://www.tencentcloud.com/search/?wd=DescribeProbeMetricData&type=document&lang=en)
+
 
     :param _builtins.str analyze_task_type: Analysis of task type, supported types: `AnalyzeTaskType_Network`: network quality, `AnalyzeTaskType_Browse`: page performance, `AnalyzeTaskType_Transport`: port performance, `AnalyzeTaskType_UploadDownload`: file transport, `AnalyzeTaskType_MediaStream`: audiovisual experience.
     :param _builtins.str field: Detailed fields of metrics, specified metrics can be passed or aggregate metrics, such as avg(ping_time) means entire delay.
@@ -206,6 +212,12 @@ def get_metric_data_output(analyze_task_type: pulumi.Input[Optional[_builtins.st
             "time >= now()-1h",
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProbeMetricData](https://www.tencentcloud.com/search/?wd=DescribeProbeMetricData&type=document&lang=en)
 
 
     :param _builtins.str analyze_task_type: Analysis of task type, supported types: `AnalyzeTaskType_Network`: network quality, `AnalyzeTaskType_Browse`: page performance, `AnalyzeTaskType_Transport`: port performance, `AnalyzeTaskType_UploadDownload`: file transport, `AnalyzeTaskType_MediaStream`: audiovisual experience.

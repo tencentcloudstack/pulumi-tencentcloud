@@ -128,6 +128,12 @@ def get_function_address(function_name: Optional[_builtins.str] = None,
         qualifier="$LATEST")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
+
 
     :param _builtins.str function_name: Function name.
     :param _builtins.str namespace: Function namespace.
@@ -168,6 +174,12 @@ def get_function_address_output(function_name: pulumi.Input[Optional[_builtins.s
         namespace="default",
         qualifier="$LATEST")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
 
 
     :param _builtins.str function_name: Function name.

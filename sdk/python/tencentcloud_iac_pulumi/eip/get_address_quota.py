@@ -86,6 +86,12 @@ def get_address_quota(result_output_file: Optional[_builtins.str] = None,
     address_quota = tencentcloud.eip.get_address_quota()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_address_quota_output(result_output_file: pulumi.Input[Optional[Optional[
 
     address_quota = tencentcloud.eip.get_address_quota()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
 
 
     :param _builtins.str result_output_file: Used to save results.

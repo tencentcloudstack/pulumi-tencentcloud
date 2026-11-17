@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetProductQuotaResult> InvokeAsync(GetProductQuotaArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProductQuotaResult> Invoke(GetProductQuotaInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProductQuotaResult> Invoke(GetProductQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaInvokeArgs(), options.WithDefaults());

@@ -153,6 +153,12 @@ def get_sign(file_type: Optional[_builtins.int] = None,
         file_type=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
+
 
     :param _builtins.int file_type: Bucket type. `1`:web project; `2`:app project.
     :param _builtins.str result_output_file: Used to save results.
@@ -191,6 +197,12 @@ def get_sign_output(file_type: pulumi.Input[Optional[Optional[_builtins.int]]] =
     sign = tencentcloud.rum.get_sign(timeout=1800,
         file_type=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
 
 
     :param _builtins.int file_type: Bucket type. `1`:web project; `2`:app project.

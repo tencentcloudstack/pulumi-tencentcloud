@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     retentionId: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
  */
 export function getTagRetentionExecutions(args: GetTagRetentionExecutionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTagRetentionExecutionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetTagRetentionExecutionsResult {
  *     retentionId: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
  */
 export function getTagRetentionExecutionsOutput(args: GetTagRetentionExecutionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTagRetentionExecutionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

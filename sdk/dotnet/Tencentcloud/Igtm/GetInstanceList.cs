@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstanceListResult> InvokeAsync(GetInstanceListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceListResult>("tencentcloud:Igtm/getInstanceList:getInstanceList", args ?? new GetInstanceListArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceListResult> Invoke(GetInstanceListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceListResult>("tencentcloud:Igtm/getInstanceList:getInstanceList", args ?? new GetInstanceListInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceListResult> Invoke(GetInstanceListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceListResult>("tencentcloud:Igtm/getInstanceList:getInstanceList", args ?? new GetInstanceListInvokeArgs(), options.WithDefaults());

@@ -196,6 +196,12 @@ def get_instance_task_list(begin_time: Optional[_builtins.str] = None,
         operate_uins=[""])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
+
 
     :param _builtins.str begin_time: Start time.
     :param _builtins.str end_time: Termination time.
@@ -265,6 +271,12 @@ def get_instance_task_list_output(begin_time: pulumi.Input[Optional[Optional[_bu
         results=[int("")],
         operate_uins=[""])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
 
 
     :param _builtins.str begin_time: Start time.

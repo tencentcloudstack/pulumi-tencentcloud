@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
  */
 export function getStoragesSet(args?: GetStoragesSetArgs, opts?: pulumi.InvokeOptions): Promise<GetStoragesSetResult> {
     args = args || {};
@@ -177,6 +183,12 @@ export interface GetStoragesSetResult {
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
  */
 export function getStoragesSetOutput(args?: GetStoragesSetOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStoragesSetResult> {
     args = args || {};

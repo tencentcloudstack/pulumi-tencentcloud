@@ -138,6 +138,12 @@ def get_describe_host_waf_instance_list(certificate_id: Optional[_builtins.str] 
         resource_type="waf")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostWafInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostWafInstanceList&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostWafInstanceListFilterArgs', 'GetDescribeHostWafInstanceListFilterArgsDict']] filters: List of filtering parameters; Filterkey: domainmatch.
@@ -184,6 +190,12 @@ def get_describe_host_waf_instance_list_output(certificate_id: pulumi.Input[Opti
     example = tencentcloud.ssl.get_describe_host_waf_instance_list(certificate_id="GGQ0tJxn",
         resource_type="waf")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostWafInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostWafInstanceList&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateRowFilter](https://www.tencentcloud.com/document/api/1155/54459)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/updateRowFilterOperation:UpdateRowFilterOperation")]
     public partial class UpdateRowFilterOperation : global::Pulumi.CustomResource

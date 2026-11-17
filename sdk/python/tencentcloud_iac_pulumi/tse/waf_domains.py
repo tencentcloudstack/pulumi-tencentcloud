@@ -119,6 +119,14 @@ class WafDomains(pulumi.CustomResource):
             gateway_id="gateway-ed63e957")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWafDomains](https://www.tencentcloud.com/document/api/1290/79285)
+        * Read: [DescribeWafDomains](https://www.tencentcloud.com/document/api/1290/79247)
+        * Delete: [DeleteWafDomains](https://www.tencentcloud.com/document/api/1290/79272)
+
         ## Import
 
         tse waf_domains can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class WafDomains(pulumi.CustomResource):
             domain="tse.exmaple.com",
             gateway_id="gateway-ed63e957")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWafDomains](https://www.tencentcloud.com/document/api/1290/79285)
+        * Read: [DescribeWafDomains](https://www.tencentcloud.com/document/api/1290/79247)
+        * Delete: [DeleteWafDomains](https://www.tencentcloud.com/document/api/1290/79272)
 
         ## Import
 

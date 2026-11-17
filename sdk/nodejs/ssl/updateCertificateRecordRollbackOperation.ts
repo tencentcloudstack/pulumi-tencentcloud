@@ -16,6 +16,12 @@ import * as utilities from "../utilities";
  * const updateCertificateRecordRollback = new tencentcloud.ssl.UpdateCertificateRecordRollbackOperation("update_certificate_record_rollback", {deployRecordId: "1603"});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateCertificateRecordRollback](https://www.tencentcloud.com/document/api/1007/57979)
+ *
  * ## Import
  *
  * ssl updateCertificateRecordRollback can be imported using the id, e.g.

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [TerminateAsyncEvent](https://www.tencentcloud.com/document/api/583/39733)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/terminateAsyncEvent:TerminateAsyncEvent")]
     public partial class TerminateAsyncEvent : global::Pulumi.CustomResource

@@ -32,6 +32,14 @@ import * as utilities from "../utilities";
  *     maxCapacity: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [PutProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39225)
+ * * Read: [GetProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39227)
+ * * Delete: [DeleteProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39229)
  */
 export class ProvisionedConcurrencyConfig extends pulumi.CustomResource {
     /**

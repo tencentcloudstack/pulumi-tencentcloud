@@ -44,6 +44,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateProxyGroup](https://www.tencentcloud.com/document/api/608/33087)
+// * Read: [DescribeProxyGroupDetails](https://www.tencentcloud.com/document/api/608/33082)
+// * Update: [ModifyProxyGroupAttribute](https://www.tencentcloud.com/document/api/608/33079)
+// * Delete: [DeleteProxyGroup](https://www.tencentcloud.com/document/api/608/33085)
+//
 // ## Import
 //
 // gaap proxyGroup can be imported using the id, e.g.

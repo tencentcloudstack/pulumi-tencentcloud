@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
 func GetTokens(ctx *pulumi.Context, args *GetTokensArgs, opts ...pulumi.InvokeOption) (*GetTokensResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTokensResult

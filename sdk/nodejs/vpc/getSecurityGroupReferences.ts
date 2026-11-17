@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     securityGroupIds: ["sg-edmur627"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
  */
 export function getSecurityGroupReferences(args: GetSecurityGroupReferencesArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupReferencesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSecurityGroupReferencesResult {
  *     securityGroupIds: ["sg-edmur627"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
  */
 export function getSecurityGroupReferencesOutput(args: GetSecurityGroupReferencesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityGroupReferencesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

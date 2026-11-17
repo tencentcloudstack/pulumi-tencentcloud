@@ -62,6 +62,12 @@ import * as utilities from "../utilities";
  * });
  * export const instances = byTags.then(byTags => byTags.instanceLists);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApmInstances](https://www.tencentcloud.com/document/api/1166/68213)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -193,6 +199,12 @@ export interface GetInstancesResult {
  * });
  * export const instances = byTags.then(byTags => byTags.instanceLists);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApmInstances](https://www.tencentcloud.com/document/api/1166/68213)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

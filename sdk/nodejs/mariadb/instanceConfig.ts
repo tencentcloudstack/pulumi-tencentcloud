@@ -23,6 +23,22 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16179)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+ *   - [ModifyRealServerAccessStrategy](https://www.tencentcloud.com/search/?wd=ModifyRealServerAccessStrategy&type=document&lang=en)
+ *   - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16174)
+ * * Read: [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+ * * Update:
+ *   - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16179)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+ *   - [ModifyRealServerAccessStrategy](https://www.tencentcloud.com/search/?wd=ModifyRealServerAccessStrategy&type=document&lang=en)
+ *   - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16174)
+ *
  * ## Import
  *
  * mariadb instanceConfig can be imported using the id, e.g.

@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
         /// </summary>
         public static Task<GetMediaMetaDataResult> InvokeAsync(GetMediaMetaDataArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataArgs(), options.WithDefaults());
@@ -90,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
         /// </summary>
         public static Output<GetMediaMetaDataResult> Invoke(GetMediaMetaDataInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataInvokeArgs(), options.WithDefaults());
@@ -131,6 +143,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
         /// </summary>
         public static Output<GetMediaMetaDataResult> Invoke(GetMediaMetaDataInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMediaMetaDataResult>("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args ?? new GetMediaMetaDataInvokeArgs(), options.WithDefaults());

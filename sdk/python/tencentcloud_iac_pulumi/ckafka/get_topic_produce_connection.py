@@ -107,6 +107,12 @@ def get_topic_produce_connection(instance_id: Optional[_builtins.str] = None,
         topic_name="topic-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicProduceConnection](https://www.tencentcloud.com/document/api/597/53303)
+
 
     :param _builtins.str instance_id: InstanceId.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_topic_produce_connection_output(instance_id: pulumi.Input[Optional[_buil
     topic_produce_connection = tencentcloud.ckafka.get_topic_produce_connection(instance_id="ckafka-xxxxxx",
         topic_name="topic-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicProduceConnection](https://www.tencentcloud.com/document/api/597/53303)
 
 
     :param _builtins.str instance_id: InstanceId.

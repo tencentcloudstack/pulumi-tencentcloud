@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
 func GetAcls(ctx *pulumi.Context, args *GetAclsArgs, opts ...pulumi.InvokeOption) (*GetAclsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAclsResult

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetPlatformEventTemplate](https://www.tencentcloud.com/search/?wd=GetPlatformEventTemplate&type=document&lang=en)
 func GetPlateformEventTemplate(ctx *pulumi.Context, args *GetPlateformEventTemplateArgs, opts ...pulumi.InvokeOption) (*GetPlateformEventTemplateResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPlateformEventTemplateResult

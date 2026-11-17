@@ -56,6 +56,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [BatchSendEmail](https://www.tencentcloud.com/document/api/1084/43052)
 type BatchSendEmail struct {
 	pulumi.CustomResourceState
 

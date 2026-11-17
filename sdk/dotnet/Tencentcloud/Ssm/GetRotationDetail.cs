@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
         /// </summary>
         public static Task<GetRotationDetailResult> InvokeAsync(GetRotationDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
         /// </summary>
         public static Output<GetRotationDetailResult> Invoke(GetRotationDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
         /// </summary>
         public static Output<GetRotationDetailResult> Invoke(GetRotationDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailInvokeArgs(), options.WithDefaults());

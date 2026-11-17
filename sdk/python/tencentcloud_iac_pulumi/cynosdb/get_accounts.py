@@ -117,6 +117,12 @@ def get_accounts(account_names: Optional[Sequence[_builtins.str]] = None,
         account_names=["root"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1098/40762)
+
 
     :param Sequence[_builtins.str] account_names: List of accounts to be filtered.
     :param _builtins.str cluster_id: The ID of cluster.
@@ -155,6 +161,12 @@ def get_accounts_output(account_names: pulumi.Input[Optional[Optional[Sequence[_
     accounts = tencentcloud.cynosdb.get_accounts(cluster_id="cynosdbmysql-bws8h88b",
         account_names=["root"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1098/40762)
 
 
     :param Sequence[_builtins.str] account_names: List of accounts to be filtered.

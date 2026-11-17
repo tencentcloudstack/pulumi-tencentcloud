@@ -403,6 +403,19 @@ class Redirection(pulumi.CustomResource):
             is_auto_rewrite=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AutoRewrite](https://www.tencentcloud.com/document/api/214/33846)
+          - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+          - [ManualRewrite](https://www.tencentcloud.com/document/api/214/33821)
+        * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
+        * Delete:
+          - [DeleteRewrite](https://www.tencentcloud.com/document/api/214/33836)
+          - [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
+
         ## Import
 
         CLB redirection can be imported using the sourceLocId#targetLocId#sourceListenerId#targetListenerId#clbId, e.g.
@@ -465,6 +478,19 @@ class Redirection(pulumi.CustomResource):
             target_rule_id="loc-op7uz010",
             is_auto_rewrite=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AutoRewrite](https://www.tencentcloud.com/document/api/214/33846)
+          - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+          - [ManualRewrite](https://www.tencentcloud.com/document/api/214/33821)
+        * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
+        * Delete:
+          - [DeleteRewrite](https://www.tencentcloud.com/document/api/214/33836)
+          - [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
 
         ## Import
 

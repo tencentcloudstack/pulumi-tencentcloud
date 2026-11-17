@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     name: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
  */
 export function getAcls(args?: GetAclsArgs, opts?: pulumi.InvokeOptions): Promise<GetAclsResult> {
     args = args || {};
@@ -114,6 +120,12 @@ export interface GetAclsResult {
  *     name: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
  */
 export function getAclsOutput(args?: GetAclsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAclsResult> {
     args = args || {};

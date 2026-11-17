@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     name: "Redis",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&type=document&lang=en)
  */
 export function getProductNamespace(args?: GetProductNamespaceArgs, opts?: pulumi.InvokeOptions): Promise<GetProductNamespaceResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetProductNamespaceResult {
  *     name: "Redis",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&type=document&lang=en)
  */
 export function getProductNamespaceOutput(args?: GetProductNamespaceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProductNamespaceResult> {
     args = args || {};

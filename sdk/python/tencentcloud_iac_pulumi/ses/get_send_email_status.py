@@ -124,6 +124,12 @@ def get_send_email_status(message_id: Optional[_builtins.str] = None,
         to_email_address="example@cloud.com")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
+
 
     :param _builtins.str message_id: The MessageId field returned by the SendMail API.
     :param _builtins.str request_date: Date sent. This parameter is required. You can only query the sending status for a single date at a time.
@@ -163,6 +169,12 @@ def get_send_email_status_output(message_id: pulumi.Input[Optional[Optional[_bui
         message_id="qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
         to_email_address="example@cloud.com")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
 
 
     :param _builtins.str message_id: The MessageId field returned by the SendMail API.

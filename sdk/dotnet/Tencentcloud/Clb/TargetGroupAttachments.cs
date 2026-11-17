@@ -70,6 +70,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AssociateTargetGroups](https://www.tencentcloud.com/document/api/214/33847)
+    /// * Read: [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+    /// * Delete: [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/214/33822)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroupAttachments:TargetGroupAttachments")]
     public partial class TargetGroupAttachments : global::Pulumi.CustomResource

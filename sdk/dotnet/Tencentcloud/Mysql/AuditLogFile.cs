@@ -123,6 +123,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAuditLogFile](https://www.tencentcloud.com/document/api/236/77037)
+    ///   - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/236/77030)
+    /// * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/236/77030)
+    /// * Delete: [DeleteAuditLogFile](https://www.tencentcloud.com/document/api/236/77035)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/auditLogFile:AuditLogFile")]
     public partial class AuditLogFile : global::Pulumi.CustomResource

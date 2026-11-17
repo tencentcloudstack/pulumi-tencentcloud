@@ -179,6 +179,12 @@ def get_tmp_instances(instance_charge_type: Optional[_builtins.int] = None,
     tmp_instances = tencentcloud.monitor.get_tmp_instances(instance_ids=["prom-xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+
 
     :param _builtins.int instance_charge_type: Filter according to instance charge type.
            - 2: Prepaid;
@@ -242,6 +248,12 @@ def get_tmp_instances_output(instance_charge_type: pulumi.Input[Optional[Optiona
 
     tmp_instances = tencentcloud.monitor.get_tmp_instances(instance_ids=["prom-xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
 
 
     :param _builtins.int instance_charge_type: Filter according to instance charge type.

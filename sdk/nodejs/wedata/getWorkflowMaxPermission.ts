@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     entityType: "folder",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
  */
 export function getWorkflowMaxPermission(args: GetWorkflowMaxPermissionArgs, opts?: pulumi.InvokeOptions): Promise<GetWorkflowMaxPermissionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetWorkflowMaxPermissionResult {
  *     entityType: "folder",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
  */
 export function getWorkflowMaxPermissionOutput(args: GetWorkflowMaxPermissionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWorkflowMaxPermissionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

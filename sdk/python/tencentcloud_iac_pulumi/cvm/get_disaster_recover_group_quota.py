@@ -132,6 +132,12 @@ def get_disaster_recover_group_quota(result_output_file: Optional[_builtins.str]
     disaster_recover_group_quota = tencentcloud.cvm.get_disaster_recover_group_quota()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -161,6 +167,12 @@ def get_disaster_recover_group_quota_output(result_output_file: pulumi.Input[Opt
 
     disaster_recover_group_quota = tencentcloud.cvm.get_disaster_recover_group_quota()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
 
 
     :param _builtins.str result_output_file: Used to save results.

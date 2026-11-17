@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     serviceId: "451a9920-e67a-4519-af41-fccac0e72005",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
  */
 export function getGatewayCanaryRules(args: GetGatewayCanaryRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayCanaryRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetGatewayCanaryRulesResult {
  *     serviceId: "451a9920-e67a-4519-af41-fccac0e72005",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
  */
 export function getGatewayCanaryRulesOutput(args: GetGatewayCanaryRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayCanaryRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

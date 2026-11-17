@@ -109,6 +109,12 @@ def get_instances(instance_id: Optional[_builtins.str] = None,
     name = tencentcloud.tcr.get_instances(name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+
 
     :param _builtins.str instance_id: ID of the TCR instance to query.
     :param _builtins.str name: Name of the TCR instance to query.
@@ -142,6 +148,12 @@ def get_instances_output(instance_id: pulumi.Input[Optional[Optional[_builtins.s
 
     name = tencentcloud.tcr.get_instances(name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
 
 
     :param _builtins.str instance_id: ID of the TCR instance to query.

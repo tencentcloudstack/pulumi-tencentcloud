@@ -47,6 +47,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyFunctionComponentBindings](https://www.tencentcloud.com/document/api/1145/78831)
+    /// * Read: [DescribeFunctionComponentBindings](https://www.tencentcloud.com/document/api/1145/78832)
+    /// * Update: [ModifyFunctionComponentBindings](https://www.tencentcloud.com/document/api/1145/78831)
+    /// * Delete: [ModifyFunctionComponentBindings](https://www.tencentcloud.com/document/api/1145/78831)
+    /// 
     /// ## Import
     /// 
     /// teo FunctionComponentBinding can be imported using the composite id (zone_id#function_id), e.g.

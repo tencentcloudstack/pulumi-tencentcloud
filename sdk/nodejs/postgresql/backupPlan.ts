@@ -30,6 +30,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateBackupPlan](https://www.tencentcloud.com/document/api/409/78805)
+ *   - [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+ * * Read: [DescribeBackupPlans](https://www.tencentcloud.com/document/api/409/45151)
+ * * Update: [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+ * * Delete: [DeleteBackupPlan](https://www.tencentcloud.com/document/api/409/78814)
+ *
  * ## Import
  *
  * PostgreSQL backup plan can be imported using the db_instance_id#plan_id, e.g.

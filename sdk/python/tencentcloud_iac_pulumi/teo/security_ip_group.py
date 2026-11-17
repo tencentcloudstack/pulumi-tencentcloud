@@ -128,6 +128,15 @@ class SecurityIpGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSecurityIPGroup](https://www.tencentcloud.com/document/api/1145/56153)
+        * Read: [DescribeSecurityIPGroup](https://www.tencentcloud.com/document/api/1145/60598)
+        * Update: [ModifySecurityIPGroup](https://www.tencentcloud.com/document/api/1145/56151)
+        * Delete: [DeleteSecurityIPGroup](https://www.tencentcloud.com/document/api/1145/56152)
+
         ## Import
 
         teo teo_security_ip_group can be imported using the id, e.g.
@@ -168,6 +177,15 @@ class SecurityIpGroup(pulumi.CustomResource):
                 "name": "bbbbb",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSecurityIPGroup](https://www.tencentcloud.com/document/api/1145/56153)
+        * Read: [DescribeSecurityIPGroup](https://www.tencentcloud.com/document/api/1145/60598)
+        * Update: [ModifySecurityIPGroup](https://www.tencentcloud.com/document/api/1145/56151)
+        * Delete: [DeleteSecurityIPGroup](https://www.tencentcloud.com/document/api/1145/56152)
 
         ## Import
 

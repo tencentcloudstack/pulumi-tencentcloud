@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
         /// </summary>
         public static Task<GetWebhookTriggerLogsResult> InvokeAsync(GetWebhookTriggerLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
         /// </summary>
         public static Output<GetWebhookTriggerLogsResult> Invoke(GetWebhookTriggerLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
         /// </summary>
         public static Output<GetWebhookTriggerLogsResult> Invoke(GetWebhookTriggerLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsInvokeArgs(), options.WithDefaults());

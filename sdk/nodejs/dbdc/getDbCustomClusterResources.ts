@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     clusterId: "dbcc-b2arjlee",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomClusterResources](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterResources&type=document&lang=en)
  */
 export function getDbCustomClusterResources(args: GetDbCustomClusterResourcesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCustomClusterResourcesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetDbCustomClusterResourcesResult {
  *     clusterId: "dbcc-b2arjlee",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomClusterResources](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterResources&type=document&lang=en)
  */
 export function getDbCustomClusterResourcesOutput(args: GetDbCustomClusterResourcesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCustomClusterResourcesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

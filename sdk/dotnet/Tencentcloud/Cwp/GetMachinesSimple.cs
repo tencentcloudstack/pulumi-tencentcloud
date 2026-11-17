@@ -139,6 +139,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
         /// </summary>
         public static Task<GetMachinesSimpleResult> InvokeAsync(GetMachinesSimpleArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleArgs(), options.WithDefaults());
@@ -270,6 +276,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
         /// </summary>
         public static Output<GetMachinesSimpleResult> Invoke(GetMachinesSimpleInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleInvokeArgs(), options.WithDefaults());
@@ -401,6 +413,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
         /// </summary>
         public static Output<GetMachinesSimpleResult> Invoke(GetMachinesSimpleInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleInvokeArgs(), options.WithDefaults());

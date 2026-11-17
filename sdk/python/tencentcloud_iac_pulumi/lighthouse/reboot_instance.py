@@ -85,6 +85,14 @@ class RebootInstance(pulumi.CustomResource):
         reboot_instance = tencentcloud.lighthouse.RebootInstance("reboot_instance", instance_id="lhins-xxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [RebootInstances](https://www.tencentcloud.com/document/api/1103/42491)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class RebootInstance(pulumi.CustomResource):
 
         reboot_instance = tencentcloud.lighthouse.RebootInstance("reboot_instance", instance_id="lhins-xxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [RebootInstances](https://www.tencentcloud.com/document/api/1103/42491)
 
 
         :param str resource_name: The name of the resource.

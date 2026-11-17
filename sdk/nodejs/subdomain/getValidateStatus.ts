@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     domainZone: "www.iac-tf.cloud",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&type=document&lang=en)
  */
 export function getValidateStatus(args: GetValidateStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetValidateStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetValidateStatusResult {
  *     domainZone: "www.iac-tf.cloud",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&type=document&lang=en)
  */
 export function getValidateStatusOutput(args: GetValidateStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetValidateStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

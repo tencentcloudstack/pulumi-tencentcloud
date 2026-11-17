@@ -107,6 +107,12 @@ def get_workflow_folders(parent_folder_path: Optional[_builtins.str] = None,
         parent_folder_path="/")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
+
 
     :param _builtins.str parent_folder_path: Parent folder absolute path, for example /abc/de, if it is root directory, pass /.
     :param _builtins.str project_id: Project ID.
@@ -141,6 +147,12 @@ def get_workflow_folders_output(parent_folder_path: pulumi.Input[Optional[_built
     wedata_workflow_folders = tencentcloud.wedata.get_workflow_folders(project_id="2905622749543821312",
         parent_folder_path="/")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
 
 
     :param _builtins.str parent_folder_path: Parent folder absolute path, for example /abc/de, if it is root directory, pass /.

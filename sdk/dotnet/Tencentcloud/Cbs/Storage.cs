@@ -158,6 +158,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// });
     /// ```
     /// 
+    /// ### Create a CBS storage with auto-mount instance id
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cbs.Storage("example", new()
+    ///     {
+    ///         StorageName = "tf-example",
+    ///         StorageType = "CLOUD_SSD",
+    ///         StorageSize = 100,
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         ProjectId = 0,
+    ///         InstanceId = "ins-xxxxxxxx",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+    /// * Read:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ApplySnapshot](https://www.tencentcloud.com/document/api/362/15643)
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+    ///   - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+    ///   - [ModifyDiskExtraPerformance](https://www.tencentcloud.com/document/api/362/40191)
+    ///   - [ModifyDisksChargeType](https://www.tencentcloud.com/search/?wd=ModifyDisksChargeType&amp;type=document&amp;lang=en)
+    ///   - [ModifyDisksRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDisksRenewFlag&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+    /// * Delete:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+    /// 
     /// ## Import
     /// 
     /// CBS storage can be imported using the id, e.g.
@@ -212,7 +264,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Output<bool?> Encrypt { get; private set; } = null!;
 
         /// <summary>
-        /// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        /// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&amp;pg=.
         /// </summary>
         [Output("encryptType")]
         public Output<string> EncryptType { get; private set; } = null!;
@@ -222,6 +274,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
+
+        /// <summary>
+        /// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `Encrypt`. 2.Cannot be used simultaneously with `tencentcloud.Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
         /// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `Encrypt` parameter need be set.
@@ -379,7 +437,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<bool>? Encrypt { get; set; }
 
         /// <summary>
-        /// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        /// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&amp;pg=.
         /// </summary>
         [Input("encryptType")]
         public Input<string>? EncryptType { get; set; }
@@ -389,6 +447,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
+
+        /// <summary>
+        /// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `Encrypt`. 2.Cannot be used simultaneously with `tencentcloud.Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
 
         /// <summary>
         /// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `Encrypt` parameter need be set.
@@ -513,7 +577,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<bool>? Encrypt { get; set; }
 
         /// <summary>
-        /// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        /// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&amp;pg=.
         /// </summary>
         [Input("encryptType")]
         public Input<string>? EncryptType { get; set; }
@@ -523,6 +587,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
+
+        /// <summary>
+        /// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `Encrypt`. 2.Cannot be used simultaneously with `tencentcloud.Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
 
         /// <summary>
         /// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `Encrypt` parameter need be set.

@@ -142,6 +142,12 @@ def get_describe_managers(company_id: Optional[_builtins.int] = None,
     describe_managers = tencentcloud.ssl.get_describe_managers(company_id=11772)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
+
 
     :param _builtins.int company_id: Company ID.
     :param _builtins.str manager_mail: Vague query manager email (will be abandoned), please use Searchkey.
@@ -187,6 +193,12 @@ def get_describe_managers_output(company_id: pulumi.Input[Optional[_builtins.int
 
     describe_managers = tencentcloud.ssl.get_describe_managers(company_id=11772)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
 
 
     :param _builtins.int company_id: Company ID.

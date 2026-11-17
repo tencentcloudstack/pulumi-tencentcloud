@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const restartInstanceOperation = new tencentcloud.elasticsearch.RestartInstanceOperation("restart_instance_operation", {instanceId: "es-xxxxxx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ *   - [RestartInstance](https://www.tencentcloud.com/document/api/845/32213)
  */
 export class RestartInstanceOperation extends pulumi.CustomResource {
     /**

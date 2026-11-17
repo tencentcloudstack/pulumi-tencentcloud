@@ -130,6 +130,12 @@ def get_record_line_list(domain: Optional[_builtins.str] = None,
         domain_id=123)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
+
 
     :param _builtins.str domain: Domain.
     :param _builtins.str domain_grade: Domain level. + Old packages: D_FREE, D_PLUS, D_EXTRA, D_EXPERT, D_ULTRA correspond to free package, personal luxury, enterprise 1, enterprise 2, enterprise 3. + New packages: DP_FREE, DP_PLUS, DP_EXTRA, DP_EXPERT, DP_ULTRA correspond to new free, personal professional, enterprise basic, enterprise standard, enterprise flagship.
@@ -170,6 +176,12 @@ def get_record_line_list_output(domain: pulumi.Input[Optional[_builtins.str]] = 
         domain_grade="DP_FREE",
         domain_id=123)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
 
 
     :param _builtins.str domain: Domain.

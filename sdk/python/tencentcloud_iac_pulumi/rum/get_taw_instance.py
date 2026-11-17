@@ -140,6 +140,12 @@ def get_taw_instance(area_ids: Optional[Sequence[_builtins.int]] = None,
         instance_ids=["rum-pasZKEI3RLgakj"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
+
 
     :param Sequence[_builtins.int] area_ids: Region ID.
     :param Sequence[_builtins.int] charge_statuses: Billing status.
@@ -189,6 +195,12 @@ def get_taw_instance_output(area_ids: pulumi.Input[Optional[Optional[Sequence[_b
         instance_statuses=[2],
         instance_ids=["rum-pasZKEI3RLgakj"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
 
 
     :param Sequence[_builtins.int] area_ids: Region ID.

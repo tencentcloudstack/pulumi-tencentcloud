@@ -39,6 +39,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateGlobalDomainDns](https://www.tencentcloud.com/search/?wd=CreateGlobalDomainDns&amp;type=document&amp;lang=en)
+    ///   - [DescribeGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomainDns&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomainDns&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomainDns&amp;type=document&amp;lang=en)
+    ///   - [ModifyGlobalDomainDns](https://www.tencentcloud.com/search/?wd=ModifyGlobalDomainDns&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteGlobalDomainDns](https://www.tencentcloud.com/search/?wd=DeleteGlobalDomainDns&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// gaap GlobalDomainDns can be imported using the id, e.g.

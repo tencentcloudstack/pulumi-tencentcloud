@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-pyyv5k3v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
  */
 export function getDcRoute(args: GetDcRouteArgs, opts?: pulumi.InvokeOptions): Promise<GetDcRouteResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetDcRouteResult {
  *     vpcId: "vpc-pyyv5k3v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
  */
 export function getDcRouteOutput(args: GetDcRouteOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDcRouteResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

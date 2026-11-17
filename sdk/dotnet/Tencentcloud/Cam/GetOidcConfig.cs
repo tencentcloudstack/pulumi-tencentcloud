@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
         /// </summary>
         public static Task<GetOidcConfigResult> InvokeAsync(GetOidcConfigArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
         /// </summary>
         public static Output<GetOidcConfigResult> Invoke(GetOidcConfigInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
         /// </summary>
         public static Output<GetOidcConfigResult> Invoke(GetOidcConfigInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOidcConfigResult>("tencentcloud:Cam/getOidcConfig:getOidcConfig", args ?? new GetOidcConfigInvokeArgs(), options.WithDefaults());

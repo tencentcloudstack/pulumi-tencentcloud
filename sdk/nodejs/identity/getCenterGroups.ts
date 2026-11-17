@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     zoneId: "z-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
  */
 export function getCenterGroups(args: GetCenterGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetCenterGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetCenterGroupsResult {
  *     zoneId: "z-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
  */
 export function getCenterGroupsOutput(args: GetCenterGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCenterGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

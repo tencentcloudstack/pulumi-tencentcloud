@@ -85,7 +85,7 @@ def get_environments(result_output_file: Optional[_builtins.str] = None,
                      zone_id: Optional[_builtins.str] = None,
                      opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetEnvironmentsResult:
     """
-    Use this data source to query detailed information of teo environments
+    Use this data source to query detailed information of TEO environments, including the environment list and the source version (`source_version`) of each effective config group version.
 
     ## Example Usage
 
@@ -95,6 +95,12 @@ def get_environments(result_output_file: Optional[_builtins.str] = None,
 
     teo_environments = tencentcloud.teo.get_environments(zone_id="zone-2qtuhspy7cr6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
 
 
     :param _builtins.str result_output_file: Used to save results.
@@ -115,7 +121,7 @@ def get_environments_output(result_output_file: pulumi.Input[Optional[Optional[_
                             zone_id: pulumi.Input[Optional[_builtins.str]] = None,
                             opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetEnvironmentsResult]:
     """
-    Use this data source to query detailed information of teo environments
+    Use this data source to query detailed information of TEO environments, including the environment list and the source version (`source_version`) of each effective config group version.
 
     ## Example Usage
 
@@ -125,6 +131,12 @@ def get_environments_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     teo_environments = tencentcloud.teo.get_environments(zone_id="zone-2qtuhspy7cr6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     subnetId: "3454730",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
  */
 export function getDbInstances(args?: GetDbInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstancesResult> {
     args = args || {};
@@ -107,6 +113,12 @@ export interface GetDbInstancesResult {
  *     subnetId: "3454730",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
  */
 export function getDbInstancesOutput(args?: GetDbInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbInstancesResult> {
     args = args || {};

@@ -542,6 +542,14 @@ class InvocationCommandAttachment(pulumi.CustomResource):
             output_cos_key_prefix="log")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RunCommand](https://www.tencentcloud.com/document/api/1147/46686)
+        * Read: [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+        * Delete: [CancelInvocation](https://www.tencentcloud.com/document/api/1147/46703)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -590,6 +598,14 @@ class InvocationCommandAttachment(pulumi.CustomResource):
             output_cos_bucket_url="https://BucketName-123454321.cos.ap-beijing.myqcloud.com",
             output_cos_key_prefix="log")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RunCommand](https://www.tencentcloud.com/document/api/1147/46686)
+        * Read: [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+        * Delete: [CancelInvocation](https://www.tencentcloud.com/document/api/1147/46703)
 
 
         :param str resource_name: The name of the resource.

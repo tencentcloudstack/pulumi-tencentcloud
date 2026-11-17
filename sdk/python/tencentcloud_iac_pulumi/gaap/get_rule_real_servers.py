@@ -108,6 +108,12 @@ def get_rule_real_servers(result_output_file: Optional[_builtins.str] = None,
     rule_real_servers = tencentcloud.gaap.get_rule_real_servers(rule_id="rule-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str rule_id: Rule Id.
@@ -138,6 +144,12 @@ def get_rule_real_servers_output(result_output_file: pulumi.Input[Optional[Optio
 
     rule_real_servers = tencentcloud.gaap.get_rule_real_servers(rule_id="rule-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
 
 
     :param _builtins.str result_output_file: Used to save results.

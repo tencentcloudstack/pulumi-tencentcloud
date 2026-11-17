@@ -74,6 +74,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateVpnGatewaySslClient](https://www.tencentcloud.com/search/?wd=CreateVpnGatewaySslClient&type=document&lang=en)
+//   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+//
+// * Read:
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//   - [DescribeVpnGatewaySslClients](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslClients&type=document&lang=en)
+//
+// * Update: [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+// * Delete:
+//   - [DeleteVpnGatewaySslClient](https://www.tencentcloud.com/search/?wd=DeleteVpnGatewaySslClient&type=document&lang=en)
+//   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+//
 // ## Import
 //
 // VPN SSL Client can be imported, e.g.

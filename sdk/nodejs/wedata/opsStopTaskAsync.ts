@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     taskIds: ["20251013154418424"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+ *   - [StopOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73811)
  */
 export class OpsStopTaskAsync extends pulumi.CustomResource {
     /**

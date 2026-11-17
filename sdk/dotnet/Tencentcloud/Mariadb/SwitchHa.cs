@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+    ///   - [SwitchDBInstanceHA](https://www.tencentcloud.com/document/api/237/45097)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/switchHa:SwitchHa")]
     public partial class SwitchHa : global::Pulumi.CustomResource

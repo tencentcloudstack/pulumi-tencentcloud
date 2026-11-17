@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     taskId: "63229997",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
  */
 export function getPullStreamTaskStatus(args: GetPullStreamTaskStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetPullStreamTaskStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetPullStreamTaskStatusResult {
  *     taskId: "63229997",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
  */
 export function getPullStreamTaskStatusOutput(args: GetPullStreamTaskStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPullStreamTaskStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

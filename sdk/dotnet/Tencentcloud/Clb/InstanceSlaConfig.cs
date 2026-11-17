@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+    /// * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+    /// * Update: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+    /// 
     /// ## Import
     /// 
     /// clb InstanceSlaConfig can be imported using the id, e.g.

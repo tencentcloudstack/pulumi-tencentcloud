@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&type=document&lang=en)
 func LookupMicroservice(ctx *pulumi.Context, args *LookupMicroserviceArgs, opts ...pulumi.InvokeOption) (*LookupMicroserviceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupMicroserviceResult

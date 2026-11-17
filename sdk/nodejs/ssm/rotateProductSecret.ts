@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.ssm.RotateProductSecret("example", {secretName: "tf_example"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/1078/41518)
+ *   - [RotateProductSecret](https://www.tencentcloud.com/document/api/1078/41515)
  */
 export class RotateProductSecret extends pulumi.CustomResource {
     /**

@@ -137,6 +137,12 @@ def get_application_public_config(config_id: Optional[_builtins.str] = None,
         config_version="123")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublicConfigs](https://www.tencentcloud.com/search/?wd=DescribePublicConfigs&type=document&lang=en)
+
 
     :param _builtins.str config_id: Config ID. Query all items if not passed, high priority.
     :param Sequence[_builtins.str] config_id_lists: Config ID list. Query all items if not passed, low priority.
@@ -180,6 +186,12 @@ def get_application_public_config_output(config_id: pulumi.Input[Optional[Option
         config_name="dsadsa",
         config_version="123")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublicConfigs](https://www.tencentcloud.com/search/?wd=DescribePublicConfigs&type=document&lang=en)
 
 
     :param _builtins.str config_id: Config ID. Query all items if not passed, high priority.

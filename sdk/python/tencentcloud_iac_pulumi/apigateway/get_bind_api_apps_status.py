@@ -128,6 +128,12 @@ def get_bind_api_apps_status(api_ids: Optional[Sequence[_builtins.str]] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] api_ids: Array of API IDs.
     :param Sequence[Union['GetBindApiAppsStatusFilterArgs', 'GetBindApiAppsStatusFilterArgsDict']] filters: Filter conditions. Supports ApiAppId, Environment, KeyWord (can match name or ID).
@@ -173,6 +179,12 @@ def get_bind_api_apps_status_output(api_ids: pulumi.Input[Optional[Sequence[_bui
             "values": ["app-krljp4wn"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] api_ids: Array of API IDs.

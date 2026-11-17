@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+    ///   - [SetSuccessTaskInstancesAsync](https://www.tencentcloud.com/document/api/1174/73812)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/taskSetSuccessInstanceAsync:TaskSetSuccessInstanceAsync")]
     public partial class TaskSetSuccessInstanceAsync : global::Pulumi.CustomResource

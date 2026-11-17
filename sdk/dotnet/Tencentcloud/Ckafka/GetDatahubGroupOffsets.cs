@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDatahubGroupOffsetsResult> InvokeAsync(GetDatahubGroupOffsetsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDatahubGroupOffsetsResult> Invoke(GetDatahubGroupOffsetsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDatahubGroupOffsetsResult> Invoke(GetDatahubGroupOffsetsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsInvokeArgs(), options.WithDefaults());

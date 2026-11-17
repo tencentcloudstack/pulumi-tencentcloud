@@ -40,6 +40,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+//   - [SwitchDBInstanceHA](https://www.tencentcloud.com/document/api/237/45097)
 type SwitchHa struct {
 	pulumi.CustomResourceState
 

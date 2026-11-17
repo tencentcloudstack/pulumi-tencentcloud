@@ -3,5 +3,6 @@
 
 # Export this package's modules as members:
 from .attachment import *
+from .attachment_v2 import *
 from .get_keys import *
 from .instance import *

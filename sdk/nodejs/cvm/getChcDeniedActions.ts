@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     chcIds: ["chc-xxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
  */
 export function getChcDeniedActions(args: GetChcDeniedActionsArgs, opts?: pulumi.InvokeOptions): Promise<GetChcDeniedActionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetChcDeniedActionsResult {
  *     chcIds: ["chc-xxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
  */
 export function getChcDeniedActionsOutput(args: GetChcDeniedActionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetChcDeniedActionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

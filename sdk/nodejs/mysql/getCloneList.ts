@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
  */
 export function getCloneList(args: GetCloneListArgs, opts?: pulumi.InvokeOptions): Promise<GetCloneListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetCloneListResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
  */
 export function getCloneListOutput(args: GetCloneListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCloneListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

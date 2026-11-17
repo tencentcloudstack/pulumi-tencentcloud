@@ -116,6 +116,12 @@ def get_rollback_range_time(backup_region: Optional[_builtins.str] = None,
     rollback_range_time = tencentcloud.mysql.get_rollback_range_time(instance_ids=["cdb-fitq5t9h"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
+
 
     :param _builtins.str backup_region: If the clone instance is not in the same region as the source instance, fill in the region where the clone instance is located, for example: ap-guangzhou.
     :param Sequence[_builtins.str] instance_ids: A list of instance IDs, the format of a single instance ID is: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
@@ -153,6 +159,12 @@ def get_rollback_range_time_output(backup_region: pulumi.Input[Optional[Optional
 
     rollback_range_time = tencentcloud.mysql.get_rollback_range_time(instance_ids=["cdb-fitq5t9h"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
 
 
     :param _builtins.str backup_region: If the clone instance is not in the same region as the source instance, fill in the region where the clone instance is located, for example: ap-guangzhou.

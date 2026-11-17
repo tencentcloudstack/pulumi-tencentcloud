@@ -161,6 +161,12 @@ class StartXevent(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StartInstanceXEvent](https://www.tencentcloud.com/document/api/238/54813)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -225,6 +231,12 @@ class StartXevent(pulumi.CustomResource):
                 "threshold": 0,
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StartInstanceXEvent](https://www.tencentcloud.com/document/api/238/54813)
 
 
         :param str resource_name: The name of the resource.

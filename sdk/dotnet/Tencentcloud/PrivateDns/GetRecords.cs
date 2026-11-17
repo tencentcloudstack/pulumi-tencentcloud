@@ -61,6 +61,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrivateZoneRecordList](https://www.tencentcloud.com/document/api/1097/42115)
         /// </summary>
         public static Task<GetRecordsResult> InvokeAsync(GetRecordsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsArgs(), options.WithDefaults());
@@ -114,6 +120,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrivateZoneRecordList](https://www.tencentcloud.com/document/api/1097/42115)
         /// </summary>
         public static Output<GetRecordsResult> Invoke(GetRecordsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());
@@ -167,6 +179,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrivateZoneRecordList](https://www.tencentcloud.com/document/api/1097/42115)
         /// </summary>
         public static Output<GetRecordsResult> Invoke(GetRecordsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());

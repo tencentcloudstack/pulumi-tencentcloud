@@ -170,6 +170,15 @@ class OrgShareUnit(pulumi.CustomResource):
             description="iac-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddShareUnit](https://www.tencentcloud.com/document/api/1031/68237)
+        * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
+        * Update: [UpdateShareUnit](https://www.tencentcloud.com/document/api/1031/68226)
+        * Delete: [DeleteShareUnit](https://www.tencentcloud.com/document/api/1031/68234)
+
         ## Import
 
         organization org_share_unit can be imported using the id, e.g.
@@ -205,6 +214,15 @@ class OrgShareUnit(pulumi.CustomResource):
             area="ap-guangzhou",
             description="iac-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddShareUnit](https://www.tencentcloud.com/document/api/1031/68237)
+        * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
+        * Update: [UpdateShareUnit](https://www.tencentcloud.com/document/api/1031/68226)
+        * Delete: [DeleteShareUnit](https://www.tencentcloud.com/document/api/1031/68234)
 
         ## Import
 

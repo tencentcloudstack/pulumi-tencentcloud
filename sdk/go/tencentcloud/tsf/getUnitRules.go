@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&type=document&lang=en)
 func LookupUnitRules(ctx *pulumi.Context, args *LookupUnitRulesArgs, opts ...pulumi.InvokeOption) (*LookupUnitRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupUnitRulesResult

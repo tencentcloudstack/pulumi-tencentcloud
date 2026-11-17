@@ -42,6 +42,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+//   - [UpgradeSmallVersion](https://www.tencentcloud.com/document/api/239/47723)
 type UpgradeCacheVersionOperation struct {
 	pulumi.CustomResourceState
 

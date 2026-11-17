@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [EnableVpcEndPointConnect](https://www.tencentcloud.com/document/api/215/40149)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/enableEndPointConnect:EnableEndPointConnect")]
     public partial class EnableEndPointConnect : global::Pulumi.CustomResource

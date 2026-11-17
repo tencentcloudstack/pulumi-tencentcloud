@@ -164,6 +164,12 @@ def get_db_custom_clusters(cluster_ids: Optional[Sequence[_builtins.str]] = None
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusters](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusters&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] cluster_ids: Query by one or more Cluster IDs. Maximum 100 IDs per request.
     :param Sequence[Union['GetDbCustomClustersFilterArgs', 'GetDbCustomClustersFilterArgsDict']] filters: Filter conditions. Supported filter names: cluster-name (exact match), cluster-status (Creating, Running, Destroying).
@@ -245,6 +251,12 @@ def get_db_custom_clusters_output(cluster_ids: pulumi.Input[Optional[Optional[Se
         "value": "production",
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusters](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusters&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] cluster_ids: Query by one or more Cluster IDs. Maximum 100 IDs per request.

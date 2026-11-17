@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     createMode: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPolicies](https://www.tencentcloud.com/document/api/598/32240)
  */
 export function getPolicies(args?: GetPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetPoliciesResult> {
     args = args || {};
@@ -150,6 +156,12 @@ export interface GetPoliciesResult {
  *     createMode: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPolicies](https://www.tencentcloud.com/document/api/598/32240)
  */
 export function getPoliciesOutput(args?: GetPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPoliciesResult> {
     args = args || {};

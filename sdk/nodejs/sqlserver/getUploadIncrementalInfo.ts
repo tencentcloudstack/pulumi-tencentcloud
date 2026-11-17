@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
  */
 export function getUploadIncrementalInfo(args: GetUploadIncrementalInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetUploadIncrementalInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -112,6 +118,12 @@ export interface GetUploadIncrementalInfoResult {
  *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
  */
 export function getUploadIncrementalInfoOutput(args: GetUploadIncrementalInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUploadIncrementalInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

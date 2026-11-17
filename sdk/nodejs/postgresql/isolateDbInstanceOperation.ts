@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const isolateDbInstanceOperation = new tencentcloud.postgresql.IsolateDbInstanceOperation("isolate_db_instance_operation", {dbInstanceIdSets: [pgsqlId]});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+ *   - [IsolateDBInstances](https://www.tencentcloud.com/document/api/409/40109)
  */
 export class IsolateDbInstanceOperation extends pulumi.CustomResource {
     /**

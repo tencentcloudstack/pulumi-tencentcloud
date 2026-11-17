@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     serviceId: "service-nxz6yync",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&type=document&lang=en)
  */
 export function getServiceReleaseVersions(args: GetServiceReleaseVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceReleaseVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetServiceReleaseVersionsResult {
  *     serviceId: "service-nxz6yync",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&type=document&lang=en)
  */
 export function getServiceReleaseVersionsOutput(args: GetServiceReleaseVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetServiceReleaseVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

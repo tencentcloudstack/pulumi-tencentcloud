@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const zones = tencentcloud.postgresql.getZones({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZones](https://www.tencentcloud.com/document/api/409/16769)
  */
 export function getZones(args?: GetZonesArgs, opts?: pulumi.InvokeOptions): Promise<GetZonesResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetZonesResult {
  *
  * const zones = tencentcloud.postgresql.getZones({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZones](https://www.tencentcloud.com/document/api/409/16769)
  */
 export function getZonesOutput(args?: GetZonesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZonesResult> {
     args = args || {};

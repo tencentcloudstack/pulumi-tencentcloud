@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     userType: "ADMIN",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
  */
 export class ModifyUserTypOperation extends pulumi.CustomResource {
     /**

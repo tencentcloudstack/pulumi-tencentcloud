@@ -42,6 +42,12 @@ import * as utilities from "../utilities";
  *     sshKeyId: "skey-2ae2snwd",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
  */
 export function getSshKeyPairValue(args?: GetSshKeyPairValueArgs, opts?: pulumi.InvokeOptions): Promise<GetSshKeyPairValueResult> {
     args = args || {};
@@ -141,6 +147,12 @@ export interface GetSshKeyPairValueResult {
  *     sshKeyId: "skey-2ae2snwd",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
  */
 export function getSshKeyPairValueOutput(args?: GetSshKeyPairValueOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSshKeyPairValueResult> {
     args = args || {};

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     name: "test eni",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
@@ -137,6 +143,12 @@ export interface GetInstanceResult {
  *     name: "test eni",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
  */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceResult> {
     args = args || {};

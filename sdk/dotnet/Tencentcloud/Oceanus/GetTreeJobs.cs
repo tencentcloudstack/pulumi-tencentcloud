@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTreeJobsResult> InvokeAsync(GetTreeJobsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTreeJobsResult> Invoke(GetTreeJobsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTreeJobsResult> Invoke(GetTreeJobsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTreeJobsResult>("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args ?? new GetTreeJobsInvokeArgs(), options.WithDefaults());

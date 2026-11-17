@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDataSources](https://www.tencentcloud.com/document/api/1174/77866)
         /// </summary>
         public static Task<WeDataDataSourcesResult> InvokeAsync(WeDataDataSourcesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<WeDataDataSourcesResult>("tencentcloud:Wedata/weDataDataSources:WeDataDataSources", args ?? new WeDataDataSourcesArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDataSources](https://www.tencentcloud.com/document/api/1174/77866)
         /// </summary>
         public static Output<WeDataDataSourcesResult> Invoke(WeDataDataSourcesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<WeDataDataSourcesResult>("tencentcloud:Wedata/weDataDataSources:WeDataDataSources", args ?? new WeDataDataSourcesInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDataSources](https://www.tencentcloud.com/document/api/1174/77866)
         /// </summary>
         public static Output<WeDataDataSourcesResult> Invoke(WeDataDataSourcesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<WeDataDataSourcesResult>("tencentcloud:Wedata/weDataDataSources:WeDataDataSources", args ?? new WeDataDataSourcesInvokeArgs(), options.WithDefaults());

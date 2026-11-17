@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const ownershipVerify = new tencentcloud.teo.OwnershipVerify("ownership_verify", {domain: "qq.com"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [VerifyOwnership](https://www.tencentcloud.com/document/api/1145/57426)
  */
 export class OwnershipVerify extends pulumi.CustomResource {
     /**

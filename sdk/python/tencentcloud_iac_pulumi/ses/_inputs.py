@@ -24,6 +24,8 @@ __all__ = [
     'BatchSendEmailTimedParamArgsDict',
     'DomainAttributeArgs',
     'DomainAttributeArgsDict',
+    'DomainTagListArgs',
+    'DomainTagListArgsDict',
     'ReceiverDataArgs',
     'ReceiverDataArgsDict',
     'SendEmailAttachmentArgs',
@@ -290,6 +292,53 @@ class DomainAttributeArgs:
     @type.setter
     def type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "type", value)
+
+
+class DomainTagListArgsDict(TypedDict):
+    tag_key: pulumi.Input[_builtins.str]
+    """
+    Tag key.
+    """
+    tag_value: pulumi.Input[_builtins.str]
+    """
+    Tag value.
+    """
+
+@pulumi.input_type
+class DomainTagListArgs:
+    def __init__(__self__, *,
+                 tag_key: pulumi.Input[_builtins.str],
+                 tag_value: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] tag_key: Tag key.
+        :param pulumi.Input[_builtins.str] tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @_builtins.property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @tag_key.setter
+    def tag_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "tag_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> pulumi.Input[_builtins.str]:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+    @tag_value.setter
+    def tag_value(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "tag_value", value)
 
 
 class ReceiverDataArgsDict(TypedDict):

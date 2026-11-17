@@ -159,6 +159,14 @@ def get_gateways(id: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+      - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+
 
     :param _builtins.str id: ID of the VPN gateway.
     :param _builtins.str name: Name of the VPN gateway. The length of character is limited to 1-60.
@@ -214,6 +222,14 @@ def get_gateways_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = No
             "test": "tf",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+      - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
 
 
     :param _builtins.str id: ID of the VPN gateway.

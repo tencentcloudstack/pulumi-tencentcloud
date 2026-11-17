@@ -33,6 +33,14 @@ import * as utilities from "../utilities";
  *     securityGroupIds: [""],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddClusterInstances](https://www.tencentcloud.com/search/?wd=AddClusterInstances&type=document&lang=en)
+ * * Read: [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+ * * Delete: [RemoveInstances](https://www.tencentcloud.com/search/?wd=RemoveInstances&type=document&lang=en)
  */
 export class InstancesAttachment extends pulumi.CustomResource {
     /**

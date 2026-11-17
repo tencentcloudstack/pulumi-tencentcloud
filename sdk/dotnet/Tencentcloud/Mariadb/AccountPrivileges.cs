@@ -45,6 +45,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+    ///   - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/237/40959)
+    /// * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/237/16164)
+    /// * Update:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+    ///   - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/237/40959)
+    /// 
     /// ## Import
     /// 
     /// mariadb AccountPrivileges can be imported using the id, e.g.

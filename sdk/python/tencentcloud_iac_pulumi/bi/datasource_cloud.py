@@ -656,6 +656,15 @@ class DatasourceCloud(pulumi.CustomResource):
             vpc_id="5292713")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72677)
+        * Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+        * Update: [ModifyDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72632)
+        * Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -711,6 +720,15 @@ class DatasourceCloud(pulumi.CustomResource):
             region_id="gz",
             vpc_id="5292713")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72677)
+        * Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+        * Update: [ModifyDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72632)
+        * Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
 
 
         :param str resource_name: The name of the resource.

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     certificateId: "8cj4g8h8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
  */
 export function getDescribeCertificate(args: GetDescribeCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeCertificateResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetDescribeCertificateResult {
  *     certificateId: "8cj4g8h8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
  */
 export function getDescribeCertificateOutput(args: GetDescribeCertificateOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeCertificateResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

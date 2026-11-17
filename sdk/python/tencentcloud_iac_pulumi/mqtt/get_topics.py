@@ -96,6 +96,12 @@ def get_topics(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.mqtt.get_topics(instance_id="mqtt-g4qgr3gx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicList](https://www.tencentcloud.com/search/?wd=DescribeTopicList&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_topics_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
 
     example = tencentcloud.mqtt.get_topics(instance_id="mqtt-g4qgr3gx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicList](https://www.tencentcloud.com/search/?wd=DescribeTopicList&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Instance ID.

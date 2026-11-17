@@ -129,6 +129,12 @@ def get_gateway_routes(destination_cidr: Optional[_builtins.str] = None,
         instance_id="vpnx-m16m4sw4")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
+
 
     :param _builtins.str destination_cidr: Destination IDC IP range.
     :param _builtins.str instance_id: Instance ID of the next hop.
@@ -173,6 +179,12 @@ def get_gateway_routes_output(destination_cidr: pulumi.Input[Optional[Optional[_
         instance_type="VPNCONN",
         instance_id="vpnx-m16m4sw4")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
 
 
     :param _builtins.str destination_cidr: Destination IDC IP range.

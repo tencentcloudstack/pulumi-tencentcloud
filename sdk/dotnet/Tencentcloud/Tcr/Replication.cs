@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a TCR replication
+    /// Provides a resource to create and update a TCR replication
     /// 
     /// ## Example Usage
     /// 
@@ -115,6 +115,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ManageReplication](https://www.tencentcloud.com/document/api/1051/42669)
+    /// * Read: [DescribeReplicationPolicies](https://www.tencentcloud.com/search/?wd=DescribeReplicationPolicies&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyReplication](https://www.tencentcloud.com/search/?wd=ModifyReplication&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteReplicationRule](https://www.tencentcloud.com/search/?wd=DeleteReplicationRule&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/replication:Replication")]
     public partial class Replication : global::Pulumi.CustomResource

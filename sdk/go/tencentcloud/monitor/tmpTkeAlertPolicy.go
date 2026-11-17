@@ -239,6 +239,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreatePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53775)
+// * Read: [DescribePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53323)
+// * Update: [ModifyPrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53765)
+// * Delete: [DeletePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53772)
 type TmpTkeAlertPolicy struct {
 	pulumi.CustomResourceState
 

@@ -37,6 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateMessageReceiver](https://www.tencentcloud.com/search/?wd=CreateMessageReceiver&amp;type=document&amp;lang=en)
+    /// * Read: [ListReceiver](https://www.tencentcloud.com/search/?wd=ListReceiver&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteMessageReceiver](https://www.tencentcloud.com/search/?wd=DeleteMessageReceiver&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CAM message receiver can be imported using the id, e.g.

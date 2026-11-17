@@ -124,6 +124,14 @@ class DeviceAccount(pulumi.CustomResource):
             account="root")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDeviceAccount](https://www.tencentcloud.com/search/?wd=CreateDeviceAccount&type=document&lang=en)
+        * Read: [DescribeDeviceAccounts](https://www.tencentcloud.com/search/?wd=DescribeDeviceAccounts&type=document&lang=en)
+        * Delete: [DeleteDeviceAccounts](https://www.tencentcloud.com/search/?wd=DeleteDeviceAccounts&type=document&lang=en)
+
         ## Import
 
         dasb device_account can be imported using the id, e.g.
@@ -162,6 +170,14 @@ class DeviceAccount(pulumi.CustomResource):
             device_id=example.id.apply(lambda x: int(x)),
             account="root")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDeviceAccount](https://www.tencentcloud.com/search/?wd=CreateDeviceAccount&type=document&lang=en)
+        * Read: [DescribeDeviceAccounts](https://www.tencentcloud.com/search/?wd=DescribeDeviceAccounts&type=document&lang=en)
+        * Delete: [DeleteDeviceAccounts](https://www.tencentcloud.com/search/?wd=DeleteDeviceAccounts&type=document&lang=en)
 
         ## Import
 

@@ -34,6 +34,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateFolder](https://www.tencentcloud.com/search/?wd=CreateFolder&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeFolder](https://www.tencentcloud.com/search/?wd=DescribeFolder&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyFolder](https://www.tencentcloud.com/search/?wd=ModifyFolder&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteFolders](https://www.tencentcloud.com/search/?wd=DeleteFolders&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// oceanus folder can be imported using the id, e.g.

@@ -66,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
         /// </summary>
         public static Task<GetSecretsResult> InvokeAsync(GetSecretsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsArgs(), options.WithDefaults());
@@ -124,6 +130,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
         /// </summary>
         public static Output<GetSecretsResult> Invoke(GetSecretsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsInvokeArgs(), options.WithDefaults());
@@ -182,6 +194,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
         /// </summary>
         public static Output<GetSecretsResult> Invoke(GetSecretsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsInvokeArgs(), options.WithDefaults());

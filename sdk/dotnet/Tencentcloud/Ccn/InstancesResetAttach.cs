@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ResetAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34780)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach")]
     public partial class InstancesResetAttach : global::Pulumi.CustomResource

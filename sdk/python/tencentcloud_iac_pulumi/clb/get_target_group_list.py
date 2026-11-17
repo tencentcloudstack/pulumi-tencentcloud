@@ -110,6 +110,12 @@ def get_target_group_list(filters: Optional[Sequence[Union['GetTargetGroupListFi
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
+
 
     :param Sequence[Union['GetTargetGroupListFilterArgs', 'GetTargetGroupListFilterArgsDict']] filters: Filter array, which is exclusive of TargetGroupIds. Valid values: TargetGroupVpcId and TargetGroupName. Target group ID will be used first.
     :param _builtins.str result_output_file: Used to save results.
@@ -146,6 +152,12 @@ def get_target_group_list_output(filters: pulumi.Input[Optional[Optional[Sequenc
         "values": ["keep-tgg"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
 
 
     :param Sequence[Union['GetTargetGroupListFilterArgs', 'GetTargetGroupListFilterArgsDict']] filters: Filter array, which is exclusive of TargetGroupIds. Valid values: TargetGroupVpcId and TargetGroupName. Target group ID will be used first.

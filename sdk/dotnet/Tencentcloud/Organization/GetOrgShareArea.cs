@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
         /// </summary>
         public static Task<GetOrgShareAreaResult> InvokeAsync(GetOrgShareAreaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgShareAreaResult>("tencentcloud:Organization/getOrgShareArea:getOrgShareArea", args ?? new GetOrgShareAreaArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
         /// </summary>
         public static Output<GetOrgShareAreaResult> Invoke(GetOrgShareAreaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgShareAreaResult>("tencentcloud:Organization/getOrgShareArea:getOrgShareArea", args ?? new GetOrgShareAreaInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
         /// </summary>
         public static Output<GetOrgShareAreaResult> Invoke(GetOrgShareAreaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgShareAreaResult>("tencentcloud:Organization/getOrgShareArea:getOrgShareArea", args ?? new GetOrgShareAreaInvokeArgs(), options.WithDefaults());

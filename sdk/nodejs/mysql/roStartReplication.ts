@@ -74,6 +74,14 @@ import * as utilities from "../utilities";
  * });
  * const exampleRoStartReplication = new tencentcloud.mysql.RoStartReplication("example", {instanceId: exampleProxy.id});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [StartReplication](https://www.tencentcloud.com/document/api/236/44329)
  */
 export class RoStartReplication extends pulumi.CustomResource {
     /**

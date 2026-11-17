@@ -140,6 +140,8 @@ import * as utilities from "../utilities";
  *     instanceChargeType: "PREPAID",
  *     instanceChargeTypePrepaidPeriod: 1,
  *     instanceChargeTypePrepaidRenewFlag: "NOTIFY_AND_MANUAL_RENEW",
+ *     deleteWithInstance: false,
+ *     deleteWithInstancePrepaid: true,
  *     forceDelete: true,
  *     dataDisks: [{
  *         dataDiskType: "CLOUD_PREMIUM",
@@ -463,6 +465,83 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create CVM instance with enableJumboFrame
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf-example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-eb30mz89",
+ *     instanceType: "S5.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 50,
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     enableJumboFrame: true,
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 100,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ *   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+ *   - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+ *   - [RunInstances](https://www.tencentcloud.com/document/api/213/33237)
+ *   - [StopInstances](https://www.tencentcloud.com/document/api/213/33235)
+ * * Read:
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ *   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+ *   - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [AssociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33232)
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ *   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+ *   - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
+ *   - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+ *   - [ModifyInstancesAttribute](https://www.tencentcloud.com/document/api/213/33246)
+ *   - [ModifyInstancesChargeType](https://www.tencentcloud.com/document/api/213/73503)
+ *   - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+ *   - [ModifyInstancesProject](https://www.tencentcloud.com/document/api/213/33245)
+ *   - [ModifyInstancesRenewFlag](https://www.tencentcloud.com/document/api/213/68324)
+ *   - [ModifyInstancesVpcAttribute](https://www.tencentcloud.com/document/api/213/33244)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [ResetInstance](https://www.tencentcloud.com/document/api/213/33242)
+ *   - [ResetInstancesInternetMaxBandwidth](https://www.tencentcloud.com/document/api/213/33241)
+ *   - [ResetInstancesPassword](https://www.tencentcloud.com/document/api/213/33240)
+ *   - [ResetInstancesType](https://www.tencentcloud.com/document/api/213/33239)
+ *   - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+ *   - [ResizeInstanceDisks](https://www.tencentcloud.com/document/api/213/33238)
+ * * Delete:
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+ *   - [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
+ *   - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+ *   - [TerminateInstances](https://www.tencentcloud.com/document/api/213/33234)
+ *
  * ## Import
  *
  * CVM instance can be imported using the id, e.g.
@@ -575,6 +654,10 @@ export class Instance extends pulumi.CustomResource {
      * Placement group ID list. Supports up to 3 group IDs. When set, `placementGroupId` will be ignored and this list will be used for CRUD operations.
      */
     declare public readonly disasterRecoverGroupIds: pulumi.Output<string[]>;
+    /**
+     * Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
+     */
+    declare public readonly enableJumboFrame: pulumi.Output<boolean>;
     /**
      * Expired time of the instance.
      */
@@ -836,6 +919,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["disableMonitorService"] = state?.disableMonitorService;
             resourceInputs["disableSecurityService"] = state?.disableSecurityService;
             resourceInputs["disasterRecoverGroupIds"] = state?.disasterRecoverGroupIds;
+            resourceInputs["enableJumboFrame"] = state?.enableJumboFrame;
             resourceInputs["expiredTime"] = state?.expiredTime;
             resourceInputs["forceDelete"] = state?.forceDelete;
             resourceInputs["forceReplacePlacementGroupId"] = state?.forceReplacePlacementGroupId;
@@ -911,6 +995,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["disableMonitorService"] = args?.disableMonitorService;
             resourceInputs["disableSecurityService"] = args?.disableSecurityService;
             resourceInputs["disasterRecoverGroupIds"] = args?.disasterRecoverGroupIds;
+            resourceInputs["enableJumboFrame"] = args?.enableJumboFrame;
             resourceInputs["forceDelete"] = args?.forceDelete;
             resourceInputs["forceReplacePlacementGroupId"] = args?.forceReplacePlacementGroupId;
             resourceInputs["forceStop"] = args?.forceStop;
@@ -1057,6 +1142,10 @@ export interface InstanceState {
      * Placement group ID list. Supports up to 3 group IDs. When set, `placementGroupId` will be ignored and this list will be used for CRUD operations.
      */
     disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
+     */
+    enableJumboFrame?: pulumi.Input<boolean | undefined>;
     /**
      * Expired time of the instance.
      */
@@ -1359,6 +1448,10 @@ export interface InstanceArgs {
      * Placement group ID list. Supports up to 3 group IDs. When set, `placementGroupId` will be ignored and this list will be used for CRUD operations.
      */
     disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
+     */
+    enableJumboFrame?: pulumi.Input<boolean | undefined>;
     /**
      * Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
      */

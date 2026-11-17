@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayServices](https://www.tencentcloud.com/document/api/1290/79257)
         /// </summary>
         public static Task<GetGatewayServicesResult> InvokeAsync(GetGatewayServicesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayServices](https://www.tencentcloud.com/document/api/1290/79257)
         /// </summary>
         public static Output<GetGatewayServicesResult> Invoke(GetGatewayServicesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayServices](https://www.tencentcloud.com/document/api/1290/79257)
         /// </summary>
         public static Output<GetGatewayServicesResult> Invoke(GetGatewayServicesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayServicesResult>("tencentcloud:Tse/getGatewayServices:getGatewayServices", args ?? new GetGatewayServicesInvokeArgs(), options.WithDefaults());

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     listenerId: "listener-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
  */
 export function getListenerRealServers(args: GetListenerRealServersArgs, opts?: pulumi.InvokeOptions): Promise<GetListenerRealServersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetListenerRealServersResult {
  *     listenerId: "listener-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
  */
 export function getListenerRealServersOutput(args: GetListenerRealServersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListenerRealServersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

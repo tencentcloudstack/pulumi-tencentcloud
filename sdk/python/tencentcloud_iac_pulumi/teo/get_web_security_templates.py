@@ -96,6 +96,12 @@ def get_web_security_templates(result_output_file: Optional[_builtins.str] = Non
     templates = tencentcloud.teo.get_web_security_templates(zone_ids=["zone-3fkff38fyw8s"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[_builtins.str] zone_ids: Zone ID list. Up to 100 zone IDs per query.
@@ -125,6 +131,12 @@ def get_web_security_templates_output(result_output_file: pulumi.Input[Optional[
 
     templates = tencentcloud.teo.get_web_security_templates(zone_ids=["zone-3fkff38fyw8s"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
 
 
     :param _builtins.str result_output_file: Used to save results.

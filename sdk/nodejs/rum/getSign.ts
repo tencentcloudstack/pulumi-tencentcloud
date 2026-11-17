@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     fileType: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
  */
 export function getSign(args?: GetSignArgs, opts?: pulumi.InvokeOptions): Promise<GetSignResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetSignResult {
  *     fileType: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
  */
 export function getSignOutput(args?: GetSignOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSignResult> {
     args = args || {};

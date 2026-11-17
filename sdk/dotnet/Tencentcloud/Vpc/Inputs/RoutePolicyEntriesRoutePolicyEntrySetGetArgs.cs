@@ -32,8 +32,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 
         /// <summary>
         /// Creation time.
-        /// 
-        /// Note: This field may return null, indicating that no valid value was found.
         /// </summary>
         [Input("createdTime")]
         public Input<string>? CreatedTime { get; set; }

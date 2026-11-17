@@ -39,6 +39,15 @@ import * as utilities from "../utilities";
  * export const configId = example.configId;
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddCustomizedConfig](https://www.tencentcloud.com/document/api/214/74450)
+ * * Read: [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/api/214/42307)
+ * * Update: [ModifyCustomizedConfig](https://www.tencentcloud.com/document/api/214/74445)
+ * * Delete: [DeleteCustomizedConfig](https://www.tencentcloud.com/document/api/214/74448)
+ *
  * ## Import
  *
  * CLB customized V2 config can be imported using the id, e.g.

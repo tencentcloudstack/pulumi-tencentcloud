@@ -152,6 +152,18 @@ class DdosPolicyAttachment(pulumi.CustomResource):
             policy_id=test_policy["policyId"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+          - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&type=document&lang=en)
+        * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+        * Delete:
+          - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+          - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +191,18 @@ class DdosPolicyAttachment(pulumi.CustomResource):
             resource_id="bgpip-00000294",
             policy_id=test_policy["policyId"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+          - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&type=document&lang=en)
+        * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+        * Delete:
+          - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+          - [ModifyResBindDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyResBindDDoSPolicy&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

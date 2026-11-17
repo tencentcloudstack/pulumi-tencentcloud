@@ -67,6 +67,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&type=document&lang=en)
 func GetUsagePlanEnvironments(ctx *pulumi.Context, args *GetUsagePlanEnvironmentsArgs, opts ...pulumi.InvokeOption) (*GetUsagePlanEnvironmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUsagePlanEnvironmentsResult

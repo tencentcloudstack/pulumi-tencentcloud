@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
-        /// ID of the resource.
+        /// rule id.
         /// </summary>
         [Input("id")]
         public Input<int>? Id { get; set; }

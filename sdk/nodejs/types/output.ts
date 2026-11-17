@@ -53,6 +53,383 @@ export namespace Address {
 
 }
 
+export namespace Ags {
+    export interface SandboxToolComputerConfiguration {
+        /**
+         * Built-in OSWorld configuration.
+         */
+        osWorldConfiguration?: outputs.Ags.SandboxToolComputerConfigurationOsWorldConfiguration;
+        /**
+         * WAA sandbox configuration.
+         */
+        waaConfiguration?: outputs.Ags.SandboxToolComputerConfigurationWaaConfiguration;
+    }
+
+    export interface SandboxToolComputerConfigurationOsWorldConfiguration {
+        /**
+         * Built-in OSWorld version. Valid values: `osworld1`, `osworld2`. Default value: `osworld1`.
+         */
+        version: string;
+    }
+
+    export interface SandboxToolComputerConfigurationWaaConfiguration {
+        /**
+         * Custom WAA image id.
+         */
+        imageId?: string;
+    }
+
+    export interface SandboxToolCustomConfiguration {
+        /**
+         * Startup arguments.
+         */
+        args?: string[];
+        /**
+         * Startup command.
+         */
+        commands?: string[];
+        /**
+         * Sandbox DNS configuration.
+         */
+        dnsConfig?: outputs.Ags.SandboxToolCustomConfigurationDnsConfig;
+        /**
+         * Environment variables.
+         */
+        envs?: outputs.Ags.SandboxToolCustomConfigurationEnv[];
+        /**
+         * Image address.
+         */
+        image?: string;
+        /**
+         * Image registry type. Valid values: `enterprise`, `personal`, `custom`.
+         */
+        imageRegistryType?: string;
+        /**
+         * Port configuration.
+         */
+        ports?: outputs.Ags.SandboxToolCustomConfigurationPort[];
+        /**
+         * Probe configuration.
+         */
+        probe?: outputs.Ags.SandboxToolCustomConfigurationProbe;
+        /**
+         * Resource configuration.
+         */
+        resources?: outputs.Ags.SandboxToolCustomConfigurationResources;
+        /**
+         * Sandbox security context.
+         */
+        securityContext?: outputs.Ags.SandboxToolCustomConfigurationSecurityContext;
+    }
+
+    export interface SandboxToolCustomConfigurationDnsConfig {
+        /**
+         * Options, corresponding to the options of resolv.conf.
+         */
+        options?: string[];
+        /**
+         * Search domains, corresponding to the `search` directive of resolv.conf.
+         */
+        searches?: string[];
+        /**
+         * DNS server addresses. Valid IP addresses are required. Default value: `10.0.0.1`.
+         */
+        servers: string[];
+    }
+
+    export interface SandboxToolCustomConfigurationEnv {
+        /**
+         * Environment variable name.
+         */
+        name?: string;
+        /**
+         * Environment variable value.
+         */
+        value?: string;
+    }
+
+    export interface SandboxToolCustomConfigurationPort {
+        /**
+         * Port name.
+         */
+        name?: string;
+        /**
+         * Port number.
+         */
+        port?: number;
+        /**
+         * Protocol.
+         */
+        protocol?: string;
+    }
+
+    export interface SandboxToolCustomConfigurationProbe {
+        /**
+         * Number of consecutive failures required to mark the probe as unhealthy.
+         */
+        failureThreshold?: number;
+        /**
+         * HTTP GET probe configuration.
+         */
+        httpGet?: outputs.Ags.SandboxToolCustomConfigurationProbeHttpGet;
+        /**
+         * Interval in milliseconds between two probes.
+         */
+        probePeriodMs?: number;
+        /**
+         * Timeout in milliseconds of a single probe.
+         */
+        probeTimeoutMs?: number;
+        /**
+         * Timeout in milliseconds for the probe to become ready.
+         */
+        readyTimeoutMs?: number;
+        /**
+         * Number of consecutive successes required to mark the probe as healthy.
+         */
+        successThreshold?: number;
+    }
+
+    export interface SandboxToolCustomConfigurationProbeHttpGet {
+        /**
+         * Request path.
+         */
+        path?: string;
+        /**
+         * Request port.
+         */
+        port?: number;
+        /**
+         * Request scheme.
+         */
+        scheme?: string;
+    }
+
+    export interface SandboxToolCustomConfigurationResources {
+        /**
+         * Amount of cpu resources.
+         */
+        cpu?: string;
+        /**
+         * Amount of memory resources.
+         */
+        memory?: string;
+        /**
+         * Custom disk size. Valid values: `1Gi`, `5Gi`, `10Gi`, `20Gi`.
+         */
+        storage?: string;
+    }
+
+    export interface SandboxToolCustomConfigurationSecurityContext {
+        /**
+         * POSIX capabilities that can be added to or removed from the running container.
+         */
+        capabilities?: outputs.Ags.SandboxToolCustomConfigurationSecurityContextCapabilities;
+        /**
+         * Whether the sandbox runs in privileged mode. Default value: `true`.
+         */
+        privileged: boolean;
+    }
+
+    export interface SandboxToolCustomConfigurationSecurityContextCapabilities {
+        /**
+         * Capabilities to add. Reference value: `["SYS_ADMIN"]`.
+         */
+        adds?: string[];
+        /**
+         * Capabilities to drop. Reference value: `["ALL"]`.
+         */
+        drops?: string[];
+    }
+
+    export interface SandboxToolLogConfiguration {
+        /**
+         * Log push configuration of CLS.
+         */
+        clsConfig?: outputs.Ags.SandboxToolLogConfigurationClsConfig;
+        /**
+         * Log source configuration.
+         */
+        logSources?: outputs.Ags.SandboxToolLogConfigurationLogSources;
+    }
+
+    export interface SandboxToolLogConfigurationClsConfig {
+        /**
+         * Id of the CLS log topic used to push sandbox tool logs.
+         */
+        topicId?: string;
+    }
+
+    export interface SandboxToolLogConfigurationLogSources {
+        /**
+         * Log files to collect. They must live under the `/logs/` directory, sub directories are not supported and at most 10 files are allowed.
+         */
+        files?: string[];
+    }
+
+    export interface SandboxToolNetworkConfiguration {
+        /**
+         * Network mode. Valid values: `PUBLIC`, `VPC`, `SANDBOX`.
+         */
+        networkMode: string;
+        /**
+         * VPC related configuration. It is used when `networkMode` is `VPC`.
+         */
+        vpcConfig?: outputs.Ags.SandboxToolNetworkConfigurationVpcConfig;
+    }
+
+    export interface SandboxToolNetworkConfigurationVpcConfig {
+        /**
+         * List of security group ids.
+         */
+        securityGroupIds?: string[];
+        /**
+         * List of VPC subnet ids.
+         */
+        subnetIds?: string[];
+    }
+
+    export interface SandboxToolStorageMount {
+        /**
+         * Local mount path inside the sandbox instance.
+         */
+        mountPath?: string;
+        /**
+         * Name of the storage mount configuration.
+         */
+        name?: string;
+        /**
+         * Whether the mount is read only. Default value: `false`.
+         */
+        readOnly: boolean;
+        /**
+         * Storage configuration.
+         */
+        storageSource?: outputs.Ags.SandboxToolStorageMountStorageSource;
+        /**
+         * Volume reference.
+         */
+        volume?: outputs.Ags.SandboxToolStorageMountVolume;
+        /**
+         * Volume template reference and derivation rule.
+         */
+        volumeTemplate?: outputs.Ags.SandboxToolStorageMountVolumeTemplate;
+    }
+
+    export interface SandboxToolStorageMountStorageSource {
+        /**
+         * AgentBucket storage configuration.
+         */
+        agentBucket?: outputs.Ags.SandboxToolStorageMountStorageSourceAgentBucket;
+        /**
+         * File storage configuration.
+         */
+        cfs?: outputs.Ags.SandboxToolStorageMountStorageSourceCfs;
+        /**
+         * Object storage bucket configuration.
+         */
+        cos?: outputs.Ags.SandboxToolStorageMountStorageSourceCos;
+        /**
+         * Image volume configuration.
+         */
+        image?: outputs.Ags.SandboxToolStorageMountStorageSourceImage;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceAgentBucket {
+        /**
+         * Access domain of the AgentBucket.
+         */
+        accessDomain?: string;
+        /**
+         * Library id of the AgentBucket.
+         */
+        libraryId?: string;
+        /**
+         * Space id of the AgentBucket.
+         */
+        spaceId?: string;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceCfs {
+        /**
+         * Id of the CFS file system.
+         */
+        fileSystemId?: string;
+        /**
+         * CFS mount path.
+         */
+        path?: string;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceCos {
+        /**
+         * Object storage bucket name.
+         */
+        bucketName?: string;
+        /**
+         * Object storage bucket path. It must be an absolute path starting with `/`.
+         */
+        bucketPath?: string;
+        /**
+         * Object storage access endpoint.
+         */
+        endpoint?: string;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceImage {
+        /**
+         * Image digest resolved by the cloud side. It is not required in requests and is only reported by the cloud.
+         */
+        digest: string;
+        /**
+         * Image registry type. Valid values: `enterprise`, `personal`.
+         */
+        imageRegistryType?: string;
+        /**
+         * Image address.
+         */
+        reference?: string;
+        /**
+         * Path inside the image.
+         */
+        subPath?: string;
+    }
+
+    export interface SandboxToolStorageMountVolume {
+        /**
+         * Stable volume id in the form `vol-xxxxxxxx`, resolved by the cloud side.
+         */
+        volumeId: string;
+        /**
+         * Volume name. The cloud side resolves it into a stable volume id under the current AppId.
+         */
+        volumeName?: string;
+    }
+
+    export interface SandboxToolStorageMountVolumeTemplate {
+        /**
+         * Reuse key. It can be a literal value or a `${metadata.xxx}` expression.
+         */
+        reuseKey?: string;
+        /**
+         * Name of the volume template.
+         */
+        volumeTemplateName: string;
+    }
+
+    export interface SandboxToolTag {
+        /**
+         * Tag key.
+         */
+        key?: string;
+        /**
+         * Tag value.
+         */
+        value?: string;
+    }
+
+}
+
 export namespace Antiddos {
     export interface BgpInstanceEnterprisePackageConfig {
         /**
@@ -416,6 +793,51 @@ export namespace Antiddos {
          * Tag value.
          */
         tagValue: string;
+    }
+
+    export interface GetDdosBlockRecordsBlockRecord {
+        /**
+         * Block time.
+         */
+        blockTime: string;
+        /**
+         * Blocked resource, public network IP.
+         */
+        resource: string;
+        /**
+         * Block/unblock status. Enum: Blocked, Unblocking, Unblocked.
+         */
+        status: string;
+    }
+
+    export interface GetDdosBlockRecordsFilter {
+        /**
+         * Filter field name. Supported: Resource, Status.
+         */
+        name: string;
+        /**
+         * Filter field value.
+         */
+        values: string[];
+    }
+
+    export interface GetDdosBlockRecordsUnblockQuotaInfo {
+        /**
+         * Quota effective end time.
+         */
+        quotaEndTime: string;
+        /**
+         * Quota effective start time.
+         */
+        quotaStartTime: string;
+        /**
+         * Total unblock quota.
+         */
+        totalQuota: number;
+        /**
+         * Used unblock quota.
+         */
+        usedQuota: number;
     }
 
     export interface GetListListenerLayer4Listener {
@@ -3975,6 +4397,371 @@ export namespace Batch {
 
 }
 
+export namespace Bdrc {
+    export interface DisasterRecoveryProtectGroupProtectedResourceStatusSet {
+        /**
+         * Resource count under this status.
+         */
+        count: number;
+        /**
+         * Replication pair status.
+         */
+        status: string;
+    }
+
+    export interface DisasterRecoverySitePairCrossCloudDetail {
+        /**
+         * Peer cloud region display name.
+         */
+        peerRegionName: string;
+        /**
+         * Peer cloud VPC display name.
+         */
+        peerVpcName: string;
+        /**
+         * Peer cloud availability zone display name.
+         */
+        peerZoneName: string;
+        /**
+         * Source cloud AppId.
+         */
+        sourceAppId: number;
+        /**
+         * Source cloud name (peer cloud name in cross-cloud).
+         */
+        sourceCloudName: string;
+        /**
+         * Source cloud sub account Uin.
+         */
+        sourceSubAccountUin: string;
+        /**
+         * Source cloud master account Uin.
+         */
+        sourceUin: string;
+        /**
+         * Source cloud user name.
+         */
+        sourceUserName: string;
+        /**
+         * Target cloud AppId.
+         */
+        targetAppId: number;
+        /**
+         * Target cloud name (local cloud name in cross-cloud).
+         */
+        targetCloudName: string;
+        /**
+         * Target cloud sub account Uin.
+         */
+        targetSubAccountUin: string;
+        /**
+         * Target cloud master account Uin.
+         */
+        targetUin: string;
+    }
+
+    export interface DisasterRecoverySitePairProtectedResourceSet {
+        /**
+         * List of protected source resource IDs under this type.
+         */
+        resourceIdSets: string[];
+        /**
+         * Resource type (consistent with SitePairType, such as DISK/CFS/INSTANCE).
+         */
+        resourceType: string;
+    }
+
+    export interface DisasterRecoverySitePairProtectedResourceStatusSet {
+        /**
+         * Number of resources under this status.
+         */
+        count: number;
+        /**
+         * Copy pair status.
+         */
+        status: string;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParameters {
+        /**
+         * Copy pair ID for drill scenarios.
+         */
+        copyPairId?: string;
+        /**
+         * Data disk list.
+         */
+        dataDisks?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersDataDisk[];
+        /**
+         * Placement group ID list.
+         */
+        disasterRecoverGroupIds?: string[];
+        /**
+         * Enhanced service config.
+         */
+        enhancedService?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedService;
+        /**
+         * Instance hostname.
+         */
+        hostName?: string;
+        /**
+         * Image ID.
+         */
+        imageId: string;
+        /**
+         * Prepaid billing settings.
+         */
+        instanceChargePrepaid?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersInstanceChargePrepaid;
+        /**
+         * Instance billing mode.
+         */
+        instanceChargeType: string;
+        /**
+         * Instance display name.
+         */
+        instanceName?: string;
+        /**
+         * Instance type.
+         */
+        instanceType?: string;
+        /**
+         * Public bandwidth config.
+         */
+        internetAccessible?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersInternetAccessible;
+        /**
+         * Login settings.
+         */
+        loginSettings?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersLoginSettings;
+        /**
+         * Instance placement.
+         */
+        placement: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersPlacement;
+        /**
+         * Recovery time point for drill scenarios.
+         */
+        recoveryTime?: string;
+        /**
+         * Source CVM ID.
+         */
+        sourceInstanceId: string;
+        /**
+         * Spot instance max bid.
+         */
+        spotPrice?: string;
+        /**
+         * Shutdown billing mode.
+         */
+        stoppedMode?: string;
+        /**
+         * System disk.
+         */
+        systemDisk: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersSystemDisk;
+        /**
+         * User data for the instance.
+         */
+        userData?: string;
+        /**
+         * VPC config.
+         */
+        virtualPrivateCloud?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersVirtualPrivateCloud;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersDataDisk {
+        /**
+         * Delete with instance.
+         */
+        deleteWithInstance?: boolean;
+        /**
+         * Cloud disk size in GB.
+         */
+        diskSize?: number;
+        /**
+         * Cloud disk type.
+         */
+        diskType?: string;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedService {
+        /**
+         * Automation service.
+         */
+        automationService?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceAutomationService;
+        /**
+         * Basic service.
+         */
+        basicService?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceBasicService;
+        /**
+         * Monitor service.
+         */
+        monitorService?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceMonitorService;
+        /**
+         * Security service.
+         */
+        securityService?: outputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceSecurityService;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceAutomationService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceBasicService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceMonitorService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceSecurityService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersInstanceChargePrepaid {
+        /**
+         * Purchase duration in months.
+         */
+        period: number;
+        /**
+         * Auto renewal flag.
+         */
+        renewFlag?: string;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersInternetAccessible {
+        /**
+         * Network billing type.
+         */
+        internetChargeType?: string;
+        /**
+         * Public network outbound bandwidth cap in Mbps.
+         */
+        internetMaxBandwidthOut?: number;
+        /**
+         * Network service provider.
+         */
+        internetServiceProvider?: string;
+        /**
+         * Whether to assign a public IP.
+         */
+        publicIpAssigned?: boolean;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersLoginSettings {
+        /**
+         * Keep image login settings.
+         */
+        keepImageLogin?: string;
+        /**
+         * Key ID list.
+         */
+        keyIds?: string[];
+        /**
+         * Instance login password.
+         */
+        password?: string;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersPlacement {
+        /**
+         * Dedicated host ID.
+         */
+        hostId?: string;
+        /**
+         * Dedicated host ID list.
+         */
+        hostIds?: string[];
+        /**
+         * Project ID.
+         */
+        projectId?: number;
+        /**
+         * Project name.
+         */
+        projectName?: string;
+        /**
+         * Zone ID.
+         */
+        zone: string;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersSystemDisk {
+        /**
+         * Cloud disk size in GB.
+         */
+        diskSize?: number;
+        /**
+         * Cloud disk type.
+         */
+        diskType?: string;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersVirtualPrivateCloud {
+        /**
+         * Used as public network gateway.
+         */
+        asVpcGateway?: boolean;
+        /**
+         * Number of IPv6 addresses.
+         */
+        ipv6AddressCount?: number;
+        /**
+         * Private IP address list.
+         */
+        privateIpAddresses?: string[];
+        /**
+         * Subnet ID.
+         */
+        subnetId: string;
+        /**
+         * Subnet name.
+         */
+        subnetName?: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: string;
+        /**
+         * VPC name.
+         */
+        vpcName?: string;
+    }
+
+    export interface InstanceCopyPairDiskCopyPairSet {
+        /**
+         * Disk copy pair ID.
+         */
+        copyPairId: string;
+        /**
+         * Disk copy pair name.
+         */
+        copyPairName: string;
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Source resource ID.
+         */
+        sourceResourceId: string;
+        /**
+         * Target resource ID.
+         */
+        targetResourceId: string;
+    }
+
+}
+
 export namespace Bh {
     export interface DeviceDeviceSet {
         /**
@@ -4899,6 +5686,329 @@ export namespace Billing {
         warnType?: string;
     }
 
+    export interface GetBillDetailDetailSet {
+        /**
+         * Transaction type name, such as prepay purchase, prepay renew, postpay deduction, etc.
+         */
+        actionType: string;
+        /**
+         * Transaction type.
+         */
+        actionTypeName: string;
+        /**
+         * Associated transaction order.
+         */
+        associatedOrders: outputs.Billing.GetBillDetailDetailSetAssociatedOrder[];
+        /**
+         * Bill day.
+         */
+        billDay: string;
+        /**
+         * Transaction ID.
+         */
+        billId: string;
+        /**
+         * Bill month.
+         */
+        billMonth: string;
+        /**
+         * Product name code.
+         */
+        businessCode: string;
+        /**
+         * Product name.
+         */
+        businessCodeName: string;
+        /**
+         * Component list.
+         */
+        componentSets: outputs.Billing.GetBillDetailDetailSetComponentSet[];
+        /**
+         * Discount content.
+         */
+        discountContent: string;
+        /**
+         * Discount object.
+         */
+        discountObject: string;
+        /**
+         * Discount type.
+         */
+        discountType: string;
+        /**
+         * Start time of use.
+         */
+        feeBeginTime: string;
+        /**
+         * End time of use.
+         */
+        feeEndTime: string;
+        /**
+         * Calculation description.
+         */
+        formula: string;
+        /**
+         * Billing rule link.
+         */
+        formulaUrl: string;
+        /**
+         * Bill record ID.
+         */
+        id: string;
+        /**
+         * Operator UIN.
+         */
+        operateUin: string;
+        /**
+         * Order ID.
+         */
+        orderId: string;
+        /**
+         * Owner UIN.
+         */
+        ownerUin: string;
+        /**
+         * Billing mode.
+         */
+        payModeName: string;
+        /**
+         * Deduction time.
+         */
+        payTime: string;
+        /**
+         * Payer account ID (the account ID is the user's unique account identifier on Tencent Cloud). Defaults to querying the current account's bill.
+         */
+        payerUin: string;
+        /**
+         * Price attributes.
+         */
+        priceInfos: string[];
+        /**
+         * Sub-product code.
+         */
+        productCode: string;
+        /**
+         * Sub-product name.
+         */
+        productCodeName: string;
+        /**
+         * Project ID.
+         */
+        projectId: number;
+        /**
+         * Project name.
+         */
+        projectName: string;
+        /**
+         * Region ID.
+         */
+        regionId: string;
+        /**
+         * Region.
+         */
+        regionName: string;
+        /**
+         * Domestic/International code.
+         */
+        regionType: string;
+        /**
+         * Domestic/International name.
+         */
+        regionTypeName: string;
+        /**
+         * Reserve detail (instance config).
+         */
+        reserveDetail: string;
+        /**
+         * Resource ID.
+         */
+        resourceId: string;
+        /**
+         * Resource alias.
+         */
+        resourceName: string;
+        /**
+         * Tag information list.
+         */
+        tags: outputs.Billing.GetBillDetailDetailSetTag[];
+        /**
+         * Zone.
+         */
+        zoneName: string;
+    }
+
+    export interface GetBillDetailDetailSetAssociatedOrder {
+        /**
+         * Adjusted order after discount.
+         */
+        newOrder: string;
+        /**
+         * Original order before discount adjustment.
+         */
+        original: string;
+        /**
+         * Upgrade order.
+         */
+        prepayModifyUp: string;
+        /**
+         * New purchase order.
+         */
+        prepayPurchase: string;
+        /**
+         * Renewal order.
+         */
+        prepayRenew: string;
+        /**
+         * Reverse order.
+         */
+        reverseOrder: string;
+    }
+
+    export interface GetBillDetailDetailSetComponentSet {
+        /**
+         * Blended discount rate.
+         */
+        blendedDiscount: string;
+        /**
+         * Cash account payment amount.
+         */
+        cashPayAmount: string;
+        /**
+         * Component name code.
+         */
+        componentCode: string;
+        /**
+         * Component type.
+         */
+        componentCodeName: string;
+        /**
+         * Component config description list.
+         */
+        componentConfigs: outputs.Billing.GetBillDetailDetailSetComponentSetComponentConfig[];
+        /**
+         * Component unit price after discount.
+         */
+        contractPrice: string;
+        /**
+         * Component original price.
+         */
+        cost: string;
+        /**
+         * Deducted usage/duration (including resource pack).
+         */
+        deductedMeasure: string;
+        /**
+         * Discount rate.
+         */
+        discount: string;
+        /**
+         * Incentive account payment amount.
+         */
+        incentivePayAmount: string;
+        /**
+         * Instance type.
+         */
+        instanceType: string;
+        /**
+         * Component type code.
+         */
+        itemCode: string;
+        /**
+         * Component name.
+         */
+        itemCodeName: string;
+        /**
+         * Reserved instance deducted component original price.
+         */
+        originalCostWithRi: string;
+        /**
+         * Savings plan deducted component original price.
+         */
+        originalCostWithSp: string;
+        /**
+         * Component price unit.
+         */
+        priceUnit: string;
+        /**
+         * Discounted total price.
+         */
+        realCost: string;
+        /**
+         * Original usage/duration before resource pack deduction.
+         */
+        realTotalMeasure: string;
+        /**
+         * Discount type.
+         */
+        reduceType: string;
+        /**
+         * Reserved instance deducted usage duration.
+         */
+        riTimeSpan: string;
+        /**
+         * Component list price.
+         */
+        singlePrice: string;
+        /**
+         * Savings plan deduction amount. Deprecated.
+         */
+        spDeduction: string;
+        /**
+         * Savings plan deduction rate.
+         */
+        spDeductionRate: string;
+        /**
+         * Component specified price. Deprecated.
+         */
+        specifiedPrice: string;
+        /**
+         * Usage duration.
+         */
+        timeSpan: string;
+        /**
+         * Duration unit.
+         */
+        timeUnitName: string;
+        /**
+         * Transfer account payment amount.
+         */
+        transferPayAmount: string;
+        /**
+         * Component usage.
+         */
+        usedAmount: string;
+        /**
+         * Component usage unit.
+         */
+        usedAmountUnit: string;
+        /**
+         * Voucher payment amount.
+         */
+        voucherPayAmount: string;
+    }
+
+    export interface GetBillDetailDetailSetComponentSetComponentConfig {
+        /**
+         * Config description name.
+         */
+        name: string;
+        /**
+         * Config description value.
+         */
+        value: string;
+    }
+
+    export interface GetBillDetailDetailSetTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
+    }
+
     export interface GetBudgetOperationLogRecord {
         /**
          * Modification type: ADD, UPDATE.
@@ -4964,6 +6074,49 @@ export namespace Billing {
 }
 
 export namespace Cam {
+    export interface GetAccountsUser {
+        /**
+         * Whether the account can log in to the console. Returned as the raw int value from the API.
+         */
+        consoleLogin: number;
+        /**
+         * Country code.
+         */
+        countryCode: string;
+        /**
+         * Creation time. Format: YYYY-MM-DD hh:mm:ss.
+         */
+        createTime: string;
+        /**
+         * Email.
+         */
+        email: string;
+        /**
+         * Account name.
+         */
+        name: string;
+        /**
+         * Phone number.
+         */
+        phoneNum: string;
+        /**
+         * Account remark.
+         */
+        remark: string;
+        /**
+         * Account UID.
+         */
+        uid: number;
+        /**
+         * Account ID (Uin).
+         */
+        uin: number;
+        /**
+         * Account type to filter by. Valid values: `Owner` (master account), `SubUser` (sub user), `CICUser` (CIC sub user), `WechatCorpUser` (WeCom sub user), `AgentIdentity` (AgentIdentity sub user), `Collaborator` (collaborator), `MessageReceiver` (message receiver).
+         */
+        userType: string;
+    }
+
     export interface GetGroupMembershipsMembershipList {
         /**
          * ID of CAM group to be queried.
@@ -5582,9 +6735,134 @@ export namespace Cam {
         value: string;
     }
 
+    export interface UpdatePasswordRuleConfigRules {
+        /**
+         * Forced password change period.
+         */
+        forcePasswordChange: number;
+        /**
+         * Minimum password length.
+         */
+        minimumLength: number;
+        /**
+         * Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+         */
+        mustContain: string;
+        /**
+         * Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+         */
+        passwordExpirationInvalidation: number;
+        /**
+         * Number of allowed password retries.
+         */
+        retryPasswordLimit: number;
+        /**
+         * Number of previous passwords that cannot be reused.
+         */
+        reusePasswordLimit: number;
+    }
+
 }
 
 export namespace Cat {
+    export interface GetInstantTasksTask {
+        /**
+         * Node count.
+         */
+        nodeCount: number;
+        /**
+         * Probe time.
+         */
+        probeTime: number;
+        /**
+         * Task status.
+         */
+        status: string;
+        /**
+         * Success rate.
+         */
+        successRate: number;
+        /**
+         * Target address.
+         */
+        targetAddress: string;
+        /**
+         * Task category.
+         */
+        taskCategory: number;
+        /**
+         * Task ID.
+         */
+        taskId: string;
+        /**
+         * Task type.
+         */
+        taskType: number;
+    }
+
+    export interface GetNodeGroupsDistrictList {
+        /**
+         * Node ID.
+         */
+        id: string;
+        /**
+         * Probe node description keyword.
+         */
+        name: string;
+    }
+
+    export interface GetNodeGroupsNetServiceList {
+        /**
+         * Node ID.
+         */
+        id: string;
+        /**
+         * Probe node description keyword.
+         */
+        name: string;
+    }
+
+    export interface GetNodeGroupsNodeList {
+        /**
+         * Node list.
+         */
+        childrens: outputs.Cat.GetNodeGroupsNodeListChildren[];
+        /**
+         * Node name.
+         */
+        content: string;
+        /**
+         * Node ID.
+         */
+        id: string;
+    }
+
+    export interface GetNodeGroupsNodeListChildren {
+        /**
+         * Node list.
+         */
+        childrens: outputs.Cat.GetNodeGroupsNodeListChildrenChildren[];
+        /**
+         * Node name.
+         */
+        content: string;
+        /**
+         * Node ID.
+         */
+        id: string;
+    }
+
+    export interface GetNodeGroupsNodeListChildrenChildren {
+        /**
+         * Node name.
+         */
+        content: string;
+        /**
+         * Node ID.
+         */
+        id: string;
+    }
+
     export interface GetNodeNodeDefine {
         /**
          * City.
@@ -5673,6 +6951,99 @@ export namespace Cat {
         name: string;
         /**
          * Value.
+         */
+        value: string;
+    }
+
+    export interface GetProbeTasksTagFilter {
+        /**
+         * Tag key.
+         */
+        key: string;
+        /**
+         * Tag value.
+         */
+        value: string;
+    }
+
+    export interface GetProbeTasksTaskSet {
+        /**
+         * Created time.
+         */
+        createdAt: string;
+        /**
+         * Cron expression for scheduled task.
+         */
+        cron: string;
+        /**
+         * Scheduled task start status.
+         */
+        cronState: number;
+        /**
+         * Probe interval in minutes.
+         */
+        interval: number;
+        /**
+         * Task name.
+         */
+        name: string;
+        /**
+         * Probe node IP type.
+         */
+        nodeIpType: number;
+        /**
+         * Probe node list.
+         */
+        nodes: string[];
+        /**
+         * Order state.
+         */
+        orderState: number;
+        /**
+         * Probe parameters.
+         */
+        parameters: string;
+        /**
+         * Pay mode.
+         */
+        payMode: number;
+        /**
+         * Task status.
+         */
+        status: number;
+        /**
+         * Whether it is a sync account.
+         */
+        subSyncFlag: number;
+        /**
+         * Tag info list.
+         */
+        tagInfoLists: outputs.Cat.GetProbeTasksTaskSetTagInfoList[];
+        /**
+         * Target address.
+         */
+        targetAddress: string;
+        /**
+         * Task category list.
+         */
+        taskCategory: number;
+        /**
+         * Task ID.
+         */
+        taskId: string;
+        /**
+         * Task type list.
+         */
+        taskType: number;
+    }
+
+    export interface GetProbeTasksTaskSetTagInfoList {
+        /**
+         * Tag key.
+         */
+        key: string;
+        /**
+         * Tag value.
          */
         value: string;
     }
@@ -6235,6 +7606,10 @@ export namespace Ccn {
          * InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
          */
         instanceType?: string;
+        /**
+         * Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+         */
+        orderType?: string;
         /**
          * ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
          */
@@ -7438,15 +8813,15 @@ export namespace Cdn {
          */
         certificateContent: string;
         /**
-         * Client certificate name.
+         * Server certificate name.
          */
         certificateName: string;
         /**
-         * Deploy time of client certificate.
+         * Deploy time of server certificate.
          */
         deployTime: string;
         /**
-         * Expire time of client certificate.
+         * Expire time of server certificate.
          */
         expireTime: string;
     }
@@ -7652,7 +9027,11 @@ export namespace Cdn {
          */
         originType: string;
         /**
-         * Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+         * Origin path rewrite rules. Each element configures a path-based origin routing rule.
+         */
+        pathRules: outputs.Cdn.DomainOriginPathRule[];
+        /**
+         * Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
          */
         serverName: string;
     }
@@ -7662,6 +9041,25 @@ export namespace Cdn {
          * Configuration switch, valid values are `on` and `off`.
          */
         switch: string;
+    }
+
+    export interface DomainOriginPathRule {
+        /**
+         * URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+         */
+        forwardUri: string;
+        /**
+         * Whether to use full path match.
+         */
+        fullMatch: boolean;
+        /**
+         * Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+         */
+        path: string;
+        /**
+         * Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+         */
+        serverName: string;
     }
 
     export interface DomainOriginPullOptimization {
@@ -8286,6 +9684,69 @@ export namespace Cdn {
 }
 
 export namespace Cdwdoris {
+    export interface GetInstanceNodesInstanceNodesList {
+        /**
+         * Compute group ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        computeGroupId: string;
+        /**
+         * Number of CPU cores. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        core: number;
+        /**
+         * Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        createTime: string;
+        /**
+         * Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        diskSize: number;
+        /**
+         * Disk type. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        diskType: string;
+        /**
+         * FE node role. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        feRole: string;
+        /**
+         * IP address. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        ip: string;
+        /**
+         * Memory size. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        memory: number;
+        /**
+         * Rip. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        rip: string;
+        /**
+         * Name of the clickhouse cluster to which it belongs. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        role: string;
+        /**
+         * Model, such as S1. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        spec: string;
+        /**
+         * Status. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        status: string;
+        /**
+         * UUID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        uuid: string;
+        /**
+         * Virtual availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        virtualZone: string;
+        /**
+         * Availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+    }
+
     export interface GetInstancesInstancesList {
         /**
          * Access address. Example: 10.0.0.1:9000. Note: This field may return null, indicating that no valid values can be obtained.
@@ -17551,6 +19012,79 @@ export namespace Ckafka {
         support: string;
     }
 
+    export interface GetRoutesRouter {
+        /**
+         * Instance access type. 0: PLAINTEXT, 1: SASL_PLAINTEXT, 2: SSL, 3: SASL_SSL.
+         */
+        accessType: number;
+        /**
+         * Virtual IP list (1 to 1 broker nodes).
+         */
+        brokerVipLists: outputs.Ckafka.GetRoutesRouterBrokerVipList[];
+        /**
+         * Delete timestamp.
+         */
+        deleteTimestamp: string;
+        /**
+         * Domain.
+         */
+        domain: string;
+        /**
+         * Domain port.
+         */
+        domainPort: number;
+        /**
+         * Remark.
+         */
+        note: string;
+        /**
+         * Route id, used to query a specific route.
+         */
+        routeId: number;
+        /**
+         * Route status. 1: creating, 2: created, 3: create failed, 4: deleting, 6: delete failed.
+         */
+        status: number;
+        /**
+         * Subnet id.
+         */
+        subnet: string;
+        /**
+         * Virtual IP list.
+         */
+        vipLists: outputs.Ckafka.GetRoutesRouterVipList[];
+        /**
+         * Routing network type. 3: vpc routing, 7: internal support routing, 1: public network routing.
+         */
+        vipType: number;
+        /**
+         * Vpc id.
+         */
+        vpcId: string;
+    }
+
+    export interface GetRoutesRouterBrokerVipList {
+        /**
+         * Virtual IP.
+         */
+        vip: string;
+        /**
+         * Virtual port.
+         */
+        vport: string;
+    }
+
+    export interface GetRoutesRouterVipList {
+        /**
+         * Virtual IP.
+         */
+        vip: string;
+        /**
+         * Virtual port.
+         */
+        vport: string;
+    }
+
     export interface GetTaskStatusResult {
         /**
          * OutPut Info.
@@ -22447,9 +23981,29 @@ export namespace Cls {
          */
         alias: string;
         /**
+         * External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+         */
+        externalId: string;
+        /**
+         * Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+         */
+        isCrossAccount: boolean;
+        /**
+         * Name of the logset that contains the destination topic. Used in cross-account scenario.
+         */
+        logsetName: string;
+        /**
+         * In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+         */
+        roleArn: string;
+        /**
          * Dst topic ID.
          */
         topicId: string;
+        /**
+         * Name of the destination topic. Used in cross-account scenario.
+         */
+        topicName: string;
     }
 
     export interface DataTransformEnvInfo {
@@ -22461,6 +24015,62 @@ export namespace Cls {
          * Environment variable value.
          */
         value: string;
+    }
+
+    export interface DeliverTaskDeliverRule {
+        /**
+         * Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+         */
+        dataScope: number;
+    }
+
+    export interface DeliverTaskSourceTopicConfig {
+        /**
+         * Source logset id.
+         */
+        logsetId: string;
+        /**
+         * Topic filter type. 1: static select.
+         */
+        topicFilterType: number;
+        /**
+         * Source topic list.
+         */
+        topics?: outputs.Cls.DeliverTaskSourceTopicConfigTopic[];
+    }
+
+    export interface DeliverTaskSourceTopicConfigTopic {
+        /**
+         * Log topic id.
+         */
+        topicId: string;
+    }
+
+    export interface DeliverTaskTargetTopicConfig {
+        /**
+         * Target account type. 1: current main account, 2: other main account.
+         */
+        accountType: number;
+        /**
+         * External ID, required when AccountType=2.
+         */
+        externalId?: string;
+        /**
+         * Target logset id.
+         */
+        logsetId: string;
+        /**
+         * Target region, e.g. ap-guangzhou.
+         */
+        region: string;
+        /**
+         * Role ARN, required when AccountType=2.
+         */
+        roleArn?: string;
+        /**
+         * Target topic id.
+         */
+        topicId: string;
     }
 
     export interface DlcDeliverDlcInfo {
@@ -24020,6 +25630,17 @@ export namespace Cls {
         userName?: string;
     }
 
+    export interface LogsetTagList {
+        /**
+         * Tag key.
+         */
+        key: string;
+        /**
+         * Tag value.
+         */
+        value: string;
+    }
+
     export interface MachineGroupMachineGroupType {
         /**
          * Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
@@ -24120,23 +25741,126 @@ export namespace Cls {
         title?: string;
     }
 
+    export interface RemoteWriteTaskAuthInfo {
+        /**
+         * Basic auth password.
+         */
+        password?: string;
+        /**
+         * Basic auth token.
+         */
+        token?: string;
+        /**
+         * Basic auth username.
+         */
+        username?: string;
+    }
+
     export interface ScheduledSqlDstResource {
         /**
          * topic type.
          */
-        bizType?: number;
+        bizType: number;
+        /**
+         * custom metric labels, used to add static dimensions to metrics.
+         */
+        customMetricLabels?: outputs.Cls.ScheduledSqlDstResourceCustomMetricLabel[];
+        /**
+         * metric timestamp field, the default value is the left boundary time of the SQL query range.
+         */
+        customTime?: string;
+        /**
+         * metric dimensions, time type is not accepted.
+         */
+        metricLabels?: string[];
         /**
          * metric name.
          */
-        metricName?: string;
+        metricName: string;
+        /**
+         * metric names, used when bizType is 1 (metric topic) for multi-metric scenarios.
+         */
+        metricNames: string[];
         /**
          * topic region.
          */
-        region?: string;
+        region: string;
         /**
          * dst topic id.
          */
         topicId: string;
+    }
+
+    export interface ScheduledSqlDstResourceCustomMetricLabel {
+        /**
+         * custom metric label key.
+         */
+        key: string;
+        /**
+         * custom metric label value.
+         */
+        value: string;
+    }
+
+    export interface SplunkDeliverExternalRole {
+        /**
+         * Cross-account delivery role name.
+         */
+        externalId: string;
+        /**
+         * Cross-account delivery role RoleArn.
+         */
+        roleArn: string;
+    }
+
+    export interface SplunkDeliverMetadataInfo {
+        /**
+         * Whether to deliver __TAG__ field.
+         */
+        enableTag: boolean;
+        /**
+         * Data format. Valid values: rawlog, json.
+         */
+        format: string;
+        /**
+         * Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+         */
+        metaFields?: string[];
+        /**
+         * Whether to flatten JSON. Required when enableTag is true.
+         */
+        tagJsonTiled: boolean;
+    }
+
+    export interface SplunkDeliverNetInfo {
+        /**
+         * Network address.
+         */
+        host: string;
+        /**
+         * Whether to use SSL. Default is false.
+         */
+        isSsl: boolean;
+        /**
+         * Network type. 1: internal network, 2: external network.
+         */
+        netType: number;
+        /**
+         * Port.
+         */
+        port: number;
+        /**
+         * Authentication token.
+         */
+        token: string;
+        /**
+         * Network service type. Required when netType is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+         */
+        virtualGatewayType: number;
+        /**
+         * VPC ID. Required when netType is internal network.
+         */
+        vpcId?: string;
     }
 
     export interface TopicCustomKmsInfo {
@@ -24945,6 +26669,10 @@ export namespace Cos {
 
     export interface BucketWebsite {
         /**
+         * To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+         */
+        charity404?: string;
+        /**
          * `Endpoint` of the static website.
          */
         endpoint: string;
@@ -24956,6 +26684,10 @@ export namespace Cos {
          * COS returns this index document when requests are made to the root domain or any of the subfolders.
          */
         indexDocument?: string;
+        /**
+         * The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+         */
+        originalHttpStatus?: string;
         /**
          * Redirects all request configurations. Valid values: http, https. Default is `http`.
          */
@@ -26999,7 +28731,7 @@ export namespace Cvm {
          */
         deleteWithInstance?: boolean;
         /**
-         * Data disk ID.
+         * System disk ID.
          */
         diskId: string;
         /**
@@ -34780,7 +36512,7 @@ export namespace Dlc {
          */
         function?: string;
         /**
-         * ID of the resource.
+         * The policy ID.
          */
         id: number;
         /**
@@ -34938,7 +36670,7 @@ export namespace Dlc {
          */
         function?: string;
         /**
-         * ID of the resource.
+         * The policy ID.
          */
         id: number;
         /**
@@ -37571,6 +39303,290 @@ export namespace Dlc {
         type: string;
     }
 
+    export interface MetaDatabaseGovernPolicy {
+        /**
+         * Govern engine.
+         */
+        governEngine: string;
+        /**
+         * Govern rule type, `Customize` or `Intelligence`.
+         */
+        ruleType: string;
+    }
+
+    export interface MetaDatabaseMetaDatabaseInfo {
+        /**
+         * Description of the DLC meta database, length 0~2048.
+         */
+        comment?: string;
+        /**
+         * Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+         */
+        databaseName: string;
+    }
+
+    export interface MetaDatabaseProperty {
+        /**
+         * Property key.
+         */
+        key: string;
+        /**
+         * Property value.
+         */
+        value: string;
+    }
+
+    export interface MetaDatabaseSmartPolicy {
+        /**
+         * Base info of smart policy.
+         */
+        baseInfo?: outputs.Dlc.MetaDatabaseSmartPolicyBaseInfo;
+        /**
+         * Policy description of smart policy.
+         */
+        policy?: outputs.Dlc.MetaDatabaseSmartPolicyPolicy;
+    }
+
+    export interface MetaDatabaseSmartPolicyBaseInfo {
+        /**
+         * User AppID.
+         */
+        appId?: string;
+        /**
+         * Catalog name.
+         */
+        catalog?: string;
+        /**
+         * Database name.
+         */
+        database?: string;
+        /**
+         * Policy type.
+         */
+        policyType?: string;
+        /**
+         * Table name.
+         */
+        table?: string;
+        /**
+         * User UIN.
+         */
+        uin: string;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicy {
+        /**
+         * Change table policy.
+         */
+        changeTable?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyChangeTable;
+        /**
+         * Index policy.
+         */
+        index?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyIndex;
+        /**
+         * Whether to inherit.
+         */
+        inherit?: string;
+        /**
+         * Data lifecycle policy.
+         */
+        lifecycle?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyLifecycle;
+        /**
+         * Data governance resources.
+         */
+        resources?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyResource[];
+        /**
+         * Table expiration policy.
+         */
+        tableExpiration?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyTableExpiration;
+        /**
+         * Data rewrite policy.
+         */
+        written?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyWritten;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyChangeTable {
+        /**
+         * Data retention time of change table, in days.
+         */
+        dataRetentionTime?: number;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyIndex {
+        /**
+         * Whether to enable index.
+         */
+        indexEnable?: string;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyLifecycle {
+        /**
+         * Whether to drop table (deprecated, use tableExpiration instead).
+         */
+        dropTable?: boolean;
+        /**
+         * Expiration time.
+         */
+        expiration?: number;
+        /**
+         * Expired field.
+         */
+        expiredField?: string;
+        /**
+         * Expired field format.
+         */
+        expiredFieldFormat?: string;
+        /**
+         * Whether to enable lifecycle.
+         */
+        lifecycleEnable?: string;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyResource {
+        /**
+         * Attribution type.
+         */
+        attributionType?: string;
+        /**
+         * Affinity info.
+         */
+        favors?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyResourceFavor[];
+        /**
+         * Instance name.
+         */
+        instance?: string;
+        /**
+         * Engine name.
+         */
+        name?: string;
+        /**
+         * Resource config info.
+         */
+        resourceConf?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyResourceResourceConf;
+        /**
+         * Standard engine resource group name.
+         */
+        resourceGroupName?: string;
+        /**
+         * Resource type.
+         */
+        resourceType?: string;
+        /**
+         * Status.
+         */
+        status?: number;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyResourceFavor {
+        /**
+         * Catalog name.
+         */
+        catalog?: string;
+        /**
+         * Database name.
+         */
+        dataBase?: string;
+        /**
+         * Priority.
+         */
+        priority?: number;
+        /**
+         * Table name.
+         */
+        table?: string;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyResourceResourceConf {
+        /**
+         * Parallelism of the optimize task.
+         */
+        parallelism?: number;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyTableExpiration {
+        /**
+         * Whether to enable the policy.
+         */
+        enabled: boolean;
+        /**
+         * Table expiration time, in days.
+         */
+        expiration: number;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyWritten {
+        /**
+         * User custom advance params.
+         */
+        advancePolicy?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy;
+        /**
+         * Whether to enable, `none`/`enable`/`disable`/`default`.
+         */
+        writtenEnable?: string;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy {
+        /**
+         * Snapshot expire before days.
+         */
+        beforeDays?: number;
+        /**
+         * Whether to enable compact.
+         */
+        compactEnable?: string;
+        /**
+         * File compact strategy.
+         */
+        compactStrategy?: string;
+        /**
+         * Whether to enable COW table compact.
+         */
+        cowCompactEnable?: string;
+        /**
+         * Whether to enable history data cleanup.
+         */
+        deleteEnable?: string;
+        /**
+         * Snapshot expire interval in minutes.
+         */
+        expiredSnapshotsIntervalMin?: number;
+        /**
+         * Min input files to compact.
+         */
+        minInputFiles?: number;
+        /**
+         * Remove orphan files interval in minutes.
+         */
+        removeOrphanIntervalMin?: number;
+        /**
+         * Retain last snapshot count.
+         */
+        retainLast?: number;
+        /**
+         * Sort compact strategy rules.
+         */
+        sortOrders?: outputs.Dlc.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder[];
+        /**
+         * Target file size after compact.
+         */
+        targetFileSizeBytes?: number;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder {
+        /**
+         * Sort column name.
+         */
+        column?: string;
+        /**
+         * Null order, `first` or `last`.
+         */
+        nullOrder?: string;
+        /**
+         * Sort direction, `asc` or `desc`.
+         */
+        sortDirection?: string;
+    }
+
     export interface StandardEngineResourceGroupConfigInfoDynamicConfContext {
         /**
          * Collection of bound working groups.
@@ -39614,6 +41630,10 @@ export namespace Dts {
          */
         procedures: string[];
         /**
+         * schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
+         */
+        schemaMode: string;
+        /**
          * schema name.
          */
         schemaName: string;
@@ -40760,6 +42780,405 @@ export namespace Dts {
          * Private network ID, which is required for access methods of private network, leased line, and VPN. Note: This field may return null, indicating that no valid value can be obtained.
          */
         vpcId?: string;
+    }
+
+    export interface SyncJobConfigDynamicObjects {
+        /**
+         * For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        advancedObjects: string[];
+        /**
+         * Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databases: outputs.Dts.SyncJobConfigDynamicObjectsDatabase[];
+        /**
+         * Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databasesOpFilters: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilter[];
+        /**
+         * Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        mode: string;
+        /**
+         * It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+         *
+         * @deprecated It has been deprecated.
+         */
+        onlineDdl: outputs.Dts.SyncJobConfigDynamicObjectsOnlineDdl;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabase {
+        /**
+         * DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbMode: string;
+        /**
+         * The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName: string;
+        /**
+         * Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        eventMode: string;
+        /**
+         * When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        events: string[];
+        /**
+         * Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functionMode: string;
+        /**
+         * Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functions: string[];
+        /**
+         * The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newDbName: string;
+        /**
+         * Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newSchemaName: string;
+        /**
+         * Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedureMode: string;
+        /**
+         * Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedures: string[];
+        /**
+         * Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaMode: string;
+        /**
+         * Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName: string;
+        /**
+         * Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableMode: string;
+        /**
+         * A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tables: outputs.Dts.SyncJobConfigDynamicObjectsDatabaseTable[];
+        /**
+         * Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggerMode: string;
+        /**
+         * When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggers: string[];
+        /**
+         * View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewMode: string;
+        /**
+         * View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        views: outputs.Dts.SyncJobConfigDynamicObjectsDatabaseView[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabaseTable {
+        /**
+         * Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        columnMode: string;
+        /**
+         * Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        columns: outputs.Dts.SyncJobConfigDynamicObjectsDatabaseTableColumn[];
+        /**
+         * Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        filterCondition: string;
+        /**
+         * New table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newTableName: string;
+        /**
+         * Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableEditMode: string;
+        /**
+         * Table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName: string;
+        /**
+         * Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpTables: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabaseTableColumn {
+        /**
+         * Column name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        columnName: string;
+        /**
+         * New column name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newColumnName: string;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabaseView {
+        /**
+         * New view name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newViewName: string;
+        /**
+         * View name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewName: string;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilter {
+        /**
+         * Database name that the rule takes effect on.
+         */
+        dbName: string;
+        /**
+         * View level DDL/DML filter rule.
+         */
+        opFilter: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter;
+        /**
+         * Table level DDL/DML filter info.
+         */
+        tables: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterTable[];
+        /**
+         * View level DDL/DML filter info.
+         */
+        views: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterView[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter {
+        /**
+         * DDL white list.
+         */
+        ddlOptions: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption[];
+        /**
+         * DML white list.
+         */
+        opTypes: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject: string;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterTable {
+        /**
+         * Table level DDL/DML filter rule.
+         */
+        opFilter: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter;
+        /**
+         * Table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName: string;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter {
+        /**
+         * DDL white list.
+         */
+        ddlOptions: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption[];
+        /**
+         * DML white list.
+         */
+        opTypes: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject: string;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterView {
+        /**
+         * View level DDL/DML filter rule.
+         */
+        opFilter: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter;
+        /**
+         * View name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewName: string;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter {
+        /**
+         * DDL white list.
+         */
+        ddlOptions: outputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption[];
+        /**
+         * DML white list.
+         */
+        opTypes: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject: string;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues: string[];
+    }
+
+    export interface SyncJobConfigDynamicObjectsOnlineDdl {
+        /**
+         * It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+         *
+         * @deprecated It has been deprecated.
+         */
+        status: string;
+    }
+
+    export interface SyncJobConfigDynamicOptions {
+        /**
+         * Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleOption: outputs.Dts.SyncJobConfigDynamicOptionsConflictHandleOption;
+        /**
+         * Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleType: string;
+        /**
+         * DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+         */
+        ddlOptions: outputs.Dts.SyncJobConfigDynamicOptionsDdlOption[];
+        /**
+         * The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dealOfExistSameTable: string;
+        /**
+         * Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+         */
+        filterBeginCommit: boolean;
+        /**
+         * Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+         */
+        filterCheckpoint: boolean;
+        /**
+         * Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        kafkaOption: outputs.Dts.SyncJobConfigDynamicOptionsKafkaOption;
+        /**
+         * DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+         */
+        opTypes: string[];
+        /**
+         * Only incremental tasks reset the designated site.
+         */
+        startPosition: string;
+    }
+
+    export interface SyncJobConfigDynamicOptionsConflictHandleOption {
+        /**
+         * Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionColumn: string;
+        /**
+         * Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOperator: string;
+        /**
+         * Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOrderInSrcAndDst: string;
+    }
+
+    export interface SyncJobConfigDynamicOptionsDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject: string;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues: string[];
+    }
+
+    export interface SyncJobConfigDynamicOptionsKafkaOption {
+        /**
+         * Other additional information, for specific data types extra parameters can be set.
+         */
+        dataOptions: outputs.Dts.SyncJobConfigDynamicOptionsKafkaOptionDataOption[];
+        /**
+         * Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+         */
+        dataType: string;
+        /**
+         * Topic used to store ddl.
+         */
+        ddlTopicName: string;
+        /**
+         * Description of single topic and custom topic.
+         */
+        topicRules: outputs.Dts.SyncJobConfigDynamicOptionsKafkaOptionTopicRule[];
+        /**
+         * Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+         */
+        topicType: string;
+    }
+
+    export interface SyncJobConfigDynamicOptionsKafkaOptionDataOption {
+        /**
+         * Option key.
+         */
+        key: string;
+        /**
+         * Option value.
+         */
+        value: string;
+    }
+
+    export interface SyncJobConfigDynamicOptionsKafkaOptionTopicRule {
+        /**
+         * Column names for partition by columns, multiple columns can be selected.
+         */
+        columns: string[];
+        /**
+         * Database name matching rule, such as Regular, Default.
+         */
+        dbMatchMode: string;
+        /**
+         * Database name, takes effect when DbMatchMode=Regular.
+         */
+        dbName: string;
+        /**
+         * Topic partition strategy.
+         */
+        partitionType: string;
+        /**
+         * Table name matching rule, such as Regular, Default.
+         */
+        tableMatchMode: string;
+        /**
+         * Table name, only takes effect when TableMatchMode=Regular.
+         */
+        tableName: string;
+        /**
+         * Topic name. When single topic, all TopicName must be the same.
+         */
+        topicName: string;
     }
 
     export interface SyncJobTag {
@@ -42550,7 +44969,7 @@ export namespace Elasticsearch {
          */
         nodeType: string;
         /**
-         * Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+         * Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
          */
         type?: string;
     }
@@ -43655,6 +46074,41 @@ export namespace Emr {
         publicKeyId?: string;
     }
 
+    export interface ClusterV2MetaDbGroupInfo {
+        /**
+         * Components that use the MetaDB. A component can belong to only one `metaDbGroupInfo` block.
+         */
+        components: string[];
+        /**
+         * MetaDB version, e.g. `mysql8`.
+         */
+        defaultMetaVersion: string;
+        /**
+         * CDB instance ID.
+         */
+        linkInstanceId: string;
+        /**
+         * JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+         */
+        metaDataJdbcUrl: string;
+        /**
+         * Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+         */
+        metaDataPass: string;
+        /**
+         * Username of the custom MetaDB.
+         */
+        metaDataUser: string;
+        /**
+         * Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+         */
+        metaType: string;
+        /**
+         * EMR-MetaDB instance ID, required when `metaType` is `EMR_EXIST_META`.
+         */
+        unifyMetaInstanceId: string;
+    }
+
     export interface ClusterV2MetaDbInfo {
         /**
          * Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
@@ -43802,7 +46256,7 @@ export namespace Emr {
          */
         _diskIndex: string;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId: string;
         /**
@@ -43882,7 +46336,7 @@ export namespace Emr {
          */
         _diskIndex: string;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId: string;
         /**
@@ -43962,7 +46416,7 @@ export namespace Emr {
          */
         _diskIndex: string;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId: string;
         /**
@@ -44042,7 +46496,7 @@ export namespace Emr {
          */
         _diskIndex: string;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId: string;
         /**
@@ -44122,7 +46576,7 @@ export namespace Emr {
          */
         _diskIndex: string;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId: string;
         /**
@@ -45161,6 +47615,31 @@ export namespace Events {
          * Storage type (Valid values: cos, cls, ckafka).
          */
         storageType: string;
+    }
+
+}
+
+export namespace Fwm {
+    export interface StrategyPostStrategy {
+        /**
+         * Rule group ID.
+         */
+        groupId: string;
+        /**
+         * Priority.
+         */
+        sequence: number;
+    }
+
+    export interface StrategyPreStrategy {
+        /**
+         * Rule group ID.
+         */
+        groupId: string;
+        /**
+         * Priority.
+         */
+        sequence: number;
     }
 
 }
@@ -48860,6 +51339,100 @@ export namespace Invite {
 
 }
 
+export namespace Ioa {
+    export interface CompanyDirectoryConfigNameI18n {
+        /**
+         * Language enum, e.g. `zh-CN`, `en-US`.
+         */
+        lang: string;
+        /**
+         * Localized name value.
+         */
+        value: string;
+    }
+
+    export interface DeliveryServerData {
+        /**
+         * Connector group id.
+         */
+        connectorGroupId: string;
+        /**
+         * Connector group name.
+         */
+        connectorGroupName: string;
+        /**
+         * Delivery server description.
+         */
+        description: string;
+        /**
+         * Delivery server id generated by the cloud side; ignored in the config on create.
+         */
+        id: number;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * Kafka SASL password. Write-only: the value is sent to the API after RSA encryption and never persisted in state. Requires Terraform CLI 1.11+.
+         */
+        kafkaSaslPassword?: string;
+        /**
+         * Kafka SASL user name.
+         */
+        kafkaSaslUserName: string;
+        /**
+         * Whether SSL is enabled for Kafka.
+         */
+        kafkaSslEnable: boolean;
+        /**
+         * Kafka version.
+         */
+        kafkaVersion: string;
+        /**
+         * Delivery server name.
+         */
+        name: string;
+        /**
+         * Whether to skip certificate verification.
+         */
+        sslSkipVerify: boolean;
+        /**
+         * Syslog facility.
+         */
+        syslogFacility: string;
+        /**
+         * HTTP server timeout in milliseconds (32-bit only).
+         */
+        targetHttpTimeout: number;
+        /**
+         * HTTP server address.
+         */
+        targetHttpUrl: string;
+        /**
+         * Kafka server address.
+         */
+        targetKafkaAddress: string;
+        /**
+         * Kafka topic.
+         */
+        targetKafkaTopic: string;
+        /**
+         * Syslog server address.
+         */
+        targetSyslogAddress: string;
+        /**
+         * Syslog protocol port (32-bit only).
+         */
+        targetSyslogPort: number;
+        /**
+         * Syslog protocol type.
+         */
+        targetSyslogProtocol: string;
+        /**
+         * Delivery server address type. Valid values: 4 (syslog), 2 (kafka), 3 (http, 32-bit only).
+         */
+        type: number;
+    }
+
+}
+
 export namespace Keewidb {
     export interface GetInstancesInstanceList {
         /**
@@ -49730,7 +52303,7 @@ export namespace Kubernetes {
          */
         endAt: string;
         /**
-         * ID of the resource.
+         * Maintenance exclusion ID.
          */
         id: number;
         /**
@@ -51844,7 +54417,7 @@ export namespace Kubernetes {
          */
         endAt: string;
         /**
-         * ID of the resource.
+         * Maintenance exclusion ID.
          */
         id: number;
         /**
@@ -51899,6 +54472,10 @@ export namespace Kubernetes {
          * Whether to enable self-healing ability.
          */
         autoRepair?: boolean;
+        /**
+         * Custom image ID.
+         */
+        customImage: string;
         /**
          * Native node pool data disk list.
          */
@@ -52305,19 +54882,19 @@ export namespace Kubernetes {
         /**
          * Indicate to set desired pod number in node. valid when the cluster is podCIDR.
          */
-        desiredPodNum?: number;
+        desiredPodNum: number;
         /**
          * Docker graph path. Default is `/var/lib/docker`.
          */
         dockerGraphPath?: string;
         /**
-         * Custom parameter information related to the node. This is a white-list parameter.
+         * Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
          */
-        extraArgs?: string[];
+        extraArgs: string[];
         /**
          * GPU driver parameters.
          */
-        gpuArgs?: outputs.Kubernetes.NodePoolNodeConfigGpuArgs;
+        gpuArgs: outputs.Kubernetes.NodePoolNodeConfigGpuArgs;
         /**
          * Indicate to schedule the adding node or not. Default is true.
          */
@@ -52329,11 +54906,11 @@ export namespace Kubernetes {
         /**
          * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
          */
-        preStartUserScript?: string;
+        preStartUserScript: string;
         /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
-        userData?: string;
+        userData: string;
     }
 
     export interface NodePoolNodeConfigDataDisk {
@@ -52367,19 +54944,19 @@ export namespace Kubernetes {
         /**
          * CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
          */
-        cuda?: {[key: string]: string};
+        cuda: {[key: string]: string};
         /**
          * cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
          */
-        cudnn?: {[key: string]: string};
+        cudnn: {[key: string]: string};
         /**
          * Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
          */
-        customDriver?: {[key: string]: string};
+        customDriver: {[key: string]: string};
         /**
          * GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
          */
-        driver?: {[key: string]: string};
+        driver: {[key: string]: string};
         /**
          * Whether to enable MIG.
          */
@@ -57625,6 +60202,17 @@ export namespace Monitor {
         pluginId: string;
         /**
          * Grafana plugin version.
+         */
+        version: string;
+    }
+
+    export interface GetGrafanaVersionsVersion {
+        /**
+         * Grafana version alias.
+         */
+        alias: string;
+        /**
+         * Grafana version number.
          */
         version: string;
     }
@@ -66956,7 +69544,7 @@ export namespace Mps {
          */
         height?: number;
         /**
-         * Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+         * Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
          */
         resolutionAdaptive?: string;
         /**
@@ -68130,7 +70718,7 @@ export namespace Mps {
          */
         height?: number;
         /**
-         * Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+         * Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
          */
         resolutionAdaptive?: string;
         /**
@@ -68226,7 +70814,7 @@ export namespace Mps {
          */
         height?: number;
         /**
-         * Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+         * Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
          */
         resolutionAdaptive?: string;
         /**
@@ -68710,6 +71298,54 @@ export namespace Mysql {
          * List of vpcs to limit downloads.
          */
         vpcLists: string[];
+    }
+
+    export interface CloneInstanceClusterTopology {
+        /**
+         * RO node topology list.
+         */
+        readOnlyNodes?: outputs.Mysql.CloneInstanceClusterTopologyReadOnlyNode[];
+        /**
+         * RW node topology.
+         */
+        readWriteNode?: outputs.Mysql.CloneInstanceClusterTopologyReadWriteNode;
+    }
+
+    export interface CloneInstanceClusterTopologyReadOnlyNode {
+        /**
+         * Whether distributed in a random zone. YES - random zone.
+         */
+        isRandomZone?: string;
+        /**
+         * Node ID.
+         */
+        nodeId?: string;
+        /**
+         * RO node zone.
+         */
+        zone?: string;
+    }
+
+    export interface CloneInstanceClusterTopologyReadWriteNode {
+        /**
+         * Node ID.
+         */
+        nodeId?: string;
+        /**
+         * RW node zone.
+         */
+        zone?: string;
+    }
+
+    export interface CloneInstanceResourceTag {
+        /**
+         * Tag key.
+         */
+        key: string;
+        /**
+         * Tag value.
+         */
+        value?: string;
     }
 
     export interface GetBackupListList {
@@ -69849,7 +72485,7 @@ export namespace Nat {
          */
         instanceId?: string;
         /**
-         * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+         * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
          */
         instancePrivateIpAddr?: string;
         /**
@@ -69861,7 +72497,7 @@ export namespace Nat {
          */
         publicIpAddrs: string[];
         /**
-         * Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+         * Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
          */
         resourceType: string;
         /**
@@ -71560,6 +74196,40 @@ export namespace Placement {
          * Type of the placement group.
          */
         type: string;
+    }
+
+}
+
+export namespace Postgres {
+    export interface AuditLogFileFilter {
+        /**
+         * Affect rows.
+         */
+        affectRows?: number;
+        /**
+         * Database name list.
+         */
+        dbNames?: string[];
+        /**
+         * Execution time.
+         */
+        execTime?: number;
+        /**
+         * Host list.
+         */
+        hosts?: string[];
+        /**
+         * SQL statement.
+         */
+        sql?: string;
+        /**
+         * SQL type list.
+         */
+        sqlTypes?: string[];
+        /**
+         * User name list.
+         */
+        users?: string[];
     }
 
 }
@@ -73674,9 +76344,11 @@ export namespace PrivateDns {
          */
         uniqVpcId: string;
         /**
-         * VPC NAME.
+         * It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
+         *
+         * @deprecated It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.
          */
-        vpcName: string;
+        vpcName?: string;
     }
 
     export interface ZoneTagSet {
@@ -76670,7 +79342,7 @@ export namespace Scf {
          */
         cfsId: string;
         /**
-         * (Readonly) File system ip address.
+         * If fixed intranet IP is enabled, this field returns the IP list used.
          */
         ipAddress: string;
         /**
@@ -78064,6 +80736,17 @@ export namespace Ses {
          * Record Type CNAME | A | TXT | MX.
          */
         type: string;
+    }
+
+    export interface DomainTagList {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
     }
 
     export interface GetBlackEmailAddressBlackList {
@@ -83615,7 +86298,7 @@ export namespace Tcr {
          */
         disabled?: boolean;
         /**
-         * ID of the resource.
+         * rule id.
          */
         id: number;
         /**
@@ -83642,7 +86325,7 @@ export namespace Tcr {
 
     export interface InstanceReplication {
         /**
-         * ID of the resource.
+         * Replication registry ID (readonly).
          */
         id: string;
         /**
@@ -83709,6 +86392,10 @@ export namespace Tcr {
          * Destination namespace.
          */
         destNamespace: string;
+        /**
+         * Whether to enable the rule.
+         */
+        enabled: boolean;
         /**
          * Synchronization filters.
          */
@@ -83822,7 +86509,7 @@ export namespace Tcr {
          */
         eventTypes: string[];
         /**
-         * ID of the resource.
+         * trigger Id.
          */
         id: number;
         /**
@@ -84965,6 +87652,42 @@ export namespace Tdmq {
 
 }
 
+export namespace Tdmysql {
+    export interface DbInstanceAutoScaleConfig {
+        /**
+         * CCU max value.
+         */
+        rangeMax: number;
+        /**
+         * CCU min value.
+         */
+        rangeMin: number;
+    }
+
+    export interface DbInstanceInitParam {
+        /**
+         * Param key.
+         */
+        param: string;
+        /**
+         * Param value.
+         */
+        value: string;
+    }
+
+    export interface DbInstanceResourceTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue?: string;
+    }
+
+}
+
 export namespace Tem {
     export interface AppConfigConfigData {
         /**
@@ -85484,7 +88207,7 @@ export namespace Teo {
          */
         status: string;
         /**
-         * Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+         * Type of the certificate.
          */
         type: string;
     }
@@ -85612,7 +88335,7 @@ export namespace Teo {
          */
         status: string;
         /**
-         * Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+         * Type of the certificate.
          */
         type: string;
     }
@@ -85816,7 +88539,7 @@ export namespace Teo {
          */
         sourceVersion: string;
         /**
-         * Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+         * Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
          */
         status: string;
         /**
@@ -85909,27 +88632,69 @@ export namespace Teo {
         value: string;
     }
 
+    export interface GetBillingDataData {
+        /**
+         * Domain name to which the data point belongs.
+         */
+        host: string;
+        /**
+         * Layer 4 proxy instance ID to which the data point belongs.
+         */
+        proxyId: string;
+        /**
+         * Billing region ID to which the data point belongs.
+         */
+        regionId: string;
+        /**
+         * Data timestamp.
+         */
+        time: string;
+        /**
+         * Numeric value.
+         */
+        value: number;
+        /**
+         * Site ID to which the data point belongs.
+         */
+        zoneId: string;
+    }
+
+    export interface GetBillingDataFilter {
+        /**
+         * Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+         */
+        type: string;
+        /**
+         * Parameter value.
+         */
+        value: string;
+    }
+
     export interface GetConfigGroupVersionDetailConfigGroupVersionInfo {
         /**
          * Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
          */
-        createTime?: string;
+        createTime: string;
         /**
          * Version description.
          */
-        description?: string;
+        description: string;
         /**
          * Configuraration group ID.
          */
-        groupId?: string;
+        groupId: string;
         /**
          * Configuration group type. Valid values: l7_acceleration: L7 acceleration configuration group. edge_functions: Edge function configuration group.
          */
-        groupType?: string;
+        groupType: string;
+        /**
+         * The source version ID that the config group version was derived from.
+         */
+        sourceVersion: string;
         /**
          * Version status. Valid values: creating: Being created.inactive: Not effective.active: Effective.
          */
-        status?: string;
+        status: string;
         /**
          * Version ID.
          */
@@ -85937,7 +88702,7 @@ export namespace Teo {
         /**
          * Version No.
          */
-        versionNumber?: string;
+        versionNumber: string;
     }
 
     export interface GetConfigGroupVersionsConfigGroupVersionInfo {
@@ -86157,7 +88922,7 @@ export namespace Teo {
 
     export interface GetEnvironmentsEnvInfo {
         /**
-         * Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+         * Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
          */
         createTime: string;
         /**
@@ -86190,23 +88955,27 @@ export namespace Teo {
         /**
          * Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
          */
-        createTime?: string;
+        createTime: string;
         /**
          * Version description.
          */
-        description?: string;
+        description: string;
         /**
          * Configuraration group ID.
          */
-        groupId?: string;
+        groupId: string;
         /**
          * Configuration group type. Valid values: l7Acceleration (L7 acceleration configuration group), edgeFunctions (Edge function configuration group).
          */
-        groupType?: string;
+        groupType: string;
         /**
-         * Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
+         * The source version ID that the config group version was derived from.
          */
-        status?: string;
+        sourceVersion: string;
+        /**
+         * Environment status. Valid values: creating (Being created), running (The environment is stable, with version changes allowed), versionDeploying (The version is currently being deployed, with no more changes allowed).
+         */
+        status: string;
         /**
          * Version ID.
          */
@@ -86214,7 +88983,38 @@ export namespace Teo {
         /**
          * Version No.
          */
-        versionNumber?: string;
+        versionNumber: string;
+    }
+
+    export interface GetIpGroupReferencesReference {
+        /**
+         * Entity ID.
+         */
+        entityId: string;
+        /**
+         * Entity name.
+         */
+        entityName: string;
+        /**
+         * Entity type.
+         */
+        entityType: string;
+        /**
+         * Sub entity ID.
+         */
+        subEntityId: string;
+        /**
+         * Sub entity name.
+         */
+        subEntityName: string;
+        /**
+         * Sub entity type.
+         */
+        subEntityType: string;
+        /**
+         * Site ID.
+         */
+        zoneId: string;
     }
 
     export interface GetIpRegionIpRegionInfo {
@@ -105384,6 +108184,10 @@ export namespace Teo {
          */
         healthThreshold?: number;
         /**
+         * Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+         */
+        hostHeaderPolicy?: string;
+        /**
          * Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
          */
         interval?: number;
@@ -105399,6 +108203,10 @@ export namespace Teo {
          * Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
          */
         port?: number;
+        /**
+         * Probe cluster region scope for health checks. Valid values: `global`, `mainlandChina`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+         */
+        probeCluster?: string;
         /**
          * Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
          */
@@ -106139,7 +108947,7 @@ export namespace Teo {
          */
         apiServiceIds?: string[];
         /**
-         * ID of the resource.
+         * API resource ID, e.g. `apires-xxxxxxxx`.
          */
         id: string;
         /**
@@ -106166,7 +108974,7 @@ export namespace Teo {
          */
         basePath: string;
         /**
-         * ID of the resource.
+         * API service ID, e.g. `apisrv-xxxxxxxx`.
          */
         id: string;
         /**
@@ -106185,7 +108993,7 @@ export namespace Teo {
          */
         attesterSource: string;
         /**
-         * ID of the resource.
+         * Client attester ID, e.g. `attest-xxxxxxxx`.
          */
         id: string;
         /**
@@ -106295,7 +109103,7 @@ export namespace Teo {
          */
         dropPageConfig: outputs.Teo.SecurityPolicyConfigSecurityConfigDropPageConfig;
         /**
-         * Exception rules configuration.
+         * Exception rule configuration.
          */
         exceptConfig: outputs.Teo.SecurityPolicyConfigSecurityConfigExceptConfig;
         /**
@@ -106311,7 +109119,7 @@ export namespace Teo {
          */
         slowPostConfig: outputs.Teo.SecurityPolicyConfigSecurityConfigSlowPostConfig;
         /**
-         * Layer-7 protection master switch.
+         * Security switch configuration.
          */
         switchConfig: outputs.Teo.SecurityPolicyConfigSecurityConfigSwitchConfig;
         /**
@@ -106552,7 +109360,7 @@ export namespace Teo {
          */
         switch: string;
         /**
-         * Update time.
+         * Update time. Output-only.
          */
         updateTime: string;
     }
@@ -107023,7 +109831,7 @@ export namespace Teo {
          */
         ruleStatus: string;
         /**
-         * Update time.
+         * Update time. Output-only.
          */
         updateTime: string;
     }
@@ -107295,11 +110103,11 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetail {
         /**
-         * Template action. Output-only.
+         * Action. Valid values: `skip`, `scan`. Output-only.
          */
         action: string;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id: number;
         /**
@@ -107613,7 +110421,7 @@ export namespace Teo {
          */
         enabled: string;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id: string;
     }
@@ -107997,9 +110805,15 @@ export namespace Teo {
          */
         action?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideAction;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
         ruleId: string;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds: string[];
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideAction {
@@ -108195,9 +111009,15 @@ export namespace Teo {
          */
         action?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
         ruleId: string;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds: string[];
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction {
@@ -108393,9 +111213,15 @@ export namespace Teo {
          */
         action?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideAction;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
         ruleId: string;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds: string[];
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideAction {
@@ -108591,9 +111417,15 @@ export namespace Teo {
          */
         action?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideAction;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
         ruleId: string;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds: string[];
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideAction {
@@ -109564,6 +112396,10 @@ export namespace Teo {
          */
         condition: string;
         /**
+         * Client device configurations. One profile per client type.
+         */
+        deviceProfiles: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile[];
+        /**
          * Whether the rule is enabled. Valid values: `on`, `off`.
          */
         enabled: string;
@@ -109583,6 +112419,195 @@ export namespace Teo {
          * Rule priority (0-100).
          */
         priority: number;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile {
+        /**
+         * Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+         */
+        clientType: string;
+        /**
+         * Minimum score (1-99) for judging a request as high risk. Default 50.
+         */
+        highRiskMinScore: number;
+        /**
+         * Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+         */
+        highRiskRequestAction?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction;
+        /**
+         * Minimum score (1-99) for judging a request as medium risk. Default 15.
+         */
+        mediumRiskMinScore: number;
+        /**
+         * Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+         */
+        mediumRiskRequestAction?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters;
+        /**
+         * Additional parameters when Name is Challenge.
+         */
+        challengeActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters;
+        /**
+         * Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+         */
+        name: string;
+        /**
+         * Additional parameters when Name is Redirect.
+         */
+        redirectActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters {
+        /**
+         * Maximum delay response time. Supported unit: seconds, range 5-10.
+         */
+        maxDelayTime?: string;
+        /**
+         * Minimum delay response time. Supported unit: seconds, range 0-5.
+         */
+        minDelayTime?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters {
+        /**
+         * Client authentication method ID.
+         */
+        attesterId?: string;
+        /**
+         * The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+         */
+        challengeOption: string;
+        /**
+         * The time interval for repeating the challenge.
+         */
+        interval?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters {
+        /**
+         * Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+         */
+        blockIp?: string;
+        /**
+         * IP blocking duration when BlockIP is on.
+         */
+        blockIpDuration?: string;
+        /**
+         * The PageId of the custom page.
+         */
+        errorPageId?: string;
+        /**
+         * Customize the status code of the page.
+         */
+        responseCode?: string;
+        /**
+         * Whether to use custom pages. Valid values: `on`, `off`.
+         */
+        returnCustomPage?: string;
+        /**
+         * Whether to ignore the request source suspension. Valid values: `on`, `off`.
+         */
+        stall?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters {
+        /**
+         * The URL to redirect.
+         */
+        url: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters;
+        /**
+         * Additional parameters when Name is Challenge.
+         */
+        challengeActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters;
+        /**
+         * Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+         */
+        name: string;
+        /**
+         * Additional parameters when Name is Redirect.
+         */
+        redirectActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters {
+        /**
+         * Maximum delay response time. Supported unit: seconds, range 5-10.
+         */
+        maxDelayTime?: string;
+        /**
+         * Minimum delay response time. Supported unit: seconds, range 0-5.
+         */
+        minDelayTime?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters {
+        /**
+         * Client authentication method ID.
+         */
+        attesterId?: string;
+        /**
+         * The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+         */
+        challengeOption: string;
+        /**
+         * The time interval for repeating the challenge.
+         */
+        interval?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters {
+        /**
+         * Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+         */
+        blockIp?: string;
+        /**
+         * IP blocking duration when BlockIP is on.
+         */
+        blockIpDuration?: string;
+        /**
+         * The PageId of the custom page.
+         */
+        errorPageId?: string;
+        /**
+         * Customize the status code of the page.
+         */
+        responseCode?: string;
+        /**
+         * Whether to use custom pages. Valid values: `on`, `off`.
+         */
+        returnCustomPage?: string;
+        /**
+         * Whether to ignore the request source suspension. Valid values: `on`, `off`.
+         */
+        stall?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters {
+        /**
+         * The URL to redirect.
+         */
+        url: string;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationAction {
@@ -109941,7 +112966,7 @@ export namespace Teo {
          */
         enabled: string;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id: string;
         /**
@@ -110014,7 +113039,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRule {
         /**
-         * Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+         * Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
          */
         action: outputs.Teo.SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleAction;
         /**
@@ -110026,7 +113051,7 @@ export namespace Teo {
          */
         enabled: string;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id: string;
         /**
@@ -110099,7 +113124,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyCustomRulesRule {
         /**
-         * The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+         * The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
          */
         action: outputs.Teo.SecurityPolicyConfigSecurityPolicyCustomRulesRuleAction;
         /**
@@ -110295,6 +113320,10 @@ export namespace Teo {
          * Specifies the security protection module for the exception rule. It is valid only when SkipScope is WebSecurityModules. The possible values are: <li>websec-mod-managed-rules: managed rules; </li><li>websec-mod-rate-limiting: rate limiting; </li><li>websec-mod-custom-rules: custom rules; </li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection; </li><li>websec-mod-bot: Bot management. </li>.
          */
         webSecurityModulesForExceptions?: string[];
+        /**
+         * Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+         */
+        webSecuritySubmodulesForExceptions: string[];
     }
 
     export interface SecurityPolicyConfigSecurityPolicyExceptionRulesRuleRequestFieldsForException {
@@ -110857,6 +113886,10 @@ export namespace Teo {
          */
         enabled: string;
         /**
+         * High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+         */
+        frequentScanningProtection: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection;
+        /**
          * Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
          */
         managedRuleGroups: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup[];
@@ -110875,6 +113908,130 @@ export namespace Teo {
          * The currently used version, in the format compliant with ISO 8601 standard, such as 2023-12-21T12:00:32Z. it is empty by default and is only an output parameter.
          */
         rulesetVersion: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection {
+        /**
+         * The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+         */
+        action: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction;
+        /**
+         * Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+         */
+        actionDuration: string;
+        /**
+         * Cumulative block count threshold within the counting period. Range 1-4294967294.
+         */
+        blockThreshold: number;
+        /**
+         * Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+         */
+        countBy: string;
+        /**
+         * Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+         */
+        countingPeriod: string;
+        /**
+         * Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+         */
+        enabled: string;
+        /**
+         * Template ID. Output-only.
+         */
+        id: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters;
+        /**
+         * Additional parameters when Name is Challenge.
+         */
+        challengeActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters;
+        /**
+         * The specific action of security execution. The values are:
+         * <li>Deny: intercept, block the request to access site resources;</li>
+         * <li>Monitor: observe, only record logs;</li>
+         * <li>Redirect: redirect to URL;</li>
+         * <li>Disabled: disabled, do not enable the specified rule;</li>
+         * <li>Allow: allow access, but delay processing requests;</li>
+         * <li>Challenge: challenge, respond to challenge content;</li>
+         * <li>BlockIP: to be abandoned, IP ban;</li>
+         * <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+         * <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+         * <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+         */
+        name: string;
+        /**
+         * Additional parameters when Name is Redirect.
+         */
+        redirectActionParameters?: outputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters {
+        /**
+         * Maximum delay response time. Supported unit: seconds, range 5-10.
+         */
+        maxDelayTime?: string;
+        /**
+         * Minimum delay response time. Supported unit: seconds, range 0-5.
+         */
+        minDelayTime?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters {
+        /**
+         * Client authentication method ID.
+         */
+        attesterId?: string;
+        /**
+         * The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+         */
+        challengeOption: string;
+        /**
+         * The time interval for repeating the challenge.
+         */
+        interval?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters {
+        /**
+         * Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+         */
+        blockIp?: string;
+        /**
+         * IP blocking duration when BlockIP is on.
+         */
+        blockIpDuration?: string;
+        /**
+         * The PageId of the custom page.
+         */
+        errorPageId?: string;
+        /**
+         * Customize the status code of the page.
+         */
+        responseCode?: string;
+        /**
+         * Whether to use custom pages. Valid values: `on`, `off`.
+         */
+        returnCustomPage?: string;
+        /**
+         * Whether to ignore the request source suspension. Valid values: `on`, `off`.
+         */
+        stall?: string;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters {
+        /**
+         * The URL to redirect.
+         */
+        url: string;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup {
@@ -110971,7 +114128,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetail {
         /**
-         * Rule description.
+         * Rule description. Output-only.
          */
         description: string;
         /**
@@ -110979,7 +114136,7 @@ export namespace Teo {
          */
         riskLevel: string;
         /**
-         * Managed rule Id.
+         * Rule ID. Output-only.
          */
         ruleId: string;
         /**
@@ -111066,7 +114223,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyRateLimitingRulesRule {
         /**
-         * The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+         * The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
          */
         action?: outputs.Teo.SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleAction;
         /**
@@ -111226,11 +114383,15 @@ export namespace Teo {
         /**
          * Bot management configuration.
          */
-        botManagement?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagement;
+        botManagement: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagement;
+        /**
+         * Basic Bot management configuration.
+         */
+        botManagementLite: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLite;
         /**
          * Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
          */
-        customRules?: outputs.Teo.WebSecurityTemplateSecurityPolicyCustomRules;
+        customRules: outputs.Teo.WebSecurityTemplateSecurityPolicyCustomRules;
         /**
          * Default deny security action parameters configuration.
          */
@@ -111238,95 +114399,95 @@ export namespace Teo {
         /**
          * Exception rule configuration.
          */
-        exceptionRules?: outputs.Teo.WebSecurityTemplateSecurityPolicyExceptionRules;
+        exceptionRules: outputs.Teo.WebSecurityTemplateSecurityPolicyExceptionRules;
         /**
          * HTTP DDOS protection configuration.
          */
-        httpDdosProtection?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtection;
+        httpDdosProtection: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtection;
         /**
          * Managed. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
          */
-        managedRules?: outputs.Teo.WebSecurityTemplateSecurityPolicyManagedRules;
+        managedRules: outputs.Teo.WebSecurityTemplateSecurityPolicyManagedRules;
         /**
          * Configures the rate limiting rule.
          */
-        rateLimitingRules?: outputs.Teo.WebSecurityTemplateSecurityPolicyRateLimitingRules;
+        rateLimitingRules: outputs.Teo.WebSecurityTemplateSecurityPolicyRateLimitingRules;
     }
 
     export interface WebSecurityTemplateSecurityPolicyBotManagement {
         /**
          * Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
          */
-        basicBotSettings?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings;
+        basicBotSettings: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings;
         /**
          * Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
          */
-        browserImpersonationDetection?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection;
+        browserImpersonationDetection: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection;
         /**
          * Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
          */
-        clientAttestationRules?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules;
+        clientAttestationRules: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules;
         /**
          * Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
          */
-        customRules?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementCustomRules;
+        customRules: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementCustomRules;
         /**
          * Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
          */
-        enabled?: string;
+        enabled: string;
     }
 
     export interface WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
         /**
          * Specifies the configuration for Bot intelligent analysis.
          */
-        botIntelligence?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence;
+        botIntelligence: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence;
         /**
          * Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
          */
-        ipReputation?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation;
+        ipReputation: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation;
         /**
          * Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
          */
-        knownBotCategories?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories;
+        knownBotCategories: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories;
         /**
          * Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
          */
-        searchEngineBots?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots;
+        searchEngineBots: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots;
         /**
          * Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
          */
-        sourceIdc?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc;
+        sourceIdc: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc;
     }
 
     export interface WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
         /**
          * Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
          */
-        botRatings?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings;
+        botRatings: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings;
         /**
          * Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
          */
-        enabled?: string;
+        enabled: string;
     }
 
     export interface WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
         /**
          * Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
          */
-        highRiskBotRequestsAction?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction;
+        highRiskBotRequestsAction: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction;
         /**
          * Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
          */
-        humanRequestsAction?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction;
+        humanRequestsAction: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction;
         /**
          * The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
          */
-        likelyBotRequestsAction?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction;
+        likelyBotRequestsAction: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction;
         /**
          * Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
          */
-        verifiedBotRequestsAction?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction;
+        verifiedBotRequestsAction: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction;
     }
 
     export interface WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
@@ -111769,7 +114930,7 @@ export namespace Teo {
         /**
          * IP intelligence library (formerly client profile analysis). valid values: - on: enable; - off: disable.
          */
-        enabled?: string;
+        enabled: string;
         /**
          * IP intelligence library (formerly client profile analysis) configuration content.
          */
@@ -112757,7 +115918,7 @@ export namespace Teo {
          */
         enabled?: string;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id: string;
         /**
@@ -113758,7 +116919,7 @@ export namespace Teo {
          */
         enabled?: string;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id: string;
         /**
@@ -114146,7 +117307,7 @@ export namespace Teo {
          */
         enabled?: string;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id: string;
         /**
@@ -114279,6 +117440,107 @@ export namespace Teo {
         responseCode: string;
     }
 
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLite {
+        /**
+         * AI crawler detection configuration.
+         */
+        aiCrawlerDetection: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection;
+        /**
+         * CAPTCHA page challenge configuration.
+         */
+        captchaPageChallenge: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection {
+        /**
+         * Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+         */
+        action: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction;
+        /**
+         * Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+         */
+        enabled: string;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters;
+        /**
+         * Additional parameter when Name is Challenge.
+         */
+        challengeActionParameters?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: outputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters;
+        /**
+         * Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+         */
+        name: string;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters {
+        /**
+         * Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+         */
+        maxDelayTime?: string;
+        /**
+         * Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+         */
+        minDelayTime?: string;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters {
+        /**
+         * Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+         */
+        attesterId?: string;
+        /**
+         * Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+         */
+        challengeOption: string;
+        /**
+         * Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+         */
+        interval?: string;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters {
+        /**
+         * Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+         */
+        blockIp?: string;
+        /**
+         * The ban duration when BlockIP is on.
+         */
+        blockIpDuration?: string;
+        /**
+         * Specifies the page id of the custom page.
+         */
+        errorPageId?: string;
+        /**
+         * Status code of the custom page.
+         */
+        responseCode?: string;
+        /**
+         * Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+         */
+        returnCustomPage?: string;
+        /**
+         * Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+         */
+        stall?: string;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge {
+        /**
+         * Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+         */
+        enabled: string;
+    }
+
     export interface WebSecurityTemplateSecurityPolicyCustomRules {
         /**
          * The custom rule. When modifying the Web protection configuration using ModifySecurityPolicy: - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations; - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
@@ -114300,7 +117562,7 @@ export namespace Teo {
          */
         enabled: string;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id: string;
         /**
@@ -114310,11 +117572,11 @@ export namespace Teo {
         /**
          * Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
          */
-        priority?: number;
+        priority: number;
         /**
          * Type of custom rule. Values: - `BasicAccessRule`: basic access control; - `PreciseMatchRule`: exact custom rule, default; - `ManagedAccessRule`: expert customized rule, output parameter only.The default value is PreciseMatchRule.
          */
-        ruleType?: string;
+        ruleType: string;
     }
 
     export interface WebSecurityTemplateSecurityPolicyCustomRulesRuleAction {
@@ -114449,15 +117711,15 @@ export namespace Teo {
         /**
          * Specifies the page id of the custom page.
          */
-        errorPageId?: string;
+        errorPageId: string;
         /**
          * Status code of the custom page.
          */
-        responseCode?: string;
+        responseCode: string;
         /**
          * Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
          */
-        returnCustomPage?: string;
+        returnCustomPage: string;
         /**
          * Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
          */
@@ -114476,15 +117738,15 @@ export namespace Teo {
         /**
          * Specifies the page id of the custom page.
          */
-        errorPageId?: string;
+        errorPageId: string;
         /**
          * Status code of the custom page.
          */
-        responseCode?: string;
+        responseCode: string;
         /**
          * Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
          */
-        returnCustomPage?: string;
+        returnCustomPage: string;
         /**
          * Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
          */
@@ -114508,7 +117770,7 @@ export namespace Teo {
          */
         enabled?: string;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id: string;
         /**
@@ -114560,26 +117822,26 @@ export namespace Teo {
         /**
          * Specifies the specific configuration of adaptive frequency control.
          */
-        adaptiveFrequencyControl?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControl;
+        adaptiveFrequencyControl: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControl;
         /**
          * Specifies the specific configuration for bandwidth abuse protection.
          */
-        bandwidthAbuseDefense?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionBandwidthAbuseDefense;
+        bandwidthAbuseDefense: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionBandwidthAbuseDefense;
         /**
          * Specifies the intelligent client filter configuration.
          */
-        clientFiltering?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionClientFiltering;
+        clientFiltering: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionClientFiltering;
         /**
          * Specifies the configuration of slow attack protection.
          */
-        slowAttackDefense?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefense;
+        slowAttackDefense: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefense;
     }
 
     export interface WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControl {
         /**
          * The handling method of adaptive frequency control. this field is required when Enabled is on. valid values for SecurityAction Name: - Monitor: observation; - Deny: block; - Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.
          */
-        action?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControlAction;
+        action: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControlAction;
         /**
          * Whether adaptive frequency control is enabled. valid values: - on: enable; - off: disable.
          */
@@ -114587,7 +117849,7 @@ export namespace Teo {
         /**
          * The restriction level of adaptive frequency control. required when Enabled is on. valid values: - Loose: Loose- Moderate: Moderate- Strict: Strict.
          */
-        sensitivity?: string;
+        sensitivity: string;
     }
 
     export interface WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControlAction {
@@ -114602,7 +117864,7 @@ export namespace Teo {
         /**
          * Additional parameter when Name is Challenge.
          */
-        challengeActionParameters?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControlActionChallengeActionParameters;
+        challengeActionParameters: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionAdaptiveFrequencyControlActionChallengeActionParameters;
         /**
          * Additional parameters when Name is Deny.
          */
@@ -114703,7 +117965,7 @@ export namespace Teo {
         /**
          * Bandwidth abuse protection (applicable to chinese mainland) handling method. required when Enabled is on. valid values for SecurityAction Name: - Monitor: observe; - Deny: block; - Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.
          */
-        action?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionBandwidthAbuseDefenseAction;
+        action: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionBandwidthAbuseDefenseAction;
         /**
          * Whether bandwidth abuse protection (applicable to chinese mainland only) is enabled. valid values: - on: enabled; - off: disabled.
          */
@@ -114823,7 +118085,7 @@ export namespace Teo {
         /**
          * The handling method of intelligent client filtering. when Enabled is on, this field is required. the Name parameter of SecurityAction supports: - Monitor: observation; - Deny: block; - Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.
          */
-        action?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionClientFilteringAction;
+        action: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionClientFilteringAction;
         /**
          * Whether intelligent client filtering is enabled. valid values: - on: enable; - off: disable.
          */
@@ -114842,7 +118104,7 @@ export namespace Teo {
         /**
          * Additional parameter when Name is Challenge.
          */
-        challengeActionParameters?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionClientFilteringActionChallengeActionParameters;
+        challengeActionParameters: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionClientFilteringActionChallengeActionParameters;
         /**
          * Additional parameters when Name is Deny.
          */
@@ -114943,7 +118205,7 @@ export namespace Teo {
         /**
          * Slow attack protection handling method. required when Enabled is on. valid values for SecurityAction Name: - Monitor: observation; - Deny: block;.
          */
-        action?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseAction;
+        action: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseAction;
         /**
          * Whether slow attack protection is enabled. valid values: - on: enabled; - off: disabled.
          */
@@ -114951,11 +118213,11 @@ export namespace Teo {
         /**
          * The specific configuration of the minimum body transfer rate threshold is required when Enabled is on.
          */
-        minimalRequestBodyTransferRate?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseMinimalRequestBodyTransferRate;
+        minimalRequestBodyTransferRate: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseMinimalRequestBodyTransferRate;
         /**
          * Specifies the specific configuration of body transfer timeout duration. required when Enabled is on.
          */
-        requestBodyTransferTimeout?: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseRequestBodyTransferTimeout;
+        requestBodyTransferTimeout: outputs.Teo.WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseRequestBodyTransferTimeout;
     }
 
     export interface WebSecurityTemplateSecurityPolicyHttpDdosProtectionSlowAttackDefenseAction {
@@ -115097,7 +118359,7 @@ export namespace Teo {
         /**
          * Managed rule automatic update option.
          */
-        autoUpdate?: outputs.Teo.WebSecurityTemplateSecurityPolicyManagedRulesAutoUpdate;
+        autoUpdate: outputs.Teo.WebSecurityTemplateSecurityPolicyManagedRulesAutoUpdate;
         /**
          * Evaluation mode is enabled or not, it is valid only when the `Enabled` parameter is set to `on`. Values: - `on`: enabled, all managed rules take effect in `observe` mode. - off: disabled, all managed rules take effect according to the specified configuration.
          */
@@ -115109,11 +118371,11 @@ export namespace Teo {
         /**
          * High-Frequency scan protection configuration option. when a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
          */
-        frequentScanningProtection?: outputs.Teo.WebSecurityTemplateSecurityPolicyManagedRulesFrequentScanningProtection;
+        frequentScanningProtection: outputs.Teo.WebSecurityTemplateSecurityPolicyManagedRulesFrequentScanningProtection;
         /**
          * Managed rule semantic analysis is enabled or not, it is valid only when the `Enabled` parameter is `on`. Values: `on`: enabled, perform semantic analysis before processing requests; `off`: disabled, process requests directly without semantic analysis. The default value is `off`.
          */
-        semanticAnalysis?: string;
+        semanticAnalysis: string;
     }
 
     export interface WebSecurityTemplateSecurityPolicyManagedRulesAutoUpdate {
@@ -115124,7 +118386,7 @@ export namespace Teo {
         /**
          * Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
          */
-        rulesetVersion?: string;
+        rulesetVersion: string;
     }
 
     export interface WebSecurityTemplateSecurityPolicyManagedRulesFrequentScanningProtection {
@@ -115296,7 +118558,7 @@ export namespace Teo {
          */
         enabled?: string;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id: string;
         /**
@@ -120391,6 +123653,10 @@ export namespace Vdb {
          */
         expireTime: string;
         /**
+         * Whether it is an SSL network.
+         */
+        isSsl: boolean;
+        /**
          * Internal port.
          */
         port: number;
@@ -120547,6 +123813,25 @@ export namespace Vod {
          * Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         width?: number;
+    }
+
+    export interface AigcQuotaModelQuota {
+        /**
+         * Model name.
+         */
+        modelName: string;
+        /**
+         * Model version.
+         */
+        modelVersion: string;
+        /**
+         * Model quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+         */
+        quotaLimit: number;
+        /**
+         * Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+         */
+        usage: number;
     }
 
     export interface GetAdaptiveDynamicStreamingTemplatesTemplateList {
@@ -122989,8 +126274,6 @@ export namespace Vpc {
         cidrBlock?: string;
         /**
          * Creation time.
-         *
-         * Note: This field may return null, indicating that no valid value was found.
          */
         createdTime: string;
         /**
@@ -124047,8 +127330,6 @@ export namespace Waf {
          * lenLt (length is less than)
          * ipmatch (belong to)
          * ipnmatch (do not belong to)
-         * numgt (number greater than)
-         * numlt (number less than)
          * geoIn (IP geo belongs to)
          * geoNotIn (IP geo not belongs to)
          * rematch (regex match)
@@ -124058,6 +127339,8 @@ export namespace Waf {
          * numneq (numerically not equal to)
          * numle (numerically less than or equal to)
          * numge (numerically greater than or equal to)
+         * belongTo (belong to)
+         * notBelongTo (do not belong to)
          * Different matching fields correspond to different logical operators. For details, see the matching field table above.
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
@@ -124071,7 +127354,7 @@ export namespace Waf {
         /**
          * Matching field
          * Different matching fields result in different matching parameters, logical operators, and matching contents. The details are as follows:
-         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPv6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
+         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPV6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CONTENT_LENGTH (Content-Length)</td><td>Parameter entry is supported.</td><td>numgt (numerically greater than)<br>numlt (numerically less than)<br>numeq (numerically equal to)</td><td>Enter an integer between 0 and 9999999999999.</td></tr><tr><td>IP_GEO (source IP geolocation)</td><td>Parameter entry is supported.</td><td>geo_in (belong to)<br>geo_not_in (do not belong to)</td><td>Enter the content with a maximum of 10240 characters. The value is a serialized JSON array, for example: [{"Country":"China","Region":"Guangdong","City":"Shenzhen"}].</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
         field: string;
@@ -124154,8 +127437,6 @@ export namespace Waf {
          * lenLt (length is less than)
          * ipmatch (belong to)
          * ipnmatch (do not belong to)
-         * numgt (number greater than)
-         * numlt (number less than)
          * geoIn (IP geo belongs to)
          * geoNotIn (IP geo not belongs to)
          * rematch (regex match)
@@ -124165,6 +127446,8 @@ export namespace Waf {
          * numneq (numerically not equal to)
          * numle (numerically less than or equal to)
          * numge (numerically greater than or equal to)
+         * belongTo (belong to)
+         * notBelongTo (do not belong to)
          * Different matching fields correspond to different logical operators. For details, see the matching field table above.
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
@@ -124178,7 +127461,7 @@ export namespace Waf {
         /**
          * Matching field
          * Different matching fields result in different matching parameters, logical operators, and matching contents. The details are as follows:
-         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPv6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
+         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPV6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CONTENT_LENGTH (Content-Length)</td><td>Parameter entry is supported.</td><td>numgt (numerically greater than)<br>numlt (numerically less than)<br>numeq (numerically equal to)</td><td>Enter an integer between 0 and 9999999999999.</td></tr><tr><td>IP_GEO (source IP geolocation)</td><td>Parameter entry is supported.</td><td>geo_in (belong to)<br>geo_not_in (do not belong to)</td><td>Enter the content with a maximum of 10240 characters. The value is a serialized JSON array, for example: [{"Country":"China","Region":"Guangdong","City":"Shenzhen"}].</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
         field: string;
@@ -124728,7 +128011,7 @@ export namespace Waf {
          */
         action: number;
         /**
-         * ID of the resource.
+         * Id.
          */
         id: string;
         /**
@@ -132791,6 +136074,10 @@ export namespace Wedata {
          * Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
          */
         projectName: string;
+        /**
+         * Project schedule mode. task: Task mode; workflow: Workflow mode.
+         */
+        scheduleMode: string;
     }
 
     export interface QualityRuleCompareRule {
@@ -133924,7 +137211,9 @@ export namespace Wedata {
          */
         triggerId: string;
         /**
-         * Minimum trigger interval in file arrival mode (seconds).
+         * This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+         *
+         * @deprecated This parameter is deprecated and will be removed in a future version.
          */
         triggerMinimumIntervalSecond?: number;
         /**
@@ -133932,7 +137221,9 @@ export namespace Wedata {
          */
         triggerMode: string;
         /**
-         * Trigger wait time in file arrival mode (seconds).
+         * This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
+         *
+         * @deprecated This parameter is deprecated and will be removed in a future version.
          */
         triggerWaitTimeSecond?: number;
     }
@@ -134583,6 +137874,67 @@ export namespace config {
 }
 
 export namespace configservice {
+    export interface AggregateCompliancePackConfigRule {
+        /**
+         * Compliance pack id that this rule belongs to.
+         */
+        compliancePackId: string;
+        /**
+         * Config rule id.
+         */
+        configRuleId: string;
+        /**
+         * Rule description.
+         */
+        description: string;
+        /**
+         * Rule identifier (managed rule name or custom rule cloud function ARN).
+         */
+        identifier: string;
+        /**
+         * Rule input parameters.
+         */
+        inputParameters: outputs.configservice.AggregateCompliancePackConfigRuleInputParameter[];
+        /**
+         * Managed rule identifier (preset rule identity).
+         */
+        managedRuleIdentifier: string;
+        /**
+         * Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+         */
+        riskLevel: number;
+        /**
+         * Rule name.
+         */
+        ruleName: string;
+    }
+
+    export interface AggregateCompliancePackConfigRuleInputParameter {
+        /**
+         * Parameter key.
+         */
+        parameterKey: string;
+        /**
+         * Parameter type. Required: `Require`, optional: `Optional`.
+         */
+        type: string;
+        /**
+         * Parameter value.
+         */
+        value: string;
+    }
+
+    export interface AggregatorAggregatorAccount {
+        /**
+         * Member account name.
+         */
+        memberName: string;
+        /**
+         * Member account ID.
+         */
+        memberUin: number;
+    }
+
     export interface CompliancePackConfigRule {
         /**
          * Compliance pack ID that this rule belongs to.
@@ -134754,6 +138106,84 @@ export namespace configservice {
          * Tag value.
          */
         tagValue: string;
+    }
+
+    export interface GetListAggregateCompliancePacksItem {
+        /**
+         * Compliance pack ID.
+         */
+        compliancePackId: string;
+        /**
+         * Compliance pack name.
+         */
+        compliancePackName: string;
+        /**
+         * Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+         */
+        complianceResult: string;
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Compliance pack description.
+         */
+        description: string;
+        /**
+         * List of non-compliant rule names.
+         */
+        noCompliantNames: string[];
+        /**
+         * Risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+         */
+        riskLevel: number;
+        /**
+         * Number of rules in the compliance pack.
+         */
+        ruleCount: number;
+        /**
+         * Compliance pack status. Valid values: ACTIVE, NO_ACTIVE.
+         */
+        status: string;
+    }
+
+    export interface GetListAggregatorsItem {
+        /**
+         * Number of accounts in the aggregator.
+         */
+        accountCount: number;
+        /**
+         * Aggregator ID.
+         */
+        accountGroupId: string;
+        /**
+         * Aggregator status.
+         */
+        aggregatorStatus: number;
+        /**
+         * Creation time.
+         */
+        createTime: string;
+        /**
+         * Aggregator description.
+         */
+        description: string;
+        /**
+         * Member name.
+         */
+        memberName: string;
+        /**
+         * Aggregator name.
+         */
+        name: string;
+        /**
+         * Owner UIN.
+         */
+        ownerUin: number;
+        /**
+         * Aggregator type.
+         */
+        type: string;
     }
 
     export interface GetResourceTypesResourceTypeList {

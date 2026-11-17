@@ -74,6 +74,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
 func LookupRoutes(ctx *pulumi.Context, args *LookupRoutesArgs, opts ...pulumi.InvokeOption) (*LookupRoutesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRoutesResult

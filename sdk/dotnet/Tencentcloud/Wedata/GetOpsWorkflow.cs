@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsWorkflow](https://www.tencentcloud.com/document/api/1174/73829)
         /// </summary>
         public static Task<GetOpsWorkflowResult> InvokeAsync(GetOpsWorkflowArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsWorkflowResult>("tencentcloud:Wedata/getOpsWorkflow:getOpsWorkflow", args ?? new GetOpsWorkflowArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsWorkflow](https://www.tencentcloud.com/document/api/1174/73829)
         /// </summary>
         public static Output<GetOpsWorkflowResult> Invoke(GetOpsWorkflowInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsWorkflowResult>("tencentcloud:Wedata/getOpsWorkflow:getOpsWorkflow", args ?? new GetOpsWorkflowInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsWorkflow](https://www.tencentcloud.com/document/api/1174/73829)
         /// </summary>
         public static Output<GetOpsWorkflowResult> Invoke(GetOpsWorkflowInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsWorkflowResult>("tencentcloud:Wedata/getOpsWorkflow:getOpsWorkflow", args ?? new GetOpsWorkflowInvokeArgs(), options.WithDefaults());

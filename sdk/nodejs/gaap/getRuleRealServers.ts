@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     ruleId: "rule-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
  */
 export function getRuleRealServers(args: GetRuleRealServersArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleRealServersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetRuleRealServersResult {
  *     ruleId: "rule-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
  */
 export function getRuleRealServersOutput(args: GetRuleRealServersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRuleRealServersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

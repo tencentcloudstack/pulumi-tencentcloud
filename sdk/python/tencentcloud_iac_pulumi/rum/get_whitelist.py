@@ -96,6 +96,12 @@ def get_whitelist(instance_id: Optional[_builtins.str] = None,
     whitelist = tencentcloud.rum.get_whitelist(instance_id="rum-pasZKEI3RLgakj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
+
 
     :param _builtins.str instance_id: Instance ID, such as taw-123.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_whitelist_output(instance_id: pulumi.Input[Optional[_builtins.str]] = No
 
     whitelist = tencentcloud.rum.get_whitelist(instance_id="rum-pasZKEI3RLgakj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
 
 
     :param _builtins.str instance_id: Instance ID, such as taw-123.

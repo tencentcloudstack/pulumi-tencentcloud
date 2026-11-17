@@ -183,6 +183,16 @@ class GroupMembership(pulumi.CustomResource):
             user_names=[example.id])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddUserToGroup](https://www.tencentcloud.com/document/api/598/32264)
+          - [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
+        * Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
+        * Delete: [RemoveUserFromGroup](https://www.tencentcloud.com/document/api/598/32254)
+
         ## Import
 
         CAM group membership can be imported using the id, e.g.
@@ -237,6 +247,16 @@ class GroupMembership(pulumi.CustomResource):
             group_id=example_group.id,
             user_names=[example.id])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddUserToGroup](https://www.tencentcloud.com/document/api/598/32264)
+          - [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
+        * Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
+        * Delete: [RemoveUserFromGroup](https://www.tencentcloud.com/document/api/598/32254)
 
         ## Import
 

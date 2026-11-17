@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     state: "APPROVED",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
  */
 export function getCrossBorderCompliance(args?: GetCrossBorderComplianceArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossBorderComplianceResult> {
     args = args || {};
@@ -165,6 +171,12 @@ export interface GetCrossBorderComplianceResult {
  *     state: "APPROVED",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
  */
 export function getCrossBorderComplianceOutput(args?: GetCrossBorderComplianceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCrossBorderComplianceResult> {
     args = args || {};

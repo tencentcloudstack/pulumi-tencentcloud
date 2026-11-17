@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDataEngineDescription](https://www.tencentcloud.com/document/api/1155/62650)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation")]
     public partial class ModifyDataEngineDescriptionOperation : global::Pulumi.CustomResource

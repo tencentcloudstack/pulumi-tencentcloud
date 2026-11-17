@@ -87,6 +87,12 @@ class RenewVideoOperation(pulumi.CustomResource):
         example = tencentcloud.vcube.RenewVideoOperation("example", license_id=1513)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewVideo](https://www.tencentcloud.com/search/?wd=RenewVideo&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -111,6 +117,12 @@ class RenewVideoOperation(pulumi.CustomResource):
 
         example = tencentcloud.vcube.RenewVideoOperation("example", license_id=1513)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewVideo](https://www.tencentcloud.com/search/?wd=RenewVideo&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

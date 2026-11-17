@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
         /// </summary>
         public static Task<GetDescribeUserInfoResult> InvokeAsync(GetDescribeUserInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
         /// </summary>
         public static Output<GetDescribeUserInfoResult> Invoke(GetDescribeUserInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
         /// </summary>
         public static Output<GetDescribeUserInfoResult> Invoke(GetDescribeUserInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserInfoResult>("tencentcloud:Dlc/getDescribeUserInfo:getDescribeUserInfo", args ?? new GetDescribeUserInfoInvokeArgs(), options.WithDefaults());

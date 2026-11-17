@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
         /// </summary>
         public static Task<GetQueryXeventResult> InvokeAsync(GetQueryXeventArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
         /// </summary>
         public static Output<GetQueryXeventResult> Invoke(GetQueryXeventInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
         /// </summary>
         public static Output<GetQueryXeventResult> Invoke(GetQueryXeventInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventInvokeArgs(), options.WithDefaults());

@@ -500,6 +500,15 @@ class VpcPolicy(pulumi.CustomResource):
             fw_group_id="ALL")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddVpcAcRule](https://www.tencentcloud.com/search/?wd=AddVpcAcRule&type=document&lang=en)
+        * Read: [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+        * Update: [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&type=document&lang=en)
+        * Delete: [RemoveVpcAcRule](https://www.tencentcloud.com/search/?wd=RemoveVpcAcRule&type=document&lang=en)
+
         ## Import
 
         CFW vpc policy can be imported using the id, e.g.
@@ -549,6 +558,15 @@ class VpcPolicy(pulumi.CustomResource):
             enable="true",
             fw_group_id="ALL")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddVpcAcRule](https://www.tencentcloud.com/search/?wd=AddVpcAcRule&type=document&lang=en)
+        * Read: [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+        * Update: [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&type=document&lang=en)
+        * Delete: [RemoveVpcAcRule](https://www.tencentcloud.com/search/?wd=RemoveVpcAcRule&type=document&lang=en)
 
         ## Import
 

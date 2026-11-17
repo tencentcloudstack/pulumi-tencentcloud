@@ -20,6 +20,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateRoutePolicyAssociations](https://www.tencentcloud.com/document/api/215/74069)
+ * * Read: [DescribeRoutePolicies](https://www.tencentcloud.com/search/?wd=DescribeRoutePolicies&type=document&lang=en)
+ * * Update: [ResetRoutePolicyAssociations](https://www.tencentcloud.com/document/api/215/74060)
+ * * Delete: [DeleteRoutePolicyAssociations](https://www.tencentcloud.com/document/api/215/74066)
+ *
  * ## Import
  *
  * VPC route policy association can be imported using the routePolicyId#routeTableId, e.g.

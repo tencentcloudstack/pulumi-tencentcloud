@@ -63,6 +63,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&amp;type=document&amp;lang=en)
+    ///   - [TagResources](https://www.tencentcloud.com/document/api/651/46533)
+    ///   - [UnTagResources](https://www.tencentcloud.com/document/api/651/46532)
+    /// * Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/topic:Topic")]
     public partial class Topic : global::Pulumi.CustomResource

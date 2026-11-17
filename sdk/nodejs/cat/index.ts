@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { GetInstantTasksArgs, GetInstantTasksResult, GetInstantTasksOutputArgs } from "./getInstantTasks";
+export const getInstantTasks: typeof import("./getInstantTasks").getInstantTasks = null as any;
+export const getInstantTasksOutput: typeof import("./getInstantTasks").getInstantTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getInstantTasks","getInstantTasksOutput"], () => require("./getInstantTasks"));
+
 export { GetMetricDataArgs, GetMetricDataResult, GetMetricDataOutputArgs } from "./getMetricData";
 export const getMetricData: typeof import("./getMetricData").getMetricData = null as any;
 export const getMetricDataOutput: typeof import("./getMetricData").getMetricDataOutput = null as any;
@@ -15,10 +20,25 @@ export const getNode: typeof import("./getNode").getNode = null as any;
 export const getNodeOutput: typeof import("./getNode").getNodeOutput = null as any;
 utilities.lazyLoad(exports, ["getNode","getNodeOutput"], () => require("./getNode"));
 
+export { GetNodeGroupsArgs, GetNodeGroupsResult, GetNodeGroupsOutputArgs } from "./getNodeGroups";
+export const getNodeGroups: typeof import("./getNodeGroups").getNodeGroups = null as any;
+export const getNodeGroupsOutput: typeof import("./getNodeGroups").getNodeGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getNodeGroups","getNodeGroupsOutput"], () => require("./getNodeGroups"));
+
 export { GetProbeDataArgs, GetProbeDataResult, GetProbeDataOutputArgs } from "./getProbeData";
 export const getProbeData: typeof import("./getProbeData").getProbeData = null as any;
 export const getProbeDataOutput: typeof import("./getProbeData").getProbeDataOutput = null as any;
 utilities.lazyLoad(exports, ["getProbeData","getProbeDataOutput"], () => require("./getProbeData"));
+
+export { GetProbeMetricTagValuesArgs, GetProbeMetricTagValuesResult, GetProbeMetricTagValuesOutputArgs } from "./getProbeMetricTagValues";
+export const getProbeMetricTagValues: typeof import("./getProbeMetricTagValues").getProbeMetricTagValues = null as any;
+export const getProbeMetricTagValuesOutput: typeof import("./getProbeMetricTagValues").getProbeMetricTagValuesOutput = null as any;
+utilities.lazyLoad(exports, ["getProbeMetricTagValues","getProbeMetricTagValuesOutput"], () => require("./getProbeMetricTagValues"));
+
+export { GetProbeTasksArgs, GetProbeTasksResult, GetProbeTasksOutputArgs } from "./getProbeTasks";
+export const getProbeTasks: typeof import("./getProbeTasks").getProbeTasks = null as any;
+export const getProbeTasksOutput: typeof import("./getProbeTasks").getProbeTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getProbeTasks","getProbeTasksOutput"], () => require("./getProbeTasks"));
 
 export { TaskSetArgs, TaskSetState } from "./taskSet";
 export type TaskSet = import("./taskSet").TaskSet;

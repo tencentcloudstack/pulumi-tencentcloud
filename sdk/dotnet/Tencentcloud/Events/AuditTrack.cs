@@ -74,6 +74,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateEventsAuditTrack](https://www.tencentcloud.com/search/?wd=CreateEventsAuditTrack&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAuditTrack](https://www.tencentcloud.com/document/api/1021/52596)
+    /// * Update: [ModifyEventsAuditTrack](https://www.tencentcloud.com/search/?wd=ModifyEventsAuditTrack&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAuditTrack](https://www.tencentcloud.com/document/api/1021/45905)
+    /// 
     /// ## Import
     /// 
     /// events audit track can be imported using the id, e.g.

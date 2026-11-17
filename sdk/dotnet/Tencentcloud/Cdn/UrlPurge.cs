@@ -55,6 +55,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read: [DescribePurgeTasks](https://www.tencentcloud.com/document/api/228/33604)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdn/urlPurge:UrlPurge")]
     public partial class UrlPurge : global::Pulumi.CustomResource

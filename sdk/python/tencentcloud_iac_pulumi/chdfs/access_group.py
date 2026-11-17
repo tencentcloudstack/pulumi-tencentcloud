@@ -186,6 +186,15 @@ class AccessGroup(pulumi.CustomResource):
             description="test access group")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAccessGroup](https://www.tencentcloud.com/document/api/1106/42424)
+        * Read: [DescribeAccessGroup](https://www.tencentcloud.com/document/api/1106/42422)
+        * Update: [ModifyAccessGroup](https://www.tencentcloud.com/document/api/1106/42420)
+        * Delete: [DeleteAccessGroup](https://www.tencentcloud.com/document/api/1106/42423)
+
         ## Import
 
         chdfs access_group can be imported using the id, e.g.
@@ -223,6 +232,15 @@ class AccessGroup(pulumi.CustomResource):
             vpc_id="vpc-4owdpnwr",
             description="test access group")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAccessGroup](https://www.tencentcloud.com/document/api/1106/42424)
+        * Read: [DescribeAccessGroup](https://www.tencentcloud.com/document/api/1106/42422)
+        * Update: [ModifyAccessGroup](https://www.tencentcloud.com/document/api/1106/42420)
+        * Delete: [DeleteAccessGroup](https://www.tencentcloud.com/document/api/1106/42423)
 
         ## Import
 

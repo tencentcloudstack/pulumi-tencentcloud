@@ -158,6 +158,12 @@ def get_backup_download_info(backup_id: Optional[_builtins.str] = None,
         backup_id="641186639-8362913-1516672770")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupUrl](https://www.tencentcloud.com/document/api/239/32075)
+
 
     :param _builtins.str backup_id: The backup ID, which can be accessed via [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) interface returns the parameter RedisBackupSet to get.
     :param _builtins.str instance_id: The ID of instance.
@@ -212,6 +218,12 @@ def get_backup_download_info_output(backup_id: pulumi.Input[Optional[_builtins.s
     backup_download_info = tencentcloud.redis.get_backup_download_info(instance_id="crs-iw7d9wdd",
         backup_id="641186639-8362913-1516672770")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupUrl](https://www.tencentcloud.com/document/api/239/32075)
 
 
     :param _builtins.str backup_id: The backup ID, which can be accessed via [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) interface returns the parameter RedisBackupSet to get.

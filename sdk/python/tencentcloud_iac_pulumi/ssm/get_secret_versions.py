@@ -121,6 +121,15 @@ def get_secret_versions(result_output_file: Optional[_builtins.str] = None,
         version_id=v1.version_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+      - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+      - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str secret_name: Secret name used to filter result.
@@ -166,6 +175,15 @@ def get_secret_versions_output(result_output_file: pulumi.Input[Optional[Optiona
     example = tencentcloud.ssm.get_secret_versions_output(secret_name=v1.secret_name,
         version_id=v1.version_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+      - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+      - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
 
 
     :param _builtins.str result_output_file: Used to save results.

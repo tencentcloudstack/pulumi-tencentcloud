@@ -264,6 +264,14 @@ class InstanceHaConfig(pulumi.CustomResource):
             max_standby_lag=10)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57239)
+        * Read: [DescribeDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57240)
+        * Update: [ModifyDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57239)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -308,6 +316,14 @@ class InstanceHaConfig(pulumi.CustomResource):
             max_standby_latency=int(10737418240),
             max_standby_lag=10)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57239)
+        * Read: [DescribeDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57240)
+        * Update: [ModifyDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57239)
 
 
         :param str resource_name: The name of the resource.

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
         /// </summary>
         public static Task<GetDescribeManagersResult> InvokeAsync(GetDescribeManagersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
         /// </summary>
         public static Output<GetDescribeManagersResult> Invoke(GetDescribeManagersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
         /// </summary>
         public static Output<GetDescribeManagersResult> Invoke(GetDescribeManagersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersInvokeArgs(), options.WithDefaults());

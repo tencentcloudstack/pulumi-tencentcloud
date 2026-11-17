@@ -35,6 +35,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&amp;type=document&amp;lang=en)
+    /// * Update: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// css domain can be imported using the id, e.g.

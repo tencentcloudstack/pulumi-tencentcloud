@@ -27,6 +27,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
+    ///   - [OpenClsService](https://www.tencentcloud.com/document/api/614/80500)
+    /// * Read: [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/openServiceOperation:OpenServiceOperation")]
     public partial class OpenServiceOperation : global::Pulumi.CustomResource

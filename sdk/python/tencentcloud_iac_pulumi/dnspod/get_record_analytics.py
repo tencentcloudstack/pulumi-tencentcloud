@@ -189,6 +189,12 @@ def get_record_analytics(dns_format: Optional[_builtins.str] = None,
         dns_format="HOUR")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
+
 
     :param _builtins.str dns_format: DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
     :param _builtins.str domain: The domain to query for resolution volume.
@@ -244,6 +250,12 @@ def get_record_analytics_output(dns_format: pulumi.Input[Optional[Optional[_buil
         subdomain="www",
         dns_format="HOUR")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
 
 
     :param _builtins.str dns_format: DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.

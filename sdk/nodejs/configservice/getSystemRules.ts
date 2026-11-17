@@ -41,6 +41,12 @@ import * as utilities from "../utilities";
  *     riskLevel: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
  */
 export function getSystemRules(args?: GetSystemRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetSystemRulesResult> {
     args = args || {};
@@ -124,6 +130,12 @@ export interface GetSystemRulesResult {
  *     riskLevel: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
  */
 export function getSystemRulesOutput(args?: GetSystemRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSystemRulesResult> {
     args = args || {};

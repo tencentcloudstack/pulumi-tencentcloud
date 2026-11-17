@@ -36,6 +36,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCustomerGateway](https://www.tencentcloud.com/document/api/215/17523)
+    ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [ModifyCustomerGatewayAttribute](https://www.tencentcloud.com/document/api/215/17509)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete:
+    ///   - [DeleteCustomerGateway](https://www.tencentcloud.com/document/api/215/17520)
+    ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+    ///   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+    /// 
     /// ## Import
     /// 
     /// VPN customer gateway can be imported using the id, e.g.

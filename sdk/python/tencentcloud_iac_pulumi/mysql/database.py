@@ -152,6 +152,14 @@ class Database(pulumi.CustomResource):
             character_set_name="utf8")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatabase](https://www.tencentcloud.com/document/api/236/56094)
+        * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/236/17493)
+        * Delete: [DeleteDatabase](https://www.tencentcloud.com/document/api/236/80218)
+
         ## Import
 
         mysql database can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class Database(pulumi.CustomResource):
             db_name="for_tf_test",
             character_set_name="utf8")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatabase](https://www.tencentcloud.com/document/api/236/56094)
+        * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/236/17493)
+        * Delete: [DeleteDatabase](https://www.tencentcloud.com/document/api/236/80218)
 
         ## Import
 

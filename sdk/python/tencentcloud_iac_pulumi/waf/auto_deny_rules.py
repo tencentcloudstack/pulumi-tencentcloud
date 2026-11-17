@@ -185,6 +185,14 @@ class AutoDenyRules(pulumi.CustomResource):
             deny_time_threshold=5)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=ModifyWafAutoDenyRules&type=document&lang=en)
+        * Read: [DescribeWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=DescribeWafAutoDenyRules&type=document&lang=en)
+        * Delete: [ModifyWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=ModifyWafAutoDenyRules&type=document&lang=en)
+
         ## Import
 
         waf auto_deny_rules can be imported using the id, e.g.
@@ -222,6 +230,14 @@ class AutoDenyRules(pulumi.CustomResource):
             time_threshold=12,
             deny_time_threshold=5)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=ModifyWafAutoDenyRules&type=document&lang=en)
+        * Read: [DescribeWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=DescribeWafAutoDenyRules&type=document&lang=en)
+        * Delete: [ModifyWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=ModifyWafAutoDenyRules&type=document&lang=en)
 
         ## Import
 

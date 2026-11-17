@@ -145,6 +145,77 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDDoSAI](https://www.tencentcloud.com/document/api/1213/61381)
+    ///   - [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    ///   - [CreateDDoSConnectLimit](https://www.tencentcloud.com/search/?wd=CreateDDoSConnectLimit&amp;type=document&amp;lang=en)
+    ///   - [CreateDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61380)
+    ///   - [CreateDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61379)
+    ///   - [CreatePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61378)
+    ///   - [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&amp;type=document&amp;lang=en)
+    ///   - [CreateProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61377)
+    ///   - [CreateWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61376)
+    ///   - [ModifyDDoSLevel](https://www.tencentcloud.com/search/?wd=ModifyDDoSLevel&amp;type=document&amp;lang=en)
+    ///   - [ModifyDDoSThreshold](https://www.tencentcloud.com/search/?wd=ModifyDDoSThreshold&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeDDoSConnectLimitList](https://www.tencentcloud.com/search/?wd=DescribeDDoSConnectLimitList&amp;type=document&amp;lang=en)
+    ///   - [DescribeListBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61364)
+    ///   - [DescribeListDDoSAI](https://www.tencentcloud.com/document/api/1213/61363)
+    ///   - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+    ///   - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+    ///   - [DescribeListPacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61360)
+    ///   - [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&amp;type=document&amp;lang=en)
+    ///   - [DescribeListProtectThresholdConfigNew](https://www.tencentcloud.com/search/?wd=DescribeListProtectThresholdConfigNew&amp;type=document&amp;lang=en)
+    ///   - [DescribeListProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61358)
+    ///   - [DescribeListWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61357)
+    /// * Update:
+    ///   - [CreateDDoSAI](https://www.tencentcloud.com/document/api/1213/61381)
+    ///   - [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    ///   - [CreateDDoSConnectLimit](https://www.tencentcloud.com/search/?wd=CreateDDoSConnectLimit&amp;type=document&amp;lang=en)
+    ///   - [CreateDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61380)
+    ///   - [CreateDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61379)
+    ///   - [CreatePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61378)
+    ///   - [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&amp;type=document&amp;lang=en)
+    ///   - [CreateProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61377)
+    ///   - [CreateWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61376)
+    ///   - [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    ///   - [DeleteDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61372)
+    ///   - [DeleteDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61371)
+    ///   - [DeletePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61370)
+    ///   - [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&amp;type=document&amp;lang=en)
+    ///   - [DeleteWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61369)
+    ///   - [DescribeListBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61364)
+    ///   - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+    ///   - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+    ///   - [DescribeListPacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61360)
+    ///   - [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&amp;type=document&amp;lang=en)
+    ///   - [DescribeListWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61357)
+    ///   - [ModifyDDoSLevel](https://www.tencentcloud.com/search/?wd=ModifyDDoSLevel&amp;type=document&amp;lang=en)
+    ///   - [ModifyDDoSThreshold](https://www.tencentcloud.com/search/?wd=ModifyDDoSThreshold&amp;type=document&amp;lang=en)
+    ///   - [SwitchWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61352)
+    /// * Delete:
+    ///   - [CreateDDoSAI](https://www.tencentcloud.com/document/api/1213/61381)
+    ///   - [CreateDDoSConnectLimit](https://www.tencentcloud.com/search/?wd=CreateDDoSConnectLimit&amp;type=document&amp;lang=en)
+    ///   - [CreateProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61377)
+    ///   - [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    ///   - [DeleteDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61372)
+    ///   - [DeleteDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61371)
+    ///   - [DeletePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61370)
+    ///   - [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&amp;type=document&amp;lang=en)
+    ///   - [DeleteWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61369)
+    ///   - [DescribeListBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61364)
+    ///   - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+    ///   - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+    ///   - [DescribeListPacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61360)
+    ///   - [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&amp;type=document&amp;lang=en)
+    ///   - [DescribeListWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61357)
+    ///   - [ModifyDDoSLevel](https://www.tencentcloud.com/search/?wd=ModifyDDoSLevel&amp;type=document&amp;lang=en)
+    ///   - [ModifyDDoSThreshold](https://www.tencentcloud.com/search/?wd=ModifyDDoSThreshold&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyV2:DdosPolicyV2")]
     public partial class DdosPolicyV2 : global::Pulumi.CustomResource

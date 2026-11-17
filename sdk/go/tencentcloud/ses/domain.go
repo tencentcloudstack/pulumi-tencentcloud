@@ -30,6 +30,13 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ses.NewDomain(ctx, "domain", &ses.DomainArgs{
 //				EmailIdentity: pulumi.String("iac.cloud"),
+//				DkimOption:    pulumi.Int(1),
+//				TagLists: ses.DomainTagListArray{
+//					&ses.DomainTagListArgs{
+//						TagKey:   pulumi.String("env"),
+//						TagValue: pulumi.String("prod"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -39,6 +46,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39414)
+// * Read: [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+// * Delete: [DeleteEmailIdentity](https://www.tencentcloud.com/document/api/1084/39413)
 //
 // ## Import
 //
@@ -51,8 +66,12 @@ type Domain struct {
 
 	// DNS configuration details.
 	Attributes DomainAttributeArrayOutput `pulumi:"attributes"`
+	// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+	DkimOption pulumi.IntOutput `pulumi:"dkimOption"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringOutput `pulumi:"emailIdentity"`
+	// Tag list.
+	TagLists DomainTagListArrayOutput `pulumi:"tagLists"`
 }
 
 // NewDomain registers a new resource with the given unique name, arguments, and options.
@@ -90,15 +109,23 @@ func GetDomain(ctx *pulumi.Context,
 type domainState struct {
 	// DNS configuration details.
 	Attributes []DomainAttribute `pulumi:"attributes"`
+	// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+	DkimOption *int `pulumi:"dkimOption"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity *string `pulumi:"emailIdentity"`
+	// Tag list.
+	TagLists []DomainTagList `pulumi:"tagLists"`
 }
 
 type DomainState struct {
 	// DNS configuration details.
 	Attributes DomainAttributeArrayInput
+	// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+	DkimOption pulumi.IntPtrInput
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringPtrInput
+	// Tag list.
+	TagLists DomainTagListArrayInput
 }
 
 func (DomainState) ElementType() reflect.Type {
@@ -106,14 +133,22 @@ func (DomainState) ElementType() reflect.Type {
 }
 
 type domainArgs struct {
+	// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+	DkimOption *int `pulumi:"dkimOption"`
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity string `pulumi:"emailIdentity"`
+	// Tag list.
+	TagLists []DomainTagList `pulumi:"tagLists"`
 }
 
 // The set of arguments for constructing a Domain resource.
 type DomainArgs struct {
+	// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+	DkimOption pulumi.IntPtrInput
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity pulumi.StringInput
+	// Tag list.
+	TagLists DomainTagListArrayInput
 }
 
 func (DomainArgs) ElementType() reflect.Type {
@@ -208,9 +243,19 @@ func (o DomainOutput) Attributes() DomainAttributeArrayOutput {
 	return o.ApplyT(func(v *Domain) DomainAttributeArrayOutput { return v.Attributes }).(DomainAttributeArrayOutput)
 }
 
+// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+func (o DomainOutput) DkimOption() pulumi.IntOutput {
+	return o.ApplyT(func(v *Domain) pulumi.IntOutput { return v.DkimOption }).(pulumi.IntOutput)
+}
+
 // Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 func (o DomainOutput) EmailIdentity() pulumi.StringOutput {
 	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.EmailIdentity }).(pulumi.StringOutput)
+}
+
+// Tag list.
+func (o DomainOutput) TagLists() DomainTagListArrayOutput {
+	return o.ApplyT(func(v *Domain) DomainTagListArrayOutput { return v.TagLists }).(DomainTagListArrayOutput)
 }
 
 type DomainArrayOutput struct{ *pulumi.OutputState }

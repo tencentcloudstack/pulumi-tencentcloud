@@ -142,6 +142,12 @@ def get_list_table(catalog_name: Optional[_builtins.str] = None,
     example = tencentcloud.wedata.get_list_table()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTable](https://www.tencentcloud.com/document/api/1174/77944)
+
 
     :param _builtins.str catalog_name: Directory name.
     :param _builtins.str database_name: Database name.
@@ -187,6 +193,12 @@ def get_list_table_output(catalog_name: pulumi.Input[Optional[Optional[_builtins
 
     example = tencentcloud.wedata.get_list_table()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTable](https://www.tencentcloud.com/document/api/1174/77944)
 
 
     :param _builtins.str catalog_name: Directory name.

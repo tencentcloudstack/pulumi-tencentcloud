@@ -64,6 +64,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
 func GetServices(ctx *pulumi.Context, args *GetServicesArgs, opts ...pulumi.InvokeOption) (*GetServicesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetServicesResult

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SubmitTask](https://www.tencentcloud.com/document/api/1174/60939)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/submitTaskOperation:SubmitTaskOperation")]
     public partial class SubmitTaskOperation : global::Pulumi.CustomResource

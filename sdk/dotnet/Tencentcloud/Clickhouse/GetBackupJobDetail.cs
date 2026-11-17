@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetBackupJobDetailResult> InvokeAsync(GetBackupJobDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupJobDetailResult>("tencentcloud:Clickhouse/getBackupJobDetail:getBackupJobDetail", args ?? new GetBackupJobDetailArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBackupJobDetailResult> Invoke(GetBackupJobDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupJobDetailResult>("tencentcloud:Clickhouse/getBackupJobDetail:getBackupJobDetail", args ?? new GetBackupJobDetailInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBackupJobDetailResult> Invoke(GetBackupJobDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupJobDetailResult>("tencentcloud:Clickhouse/getBackupJobDetail:getBackupJobDetail", args ?? new GetBackupJobDetailInvokeArgs(), options.WithDefaults());

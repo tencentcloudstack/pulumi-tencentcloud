@@ -110,6 +110,12 @@ def get_gateway_all_group_apis(gateway_deploy_group_id: Optional[_builtins.str] 
         search_word="user")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&type=document&lang=en)
+
 
     :param _builtins.str gateway_deploy_group_id: gateway group Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_gateway_all_group_apis_output(gateway_deploy_group_id: pulumi.Input[Opti
     gateway_all_group_apis = tencentcloud.tsf.get_gateway_all_group_apis(gateway_deploy_group_id="group-aeoej4qy",
         search_word="user")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGatewayAllGroupApis](https://www.tencentcloud.com/search/?wd=DescribeGatewayAllGroupApis&type=document&lang=en)
 
 
     :param _builtins.str gateway_deploy_group_id: gateway group Id.

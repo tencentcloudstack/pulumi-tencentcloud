@@ -37,6 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateExport](https://www.tencentcloud.com/document/api/614/42798)
+    /// * Read: [DescribeExports](https://www.tencentcloud.com/document/api/614/42790)
+    /// * Delete: [DeleteExport](https://www.tencentcloud.com/document/api/614/42795)
+    /// 
     /// ## Import
     /// 
     /// cls export can be imported using the id, e.g.

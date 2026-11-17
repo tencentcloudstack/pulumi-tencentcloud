@@ -57,6 +57,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAlarmPolicies](https://www.tencentcloud.com/document/api/248/39321)
 func LookupAlarmPolicy(ctx *pulumi.Context, args *LookupAlarmPolicyArgs, opts ...pulumi.InvokeOption) (*LookupAlarmPolicyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupAlarmPolicyResult

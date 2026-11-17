@@ -129,6 +129,12 @@ def get_basic_device_status(filter_region: Optional[_builtins.int] = None,
         filter_region=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBasicDeviceStatus](https://www.tencentcloud.com/document/api/1213/61391)
+
 
     :param _builtins.int filter_region: Region Id.
     :param Sequence[_builtins.str] id_lists: Named resource transfer ID.
@@ -168,6 +174,12 @@ def get_basic_device_status_output(filter_region: pulumi.Input[Optional[Optional
     basic_device_status = tencentcloud.antiddos.get_basic_device_status(ip_lists=["127.0.0.1"],
         filter_region=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBasicDeviceStatus](https://www.tencentcloud.com/document/api/1213/61391)
 
 
     :param _builtins.int filter_region: Region Id.

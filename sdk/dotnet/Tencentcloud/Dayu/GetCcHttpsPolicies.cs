@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCcHttpsPoliciesResult> InvokeAsync(GetCcHttpsPoliciesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcHttpsPoliciesResult> Invoke(GetCcHttpsPoliciesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcHttpsPoliciesResult> Invoke(GetCcHttpsPoliciesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcHttpsPoliciesResult>("tencentcloud:Dayu/getCcHttpsPolicies:getCcHttpsPolicies", args ?? new GetCcHttpsPoliciesInvokeArgs(), options.WithDefaults());

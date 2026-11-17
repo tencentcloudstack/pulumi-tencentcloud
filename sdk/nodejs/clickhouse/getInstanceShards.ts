@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdwch-datuhk3z",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&type=document&lang=en)
  */
 export function getInstanceShards(args: GetInstanceShardsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceShardsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetInstanceShardsResult {
  *     instanceId: "cdwch-datuhk3z",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&type=document&lang=en)
  */
 export function getInstanceShardsOutput(args: GetInstanceShardsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceShardsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

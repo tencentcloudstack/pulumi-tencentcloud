@@ -22,13 +22,21 @@ __all__ = ['Domain', 'DomainArgs']
 @pulumi.input_type
 class DomainArgs:
     def __init__(__self__, *,
-                 email_identity: pulumi.Input[_builtins.str]):
+                 email_identity: pulumi.Input[_builtins.str],
+                 dkim_option: pulumi.Input[Optional[_builtins.int]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input['DomainTagListArgs']]]] = None):
         """
         The set of arguments for constructing a Domain resource.
 
         :param pulumi.Input[_builtins.str] email_identity: Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+        :param pulumi.Input[_builtins.int] dkim_option: DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainTagListArgs']]] tag_lists: Tag list.
         """
         pulumi.set(__self__, "email_identity", email_identity)
+        if dkim_option is not None:
+            pulumi.set(__self__, "dkim_option", dkim_option)
+        if tag_lists is not None:
+            pulumi.set(__self__, "tag_lists", tag_lists)
 
     @_builtins.property
     @pulumi.getter(name="emailIdentity")
@@ -42,22 +50,54 @@ class DomainArgs:
     def email_identity(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "email_identity", value)
 
+    @_builtins.property
+    @pulumi.getter(name="dkimOption")
+    def dkim_option(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        """
+        return pulumi.get(self, "dkim_option")
+
+    @dkim_option.setter
+    def dkim_option(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "dkim_option", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['DomainTagListArgs']]]]:
+        """
+        Tag list.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @tag_lists.setter
+    def tag_lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['DomainTagListArgs']]]]):
+        pulumi.set(self, "tag_lists", value)
+
 
 @pulumi.input_type
 class _DomainState:
     def __init__(__self__, *,
                  attributes: pulumi.Input[Optional[Sequence[pulumi.Input['DomainAttributeArgs']]]] = None,
-                 email_identity: pulumi.Input[Optional[_builtins.str]] = None):
+                 dkim_option: pulumi.Input[Optional[_builtins.int]] = None,
+                 email_identity: pulumi.Input[Optional[_builtins.str]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input['DomainTagListArgs']]]] = None):
         """
         Input properties used for looking up and filtering Domain resources.
 
         :param pulumi.Input[Sequence[pulumi.Input['DomainAttributeArgs']]] attributes: DNS configuration details.
+        :param pulumi.Input[_builtins.int] dkim_option: DKIM key length. 0: 1024-bit, 1: 2048-bit.
         :param pulumi.Input[_builtins.str] email_identity: Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+        :param pulumi.Input[Sequence[pulumi.Input['DomainTagListArgs']]] tag_lists: Tag list.
         """
         if attributes is not None:
             pulumi.set(__self__, "attributes", attributes)
+        if dkim_option is not None:
+            pulumi.set(__self__, "dkim_option", dkim_option)
         if email_identity is not None:
             pulumi.set(__self__, "email_identity", email_identity)
+        if tag_lists is not None:
+            pulumi.set(__self__, "tag_lists", tag_lists)
 
     @_builtins.property
     @pulumi.getter
@@ -72,6 +112,18 @@ class _DomainState:
         pulumi.set(self, "attributes", value)
 
     @_builtins.property
+    @pulumi.getter(name="dkimOption")
+    def dkim_option(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        """
+        return pulumi.get(self, "dkim_option")
+
+    @dkim_option.setter
+    def dkim_option(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "dkim_option", value)
+
+    @_builtins.property
     @pulumi.getter(name="emailIdentity")
     def email_identity(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -83,6 +135,18 @@ class _DomainState:
     def email_identity(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "email_identity", value)
 
+    @_builtins.property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['DomainTagListArgs']]]]:
+        """
+        Tag list.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @tag_lists.setter
+    def tag_lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['DomainTagListArgs']]]]):
+        pulumi.set(self, "tag_lists", value)
+
 
 @pulumi.type_token("tencentcloud:Ses/domain:Domain")
 class Domain(pulumi.CustomResource):
@@ -90,7 +154,9 @@ class Domain(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 dkim_option: pulumi.Input[Optional[_builtins.int]] = None,
                  email_identity: pulumi.Input[Optional[_builtins.str]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DomainTagListArgs', 'DomainTagListArgsDict']]]]] = None,
                  __props__=None):
         """
         Provides a resource to create a ses domain
@@ -101,8 +167,22 @@ class Domain(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        domain = tencentcloud.ses.Domain("domain", email_identity="iac.cloud")
+        domain = tencentcloud.ses.Domain("domain",
+            email_identity="iac.cloud",
+            dkim_option=1,
+            tag_lists=[{
+                "tag_key": "env",
+                "tag_value": "prod",
+            }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39414)
+        * Read: [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+        * Delete: [DeleteEmailIdentity](https://www.tencentcloud.com/document/api/1084/39413)
 
         ## Import
 
@@ -114,7 +194,9 @@ class Domain(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.int] dkim_option: DKIM key length. 0: 1024-bit, 1: 2048-bit.
         :param pulumi.Input[_builtins.str] email_identity: Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DomainTagListArgs', 'DomainTagListArgsDict']]]] tag_lists: Tag list.
         """
         ...
     @overload
@@ -131,8 +213,22 @@ class Domain(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        domain = tencentcloud.ses.Domain("domain", email_identity="iac.cloud")
+        domain = tencentcloud.ses.Domain("domain",
+            email_identity="iac.cloud",
+            dkim_option=1,
+            tag_lists=[{
+                "tag_key": "env",
+                "tag_value": "prod",
+            }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39414)
+        * Read: [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+        * Delete: [DeleteEmailIdentity](https://www.tencentcloud.com/document/api/1084/39413)
 
         ## Import
 
@@ -157,7 +253,9 @@ class Domain(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 dkim_option: pulumi.Input[Optional[_builtins.int]] = None,
                  email_identity: pulumi.Input[Optional[_builtins.str]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DomainTagListArgs', 'DomainTagListArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -167,9 +265,11 @@ class Domain(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = DomainArgs.__new__(DomainArgs)
 
+            __props__.__dict__["dkim_option"] = dkim_option
             if email_identity is None and not opts.urn:
                 raise TypeError("Missing required property 'email_identity'")
             __props__.__dict__["email_identity"] = email_identity
+            __props__.__dict__["tag_lists"] = tag_lists
             __props__.__dict__["attributes"] = None
         super(Domain, __self__).__init__(
             'tencentcloud:Ses/domain:Domain',
@@ -182,7 +282,9 @@ class Domain(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DomainAttributeArgs', 'DomainAttributeArgsDict']]]]] = None,
-            email_identity: pulumi.Input[Optional[_builtins.str]] = None) -> 'Domain':
+            dkim_option: pulumi.Input[Optional[_builtins.int]] = None,
+            email_identity: pulumi.Input[Optional[_builtins.str]] = None,
+            tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DomainTagListArgs', 'DomainTagListArgsDict']]]]] = None) -> 'Domain':
         """
         Get an existing Domain resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -191,14 +293,18 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[Union['DomainAttributeArgs', 'DomainAttributeArgsDict']]]] attributes: DNS configuration details.
+        :param pulumi.Input[_builtins.int] dkim_option: DKIM key length. 0: 1024-bit, 1: 2048-bit.
         :param pulumi.Input[_builtins.str] email_identity: Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DomainTagListArgs', 'DomainTagListArgsDict']]]] tag_lists: Tag list.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _DomainState.__new__(_DomainState)
 
         __props__.__dict__["attributes"] = attributes
+        __props__.__dict__["dkim_option"] = dkim_option
         __props__.__dict__["email_identity"] = email_identity
+        __props__.__dict__["tag_lists"] = tag_lists
         return Domain(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -210,10 +316,26 @@ class Domain(pulumi.CustomResource):
         return pulumi.get(self, "attributes")
 
     @_builtins.property
+    @pulumi.getter(name="dkimOption")
+    def dkim_option(self) -> pulumi.Output[_builtins.int]:
+        """
+        DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        """
+        return pulumi.get(self, "dkim_option")
+
+    @_builtins.property
     @pulumi.getter(name="emailIdentity")
     def email_identity(self) -> pulumi.Output[_builtins.str]:
         """
         Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         """
         return pulumi.get(self, "email_identity")
+
+    @_builtins.property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> pulumi.Output[Sequence['outputs.DomainTagList']]:
+        """
+        Tag list.
+        """
+        return pulumi.get(self, "tag_lists")
 

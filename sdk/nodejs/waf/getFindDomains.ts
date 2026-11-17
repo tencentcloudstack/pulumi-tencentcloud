@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     order: "asc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
  */
 export function getFindDomains(args?: GetFindDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetFindDomainsResult> {
     args = args || {};
@@ -120,6 +126,12 @@ export interface GetFindDomainsResult {
  *     order: "asc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
  */
 export function getFindDomainsOutput(args?: GetFindDomainsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFindDomainsResult> {
     args = args || {};

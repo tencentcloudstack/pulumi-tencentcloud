@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
 func LookupWhitelist(ctx *pulumi.Context, args *LookupWhitelistArgs, opts ...pulumi.InvokeOption) (*LookupWhitelistResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupWhitelistResult

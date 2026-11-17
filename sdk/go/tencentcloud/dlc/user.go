@@ -33,6 +33,7 @@ import (
 //				UserType:        pulumi.String("COMMON"),
 //				UserAlias:       pulumi.String("terraform-test"),
 //				UserDescription: pulumi.String("for terraform test"),
+//				AccountType:     pulumi.String("UserAccount"),
 //			})
 //			if err != nil {
 //				return err
@@ -42,6 +43,18 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateUser](https://www.tencentcloud.com/document/api/1155/62675)
+// * Read: [DescribeUsers](https://www.tencentcloud.com/document/api/1155/62668)
+// * Update:
+//   - [ModifyUser](https://www.tencentcloud.com/document/api/1155/62663)
+//   - [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
+//
+// * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/1155/62673)
 //
 // ## Import
 //
@@ -53,6 +66,8 @@ import (
 type User struct {
 	pulumi.CustomResourceState
 
+	// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+	AccountType pulumi.StringOutput `pulumi:"accountType"`
 	// User alias, and its characters are less than 50.
 	UserAlias pulumi.StringPtrOutput `pulumi:"userAlias"`
 	// User description, which can make it easy to identify different users.
@@ -60,7 +75,7 @@ type User struct {
 	// Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
 	UserId pulumi.StringOutput `pulumi:"userId"`
 	// Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
-	UserType pulumi.StringPtrOutput `pulumi:"userType"`
+	UserType pulumi.StringOutput `pulumi:"userType"`
 	// Collection of IDs of working groups bound to users.
 	WorkGroupIds pulumi.IntArrayOutput `pulumi:"workGroupIds"`
 }
@@ -98,6 +113,8 @@ func GetUser(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering User resources.
 type userState struct {
+	// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+	AccountType *string `pulumi:"accountType"`
 	// User alias, and its characters are less than 50.
 	UserAlias *string `pulumi:"userAlias"`
 	// User description, which can make it easy to identify different users.
@@ -111,6 +128,8 @@ type userState struct {
 }
 
 type UserState struct {
+	// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+	AccountType pulumi.StringPtrInput
 	// User alias, and its characters are less than 50.
 	UserAlias pulumi.StringPtrInput
 	// User description, which can make it easy to identify different users.
@@ -128,6 +147,8 @@ func (UserState) ElementType() reflect.Type {
 }
 
 type userArgs struct {
+	// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+	AccountType *string `pulumi:"accountType"`
 	// User alias, and its characters are less than 50.
 	UserAlias *string `pulumi:"userAlias"`
 	// User description, which can make it easy to identify different users.
@@ -140,6 +161,8 @@ type userArgs struct {
 
 // The set of arguments for constructing a User resource.
 type UserArgs struct {
+	// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+	AccountType pulumi.StringPtrInput
 	// User alias, and its characters are less than 50.
 	UserAlias pulumi.StringPtrInput
 	// User description, which can make it easy to identify different users.
@@ -237,6 +260,11 @@ func (o UserOutput) ToUserOutputWithContext(ctx context.Context) UserOutput {
 	return o
 }
 
+// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+func (o UserOutput) AccountType() pulumi.StringOutput {
+	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.AccountType }).(pulumi.StringOutput)
+}
+
 // User alias, and its characters are less than 50.
 func (o UserOutput) UserAlias() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.UserAlias }).(pulumi.StringPtrOutput)
@@ -253,8 +281,8 @@ func (o UserOutput) UserId() pulumi.StringOutput {
 }
 
 // Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
-func (o UserOutput) UserType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.UserType }).(pulumi.StringPtrOutput)
+func (o UserOutput) UserType() pulumi.StringOutput {
+	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.UserType }).(pulumi.StringOutput)
 }
 
 // Collection of IDs of working groups bound to users.

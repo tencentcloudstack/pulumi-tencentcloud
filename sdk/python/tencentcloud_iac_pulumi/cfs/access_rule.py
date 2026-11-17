@@ -220,6 +220,15 @@ class AccessRule(pulumi.CustomResource):
             user_permission="root_squash")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCfsRule](https://www.tencentcloud.com/document/api/582/34508)
+        * Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
+        * Update: [UpdateCfsRule](https://www.tencentcloud.com/document/api/582/34502)
+        * Delete: [DeleteCfsRule](https://www.tencentcloud.com/document/api/582/34506)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -251,6 +260,15 @@ class AccessRule(pulumi.CustomResource):
             rw_permission="RO",
             user_permission="root_squash")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCfsRule](https://www.tencentcloud.com/document/api/582/34508)
+        * Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
+        * Update: [UpdateCfsRule](https://www.tencentcloud.com/document/api/582/34502)
+        * Delete: [DeleteCfsRule](https://www.tencentcloud.com/document/api/582/34506)
 
 
         :param str resource_name: The name of the resource.

@@ -76,6 +76,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
     /// });
     /// ```
     /// 
+    /// ### Update bandwidth in place
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Dcx.Instance("example", new()
+    ///     {
+    ///         DcId = "dc-ink7y3qf",
+    ///         Name = "tf-example",
+    ///         DcOwnerAccount = "100017971194",
+    ///         NetworkType = "VPC",
+    ///         NetworkRegion = "ap-guangzhou",
+    ///         VpcId = "vpc-nzuu8dyj",
+    ///         DcgId = "dcg-ehr22qfb",
+    ///         Bandwidth = 200,
+    ///         RouteType = "BGP",
+    ///         BgpAsn = 64511,
+    ///         Vlan = 60,
+    ///         TencentAddress = "10.8.254.14/30",
+    ///         CustomerAddress = "10.8.254.13/30",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19821)
+    ///   - [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+    /// * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+    /// * Update: [ModifyDirectConnectTunnelAttribute](https://www.tencentcloud.com/document/api/216/19818)
+    /// * Delete: [DeleteDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19820)
+    /// 
     /// ## Import
     /// 
     /// DCX instance can be imported using the id, e.g.

@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string> BasePath { get; set; } = null!;
 
         /// <summary>
-        /// ID of the resource.
+        /// API service ID, e.g. `apisrv-xxxxxxxx`.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

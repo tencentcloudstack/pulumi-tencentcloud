@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
         /// </summary>
         public static Task<GetAttackOverviewResult> InvokeAsync(GetAttackOverviewArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewArgs(), options.WithDefaults());
@@ -108,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
         /// </summary>
         public static Output<GetAttackOverviewResult> Invoke(GetAttackOverviewInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewInvokeArgs(), options.WithDefaults());
@@ -158,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
         /// </summary>
         public static Output<GetAttackOverviewResult> Invoke(GetAttackOverviewInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewInvokeArgs(), options.WithDefaults());

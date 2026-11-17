@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&type=document&lang=en)
 func GetBudgetOperationLog(ctx *pulumi.Context, args *GetBudgetOperationLogArgs, opts ...pulumi.InvokeOption) (*GetBudgetOperationLogResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBudgetOperationLogResult

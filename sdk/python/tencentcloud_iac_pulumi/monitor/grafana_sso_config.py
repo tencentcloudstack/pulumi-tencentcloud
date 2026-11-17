@@ -119,6 +119,18 @@ class GrafanaSsoConfig(pulumi.CustomResource):
             enable_sso=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [EnableGrafanaSSO](https://www.tencentcloud.com/document/api/248/49752)
+        * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [EnableGrafanaSSO](https://www.tencentcloud.com/document/api/248/49752)
+
         ## Import
 
         monitor grafana_sso_config can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class GrafanaSsoConfig(pulumi.CustomResource):
             instance_id="grafana-dp2hnnfa",
             enable_sso=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [EnableGrafanaSSO](https://www.tencentcloud.com/document/api/248/49752)
+        * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [EnableGrafanaSSO](https://www.tencentcloud.com/document/api/248/49752)
 
         ## Import
 

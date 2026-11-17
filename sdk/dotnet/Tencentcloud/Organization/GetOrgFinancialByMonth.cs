@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationFinancialByMonth](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMonth&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOrgFinancialByMonthResult> InvokeAsync(GetOrgFinancialByMonthArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationFinancialByMonth](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMonth&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOrgFinancialByMonthResult> Invoke(GetOrgFinancialByMonthInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationFinancialByMonth](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMonth&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOrgFinancialByMonthResult> Invoke(GetOrgFinancialByMonthInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMonthResult>("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args ?? new GetOrgFinancialByMonthInvokeArgs(), options.WithDefaults());

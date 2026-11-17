@@ -21,6 +21,13 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [PurchaseReservedInstancesOffering](https://www.tencentcloud.com/document/api/213/68355)
+ * * Read: [DescribeReservedInstances](https://www.tencentcloud.com/document/api/213/68457)
+ *
  * ## Import
  *
  * Reserved instance can be imported using the id, e.g.

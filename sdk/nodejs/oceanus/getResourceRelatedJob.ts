@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResourceRelatedJobs](https://www.tencentcloud.com/search/?wd=DescribeResourceRelatedJobs&type=document&lang=en)
  */
 export function getResourceRelatedJob(args: GetResourceRelatedJobArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceRelatedJobResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetResourceRelatedJobResult {
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResourceRelatedJobs](https://www.tencentcloud.com/search/?wd=DescribeResourceRelatedJobs&type=document&lang=en)
  */
 export function getResourceRelatedJobOutput(args: GetResourceRelatedJobOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourceRelatedJobResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

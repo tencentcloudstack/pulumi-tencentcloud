@@ -200,6 +200,15 @@ class InboundEndpoint(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInboundEndpoint](https://www.tencentcloud.com/search/?wd=CreateInboundEndpoint&type=document&lang=en)
+        * Read: [DescribeInboundEndpointList](https://www.tencentcloud.com/search/?wd=DescribeInboundEndpointList&type=document&lang=en)
+        * Update: [ModifyInboundEndpoint](https://www.tencentcloud.com/search/?wd=ModifyInboundEndpoint&type=document&lang=en)
+        * Delete: [DeleteInboundEndpoint](https://www.tencentcloud.com/search/?wd=DeleteInboundEndpoint&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -241,6 +250,15 @@ class InboundEndpoint(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInboundEndpoint](https://www.tencentcloud.com/search/?wd=CreateInboundEndpoint&type=document&lang=en)
+        * Read: [DescribeInboundEndpointList](https://www.tencentcloud.com/search/?wd=DescribeInboundEndpointList&type=document&lang=en)
+        * Update: [ModifyInboundEndpoint](https://www.tencentcloud.com/search/?wd=ModifyInboundEndpoint&type=document&lang=en)
+        * Delete: [DeleteInboundEndpoint](https://www.tencentcloud.com/search/?wd=DeleteInboundEndpoint&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

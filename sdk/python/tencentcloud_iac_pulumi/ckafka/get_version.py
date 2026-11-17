@@ -120,6 +120,12 @@ def get_version(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.ckafka.get_version(instance_id="ckafka-8j4raxv8")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCkafkaVersion](https://www.tencentcloud.com/document/api/597/74424)
+
 
     :param _builtins.str instance_id: CKafka instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -151,6 +157,12 @@ def get_version_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None
 
     example = tencentcloud.ckafka.get_version(instance_id="ckafka-8j4raxv8")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCkafkaVersion](https://www.tencentcloud.com/document/api/597/74424)
 
 
     :param _builtins.str instance_id: CKafka instance ID.

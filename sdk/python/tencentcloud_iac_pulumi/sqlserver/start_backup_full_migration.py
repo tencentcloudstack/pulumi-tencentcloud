@@ -119,6 +119,14 @@ class StartBackupFullMigration(pulumi.CustomResource):
             backup_migration_id="mssql-backup-migration-kpl74n9l")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [StartBackupMigration](https://www.tencentcloud.com/document/api/238/39832)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class StartBackupFullMigration(pulumi.CustomResource):
             instance_id="mssql-i1z41iwd",
             backup_migration_id="mssql-backup-migration-kpl74n9l")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [StartBackupMigration](https://www.tencentcloud.com/document/api/238/39832)
 
 
         :param str resource_name: The name of the resource.

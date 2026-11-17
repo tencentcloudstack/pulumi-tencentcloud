@@ -99,6 +99,12 @@ def get_describe_data_engine(data_engine_name: Optional[_builtins.str] = None,
     example = tencentcloud.dlc.get_describe_data_engine(data_engine_name="tf-example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+
 
     :param _builtins.str data_engine_name: Engine name.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_describe_data_engine_output(data_engine_name: pulumi.Input[Optional[_bui
 
     example = tencentcloud.dlc.get_describe_data_engine(data_engine_name="tf-example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
 
 
     :param _builtins.str data_engine_name: Engine name.

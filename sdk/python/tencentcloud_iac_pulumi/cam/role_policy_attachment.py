@@ -193,6 +193,16 @@ class RolePolicyAttachment(pulumi.CustomResource):
             policy_id=policy.policy_lists[0].policy_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachRolePolicy](https://www.tencentcloud.com/document/api/598/33562)
+          - [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
+        * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
+        * Delete: [DetachRolePolicy](https://www.tencentcloud.com/document/api/598/33558)
+
         ## Import
 
         CAM role policy attachment can be imported using the id, e.g.
@@ -236,6 +246,16 @@ class RolePolicyAttachment(pulumi.CustomResource):
             role_id=roles.role_lists[0].role_id,
             policy_id=policy.policy_lists[0].policy_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachRolePolicy](https://www.tencentcloud.com/document/api/598/33562)
+          - [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
+        * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
+        * Delete: [DetachRolePolicy](https://www.tencentcloud.com/document/api/598/33558)
 
         ## Import
 

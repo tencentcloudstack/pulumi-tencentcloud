@@ -131,6 +131,14 @@ class ReplaceRoutesWithRoutePolicyConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceRoutesWithRoutePolicy](https://www.tencentcloud.com/document/api/215/76539)
+        * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+        * Update: [ReplaceRoutesWithRoutePolicy](https://www.tencentcloud.com/document/api/215/76539)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -165,6 +173,14 @@ class ReplaceRoutesWithRoutePolicyConfig(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceRoutesWithRoutePolicy](https://www.tencentcloud.com/document/api/215/76539)
+        * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+        * Update: [ReplaceRoutesWithRoutePolicy](https://www.tencentcloud.com/document/api/215/76539)
 
 
         :param str resource_name: The name of the resource.

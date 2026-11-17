@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     dataEngineName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&type=document&lang=en)
  */
 export function getDescribeDataEngineEvents(args: GetDescribeDataEngineEventsArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeDataEngineEventsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetDescribeDataEngineEventsResult {
  *     dataEngineName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&type=document&lang=en)
  */
 export function getDescribeDataEngineEventsOutput(args: GetDescribeDataEngineEventsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeDataEngineEventsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

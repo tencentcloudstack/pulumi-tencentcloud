@@ -600,6 +600,21 @@ class ClusterEndpoint(pulumi.CustomResource):
             }))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+          - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+          - [DescribeClusterVirtualNode](https://www.tencentcloud.com/document/api/457/53272)
+        * Read:
+          - [DescribeClusterKubeconfig](https://www.tencentcloud.com/document/api/457/38510)
+          - [DescribeClusterSecurity](https://www.tencentcloud.com/search/?wd=DescribeClusterSecurity&type=document&lang=en)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+        * Update: [ModifyClusterEndpointSP](https://www.tencentcloud.com/document/api/457/33864)
+        * Delete: [DescribeClusterSecurity](https://www.tencentcloud.com/search/?wd=DescribeClusterSecurity&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -663,6 +678,21 @@ class ClusterEndpoint(pulumi.CustomResource):
                 },
             }))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+          - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+          - [DescribeClusterVirtualNode](https://www.tencentcloud.com/document/api/457/53272)
+        * Read:
+          - [DescribeClusterKubeconfig](https://www.tencentcloud.com/document/api/457/38510)
+          - [DescribeClusterSecurity](https://www.tencentcloud.com/search/?wd=DescribeClusterSecurity&type=document&lang=en)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+        * Update: [ModifyClusterEndpointSP](https://www.tencentcloud.com/document/api/457/33864)
+        * Delete: [DescribeClusterSecurity](https://www.tencentcloud.com/search/?wd=DescribeClusterSecurity&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

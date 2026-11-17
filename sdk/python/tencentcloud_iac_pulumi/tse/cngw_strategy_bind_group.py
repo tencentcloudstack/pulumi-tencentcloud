@@ -201,6 +201,18 @@ class CngwStrategyBindGroup(pulumi.CustomResource):
             option="bind")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [BindAutoScalerResourceStrategyToGroups](https://www.tencentcloud.com/document/api/1290/79299)
+          - [UnbindAutoScalerResourceStrategyFromGroups](https://www.tencentcloud.com/document/api/1290/79230)
+        * Read: [DescribeAutoScalerResourceStrategyBindingGroups](https://www.tencentcloud.com/document/api/1290/79270)
+        * Update:
+          - [BindAutoScalerResourceStrategyToGroups](https://www.tencentcloud.com/document/api/1290/79299)
+          - [UnbindAutoScalerResourceStrategyFromGroups](https://www.tencentcloud.com/document/api/1290/79230)
+
         ## Import
 
         tse cngw_strategy_bind_group can be imported using the id, e.g.
@@ -238,6 +250,18 @@ class CngwStrategyBindGroup(pulumi.CustomResource):
             group_id="group-a160d123",
             option="bind")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [BindAutoScalerResourceStrategyToGroups](https://www.tencentcloud.com/document/api/1290/79299)
+          - [UnbindAutoScalerResourceStrategyFromGroups](https://www.tencentcloud.com/document/api/1290/79230)
+        * Read: [DescribeAutoScalerResourceStrategyBindingGroups](https://www.tencentcloud.com/document/api/1290/79270)
+        * Update:
+          - [BindAutoScalerResourceStrategyToGroups](https://www.tencentcloud.com/document/api/1290/79299)
+          - [UnbindAutoScalerResourceStrategyFromGroups](https://www.tencentcloud.com/document/api/1290/79230)
 
         ## Import
 

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
 func GetTriggers(ctx *pulumi.Context, args *GetTriggersArgs, opts ...pulumi.InvokeOption) (*GetTriggersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTriggersResult

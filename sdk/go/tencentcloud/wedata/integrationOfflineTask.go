@@ -84,6 +84,18 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateOfflineTask](https://www.tencentcloud.com/document/api/1174/61067)
+//   - [ModifyIntegrationTask](https://www.tencentcloud.com/document/api/1174/61021)
+//
+// * Read: [DescribeIntegrationTask](https://www.tencentcloud.com/document/api/1174/61039)
+// * Update: [ModifyIntegrationTask](https://www.tencentcloud.com/document/api/1174/61021)
+// * Delete: [DeleteOfflineTask](https://www.tencentcloud.com/document/api/1174/61063)
+//
 // ## Import
 //
 // wedata integrationOfflineTask can be imported using the id, e.g.

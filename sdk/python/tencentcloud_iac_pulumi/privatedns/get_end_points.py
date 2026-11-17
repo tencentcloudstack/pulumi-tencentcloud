@@ -126,6 +126,12 @@ def get_end_points(filters: Optional[Sequence[Union['GetEndPointsFilterArgs', 'G
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
+
 
     :param Sequence[Union['GetEndPointsFilterArgs', 'GetEndPointsFilterArgsDict']] filters: Filter parameters. Valid values: EndPointName, EndPointId, EndPointServiceId, and EndPointVip.
     :param _builtins.str result_output_file: Used to save results.
@@ -183,6 +189,12 @@ def get_end_points_output(filters: pulumi.Input[Optional[Optional[Sequence[Union
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
 
 
     :param Sequence[Union['GetEndPointsFilterArgs', 'GetEndPointsFilterArgsDict']] filters: Filter parameters. Valid values: EndPointName, EndPointId, EndPointServiceId, and EndPointVip.

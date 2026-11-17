@@ -30,6 +30,7 @@ class AlarmNoticeArgs:
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_receivers: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeNoticeReceiverArgs']]]] = None,
                  notice_rules: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeNoticeRuleArgs']]]] = None,
+                 secure_detail_status: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  web_callbacks: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeWebCallbackArgs']]]] = None):
@@ -44,6 +45,7 @@ class AlarmNoticeArgs:
         :param pulumi.Input[_builtins.str] name: Alarm notice name.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeNoticeReceiverArgs']]] notice_receivers: Notice receivers.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeNoticeRuleArgs']]] notice_rules: Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        :param pulumi.Input[_builtins.int] secure_detail_status: Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
         :param pulumi.Input[_builtins.str] type: Notice type. Value: Trigger, Recovery, All.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeWebCallbackArgs']]] web_callbacks: Callback info.
@@ -64,6 +66,8 @@ class AlarmNoticeArgs:
             pulumi.set(__self__, "notice_receivers", notice_receivers)
         if notice_rules is not None:
             pulumi.set(__self__, "notice_rules", notice_rules)
+        if secure_detail_status is not None:
+            pulumi.set(__self__, "secure_detail_status", secure_detail_status)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if type is not None:
@@ -166,6 +170,18 @@ class AlarmNoticeArgs:
     @notice_rules.setter
     def notice_rules(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeNoticeRuleArgs']]]]):
         pulumi.set(self, "notice_rules", value)
+
+    @_builtins.property
+    @pulumi.getter(name="secureDetailStatus")
+    def secure_detail_status(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+        """
+        return pulumi.get(self, "secure_detail_status")
+
+    @secure_detail_status.setter
+    def secure_detail_status(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "secure_detail_status", value)
 
     @_builtins.property
     @pulumi.getter
@@ -215,6 +231,7 @@ class _AlarmNoticeState:
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_receivers: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeNoticeReceiverArgs']]]] = None,
                  notice_rules: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeNoticeRuleArgs']]]] = None,
+                 secure_detail_status: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  web_callbacks: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeWebCallbackArgs']]]] = None):
@@ -229,6 +246,7 @@ class _AlarmNoticeState:
         :param pulumi.Input[_builtins.str] name: Alarm notice name.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeNoticeReceiverArgs']]] notice_receivers: Notice receivers.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeNoticeRuleArgs']]] notice_rules: Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        :param pulumi.Input[_builtins.int] secure_detail_status: Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
         :param pulumi.Input[_builtins.str] type: Notice type. Value: Trigger, Recovery, All.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmNoticeWebCallbackArgs']]] web_callbacks: Callback info.
@@ -249,6 +267,8 @@ class _AlarmNoticeState:
             pulumi.set(__self__, "notice_receivers", notice_receivers)
         if notice_rules is not None:
             pulumi.set(__self__, "notice_rules", notice_rules)
+        if secure_detail_status is not None:
+            pulumi.set(__self__, "secure_detail_status", secure_detail_status)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if type is not None:
@@ -351,6 +371,18 @@ class _AlarmNoticeState:
     @notice_rules.setter
     def notice_rules(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmNoticeNoticeRuleArgs']]]]):
         pulumi.set(self, "notice_rules", value)
+
+    @_builtins.property
+    @pulumi.getter(name="secureDetailStatus")
+    def secure_detail_status(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+        """
+        return pulumi.get(self, "secure_detail_status")
+
+    @secure_detail_status.setter
+    def secure_detail_status(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "secure_detail_status", value)
 
     @_builtins.property
     @pulumi.getter
@@ -403,6 +435,7 @@ class AlarmNotice(pulumi.CustomResource):
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_receivers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeNoticeReceiverArgs', 'AlarmNoticeNoticeReceiverArgsDict']]]]] = None,
                  notice_rules: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeNoticeRuleArgs', 'AlarmNoticeNoticeRuleArgsDict']]]]] = None,
+                 secure_detail_status: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  web_callbacks: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeWebCallbackArgs', 'AlarmNoticeWebCallbackArgsDict']]]]] = None,
@@ -422,6 +455,7 @@ class AlarmNotice(pulumi.CustomResource):
             jump_domain="https://console.cloud.tencent.com",
             deliver_status=2,
             alarm_shield_status=2,
+            secure_detail_status=1,
             callback_prioritize=True,
             notice_rules=[{
                 "escalate": True,
@@ -521,6 +555,21 @@ class AlarmNotice(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAlarmNotice](https://www.tencentcloud.com/document/api/614/42829)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/614/42822)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteAlarmNotice](https://www.tencentcloud.com/document/api/614/42827)
+
         ## Import
 
         cls alarm notice can be imported using the id, e.g.
@@ -540,6 +589,7 @@ class AlarmNotice(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Alarm notice name.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmNoticeNoticeReceiverArgs', 'AlarmNoticeNoticeReceiverArgsDict']]]] notice_receivers: Notice receivers.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmNoticeNoticeRuleArgs', 'AlarmNoticeNoticeRuleArgsDict']]]] notice_rules: Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        :param pulumi.Input[_builtins.int] secure_detail_status: Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
         :param pulumi.Input[_builtins.str] type: Notice type. Value: Trigger, Recovery, All.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmNoticeWebCallbackArgs', 'AlarmNoticeWebCallbackArgsDict']]]] web_callbacks: Callback info.
@@ -565,6 +615,7 @@ class AlarmNotice(pulumi.CustomResource):
             jump_domain="https://console.cloud.tencent.com",
             deliver_status=2,
             alarm_shield_status=2,
+            secure_detail_status=1,
             callback_prioritize=True,
             notice_rules=[{
                 "escalate": True,
@@ -663,6 +714,21 @@ class AlarmNotice(pulumi.CustomResource):
                 "createdBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAlarmNotice](https://www.tencentcloud.com/document/api/614/42829)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/614/42822)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteAlarmNotice](https://www.tencentcloud.com/document/api/614/42827)
 
         ## Import
 
@@ -696,6 +762,7 @@ class AlarmNotice(pulumi.CustomResource):
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_receivers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeNoticeReceiverArgs', 'AlarmNoticeNoticeReceiverArgsDict']]]]] = None,
                  notice_rules: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeNoticeRuleArgs', 'AlarmNoticeNoticeRuleArgsDict']]]]] = None,
+                 secure_detail_status: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  web_callbacks: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeWebCallbackArgs', 'AlarmNoticeWebCallbackArgsDict']]]]] = None,
@@ -716,6 +783,7 @@ class AlarmNotice(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["notice_receivers"] = notice_receivers
             __props__.__dict__["notice_rules"] = notice_rules
+            __props__.__dict__["secure_detail_status"] = secure_detail_status
             __props__.__dict__["tags"] = tags
             __props__.__dict__["type"] = type
             __props__.__dict__["web_callbacks"] = web_callbacks
@@ -737,6 +805,7 @@ class AlarmNotice(pulumi.CustomResource):
             name: pulumi.Input[Optional[_builtins.str]] = None,
             notice_receivers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeNoticeReceiverArgs', 'AlarmNoticeNoticeReceiverArgsDict']]]]] = None,
             notice_rules: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeNoticeRuleArgs', 'AlarmNoticeNoticeRuleArgsDict']]]]] = None,
+            secure_detail_status: pulumi.Input[Optional[_builtins.int]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None,
             web_callbacks: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmNoticeWebCallbackArgs', 'AlarmNoticeWebCallbackArgsDict']]]]] = None) -> 'AlarmNotice':
@@ -755,6 +824,7 @@ class AlarmNotice(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Alarm notice name.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmNoticeNoticeReceiverArgs', 'AlarmNoticeNoticeReceiverArgsDict']]]] notice_receivers: Notice receivers.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmNoticeNoticeRuleArgs', 'AlarmNoticeNoticeRuleArgsDict']]]] notice_rules: Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        :param pulumi.Input[_builtins.int] secure_detail_status: Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
         :param pulumi.Input[_builtins.str] type: Notice type. Value: Trigger, Recovery, All.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmNoticeWebCallbackArgs', 'AlarmNoticeWebCallbackArgsDict']]]] web_callbacks: Callback info.
@@ -771,6 +841,7 @@ class AlarmNotice(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["notice_receivers"] = notice_receivers
         __props__.__dict__["notice_rules"] = notice_rules
+        __props__.__dict__["secure_detail_status"] = secure_detail_status
         __props__.__dict__["tags"] = tags
         __props__.__dict__["type"] = type
         __props__.__dict__["web_callbacks"] = web_callbacks
@@ -839,6 +910,14 @@ class AlarmNotice(pulumi.CustomResource):
         Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
         """
         return pulumi.get(self, "notice_rules")
+
+    @_builtins.property
+    @pulumi.getter(name="secureDetailStatus")
+    def secure_detail_status(self) -> pulumi.Output[_builtins.int]:
+        """
+        Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+        """
+        return pulumi.get(self, "secure_detail_status")
 
     @_builtins.property
     @pulumi.getter

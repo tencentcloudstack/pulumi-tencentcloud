@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const cdwpgInstances = tencentcloud.cdwpg.getInstances({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSimpleInstances](https://www.tencentcloud.com/document/api/1138/68300)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetInstancesResult {
  *
  * const cdwpgInstances = tencentcloud.cdwpg.getInstances({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSimpleInstances](https://www.tencentcloud.com/document/api/1138/68300)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

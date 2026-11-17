@@ -235,6 +235,14 @@ class LiveTranscodeRuleAttachment(pulumi.CustomResource):
             template_id=temp.id.apply(lambda x: int(x)))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTranscodeRule](https://www.tencentcloud.com/document/api/267/30791)
+        * Read: [DescribeLiveTranscodeRules](https://www.tencentcloud.com/document/api/267/30787)
+        * Delete: [DeleteLiveTranscodeRule](https://www.tencentcloud.com/document/api/267/30789)
+
         ## Import
 
         css live_transcode_rule_attachment can be imported using the id, e.g.
@@ -289,6 +297,14 @@ class LiveTranscodeRuleAttachment(pulumi.CustomResource):
             stream_name=task.stream_name,
             template_id=temp.id.apply(lambda x: int(x)))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTranscodeRule](https://www.tencentcloud.com/document/api/267/30791)
+        * Read: [DescribeLiveTranscodeRules](https://www.tencentcloud.com/document/api/267/30787)
+        * Delete: [DeleteLiveTranscodeRule](https://www.tencentcloud.com/document/api/267/30789)
 
         ## Import
 

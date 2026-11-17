@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
         /// </summary>
         public static Task<GetAlarmConditionsTemplateResult> InvokeAsync(GetAlarmConditionsTemplateArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
         /// </summary>
         public static Output<GetAlarmConditionsTemplateResult> Invoke(GetAlarmConditionsTemplateInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
         /// </summary>
         public static Output<GetAlarmConditionsTemplateResult> Invoke(GetAlarmConditionsTemplateInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateInvokeArgs(), options.WithDefaults());

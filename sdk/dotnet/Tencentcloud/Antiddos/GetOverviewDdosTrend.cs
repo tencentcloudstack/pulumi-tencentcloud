@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewDDoSTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewDDoSTrend&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOverviewDdosTrendResult> InvokeAsync(GetOverviewDdosTrendArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewDdosTrendResult>("tencentcloud:Antiddos/getOverviewDdosTrend:getOverviewDdosTrend", args ?? new GetOverviewDdosTrendArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewDDoSTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewDDoSTrend&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOverviewDdosTrendResult> Invoke(GetOverviewDdosTrendInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewDdosTrendResult>("tencentcloud:Antiddos/getOverviewDdosTrend:getOverviewDdosTrend", args ?? new GetOverviewDdosTrendInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewDDoSTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewDDoSTrend&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOverviewDdosTrendResult> Invoke(GetOverviewDdosTrendInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewDdosTrendResult>("tencentcloud:Antiddos/getOverviewDdosTrend:getOverviewDdosTrend", args ?? new GetOverviewDdosTrendInvokeArgs(), options.WithDefaults());

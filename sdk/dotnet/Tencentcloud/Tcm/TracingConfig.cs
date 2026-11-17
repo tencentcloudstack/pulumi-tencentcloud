@@ -60,6 +60,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyTracingConfig](https://www.tencentcloud.com/search/?wd=ModifyTracingConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyTracingConfig](https://www.tencentcloud.com/search/?wd=ModifyTracingConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tcm TracingConfig can be imported using the mesh_id, e.g.

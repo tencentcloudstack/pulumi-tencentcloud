@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -25,6 +27,26 @@ import * as utilities from "../utilities";
  *     subAppId: example.subAppId.apply(x =>Number(x)),
  *     quotaType: "Image",
  *     quotaLimit: 100,
+ *     quotaPeriod: "Month",
+ *     resetDay: 1,
+ *     modelQuotaSwitch: "ON",
+ *     modelQuotas: [
+ *         {
+ *             modelName: "model1",
+ *             modelVersion: "v1",
+ *             quotaLimit: 100,
+ *         },
+ *         {
+ *             modelName: "model2",
+ *             modelVersion: "v2",
+ *             quotaLimit: 50,
+ *         },
+ *         {
+ *             modelName: "model3",
+ *             modelVersion: "v3",
+ *             quotaLimit: 80,
+ *         },
+ *     ],
  * });
  * ```
  *
@@ -68,6 +90,15 @@ import * as utilities from "../utilities";
  *     apiToken: exampleAigcApiToken.apiToken,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAigcQuota](https://www.tencentcloud.com/document/api/266/81192)
+ * * Read: [DescribeAigcQuotas](https://www.tencentcloud.com/document/api/266/81190)
+ * * Update: [ModifyAigcQuota](https://www.tencentcloud.com/document/api/266/81189)
+ * * Delete: [DeleteAigcQuota](https://www.tencentcloud.com/document/api/266/81191)
  *
  * ## Import
  *
@@ -119,19 +150,35 @@ export class AigcQuota extends pulumi.CustomResource {
      */
     declare public readonly apiToken: pulumi.Output<string | undefined>;
     /**
+     * Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+     */
+    declare public readonly modelQuotaSwitch: pulumi.Output<string>;
+    /**
+     * Per-model quotas, only valid when `modelQuotaSwitch` is `ON`.
+     */
+    declare public readonly modelQuotas: pulumi.Output<outputs.Vod.AigcQuotaModelQuota[]>;
+    /**
      * Quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds; when `quotaType` is `Text`, count by tokens.
      */
     declare public readonly quotaLimit: pulumi.Output<number>;
+    /**
+     * Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quotaLimit` is the total quota).
+     */
+    declare public readonly quotaPeriod: pulumi.Output<string>;
     /**
      * Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
      */
     declare public readonly quotaType: pulumi.Output<string>;
     /**
+     * Reset day of the month, only valid when `quotaPeriod` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+     */
+    declare public readonly resetDay: pulumi.Output<number>;
+    /**
      * The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
      */
     declare public readonly subAppId: pulumi.Output<number>;
     /**
-     * Current usage amount. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds; when `quotaType` is `Text`, count by tokens.
+     * Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
      */
     declare public /*out*/ readonly usage: pulumi.Output<number>;
 
@@ -149,8 +196,12 @@ export class AigcQuota extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as AigcQuotaState | undefined;
             resourceInputs["apiToken"] = state?.apiToken;
+            resourceInputs["modelQuotaSwitch"] = state?.modelQuotaSwitch;
+            resourceInputs["modelQuotas"] = state?.modelQuotas;
             resourceInputs["quotaLimit"] = state?.quotaLimit;
+            resourceInputs["quotaPeriod"] = state?.quotaPeriod;
             resourceInputs["quotaType"] = state?.quotaType;
+            resourceInputs["resetDay"] = state?.resetDay;
             resourceInputs["subAppId"] = state?.subAppId;
             resourceInputs["usage"] = state?.usage;
         } else {
@@ -165,8 +216,12 @@ export class AigcQuota extends pulumi.CustomResource {
                 throw new Error("Missing required property 'subAppId'");
             }
             resourceInputs["apiToken"] = args?.apiToken;
+            resourceInputs["modelQuotaSwitch"] = args?.modelQuotaSwitch;
+            resourceInputs["modelQuotas"] = args?.modelQuotas;
             resourceInputs["quotaLimit"] = args?.quotaLimit;
+            resourceInputs["quotaPeriod"] = args?.quotaPeriod;
             resourceInputs["quotaType"] = args?.quotaType;
+            resourceInputs["resetDay"] = args?.resetDay;
             resourceInputs["subAppId"] = args?.subAppId;
             resourceInputs["usage"] = undefined /*out*/;
         }
@@ -184,19 +239,35 @@ export interface AigcQuotaState {
      */
     apiToken?: pulumi.Input<string | undefined>;
     /**
+     * Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+     */
+    modelQuotaSwitch?: pulumi.Input<string | undefined>;
+    /**
+     * Per-model quotas, only valid when `modelQuotaSwitch` is `ON`.
+     */
+    modelQuotas?: pulumi.Input<pulumi.Input<inputs.Vod.AigcQuotaModelQuota>[] | undefined>;
+    /**
      * Quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds; when `quotaType` is `Text`, count by tokens.
      */
     quotaLimit?: pulumi.Input<number | undefined>;
+    /**
+     * Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quotaLimit` is the total quota).
+     */
+    quotaPeriod?: pulumi.Input<string | undefined>;
     /**
      * Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
      */
     quotaType?: pulumi.Input<string | undefined>;
     /**
+     * Reset day of the month, only valid when `quotaPeriod` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+     */
+    resetDay?: pulumi.Input<number | undefined>;
+    /**
      * The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
      */
     subAppId?: pulumi.Input<number | undefined>;
     /**
-     * Current usage amount. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds; when `quotaType` is `Text`, count by tokens.
+     * Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
      */
     usage?: pulumi.Input<number | undefined>;
 }
@@ -210,13 +281,29 @@ export interface AigcQuotaArgs {
      */
     apiToken?: pulumi.Input<string | undefined>;
     /**
+     * Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+     */
+    modelQuotaSwitch?: pulumi.Input<string | undefined>;
+    /**
+     * Per-model quotas, only valid when `modelQuotaSwitch` is `ON`.
+     */
+    modelQuotas?: pulumi.Input<pulumi.Input<inputs.Vod.AigcQuotaModelQuota>[] | undefined>;
+    /**
      * Quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds; when `quotaType` is `Text`, count by tokens.
      */
     quotaLimit: pulumi.Input<number>;
     /**
+     * Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quotaLimit` is the total quota).
+     */
+    quotaPeriod?: pulumi.Input<string | undefined>;
+    /**
      * Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
      */
     quotaType: pulumi.Input<string>;
+    /**
+     * Reset day of the month, only valid when `quotaPeriod` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+     */
+    resetDay?: pulumi.Input<number | undefined>;
     /**
      * The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
      */

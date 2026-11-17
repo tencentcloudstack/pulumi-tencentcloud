@@ -167,6 +167,12 @@ def get_time_shift_stream_list(domain: Optional[_builtins.str] = None,
         domain_group="tf-test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
+
 
     :param _builtins.str domain: The push domain.
     :param _builtins.str domain_group: The group the push domain belongs to.
@@ -217,6 +223,12 @@ def get_time_shift_stream_list_output(domain: pulumi.Input[Optional[Optional[_bu
         domain="177154.push.tlivecloud.com",
         domain_group="tf-test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
 
 
     :param _builtins.str domain: The push domain.

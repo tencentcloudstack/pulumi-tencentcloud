@@ -103,6 +103,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [BindApiApp](https://www.tencentcloud.com/search/?wd=BindApiApp&type=document&lang=en)
+// * Read: [DescribeApiAppBindApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApiAppBindApisStatus&type=document&lang=en)
+// * Delete: [UnbindApiApp](https://www.tencentcloud.com/search/?wd=UnbindApiApp&type=document&lang=en)
+//
 // ## Import
 //
 // apigateway apiAppAttachment can be imported using the id, e.g.

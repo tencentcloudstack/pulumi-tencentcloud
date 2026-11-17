@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
 func GetSqlScriptRuns(ctx *pulumi.Context, args *GetSqlScriptRunsArgs, opts ...pulumi.InvokeOption) (*GetSqlScriptRunsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSqlScriptRunsResult

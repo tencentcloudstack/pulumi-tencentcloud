@@ -36,6 +36,12 @@ import * as utilities from "../utilities";
  *     orderByType: "asc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
  */
 export function getReadonlyGroups(args?: GetReadonlyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetReadonlyGroupsResult> {
     args = args || {};
@@ -117,6 +123,12 @@ export interface GetReadonlyGroupsResult {
  *     orderByType: "asc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
  */
 export function getReadonlyGroupsOutput(args?: GetReadonlyGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetReadonlyGroupsResult> {
     args = args || {};

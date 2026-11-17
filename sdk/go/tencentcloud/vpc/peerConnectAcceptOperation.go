@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AcceptVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=AcceptVpcPeeringConnection&type=document&lang=en)
 type PeerConnectAcceptOperation struct {
 	pulumi.CustomResourceState
 

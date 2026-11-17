@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+    /// * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+    /// * Delete: [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+    /// 
     /// ## Import
     /// 
     /// CLB cls log attachment can be imported using the loadBalancerId#logSetId#logTopicId, e.g.

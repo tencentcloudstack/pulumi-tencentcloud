@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ContinueSyncJob](https://www.tencentcloud.com/document/api/571/53980)
+    ///   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncJobContinueOperation:SyncJobContinueOperation")]
     public partial class SyncJobContinueOperation : global::Pulumi.CustomResource

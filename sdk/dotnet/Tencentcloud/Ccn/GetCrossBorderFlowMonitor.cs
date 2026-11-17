@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCrossBorderFlowMonitorResult> InvokeAsync(GetCrossBorderFlowMonitorArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCrossBorderFlowMonitorResult> Invoke(GetCrossBorderFlowMonitorInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCrossBorderFlowMonitorResult> Invoke(GetCrossBorderFlowMonitorInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderFlowMonitorResult>("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args ?? new GetCrossBorderFlowMonitorInvokeArgs(), options.WithDefaults());

@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInvocationTasks](https://www.tencentcloud.com/document/api/1147/46696)
         /// </summary>
         public static Task<GetInvocationTaskResult> InvokeAsync(GetInvocationTaskArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInvocationTasks](https://www.tencentcloud.com/document/api/1147/46696)
         /// </summary>
         public static Output<GetInvocationTaskResult> Invoke(GetInvocationTaskInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInvocationTasks](https://www.tencentcloud.com/document/api/1147/46696)
         /// </summary>
         public static Output<GetInvocationTaskResult> Invoke(GetInvocationTaskInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskInvokeArgs(), options.WithDefaults());

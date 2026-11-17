@@ -47,6 +47,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
         /// </summary>
         public readonly ImmutableArray<string> Procedures;
         /// <summary>
+        /// schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
+        /// </summary>
+        public readonly string SchemaMode;
+        /// <summary>
         /// schema name.
         /// </summary>
         public readonly string SchemaName;
@@ -85,6 +89,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
 
             ImmutableArray<string> procedures,
 
+            string schemaMode,
+
             string schemaName,
 
             string tableMode,
@@ -103,6 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
             NewSchemaName = newSchemaName;
             ProcedureMode = procedureMode;
             Procedures = procedures;
+            SchemaMode = schemaMode;
             SchemaName = schemaName;
             TableMode = tableMode;
             Tables = tables;

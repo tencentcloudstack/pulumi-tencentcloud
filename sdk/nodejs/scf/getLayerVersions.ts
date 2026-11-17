@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     layerName: "tf-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
  */
 export function getLayerVersions(args: GetLayerVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetLayerVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -79,6 +85,12 @@ export interface GetLayerVersionsResult {
  *     layerName: "tf-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
  */
 export function getLayerVersionsOutput(args: GetLayerVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLayerVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

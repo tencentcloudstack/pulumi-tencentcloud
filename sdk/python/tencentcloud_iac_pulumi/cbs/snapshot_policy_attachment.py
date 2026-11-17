@@ -218,6 +218,16 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
             snapshot_policy_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32168)
+        * Read:
+          - [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+          - [DescribeDiskAssociatedAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32164)
+        * Delete: [UnbindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32161)
+
         ## Import
 
         CBS snapshot policy attachment can be imported using the id, e.g.
@@ -324,6 +334,16 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
             ],
             snapshot_policy_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32168)
+        * Read:
+          - [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+          - [DescribeDiskAssociatedAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32164)
+        * Delete: [UnbindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32161)
 
         ## Import
 

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataPvUrlInfo](https://www.tencentcloud.com/document/api/1131/45323)
 func GetPvUrlInfo(ctx *pulumi.Context, args *GetPvUrlInfoArgs, opts ...pulumi.InvokeOption) (*GetPvUrlInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPvUrlInfoResult

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubTasks](https://www.tencentcloud.com/search/?wd=DescribeDatahubTasks&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDatahubTaskResult> InvokeAsync(GetDatahubTaskArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubTasks](https://www.tencentcloud.com/search/?wd=DescribeDatahubTasks&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDatahubTaskResult> Invoke(GetDatahubTaskInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatahubTasks](https://www.tencentcloud.com/search/?wd=DescribeDatahubTasks&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDatahubTaskResult> Invoke(GetDatahubTaskInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskInvokeArgs(), options.WithDefaults());

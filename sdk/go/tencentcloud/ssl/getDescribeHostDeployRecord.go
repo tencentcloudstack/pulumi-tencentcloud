@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHostDeployRecord](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecord&type=document&lang=en)
 func GetDescribeHostDeployRecord(ctx *pulumi.Context, args *GetDescribeHostDeployRecordArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostDeployRecordResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostDeployRecordResult

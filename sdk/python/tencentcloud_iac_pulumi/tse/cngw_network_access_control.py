@@ -191,6 +191,18 @@ class CngwNetworkAccessControl(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+          - [ModifyNetworkAccessStrategy](https://www.tencentcloud.com/document/api/1290/79234)
+        * Read: [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+        * Update:
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+          - [ModifyNetworkAccessStrategy](https://www.tencentcloud.com/document/api/1290/79234)
+
         ## Import
 
         tse cngw_route_rate_limit can be imported using the id, e.g.
@@ -231,6 +243,18 @@ class CngwNetworkAccessControl(pulumi.CustomResource):
                 "cidr_white_lists": ["1.1.1.0"],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+          - [ModifyNetworkAccessStrategy](https://www.tencentcloud.com/document/api/1290/79234)
+        * Read: [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+        * Update:
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+          - [ModifyNetworkAccessStrategy](https://www.tencentcloud.com/document/api/1290/79234)
 
         ## Import
 

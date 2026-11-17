@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const foo = tencentcloud.domains.getInstance({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainNameList](https://www.tencentcloud.com/search/?wd=DescribeDomainNameList&type=document&lang=en)
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
@@ -73,6 +79,12 @@ export interface GetInstanceResult {
  *
  * const foo = tencentcloud.domains.getInstance({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainNameList](https://www.tencentcloud.com/search/?wd=DescribeDomainNameList&type=document&lang=en)
  */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceResult> {
     args = args || {};

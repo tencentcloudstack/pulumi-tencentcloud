@@ -34,6 +34,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read: [DescribeInstanceSSL](https://www.tencentcloud.com/document/api/240/74531)
+    /// * Update:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+    ///   - [InstanceEnableSSL](https://www.tencentcloud.com/document/api/240/74528)
+    /// * Delete:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+    ///   - [InstanceEnableSSL](https://www.tencentcloud.com/document/api/240/74528)
+    /// 
     /// ## Import
     /// 
     /// MongoDB instance SSL configuration can be imported using the instance id, e.g.

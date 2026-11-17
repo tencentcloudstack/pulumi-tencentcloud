@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLogstashInstanceOperations](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceOperations&type=document&lang=en)
 func GetLogstashInstanceOperations(ctx *pulumi.Context, args *GetLogstashInstanceOperationsArgs, opts ...pulumi.InvokeOption) (*GetLogstashInstanceOperationsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogstashInstanceOperationsResult

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     backUpJobId: 1234,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&type=document&lang=en)
  */
 export function getBackupJobDetail(args: GetBackupJobDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupJobDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetBackupJobDetailResult {
  *     backUpJobId: 1234,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&type=document&lang=en)
  */
 export function getBackupJobDetailOutput(args: GetBackupJobDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupJobDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

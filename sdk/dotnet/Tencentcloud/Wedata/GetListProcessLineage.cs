@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListProcessLineage](https://www.tencentcloud.com/document/api/1174/77946)
         /// </summary>
         public static Task<GetListProcessLineageResult> InvokeAsync(GetListProcessLineageArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListProcessLineageResult>("tencentcloud:Wedata/getListProcessLineage:getListProcessLineage", args ?? new GetListProcessLineageArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListProcessLineage](https://www.tencentcloud.com/document/api/1174/77946)
         /// </summary>
         public static Output<GetListProcessLineageResult> Invoke(GetListProcessLineageInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListProcessLineageResult>("tencentcloud:Wedata/getListProcessLineage:getListProcessLineage", args ?? new GetListProcessLineageInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListProcessLineage](https://www.tencentcloud.com/document/api/1174/77946)
         /// </summary>
         public static Output<GetListProcessLineageResult> Invoke(GetListProcessLineageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListProcessLineageResult>("tencentcloud:Wedata/getListProcessLineage:getListProcessLineage", args ?? new GetListProcessLineageInvokeArgs(), options.WithDefaults());

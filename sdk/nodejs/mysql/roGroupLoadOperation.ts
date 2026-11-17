@@ -72,6 +72,12 @@ import * as utilities from "../utilities";
  * });
  * const roGroupLoadOperation = new tencentcloud.mysql.RoGroupLoadOperation("ro_group_load_operation", {roGroupId: example.apply(example => example.instanceLists?.[0]?.roGroups?.[0]?.groupId)});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [BalanceRoGroupLoad](https://www.tencentcloud.com/document/api/236/35192)
  */
 export class RoGroupLoadOperation extends pulumi.CustomResource {
     /**

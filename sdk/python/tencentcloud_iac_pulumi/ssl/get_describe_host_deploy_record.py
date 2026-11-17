@@ -110,6 +110,12 @@ def get_describe_host_deploy_record(certificate_id: Optional[_builtins.str] = No
         resource_type="ddos")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostDeployRecord](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecord&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param _builtins.str resource_type: Resource Type.
@@ -144,6 +150,12 @@ def get_describe_host_deploy_record_output(certificate_id: pulumi.Input[Optional
     describe_host_deploy_record = tencentcloud.ssl.get_describe_host_deploy_record(certificate_id="8u8DII0l",
         resource_type="ddos")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostDeployRecord](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecord&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

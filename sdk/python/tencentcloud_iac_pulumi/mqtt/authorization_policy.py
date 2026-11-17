@@ -525,6 +525,15 @@ class AuthorizationPolicy(pulumi.CustomResource):
             remark="policy remark.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAuthorizationPolicy](https://www.tencentcloud.com/document/api/1294/76536)
+        * Read: [DescribeAuthorizationPolicies](https://www.tencentcloud.com/document/api/1294/76534)
+        * Update: [ModifyAuthorizationPolicy](https://www.tencentcloud.com/document/api/1294/76533)
+        * Delete: [DeleteAuthorizationPolicy](https://www.tencentcloud.com/document/api/1294/76535)
+
         ## Import
 
         MQTT authorization policy can be imported using the id, e.g.
@@ -602,6 +611,15 @@ class AuthorizationPolicy(pulumi.CustomResource):
             ip="192.168.1.0/24",
             remark="policy remark.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAuthorizationPolicy](https://www.tencentcloud.com/document/api/1294/76536)
+        * Read: [DescribeAuthorizationPolicies](https://www.tencentcloud.com/document/api/1294/76534)
+        * Update: [ModifyAuthorizationPolicy](https://www.tencentcloud.com/document/api/1294/76533)
+        * Delete: [DeleteAuthorizationPolicy](https://www.tencentcloud.com/document/api/1294/76535)
 
         ## Import
 

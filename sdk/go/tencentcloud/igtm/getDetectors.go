@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDetectors](https://www.tencentcloud.com/search/?wd=DescribeDetectors&type=document&lang=en)
 func GetDetectors(ctx *pulumi.Context, args *GetDetectorsArgs, opts ...pulumi.InvokeOption) (*GetDetectorsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDetectorsResult

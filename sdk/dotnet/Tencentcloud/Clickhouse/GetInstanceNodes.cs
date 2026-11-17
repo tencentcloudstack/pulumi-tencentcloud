@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstanceNodesResult> InvokeAsync(GetInstanceNodesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceNodesResult> Invoke(GetInstanceNodesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceNodesResult> Invoke(GetInstanceNodesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceNodesResult>("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args ?? new GetInstanceNodesInvokeArgs(), options.WithDefaults());

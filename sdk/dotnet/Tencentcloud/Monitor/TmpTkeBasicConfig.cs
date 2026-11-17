@@ -201,6 +201,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+    ///   - [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
+    /// * Read: [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+    /// * Update:
+    ///   - [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+    ///   - [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpTkeBasicConfig:TmpTkeBasicConfig")]
     public partial class TmpTkeBasicConfig : global::Pulumi.CustomResource

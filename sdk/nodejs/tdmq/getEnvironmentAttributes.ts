@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     clusterId: exampleInstance.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&type=document&lang=en)
  */
 export function getEnvironmentAttributes(args: GetEnvironmentAttributesArgs, opts?: pulumi.InvokeOptions): Promise<GetEnvironmentAttributesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -126,6 +132,12 @@ export interface GetEnvironmentAttributesResult {
  *     clusterId: exampleInstance.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&type=document&lang=en)
  */
 export function getEnvironmentAttributesOutput(args: GetEnvironmentAttributesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEnvironmentAttributesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

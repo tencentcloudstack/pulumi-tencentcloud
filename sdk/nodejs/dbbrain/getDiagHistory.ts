@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
  */
 export function getDiagHistory(args: GetDiagHistoryArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagHistoryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -103,6 +109,12 @@ export interface GetDiagHistoryResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
  */
 export function getDiagHistoryOutput(args: GetDiagHistoryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDiagHistoryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

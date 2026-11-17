@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const firewallRulesTemplate = tencentcloud.lighthouse.getFirewallRulesTemplate({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFirewallRulesTemplate](https://www.tencentcloud.com/document/api/1103/42510)
  */
 export function getFirewallRulesTemplate(args?: GetFirewallRulesTemplateArgs, opts?: pulumi.InvokeOptions): Promise<GetFirewallRulesTemplateResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetFirewallRulesTemplateResult {
  *
  * const firewallRulesTemplate = tencentcloud.lighthouse.getFirewallRulesTemplate({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFirewallRulesTemplate](https://www.tencentcloud.com/document/api/1103/42510)
  */
 export function getFirewallRulesTemplateOutput(args?: GetFirewallRulesTemplateOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFirewallRulesTemplateResult> {
     args = args || {};

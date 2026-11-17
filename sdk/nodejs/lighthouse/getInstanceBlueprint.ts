@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["lhins-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
  */
 export function getInstanceBlueprint(args: GetInstanceBlueprintArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceBlueprintResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetInstanceBlueprintResult {
  *     instanceIds: ["lhins-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
  */
 export function getInstanceBlueprintOutput(args: GetInstanceBlueprintOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceBlueprintResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

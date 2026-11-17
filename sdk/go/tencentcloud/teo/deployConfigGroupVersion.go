@@ -49,6 +49,16 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DeployConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57976)
+//   - [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
+//
+// * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
 type DeployConfigGroupVersion struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +74,7 @@ type DeployConfigGroupVersion struct {
 	Message pulumi.StringOutput `pulumi:"message"`
 	// Deploy record ID.
 	RecordId pulumi.StringOutput `pulumi:"recordId"`
-	// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Zone ID.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
@@ -124,7 +134,7 @@ type deployConfigGroupVersionState struct {
 	Message *string `pulumi:"message"`
 	// Deploy record ID.
 	RecordId *string `pulumi:"recordId"`
-	// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 	Status *string `pulumi:"status"`
 	// Zone ID.
 	ZoneId *string `pulumi:"zoneId"`
@@ -143,7 +153,7 @@ type DeployConfigGroupVersionState struct {
 	Message pulumi.StringPtrInput
 	// Deploy record ID.
 	RecordId pulumi.StringPtrInput
-	// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 	Status pulumi.StringPtrInput
 	// Zone ID.
 	ZoneId pulumi.StringPtrInput
@@ -295,7 +305,7 @@ func (o DeployConfigGroupVersionOutput) RecordId() pulumi.StringOutput {
 	return o.ApplyT(func(v *DeployConfigGroupVersion) pulumi.StringOutput { return v.RecordId }).(pulumi.StringOutput)
 }
 
-// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 func (o DeployConfigGroupVersionOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *DeployConfigGroupVersion) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }

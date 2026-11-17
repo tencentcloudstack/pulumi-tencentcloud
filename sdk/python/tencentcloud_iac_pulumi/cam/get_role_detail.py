@@ -117,6 +117,12 @@ def get_role_detail(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.cam.get_role_detail(role_name="tf-example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str role_id: Role ID, used to specify role. Input either `RoleId` or `RoleName`.
@@ -161,6 +167,12 @@ def get_role_detail_output(result_output_file: pulumi.Input[Optional[Optional[_b
 
     example = tencentcloud.cam.get_role_detail(role_name="tf-example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
 
 
     :param _builtins.str result_output_file: Used to save results.

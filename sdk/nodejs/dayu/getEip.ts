@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     resourceId: "bgpip-000004xg",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
  */
 export function getEip(args: GetEipArgs, opts?: pulumi.InvokeOptions): Promise<GetEipResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetEipResult {
  *     resourceId: "bgpip-000004xg",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
  */
 export function getEipOutput(args: GetEipOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEipResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

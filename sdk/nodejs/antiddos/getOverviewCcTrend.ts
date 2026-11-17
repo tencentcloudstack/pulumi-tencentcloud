@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     business: "bgpip",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&type=document&lang=en)
  */
 export function getOverviewCcTrend(args: GetOverviewCcTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewCcTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetOverviewCcTrendResult {
  *     business: "bgpip",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&type=document&lang=en)
  */
 export function getOverviewCcTrendOutput(args: GetOverviewCcTrendOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOverviewCcTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

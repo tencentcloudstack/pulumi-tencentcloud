@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     renewFlag: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RenewDataEngine](https://www.tencentcloud.com/document/api/1155/62690)
  */
 export class RenewDataEngineOperation extends pulumi.CustomResource {
     /**

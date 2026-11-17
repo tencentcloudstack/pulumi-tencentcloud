@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
         /// </summary>
         public static Task<GetServicesResult> InvokeAsync(GetServicesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetServicesResult>("tencentcloud:Organization/getServices:getServices", args ?? new GetServicesArgs(), options.WithDefaults());
@@ -90,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
         /// </summary>
         public static Output<GetServicesResult> Invoke(GetServicesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetServicesResult>("tencentcloud:Organization/getServices:getServices", args ?? new GetServicesInvokeArgs(), options.WithDefaults());
@@ -131,6 +143,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
         /// </summary>
         public static Output<GetServicesResult> Invoke(GetServicesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetServicesResult>("tencentcloud:Organization/getServices:getServices", args ?? new GetServicesInvokeArgs(), options.WithDefaults());

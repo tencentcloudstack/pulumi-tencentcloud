@@ -56,6 +56,15 @@ import * as utilities from "../utilities";
  * });
  * const exampleSwitchForUpgrade = new tencentcloud.mysql.SwitchForUpgrade("example", {instanceId: example.id});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+ *   - [SwitchForUpgrade](https://www.tencentcloud.com/document/api/236/15864)
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
  */
 export class SwitchForUpgrade extends pulumi.CustomResource {
     /**

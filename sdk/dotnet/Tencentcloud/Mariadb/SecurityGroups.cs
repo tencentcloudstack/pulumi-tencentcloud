@@ -35,6 +35,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/237/39450)
+    /// * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
+    /// * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/237/39446)
+    /// * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/237/39447)
+    /// 
     /// ## Import
     /// 
     /// mariadb SecurityGroups can be imported using the id, e.g.

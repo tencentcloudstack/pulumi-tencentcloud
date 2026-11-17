@@ -118,6 +118,12 @@ def get_check_data_engine_image_can_be_rollback(data_engine_id: Optional[_builti
     example = tencentcloud.dlc.get_check_data_engine_image_can_be_rollback(data_engine_id="DataEngine-80ibn1cj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckDataEngineImageCanBeRollback](https://www.tencentcloud.com/document/api/1155/62695)
+
 
     :param _builtins.str data_engine_id: Unique engine ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -149,6 +155,12 @@ def get_check_data_engine_image_can_be_rollback_output(data_engine_id: pulumi.In
 
     example = tencentcloud.dlc.get_check_data_engine_image_can_be_rollback(data_engine_id="DataEngine-80ibn1cj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckDataEngineImageCanBeRollback](https://www.tencentcloud.com/document/api/1155/62695)
 
 
     :param _builtins.str data_engine_id: Unique engine ID.

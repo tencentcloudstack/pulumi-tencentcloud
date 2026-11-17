@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? SourceVersion;
         /// <summary>
-        /// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        /// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         /// </summary>
         public readonly string? Status;
         /// <summary>

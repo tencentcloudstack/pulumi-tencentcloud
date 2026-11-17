@@ -51,6 +51,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+        ///   - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
         /// </summary>
         public static Task<GetLayer7ListenersResult> InvokeAsync(GetLayer7ListenersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersArgs(), options.WithDefaults());
@@ -94,6 +102,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+        ///   - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
         /// </summary>
         public static Output<GetLayer7ListenersResult> Invoke(GetLayer7ListenersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersInvokeArgs(), options.WithDefaults());
@@ -137,6 +153,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+        ///   - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
         /// </summary>
         public static Output<GetLayer7ListenersResult> Invoke(GetLayer7ListenersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayer7ListenersResult>("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args ?? new GetLayer7ListenersInvokeArgs(), options.WithDefaults());

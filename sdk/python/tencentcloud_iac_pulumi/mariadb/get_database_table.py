@@ -118,6 +118,12 @@ def get_database_table(db_name: Optional[_builtins.str] = None,
         table="server_cost")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
+
 
     :param _builtins.str db_name: database name.
     :param _builtins.str instance_id: instance id.
@@ -157,6 +163,12 @@ def get_database_table_output(db_name: pulumi.Input[Optional[_builtins.str]] = N
         db_name="mysql",
         table="server_cost")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
 
 
     :param _builtins.str db_name: database name.

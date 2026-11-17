@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
         /// </summary>
         public static Task<GetBusResult> InvokeAsync(GetBusArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusArgs(), options.WithDefaults());
@@ -98,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
         /// </summary>
         public static Output<GetBusResult> Invoke(GetBusInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusInvokeArgs(), options.WithDefaults());
@@ -143,6 +155,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
         /// </summary>
         public static Output<GetBusResult> Invoke(GetBusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBusResult>("tencentcloud:Eb/getBus:getBus", args ?? new GetBusInvokeArgs(), options.WithDefaults());

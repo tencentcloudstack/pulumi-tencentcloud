@@ -65,6 +65,15 @@ import * as utilities from "../utilities";
  *     status: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73186)
+ * * Read: [DescribeOwaspWhiteRules](https://www.tencentcloud.com/document/api/627/73181)
+ * * Update: [ModifyOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73176)
+ * * Delete: [DeleteOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73184)
  */
 export class OwaspWhiteRule extends pulumi.CustomResource {
     /**

@@ -35,8 +35,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///         Operate = "unbind-use-default",
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["bindMessage"] = example.Message,
+    ///     };
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
+    /// * Read:
+    ///   - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+    ///   - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+    /// * Delete: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
     /// 
     /// ## Import
     /// 
@@ -54,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Output("entity")]
         public Output<string> Entity { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+        /// </summary>
+        [Output("message")]
+        public Output<string> Message { get; private set; } = null!;
 
         /// <summary>
         /// Bind or unbind operation option. Valid values:
@@ -193,6 +213,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("entity")]
         public Input<string>? Entity { get; set; }
+
+        /// <summary>
+        /// Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+        /// </summary>
+        [Input("message")]
+        public Input<string>? Message { get; set; }
 
         /// <summary>
         /// Bind or unbind operation option. Valid values:

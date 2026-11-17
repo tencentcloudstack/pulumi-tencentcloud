@@ -140,6 +140,12 @@ def get_error_log(end_time: Optional[_builtins.int] = None,
         inst_type="slave")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
+
 
     :param _builtins.int end_time: End timestamp. For example 1585142640.
     :param _builtins.str inst_type: Only valid when the instance is the master instance or disaster recovery instance, the optional value: slave, which means to pull the log of the slave machine.
@@ -189,6 +195,12 @@ def get_error_log_output(end_time: pulumi.Input[Optional[_builtins.int]] = None,
         key_words=["Shutting"],
         inst_type="slave")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
 
 
     :param _builtins.int end_time: End timestamp. For example 1585142640.

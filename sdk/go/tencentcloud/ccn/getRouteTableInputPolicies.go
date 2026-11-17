@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
 func LookupRouteTableInputPolicies(ctx *pulumi.Context, args *LookupRouteTableInputPoliciesArgs, opts ...pulumi.InvokeOption) (*LookupRouteTableInputPoliciesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRouteTableInputPoliciesResult

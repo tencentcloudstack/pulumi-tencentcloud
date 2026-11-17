@@ -96,6 +96,12 @@ def get_proxy_and_statistics_listeners(project_id: Optional[_builtins.int] = Non
     proxy_and_statistics_listeners = tencentcloud.gaap.get_proxy_and_statistics_listeners(project_id=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyAndStatisticsListeners](https://www.tencentcloud.com/document/api/608/33099)
+
 
     :param _builtins.int project_id: Project Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_proxy_and_statistics_listeners_output(project_id: pulumi.Input[Optional[
 
     proxy_and_statistics_listeners = tencentcloud.gaap.get_proxy_and_statistics_listeners(project_id=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyAndStatisticsListeners](https://www.tencentcloud.com/document/api/608/33099)
 
 
     :param _builtins.int project_id: Project Id.

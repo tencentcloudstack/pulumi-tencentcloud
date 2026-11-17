@@ -287,6 +287,12 @@ def get_alarm_history(alarm_levels: Optional[Sequence[_builtins.str]] = None,
         policy_ids=["policy-iejtp4ue"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
+
 
     :param Sequence[_builtins.str] alarm_levels: Alarm levels.
     :param _builtins.str alarm_object: Filter by alarm object. Fuzzy search with string is supported.
@@ -392,6 +398,12 @@ def get_alarm_history_output(alarm_levels: pulumi.Input[Optional[Optional[Sequen
         content="CPU利用率 > 3%",
         policy_ids=["policy-iejtp4ue"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
 
 
     :param Sequence[_builtins.str] alarm_levels: Alarm levels.

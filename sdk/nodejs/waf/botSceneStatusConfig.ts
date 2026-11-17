@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyBotSceneStatus](https://www.tencentcloud.com/search/?wd=ModifyBotSceneStatus&type=document&lang=en)
+ * * Read: [DescribeBotSceneList](https://www.tencentcloud.com/search/?wd=DescribeBotSceneList&type=document&lang=en)
+ * * Update: [ModifyBotSceneStatus](https://www.tencentcloud.com/search/?wd=ModifyBotSceneStatus&type=document&lang=en)
+ *
  * ## Import
  *
  * WAF bot scene status config can be imported using the id, e.g.

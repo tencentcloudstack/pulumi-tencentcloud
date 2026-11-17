@@ -140,6 +140,28 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateInstanceNew](https://www.tencentcloud.com/search/?wd=CreateInstanceNew&type=document&lang=en)
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+ *   - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+ *   - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+ * * Read:
+ *   - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&type=document&lang=en)
+ *   - [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&type=document&lang=en)
+ * * Update:
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+ *   - [ModifyInstance](https://www.tencentcloud.com/search/?wd=ModifyInstance&type=document&lang=en)
+ *   - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+ *   - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+ * * Delete:
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+ *   - [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&type=document&lang=en)
+ *   - [DestroyInstance](https://www.tencentcloud.com/search/?wd=DestroyInstance&type=document&lang=en)
  */
 export class Instance extends pulumi.CustomResource {
     /**
@@ -181,6 +203,10 @@ export class Instance extends pulumi.CustomResource {
      * Payment type.
      */
     declare public readonly chargeProperties: pulumi.Output<outputs.Cdwdoris.InstanceChargeProperties>;
+    /**
+     * Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+     */
+    declare public readonly diskEncrypt: pulumi.Output<number>;
     /**
      * Database password.
      */
@@ -258,6 +284,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["beSpec"] = state?.beSpec;
             resourceInputs["caseSensitive"] = state?.caseSensitive;
             resourceInputs["chargeProperties"] = state?.chargeProperties;
+            resourceInputs["diskEncrypt"] = state?.diskEncrypt;
             resourceInputs["dorisUserPwd"] = state?.dorisUserPwd;
             resourceInputs["enableMultiZones"] = state?.enableMultiZones;
             resourceInputs["feSpec"] = state?.feSpec;
@@ -311,6 +338,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["beSpec"] = args?.beSpec;
             resourceInputs["caseSensitive"] = args?.caseSensitive;
             resourceInputs["chargeProperties"] = args?.chargeProperties;
+            resourceInputs["diskEncrypt"] = args?.diskEncrypt;
             resourceInputs["dorisUserPwd"] = args?.dorisUserPwd ? pulumi.secret(args.dorisUserPwd) : undefined;
             resourceInputs["enableMultiZones"] = args?.enableMultiZones;
             resourceInputs["feSpec"] = args?.feSpec;
@@ -350,6 +378,10 @@ export interface InstanceState {
      * Payment type.
      */
     chargeProperties?: pulumi.Input<inputs.Cdwdoris.InstanceChargeProperties | undefined>;
+    /**
+     * Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+     */
+    diskEncrypt?: pulumi.Input<number | undefined>;
     /**
      * Database password.
      */
@@ -428,6 +460,10 @@ export interface InstanceArgs {
      * Payment type.
      */
     chargeProperties: pulumi.Input<inputs.Cdwdoris.InstanceChargeProperties>;
+    /**
+     * Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+     */
+    diskEncrypt?: pulumi.Input<number | undefined>;
     /**
      * Database password.
      */

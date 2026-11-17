@@ -75,6 +75,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetMonitorData](https://www.tencentcloud.com/document/api/248/33881)
 func GetData(ctx *pulumi.Context, args *GetDataArgs, opts ...pulumi.InvokeOption) (*GetDataResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDataResult

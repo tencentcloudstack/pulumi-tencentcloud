@@ -143,6 +143,12 @@ def get_database_objects(db_name: Optional[_builtins.str] = None,
         db_name="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
+
 
     :param _builtins.str db_name: database name.
     :param _builtins.str instance_id: instance id.
@@ -180,6 +186,12 @@ def get_database_objects_output(db_name: pulumi.Input[Optional[_builtins.str]] =
     database_objects = tencentcloud.mariadb.get_database_objects(instance_id="tdsql-n2fw7pn3",
         db_name="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
 
 
     :param _builtins.str db_name: database name.

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
  */
 export function getBinLog(args: GetBinLogArgs, opts?: pulumi.InvokeOptions): Promise<GetBinLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetBinLogResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
  */
 export function getBinLogOutput(args: GetBinLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBinLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

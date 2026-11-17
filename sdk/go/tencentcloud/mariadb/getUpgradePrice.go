@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&type=document&lang=en)
 func GetUpgradePrice(ctx *pulumi.Context, args *GetUpgradePriceArgs, opts ...pulumi.InvokeOption) (*GetUpgradePriceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUpgradePriceResult

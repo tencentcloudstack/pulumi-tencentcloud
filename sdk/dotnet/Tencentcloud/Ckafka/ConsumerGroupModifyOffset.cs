@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyGroupOffsets](https://www.tencentcloud.com/document/api/597/35355)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/consumerGroupModifyOffset:ConsumerGroupModifyOffset")]
     public partial class ConsumerGroupModifyOffset : global::Pulumi.CustomResource

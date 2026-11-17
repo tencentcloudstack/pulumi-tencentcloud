@@ -155,6 +155,12 @@ def get_job_events(end_timestamp: Optional[_builtins.int] = None,
         work_space_id="space-6w8eab6f")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeJobEvents](https://www.tencentcloud.com/search/?wd=DescribeJobEvents&type=document&lang=en)
+
 
     :param _builtins.int end_timestamp: Filter condition:End Unix timestamp (seconds).
     :param _builtins.str job_id: Job ID.
@@ -208,6 +214,12 @@ def get_job_events_output(end_timestamp: pulumi.Input[Optional[_builtins.int]] =
         ],
         work_space_id="space-6w8eab6f")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeJobEvents](https://www.tencentcloud.com/search/?wd=DescribeJobEvents&type=document&lang=en)
 
 
     :param _builtins.int end_timestamp: Filter condition:End Unix timestamp (seconds).

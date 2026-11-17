@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifySnapshotConfig](https://www.tencentcloud.com/search/?wd=ModifySnapshotConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeSnapshotConfig](https://www.tencentcloud.com/search/?wd=DescribeSnapshotConfig&amp;type=document&amp;lang=en)
+    /// * Update: [ModifySnapshotConfig](https://www.tencentcloud.com/search/?wd=ModifySnapshotConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dnspod SnapshotConfig can be imported using the id, e.g.

@@ -119,6 +119,18 @@ class InvokerConfig(pulumi.CustomResource):
             invoker_status="on")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+          - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+        * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+        * Update:
+          - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+          - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+
         ## Import
 
         tat invoker_config can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class InvokerConfig(pulumi.CustomResource):
             invoker_id="ivk-cas4upyf",
             invoker_status="on")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+          - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+        * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+        * Update:
+          - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+          - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
 
         ## Import
 

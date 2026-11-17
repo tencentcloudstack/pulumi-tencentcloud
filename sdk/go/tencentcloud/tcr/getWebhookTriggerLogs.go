@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
 func GetWebhookTriggerLogs(ctx *pulumi.Context, args *GetWebhookTriggerLogsArgs, opts ...pulumi.InvokeOption) (*GetWebhookTriggerLogsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWebhookTriggerLogsResult

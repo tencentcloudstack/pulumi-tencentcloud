@@ -86,6 +86,12 @@ def get_dest_regions(result_output_file: Optional[_builtins.str] = None,
     dest_regions = tencentcloud.gaap.get_dest_regions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_dest_regions_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     dest_regions = tencentcloud.gaap.get_dest_regions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
 
 
     :param _builtins.str result_output_file: Used to save results.

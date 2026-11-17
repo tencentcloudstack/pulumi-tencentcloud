@@ -166,6 +166,12 @@ def get_backup_overview(product: Optional[_builtins.str] = None,
     backup_overview = tencentcloud.mysql.get_backup_overview(product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
+
 
     :param _builtins.str product: The type of cloud database product to be queried, currently only supports `mysql`.
     :param _builtins.str result_output_file: Used to save results.
@@ -201,6 +207,12 @@ def get_backup_overview_output(product: pulumi.Input[Optional[_builtins.str]] = 
 
     backup_overview = tencentcloud.mysql.get_backup_overview(product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
 
 
     :param _builtins.str product: The type of cloud database product to be queried, currently only supports `mysql`.

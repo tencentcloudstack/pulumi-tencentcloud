@@ -23,6 +23,14 @@ import * as utilities from "../utilities";
  * const recordValue = record;
  * const recordType = recordTypeTencentcloudCdnDomainVerifier;
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&type=document&lang=en)
+ *   - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&type=document&lang=en)
  */
 export function getDomainVerifier(args: GetDomainVerifierArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainVerifierResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -128,6 +136,14 @@ export interface GetDomainVerifierResult {
  * const recordValue = record;
  * const recordType = recordTypeTencentcloudCdnDomainVerifier;
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&type=document&lang=en)
+ *   - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&type=document&lang=en)
  */
 export function getDomainVerifierOutput(args: GetDomainVerifierOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainVerifierResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

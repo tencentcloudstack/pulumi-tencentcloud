@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RecoverBackUpJob](https://www.tencentcloud.com/search/?wd=RecoverBackUpJob&type=document&lang=en)
 type RecoverBackupJob struct {
 	pulumi.CustomResourceState
 

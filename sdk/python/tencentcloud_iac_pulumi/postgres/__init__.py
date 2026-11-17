@@ -2,4 +2,6 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 # Export this package's modules as members:
+from ._inputs import *
+from .audit_log_file import *
 from .audit_service import *

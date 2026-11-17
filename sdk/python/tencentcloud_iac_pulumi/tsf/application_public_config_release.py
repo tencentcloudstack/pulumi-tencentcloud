@@ -153,6 +153,16 @@ class ApplicationPublicConfigRelease(pulumi.CustomResource):
             release_desc="product version")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReleasePublicConfig](https://www.tencentcloud.com/search/?wd=ReleasePublicConfig&type=document&lang=en)
+        * Read: [DescribePublicConfigReleases](https://www.tencentcloud.com/search/?wd=DescribePublicConfigReleases&type=document&lang=en)
+        * Delete:
+          - [DescribePublicConfigReleases](https://www.tencentcloud.com/search/?wd=DescribePublicConfigReleases&type=document&lang=en)
+          - [RevocationPublicConfig](https://www.tencentcloud.com/search/?wd=RevocationPublicConfig&type=document&lang=en)
+
         ## Import
 
         tsf application_public_config_release can be imported using the id, e.g.
@@ -188,6 +198,16 @@ class ApplicationPublicConfigRelease(pulumi.CustomResource):
             namespace_id="namespace-123456",
             release_desc="product version")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReleasePublicConfig](https://www.tencentcloud.com/search/?wd=ReleasePublicConfig&type=document&lang=en)
+        * Read: [DescribePublicConfigReleases](https://www.tencentcloud.com/search/?wd=DescribePublicConfigReleases&type=document&lang=en)
+        * Delete:
+          - [DescribePublicConfigReleases](https://www.tencentcloud.com/search/?wd=DescribePublicConfigReleases&type=document&lang=en)
+          - [RevocationPublicConfig](https://www.tencentcloud.com/search/?wd=RevocationPublicConfig&type=document&lang=en)
 
         ## Import
 

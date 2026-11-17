@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DeleteBackUpData](https://www.tencentcloud.com/search/?wd=DeleteBackUpData&type=document&lang=en)
 type DeleteBackupData struct {
 	pulumi.CustomResourceState
 

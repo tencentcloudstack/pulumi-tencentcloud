@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetOpsWorkflow](https://www.tencentcloud.com/document/api/1174/73829)
 func GetOpsWorkflow(ctx *pulumi.Context, args *GetOpsWorkflowArgs, opts ...pulumi.InvokeOption) (*GetOpsWorkflowResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOpsWorkflowResult

@@ -76,6 +76,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/239/41921)
+    /// * Read: [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/api/239/41926)
+    /// * Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/239/41918)
+    /// * Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/239/41920)
+    /// 
     /// ## Import
     /// 
     /// redis ParamTemplate can be imported using the id, e.g.

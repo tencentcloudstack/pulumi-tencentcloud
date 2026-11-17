@@ -109,6 +109,12 @@ def get_regions(include_unavailable: Optional[_builtins.bool] = None,
     my_favourite_region = tencentcloud.availability.get_regions(name="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegions](https://www.tencentcloud.com/search/?wd=DescribeRegions&type=document&lang=en)
+
 
     :param _builtins.bool include_unavailable: A bool variable indicates that the query will include `UNAVAILABLE` regions.
     :param _builtins.str name: When specified, only the region with the exactly name match will be returned. `default` value means it consistent with the provider region.
@@ -142,6 +148,12 @@ def get_regions_output(include_unavailable: pulumi.Input[Optional[Optional[_buil
 
     my_favourite_region = tencentcloud.availability.get_regions(name="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegions](https://www.tencentcloud.com/search/?wd=DescribeRegions&type=document&lang=en)
 
 
     :param _builtins.bool include_unavailable: A bool variable indicates that the query will include `UNAVAILABLE` regions.

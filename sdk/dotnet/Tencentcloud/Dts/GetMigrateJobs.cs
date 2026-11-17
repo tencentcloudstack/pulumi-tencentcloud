@@ -83,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
         /// </summary>
         public static Task<GetMigrateJobsResult> InvokeAsync(GetMigrateJobsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsArgs(), options.WithDefaults());
@@ -158,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
         /// </summary>
         public static Output<GetMigrateJobsResult> Invoke(GetMigrateJobsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsInvokeArgs(), options.WithDefaults());
@@ -233,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
         /// </summary>
         public static Output<GetMigrateJobsResult> Invoke(GetMigrateJobsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsInvokeArgs(), options.WithDefaults());

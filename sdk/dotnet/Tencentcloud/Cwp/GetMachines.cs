@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/296/30889)
         /// </summary>
         public static Task<GetMachinesResult> InvokeAsync(GetMachinesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachinesResult>("tencentcloud:Cwp/getMachines:getMachines", args ?? new GetMachinesArgs(), options.WithDefaults());
@@ -120,6 +126,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/296/30889)
         /// </summary>
         public static Output<GetMachinesResult> Invoke(GetMachinesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachinesResult>("tencentcloud:Cwp/getMachines:getMachines", args ?? new GetMachinesInvokeArgs(), options.WithDefaults());
@@ -176,6 +188,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/296/30889)
         /// </summary>
         public static Output<GetMachinesResult> Invoke(GetMachinesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachinesResult>("tencentcloud:Cwp/getMachines:getMachines", args ?? new GetMachinesInvokeArgs(), options.WithDefaults());

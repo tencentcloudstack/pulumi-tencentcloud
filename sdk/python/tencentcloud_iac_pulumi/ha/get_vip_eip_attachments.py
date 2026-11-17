@@ -113,6 +113,12 @@ def get_vip_eip_attachments(address_ip: Optional[_builtins.str] = None,
         address_ip="1.1.1.1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+
 
     :param _builtins.str address_ip: Public IP address of EIP to be queried.
     :param _builtins.str havip_id: ID of the attached HA VIP to be queried.
@@ -147,6 +153,12 @@ def get_vip_eip_attachments_output(address_ip: pulumi.Input[Optional[Optional[_b
     foo = tencentcloud.ha.get_vip_eip_attachments(havip_id="havip-kjqwe4ba",
         address_ip="1.1.1.1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
 
 
     :param _builtins.str address_ip: Public IP address of EIP to be queried.

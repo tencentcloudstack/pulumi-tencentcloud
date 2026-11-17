@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
 func GetContentQuota(ctx *pulumi.Context, args *GetContentQuotaArgs, opts ...pulumi.InvokeOption) (*GetContentQuotaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetContentQuotaResult

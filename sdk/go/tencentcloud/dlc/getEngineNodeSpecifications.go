@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeEngineNodeSpec](https://www.tencentcloud.com/search/?wd=DescribeEngineNodeSpec&type=document&lang=en)
 func GetEngineNodeSpecifications(ctx *pulumi.Context, args *GetEngineNodeSpecificationsArgs, opts ...pulumi.InvokeOption) (*GetEngineNodeSpecificationsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEngineNodeSpecificationsResult

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
         /// </summary>
         public static Task<GetDescribeUserTypeResult> InvokeAsync(GetDescribeUserTypeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
         /// </summary>
         public static Output<GetDescribeUserTypeResult> Invoke(GetDescribeUserTypeInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
         /// </summary>
         public static Output<GetDescribeUserTypeResult> Invoke(GetDescribeUserTypeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserTypeResult>("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args ?? new GetDescribeUserTypeInvokeArgs(), options.WithDefaults());

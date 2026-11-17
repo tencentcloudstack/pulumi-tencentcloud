@@ -35,6 +35,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ConfirmMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74213)
+    /// * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
+    /// * Update: [ConfirmMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74213)
+    /// 
     /// ## Import
     /// 
     /// TEO confirm multi-path gateway origin ACL can be imported using the id, e.g.

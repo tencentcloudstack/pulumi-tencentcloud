@@ -41,6 +41,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+ *   - [ModifyNatFwSwitch](https://www.tencentcloud.com/document/api/1160/51332)
+ * * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+ * * Update:
+ *   - [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+ *   - [ModifyNatFwSwitch](https://www.tencentcloud.com/document/api/1160/51332)
+ *
  * ## Import
  *
  * CFW nat firewall switch can be imported using the natInsId#subnetId, e.g.

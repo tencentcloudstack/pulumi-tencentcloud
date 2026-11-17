@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
         /// </summary>
         public static Task<GetInternetAddressQuotaResult> InvokeAsync(GetInternetAddressQuotaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
         /// </summary>
         public static Output<GetInternetAddressQuotaResult> Invoke(GetInternetAddressQuotaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
         /// </summary>
         public static Output<GetInternetAddressQuotaResult> Invoke(GetInternetAddressQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaInvokeArgs(), options.WithDefaults());

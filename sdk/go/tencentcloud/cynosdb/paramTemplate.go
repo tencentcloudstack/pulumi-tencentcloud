@@ -48,6 +48,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/1098/55908)
+// * Read: [DescribeParamTemplateDetail](https://www.tencentcloud.com/document/api/1098/55905)
+// * Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/1098/55903)
+// * Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/1098/55907)
 type ParamTemplate struct {
 	pulumi.CustomResourceState
 

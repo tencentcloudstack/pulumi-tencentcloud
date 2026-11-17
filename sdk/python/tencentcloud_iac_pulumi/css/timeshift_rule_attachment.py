@@ -185,6 +185,16 @@ class TimeshiftRuleAttachment(pulumi.CustomResource):
             stream_name="ppp")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTimeShiftRule](https://www.tencentcloud.com/document/api/267/53726)
+        * Read: [DescribeLiveTimeShiftRules](https://www.tencentcloud.com/document/api/267/53722)
+        * Delete:
+          - [DeleteLiveTimeShiftRule](https://www.tencentcloud.com/document/api/267/53724)
+          - [DescribeLiveTimeShiftRules](https://www.tencentcloud.com/document/api/267/53722)
+
         ## Import
 
         css timeshift_rule_attachment can be imported using the id, e.g.
@@ -222,6 +232,16 @@ class TimeshiftRuleAttachment(pulumi.CustomResource):
             app_name="qqq",
             stream_name="ppp")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTimeShiftRule](https://www.tencentcloud.com/document/api/267/53726)
+        * Read: [DescribeLiveTimeShiftRules](https://www.tencentcloud.com/document/api/267/53722)
+        * Delete:
+          - [DeleteLiveTimeShiftRule](https://www.tencentcloud.com/document/api/267/53724)
+          - [DescribeLiveTimeShiftRules](https://www.tencentcloud.com/document/api/267/53722)
 
         ## Import
 

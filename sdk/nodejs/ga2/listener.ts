@@ -113,6 +113,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateListener](https://www.tencentcloud.com/document/api/1299/83832)
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+ * * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/1299/83843)
+ * * Update:
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+ *   - [ModifyListener](https://www.tencentcloud.com/document/api/1299/83804)
+ * * Delete:
+ *   - [DeleteListener](https://www.tencentcloud.com/document/api/1299/83823)
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+ *
  * ## Import
  *
  * GA2 listener can be imported using the composite id `<global_accelerator_id>#<listener_id>`, e.g.

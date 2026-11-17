@@ -127,6 +127,14 @@ def get_attachments(clb_id: Optional[_builtins.str] = None,
         rule_id="loc-4xxr2cy7")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+      - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
+
 
     :param _builtins.str clb_id: ID of the CLB to be queried.
     :param _builtins.str listener_id: ID of the CLB listener to be queried.
@@ -166,6 +174,14 @@ def get_attachments_output(clb_id: pulumi.Input[Optional[_builtins.str]] = None,
         clb_id="lb-k2zjp9lv",
         rule_id="loc-4xxr2cy7")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+      - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
 
 
     :param _builtins.str clb_id: ID of the CLB to be queried.

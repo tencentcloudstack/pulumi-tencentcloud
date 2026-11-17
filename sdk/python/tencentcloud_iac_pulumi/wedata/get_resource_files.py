@@ -167,6 +167,12 @@ def get_resource_files(create_time_end: Optional[_builtins.str] = None,
         resource_name="tftest.txt")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
+
 
     :param _builtins.str create_time_end: Create time range. specifies the termination time in yyyy-MM-dd HH:MM:ss format.
     :param _builtins.str create_time_start: Create time range. specifies the start time in yyyy-MM-dd HH:MM:ss format.
@@ -225,6 +231,12 @@ def get_resource_files_output(create_time_end: pulumi.Input[Optional[Optional[_b
     wedata_resource_files = tencentcloud.wedata.get_resource_files(project_id="2905622749543821312",
         resource_name="tftest.txt")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
 
 
     :param _builtins.str create_time_end: Create time range. specifies the termination time in yyyy-MM-dd HH:MM:ss format.

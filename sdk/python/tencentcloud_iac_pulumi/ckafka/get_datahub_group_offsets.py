@@ -116,6 +116,12 @@ def get_datahub_group_offsets(group: Optional[_builtins.str] = None,
     datahub_group_offsets = tencentcloud.ckafka.get_datahub_group_offsets()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&type=document&lang=en)
+
 
     :param _builtins.str group: Kafka consumer group.
     :param _builtins.str name: topic name that the task subscribe.
@@ -153,6 +159,12 @@ def get_datahub_group_offsets_output(group: pulumi.Input[Optional[_builtins.str]
 
     datahub_group_offsets = tencentcloud.ckafka.get_datahub_group_offsets()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&type=document&lang=en)
 
 
     :param _builtins.str group: Kafka consumer group.

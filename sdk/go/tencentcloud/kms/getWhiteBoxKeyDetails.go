@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&type=document&lang=en)
 func GetWhiteBoxKeyDetails(ctx *pulumi.Context, args *GetWhiteBoxKeyDetailsArgs, opts ...pulumi.InvokeOption) (*GetWhiteBoxKeyDetailsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWhiteBoxKeyDetailsResult

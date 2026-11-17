@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
         /// </summary>
         public static Task<GetSqlScriptRunsResult> InvokeAsync(GetSqlScriptRunsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSqlScriptRunsResult>("tencentcloud:Wedata/getSqlScriptRuns:getSqlScriptRuns", args ?? new GetSqlScriptRunsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
         /// </summary>
         public static Output<GetSqlScriptRunsResult> Invoke(GetSqlScriptRunsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSqlScriptRunsResult>("tencentcloud:Wedata/getSqlScriptRuns:getSqlScriptRuns", args ?? new GetSqlScriptRunsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
         /// </summary>
         public static Output<GetSqlScriptRunsResult> Invoke(GetSqlScriptRunsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSqlScriptRunsResult>("tencentcloud:Wedata/getSqlScriptRuns:getSqlScriptRuns", args ?? new GetSqlScriptRunsInvokeArgs(), options.WithDefaults());

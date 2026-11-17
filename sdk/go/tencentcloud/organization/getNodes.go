@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52061)
 func GetNodes(ctx *pulumi.Context, args *GetNodesArgs, opts ...pulumi.InvokeOption) (*GetNodesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNodesResult

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     showReplicationLog: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
  */
 export function getReplicationInstanceSyncStatus(args: GetReplicationInstanceSyncStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetReplicationInstanceSyncStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetReplicationInstanceSyncStatusResult {
  *     showReplicationLog: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
  */
 export function getReplicationInstanceSyncStatusOutput(args: GetReplicationInstanceSyncStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetReplicationInstanceSyncStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

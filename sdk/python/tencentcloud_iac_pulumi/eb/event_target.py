@@ -355,6 +355,15 @@ class EventTarget(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTarget](https://www.tencentcloud.com/document/api/1108/45834)
+        * Read: [ListTargets](https://www.tencentcloud.com/document/api/1108/45832)
+        * Update: [UpdateTarget](https://www.tencentcloud.com/document/api/1108/45831)
+        * Delete: [DeleteTarget](https://www.tencentcloud.com/document/api/1108/45833)
+
         ## Import
 
         eb event_target can be imported using the id, e.g.
@@ -464,6 +473,15 @@ class EventTarget(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTarget](https://www.tencentcloud.com/document/api/1108/45834)
+        * Read: [ListTargets](https://www.tencentcloud.com/document/api/1108/45832)
+        * Update: [UpdateTarget](https://www.tencentcloud.com/document/api/1108/45831)
+        * Delete: [DeleteTarget](https://www.tencentcloud.com/document/api/1108/45833)
 
         ## Import
 

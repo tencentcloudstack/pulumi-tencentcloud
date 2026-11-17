@@ -113,6 +113,12 @@ def get_cluster_detail_databases(cluster_id: Optional[_builtins.str] = None,
         db_name="users")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str db_name: Database Name.
@@ -147,6 +153,12 @@ def get_cluster_detail_databases_output(cluster_id: pulumi.Input[Optional[_built
     cluster_detail_databases = tencentcloud.cynosdb.get_cluster_detail_databases(cluster_id="cynosdbmysql-bws8h88b",
         db_name="users")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
 
 
     :param _builtins.str cluster_id: Cluster ID.

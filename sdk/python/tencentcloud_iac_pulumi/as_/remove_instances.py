@@ -179,6 +179,12 @@ class RemoveInstances(pulumi.CustomResource):
             instance_ids=attachment.instance_ids)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RemoveInstances](https://www.tencentcloud.com/document/api/377/31005)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -263,6 +269,12 @@ class RemoveInstances(pulumi.CustomResource):
             auto_scaling_group_id=example_scaling_group.id,
             instance_ids=attachment.instance_ids)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RemoveInstances](https://www.tencentcloud.com/document/api/377/31005)
 
 
         :param str resource_name: The name of the resource.

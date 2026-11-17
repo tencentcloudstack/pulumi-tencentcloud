@@ -128,6 +128,18 @@ class DdosIpAttachmentV2(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+          - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+        * Read: [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+        * Delete:
+          - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+          - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -158,6 +170,18 @@ class DdosIpAttachmentV2(pulumi.CustomResource):
                 "device_type": "cvm",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+          - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+        * Read: [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+        * Delete:
+          - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+          - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
 
 
         :param str resource_name: The name of the resource.

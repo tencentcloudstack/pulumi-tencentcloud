@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// 
     /// ## Example Usage
     /// 
+    /// ### If ResourceType is SUBNET
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -23,154 +25,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    ///     var example = new Tencentcloud.Nat.GatewaySnat("example", new()
     ///     {
-    ///         Product = "nat",
-    ///     });
-    /// 
-    ///     var image = Tencentcloud.Images.GetInstance.Invoke(new()
-    ///     {
-    ///         OsName = "centos",
-    ///     });
-    /// 
-    ///     var instanceTypes = Tencentcloud.Instance.GetTypes.Invoke(new()
-    ///     {
-    ///         Filters = new[]
-    ///         {
-    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
-    ///             {
-    ///                 Name = "zone",
-    ///                 Values = new[]
-    ///                 {
-    ///                     zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
-    ///                 },
-    ///             },
-    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
-    ///             {
-    ///                 Name = "instance-family",
-    ///                 Values = new[]
-    ///                 {
-    ///                     "S5",
-    ///                 },
-    ///             },
-    ///         },
-    ///         CpuCoreCount = 2,
-    ///         ExcludeSoldOut = true,
-    ///     });
-    /// 
-    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
-    ///     {
-    ///         Name = "vpc-example",
-    ///         CidrBlock = "10.0.0.0/16",
-    ///     });
-    /// 
-    ///     // Create route_table and entry
-    ///     var routeTable = new Tencentcloud.Route.Table("route_table", new()
-    ///     {
-    ///         VpcId = vpc.Id,
-    ///         Name = "tf_example",
-    ///     });
-    /// 
-    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    ///     {
-    ///         VpcId = vpc.Id,
-    ///         Name = "subnet-example",
-    ///         CidrBlock = "10.0.0.0/16",
-    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
-    ///         RouteTableId = routeTable.Id,
-    ///     });
-    /// 
-    ///     var eipExample1 = new Tencentcloud.Eip.Instance("eip_example1", new()
-    ///     {
-    ///         Name = "eip_example1",
-    ///     });
-    /// 
-    ///     var eipExample2 = new Tencentcloud.Eip.Instance("eip_example2", new()
-    ///     {
-    ///         Name = "eip_example2",
-    ///     });
-    /// 
-    ///     // Create NAT Gateway
-    ///     var myNat = new Tencentcloud.Nat.Gateway("my_nat", new()
-    ///     {
-    ///         VpcId = vpc.Id,
-    ///         Name = "tf_example_nat_gateway",
-    ///         MaxConcurrent = 3000000,
-    ///         Bandwidth = 500,
-    ///         AssignedEipSets = new[]
-    ///         {
-    ///             eipExample1.PublicIp,
-    ///             eipExample2.PublicIp,
-    ///         },
-    ///     });
-    /// 
-    ///     var routeEntry = new Tencentcloud.Route.TableEntry("route_entry", new()
-    ///     {
-    ///         RouteTableId = routeTable.Id,
-    ///         DestinationCidrBlock = "10.0.0.0/8",
-    ///         NextType = "NAT",
-    ///         NextHub = myNat.Id,
-    ///     });
-    /// 
-    ///     // Subnet Nat gateway snat
-    ///     var subnetSnat = new Tencentcloud.Nat.GatewaySnat("subnet_snat", new()
-    ///     {
-    ///         NatGatewayId = myNat.Id,
+    ///         NatGatewayId = "nat-jmf9955g",
     ///         ResourceType = "SUBNET",
-    ///         SubnetId = subnet.Id,
-    ///         SubnetCidrBlock = subnet.CidrBlock,
-    ///         Description = "terraform test",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         SubnetCidrBlock = "10.0.30.0/24",
+    ///         Description = "remark.",
     ///         PublicIpAddrs = new[]
     ///         {
-    ///             eipExample1.PublicIp,
-    ///             eipExample2.PublicIp,
-    ///         },
-    ///     });
-    /// 
-    ///     // Create instance
-    ///     var example = new Tencentcloud.Instance.Instance("example", new()
-    ///     {
-    ///         InstanceName = "tf_example",
-    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
-    ///         ImageId = image.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
-    ///         InstanceType = instanceTypes.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
-    ///         SystemDiskType = "CLOUD_PREMIUM",
-    ///         SystemDiskSize = 50,
-    ///         Hostname = "user",
-    ///         ProjectId = 0,
-    ///         VpcId = vpc.Id,
-    ///         SubnetId = subnet.Id,
-    ///     });
-    /// 
-    ///     // NetWorkInterface Nat gateway snat
-    ///     var myInstanceSnat = new Tencentcloud.Nat.GatewaySnat("my_instance_snat", new()
-    ///     {
-    ///         NatGatewayId = myNat.Id,
-    ///         ResourceType = "NETWORKINTERFACE",
-    ///         InstanceId = example.Id,
-    ///         InstancePrivateIpAddr = example.PrivateIp,
-    ///         Description = "terraform test",
-    ///         PublicIpAddrs = new[]
-    ///         {
-    ///             eipExample1.PublicIp,
+    ///             "106.55.167.123",
     ///         },
     ///     });
     /// 
     /// });
     /// ```
     /// 
+    /// ### If ResourceType is NETWORKINTERFACE
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Nat.GatewaySnat("example", new()
+    ///     {
+    ///         NatGatewayId = "nat-jmf9955g",
+    ///         ResourceType = "NETWORKINTERFACE",
+    ///         InstanceId = "ins-p97oyxt6",
+    ///         InstancePrivateIpAddr = "10.0.30.62",
+    ///         Description = "remark.",
+    ///         PublicIpAddrs = new[]
+    ///         {
+    ///             "106.55.167.123",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### If ResourceType is USERDEFINED
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Nat.GatewaySnat("example", new()
+    ///     {
+    ///         NatGatewayId = "nat-jmf9955g",
+    ///         ResourceType = "USERDEFINED",
+    ///         InstancePrivateIpAddr = "10.0.40.0/24",
+    ///         Description = "remark.",
+    ///         PublicIpAddrs = new[]
+    ///         {
+    ///             "106.55.167.123",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39646)
+    ///   - [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+    /// * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+    /// * Update: [ModifyNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39643)
+    /// * Delete: [DeleteNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39645)
+    /// 
     /// ## Import
     /// 
-    /// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', ResourceId range `SubnetId`, `InstanceId`, e.g.
+    /// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', ResourceId range `SubnetId`, `InstanceId` and `""`, e.g.
     /// 
     /// SUBNET SNat
+    /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#subnet-hhi88a58
     /// ```
     /// 
     /// NETWORKINTERFACT SNat
+    /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#ins-p97oyxt6
+    /// ```
+    /// 
+    /// USERDEFINED SNat
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Nat/gatewaySnat:GatewaySnat")]
@@ -195,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Output<string?> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE.
+        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE or USERDEFINED.
         /// </summary>
         [Output("instancePrivateIpAddr")]
         public Output<string?> InstancePrivateIpAddr { get; private set; } = null!;
@@ -213,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Output<ImmutableArray<string>> PublicIpAddrs { get; private set; } = null!;
 
         /// <summary>
-        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         /// </summary>
         [Output("resourceType")]
         public Output<string> ResourceType { get; private set; } = null!;
@@ -296,7 +248,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE.
+        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE or USERDEFINED.
         /// </summary>
         [Input("instancePrivateIpAddr")]
         public Input<string>? InstancePrivateIpAddr { get; set; }
@@ -320,7 +272,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
 
         /// <summary>
-        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         /// </summary>
         [Input("resourceType", required: true)]
         public Input<string> ResourceType { get; set; } = null!;
@@ -364,7 +316,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE.
+        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE or USERDEFINED.
         /// </summary>
         [Input("instancePrivateIpAddr")]
         public Input<string>? InstancePrivateIpAddr { get; set; }
@@ -388,7 +340,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
 
         /// <summary>
-        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         /// </summary>
         [Input("resourceType")]
         public Input<string>? ResourceType { get; set; }

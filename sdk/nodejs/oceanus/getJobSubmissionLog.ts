@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     orderType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&type=document&lang=en)
  */
 export function getJobSubmissionLog(args: GetJobSubmissionLogArgs, opts?: pulumi.InvokeOptions): Promise<GetJobSubmissionLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -133,6 +139,12 @@ export interface GetJobSubmissionLogResult {
  *     orderType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&type=document&lang=en)
  */
 export function getJobSubmissionLogOutput(args: GetJobSubmissionLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetJobSubmissionLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

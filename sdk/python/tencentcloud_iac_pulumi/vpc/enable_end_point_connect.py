@@ -153,6 +153,12 @@ class EnableEndPointConnect(pulumi.CustomResource):
             accept_flag=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableVpcEndPointConnect](https://www.tencentcloud.com/document/api/215/40149)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -180,6 +186,12 @@ class EnableEndPointConnect(pulumi.CustomResource):
             end_point_ids=["vpce-6q0ftmke"],
             accept_flag=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableVpcEndPointConnect](https://www.tencentcloud.com/document/api/215/40149)
 
 
         :param str resource_name: The name of the resource.

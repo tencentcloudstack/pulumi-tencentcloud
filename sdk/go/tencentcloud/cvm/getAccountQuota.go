@@ -152,6 +152,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&type=document&lang=en)
 func GetAccountQuota(ctx *pulumi.Context, args *GetAccountQuotaArgs, opts ...pulumi.InvokeOption) (*GetAccountQuotaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountQuotaResult

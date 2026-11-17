@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
         /// </summary>
         public static Task<GetAttackLogHistogramResult> InvokeAsync(GetAttackLogHistogramArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramArgs(), options.WithDefaults());
@@ -108,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
         /// </summary>
         public static Output<GetAttackLogHistogramResult> Invoke(GetAttackLogHistogramInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramInvokeArgs(), options.WithDefaults());
@@ -158,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
         /// </summary>
         public static Output<GetAttackLogHistogramResult> Invoke(GetAttackLogHistogramInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramInvokeArgs(), options.WithDefaults());

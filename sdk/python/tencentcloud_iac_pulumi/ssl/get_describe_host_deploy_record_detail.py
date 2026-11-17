@@ -132,6 +132,12 @@ def get_describe_host_deploy_record_detail(deploy_record_id: Optional[_builtins.
     describe_host_deploy_record_detail = tencentcloud.ssl.get_describe_host_deploy_record_detail(deploy_record_id="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostDeployRecordDetail](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecordDetail&type=document&lang=en)
+
 
     :param _builtins.str deploy_record_id: Deployment record ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -164,6 +170,12 @@ def get_describe_host_deploy_record_detail_output(deploy_record_id: pulumi.Input
 
     describe_host_deploy_record_detail = tencentcloud.ssl.get_describe_host_deploy_record_detail(deploy_record_id="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostDeployRecordDetail](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecordDetail&type=document&lang=en)
 
 
     :param _builtins.str deploy_record_id: Deployment record ID.

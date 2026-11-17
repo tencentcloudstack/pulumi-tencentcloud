@@ -71,6 +71,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Task<GetBasicInstancesResult> InvokeAsync(GetBasicInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesArgs(), options.WithDefaults());
@@ -134,6 +142,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetBasicInstancesResult> Invoke(GetBasicInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesInvokeArgs(), options.WithDefaults());
@@ -197,6 +213,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetBasicInstancesResult> Invoke(GetBasicInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBasicInstancesResult>("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args ?? new GetBasicInstancesInvokeArgs(), options.WithDefaults());

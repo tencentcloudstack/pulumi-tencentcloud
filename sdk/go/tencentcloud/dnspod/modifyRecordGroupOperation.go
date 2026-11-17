@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyRecordToGroup](https://www.tencentcloud.com/document/api/1157/53840)
 type ModifyRecordGroupOperation struct {
 	pulumi.CustomResourceState
 

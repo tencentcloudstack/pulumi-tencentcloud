@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&type=document&lang=en)
 func GetNativeSparkSessions(ctx *pulumi.Context, args *GetNativeSparkSessionsArgs, opts ...pulumi.InvokeOption) (*GetNativeSparkSessionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNativeSparkSessionsResult

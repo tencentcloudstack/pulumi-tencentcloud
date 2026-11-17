@@ -115,6 +115,12 @@ def get_strategy_list(filters: Optional[Sequence[Union['GetStrategyListFilterArg
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&type=document&lang=en)
+
 
     :param Sequence[Union['GetStrategyListFilterArgs', 'GetStrategyListFilterArgsDict']] filters: Strategy filter conditions: StrategyName: strategy name.
     :param _builtins.str instance_id: Instance ID.
@@ -153,6 +159,12 @@ def get_strategy_list_output(filters: pulumi.Input[Optional[Optional[Sequence[Un
             "fuzzy": True,
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&type=document&lang=en)
 
 
     :param Sequence[Union['GetStrategyListFilterArgs', 'GetStrategyListFilterArgsDict']] filters: Strategy filter conditions: StrategyName: strategy name.

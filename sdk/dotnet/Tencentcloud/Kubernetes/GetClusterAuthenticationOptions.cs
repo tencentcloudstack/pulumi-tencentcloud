@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
         /// </summary>
         public static Task<GetClusterAuthenticationOptionsResult> InvokeAsync(GetClusterAuthenticationOptionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
         /// </summary>
         public static Output<GetClusterAuthenticationOptionsResult> Invoke(GetClusterAuthenticationOptionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
         /// </summary>
         public static Output<GetClusterAuthenticationOptionsResult> Invoke(GetClusterAuthenticationOptionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsInvokeArgs(), options.WithDefaults());

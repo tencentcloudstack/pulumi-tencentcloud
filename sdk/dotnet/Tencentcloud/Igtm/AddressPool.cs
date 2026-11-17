@@ -49,6 +49,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAddressPool](https://www.tencentcloud.com/search/?wd=CreateAddressPool&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAddressPoolDetail](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolDetail&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAddressPool](https://www.tencentcloud.com/search/?wd=ModifyAddressPool&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAddressPool](https://www.tencentcloud.com/search/?wd=DeleteAddressPool&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// IGTM address pool can be imported using the id, e.g.

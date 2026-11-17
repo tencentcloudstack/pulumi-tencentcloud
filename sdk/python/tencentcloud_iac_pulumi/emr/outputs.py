@@ -54,6 +54,7 @@ __all__ = [
     'ClusterV2DependService',
     'ClusterV2InstanceChargePrepaid',
     'ClusterV2LoginSettings',
+    'ClusterV2MetaDbGroupInfo',
     'ClusterV2MetaDbInfo',
     'ClusterV2SceneSoftwareConfig',
     'ClusterV2ScriptBootstrapActionConfig',
@@ -3817,6 +3818,138 @@ class ClusterV2LoginSettings(dict):
 
 
 @pulumi.output_type
+class ClusterV2MetaDbGroupInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "defaultMetaVersion":
+            suggest = "default_meta_version"
+        elif key == "linkInstanceId":
+            suggest = "link_instance_id"
+        elif key == "metaDataJdbcUrl":
+            suggest = "meta_data_jdbc_url"
+        elif key == "metaDataPass":
+            suggest = "meta_data_pass"
+        elif key == "metaDataUser":
+            suggest = "meta_data_user"
+        elif key == "metaType":
+            suggest = "meta_type"
+        elif key == "unifyMetaInstanceId":
+            suggest = "unify_meta_instance_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClusterV2MetaDbGroupInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClusterV2MetaDbGroupInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClusterV2MetaDbGroupInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 components: Optional[Sequence[_builtins.str]] = None,
+                 default_meta_version: Optional[_builtins.str] = None,
+                 link_instance_id: Optional[_builtins.str] = None,
+                 meta_data_jdbc_url: Optional[_builtins.str] = None,
+                 meta_data_pass: Optional[_builtins.str] = None,
+                 meta_data_user: Optional[_builtins.str] = None,
+                 meta_type: Optional[_builtins.str] = None,
+                 unify_meta_instance_id: Optional[_builtins.str] = None):
+        """
+        :param Sequence[_builtins.str] components: Components that use the MetaDB. A component can belong to only one `meta_db_group_info` block.
+        :param _builtins.str default_meta_version: MetaDB version, e.g. `mysql8`.
+        :param _builtins.str link_instance_id: CDB instance ID.
+        :param _builtins.str meta_data_jdbc_url: JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+        :param _builtins.str meta_data_pass: Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+        :param _builtins.str meta_data_user: Username of the custom MetaDB.
+        :param _builtins.str meta_type: Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+        :param _builtins.str unify_meta_instance_id: EMR-MetaDB instance ID, required when `meta_type` is `EMR_EXIST_META`.
+        """
+        if components is not None:
+            pulumi.set(__self__, "components", components)
+        if default_meta_version is not None:
+            pulumi.set(__self__, "default_meta_version", default_meta_version)
+        if link_instance_id is not None:
+            pulumi.set(__self__, "link_instance_id", link_instance_id)
+        if meta_data_jdbc_url is not None:
+            pulumi.set(__self__, "meta_data_jdbc_url", meta_data_jdbc_url)
+        if meta_data_pass is not None:
+            pulumi.set(__self__, "meta_data_pass", meta_data_pass)
+        if meta_data_user is not None:
+            pulumi.set(__self__, "meta_data_user", meta_data_user)
+        if meta_type is not None:
+            pulumi.set(__self__, "meta_type", meta_type)
+        if unify_meta_instance_id is not None:
+            pulumi.set(__self__, "unify_meta_instance_id", unify_meta_instance_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def components(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Components that use the MetaDB. A component can belong to only one `meta_db_group_info` block.
+        """
+        return pulumi.get(self, "components")
+
+    @_builtins.property
+    @pulumi.getter(name="defaultMetaVersion")
+    def default_meta_version(self) -> Optional[_builtins.str]:
+        """
+        MetaDB version, e.g. `mysql8`.
+        """
+        return pulumi.get(self, "default_meta_version")
+
+    @_builtins.property
+    @pulumi.getter(name="linkInstanceId")
+    def link_instance_id(self) -> Optional[_builtins.str]:
+        """
+        CDB instance ID.
+        """
+        return pulumi.get(self, "link_instance_id")
+
+    @_builtins.property
+    @pulumi.getter(name="metaDataJdbcUrl")
+    def meta_data_jdbc_url(self) -> Optional[_builtins.str]:
+        """
+        JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+        """
+        return pulumi.get(self, "meta_data_jdbc_url")
+
+    @_builtins.property
+    @pulumi.getter(name="metaDataPass")
+    def meta_data_pass(self) -> Optional[_builtins.str]:
+        """
+        Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+        """
+        return pulumi.get(self, "meta_data_pass")
+
+    @_builtins.property
+    @pulumi.getter(name="metaDataUser")
+    def meta_data_user(self) -> Optional[_builtins.str]:
+        """
+        Username of the custom MetaDB.
+        """
+        return pulumi.get(self, "meta_data_user")
+
+    @_builtins.property
+    @pulumi.getter(name="metaType")
+    def meta_type(self) -> Optional[_builtins.str]:
+        """
+        Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+        """
+        return pulumi.get(self, "meta_type")
+
+    @_builtins.property
+    @pulumi.getter(name="unifyMetaInstanceId")
+    def unify_meta_instance_id(self) -> Optional[_builtins.str]:
+        """
+        EMR-MetaDB instance ID, required when `meta_type` is `EMR_EXIST_META`.
+        """
+        return pulumi.get(self, "unify_meta_instance_id")
+
+
+@pulumi.output_type
 class ClusterV2MetaDbInfo(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -4410,7 +4543,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDat
                  disk_type: Optional[_builtins.str] = None):
         """
         :param _builtins.str _disk_index: **Required** stable identity key for this `data_disk` block. Must be unique within the same node's `data_disk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
-        :param _builtins.str disk_id: Disk ID (read-only, populated from API).
+        :param _builtins.str disk_id: Disk ID.
         :param _builtins.int disk_size: Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
         :param _builtins.str disk_type: Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
         """
@@ -4434,7 +4567,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDat
     @pulumi.getter(name="diskId")
     def disk_id(self) -> Optional[_builtins.str]:
         """
-        Disk ID (read-only, populated from API).
+        Disk ID.
         """
         return pulumi.get(self, "disk_id")
 
@@ -4710,7 +4843,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataD
                  disk_type: Optional[_builtins.str] = None):
         """
         :param _builtins.str _disk_index: **Required** stable identity key for this `data_disk` block. Must be unique within the same node's `data_disk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
-        :param _builtins.str disk_id: Disk ID (read-only, populated from API).
+        :param _builtins.str disk_id: Disk ID.
         :param _builtins.int disk_size: Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
         :param _builtins.str disk_type: Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
         """
@@ -4734,7 +4867,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataD
     @pulumi.getter(name="diskId")
     def disk_id(self) -> Optional[_builtins.str]:
         """
-        Disk ID (read-only, populated from API).
+        Disk ID.
         """
         return pulumi.get(self, "disk_id")
 
@@ -5010,7 +5143,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDat
                  disk_type: Optional[_builtins.str] = None):
         """
         :param _builtins.str _disk_index: **Required** stable identity key for this `data_disk` block. Must be unique within the same node's `data_disk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
-        :param _builtins.str disk_id: Disk ID (read-only, populated from API).
+        :param _builtins.str disk_id: Disk ID.
         :param _builtins.int disk_size: Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
         :param _builtins.str disk_type: Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
         """
@@ -5034,7 +5167,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDat
     @pulumi.getter(name="diskId")
     def disk_id(self) -> Optional[_builtins.str]:
         """
-        Disk ID (read-only, populated from API).
+        Disk ID.
         """
         return pulumi.get(self, "disk_id")
 
@@ -5310,7 +5443,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDat
                  disk_type: Optional[_builtins.str] = None):
         """
         :param _builtins.str _disk_index: **Required** stable identity key for this `data_disk` block. Must be unique within the same node's `data_disk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
-        :param _builtins.str disk_id: Disk ID (read-only, populated from API).
+        :param _builtins.str disk_id: Disk ID.
         :param _builtins.int disk_size: Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
         :param _builtins.str disk_type: Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
         """
@@ -5334,7 +5467,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDat
     @pulumi.getter(name="diskId")
     def disk_id(self) -> Optional[_builtins.str]:
         """
-        Disk ID (read-only, populated from API).
+        Disk ID.
         """
         return pulumi.get(self, "disk_id")
 
@@ -5610,7 +5743,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataD
                  disk_type: Optional[_builtins.str] = None):
         """
         :param _builtins.str _disk_index: **Required** stable identity key for this `data_disk` block. Must be unique within the same node's `data_disk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
-        :param _builtins.str disk_id: Disk ID (read-only, populated from API).
+        :param _builtins.str disk_id: Disk ID.
         :param _builtins.int disk_size: Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
         :param _builtins.str disk_type: Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
         """
@@ -5634,7 +5767,7 @@ class ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataD
     @pulumi.getter(name="diskId")
     def disk_id(self) -> Optional[_builtins.str]:
         """
-        Disk ID (read-only, populated from API).
+        Disk ID.
         """
         return pulumi.get(self, "disk_id")
 

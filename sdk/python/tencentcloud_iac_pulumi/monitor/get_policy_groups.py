@@ -110,6 +110,12 @@ def get_policy_groups(name: Optional[_builtins.str] = None,
     name = tencentcloud.monitor.get_policy_groups(name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+
 
     :param _builtins.str name: Policy group name for query.
     :param Sequence[_builtins.str] policy_view_names: The policy view for query.
@@ -147,6 +153,12 @@ def get_policy_groups_output(name: pulumi.Input[Optional[Optional[_builtins.str]
     ])
     name = tencentcloud.monitor.get_policy_groups(name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
 
 
     :param _builtins.str name: Policy group name for query.

@@ -113,6 +113,12 @@ def get_groups(name: Optional[_builtins.str] = None,
         name="tf_example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisasterRecoverGroups](https://www.tencentcloud.com/document/api/213/33261)
+
 
     :param _builtins.str name: Name of the placement group to be queried.
     :param _builtins.str placement_group_id: ID of the placement group to be queried.
@@ -147,6 +153,12 @@ def get_groups_output(name: pulumi.Input[Optional[Optional[_builtins.str]]] = No
     example = tencentcloud.placement.get_groups(placement_group_id="ps-bwvst92h",
         name="tf_example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisasterRecoverGroups](https://www.tencentcloud.com/document/api/213/33261)
 
 
     :param _builtins.str name: Name of the placement group to be queried.

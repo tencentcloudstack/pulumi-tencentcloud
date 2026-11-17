@@ -15,11 +15,17 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const teoConfigGroupVersionDetail = tencentcloud.teo.getConfigGroupVersionDetail({
+ * const example = tencentcloud.teo.getConfigGroupVersionDetail({
  *     zoneId: "zone-2qtuhspy7cr6",
  *     versionId: "sv-2quhspyeq8r6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
  */
 export function getConfigGroupVersionDetail(args: GetConfigGroupVersionDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigGroupVersionDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -65,6 +71,9 @@ export interface GetConfigGroupVersionDetailResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
+    /**
+     * Version ID.
+     */
     readonly versionId: string;
     readonly zoneId: string;
 }
@@ -77,11 +86,17 @@ export interface GetConfigGroupVersionDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const teoConfigGroupVersionDetail = tencentcloud.teo.getConfigGroupVersionDetail({
+ * const example = tencentcloud.teo.getConfigGroupVersionDetail({
  *     zoneId: "zone-2qtuhspy7cr6",
  *     versionId: "sv-2quhspyeq8r6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
  */
 export function getConfigGroupVersionDetailOutput(args: GetConfigGroupVersionDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigGroupVersionDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

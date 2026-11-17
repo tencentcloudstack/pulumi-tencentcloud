@@ -126,6 +126,382 @@ export namespace Address {
 
 }
 
+export namespace Ags {
+    export interface SandboxToolComputerConfiguration {
+        /**
+         * Built-in OSWorld configuration.
+         */
+        osWorldConfiguration?: pulumi.Input<inputs.Ags.SandboxToolComputerConfigurationOsWorldConfiguration | undefined>;
+        /**
+         * WAA sandbox configuration.
+         */
+        waaConfiguration?: pulumi.Input<inputs.Ags.SandboxToolComputerConfigurationWaaConfiguration | undefined>;
+    }
+
+    export interface SandboxToolComputerConfigurationOsWorldConfiguration {
+        /**
+         * Built-in OSWorld version. Valid values: `osworld1`, `osworld2`. Default value: `osworld1`.
+         */
+        version?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolComputerConfigurationWaaConfiguration {
+        /**
+         * Custom WAA image id.
+         */
+        imageId?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolCustomConfiguration {
+        /**
+         * Startup arguments.
+         */
+        args?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Startup command.
+         */
+        commands?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Sandbox DNS configuration.
+         */
+        dnsConfig?: pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationDnsConfig | undefined>;
+        /**
+         * Environment variables.
+         */
+        envs?: pulumi.Input<pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationEnv>[] | undefined>;
+        /**
+         * Image address.
+         */
+        image?: pulumi.Input<string | undefined>;
+        /**
+         * Image registry type. Valid values: `enterprise`, `personal`, `custom`.
+         */
+        imageRegistryType?: pulumi.Input<string | undefined>;
+        /**
+         * Port configuration.
+         */
+        ports?: pulumi.Input<pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationPort>[] | undefined>;
+        /**
+         * Probe configuration.
+         */
+        probe?: pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationProbe | undefined>;
+        /**
+         * Resource configuration.
+         */
+        resources?: pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationResources | undefined>;
+        /**
+         * Sandbox security context.
+         */
+        securityContext?: pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationSecurityContext | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationDnsConfig {
+        /**
+         * Options, corresponding to the options of resolv.conf.
+         */
+        options?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Search domains, corresponding to the `search` directive of resolv.conf.
+         */
+        searches?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * DNS server addresses. Valid IP addresses are required. Default value: `10.0.0.1`.
+         */
+        servers: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface SandboxToolCustomConfigurationEnv {
+        /**
+         * Environment variable name.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Environment variable value.
+         */
+        value?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationPort {
+        /**
+         * Port name.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Port number.
+         */
+        port?: pulumi.Input<number | undefined>;
+        /**
+         * Protocol.
+         */
+        protocol?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationProbe {
+        /**
+         * Number of consecutive failures required to mark the probe as unhealthy.
+         */
+        failureThreshold?: pulumi.Input<number | undefined>;
+        /**
+         * HTTP GET probe configuration.
+         */
+        httpGet?: pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationProbeHttpGet | undefined>;
+        /**
+         * Interval in milliseconds between two probes.
+         */
+        probePeriodMs?: pulumi.Input<number | undefined>;
+        /**
+         * Timeout in milliseconds of a single probe.
+         */
+        probeTimeoutMs?: pulumi.Input<number | undefined>;
+        /**
+         * Timeout in milliseconds for the probe to become ready.
+         */
+        readyTimeoutMs?: pulumi.Input<number | undefined>;
+        /**
+         * Number of consecutive successes required to mark the probe as healthy.
+         */
+        successThreshold?: pulumi.Input<number | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationProbeHttpGet {
+        /**
+         * Request path.
+         */
+        path?: pulumi.Input<string | undefined>;
+        /**
+         * Request port.
+         */
+        port?: pulumi.Input<number | undefined>;
+        /**
+         * Request scheme.
+         */
+        scheme?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationResources {
+        /**
+         * Amount of cpu resources.
+         */
+        cpu?: pulumi.Input<string | undefined>;
+        /**
+         * Amount of memory resources.
+         */
+        memory?: pulumi.Input<string | undefined>;
+        /**
+         * Custom disk size. Valid values: `1Gi`, `5Gi`, `10Gi`, `20Gi`.
+         */
+        storage?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationSecurityContext {
+        /**
+         * POSIX capabilities that can be added to or removed from the running container.
+         */
+        capabilities?: pulumi.Input<inputs.Ags.SandboxToolCustomConfigurationSecurityContextCapabilities | undefined>;
+        /**
+         * Whether the sandbox runs in privileged mode. Default value: `true`.
+         */
+        privileged?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface SandboxToolCustomConfigurationSecurityContextCapabilities {
+        /**
+         * Capabilities to add. Reference value: `["SYS_ADMIN"]`.
+         */
+        adds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Capabilities to drop. Reference value: `["ALL"]`.
+         */
+        drops?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SandboxToolLogConfiguration {
+        /**
+         * Log push configuration of CLS.
+         */
+        clsConfig?: pulumi.Input<inputs.Ags.SandboxToolLogConfigurationClsConfig | undefined>;
+        /**
+         * Log source configuration.
+         */
+        logSources?: pulumi.Input<inputs.Ags.SandboxToolLogConfigurationLogSources | undefined>;
+    }
+
+    export interface SandboxToolLogConfigurationClsConfig {
+        /**
+         * Id of the CLS log topic used to push sandbox tool logs.
+         */
+        topicId?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolLogConfigurationLogSources {
+        /**
+         * Log files to collect. They must live under the `/logs/` directory, sub directories are not supported and at most 10 files are allowed.
+         */
+        files?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SandboxToolNetworkConfiguration {
+        /**
+         * Network mode. Valid values: `PUBLIC`, `VPC`, `SANDBOX`.
+         */
+        networkMode: pulumi.Input<string>;
+        /**
+         * VPC related configuration. It is used when `networkMode` is `VPC`.
+         */
+        vpcConfig?: pulumi.Input<inputs.Ags.SandboxToolNetworkConfigurationVpcConfig | undefined>;
+    }
+
+    export interface SandboxToolNetworkConfigurationVpcConfig {
+        /**
+         * List of security group ids.
+         */
+        securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * List of VPC subnet ids.
+         */
+        subnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SandboxToolStorageMount {
+        /**
+         * Local mount path inside the sandbox instance.
+         */
+        mountPath?: pulumi.Input<string | undefined>;
+        /**
+         * Name of the storage mount configuration.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Whether the mount is read only. Default value: `false`.
+         */
+        readOnly?: pulumi.Input<boolean | undefined>;
+        /**
+         * Storage configuration.
+         */
+        storageSource?: pulumi.Input<inputs.Ags.SandboxToolStorageMountStorageSource | undefined>;
+        /**
+         * Volume reference.
+         */
+        volume?: pulumi.Input<inputs.Ags.SandboxToolStorageMountVolume | undefined>;
+        /**
+         * Volume template reference and derivation rule.
+         */
+        volumeTemplate?: pulumi.Input<inputs.Ags.SandboxToolStorageMountVolumeTemplate | undefined>;
+    }
+
+    export interface SandboxToolStorageMountStorageSource {
+        /**
+         * AgentBucket storage configuration.
+         */
+        agentBucket?: pulumi.Input<inputs.Ags.SandboxToolStorageMountStorageSourceAgentBucket | undefined>;
+        /**
+         * File storage configuration.
+         */
+        cfs?: pulumi.Input<inputs.Ags.SandboxToolStorageMountStorageSourceCfs | undefined>;
+        /**
+         * Object storage bucket configuration.
+         */
+        cos?: pulumi.Input<inputs.Ags.SandboxToolStorageMountStorageSourceCos | undefined>;
+        /**
+         * Image volume configuration.
+         */
+        image?: pulumi.Input<inputs.Ags.SandboxToolStorageMountStorageSourceImage | undefined>;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceAgentBucket {
+        /**
+         * Access domain of the AgentBucket.
+         */
+        accessDomain?: pulumi.Input<string | undefined>;
+        /**
+         * Library id of the AgentBucket.
+         */
+        libraryId?: pulumi.Input<string | undefined>;
+        /**
+         * Space id of the AgentBucket.
+         */
+        spaceId?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceCfs {
+        /**
+         * Id of the CFS file system.
+         */
+        fileSystemId?: pulumi.Input<string | undefined>;
+        /**
+         * CFS mount path.
+         */
+        path?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceCos {
+        /**
+         * Object storage bucket name.
+         */
+        bucketName?: pulumi.Input<string | undefined>;
+        /**
+         * Object storage bucket path. It must be an absolute path starting with `/`.
+         */
+        bucketPath?: pulumi.Input<string | undefined>;
+        /**
+         * Object storage access endpoint.
+         */
+        endpoint?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolStorageMountStorageSourceImage {
+        /**
+         * Image digest resolved by the cloud side. It is not required in requests and is only reported by the cloud.
+         */
+        digest?: pulumi.Input<string | undefined>;
+        /**
+         * Image registry type. Valid values: `enterprise`, `personal`.
+         */
+        imageRegistryType?: pulumi.Input<string | undefined>;
+        /**
+         * Image address.
+         */
+        reference?: pulumi.Input<string | undefined>;
+        /**
+         * Path inside the image.
+         */
+        subPath?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolStorageMountVolume {
+        /**
+         * Stable volume id in the form `vol-xxxxxxxx`, resolved by the cloud side.
+         */
+        volumeId?: pulumi.Input<string | undefined>;
+        /**
+         * Volume name. The cloud side resolves it into a stable volume id under the current AppId.
+         */
+        volumeName?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SandboxToolStorageMountVolumeTemplate {
+        /**
+         * Reuse key. It can be a literal value or a `${metadata.xxx}` expression.
+         */
+        reuseKey?: pulumi.Input<string | undefined>;
+        /**
+         * Name of the volume template.
+         */
+        volumeTemplateName: pulumi.Input<string>;
+    }
+
+    export interface SandboxToolTag {
+        /**
+         * Tag key.
+         */
+        key?: pulumi.Input<string | undefined>;
+        /**
+         * Tag value.
+         */
+        value?: pulumi.Input<string | undefined>;
+    }
+}
+
 export namespace Antiddos {
     export interface BgpInstanceEnterprisePackageConfig {
         /**
@@ -339,6 +715,28 @@ export namespace Antiddos {
          * Tag value.
          */
         tagValue: pulumi.Input<string>;
+    }
+
+    export interface GetDdosBlockRecordsFilter {
+        /**
+         * Filter field name. Supported: Resource, Status.
+         */
+        name: string;
+        /**
+         * Filter field value.
+         */
+        values: string[];
+    }
+
+    export interface GetDdosBlockRecordsFilterArgs {
+        /**
+         * Filter field name. Supported: Resource, Status.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter field value.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface PacketFilterConfigPacketFilterConfig {
@@ -1433,6 +1831,370 @@ export namespace Batch {
     }
 }
 
+export namespace Bdrc {
+    export interface DisasterRecoveryProtectGroupProtectedResourceStatusSet {
+        /**
+         * Resource count under this status.
+         */
+        count?: pulumi.Input<number | undefined>;
+        /**
+         * Replication pair status.
+         */
+        status?: pulumi.Input<string | undefined>;
+    }
+
+    export interface DisasterRecoverySitePairCrossCloudDetail {
+        /**
+         * Peer cloud region display name.
+         */
+        peerRegionName?: pulumi.Input<string | undefined>;
+        /**
+         * Peer cloud VPC display name.
+         */
+        peerVpcName?: pulumi.Input<string | undefined>;
+        /**
+         * Peer cloud availability zone display name.
+         */
+        peerZoneName?: pulumi.Input<string | undefined>;
+        /**
+         * Source cloud AppId.
+         */
+        sourceAppId?: pulumi.Input<number | undefined>;
+        /**
+         * Source cloud name (peer cloud name in cross-cloud).
+         */
+        sourceCloudName?: pulumi.Input<string | undefined>;
+        /**
+         * Source cloud sub account Uin.
+         */
+        sourceSubAccountUin?: pulumi.Input<string | undefined>;
+        /**
+         * Source cloud master account Uin.
+         */
+        sourceUin?: pulumi.Input<string | undefined>;
+        /**
+         * Source cloud user name.
+         */
+        sourceUserName?: pulumi.Input<string | undefined>;
+        /**
+         * Target cloud AppId.
+         */
+        targetAppId?: pulumi.Input<number | undefined>;
+        /**
+         * Target cloud name (local cloud name in cross-cloud).
+         */
+        targetCloudName?: pulumi.Input<string | undefined>;
+        /**
+         * Target cloud sub account Uin.
+         */
+        targetSubAccountUin?: pulumi.Input<string | undefined>;
+        /**
+         * Target cloud master account Uin.
+         */
+        targetUin?: pulumi.Input<string | undefined>;
+    }
+
+    export interface DisasterRecoverySitePairProtectedResourceSet {
+        /**
+         * List of protected source resource IDs under this type.
+         */
+        resourceIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Resource type (consistent with SitePairType, such as DISK/CFS/INSTANCE).
+         */
+        resourceType?: pulumi.Input<string | undefined>;
+    }
+
+    export interface DisasterRecoverySitePairProtectedResourceStatusSet {
+        /**
+         * Number of resources under this status.
+         */
+        count?: pulumi.Input<number | undefined>;
+        /**
+         * Copy pair status.
+         */
+        status?: pulumi.Input<string | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParameters {
+        /**
+         * Copy pair ID for drill scenarios.
+         */
+        copyPairId?: pulumi.Input<string | undefined>;
+        /**
+         * Data disk list.
+         */
+        dataDisks?: pulumi.Input<pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersDataDisk>[] | undefined>;
+        /**
+         * Placement group ID list.
+         */
+        disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Enhanced service config.
+         */
+        enhancedService?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedService | undefined>;
+        /**
+         * Instance hostname.
+         */
+        hostName?: pulumi.Input<string | undefined>;
+        /**
+         * Image ID.
+         */
+        imageId: pulumi.Input<string>;
+        /**
+         * Prepaid billing settings.
+         */
+        instanceChargePrepaid?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersInstanceChargePrepaid | undefined>;
+        /**
+         * Instance billing mode.
+         */
+        instanceChargeType: pulumi.Input<string>;
+        /**
+         * Instance display name.
+         */
+        instanceName?: pulumi.Input<string | undefined>;
+        /**
+         * Instance type.
+         */
+        instanceType?: pulumi.Input<string | undefined>;
+        /**
+         * Public bandwidth config.
+         */
+        internetAccessible?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersInternetAccessible | undefined>;
+        /**
+         * Login settings.
+         */
+        loginSettings?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersLoginSettings | undefined>;
+        /**
+         * Instance placement.
+         */
+        placement: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersPlacement>;
+        /**
+         * Recovery time point for drill scenarios.
+         */
+        recoveryTime?: pulumi.Input<string | undefined>;
+        /**
+         * Source CVM ID.
+         */
+        sourceInstanceId: pulumi.Input<string>;
+        /**
+         * Spot instance max bid.
+         */
+        spotPrice?: pulumi.Input<string | undefined>;
+        /**
+         * Shutdown billing mode.
+         */
+        stoppedMode?: pulumi.Input<string | undefined>;
+        /**
+         * System disk.
+         */
+        systemDisk: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersSystemDisk>;
+        /**
+         * User data for the instance.
+         */
+        userData?: pulumi.Input<string | undefined>;
+        /**
+         * VPC config.
+         */
+        virtualPrivateCloud?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersVirtualPrivateCloud | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersDataDisk {
+        /**
+         * Delete with instance.
+         */
+        deleteWithInstance?: pulumi.Input<boolean | undefined>;
+        /**
+         * Cloud disk size in GB.
+         */
+        diskSize?: pulumi.Input<number | undefined>;
+        /**
+         * Cloud disk type.
+         */
+        diskType?: pulumi.Input<string | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedService {
+        /**
+         * Automation service.
+         */
+        automationService?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceAutomationService | undefined>;
+        /**
+         * Basic service.
+         */
+        basicService?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceBasicService | undefined>;
+        /**
+         * Monitor service.
+         */
+        monitorService?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceMonitorService | undefined>;
+        /**
+         * Security service.
+         */
+        securityService?: pulumi.Input<inputs.Bdrc.InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceSecurityService | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceAutomationService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceBasicService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceMonitorService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersEnhancedServiceSecurityService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersInstanceChargePrepaid {
+        /**
+         * Purchase duration in months.
+         */
+        period: pulumi.Input<number>;
+        /**
+         * Auto renewal flag.
+         */
+        renewFlag?: pulumi.Input<string | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersInternetAccessible {
+        /**
+         * Network billing type.
+         */
+        internetChargeType?: pulumi.Input<string | undefined>;
+        /**
+         * Public network outbound bandwidth cap in Mbps.
+         */
+        internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
+        /**
+         * Network service provider.
+         */
+        internetServiceProvider?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to assign a public IP.
+         */
+        publicIpAssigned?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersLoginSettings {
+        /**
+         * Keep image login settings.
+         */
+        keepImageLogin?: pulumi.Input<string | undefined>;
+        /**
+         * Key ID list.
+         */
+        keyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Instance login password.
+         */
+        password?: pulumi.Input<string | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersPlacement {
+        /**
+         * Dedicated host ID.
+         */
+        hostId?: pulumi.Input<string | undefined>;
+        /**
+         * Dedicated host ID list.
+         */
+        hostIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Project ID.
+         */
+        projectId?: pulumi.Input<number | undefined>;
+        /**
+         * Project name.
+         */
+        projectName?: pulumi.Input<string | undefined>;
+        /**
+         * Zone ID.
+         */
+        zone: pulumi.Input<string>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersSystemDisk {
+        /**
+         * Cloud disk size in GB.
+         */
+        diskSize?: pulumi.Input<number | undefined>;
+        /**
+         * Cloud disk type.
+         */
+        diskType?: pulumi.Input<string | undefined>;
+    }
+
+    export interface InstanceCopyPairCreateTargetInstanceParametersVirtualPrivateCloud {
+        /**
+         * Used as public network gateway.
+         */
+        asVpcGateway?: pulumi.Input<boolean | undefined>;
+        /**
+         * Number of IPv6 addresses.
+         */
+        ipv6AddressCount?: pulumi.Input<number | undefined>;
+        /**
+         * Private IP address list.
+         */
+        privateIpAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Subnet ID.
+         */
+        subnetId: pulumi.Input<string>;
+        /**
+         * Subnet name.
+         */
+        subnetName?: pulumi.Input<string | undefined>;
+        /**
+         * VPC ID.
+         */
+        vpcId: pulumi.Input<string>;
+        /**
+         * VPC name.
+         */
+        vpcName?: pulumi.Input<string | undefined>;
+    }
+
+    export interface InstanceCopyPairDiskCopyPairSet {
+        /**
+         * Disk copy pair ID.
+         */
+        copyPairId?: pulumi.Input<string | undefined>;
+        /**
+         * Disk copy pair name.
+         */
+        copyPairName?: pulumi.Input<string | undefined>;
+        /**
+         * Creation time.
+         */
+        createTime?: pulumi.Input<string | undefined>;
+        /**
+         * Source resource ID.
+         */
+        sourceResourceId?: pulumi.Input<string | undefined>;
+        /**
+         * Target resource ID.
+         */
+        targetResourceId?: pulumi.Input<string | undefined>;
+    }
+}
+
 export namespace Bh {
     export interface DeviceDeviceSet {
         /**
@@ -1752,9 +2514,58 @@ export namespace Cam {
          */
         value: pulumi.Input<string>;
     }
+
+    export interface UpdatePasswordRuleConfigRules {
+        /**
+         * Forced password change period.
+         */
+        forcePasswordChange?: pulumi.Input<number | undefined>;
+        /**
+         * Minimum password length.
+         */
+        minimumLength?: pulumi.Input<number | undefined>;
+        /**
+         * Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+         */
+        mustContain?: pulumi.Input<string | undefined>;
+        /**
+         * Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+         */
+        passwordExpirationInvalidation?: pulumi.Input<number | undefined>;
+        /**
+         * Number of allowed password retries.
+         */
+        retryPasswordLimit?: pulumi.Input<number | undefined>;
+        /**
+         * Number of previous passwords that cannot be reused.
+         */
+        reusePasswordLimit?: pulumi.Input<number | undefined>;
+    }
 }
 
 export namespace Cat {
+    export interface GetProbeTasksTagFilter {
+        /**
+         * Tag key.
+         */
+        key: string;
+        /**
+         * Tag value.
+         */
+        value: string;
+    }
+
+    export interface GetProbeTasksTagFilterArgs {
+        /**
+         * Tag key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
+        value: pulumi.Input<string>;
+    }
+
     export interface TaskSetBatchTasks {
         /**
          * Task name.
@@ -1832,6 +2643,10 @@ export namespace Ccn {
          * InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
          */
         instanceType?: pulumi.Input<string | undefined>;
+        /**
+         * Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+         */
+        orderType?: pulumi.Input<string | undefined>;
         /**
          * ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
          */
@@ -2642,15 +3457,15 @@ export namespace Cdn {
          */
         certificateContent: pulumi.Input<string>;
         /**
-         * Client certificate name.
+         * Server certificate name.
          */
         certificateName?: pulumi.Input<string | undefined>;
         /**
-         * Deploy time of client certificate.
+         * Deploy time of server certificate.
          */
         deployTime?: pulumi.Input<string | undefined>;
         /**
-         * Expire time of client certificate.
+         * Expire time of server certificate.
          */
         expireTime?: pulumi.Input<string | undefined>;
     }
@@ -2856,7 +3671,11 @@ export namespace Cdn {
          */
         originType: pulumi.Input<string>;
         /**
-         * Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+         * Origin path rewrite rules. Each element configures a path-based origin routing rule.
+         */
+        pathRules?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainOriginPathRule>[] | undefined>;
+        /**
+         * Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
          */
         serverName?: pulumi.Input<string | undefined>;
     }
@@ -2866,6 +3685,25 @@ export namespace Cdn {
          * Configuration switch, valid values are `on` and `off`.
          */
         switch: pulumi.Input<string>;
+    }
+
+    export interface DomainOriginPathRule {
+        /**
+         * URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+         */
+        forwardUri?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to use full path match.
+         */
+        fullMatch?: pulumi.Input<boolean | undefined>;
+        /**
+         * Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+         */
+        path?: pulumi.Input<string | undefined>;
+        /**
+         * Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+         */
+        serverName?: pulumi.Input<string | undefined>;
     }
 
     export interface DomainOriginPullOptimization {
@@ -10123,9 +10961,29 @@ export namespace Cls {
          */
         alias: pulumi.Input<string>;
         /**
+         * External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+         */
+        externalId?: pulumi.Input<string | undefined>;
+        /**
+         * Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+         */
+        isCrossAccount?: pulumi.Input<boolean | undefined>;
+        /**
+         * Name of the logset that contains the destination topic. Used in cross-account scenario.
+         */
+        logsetName?: pulumi.Input<string | undefined>;
+        /**
+         * In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+         */
+        roleArn?: pulumi.Input<string | undefined>;
+        /**
          * Dst topic ID.
          */
         topicId: pulumi.Input<string>;
+        /**
+         * Name of the destination topic. Used in cross-account scenario.
+         */
+        topicName?: pulumi.Input<string | undefined>;
     }
 
     export interface DataTransformEnvInfo {
@@ -10137,6 +10995,62 @@ export namespace Cls {
          * Environment variable value.
          */
         value: pulumi.Input<string>;
+    }
+
+    export interface DeliverTaskDeliverRule {
+        /**
+         * Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+         */
+        dataScope: pulumi.Input<number>;
+    }
+
+    export interface DeliverTaskSourceTopicConfig {
+        /**
+         * Source logset id.
+         */
+        logsetId: pulumi.Input<string>;
+        /**
+         * Topic filter type. 1: static select.
+         */
+        topicFilterType: pulumi.Input<number>;
+        /**
+         * Source topic list.
+         */
+        topics?: pulumi.Input<pulumi.Input<inputs.Cls.DeliverTaskSourceTopicConfigTopic>[] | undefined>;
+    }
+
+    export interface DeliverTaskSourceTopicConfigTopic {
+        /**
+         * Log topic id.
+         */
+        topicId: pulumi.Input<string>;
+    }
+
+    export interface DeliverTaskTargetTopicConfig {
+        /**
+         * Target account type. 1: current main account, 2: other main account.
+         */
+        accountType: pulumi.Input<number>;
+        /**
+         * External ID, required when AccountType=2.
+         */
+        externalId?: pulumi.Input<string | undefined>;
+        /**
+         * Target logset id.
+         */
+        logsetId: pulumi.Input<string>;
+        /**
+         * Target region, e.g. ap-guangzhou.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Role ARN, required when AccountType=2.
+         */
+        roleArn?: pulumi.Input<string | undefined>;
+        /**
+         * Target topic id.
+         */
+        topicId: pulumi.Input<string>;
     }
 
     export interface DlcDeliverDlcInfo {
@@ -10992,6 +11906,17 @@ export namespace Cls {
         userName?: pulumi.Input<string | undefined>;
     }
 
+    export interface LogsetTagList {
+        /**
+         * Tag key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
+        value: pulumi.Input<string>;
+    }
+
     export interface MachineGroupMachineGroupType {
         /**
          * Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
@@ -11092,15 +12017,46 @@ export namespace Cls {
         title?: pulumi.Input<string | undefined>;
     }
 
+    export interface RemoteWriteTaskAuthInfo {
+        /**
+         * Basic auth password.
+         */
+        password?: pulumi.Input<string | undefined>;
+        /**
+         * Basic auth token.
+         */
+        token?: pulumi.Input<string | undefined>;
+        /**
+         * Basic auth username.
+         */
+        username?: pulumi.Input<string | undefined>;
+    }
+
     export interface ScheduledSqlDstResource {
         /**
          * topic type.
          */
         bizType?: pulumi.Input<number | undefined>;
         /**
+         * custom metric labels, used to add static dimensions to metrics.
+         */
+        customMetricLabels?: pulumi.Input<pulumi.Input<inputs.Cls.ScheduledSqlDstResourceCustomMetricLabel>[] | undefined>;
+        /**
+         * metric timestamp field, the default value is the left boundary time of the SQL query range.
+         */
+        customTime?: pulumi.Input<string | undefined>;
+        /**
+         * metric dimensions, time type is not accepted.
+         */
+        metricLabels?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
          * metric name.
          */
         metricName?: pulumi.Input<string | undefined>;
+        /**
+         * metric names, used when bizType is 1 (metric topic) for multi-metric scenarios.
+         */
+        metricNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
         /**
          * topic region.
          */
@@ -11109,6 +12065,78 @@ export namespace Cls {
          * dst topic id.
          */
         topicId: pulumi.Input<string>;
+    }
+
+    export interface ScheduledSqlDstResourceCustomMetricLabel {
+        /**
+         * custom metric label key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * custom metric label value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface SplunkDeliverExternalRole {
+        /**
+         * Cross-account delivery role name.
+         */
+        externalId: pulumi.Input<string>;
+        /**
+         * Cross-account delivery role RoleArn.
+         */
+        roleArn: pulumi.Input<string>;
+    }
+
+    export interface SplunkDeliverMetadataInfo {
+        /**
+         * Whether to deliver __TAG__ field.
+         */
+        enableTag?: pulumi.Input<boolean | undefined>;
+        /**
+         * Data format. Valid values: rawlog, json.
+         */
+        format: pulumi.Input<string>;
+        /**
+         * Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+         */
+        metaFields?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Whether to flatten JSON. Required when enableTag is true.
+         */
+        tagJsonTiled?: pulumi.Input<boolean | undefined>;
+    }
+
+    export interface SplunkDeliverNetInfo {
+        /**
+         * Network address.
+         */
+        host: pulumi.Input<string>;
+        /**
+         * Whether to use SSL. Default is false.
+         */
+        isSsl?: pulumi.Input<boolean | undefined>;
+        /**
+         * Network type. 1: internal network, 2: external network.
+         */
+        netType: pulumi.Input<number>;
+        /**
+         * Port.
+         */
+        port: pulumi.Input<number>;
+        /**
+         * Authentication token.
+         */
+        token: pulumi.Input<string>;
+        /**
+         * Network service type. Required when netType is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+         */
+        virtualGatewayType?: pulumi.Input<number | undefined>;
+        /**
+         * VPC ID. Required when netType is internal network.
+         */
+        vpcId?: pulumi.Input<string | undefined>;
     }
 
     export interface TopicCustomKmsInfo {
@@ -11862,6 +12890,10 @@ export namespace Cos {
 
     export interface BucketWebsite {
         /**
+         * To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+         */
+        charity404?: pulumi.Input<string | undefined>;
+        /**
          * `Endpoint` of the static website.
          */
         endpoint?: pulumi.Input<string | undefined>;
@@ -11873,6 +12905,10 @@ export namespace Cos {
          * COS returns this index document when requests are made to the root domain or any of the subfolders.
          */
         indexDocument?: pulumi.Input<string | undefined>;
+        /**
+         * The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+         */
+        originalHttpStatus?: pulumi.Input<string | undefined>;
         /**
          * Redirects all request configurations. Valid values: http, https. Default is `http`.
          */
@@ -12555,7 +13591,7 @@ export namespace Cvm {
          */
         deleteWithInstance?: pulumi.Input<boolean | undefined>;
         /**
-         * Data disk ID.
+         * System disk ID.
          */
         diskId?: pulumi.Input<string | undefined>;
         /**
@@ -15490,7 +16526,7 @@ export namespace Dlc {
          */
         function?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The policy ID.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -15648,7 +16684,7 @@ export namespace Dlc {
          */
         function?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The policy ID.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -16707,6 +17743,290 @@ export namespace Dlc {
          * Attribute value, if there are multiple Values in the same Filter, the relationship between the Values under the same Filter is a logical OR relationship.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface MetaDatabaseGovernPolicy {
+        /**
+         * Govern engine.
+         */
+        governEngine?: pulumi.Input<string | undefined>;
+        /**
+         * Govern rule type, `Customize` or `Intelligence`.
+         */
+        ruleType?: pulumi.Input<string | undefined>;
+    }
+
+    export interface MetaDatabaseMetaDatabaseInfo {
+        /**
+         * Description of the DLC meta database, length 0~2048.
+         */
+        comment?: pulumi.Input<string | undefined>;
+        /**
+         * Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+         */
+        databaseName: pulumi.Input<string>;
+    }
+
+    export interface MetaDatabaseProperty {
+        /**
+         * Property key.
+         */
+        key?: pulumi.Input<string | undefined>;
+        /**
+         * Property value.
+         */
+        value?: pulumi.Input<string | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicy {
+        /**
+         * Base info of smart policy.
+         */
+        baseInfo?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyBaseInfo | undefined>;
+        /**
+         * Policy description of smart policy.
+         */
+        policy?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicy | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyBaseInfo {
+        /**
+         * User AppID.
+         */
+        appId?: pulumi.Input<string | undefined>;
+        /**
+         * Catalog name.
+         */
+        catalog?: pulumi.Input<string | undefined>;
+        /**
+         * Database name.
+         */
+        database?: pulumi.Input<string | undefined>;
+        /**
+         * Policy type.
+         */
+        policyType?: pulumi.Input<string | undefined>;
+        /**
+         * Table name.
+         */
+        table?: pulumi.Input<string | undefined>;
+        /**
+         * User UIN.
+         */
+        uin: pulumi.Input<string>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicy {
+        /**
+         * Change table policy.
+         */
+        changeTable?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyChangeTable | undefined>;
+        /**
+         * Index policy.
+         */
+        index?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyIndex | undefined>;
+        /**
+         * Whether to inherit.
+         */
+        inherit?: pulumi.Input<string | undefined>;
+        /**
+         * Data lifecycle policy.
+         */
+        lifecycle?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyLifecycle | undefined>;
+        /**
+         * Data governance resources.
+         */
+        resources?: pulumi.Input<pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyResource>[] | undefined>;
+        /**
+         * Table expiration policy.
+         */
+        tableExpiration?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyTableExpiration | undefined>;
+        /**
+         * Data rewrite policy.
+         */
+        written?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyWritten | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyChangeTable {
+        /**
+         * Data retention time of change table, in days.
+         */
+        dataRetentionTime?: pulumi.Input<number | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyIndex {
+        /**
+         * Whether to enable index.
+         */
+        indexEnable?: pulumi.Input<string | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyLifecycle {
+        /**
+         * Whether to drop table (deprecated, use tableExpiration instead).
+         */
+        dropTable?: pulumi.Input<boolean | undefined>;
+        /**
+         * Expiration time.
+         */
+        expiration?: pulumi.Input<number | undefined>;
+        /**
+         * Expired field.
+         */
+        expiredField?: pulumi.Input<string | undefined>;
+        /**
+         * Expired field format.
+         */
+        expiredFieldFormat?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to enable lifecycle.
+         */
+        lifecycleEnable?: pulumi.Input<string | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyResource {
+        /**
+         * Attribution type.
+         */
+        attributionType?: pulumi.Input<string | undefined>;
+        /**
+         * Affinity info.
+         */
+        favors?: pulumi.Input<pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyResourceFavor>[] | undefined>;
+        /**
+         * Instance name.
+         */
+        instance?: pulumi.Input<string | undefined>;
+        /**
+         * Engine name.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Resource config info.
+         */
+        resourceConf?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyResourceResourceConf | undefined>;
+        /**
+         * Standard engine resource group name.
+         */
+        resourceGroupName?: pulumi.Input<string | undefined>;
+        /**
+         * Resource type.
+         */
+        resourceType?: pulumi.Input<string | undefined>;
+        /**
+         * Status.
+         */
+        status?: pulumi.Input<number | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyResourceFavor {
+        /**
+         * Catalog name.
+         */
+        catalog?: pulumi.Input<string | undefined>;
+        /**
+         * Database name.
+         */
+        dataBase?: pulumi.Input<string | undefined>;
+        /**
+         * Priority.
+         */
+        priority?: pulumi.Input<number | undefined>;
+        /**
+         * Table name.
+         */
+        table?: pulumi.Input<string | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyResourceResourceConf {
+        /**
+         * Parallelism of the optimize task.
+         */
+        parallelism?: pulumi.Input<number | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyTableExpiration {
+        /**
+         * Whether to enable the policy.
+         */
+        enabled: pulumi.Input<boolean>;
+        /**
+         * Table expiration time, in days.
+         */
+        expiration: pulumi.Input<number>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyWritten {
+        /**
+         * User custom advance params.
+         */
+        advancePolicy?: pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy | undefined>;
+        /**
+         * Whether to enable, `none`/`enable`/`disable`/`default`.
+         */
+        writtenEnable?: pulumi.Input<string | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicy {
+        /**
+         * Snapshot expire before days.
+         */
+        beforeDays?: pulumi.Input<number | undefined>;
+        /**
+         * Whether to enable compact.
+         */
+        compactEnable?: pulumi.Input<string | undefined>;
+        /**
+         * File compact strategy.
+         */
+        compactStrategy?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to enable COW table compact.
+         */
+        cowCompactEnable?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to enable history data cleanup.
+         */
+        deleteEnable?: pulumi.Input<string | undefined>;
+        /**
+         * Snapshot expire interval in minutes.
+         */
+        expiredSnapshotsIntervalMin?: pulumi.Input<number | undefined>;
+        /**
+         * Min input files to compact.
+         */
+        minInputFiles?: pulumi.Input<number | undefined>;
+        /**
+         * Remove orphan files interval in minutes.
+         */
+        removeOrphanIntervalMin?: pulumi.Input<number | undefined>;
+        /**
+         * Retain last snapshot count.
+         */
+        retainLast?: pulumi.Input<number | undefined>;
+        /**
+         * Sort compact strategy rules.
+         */
+        sortOrders?: pulumi.Input<pulumi.Input<inputs.Dlc.MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder>[] | undefined>;
+        /**
+         * Target file size after compact.
+         */
+        targetFileSizeBytes?: pulumi.Input<number | undefined>;
+    }
+
+    export interface MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrder {
+        /**
+         * Sort column name.
+         */
+        column?: pulumi.Input<string | undefined>;
+        /**
+         * Null order, `first` or `last`.
+         */
+        nullOrder?: pulumi.Input<string | undefined>;
+        /**
+         * Sort direction, `asc` or `desc`.
+         */
+        sortDirection?: pulumi.Input<string | undefined>;
     }
 
     export interface StandardEngineResourceGroupConfigInfoDynamicConfContext {
@@ -17932,6 +19252,405 @@ export namespace Dts {
         vpcId?: pulumi.Input<string | undefined>;
     }
 
+    export interface SyncJobConfigDynamicObjects {
+        /**
+         * For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        advancedObjects?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databases?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabase>[] | undefined>;
+        /**
+         * Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databasesOpFilters?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilter>[] | undefined>;
+        /**
+         * Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        mode?: pulumi.Input<string | undefined>;
+        /**
+         * It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+         *
+         * @deprecated It has been deprecated.
+         */
+        onlineDdl?: pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsOnlineDdl | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabase {
+        /**
+         * DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbMode?: pulumi.Input<string | undefined>;
+        /**
+         * The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dbName?: pulumi.Input<string | undefined>;
+        /**
+         * Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        eventMode?: pulumi.Input<string | undefined>;
+        /**
+         * When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        events?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functionMode?: pulumi.Input<string | undefined>;
+        /**
+         * Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        functions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newDbName?: pulumi.Input<string | undefined>;
+        /**
+         * Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newSchemaName?: pulumi.Input<string | undefined>;
+        /**
+         * Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedureMode?: pulumi.Input<string | undefined>;
+        /**
+         * Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        procedures?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaMode?: pulumi.Input<string | undefined>;
+        /**
+         * Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName?: pulumi.Input<string | undefined>;
+        /**
+         * Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableMode?: pulumi.Input<string | undefined>;
+        /**
+         * A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tables?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabaseTable>[] | undefined>;
+        /**
+         * Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggerMode?: pulumi.Input<string | undefined>;
+        /**
+         * When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        triggers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewMode?: pulumi.Input<string | undefined>;
+        /**
+         * View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        views?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabaseView>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabaseTable {
+        /**
+         * Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        columnMode?: pulumi.Input<string | undefined>;
+        /**
+         * Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        columns?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabaseTableColumn>[] | undefined>;
+        /**
+         * Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        filterCondition?: pulumi.Input<string | undefined>;
+        /**
+         * New table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newTableName?: pulumi.Input<string | undefined>;
+        /**
+         * Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableEditMode?: pulumi.Input<string | undefined>;
+        /**
+         * Table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName?: pulumi.Input<string | undefined>;
+        /**
+         * Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tmpTables?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabaseTableColumn {
+        /**
+         * Column name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        columnName?: pulumi.Input<string | undefined>;
+        /**
+         * New column name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newColumnName?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabaseView {
+        /**
+         * New view name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        newViewName?: pulumi.Input<string | undefined>;
+        /**
+         * View name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewName?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilter {
+        /**
+         * Database name that the rule takes effect on.
+         */
+        dbName: pulumi.Input<string>;
+        /**
+         * View level DDL/DML filter rule.
+         */
+        opFilter?: pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter | undefined>;
+        /**
+         * Table level DDL/DML filter info.
+         */
+        tables?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterTable>[] | undefined>;
+        /**
+         * View level DDL/DML filter info.
+         */
+        views?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterView>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter {
+        /**
+         * DDL white list.
+         */
+        ddlOptions?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption>[] | undefined>;
+        /**
+         * DML white list.
+         */
+        opTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject?: pulumi.Input<string | undefined>;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterTable {
+        /**
+         * Table level DDL/DML filter rule.
+         */
+        opFilter?: pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter | undefined>;
+        /**
+         * Table name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName: pulumi.Input<string>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter {
+        /**
+         * DDL white list.
+         */
+        ddlOptions?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption>[] | undefined>;
+        /**
+         * DML white list.
+         */
+        opTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject?: pulumi.Input<string | undefined>;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterView {
+        /**
+         * View level DDL/DML filter rule.
+         */
+        opFilter?: pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter | undefined>;
+        /**
+         * View name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        viewName: pulumi.Input<string>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter {
+        /**
+         * DDL white list.
+         */
+        ddlOptions?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption>[] | undefined>;
+        /**
+         * DML white list.
+         */
+        opTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject?: pulumi.Input<string | undefined>;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicObjectsOnlineDdl {
+        /**
+         * It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+         *
+         * @deprecated It has been deprecated.
+         */
+        status: pulumi.Input<string>;
+    }
+
+    export interface SyncJobConfigDynamicOptions {
+        /**
+         * Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleOption?: pulumi.Input<inputs.Dts.SyncJobConfigDynamicOptionsConflictHandleOption | undefined>;
+        /**
+         * Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conflictHandleType?: pulumi.Input<string | undefined>;
+        /**
+         * DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+         */
+        ddlOptions: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicOptionsDdlOption>[]>;
+        /**
+         * The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        dealOfExistSameTable?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+         */
+        filterBeginCommit?: pulumi.Input<boolean | undefined>;
+        /**
+         * Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+         */
+        filterCheckpoint?: pulumi.Input<boolean | undefined>;
+        /**
+         * Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        kafkaOption?: pulumi.Input<inputs.Dts.SyncJobConfigDynamicOptionsKafkaOption | undefined>;
+        /**
+         * DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+         */
+        opTypes: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Only incremental tasks reset the designated site.
+         */
+        startPosition?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicOptionsConflictHandleOption {
+        /**
+         * Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionColumn?: pulumi.Input<string | undefined>;
+        /**
+         * Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOperator?: pulumi.Input<string | undefined>;
+        /**
+         * Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        conditionOrderInSrcAndDst?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicOptionsDdlOption {
+        /**
+         * Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlObject?: pulumi.Input<string | undefined>;
+        /**
+         * The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        ddlValues?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicOptionsKafkaOption {
+        /**
+         * Other additional information, for specific data types extra parameters can be set.
+         */
+        dataOptions?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicOptionsKafkaOptionDataOption>[] | undefined>;
+        /**
+         * Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+         */
+        dataType?: pulumi.Input<string | undefined>;
+        /**
+         * Topic used to store ddl.
+         */
+        ddlTopicName?: pulumi.Input<string | undefined>;
+        /**
+         * Description of single topic and custom topic.
+         */
+        topicRules?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobConfigDynamicOptionsKafkaOptionTopicRule>[] | undefined>;
+        /**
+         * Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+         */
+        topicType?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicOptionsKafkaOptionDataOption {
+        /**
+         * Option key.
+         */
+        key?: pulumi.Input<string | undefined>;
+        /**
+         * Option value.
+         */
+        value?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SyncJobConfigDynamicOptionsKafkaOptionTopicRule {
+        /**
+         * Column names for partition by columns, multiple columns can be selected.
+         */
+        columns?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Database name matching rule, such as Regular, Default.
+         */
+        dbMatchMode?: pulumi.Input<string | undefined>;
+        /**
+         * Database name, takes effect when DbMatchMode=Regular.
+         */
+        dbName?: pulumi.Input<string | undefined>;
+        /**
+         * Topic partition strategy.
+         */
+        partitionType?: pulumi.Input<string | undefined>;
+        /**
+         * Table name matching rule, such as Regular, Default.
+         */
+        tableMatchMode?: pulumi.Input<string | undefined>;
+        /**
+         * Table name, only takes effect when TableMatchMode=Regular.
+         */
+        tableName?: pulumi.Input<string | undefined>;
+        /**
+         * Topic name. When single topic, all TopicName must be the same.
+         */
+        topicName?: pulumi.Input<string | undefined>;
+    }
+
     export interface SyncJobTag {
         /**
          * Tag key.
@@ -18365,7 +20084,7 @@ export namespace Elasticsearch {
          */
         nodeType: pulumi.Input<string>;
         /**
-         * Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+         * Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
          */
         type?: pulumi.Input<string | undefined>;
     }
@@ -19469,6 +21188,41 @@ export namespace Emr {
         publicKeyId?: pulumi.Input<string | undefined>;
     }
 
+    export interface ClusterV2MetaDbGroupInfo {
+        /**
+         * Components that use the MetaDB. A component can belong to only one `metaDbGroupInfo` block.
+         */
+        components?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * MetaDB version, e.g. `mysql8`.
+         */
+        defaultMetaVersion?: pulumi.Input<string | undefined>;
+        /**
+         * CDB instance ID.
+         */
+        linkInstanceId?: pulumi.Input<string | undefined>;
+        /**
+         * JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+         */
+        metaDataJdbcUrl?: pulumi.Input<string | undefined>;
+        /**
+         * Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+         */
+        metaDataPass?: pulumi.Input<string | undefined>;
+        /**
+         * Username of the custom MetaDB.
+         */
+        metaDataUser?: pulumi.Input<string | undefined>;
+        /**
+         * Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+         */
+        metaType?: pulumi.Input<string | undefined>;
+        /**
+         * EMR-MetaDB instance ID, required when `metaType` is `EMR_EXIST_META`.
+         */
+        unifyMetaInstanceId?: pulumi.Input<string | undefined>;
+    }
+
     export interface ClusterV2MetaDbInfo {
         /**
          * Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
@@ -19616,7 +21370,7 @@ export namespace Emr {
          */
         _diskIndex: pulumi.Input<string>;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId?: pulumi.Input<string | undefined>;
         /**
@@ -19696,7 +21450,7 @@ export namespace Emr {
          */
         _diskIndex: pulumi.Input<string>;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId?: pulumi.Input<string | undefined>;
         /**
@@ -19776,7 +21530,7 @@ export namespace Emr {
          */
         _diskIndex: pulumi.Input<string>;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId?: pulumi.Input<string | undefined>;
         /**
@@ -19856,7 +21610,7 @@ export namespace Emr {
          */
         _diskIndex: pulumi.Input<string>;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId?: pulumi.Input<string | undefined>;
         /**
@@ -19936,7 +21690,7 @@ export namespace Emr {
          */
         _diskIndex: pulumi.Input<string>;
         /**
-         * Disk ID (read-only, populated from API).
+         * Disk ID.
          */
         diskId?: pulumi.Input<string | undefined>;
         /**
@@ -20258,6 +22012,30 @@ export namespace Events {
          * Storage type (Valid values: cos, cls, ckafka).
          */
         storageType: pulumi.Input<string>;
+    }
+}
+
+export namespace Fwm {
+    export interface StrategyPostStrategy {
+        /**
+         * Rule group ID.
+         */
+        groupId: pulumi.Input<string>;
+        /**
+         * Priority.
+         */
+        sequence?: pulumi.Input<number | undefined>;
+    }
+
+    export interface StrategyPreStrategy {
+        /**
+         * Rule group ID.
+         */
+        groupId: pulumi.Input<string>;
+        /**
+         * Priority.
+         */
+        sequence?: pulumi.Input<number | undefined>;
     }
 }
 
@@ -21251,6 +23029,99 @@ export namespace Invite {
     }
 }
 
+export namespace Ioa {
+    export interface CompanyDirectoryConfigNameI18n {
+        /**
+         * Language enum, e.g. `zh-CN`, `en-US`.
+         */
+        lang: pulumi.Input<string>;
+        /**
+         * Localized name value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface DeliveryServerData {
+        /**
+         * Connector group id.
+         */
+        connectorGroupId?: pulumi.Input<string | undefined>;
+        /**
+         * Connector group name.
+         */
+        connectorGroupName?: pulumi.Input<string | undefined>;
+        /**
+         * Delivery server description.
+         */
+        description?: pulumi.Input<string | undefined>;
+        /**
+         * Delivery server id generated by the cloud side; ignored in the config on create.
+         */
+        id?: pulumi.Input<number | undefined>;
+        /**
+         * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * Kafka SASL password. Write-only: the value is sent to the API after RSA encryption and never persisted in state. Requires Terraform CLI 1.11+.
+         */
+        kafkaSaslPassword?: pulumi.Input<string | undefined>;
+        /**
+         * Kafka SASL user name.
+         */
+        kafkaSaslUserName?: pulumi.Input<string | undefined>;
+        /**
+         * Whether SSL is enabled for Kafka.
+         */
+        kafkaSslEnable?: pulumi.Input<boolean | undefined>;
+        /**
+         * Kafka version.
+         */
+        kafkaVersion?: pulumi.Input<string | undefined>;
+        /**
+         * Delivery server name.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to skip certificate verification.
+         */
+        sslSkipVerify?: pulumi.Input<boolean | undefined>;
+        /**
+         * Syslog facility.
+         */
+        syslogFacility?: pulumi.Input<string | undefined>;
+        /**
+         * HTTP server timeout in milliseconds (32-bit only).
+         */
+        targetHttpTimeout?: pulumi.Input<number | undefined>;
+        /**
+         * HTTP server address.
+         */
+        targetHttpUrl?: pulumi.Input<string | undefined>;
+        /**
+         * Kafka server address.
+         */
+        targetKafkaAddress?: pulumi.Input<string | undefined>;
+        /**
+         * Kafka topic.
+         */
+        targetKafkaTopic?: pulumi.Input<string | undefined>;
+        /**
+         * Syslog server address.
+         */
+        targetSyslogAddress?: pulumi.Input<string | undefined>;
+        /**
+         * Syslog protocol port (32-bit only).
+         */
+        targetSyslogPort?: pulumi.Input<number | undefined>;
+        /**
+         * Syslog protocol type.
+         */
+        targetSyslogProtocol?: pulumi.Input<string | undefined>;
+        /**
+         * Delivery server address type. Valid values: 4 (syslog), 2 (kafka), 3 (http, 32-bit only).
+         */
+        type?: pulumi.Input<number | undefined>;
+    }
+}
+
 export namespace Keewidb {
     export interface GetInstancesTagList {
         /**
@@ -21781,7 +23652,7 @@ export namespace Kubernetes {
          */
         endAt: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * Maintenance exclusion ID.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -22573,7 +24444,7 @@ export namespace Kubernetes {
          */
         endAt: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * Maintenance exclusion ID.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -22628,6 +24499,10 @@ export namespace Kubernetes {
          * Whether to enable self-healing ability.
          */
         autoRepair?: pulumi.Input<boolean | undefined>;
+        /**
+         * Custom image ID.
+         */
+        customImage?: pulumi.Input<string | undefined>;
         /**
          * Native node pool data disk list.
          */
@@ -23040,7 +24915,7 @@ export namespace Kubernetes {
          */
         dockerGraphPath?: pulumi.Input<string | undefined>;
         /**
-         * Custom parameter information related to the node. This is a white-list parameter.
+         * Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
          */
         extraArgs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
         /**
@@ -31100,7 +32975,7 @@ export namespace Mps {
          */
         height?: pulumi.Input<number | undefined>;
         /**
-         * Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+         * Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
          */
         resolutionAdaptive?: pulumi.Input<string | undefined>;
         /**
@@ -32274,7 +34149,7 @@ export namespace Mps {
          */
         height?: pulumi.Input<number | undefined>;
         /**
-         * Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+         * Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
          */
         resolutionAdaptive?: pulumi.Input<string | undefined>;
         /**
@@ -32370,7 +34245,7 @@ export namespace Mps {
          */
         height?: pulumi.Input<number | undefined>;
         /**
-         * Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+         * Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
          */
         resolutionAdaptive?: pulumi.Input<string | undefined>;
         /**
@@ -32776,6 +34651,54 @@ export namespace Mysql {
          * List of vpcs to limit downloads.
          */
         vpcLists: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface CloneInstanceClusterTopology {
+        /**
+         * RO node topology list.
+         */
+        readOnlyNodes?: pulumi.Input<pulumi.Input<inputs.Mysql.CloneInstanceClusterTopologyReadOnlyNode>[] | undefined>;
+        /**
+         * RW node topology.
+         */
+        readWriteNode?: pulumi.Input<inputs.Mysql.CloneInstanceClusterTopologyReadWriteNode | undefined>;
+    }
+
+    export interface CloneInstanceClusterTopologyReadOnlyNode {
+        /**
+         * Whether distributed in a random zone. YES - random zone.
+         */
+        isRandomZone?: pulumi.Input<string | undefined>;
+        /**
+         * Node ID.
+         */
+        nodeId?: pulumi.Input<string | undefined>;
+        /**
+         * RO node zone.
+         */
+        zone?: pulumi.Input<string | undefined>;
+    }
+
+    export interface CloneInstanceClusterTopologyReadWriteNode {
+        /**
+         * Node ID.
+         */
+        nodeId?: pulumi.Input<string | undefined>;
+        /**
+         * RW node zone.
+         */
+        zone?: pulumi.Input<string | undefined>;
+    }
+
+    export interface CloneInstanceResourceTag {
+        /**
+         * Tag key.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
+        value?: pulumi.Input<string | undefined>;
     }
 
     export interface InstanceClusterTopology {
@@ -33467,6 +35390,39 @@ export namespace Organization {
 export namespace Placement {
 }
 
+export namespace Postgres {
+    export interface AuditLogFileFilter {
+        /**
+         * Affect rows.
+         */
+        affectRows?: pulumi.Input<number | undefined>;
+        /**
+         * Database name list.
+         */
+        dbNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Execution time.
+         */
+        execTime?: pulumi.Input<number | undefined>;
+        /**
+         * Host list.
+         */
+        hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * SQL statement.
+         */
+        sql?: pulumi.Input<string | undefined>;
+        /**
+         * SQL type list.
+         */
+        sqlTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * User name list.
+         */
+        users?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    }
+}
+
 export namespace Postgresql {
     export interface AccountPrivilegesOperationModifyPrivilegeSet {
         /**
@@ -34011,9 +35967,11 @@ export namespace PrivateDns {
          */
         uniqVpcId: pulumi.Input<string>;
         /**
-         * VPC NAME.
+         * It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
+         *
+         * @deprecated It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.
          */
-        vpcName: pulumi.Input<string>;
+        vpcName?: pulumi.Input<string | undefined>;
     }
 
     export interface ZoneTagSet {
@@ -35029,7 +36987,7 @@ export namespace Scf {
          */
         cfsId: pulumi.Input<string>;
         /**
-         * (Readonly) File system ip address.
+         * If fixed intranet IP is enabled, this field returns the IP list used.
          */
         ipAddress?: pulumi.Input<string | undefined>;
         /**
@@ -35565,6 +37523,17 @@ export namespace Ses {
          * Record Type CNAME | A | TXT | MX.
          */
         type?: pulumi.Input<string | undefined>;
+    }
+
+    export interface DomainTagList {
+        /**
+         * Tag key.
+         */
+        tagKey: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
+        tagValue: pulumi.Input<string>;
     }
 
     export interface ReceiverData {
@@ -36932,7 +38901,7 @@ export namespace Tcr {
          */
         disabled?: pulumi.Input<boolean | undefined>;
         /**
-         * ID of the resource.
+         * rule id.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -36959,7 +38928,7 @@ export namespace Tcr {
 
     export interface InstanceReplication {
         /**
-         * ID of the resource.
+         * Replication registry ID (readonly).
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -37026,6 +38995,10 @@ export namespace Tcr {
          * Destination namespace.
          */
         destNamespace: pulumi.Input<string>;
+        /**
+         * Whether to enable the rule.
+         */
+        enabled?: pulumi.Input<boolean | undefined>;
         /**
          * Synchronization filters.
          */
@@ -37139,7 +39112,7 @@ export namespace Tcr {
          */
         eventTypes: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * ID of the resource.
+         * trigger Id.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -37402,6 +39375,41 @@ export namespace Tdmq {
          * Tag value.
          */
         tagValue: pulumi.Input<string>;
+    }
+}
+
+export namespace Tdmysql {
+    export interface DbInstanceAutoScaleConfig {
+        /**
+         * CCU max value.
+         */
+        rangeMax: pulumi.Input<number>;
+        /**
+         * CCU min value.
+         */
+        rangeMin: pulumi.Input<number>;
+    }
+
+    export interface DbInstanceInitParam {
+        /**
+         * Param key.
+         */
+        param: pulumi.Input<string>;
+        /**
+         * Param value.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface DbInstanceResourceTag {
+        /**
+         * Tag key.
+         */
+        tagKey: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
+        tagValue?: pulumi.Input<string | undefined>;
     }
 }
 
@@ -37923,7 +39931,7 @@ export namespace Teo {
          */
         status?: pulumi.Input<string | undefined>;
         /**
-         * Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+         * Type of the certificate.
          */
         type?: pulumi.Input<string | undefined>;
     }
@@ -38051,7 +40059,7 @@ export namespace Teo {
          */
         status?: pulumi.Input<string | undefined>;
         /**
-         * Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+         * Type of the certificate.
          */
         type?: pulumi.Input<string | undefined>;
     }
@@ -38255,7 +40263,7 @@ export namespace Teo {
          */
         sourceVersion?: pulumi.Input<string | undefined>;
         /**
-         * Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+         * Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
          */
         status?: pulumi.Input<string | undefined>;
         /**
@@ -38344,6 +40352,28 @@ export namespace Teo {
         type: pulumi.Input<string>;
         /**
          * The value of the variable, which is limited to a maximum of 5000 bytes. The default value is empty.
+         */
+        value: pulumi.Input<string>;
+    }
+
+    export interface GetBillingDataFilter {
+        /**
+         * Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+         */
+        type: string;
+        /**
+         * Parameter value.
+         */
+        value: string;
+    }
+
+    export interface GetBillingDataFilterArgs {
+        /**
+         * Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+         */
+        type: pulumi.Input<string>;
+        /**
+         * Parameter value.
          */
         value: pulumi.Input<string>;
     }
@@ -56702,6 +58732,10 @@ export namespace Teo {
          */
         healthThreshold?: pulumi.Input<number | undefined>;
         /**
+         * Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+         */
+        hostHeaderPolicy?: pulumi.Input<string | undefined>;
+        /**
          * Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
          */
         interval?: pulumi.Input<number | undefined>;
@@ -56717,6 +58751,10 @@ export namespace Teo {
          * Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
          */
         port?: pulumi.Input<number | undefined>;
+        /**
+         * Probe cluster region scope for health checks. Valid values: `global`, `mainlandChina`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+         */
+        probeCluster?: pulumi.Input<string | undefined>;
         /**
          * Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
          */
@@ -57457,7 +59495,7 @@ export namespace Teo {
          */
         apiServiceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
         /**
-         * ID of the resource.
+         * API resource ID, e.g. `apires-xxxxxxxx`.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -57484,7 +59522,7 @@ export namespace Teo {
          */
         basePath: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * API service ID, e.g. `apisrv-xxxxxxxx`.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -57503,7 +59541,7 @@ export namespace Teo {
          */
         attesterSource: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * Client attester ID, e.g. `attest-xxxxxxxx`.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -57613,7 +59651,7 @@ export namespace Teo {
          */
         dropPageConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityConfigDropPageConfig | undefined>;
         /**
-         * Exception rules configuration.
+         * Exception rule configuration.
          */
         exceptConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityConfigExceptConfig | undefined>;
         /**
@@ -57629,7 +59667,7 @@ export namespace Teo {
          */
         slowPostConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityConfigSlowPostConfig | undefined>;
         /**
-         * Layer-7 protection master switch.
+         * Security switch configuration.
          */
         switchConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityConfigSwitchConfig | undefined>;
         /**
@@ -57870,7 +59908,7 @@ export namespace Teo {
          */
         switch?: pulumi.Input<string | undefined>;
         /**
-         * Update time.
+         * Update time. Output-only.
          */
         updateTime?: pulumi.Input<string | undefined>;
     }
@@ -58341,7 +60379,7 @@ export namespace Teo {
          */
         ruleStatus?: pulumi.Input<string | undefined>;
         /**
-         * Update time.
+         * Update time. Output-only.
          */
         updateTime?: pulumi.Input<string | undefined>;
     }
@@ -58613,11 +60651,11 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetail {
         /**
-         * Template action. Output-only.
+         * Action. Valid values: `skip`, `scan`. Output-only.
          */
         action?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id?: pulumi.Input<number | undefined>;
         /**
@@ -58931,7 +60969,7 @@ export namespace Teo {
          */
         enabled?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id?: pulumi.Input<string | undefined>;
     }
@@ -59315,9 +61353,15 @@ export namespace Teo {
          */
         action?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideAction | undefined>;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
-        ruleId: pulumi.Input<string>;
+        ruleId?: pulumi.Input<string | undefined>;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideAction {
@@ -59513,9 +61557,15 @@ export namespace Teo {
          */
         action?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction | undefined>;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
-        ruleId: pulumi.Input<string>;
+        ruleId?: pulumi.Input<string | undefined>;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction {
@@ -59711,9 +61761,15 @@ export namespace Teo {
          */
         action?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideAction | undefined>;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
-        ruleId: pulumi.Input<string>;
+        ruleId?: pulumi.Input<string | undefined>;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideAction {
@@ -59909,9 +61965,15 @@ export namespace Teo {
          */
         action?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideAction | undefined>;
         /**
-         * Rule ID or category ID for action override.
+         * It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+         *
+         * @deprecated It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
          */
-        ruleId: pulumi.Input<string>;
+        ruleId?: pulumi.Input<string | undefined>;
+        /**
+         * One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+         */
+        ruleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideAction {
@@ -60882,6 +62944,10 @@ export namespace Teo {
          */
         condition: pulumi.Input<string>;
         /**
+         * Client device configurations. One profile per client type.
+         */
+        deviceProfiles?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile>[] | undefined>;
+        /**
          * Whether the rule is enabled. Valid values: `on`, `off`.
          */
         enabled: pulumi.Input<string>;
@@ -60901,6 +62967,195 @@ export namespace Teo {
          * Rule priority (0-100).
          */
         priority?: pulumi.Input<number | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile {
+        /**
+         * Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+         */
+        clientType: pulumi.Input<string>;
+        /**
+         * Minimum score (1-99) for judging a request as high risk. Default 50.
+         */
+        highRiskMinScore?: pulumi.Input<number | undefined>;
+        /**
+         * Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+         */
+        highRiskRequestAction?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction | undefined>;
+        /**
+         * Minimum score (1-99) for judging a request as medium risk. Default 15.
+         */
+        mediumRiskMinScore?: pulumi.Input<number | undefined>;
+        /**
+         * Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+         */
+        mediumRiskRequestAction?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Challenge.
+         */
+        challengeActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters | undefined>;
+        /**
+         * Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Additional parameters when Name is Redirect.
+         */
+        redirectActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters {
+        /**
+         * Maximum delay response time. Supported unit: seconds, range 5-10.
+         */
+        maxDelayTime?: pulumi.Input<string | undefined>;
+        /**
+         * Minimum delay response time. Supported unit: seconds, range 0-5.
+         */
+        minDelayTime?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters {
+        /**
+         * Client authentication method ID.
+         */
+        attesterId?: pulumi.Input<string | undefined>;
+        /**
+         * The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+         */
+        challengeOption: pulumi.Input<string>;
+        /**
+         * The time interval for repeating the challenge.
+         */
+        interval?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters {
+        /**
+         * Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+         */
+        blockIp?: pulumi.Input<string | undefined>;
+        /**
+         * IP blocking duration when BlockIP is on.
+         */
+        blockIpDuration?: pulumi.Input<string | undefined>;
+        /**
+         * The PageId of the custom page.
+         */
+        errorPageId?: pulumi.Input<string | undefined>;
+        /**
+         * Customize the status code of the page.
+         */
+        responseCode?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to use custom pages. Valid values: `on`, `off`.
+         */
+        returnCustomPage?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to ignore the request source suspension. Valid values: `on`, `off`.
+         */
+        stall?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters {
+        /**
+         * The URL to redirect.
+         */
+        url: pulumi.Input<string>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Challenge.
+         */
+        challengeActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters | undefined>;
+        /**
+         * Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Additional parameters when Name is Redirect.
+         */
+        redirectActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters {
+        /**
+         * Maximum delay response time. Supported unit: seconds, range 5-10.
+         */
+        maxDelayTime?: pulumi.Input<string | undefined>;
+        /**
+         * Minimum delay response time. Supported unit: seconds, range 0-5.
+         */
+        minDelayTime?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters {
+        /**
+         * Client authentication method ID.
+         */
+        attesterId?: pulumi.Input<string | undefined>;
+        /**
+         * The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+         */
+        challengeOption: pulumi.Input<string>;
+        /**
+         * The time interval for repeating the challenge.
+         */
+        interval?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters {
+        /**
+         * Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+         */
+        blockIp?: pulumi.Input<string | undefined>;
+        /**
+         * IP blocking duration when BlockIP is on.
+         */
+        blockIpDuration?: pulumi.Input<string | undefined>;
+        /**
+         * The PageId of the custom page.
+         */
+        errorPageId?: pulumi.Input<string | undefined>;
+        /**
+         * Customize the status code of the page.
+         */
+        responseCode?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to use custom pages. Valid values: `on`, `off`.
+         */
+        returnCustomPage?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to ignore the request source suspension. Valid values: `on`, `off`.
+         */
+        stall?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters {
+        /**
+         * The URL to redirect.
+         */
+        url: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationAction {
@@ -61259,7 +63514,7 @@ export namespace Teo {
          */
         enabled: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -61332,7 +63587,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRule {
         /**
-         * Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+         * Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
          */
         action: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleAction>;
         /**
@@ -61344,7 +63599,7 @@ export namespace Teo {
          */
         enabled: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * Template ID. Output-only.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -61417,7 +63672,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyCustomRulesRule {
         /**
-         * The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+         * The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
          */
         action: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyCustomRulesRuleAction>;
         /**
@@ -61613,6 +63868,10 @@ export namespace Teo {
          * Specifies the security protection module for the exception rule. It is valid only when SkipScope is WebSecurityModules. The possible values are: <li>websec-mod-managed-rules: managed rules; </li><li>websec-mod-rate-limiting: rate limiting; </li><li>websec-mod-custom-rules: custom rules; </li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection; </li><li>websec-mod-bot: Bot management. </li>.
          */
         webSecurityModulesForExceptions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+        /**
+         * Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+         */
+        webSecuritySubmodulesForExceptions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyExceptionRulesRuleRequestFieldsForException {
@@ -62175,6 +64434,10 @@ export namespace Teo {
          */
         enabled: pulumi.Input<string>;
         /**
+         * High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+         */
+        frequentScanningProtection?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection | undefined>;
+        /**
          * Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
          */
         managedRuleGroups?: pulumi.Input<pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup>[] | undefined>;
@@ -62193,6 +64456,130 @@ export namespace Teo {
          * The currently used version, in the format compliant with ISO 8601 standard, such as 2023-12-21T12:00:32Z. it is empty by default and is only an output parameter.
          */
         rulesetVersion?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection {
+        /**
+         * The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+         */
+        action?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction | undefined>;
+        /**
+         * Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+         */
+        actionDuration?: pulumi.Input<string | undefined>;
+        /**
+         * Cumulative block count threshold within the counting period. Range 1-4294967294.
+         */
+        blockThreshold?: pulumi.Input<number | undefined>;
+        /**
+         * Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+         */
+        countBy?: pulumi.Input<string | undefined>;
+        /**
+         * Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+         */
+        countingPeriod?: pulumi.Input<string | undefined>;
+        /**
+         * Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+         */
+        enabled?: pulumi.Input<string | undefined>;
+        /**
+         * Template ID. Output-only.
+         */
+        id?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Challenge.
+         */
+        challengeActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters | undefined>;
+        /**
+         * The specific action of security execution. The values are:
+         * <li>Deny: intercept, block the request to access site resources;</li>
+         * <li>Monitor: observe, only record logs;</li>
+         * <li>Redirect: redirect to URL;</li>
+         * <li>Disabled: disabled, do not enable the specified rule;</li>
+         * <li>Allow: allow access, but delay processing requests;</li>
+         * <li>Challenge: challenge, respond to challenge content;</li>
+         * <li>BlockIP: to be abandoned, IP ban;</li>
+         * <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+         * <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+         * <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+         */
+        name?: pulumi.Input<string | undefined>;
+        /**
+         * Additional parameters when Name is Redirect.
+         */
+        redirectActionParameters?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters {
+        /**
+         * Maximum delay response time. Supported unit: seconds, range 5-10.
+         */
+        maxDelayTime?: pulumi.Input<string | undefined>;
+        /**
+         * Minimum delay response time. Supported unit: seconds, range 0-5.
+         */
+        minDelayTime?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters {
+        /**
+         * Client authentication method ID.
+         */
+        attesterId?: pulumi.Input<string | undefined>;
+        /**
+         * The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+         */
+        challengeOption: pulumi.Input<string>;
+        /**
+         * The time interval for repeating the challenge.
+         */
+        interval?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters {
+        /**
+         * Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+         */
+        blockIp?: pulumi.Input<string | undefined>;
+        /**
+         * IP blocking duration when BlockIP is on.
+         */
+        blockIpDuration?: pulumi.Input<string | undefined>;
+        /**
+         * The PageId of the custom page.
+         */
+        errorPageId?: pulumi.Input<string | undefined>;
+        /**
+         * Customize the status code of the page.
+         */
+        responseCode?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to use custom pages. Valid values: `on`, `off`.
+         */
+        returnCustomPage?: pulumi.Input<string | undefined>;
+        /**
+         * Whether to ignore the request source suspension. Valid values: `on`, `off`.
+         */
+        stall?: pulumi.Input<string | undefined>;
+    }
+
+    export interface SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters {
+        /**
+         * The URL to redirect.
+         */
+        url: pulumi.Input<string>;
     }
 
     export interface SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup {
@@ -62289,7 +64676,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetail {
         /**
-         * Rule description.
+         * Rule description. Output-only.
          */
         description?: pulumi.Input<string | undefined>;
         /**
@@ -62297,7 +64684,7 @@ export namespace Teo {
          */
         riskLevel?: pulumi.Input<string | undefined>;
         /**
-         * Managed rule Id.
+         * Rule ID. Output-only.
          */
         ruleId?: pulumi.Input<string | undefined>;
         /**
@@ -62384,7 +64771,7 @@ export namespace Teo {
 
     export interface SecurityPolicyConfigSecurityPolicyRateLimitingRulesRule {
         /**
-         * The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+         * The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
          */
         action?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleAction | undefined>;
         /**
@@ -62545,6 +64932,10 @@ export namespace Teo {
          * Bot management configuration.
          */
         botManagement?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagement | undefined>;
+        /**
+         * Basic Bot management configuration.
+         */
+        botManagementLite?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLite | undefined>;
         /**
          * Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
          */
@@ -64075,7 +66466,7 @@ export namespace Teo {
          */
         enabled?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -65076,7 +67467,7 @@ export namespace Teo {
          */
         enabled?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -65464,7 +67855,7 @@ export namespace Teo {
          */
         enabled?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -65597,6 +67988,107 @@ export namespace Teo {
         responseCode: pulumi.Input<string>;
     }
 
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLite {
+        /**
+         * AI crawler detection configuration.
+         */
+        aiCrawlerDetection?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection | undefined>;
+        /**
+         * CAPTCHA page challenge configuration.
+         */
+        captchaPageChallenge?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge | undefined>;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection {
+        /**
+         * Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+         */
+        action?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction | undefined>;
+        /**
+         * Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+         */
+        enabled: pulumi.Input<string>;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction {
+        /**
+         * Additional parameters when Name is Allow.
+         */
+        allowActionParameters?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters | undefined>;
+        /**
+         * Additional parameter when Name is Challenge.
+         */
+        challengeActionParameters?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters | undefined>;
+        /**
+         * Additional parameters when Name is Deny.
+         */
+        denyActionParameters?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters | undefined>;
+        /**
+         * Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+         */
+        name: pulumi.Input<string>;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters {
+        /**
+         * Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+         */
+        maxDelayTime?: pulumi.Input<string | undefined>;
+        /**
+         * Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+         */
+        minDelayTime?: pulumi.Input<string | undefined>;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters {
+        /**
+         * Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+         */
+        attesterId?: pulumi.Input<string | undefined>;
+        /**
+         * Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+         */
+        challengeOption: pulumi.Input<string>;
+        /**
+         * Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+         */
+        interval?: pulumi.Input<string | undefined>;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters {
+        /**
+         * Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+         */
+        blockIp?: pulumi.Input<string | undefined>;
+        /**
+         * The ban duration when BlockIP is on.
+         */
+        blockIpDuration?: pulumi.Input<string | undefined>;
+        /**
+         * Specifies the page id of the custom page.
+         */
+        errorPageId?: pulumi.Input<string | undefined>;
+        /**
+         * Status code of the custom page.
+         */
+        responseCode?: pulumi.Input<string | undefined>;
+        /**
+         * Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+         */
+        returnCustomPage?: pulumi.Input<string | undefined>;
+        /**
+         * Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+         */
+        stall?: pulumi.Input<string | undefined>;
+    }
+
+    export interface WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge {
+        /**
+         * Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+         */
+        enabled: pulumi.Input<string>;
+    }
+
     export interface WebSecurityTemplateSecurityPolicyCustomRules {
         /**
          * The custom rule. When modifying the Web protection configuration using ModifySecurityPolicy: - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations; - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
@@ -65618,7 +68110,7 @@ export namespace Teo {
          */
         enabled: pulumi.Input<string>;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -65826,7 +68318,7 @@ export namespace Teo {
          */
         enabled?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -66614,7 +69106,7 @@ export namespace Teo {
          */
         enabled?: pulumi.Input<string | undefined>;
         /**
-         * ID of the resource.
+         * The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -68600,6 +71092,10 @@ export namespace Vdb {
          */
         expireTime?: pulumi.Input<string | undefined>;
         /**
+         * Whether it is an SSL network.
+         */
+        isSsl?: pulumi.Input<boolean | undefined>;
+        /**
          * Internal port.
          */
         port?: pulumi.Input<number | undefined>;
@@ -68755,6 +71251,25 @@ export namespace Vod {
          * Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         width?: pulumi.Input<number | undefined>;
+    }
+
+    export interface AigcQuotaModelQuota {
+        /**
+         * Model name.
+         */
+        modelName?: pulumi.Input<string | undefined>;
+        /**
+         * Model version.
+         */
+        modelVersion?: pulumi.Input<string | undefined>;
+        /**
+         * Model quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+         */
+        quotaLimit?: pulumi.Input<number | undefined>;
+        /**
+         * Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+         */
+        usage?: pulumi.Input<number | undefined>;
     }
 
     export interface ProcedureTemplateAiAnalysisTask {
@@ -69587,8 +72102,6 @@ export namespace Vpc {
         cidrBlock?: pulumi.Input<string | undefined>;
         /**
          * Creation time.
-         *
-         * Note: This field may return null, indicating that no valid value was found.
          */
         createdTime?: pulumi.Input<string | undefined>;
         /**
@@ -70357,8 +72870,6 @@ export namespace Waf {
          * lenLt (length is less than)
          * ipmatch (belong to)
          * ipnmatch (do not belong to)
-         * numgt (number greater than)
-         * numlt (number less than)
          * geoIn (IP geo belongs to)
          * geoNotIn (IP geo not belongs to)
          * rematch (regex match)
@@ -70368,6 +72879,8 @@ export namespace Waf {
          * numneq (numerically not equal to)
          * numle (numerically less than or equal to)
          * numge (numerically greater than or equal to)
+         * belongTo (belong to)
+         * notBelongTo (do not belong to)
          * Different matching fields correspond to different logical operators. For details, see the matching field table above.
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
@@ -70381,7 +72894,7 @@ export namespace Waf {
         /**
          * Matching field
          * Different matching fields result in different matching parameters, logical operators, and matching contents. The details are as follows:
-         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPv6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
+         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPV6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CONTENT_LENGTH (Content-Length)</td><td>Parameter entry is supported.</td><td>numgt (numerically greater than)<br>numlt (numerically less than)<br>numeq (numerically equal to)</td><td>Enter an integer between 0 and 9999999999999.</td></tr><tr><td>IP_GEO (source IP geolocation)</td><td>Parameter entry is supported.</td><td>geo_in (belong to)<br>geo_not_in (do not belong to)</td><td>Enter the content with a maximum of 10240 characters. The value is a serialized JSON array, for example: [{"Country":"China","Region":"Guangdong","City":"Shenzhen"}].</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
         field: pulumi.Input<string>;
@@ -70464,8 +72977,6 @@ export namespace Waf {
          * lenLt (length is less than)
          * ipmatch (belong to)
          * ipnmatch (do not belong to)
-         * numgt (number greater than)
-         * numlt (number less than)
          * geoIn (IP geo belongs to)
          * geoNotIn (IP geo not belongs to)
          * rematch (regex match)
@@ -70475,6 +72986,8 @@ export namespace Waf {
          * numneq (numerically not equal to)
          * numle (numerically less than or equal to)
          * numge (numerically greater than or equal to)
+         * belongTo (belong to)
+         * notBelongTo (do not belong to)
          * Different matching fields correspond to different logical operators. For details, see the matching field table above.
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
@@ -70488,7 +73001,7 @@ export namespace Waf {
         /**
          * Matching field
          * Different matching fields result in different matching parameters, logical operators, and matching contents. The details are as follows:
-         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPv6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
+         * <table><thead><tr><th>Matching Field</th><th>Matching Parameter</th><th>Logical Symbol</th><th>Matching Content</th></tr></thead><tbody><tr><td>IP (source IP)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>Multiple IP addresses are separated by commas. A maximum of 20 IP addresses are allowed.</td></tr><tr><td>IPV6 (source IPv6)</td><td>Parameters are not supported.</td><td>ipmatch (match)<br>ipnmatch (mismatch)</td><td>A single IPv6 address is supported.</td></tr><tr><td>Referer (referer)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content, with a maximum of 512 characters.</td></tr><tr><td>URL (request path)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content starting with /, with a maximum of 512 characters.</td></tr><tr><td>UserAgent (UserAgent)</td><td>Parameters are not supported.</td><td>Same logical symbols as the matching field <font color="Red">Referer</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>HTTP_METHOD (HTTP request method)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong_to (belong to)<br>not_belong_to (do not belong to)</td><td>Enter the method name. The uppercase is recommended.</td></tr><tr><td>QUERY_STRING (request string)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET (GET parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_PARAMS_NAMES (GET parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>belong_to (belong to)<br>not_belong_to (do not belong to)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST (POST parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>GET_POST_NAMES (POST parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>POST_BODY (complete body)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">Request Path</font></td><td>Enter the body content with a maximum of 512 characters.</td></tr><tr><td>COOKIE (cookie)</td><td>Parameters are not supported.</td><td>empty (Content is empty.)<br>null (do not exist)<br>rematch (regular expression matching)</td><td><font color="Red">Unsupported currently</font></td></tr><tr><td>GET_COOKIES_NAMES (cookie parameter name)</td><td>Parameters are not supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Name</font></td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>ARGS_COOKIE (cookie parameter value)</td><td>Parameter entry is supported.</td><td>Same logical symbol as the matching field <font color="Red">GET Parameter Value</font></td><td>Enter the contentwith a maximum of 512 characters.</td></tr><tr><td>GET_HEADERS_NAMES (header parameter name)</td><td>Parameters are not supported.</td><td>exist (Parameter exists.)<br>nexist (Parameter does not exist.)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters. The lowercase is recommended.</td></tr><tr><td>ARGS_HEADER (header parameter value)</td><td>Parameter entry is supported.</td><td>contains (contain)<br>ncontains (do not contain)<br>len_eq (length equals to)<br>len_gt (length is greater than)<br>len_lt (length is less than)<br>strprefix (prefix matching)<br>strsuffix (suffix matching)<br>rematch (regular expression matching)</td><td>Enter the content with a maximum of 512 characters.</td></tr><tr><td>CONTENT_LENGTH (Content-Length)</td><td>Parameter entry is supported.</td><td>numgt (numerically greater than)<br>numlt (numerically less than)<br>numeq (numerically equal to)</td><td>Enter an integer between 0 and 9999999999999.</td></tr><tr><td>IP_GEO (source IP geolocation)</td><td>Parameter entry is supported.</td><td>geo_in (belong to)<br>geo_not_in (do not belong to)</td><td>Enter the content with a maximum of 10240 characters. The value is a serialized JSON array, for example: [{"Country":"China","Region":"Guangdong","City":"Shenzhen"}].</td></tr><tr><td>CAPTCHA_RISK (CAPTCHA risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter risk level value, supporting numerical range 0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK (CAPTCHA device risk)</td><td>Parameters are not supported.</td><td>eq (equal to)<br>neq (not equal to)<br>belong (belongs to)<br>not_belong (does not belong to)<br>null (does not exist)<br>exist (exists)</td><td>Enter device risk code, supporting values: 101, 201, 301, 401, 501, 601, 701</td></tr><tr><td>CAPTCHAR_SCORE (CAPTCHA risk assessment score)</td><td>Parameters are not supported.</td><td>numeq (numerically equal to)<br>numgt (numerically greater than)<br>numlt (numerically less than)<br>numle (numerically less than or equal to)<br>numge (numerically greater than or equal to)<br>null (does not exist)<br>exist (exists)</td><td>Enter assessment score, supporting numerical range 0-100</td></tr></tbody></table>
          * Note: This field may return null, indicating that no valid values can be obtained.
          */
         field: pulumi.Input<string>;
@@ -70564,7 +73077,7 @@ export namespace Waf {
          */
         action: pulumi.Input<number>;
         /**
-         * ID of the resource.
+         * Id.
          */
         id?: pulumi.Input<string | undefined>;
         /**
@@ -72890,6 +75403,10 @@ export namespace Wedata {
          * Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
          */
         projectName: pulumi.Input<string>;
+        /**
+         * Project schedule mode. task: Task mode; workflow: Workflow mode.
+         */
+        scheduleMode?: pulumi.Input<string | undefined>;
     }
 
     export interface QualityRuleCompareRule {
@@ -74023,7 +76540,9 @@ export namespace Wedata {
          */
         triggerId?: pulumi.Input<string | undefined>;
         /**
-         * Minimum trigger interval in file arrival mode (seconds).
+         * This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+         *
+         * @deprecated This parameter is deprecated and will be removed in a future version.
          */
         triggerMinimumIntervalSecond?: pulumi.Input<number | undefined>;
         /**
@@ -74031,7 +76550,9 @@ export namespace Wedata {
          */
         triggerMode: pulumi.Input<string>;
         /**
-         * Trigger wait time in file arrival mode (seconds).
+         * This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
+         *
+         * @deprecated This parameter is deprecated and will be removed in a future version.
          */
         triggerWaitTimeSecond?: pulumi.Input<number | undefined>;
     }
@@ -74322,6 +76843,67 @@ export namespace config {
 }
 
 export namespace configservice {
+    export interface AggregateCompliancePackConfigRule {
+        /**
+         * Compliance pack id that this rule belongs to.
+         */
+        compliancePackId?: pulumi.Input<string | undefined>;
+        /**
+         * Config rule id.
+         */
+        configRuleId?: pulumi.Input<string | undefined>;
+        /**
+         * Rule description.
+         */
+        description?: pulumi.Input<string | undefined>;
+        /**
+         * Rule identifier (managed rule name or custom rule cloud function ARN).
+         */
+        identifier?: pulumi.Input<string | undefined>;
+        /**
+         * Rule input parameters.
+         */
+        inputParameters: pulumi.Input<pulumi.Input<inputs.configservice.AggregateCompliancePackConfigRuleInputParameter>[]>;
+        /**
+         * Managed rule identifier (preset rule identity).
+         */
+        managedRuleIdentifier?: pulumi.Input<string | undefined>;
+        /**
+         * Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+         */
+        riskLevel: pulumi.Input<number>;
+        /**
+         * Rule name.
+         */
+        ruleName: pulumi.Input<string>;
+    }
+
+    export interface AggregateCompliancePackConfigRuleInputParameter {
+        /**
+         * Parameter key.
+         */
+        parameterKey: pulumi.Input<string>;
+        /**
+         * Parameter type. Required: `Require`, optional: `Optional`.
+         */
+        type?: pulumi.Input<string | undefined>;
+        /**
+         * Parameter value.
+         */
+        value?: pulumi.Input<string | undefined>;
+    }
+
+    export interface AggregatorAggregatorAccount {
+        /**
+         * Member account name.
+         */
+        memberName: pulumi.Input<string>;
+        /**
+         * Member account ID.
+         */
+        memberUin: pulumi.Input<number>;
+    }
+
     export interface CompliancePackConfigRule {
         /**
          * Compliance pack ID that this rule belongs to.

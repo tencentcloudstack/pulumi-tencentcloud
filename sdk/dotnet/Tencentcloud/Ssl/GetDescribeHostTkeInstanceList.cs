@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostTkeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostTkeInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDescribeHostTkeInstanceListResult> InvokeAsync(GetDescribeHostTkeInstanceListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostTkeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostTkeInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeHostTkeInstanceListResult> Invoke(GetDescribeHostTkeInstanceListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostTkeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostTkeInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeHostTkeInstanceListResult> Invoke(GetDescribeHostTkeInstanceListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostTkeInstanceListResult>("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args ?? new GetDescribeHostTkeInstanceListInvokeArgs(), options.WithDefaults());

@@ -189,6 +189,13 @@ class OrgMemberPolicyAttachment(pulumi.CustomResource):
             identity_id=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOrganizationMembersPolicy](https://www.tencentcloud.com/document/api/1031/66410)
+        * Delete: [DeleteOrganizationMembersPolicy](https://www.tencentcloud.com/document/api/1031/66407)
+
         ## Import
 
         organization org_member_policy_attachment can be imported using the id, e.g.
@@ -228,6 +235,13 @@ class OrgMemberPolicyAttachment(pulumi.CustomResource):
             policy_name="example-iac",
             identity_id=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOrganizationMembersPolicy](https://www.tencentcloud.com/document/api/1031/66410)
+        * Delete: [DeleteOrganizationMembersPolicy](https://www.tencentcloud.com/document/api/1031/66407)
 
         ## Import
 

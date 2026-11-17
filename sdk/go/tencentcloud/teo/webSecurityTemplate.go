@@ -12,9 +12,9 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a teo web security template
+// Provides a resource to create a TEO web security template
 //
-// > **NOTE:** The current resources do not support managed_rule_groups.
+// > **NOTE:** The current resources do not support `managedRuleGroups`.
 //
 // ## Example Usage
 //
@@ -32,7 +32,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := teo.NewWebSecurityTemplate(ctx, "web_security_template", &teo.WebSecurityTemplateArgs{
+//			_, err := teo.NewWebSecurityTemplate(ctx, "example", &teo.WebSecurityTemplateArgs{
 //				TemplateName: pulumi.String("tf_example"),
 //				ZoneId:       pulumi.String("zone-3fkff38fyw8s"),
 //				SecurityPolicy: &teo.WebSecurityTemplateSecurityPolicyArgs{
@@ -79,7 +79,7 @@ import (
 //											pulumi.String("9126905504"),
 //										},
 //										Action: &teo.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsBotManagementActionOverrideActionArgs{
-//											Name: pulumi.String("Deny"),
+//											Name: pulumi.String("Allow"),
 //										},
 //									},
 //								},
@@ -148,6 +148,17 @@ import (
 //										},
 //									},
 //								},
+//							},
+//						},
+//					},
+//					BotManagementLite: &teo.WebSecurityTemplateSecurityPolicyBotManagementLiteArgs{
+//						CaptchaPageChallenge: &teo.WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs{
+//							Enabled: pulumi.String("on"),
+//						},
+//						AiCrawlerDetection: &teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs{
+//							Enabled: pulumi.String("on"),
+//							Action: &teo.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs{
+//								Name: pulumi.String("Deny"),
 //							},
 //						},
 //					},
@@ -294,18 +305,32 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71948)
+// * Read:
+//   - [DescribeWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71946)
+//   - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+//
+// * Update: [ModifyWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71944)
+// * Delete: [DeleteWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71947)
+//
 // ## Import
 //
-// teo web security template can be imported using the id, e.g.
+// TEO web security template can be imported using the zoneId#templateId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-rpccs7c6
+// $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-3u86ilp39yyn
 // ```
 type WebSecurityTemplate struct {
 	pulumi.CustomResourceState
 
 	// Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
 	SecurityPolicy WebSecurityTemplateSecurityPolicyOutput `pulumi:"securityPolicy"`
+	// Template ID.
+	TemplateId pulumi.StringOutput `pulumi:"templateId"`
 	// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
 	TemplateName pulumi.StringOutput `pulumi:"templateName"`
 	// Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
@@ -350,6 +375,8 @@ func GetWebSecurityTemplate(ctx *pulumi.Context,
 type webSecurityTemplateState struct {
 	// Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
 	SecurityPolicy *WebSecurityTemplateSecurityPolicy `pulumi:"securityPolicy"`
+	// Template ID.
+	TemplateId *string `pulumi:"templateId"`
 	// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
 	TemplateName *string `pulumi:"templateName"`
 	// Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
@@ -359,6 +386,8 @@ type webSecurityTemplateState struct {
 type WebSecurityTemplateState struct {
 	// Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
 	SecurityPolicy WebSecurityTemplateSecurityPolicyPtrInput
+	// Template ID.
+	TemplateId pulumi.StringPtrInput
 	// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
 	TemplateName pulumi.StringPtrInput
 	// Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
@@ -478,6 +507,11 @@ func (o WebSecurityTemplateOutput) ToWebSecurityTemplateOutputWithContext(ctx co
 // Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
 func (o WebSecurityTemplateOutput) SecurityPolicy() WebSecurityTemplateSecurityPolicyOutput {
 	return o.ApplyT(func(v *WebSecurityTemplate) WebSecurityTemplateSecurityPolicyOutput { return v.SecurityPolicy }).(WebSecurityTemplateSecurityPolicyOutput)
+}
+
+// Template ID.
+func (o WebSecurityTemplateOutput) TemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *WebSecurityTemplate) pulumi.StringOutput { return v.TemplateId }).(pulumi.StringOutput)
 }
 
 // Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.

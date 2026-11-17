@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProxyAndStatisticsListeners](https://www.tencentcloud.com/document/api/608/33099)
 func GetProxyAndStatisticsListeners(ctx *pulumi.Context, args *GetProxyAndStatisticsListenersArgs, opts ...pulumi.InvokeOption) (*GetProxyAndStatisticsListenersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyAndStatisticsListenersResult

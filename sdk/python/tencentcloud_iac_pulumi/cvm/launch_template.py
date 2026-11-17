@@ -1020,6 +1020,16 @@ class LaunchTemplate(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLaunchTemplate](https://www.tencentcloud.com/document/api/213/45362)
+        * Read:
+          - [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+          - [DescribeLaunchTemplates](https://www.tencentcloud.com/document/api/213/45357)
+        * Delete: [DeleteLaunchTemplate](https://www.tencentcloud.com/document/api/213/45360)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1112,6 +1122,16 @@ class LaunchTemplate(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLaunchTemplate](https://www.tencentcloud.com/document/api/213/45362)
+        * Read:
+          - [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+          - [DescribeLaunchTemplates](https://www.tencentcloud.com/document/api/213/45357)
+        * Delete: [DeleteLaunchTemplate](https://www.tencentcloud.com/document/api/213/45360)
 
 
         :param str resource_name: The name of the resource.

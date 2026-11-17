@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDescribeHostLighthouseInstanceListResult> InvokeAsync(GetDescribeHostLighthouseInstanceListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeHostLighthouseInstanceListResult> Invoke(GetDescribeHostLighthouseInstanceListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeHostLighthouseInstanceListResult> Invoke(GetDescribeHostLighthouseInstanceListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostLighthouseInstanceListResult>("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args ?? new GetDescribeHostLighthouseInstanceListInvokeArgs(), options.WithDefaults());

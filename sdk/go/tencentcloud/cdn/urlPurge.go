@@ -70,6 +70,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Read: [DescribePurgeTasks](https://www.tencentcloud.com/document/api/228/33604)
 type UrlPurge struct {
 	pulumi.CustomResourceState
 

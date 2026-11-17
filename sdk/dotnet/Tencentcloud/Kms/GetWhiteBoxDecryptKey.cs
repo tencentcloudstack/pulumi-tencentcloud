@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxDecryptKey](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDecryptKey&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetWhiteBoxDecryptKeyResult> InvokeAsync(GetWhiteBoxDecryptKeyArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxDecryptKey](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDecryptKey&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWhiteBoxDecryptKeyResult> Invoke(GetWhiteBoxDecryptKeyInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxDecryptKey](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDecryptKey&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWhiteBoxDecryptKeyResult> Invoke(GetWhiteBoxDecryptKeyInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxDecryptKeyResult>("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args ?? new GetWhiteBoxDecryptKeyInvokeArgs(), options.WithDefaults());

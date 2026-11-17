@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceLogs](https://www.tencentcloud.com/document/api/845/32216)
         /// </summary>
         public static Task<GetInstanceLogsResult> InvokeAsync(GetInstanceLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceLogs](https://www.tencentcloud.com/document/api/845/32216)
         /// </summary>
         public static Output<GetInstanceLogsResult> Invoke(GetInstanceLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceLogs](https://www.tencentcloud.com/document/api/845/32216)
         /// </summary>
         public static Output<GetInstanceLogsResult> Invoke(GetInstanceLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceLogsResult>("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args ?? new GetInstanceLogsInvokeArgs(), options.WithDefaults());

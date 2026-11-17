@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopSpaceSchemaTimeSeries](https://www.tencentcloud.com/document/api/1035/41190)
 func GetTopSpaceSchemaTimeSeries(ctx *pulumi.Context, args *GetTopSpaceSchemaTimeSeriesArgs, opts ...pulumi.InvokeOption) (*GetTopSpaceSchemaTimeSeriesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopSpaceSchemaTimeSeriesResult

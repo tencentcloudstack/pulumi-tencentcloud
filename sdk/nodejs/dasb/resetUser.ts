@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.dasb.ResetUser("example", {userId: 16});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ResetUser](https://www.tencentcloud.com/search/?wd=ResetUser&type=document&lang=en)
  */
 export class ResetUser extends pulumi.CustomResource {
     /**

@@ -40,6 +40,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUserGroup](https://www.tencentcloud.com/search/?wd=CreateUserGroup&amp;type=document&amp;lang=en)
+    /// * Read: [ListUserGroups](https://www.tencentcloud.com/search/?wd=ListUserGroups&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateUserGroup](https://www.tencentcloud.com/search/?wd=UpdateUserGroup&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteUserGroups](https://www.tencentcloud.com/search/?wd=DeleteUserGroups&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ciam UserGroup can be imported using the id, e.g.

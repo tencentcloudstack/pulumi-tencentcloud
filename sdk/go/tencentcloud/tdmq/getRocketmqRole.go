@@ -51,6 +51,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
 func LookupRocketmqRole(ctx *pulumi.Context, args *LookupRocketmqRoleArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqRoleResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqRoleResult

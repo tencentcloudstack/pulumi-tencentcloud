@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancePluginList](https://www.tencentcloud.com/search/?wd=DescribeInstancePluginList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstancePluginListResult> InvokeAsync(GetInstancePluginListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancePluginList](https://www.tencentcloud.com/search/?wd=DescribeInstancePluginList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancePluginListResult> Invoke(GetInstancePluginListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancePluginList](https://www.tencentcloud.com/search/?wd=DescribeInstancePluginList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancePluginListResult> Invoke(GetInstancePluginListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListInvokeArgs(), options.WithDefaults());

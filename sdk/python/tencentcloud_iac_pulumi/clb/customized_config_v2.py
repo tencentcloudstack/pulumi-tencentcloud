@@ -218,6 +218,15 @@ class CustomizedConfigV2(pulumi.CustomResource):
         pulumi.export("configId", example.config_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddCustomizedConfig](https://www.tencentcloud.com/document/api/214/74450)
+        * Read: [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/api/214/42307)
+        * Update: [ModifyCustomizedConfig](https://www.tencentcloud.com/document/api/214/74445)
+        * Delete: [DeleteCustomizedConfig](https://www.tencentcloud.com/document/api/214/74448)
+
         ## Import
 
         CLB customized V2 config can be imported using the id, e.g.
@@ -275,6 +284,15 @@ class CustomizedConfigV2(pulumi.CustomResource):
             config_type="LOCATION")
         pulumi.export("configId", example.config_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddCustomizedConfig](https://www.tencentcloud.com/document/api/214/74450)
+        * Read: [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/api/214/42307)
+        * Update: [ModifyCustomizedConfig](https://www.tencentcloud.com/document/api/214/74445)
+        * Delete: [DeleteCustomizedConfig](https://www.tencentcloud.com/document/api/214/74448)
 
         ## Import
 

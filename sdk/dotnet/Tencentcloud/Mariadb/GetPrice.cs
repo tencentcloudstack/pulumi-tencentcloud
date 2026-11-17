@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
         /// </summary>
         public static Task<GetPriceResult> InvokeAsync(GetPriceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPriceResult>("tencentcloud:Mariadb/getPrice:getPrice", args ?? new GetPriceArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
         /// </summary>
         public static Output<GetPriceResult> Invoke(GetPriceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPriceResult>("tencentcloud:Mariadb/getPrice:getPrice", args ?? new GetPriceInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
         /// </summary>
         public static Output<GetPriceResult> Invoke(GetPriceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPriceResult>("tencentcloud:Mariadb/getPrice:getPrice", args ?? new GetPriceInvokeArgs(), options.WithDefaults());

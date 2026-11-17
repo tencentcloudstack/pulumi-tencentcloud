@@ -289,6 +289,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// });
     /// ```
     /// 
+    /// ### Example Usage of CDN domain with origin path rewrite rules
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cdn.Domain("example", new()
+    ///     {
+    ///         CdnDomain = "example.com",
+    ///         ServiceType = "web",
+    ///         Area = "mainland",
+    ///         Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
+    ///         {
+    ///             OriginType = "ip",
+    ///             OriginLists = new[]
+    ///             {
+    ///                 "127.0.0.1",
+    ///             },
+    ///             OriginPullProtocol = "follow",
+    ///             PathRules = new[]
+    ///             {
+    ///                 new Tencentcloud.Cdn.Inputs.DomainOriginPathRuleArgs
+    ///                 {
+    ///                     FullMatch = false,
+    ///                     Path = "/api/*",
+    ///                     ServerName = "origin.example.com",
+    ///                     ForwardUri = "/v2/$1",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddCdnDomain](https://www.tencentcloud.com/document/api/228/34015)
+    ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateDomainConfig](https://www.tencentcloud.com/document/api/228/34018)
+    /// * Delete:
+    ///   - [DeleteCdnDomain](https://www.tencentcloud.com/document/api/228/34014)
+    ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [StopCdnDomain](https://www.tencentcloud.com/document/api/228/34012)
+    /// 
     /// ## Import
     /// 
     /// CDN domain can be imported using the id, e.g.

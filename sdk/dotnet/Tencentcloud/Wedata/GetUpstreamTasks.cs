@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListUpstreamTasks](https://www.tencentcloud.com/document/api/1174/73867)
         /// </summary>
         public static Task<GetUpstreamTasksResult> InvokeAsync(GetUpstreamTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUpstreamTasksResult>("tencentcloud:Wedata/getUpstreamTasks:getUpstreamTasks", args ?? new GetUpstreamTasksArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListUpstreamTasks](https://www.tencentcloud.com/document/api/1174/73867)
         /// </summary>
         public static Output<GetUpstreamTasksResult> Invoke(GetUpstreamTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUpstreamTasksResult>("tencentcloud:Wedata/getUpstreamTasks:getUpstreamTasks", args ?? new GetUpstreamTasksInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListUpstreamTasks](https://www.tencentcloud.com/document/api/1174/73867)
         /// </summary>
         public static Output<GetUpstreamTasksResult> Invoke(GetUpstreamTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUpstreamTasksResult>("tencentcloud:Wedata/getUpstreamTasks:getUpstreamTasks", args ?? new GetUpstreamTasksInvokeArgs(), options.WithDefaults());

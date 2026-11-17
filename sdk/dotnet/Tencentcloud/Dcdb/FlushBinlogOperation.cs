@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/flushBinlogOperation:FlushBinlogOperation")]
     public partial class FlushBinlogOperation : global::Pulumi.CustomResource

@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&amp;type=document&amp;lang=en)
+        ///   - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDomainVerifierResult> InvokeAsync(GetDomainVerifierArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierArgs(), options.WithDefaults());
@@ -72,6 +80,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&amp;type=document&amp;lang=en)
+        ///   - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDomainVerifierResult> Invoke(GetDomainVerifierInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierInvokeArgs(), options.WithDefaults());
@@ -104,6 +120,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&amp;type=document&amp;lang=en)
+        ///   - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDomainVerifierResult> Invoke(GetDomainVerifierInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierInvokeArgs(), options.WithDefaults());

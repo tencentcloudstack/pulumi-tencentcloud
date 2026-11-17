@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AddCalcEnginesToProject](https://www.tencentcloud.com/document/api/1174/77878)
 type AddCalcEnginesToProjectOperation struct {
 	pulumi.CustomResourceState
 

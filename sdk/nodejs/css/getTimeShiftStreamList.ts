@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     domainGroup: "tf-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
  */
 export function getTimeShiftStreamList(args: GetTimeShiftStreamListArgs, opts?: pulumi.InvokeOptions): Promise<GetTimeShiftStreamListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -121,6 +127,12 @@ export interface GetTimeShiftStreamListResult {
  *     domainGroup: "tf-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
  */
 export function getTimeShiftStreamListOutput(args: GetTimeShiftStreamListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTimeShiftStreamListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

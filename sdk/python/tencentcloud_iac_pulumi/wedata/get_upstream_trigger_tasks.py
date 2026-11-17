@@ -107,6 +107,12 @@ def get_upstream_trigger_tasks(project_id: Optional[_builtins.str] = None,
         task_id="20241024174712123456")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUpstreamTriggerTasks](https://www.tencentcloud.com/document/api/1174/77917)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_upstream_trigger_tasks_output(project_id: pulumi.Input[Optional[_builtin
     upstream_trigger_tasks = tencentcloud.wedata.get_upstream_trigger_tasks(project_id="3108707295180644352",
         task_id="20241024174712123456")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUpstreamTriggerTasks](https://www.tencentcloud.com/document/api/1174/77917)
 
 
     :param _builtins.str project_id: Project ID.

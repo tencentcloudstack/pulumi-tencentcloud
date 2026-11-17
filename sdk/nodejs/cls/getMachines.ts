@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     groupId: group.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/614/42817)
  */
 export function getMachines(args: GetMachinesArgs, opts?: pulumi.InvokeOptions): Promise<GetMachinesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -98,6 +104,12 @@ export interface GetMachinesResult {
  *     groupId: group.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/614/42817)
  */
 export function getMachinesOutput(args: GetMachinesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMachinesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

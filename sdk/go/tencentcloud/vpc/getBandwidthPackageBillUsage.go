@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
 func GetBandwidthPackageBillUsage(ctx *pulumi.Context, args *GetBandwidthPackageBillUsageArgs, opts ...pulumi.InvokeOption) (*GetBandwidthPackageBillUsageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBandwidthPackageBillUsageResult

@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     policyIds: ["policy-iejtp4ue"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
  */
 export function getAlarmHistory(args: GetAlarmHistoryArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmHistoryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -208,6 +214,12 @@ export interface GetAlarmHistoryResult {
  *     policyIds: ["policy-iejtp4ue"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
  */
 export function getAlarmHistoryOutput(args: GetAlarmHistoryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmHistoryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

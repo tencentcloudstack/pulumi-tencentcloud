@@ -543,6 +543,14 @@ class ConfigBackupStrategy(pulumi.CustomResource):
             regular_backup_start_time="%s")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupStrategy](https://www.tencentcloud.com/document/api/238/37929)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update: [ModifyBackupStrategy](https://www.tencentcloud.com/document/api/238/37929)
+
         ## Import
 
         sqlserver config_backup_strategy can be imported using the id, e.g.
@@ -678,6 +686,14 @@ class ConfigBackupStrategy(pulumi.CustomResource):
             regular_backup_counts=1,
             regular_backup_start_time="%s")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupStrategy](https://www.tencentcloud.com/document/api/238/37929)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update: [ModifyBackupStrategy](https://www.tencentcloud.com/document/api/238/37929)
 
         ## Import
 

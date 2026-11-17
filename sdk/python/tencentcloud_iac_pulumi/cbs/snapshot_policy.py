@@ -21,20 +21,37 @@ __all__ = ['SnapshotPolicy', 'SnapshotPolicyArgs']
 class SnapshotPolicyArgs:
     def __init__(__self__, *,
                  repeat_hours: pulumi.Input[Sequence[pulumi.Input[_builtins.int]]],
-                 repeat_weekdays: pulumi.Input[Sequence[pulumi.Input[_builtins.int]]],
                  snapshot_policy_name: pulumi.Input[_builtins.str],
+                 interval_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 is_activated: pulumi.Input[Optional[_builtins.bool]] = None,
+                 is_permanent: pulumi.Input[Optional[_builtins.bool]] = None,
+                 repeat_months: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 repeat_weekdays: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  retention_days: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a SnapshotPolicy resource.
 
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_hours: Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_weekdays: Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
         :param pulumi.Input[_builtins.str] snapshot_policy_name: Name of snapshot policy. The maximum length can not exceed 60 bytes.
+        :param pulumi.Input[_builtins.int] interval_days: Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        :param pulumi.Input[_builtins.bool] is_activated: Whether the snapshot policy is activated. Default is true.
+        :param pulumi.Input[_builtins.bool] is_permanent: Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_months: Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_weekdays: Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
         :param pulumi.Input[_builtins.int] retention_days: Retention days of the snapshot, and the default value is 7.
         """
         pulumi.set(__self__, "repeat_hours", repeat_hours)
-        pulumi.set(__self__, "repeat_weekdays", repeat_weekdays)
         pulumi.set(__self__, "snapshot_policy_name", snapshot_policy_name)
+        if interval_days is not None:
+            pulumi.set(__self__, "interval_days", interval_days)
+        if is_activated is not None:
+            pulumi.set(__self__, "is_activated", is_activated)
+        if is_permanent is not None:
+            pulumi.set(__self__, "is_permanent", is_permanent)
+        if repeat_months is not None:
+            pulumi.set(__self__, "repeat_months", repeat_months)
+        if repeat_weekdays is not None:
+            pulumi.set(__self__, "repeat_weekdays", repeat_weekdays)
         if retention_days is not None:
             pulumi.set(__self__, "retention_days", retention_days)
 
@@ -51,18 +68,6 @@ class SnapshotPolicyArgs:
         pulumi.set(self, "repeat_hours", value)
 
     @_builtins.property
-    @pulumi.getter(name="repeatWeekdays")
-    def repeat_weekdays(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]:
-        """
-        Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
-        """
-        return pulumi.get(self, "repeat_weekdays")
-
-    @repeat_weekdays.setter
-    def repeat_weekdays(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.int]]]):
-        pulumi.set(self, "repeat_weekdays", value)
-
-    @_builtins.property
     @pulumi.getter(name="snapshotPolicyName")
     def snapshot_policy_name(self) -> pulumi.Input[_builtins.str]:
         """
@@ -73,6 +78,66 @@ class SnapshotPolicyArgs:
     @snapshot_policy_name.setter
     def snapshot_policy_name(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "snapshot_policy_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="intervalDays")
+    def interval_days(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        """
+        return pulumi.get(self, "interval_days")
+
+    @interval_days.setter
+    def interval_days(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "interval_days", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isActivated")
+    def is_activated(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the snapshot policy is activated. Default is true.
+        """
+        return pulumi.get(self, "is_activated")
+
+    @is_activated.setter
+    def is_activated(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_activated", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isPermanent")
+    def is_permanent(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
+        """
+        return pulumi.get(self, "is_permanent")
+
+    @is_permanent.setter
+    def is_permanent(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_permanent", value)
+
+    @_builtins.property
+    @pulumi.getter(name="repeatMonths")
+    def repeat_months(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
+        """
+        Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        """
+        return pulumi.get(self, "repeat_months")
+
+    @repeat_months.setter
+    def repeat_months(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
+        pulumi.set(self, "repeat_months", value)
+
+    @_builtins.property
+    @pulumi.getter(name="repeatWeekdays")
+    def repeat_weekdays(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
+        """
+        Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
+        """
+        return pulumi.get(self, "repeat_weekdays")
+
+    @repeat_weekdays.setter
+    def repeat_weekdays(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
+        pulumi.set(self, "repeat_weekdays", value)
 
     @_builtins.property
     @pulumi.getter(name="retentionDays")
@@ -90,26 +155,78 @@ class SnapshotPolicyArgs:
 @pulumi.input_type
 class _SnapshotPolicyState:
     def __init__(__self__, *,
+                 interval_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 is_activated: pulumi.Input[Optional[_builtins.bool]] = None,
+                 is_permanent: pulumi.Input[Optional[_builtins.bool]] = None,
                  repeat_hours: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 repeat_months: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  repeat_weekdays: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  retention_days: pulumi.Input[Optional[_builtins.int]] = None,
                  snapshot_policy_name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering SnapshotPolicy resources.
 
+        :param pulumi.Input[_builtins.int] interval_days: Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        :param pulumi.Input[_builtins.bool] is_activated: Whether the snapshot policy is activated. Default is true.
+        :param pulumi.Input[_builtins.bool] is_permanent: Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_hours: Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_months: Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_weekdays: Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
         :param pulumi.Input[_builtins.int] retention_days: Retention days of the snapshot, and the default value is 7.
         :param pulumi.Input[_builtins.str] snapshot_policy_name: Name of snapshot policy. The maximum length can not exceed 60 bytes.
         """
+        if interval_days is not None:
+            pulumi.set(__self__, "interval_days", interval_days)
+        if is_activated is not None:
+            pulumi.set(__self__, "is_activated", is_activated)
+        if is_permanent is not None:
+            pulumi.set(__self__, "is_permanent", is_permanent)
         if repeat_hours is not None:
             pulumi.set(__self__, "repeat_hours", repeat_hours)
+        if repeat_months is not None:
+            pulumi.set(__self__, "repeat_months", repeat_months)
         if repeat_weekdays is not None:
             pulumi.set(__self__, "repeat_weekdays", repeat_weekdays)
         if retention_days is not None:
             pulumi.set(__self__, "retention_days", retention_days)
         if snapshot_policy_name is not None:
             pulumi.set(__self__, "snapshot_policy_name", snapshot_policy_name)
+
+    @_builtins.property
+    @pulumi.getter(name="intervalDays")
+    def interval_days(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        """
+        return pulumi.get(self, "interval_days")
+
+    @interval_days.setter
+    def interval_days(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "interval_days", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isActivated")
+    def is_activated(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the snapshot policy is activated. Default is true.
+        """
+        return pulumi.get(self, "is_activated")
+
+    @is_activated.setter
+    def is_activated(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_activated", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isPermanent")
+    def is_permanent(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
+        """
+        return pulumi.get(self, "is_permanent")
+
+    @is_permanent.setter
+    def is_permanent(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_permanent", value)
 
     @_builtins.property
     @pulumi.getter(name="repeatHours")
@@ -122,6 +239,18 @@ class _SnapshotPolicyState:
     @repeat_hours.setter
     def repeat_hours(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
         pulumi.set(self, "repeat_hours", value)
+
+    @_builtins.property
+    @pulumi.getter(name="repeatMonths")
+    def repeat_months(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
+        """
+        Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        """
+        return pulumi.get(self, "repeat_months")
+
+    @repeat_months.setter
+    def repeat_months(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
+        pulumi.set(self, "repeat_months", value)
 
     @_builtins.property
     @pulumi.getter(name="repeatWeekdays")
@@ -166,42 +295,80 @@ class SnapshotPolicy(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 interval_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 is_activated: pulumi.Input[Optional[_builtins.bool]] = None,
+                 is_permanent: pulumi.Input[Optional[_builtins.bool]] = None,
                  repeat_hours: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 repeat_months: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  repeat_weekdays: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  retention_days: pulumi.Input[Optional[_builtins.int]] = None,
                  snapshot_policy_name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provides a snapshot policy resource.
+        Provides a CBS snapshot policy resource.
+
+        > **NOTE:** `repeat_weekdays`/`repeat_months`/`interval_days` are mutually exclusive rules, required and only one policy rule can be set. If mutually exclusive rules are passed in at the same time, only one will take effect, with priority in the order listed above: for example, if all three rules are set, only `repeat_weekdays` will take effect
 
         ## Example Usage
+
+        ### Create policy by repeat_weekdays
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy = tencentcloud.cbs.SnapshotPolicy("snapshot_policy",
-            snapshot_policy_name="mysnapshotpolicyname",
+        example = tencentcloud.cbs.SnapshotPolicy("example",
+            snapshot_policy_name="tf-example",
+            repeat_hours=[1],
             repeat_weekdays=[
                 1,
                 4,
             ],
-            repeat_hours=[1],
+            is_activated=True,
+            is_permanent=False,
             retention_days=7)
         ```
+
+        ### Create policy by interval_days
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cbs.SnapshotPolicy("example",
+            snapshot_policy_name="tf-example",
+            repeat_hours=[1],
+            interval_days=30,
+            is_activated=True,
+            is_permanent=False,
+            retention_days=7)
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32167)
+        * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+        * Update: [ModifyAutoSnapshotPolicyAttribute](https://www.tencentcloud.com/document/api/362/32162)
+        * Delete: [DeleteAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32166)
 
         ## Import
 
         CBS snapshot policy can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+        $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy example asp-jliex1tn
         ```
 
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.int] interval_days: Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        :param pulumi.Input[_builtins.bool] is_activated: Whether the snapshot policy is activated. Default is true.
+        :param pulumi.Input[_builtins.bool] is_permanent: Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_hours: Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_months: Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_weekdays: Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
         :param pulumi.Input[_builtins.int] retention_days: Retention days of the snapshot, and the default value is 7.
         :param pulumi.Input[_builtins.str] snapshot_policy_name: Name of snapshot policy. The maximum length can not exceed 60 bytes.
@@ -213,30 +380,60 @@ class SnapshotPolicy(pulumi.CustomResource):
                  args: SnapshotPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a snapshot policy resource.
+        Provides a CBS snapshot policy resource.
+
+        > **NOTE:** `repeat_weekdays`/`repeat_months`/`interval_days` are mutually exclusive rules, required and only one policy rule can be set. If mutually exclusive rules are passed in at the same time, only one will take effect, with priority in the order listed above: for example, if all three rules are set, only `repeat_weekdays` will take effect
 
         ## Example Usage
+
+        ### Create policy by repeat_weekdays
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        snapshot_policy = tencentcloud.cbs.SnapshotPolicy("snapshot_policy",
-            snapshot_policy_name="mysnapshotpolicyname",
+        example = tencentcloud.cbs.SnapshotPolicy("example",
+            snapshot_policy_name="tf-example",
+            repeat_hours=[1],
             repeat_weekdays=[
                 1,
                 4,
             ],
-            repeat_hours=[1],
+            is_activated=True,
+            is_permanent=False,
             retention_days=7)
         ```
+
+        ### Create policy by interval_days
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cbs.SnapshotPolicy("example",
+            snapshot_policy_name="tf-example",
+            repeat_hours=[1],
+            interval_days=30,
+            is_activated=True,
+            is_permanent=False,
+            retention_days=7)
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32167)
+        * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+        * Update: [ModifyAutoSnapshotPolicyAttribute](https://www.tencentcloud.com/document/api/362/32162)
+        * Delete: [DeleteAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32166)
 
         ## Import
 
         CBS snapshot policy can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+        $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy example asp-jliex1tn
         ```
 
 
@@ -255,7 +452,11 @@ class SnapshotPolicy(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 interval_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 is_activated: pulumi.Input[Optional[_builtins.bool]] = None,
+                 is_permanent: pulumi.Input[Optional[_builtins.bool]] = None,
                  repeat_hours: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 repeat_months: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  repeat_weekdays: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  retention_days: pulumi.Input[Optional[_builtins.int]] = None,
                  snapshot_policy_name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -268,11 +469,13 @@ class SnapshotPolicy(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = SnapshotPolicyArgs.__new__(SnapshotPolicyArgs)
 
+            __props__.__dict__["interval_days"] = interval_days
+            __props__.__dict__["is_activated"] = is_activated
+            __props__.__dict__["is_permanent"] = is_permanent
             if repeat_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'repeat_hours'")
             __props__.__dict__["repeat_hours"] = repeat_hours
-            if repeat_weekdays is None and not opts.urn:
-                raise TypeError("Missing required property 'repeat_weekdays'")
+            __props__.__dict__["repeat_months"] = repeat_months
             __props__.__dict__["repeat_weekdays"] = repeat_weekdays
             __props__.__dict__["retention_days"] = retention_days
             if snapshot_policy_name is None and not opts.urn:
@@ -288,7 +491,11 @@ class SnapshotPolicy(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            interval_days: pulumi.Input[Optional[_builtins.int]] = None,
+            is_activated: pulumi.Input[Optional[_builtins.bool]] = None,
+            is_permanent: pulumi.Input[Optional[_builtins.bool]] = None,
             repeat_hours: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+            repeat_months: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
             repeat_weekdays: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
             retention_days: pulumi.Input[Optional[_builtins.int]] = None,
             snapshot_policy_name: pulumi.Input[Optional[_builtins.str]] = None) -> 'SnapshotPolicy':
@@ -299,7 +506,11 @@ class SnapshotPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.int] interval_days: Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        :param pulumi.Input[_builtins.bool] is_activated: Whether the snapshot policy is activated. Default is true.
+        :param pulumi.Input[_builtins.bool] is_permanent: Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_hours: Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_months: Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] repeat_weekdays: Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
         :param pulumi.Input[_builtins.int] retention_days: Retention days of the snapshot, and the default value is 7.
         :param pulumi.Input[_builtins.str] snapshot_policy_name: Name of snapshot policy. The maximum length can not exceed 60 bytes.
@@ -308,11 +519,39 @@ class SnapshotPolicy(pulumi.CustomResource):
 
         __props__ = _SnapshotPolicyState.__new__(_SnapshotPolicyState)
 
+        __props__.__dict__["interval_days"] = interval_days
+        __props__.__dict__["is_activated"] = is_activated
+        __props__.__dict__["is_permanent"] = is_permanent
         __props__.__dict__["repeat_hours"] = repeat_hours
+        __props__.__dict__["repeat_months"] = repeat_months
         __props__.__dict__["repeat_weekdays"] = repeat_weekdays
         __props__.__dict__["retention_days"] = retention_days
         __props__.__dict__["snapshot_policy_name"] = snapshot_policy_name
         return SnapshotPolicy(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="intervalDays")
+    def interval_days(self) -> pulumi.Output[Optional[_builtins.int]]:
+        """
+        Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        """
+        return pulumi.get(self, "interval_days")
+
+    @_builtins.property
+    @pulumi.getter(name="isActivated")
+    def is_activated(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether the snapshot policy is activated. Default is true.
+        """
+        return pulumi.get(self, "is_activated")
+
+    @_builtins.property
+    @pulumi.getter(name="isPermanent")
+    def is_permanent(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retention_days must not be specified, otherwise a conflict error will be returned by the API.
+        """
+        return pulumi.get(self, "is_permanent")
 
     @_builtins.property
     @pulumi.getter(name="repeatHours")
@@ -323,8 +562,16 @@ class SnapshotPolicy(pulumi.CustomResource):
         return pulumi.get(self, "repeat_hours")
 
     @_builtins.property
+    @pulumi.getter(name="repeatMonths")
+    def repeat_months(self) -> pulumi.Output[Optional[Sequence[_builtins.int]]]:
+        """
+        Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        """
+        return pulumi.get(self, "repeat_months")
+
+    @_builtins.property
     @pulumi.getter(name="repeatWeekdays")
-    def repeat_weekdays(self) -> pulumi.Output[Sequence[_builtins.int]]:
+    def repeat_weekdays(self) -> pulumi.Output[Optional[Sequence[_builtins.int]]]:
         """
         Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
         """
@@ -332,7 +579,7 @@ class SnapshotPolicy(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="retentionDays")
-    def retention_days(self) -> pulumi.Output[Optional[_builtins.int]]:
+    def retention_days(self) -> pulumi.Output[_builtins.int]:
         """
         Retention days of the snapshot, and the default value is 7.
         """

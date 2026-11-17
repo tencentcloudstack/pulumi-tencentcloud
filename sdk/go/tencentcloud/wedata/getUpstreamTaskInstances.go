@@ -14,6 +14,12 @@ import (
 // Use this data source to query detailed information of wedata upstream task instances
 //
 // ## Example Usage
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListUpstreamTaskInstances](https://www.tencentcloud.com/document/api/1174/73815)
 func GetUpstreamTaskInstances(ctx *pulumi.Context, args *GetUpstreamTaskInstancesArgs, opts ...pulumi.InvokeOption) (*GetUpstreamTaskInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUpstreamTaskInstancesResult

@@ -1339,7 +1339,7 @@ type LaunchTemplateDataDisk struct {
 	CdcId *string `pulumi:"cdcId"`
 	// Whether the data disk is destroyed along with the instance, true or false.
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
-	// Data disk ID.
+	// System disk ID.
 	DiskId *string `pulumi:"diskId"`
 	// The size of the data disk.
 	DiskSize int `pulumi:"diskSize"`
@@ -1371,7 +1371,7 @@ type LaunchTemplateDataDiskArgs struct {
 	CdcId pulumi.StringPtrInput `pulumi:"cdcId"`
 	// Whether the data disk is destroyed along with the instance, true or false.
 	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
-	// Data disk ID.
+	// System disk ID.
 	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
 	// The size of the data disk.
 	DiskSize pulumi.IntInput `pulumi:"diskSize"`
@@ -1448,7 +1448,7 @@ func (o LaunchTemplateDataDiskOutput) DeleteWithInstance() pulumi.BoolPtrOutput 
 	return o.ApplyT(func(v LaunchTemplateDataDisk) *bool { return v.DeleteWithInstance }).(pulumi.BoolPtrOutput)
 }
 
-// Data disk ID.
+// System disk ID.
 func (o LaunchTemplateDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LaunchTemplateDataDisk) *string { return v.DiskId }).(pulumi.StringPtrOutput)
 }

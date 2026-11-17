@@ -100,6 +100,12 @@ def get_resources(filters: Optional[Sequence[Union['GetResourcesFilterArgs', 'Ge
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResources](https://www.tencentcloud.com/document/api/214/51214)
+
 
     :param Sequence[Union['GetResourcesFilterArgs', 'GetResourcesFilterArgsDict']] filters: Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_resources_output(filters: pulumi.Input[Optional[Optional[Sequence[Union[
         "values": ["BGP"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResources](https://www.tencentcloud.com/document/api/214/51214)
 
 
     :param Sequence[Union['GetResourcesFilterArgs', 'GetResourcesFilterArgsDict']] filters: Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.

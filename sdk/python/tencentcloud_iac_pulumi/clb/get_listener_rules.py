@@ -163,6 +163,12 @@ def get_listener_rules(clb_id: Optional[_builtins.str] = None,
         scheduler="WRR")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+
 
     :param _builtins.str clb_id: ID of the CLB to be queried.
     :param _builtins.str domain: Domain name of the forwarding rule to be queried.
@@ -217,6 +223,12 @@ def get_listener_rules_output(clb_id: pulumi.Input[Optional[_builtins.str]] = No
         url="/",
         scheduler="WRR")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
 
 
     :param _builtins.str clb_id: ID of the CLB to be queried.

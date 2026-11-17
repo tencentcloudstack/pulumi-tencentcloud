@@ -234,6 +234,19 @@ class TmpTkeClusterAgent(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53774)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Read: [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Update: [ModifyPrometheusAgentExternalLabels](https://www.tencentcloud.com/document/api/248/53766)
+        * Delete:
+          - [DeletePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53771)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -372,6 +385,19 @@ class TmpTkeClusterAgent(pulumi.CustomResource):
                 "enable_external": False,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53774)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Read: [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Update: [ModifyPrometheusAgentExternalLabels](https://www.tencentcloud.com/document/api/248/53766)
+        * Delete:
+          - [DeletePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53771)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
 
 
         :param str resource_name: The name of the resource.

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&type=document&lang=en)
 func GetValidateStatus(ctx *pulumi.Context, args *GetValidateStatusArgs, opts ...pulumi.InvokeOption) (*GetValidateStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetValidateStatusResult

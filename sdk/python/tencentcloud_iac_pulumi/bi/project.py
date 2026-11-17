@@ -188,6 +188,15 @@ class Project(pulumi.CustomResource):
             mark="project mark")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateProject](https://www.tencentcloud.com/document/api/1270/72627)
+        * Read: [DescribeProjectInfo](https://www.tencentcloud.com/document/api/1270/72625)
+        * Update: [ModifyProject](https://www.tencentcloud.com/document/api/1270/72623)
+        * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1270/72626)
+
         ## Import
 
         bi project can be imported using the id, e.g.
@@ -225,6 +234,15 @@ class Project(pulumi.CustomResource):
             logo="TF-test",
             mark="project mark")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateProject](https://www.tencentcloud.com/document/api/1270/72627)
+        * Read: [DescribeProjectInfo](https://www.tencentcloud.com/document/api/1270/72625)
+        * Update: [ModifyProject](https://www.tencentcloud.com/document/api/1270/72623)
+        * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1270/72626)
 
         ## Import
 

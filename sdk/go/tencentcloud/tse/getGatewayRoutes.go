@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
 func LookupGatewayRoutes(ctx *pulumi.Context, args *LookupGatewayRoutesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayRoutesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGatewayRoutesResult

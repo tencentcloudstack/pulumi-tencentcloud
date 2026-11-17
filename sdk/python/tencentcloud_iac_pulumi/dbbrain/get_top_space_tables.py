@@ -153,6 +153,12 @@ def get_top_space_tables(instance_id: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.int limit: The number of Top tables returned, the maximum value is 100, and the default is 20.
@@ -210,6 +216,12 @@ def get_top_space_tables_output(instance_id: pulumi.Input[Optional[_builtins.str
         sort_by="PhysicalFileSize",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
 
 
     :param _builtins.str instance_id: instance id.

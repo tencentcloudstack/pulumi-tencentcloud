@@ -245,6 +245,17 @@ class GeneralBackup(pulumi.CustomResource):
             strategy=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackup](https://www.tencentcloud.com/document/api/238/32130)
+          - [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
+        * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/238/32127)
+        * Update: [ModifyBackupName](https://www.tencentcloud.com/document/api/238/72774)
+        * Delete: [RemoveBackups](https://www.tencentcloud.com/document/api/238/72776)
+
         ## Import
 
         sqlserver general_backups can be imported using the id, e.g.
@@ -322,6 +333,17 @@ class GeneralBackup(pulumi.CustomResource):
             backup_name="tf_example_backup",
             strategy=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackup](https://www.tencentcloud.com/document/api/238/32130)
+          - [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
+        * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/238/32127)
+        * Update: [ModifyBackupName](https://www.tencentcloud.com/document/api/238/72774)
+        * Delete: [RemoveBackups](https://www.tencentcloud.com/document/api/238/72776)
 
         ## Import
 

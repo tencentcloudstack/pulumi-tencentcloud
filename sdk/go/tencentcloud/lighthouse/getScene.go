@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeScenes](https://www.tencentcloud.com/document/api/1103/52166)
 func GetScene(ctx *pulumi.Context, args *GetSceneArgs, opts ...pulumi.InvokeOption) (*GetSceneResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSceneResult

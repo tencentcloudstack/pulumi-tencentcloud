@@ -120,6 +120,12 @@ def get_function_aliases(function_name: Optional[_builtins.str] = None,
         namespace="default")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAliases](https://www.tencentcloud.com/document/api/583/36322)
+
 
     :param _builtins.str function_name: Function name.
     :param _builtins.str function_version: If this parameter is provided, only aliases associated with this function version will be returned.
@@ -158,6 +164,12 @@ def get_function_aliases_output(function_name: pulumi.Input[Optional[_builtins.s
     function_aliases = tencentcloud.scf.get_function_aliases(function_name="keep-1676351130",
         namespace="default")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAliases](https://www.tencentcloud.com/document/api/583/36322)
 
 
     :param _builtins.str function_name: Function name.

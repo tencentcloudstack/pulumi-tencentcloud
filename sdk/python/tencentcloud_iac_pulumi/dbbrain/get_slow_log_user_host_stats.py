@@ -139,6 +139,12 @@ def get_slow_log_user_host_stats(end_time: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogUserHostStats](https://www.tencentcloud.com/document/api/1035/41182)
+
 
     :param _builtins.str end_time: EndTime time of the query range, time format such as: 2019-09-10 12:13:14.
     :param _builtins.str instance_id: instance id.
@@ -187,6 +193,12 @@ def get_slow_log_user_host_stats_output(end_time: pulumi.Input[Optional[_builtin
         end_time="%s",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogUserHostStats](https://www.tencentcloud.com/document/api/1035/41182)
 
 
     :param _builtins.str end_time: EndTime time of the query range, time format such as: 2019-09-10 12:13:14.

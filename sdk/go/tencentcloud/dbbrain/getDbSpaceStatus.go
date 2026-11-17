@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBSpaceStatus](https://www.tencentcloud.com/document/api/1035/41196)
 func GetDbSpaceStatus(ctx *pulumi.Context, args *GetDbSpaceStatusArgs, opts ...pulumi.InvokeOption) (*GetDbSpaceStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbSpaceStatusResult

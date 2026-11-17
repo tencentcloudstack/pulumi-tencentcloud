@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-jqlegd42",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AttachDisks](https://www.tencentcloud.com/document/api/362/16313)
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ * * Delete: [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
  */
 export class StorageSetAttachment extends pulumi.CustomResource {
     /**

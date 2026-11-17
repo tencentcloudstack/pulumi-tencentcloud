@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetConfigSummaryResult> InvokeAsync(GetConfigSummaryArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetConfigSummaryResult> Invoke(GetConfigSummaryInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetConfigSummaryResult> Invoke(GetConfigSummaryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigSummaryResult>("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args ?? new GetConfigSummaryInvokeArgs(), options.WithDefaults());

@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateStreamLinkEvent](https://www.tencentcloud.com/search/?wd=CreateStreamLinkEvent&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeStreamLinkEvent](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkEvent&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyStreamLinkEvent](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkEvent&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteStreamLinkEvent](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkEvent&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// mps event can be imported using the id, e.g.

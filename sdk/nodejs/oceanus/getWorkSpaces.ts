@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&type=document&lang=en)
  */
 export function getWorkSpaces(args?: GetWorkSpacesArgs, opts?: pulumi.InvokeOptions): Promise<GetWorkSpacesResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetWorkSpacesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&type=document&lang=en)
  */
 export function getWorkSpacesOutput(args?: GetWorkSpacesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWorkSpacesResult> {
     args = args || {};

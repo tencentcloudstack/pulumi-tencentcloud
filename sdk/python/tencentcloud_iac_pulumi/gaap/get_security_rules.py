@@ -189,6 +189,12 @@ def get_security_rules(action: Optional[_builtins.str] = None,
         protocol=foo_security_rule.protocol)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+
 
     :param _builtins.str action: Policy of the rule to be queried.
     :param _builtins.str cidr_ip: A network address block of the request source to be queried.
@@ -260,6 +266,12 @@ def get_security_rules_output(action: pulumi.Input[Optional[Optional[_builtins.s
     protocol = tencentcloud.gaap.get_security_rules_output(policy_id=foo_security_policy.id,
         protocol=foo_security_rule.protocol)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
 
 
     :param _builtins.str action: Policy of the rule to be queried.

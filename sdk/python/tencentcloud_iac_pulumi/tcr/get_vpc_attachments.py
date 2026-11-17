@@ -122,6 +122,14 @@ def get_vpc_attachments(instance_id: Optional[_builtins.str] = None,
     id = tencentcloud.tcr.get_vpc_attachments(instance_id="cls-satg5125")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+      - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+
 
     :param _builtins.str instance_id: ID of the instance to query.
     :param _builtins.str result_output_file: Used to save results.
@@ -159,6 +167,14 @@ def get_vpc_attachments_output(instance_id: pulumi.Input[Optional[_builtins.str]
 
     id = tencentcloud.tcr.get_vpc_attachments(instance_id="cls-satg5125")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+      - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
 
 
     :param _builtins.str instance_id: ID of the instance to query.

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
 func GetClusterParams(ctx *pulumi.Context, args *GetClusterParamsArgs, opts ...pulumi.InvokeOption) (*GetClusterParamsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterParamsResult

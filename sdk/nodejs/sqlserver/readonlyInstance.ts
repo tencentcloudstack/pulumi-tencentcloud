@@ -61,6 +61,25 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateReadOnlyDBInstances](https://www.tencentcloud.com/document/api/238/66348)
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+ *   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeReadOnlyGroupByReadOnlyInstance](https://www.tencentcloud.com/document/api/238/72740)
+ *   - [DescribeReadOnlyGroupList](https://www.tencentcloud.com/document/api/238/72738)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Delete:
+ *   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ *   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+ *
  * ## Import
  *
  * SQL Server readonly instance can be imported using the id, e.g.

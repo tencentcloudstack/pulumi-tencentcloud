@@ -95,6 +95,12 @@ def get_db_charsets(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_db_charsets(instance_id="mssql-qelbzgwf")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
+
 
     :param _builtins.str instance_id: Instance ID in the format of mssql-j8kv137v.
     :param _builtins.str result_output_file: Used to save results.
@@ -124,6 +130,12 @@ def get_db_charsets_output(instance_id: pulumi.Input[Optional[_builtins.str]] = 
 
     example = tencentcloud.sqlserver.get_db_charsets(instance_id="mssql-qelbzgwf")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
 
 
     :param _builtins.str instance_id: Instance ID in the format of mssql-j8kv137v.

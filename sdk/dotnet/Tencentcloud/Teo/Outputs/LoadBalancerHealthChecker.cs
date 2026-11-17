@@ -35,6 +35,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly int? HealthThreshold;
         /// <summary>
+        /// Probe request Host Header policy, valid when `Type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `Path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+        /// </summary>
+        public readonly string? HostHeaderPolicy;
+        /// <summary>
         /// Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
         /// </summary>
         public readonly int? Interval;
@@ -50,6 +54,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// Check port. Required when `Type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
         /// </summary>
         public readonly int? Port;
+        /// <summary>
+        /// Probe cluster region scope for health checks. Valid values: `Global`, `MainlandChina`, `Overseas`. Default: `Global`. Only supported when load balancer instance type is `HTTP_V2`.
+        /// </summary>
+        public readonly string? ProbeCluster;
         /// <summary>
         /// Expected response content from origin, valid when `Type` is `UDP`. Only ASCII visible characters allowed, max length 500.
         /// </summary>
@@ -79,6 +87,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             int? healthThreshold,
 
+            string? hostHeaderPolicy,
+
             int? interval,
 
             string? method,
@@ -86,6 +96,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             string? path,
 
             int? port,
+
+            string? probeCluster,
 
             string? recvContext,
 
@@ -100,10 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             FollowRedirect = followRedirect;
             Headers = headers;
             HealthThreshold = healthThreshold;
+            HostHeaderPolicy = hostHeaderPolicy;
             Interval = interval;
             Method = method;
             Path = path;
             Port = port;
+            ProbeCluster = probeCluster;
             RecvContext = recvContext;
             SendContext = sendContext;
             Timeout = timeout;

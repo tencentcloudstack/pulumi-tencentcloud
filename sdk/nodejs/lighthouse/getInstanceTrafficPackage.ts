@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const instanceTrafficPackage = tencentcloud.lighthouse.getInstanceTrafficPackage({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
  */
 export function getInstanceTrafficPackage(args?: GetInstanceTrafficPackageArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceTrafficPackageResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetInstanceTrafficPackageResult {
  *
  * const instanceTrafficPackage = tencentcloud.lighthouse.getInstanceTrafficPackage({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
  */
 export function getInstanceTrafficPackageOutput(args?: GetInstanceTrafficPackageOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceTrafficPackageResult> {
     args = args || {};

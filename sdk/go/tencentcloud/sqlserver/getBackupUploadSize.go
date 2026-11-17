@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBackupUploadSize](https://www.tencentcloud.com/document/api/238/39837)
 func GetBackupUploadSize(ctx *pulumi.Context, args *GetBackupUploadSizeArgs, opts ...pulumi.InvokeOption) (*GetBackupUploadSizeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupUploadSizeResult

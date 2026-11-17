@@ -100,6 +100,12 @@ def get_cluster_resources(filters: Optional[Sequence[Union['GetClusterResourcesF
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterResources](https://www.tencentcloud.com/search/?wd=DescribeClusterResources&type=document&lang=en)
+
 
     :param Sequence[Union['GetClusterResourcesFilterArgs', 'GetClusterResourcesFilterArgsDict']] filters: Filter conditions to query cluster. cluster-id - String - Required: No - (Filter condition) Filter by cluster ID, such as tgw-12345678. vip - String - Required: No - (Filter condition) Filter by loadbalancer vip, such as 192.168.0.1. loadblancer-id - String - Required: No - (Filter condition) Filter by loadblancer ID, such as lbl-12345678. idle - String - Required: No - (Filter condition) Filter by Whether load balancing is idle, such as True, False.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_cluster_resources_output(filters: pulumi.Input[Optional[Optional[Sequenc
         "values": ["True"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterResources](https://www.tencentcloud.com/search/?wd=DescribeClusterResources&type=document&lang=en)
 
 
     :param Sequence[Union['GetClusterResourcesFilterArgs', 'GetClusterResourcesFilterArgsDict']] filters: Filter conditions to query cluster. cluster-id - String - Required: No - (Filter condition) Filter by cluster ID, such as tgw-12345678. vip - String - Required: No - (Filter condition) Filter by loadbalancer vip, such as 192.168.0.1. loadblancer-id - String - Required: No - (Filter condition) Filter by loadblancer ID, such as lbl-12345678. idle - String - Required: No - (Filter condition) Filter by Whether load balancing is idle, such as True, False.

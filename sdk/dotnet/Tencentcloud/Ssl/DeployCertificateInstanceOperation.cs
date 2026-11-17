@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeployCertificateInstance](https://www.tencentcloud.com/search/?wd=DeployCertificateInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ssl DeployCertificateInstance can be imported using the id, e.g.

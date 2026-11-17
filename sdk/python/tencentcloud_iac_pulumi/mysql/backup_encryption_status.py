@@ -168,6 +168,14 @@ class BackupEncryptionStatus(pulumi.CustomResource):
             encryption_status="off")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupEncryptionStatus](https://www.tencentcloud.com/document/api/236/53777)
+        * Read: [DescribeBackupEncryptionStatus](https://www.tencentcloud.com/document/api/236/53778)
+        * Update: [ModifyBackupEncryptionStatus](https://www.tencentcloud.com/document/api/236/53777)
+
         ## Import
 
         mysql backup_encryption_status can be imported using the id, e.g.
@@ -250,6 +258,14 @@ class BackupEncryptionStatus(pulumi.CustomResource):
             instance_id=example_tencentcloud_mysql_instance["id"],
             encryption_status="off")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupEncryptionStatus](https://www.tencentcloud.com/document/api/236/53777)
+        * Read: [DescribeBackupEncryptionStatus](https://www.tencentcloud.com/document/api/236/53778)
+        * Update: [ModifyBackupEncryptionStatus](https://www.tencentcloud.com/document/api/236/53777)
 
         ## Import
 

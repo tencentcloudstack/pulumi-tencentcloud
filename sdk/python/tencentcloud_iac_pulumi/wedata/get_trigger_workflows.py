@@ -166,6 +166,12 @@ def get_trigger_workflows(bundle_id: Optional[_builtins.str] = None,
     wedata_trigger_workflows = tencentcloud.wedata.get_trigger_workflows(project_id="3108707295180644352")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77918)
+
 
     :param _builtins.str bundle_id: Bundle ID item.
     :param Sequence[_builtins.str] create_times: Creation time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
@@ -223,6 +229,12 @@ def get_trigger_workflows_output(bundle_id: pulumi.Input[Optional[Optional[_buil
 
     wedata_trigger_workflows = tencentcloud.wedata.get_trigger_workflows(project_id="3108707295180644352")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77918)
 
 
     :param _builtins.str bundle_id: Bundle ID item.

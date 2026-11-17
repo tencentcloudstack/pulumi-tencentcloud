@@ -96,6 +96,12 @@ def get_bandwidth_package_bill_usage(bandwidth_package_id: Optional[_builtins.st
     bandwidth_package_bill_usage = tencentcloud.vpc.get_bandwidth_package_bill_usage(bandwidth_package_id="bwp-234rfgt5")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
+
 
     :param _builtins.str bandwidth_package_id: The unique ID of the postpaid bandwidth package.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_bandwidth_package_bill_usage_output(bandwidth_package_id: pulumi.Input[O
 
     bandwidth_package_bill_usage = tencentcloud.vpc.get_bandwidth_package_bill_usage(bandwidth_package_id="bwp-234rfgt5")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
 
 
     :param _builtins.str bandwidth_package_id: The unique ID of the postpaid bandwidth package.

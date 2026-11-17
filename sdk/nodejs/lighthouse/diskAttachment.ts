@@ -19,6 +19,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AttachDisks](https://www.tencentcloud.com/document/api/1103/44576)
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+ * * Delete:
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+ *   - [DetachDisks](https://www.tencentcloud.com/document/api/1103/44570)
+ *
  * ## Import
  *
  * lighthouse diskAttachment can be imported using the id, e.g.

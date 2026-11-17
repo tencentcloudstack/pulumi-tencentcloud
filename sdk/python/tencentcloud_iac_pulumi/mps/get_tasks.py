@@ -117,6 +117,12 @@ def get_tasks(limit: Optional[_builtins.int] = None,
         limit=20)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/1041/33643)
+
 
     :param _builtins.int limit: Return the number of records, default value: 10, maximum value: 100.
     :param _builtins.str result_output_file: Used to save results.
@@ -155,6 +161,12 @@ def get_tasks_output(limit: pulumi.Input[Optional[Optional[_builtins.int]]] = No
     tasks = tencentcloud.mps.get_tasks(status="FINISH",
         limit=20)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/1041/33643)
 
 
     :param _builtins.int limit: Return the number of records, default value: 10, maximum value: 100.

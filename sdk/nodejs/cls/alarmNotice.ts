@@ -20,6 +20,7 @@ import * as utilities from "../utilities";
  *     jumpDomain: "https://console.cloud.tencent.com",
  *     deliverStatus: 2,
  *     alarmShieldStatus: 2,
+ *     secureDetailStatus: 1,
  *     callbackPrioritize: true,
  *     noticeRules: [{
  *         escalate: true,
@@ -120,6 +121,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateAlarmNotice](https://www.tencentcloud.com/document/api/614/42829)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/614/42822)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteAlarmNotice](https://www.tencentcloud.com/document/api/614/42827)
+ *
  * ## Import
  *
  * cls alarm notice can be imported using the id, e.g.
@@ -189,6 +205,10 @@ export class AlarmNotice extends pulumi.CustomResource {
      */
     declare public readonly noticeRules: pulumi.Output<outputs.Cls.AlarmNoticeNoticeRule[] | undefined>;
     /**
+     * Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+     */
+    declare public readonly secureDetailStatus: pulumi.Output<number>;
+    /**
      * Tag description list.
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
@@ -222,6 +242,7 @@ export class AlarmNotice extends pulumi.CustomResource {
             resourceInputs["name"] = state?.name;
             resourceInputs["noticeReceivers"] = state?.noticeReceivers;
             resourceInputs["noticeRules"] = state?.noticeRules;
+            resourceInputs["secureDetailStatus"] = state?.secureDetailStatus;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["type"] = state?.type;
             resourceInputs["webCallbacks"] = state?.webCallbacks;
@@ -235,6 +256,7 @@ export class AlarmNotice extends pulumi.CustomResource {
             resourceInputs["name"] = args?.name;
             resourceInputs["noticeReceivers"] = args?.noticeReceivers;
             resourceInputs["noticeRules"] = args?.noticeRules;
+            resourceInputs["secureDetailStatus"] = args?.secureDetailStatus;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["type"] = args?.type;
             resourceInputs["webCallbacks"] = args?.webCallbacks;
@@ -280,6 +302,10 @@ export interface AlarmNoticeState {
      * Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
      */
     noticeRules?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeRule>[] | undefined>;
+    /**
+     * Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+     */
+    secureDetailStatus?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
@@ -330,6 +356,10 @@ export interface AlarmNoticeArgs {
      * Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
      */
     noticeRules?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeRule>[] | undefined>;
+    /**
+     * Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+     */
+    secureDetailStatus?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */

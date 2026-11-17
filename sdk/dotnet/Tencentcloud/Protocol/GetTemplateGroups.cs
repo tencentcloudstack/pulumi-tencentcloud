@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
         /// </summary>
         public static Task<GetTemplateGroupsResult> InvokeAsync(GetTemplateGroupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
         /// </summary>
         public static Output<GetTemplateGroupsResult> Invoke(GetTemplateGroupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
         /// </summary>
         public static Output<GetTemplateGroupsResult> Invoke(GetTemplateGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTemplateGroupsResult>("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args ?? new GetTemplateGroupsInvokeArgs(), options.WithDefaults());

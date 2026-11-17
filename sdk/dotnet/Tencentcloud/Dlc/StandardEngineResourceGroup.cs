@@ -93,6 +93,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateStandardEngineResourceGroup](https://www.tencentcloud.com/search/?wd=CreateStandardEngineResourceGroup&amp;type=document&amp;lang=en)
+    ///   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [PauseStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=PauseStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [LaunchStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=LaunchStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [PauseStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=PauseStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [UpdateEngineResourceGroupNetworkConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateEngineResourceGroupNetworkConfigInfo&amp;type=document&amp;lang=en)
+    ///   - [UpdateStandardEngineResourceGroupBaseInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupBaseInfo&amp;type=document&amp;lang=en)
+    ///   - [UpdateStandardEngineResourceGroupResourceInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupResourceInfo&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteStandardEngineResourceGroup](https://www.tencentcloud.com/search/?wd=DeleteStandardEngineResourceGroup&amp;type=document&amp;lang=en)
+    ///   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [PauseStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=PauseStandardEngineResourceGroups&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/standardEngineResourceGroup:StandardEngineResourceGroup")]
     public partial class StandardEngineResourceGroup : global::Pulumi.CustomResource

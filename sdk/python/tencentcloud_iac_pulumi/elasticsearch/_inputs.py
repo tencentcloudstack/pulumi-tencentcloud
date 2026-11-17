@@ -301,7 +301,7 @@ class InstanceNodeInfoListArgsDict(TypedDict):
     """
     type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+    Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
     """
 
 @pulumi.input_type
@@ -319,7 +319,7 @@ class InstanceNodeInfoListArgs:
         :param pulumi.Input[_builtins.int] disk_size: Node disk size. Unit is GB, and default value is `100`. Big Data and High IO models do not support the specified disk size and have no default values.
         :param pulumi.Input[_builtins.str] disk_type: Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`. Big Data and High IO models do not support the specified disk type and have no default values.
         :param pulumi.Input[_builtins.bool] encrypt: Decides to encrypt this disk or not.
-        :param pulumi.Input[_builtins.str] type: Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+        :param pulumi.Input[_builtins.str] type: Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
         """
         pulumi.set(__self__, "node_num", node_num)
         pulumi.set(__self__, "node_type", node_type)
@@ -396,7 +396,7 @@ class InstanceNodeInfoListArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+        Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
         """
         return pulumi.get(self, "type")
 

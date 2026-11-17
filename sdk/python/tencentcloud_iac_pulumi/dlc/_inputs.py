@@ -113,6 +113,38 @@ __all__ = [
     'GetDescribeWorkGroupInfoFilterArgsDict',
     'GetStandardEngineResourceGroupConfigInformationFilterArgs',
     'GetStandardEngineResourceGroupConfigInformationFilterArgsDict',
+    'MetaDatabaseGovernPolicyArgs',
+    'MetaDatabaseGovernPolicyArgsDict',
+    'MetaDatabaseMetaDatabaseInfoArgs',
+    'MetaDatabaseMetaDatabaseInfoArgsDict',
+    'MetaDatabasePropertyArgs',
+    'MetaDatabasePropertyArgsDict',
+    'MetaDatabaseSmartPolicyArgs',
+    'MetaDatabaseSmartPolicyArgsDict',
+    'MetaDatabaseSmartPolicyBaseInfoArgs',
+    'MetaDatabaseSmartPolicyBaseInfoArgsDict',
+    'MetaDatabaseSmartPolicyPolicyArgs',
+    'MetaDatabaseSmartPolicyPolicyArgsDict',
+    'MetaDatabaseSmartPolicyPolicyChangeTableArgs',
+    'MetaDatabaseSmartPolicyPolicyChangeTableArgsDict',
+    'MetaDatabaseSmartPolicyPolicyIndexArgs',
+    'MetaDatabaseSmartPolicyPolicyIndexArgsDict',
+    'MetaDatabaseSmartPolicyPolicyLifecycleArgs',
+    'MetaDatabaseSmartPolicyPolicyLifecycleArgsDict',
+    'MetaDatabaseSmartPolicyPolicyResourceArgs',
+    'MetaDatabaseSmartPolicyPolicyResourceArgsDict',
+    'MetaDatabaseSmartPolicyPolicyResourceFavorArgs',
+    'MetaDatabaseSmartPolicyPolicyResourceFavorArgsDict',
+    'MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs',
+    'MetaDatabaseSmartPolicyPolicyResourceResourceConfArgsDict',
+    'MetaDatabaseSmartPolicyPolicyTableExpirationArgs',
+    'MetaDatabaseSmartPolicyPolicyTableExpirationArgsDict',
+    'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs',
+    'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgsDict',
+    'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs',
+    'MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgsDict',
+    'MetaDatabaseSmartPolicyPolicyWrittenArgs',
+    'MetaDatabaseSmartPolicyPolicyWrittenArgsDict',
     'StandardEngineResourceGroupConfigInfoDynamicConfContextArgs',
     'StandardEngineResourceGroupConfigInfoDynamicConfContextArgsDict',
     'StandardEngineResourceGroupConfigInfoDynamicConfContextParamArgs',
@@ -366,7 +398,7 @@ class AttachUserPolicyAttachmentPolicySetArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    The policy ID.
     """
     is_admin_policy: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
@@ -453,7 +485,7 @@ class AttachUserPolicyAttachmentPolicySetArgs:
         :param pulumi.Input[_builtins.str] database: The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
         :param pulumi.Input[_builtins.str] engine_generation: Engine type.
         :param pulumi.Input[_builtins.str] function: The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.int] id: The policy ID.
         :param pulumi.Input[_builtins.bool] is_admin_policy: Whether the permission source is admin.
         :param pulumi.Input[_builtins.str] mode: The grant mode, Valid values: `COMMON` and `SENIOR`.
         :param pulumi.Input[_builtins.str] model: The name of the target Model. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
@@ -599,7 +631,7 @@ class AttachUserPolicyAttachmentPolicySetArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        The policy ID.
         """
         return pulumi.get(self, "id")
 
@@ -1148,7 +1180,7 @@ class AttachWorkGroupPolicyAttachmentPolicySetArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    The policy ID.
     """
     is_admin_policy: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
@@ -1229,7 +1261,7 @@ class AttachWorkGroupPolicyAttachmentPolicySetArgs:
         :param pulumi.Input[_builtins.str] data_engine: The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
         :param pulumi.Input[_builtins.str] engine_generation: The engine generation/type.
         :param pulumi.Input[_builtins.str] function: The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.int] id: The policy ID.
         :param pulumi.Input[_builtins.bool] is_admin_policy: Whether the permission source is admin, which is not required as an input parameter.
         :param pulumi.Input[_builtins.str] mode: The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
         :param pulumi.Input[_builtins.str] model: The name of the target Model. `*` represents all models in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any model.
@@ -1393,7 +1425,7 @@ class AttachWorkGroupPolicyAttachmentPolicySetArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        The policy ID.
         """
         return pulumi.get(self, "id")
 
@@ -5703,6 +5735,1326 @@ class DetachWorkGroupPolicyOperationPolicySetArgs:
     @view.setter
     def view(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "view", value)
+
+
+class MetaDatabaseGovernPolicyArgsDict(TypedDict):
+    govern_engine: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Govern engine.
+    """
+    rule_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Govern rule type, `Customize` or `Intelligence`.
+    """
+
+@pulumi.input_type
+class MetaDatabaseGovernPolicyArgs:
+    def __init__(__self__, *,
+                 govern_engine: pulumi.Input[Optional[_builtins.str]] = None,
+                 rule_type: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] govern_engine: Govern engine.
+        :param pulumi.Input[_builtins.str] rule_type: Govern rule type, `Customize` or `Intelligence`.
+        """
+        if govern_engine is not None:
+            pulumi.set(__self__, "govern_engine", govern_engine)
+        if rule_type is not None:
+            pulumi.set(__self__, "rule_type", rule_type)
+
+    @_builtins.property
+    @pulumi.getter(name="governEngine")
+    def govern_engine(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Govern engine.
+        """
+        return pulumi.get(self, "govern_engine")
+
+    @govern_engine.setter
+    def govern_engine(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "govern_engine", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Govern rule type, `Customize` or `Intelligence`.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @rule_type.setter
+    def rule_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "rule_type", value)
+
+
+class MetaDatabaseMetaDatabaseInfoArgsDict(TypedDict):
+    database_name: pulumi.Input[_builtins.str]
+    """
+    Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+    """
+    comment: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Description of the DLC meta database, length 0~2048.
+    """
+
+@pulumi.input_type
+class MetaDatabaseMetaDatabaseInfoArgs:
+    def __init__(__self__, *,
+                 database_name: pulumi.Input[_builtins.str],
+                 comment: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] database_name: Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+        :param pulumi.Input[_builtins.str] comment: Description of the DLC meta database, length 0~2048.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        if comment is not None:
+            pulumi.set(__self__, "comment", comment)
+
+    @_builtins.property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Name of the DLC meta database, length 0~128, digits, letters and underscores are supported, cannot start with a digit, and is converted to lowercase.
+        """
+        return pulumi.get(self, "database_name")
+
+    @database_name.setter
+    def database_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "database_name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def comment(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Description of the DLC meta database, length 0~2048.
+        """
+        return pulumi.get(self, "comment")
+
+    @comment.setter
+    def comment(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "comment", value)
+
+
+class MetaDatabasePropertyArgsDict(TypedDict):
+    key: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Property key.
+    """
+    value: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Property value.
+    """
+
+@pulumi.input_type
+class MetaDatabasePropertyArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[Optional[_builtins.str]] = None,
+                 value: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] key: Property key.
+        :param pulumi.Input[_builtins.str] value: Property value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Property key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Property value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "value", value)
+
+
+class MetaDatabaseSmartPolicyArgsDict(TypedDict):
+    base_info: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyBaseInfoArgsDict']]]
+    """
+    Base info of smart policy.
+    """
+    policy: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyArgsDict']]]
+    """
+    Policy description of smart policy.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyArgs:
+    def __init__(__self__, *,
+                 base_info: pulumi.Input[Optional['MetaDatabaseSmartPolicyBaseInfoArgs']] = None,
+                 policy: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyArgs']] = None):
+        """
+        :param pulumi.Input['MetaDatabaseSmartPolicyBaseInfoArgs'] base_info: Base info of smart policy.
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyArgs'] policy: Policy description of smart policy.
+        """
+        if base_info is not None:
+            pulumi.set(__self__, "base_info", base_info)
+        if policy is not None:
+            pulumi.set(__self__, "policy", policy)
+
+    @_builtins.property
+    @pulumi.getter(name="baseInfo")
+    def base_info(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyBaseInfoArgs']]:
+        """
+        Base info of smart policy.
+        """
+        return pulumi.get(self, "base_info")
+
+    @base_info.setter
+    def base_info(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyBaseInfoArgs']]):
+        pulumi.set(self, "base_info", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def policy(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyArgs']]:
+        """
+        Policy description of smart policy.
+        """
+        return pulumi.get(self, "policy")
+
+    @policy.setter
+    def policy(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyArgs']]):
+        pulumi.set(self, "policy", value)
+
+
+class MetaDatabaseSmartPolicyBaseInfoArgsDict(TypedDict):
+    uin: pulumi.Input[_builtins.str]
+    """
+    User UIN.
+    """
+    app_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    User AppID.
+    """
+    catalog: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Catalog name.
+    """
+    database: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Database name.
+    """
+    policy_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Policy type.
+    """
+    table: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Table name.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyBaseInfoArgs:
+    def __init__(__self__, *,
+                 uin: pulumi.Input[_builtins.str],
+                 app_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 catalog: pulumi.Input[Optional[_builtins.str]] = None,
+                 database: pulumi.Input[Optional[_builtins.str]] = None,
+                 policy_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 table: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] uin: User UIN.
+        :param pulumi.Input[_builtins.str] app_id: User AppID.
+        :param pulumi.Input[_builtins.str] catalog: Catalog name.
+        :param pulumi.Input[_builtins.str] database: Database name.
+        :param pulumi.Input[_builtins.str] policy_type: Policy type.
+        :param pulumi.Input[_builtins.str] table: Table name.
+        """
+        pulumi.set(__self__, "uin", uin)
+        if app_id is not None:
+            pulumi.set(__self__, "app_id", app_id)
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if database is not None:
+            pulumi.set(__self__, "database", database)
+        if policy_type is not None:
+            pulumi.set(__self__, "policy_type", policy_type)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+
+    @_builtins.property
+    @pulumi.getter
+    def uin(self) -> pulumi.Input[_builtins.str]:
+        """
+        User UIN.
+        """
+        return pulumi.get(self, "uin")
+
+    @uin.setter
+    def uin(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "uin", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        User AppID.
+        """
+        return pulumi.get(self, "app_id")
+
+    @app_id.setter
+    def app_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "app_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def catalog(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Catalog name.
+        """
+        return pulumi.get(self, "catalog")
+
+    @catalog.setter
+    def catalog(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "catalog", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def database(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "database")
+
+    @database.setter
+    def database(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "database", value)
+
+    @_builtins.property
+    @pulumi.getter(name="policyType")
+    def policy_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Policy type.
+        """
+        return pulumi.get(self, "policy_type")
+
+    @policy_type.setter
+    def policy_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "policy_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "table", value)
+
+
+class MetaDatabaseSmartPolicyPolicyArgsDict(TypedDict):
+    change_table: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyChangeTableArgsDict']]]
+    """
+    Change table policy.
+    """
+    index: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyIndexArgsDict']]]
+    """
+    Index policy.
+    """
+    inherit: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to inherit.
+    """
+    lifecycle: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyLifecycleArgsDict']]]
+    """
+    Data lifecycle policy.
+    """
+    resources: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceArgsDict']]]]]
+    """
+    Data governance resources.
+    """
+    table_expiration: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyTableExpirationArgsDict']]]
+    """
+    Table expiration policy.
+    """
+    written: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenArgsDict']]]
+    """
+    Data rewrite policy.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyArgs:
+    def __init__(__self__, *,
+                 change_table: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyChangeTableArgs']] = None,
+                 index: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyIndexArgs']] = None,
+                 inherit: pulumi.Input[Optional[_builtins.str]] = None,
+                 lifecycle: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyLifecycleArgs']] = None,
+                 resources: pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceArgs']]]] = None,
+                 table_expiration: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyTableExpirationArgs']] = None,
+                 written: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenArgs']] = None):
+        """
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyChangeTableArgs'] change_table: Change table policy.
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyIndexArgs'] index: Index policy.
+        :param pulumi.Input[_builtins.str] inherit: Whether to inherit.
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyLifecycleArgs'] lifecycle: Data lifecycle policy.
+        :param pulumi.Input[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceArgs']]] resources: Data governance resources.
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyTableExpirationArgs'] table_expiration: Table expiration policy.
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenArgs'] written: Data rewrite policy.
+        """
+        if change_table is not None:
+            pulumi.set(__self__, "change_table", change_table)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if inherit is not None:
+            pulumi.set(__self__, "inherit", inherit)
+        if lifecycle is not None:
+            pulumi.set(__self__, "lifecycle", lifecycle)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+        if table_expiration is not None:
+            pulumi.set(__self__, "table_expiration", table_expiration)
+        if written is not None:
+            pulumi.set(__self__, "written", written)
+
+    @_builtins.property
+    @pulumi.getter(name="changeTable")
+    def change_table(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyChangeTableArgs']]:
+        """
+        Change table policy.
+        """
+        return pulumi.get(self, "change_table")
+
+    @change_table.setter
+    def change_table(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyChangeTableArgs']]):
+        pulumi.set(self, "change_table", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def index(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyIndexArgs']]:
+        """
+        Index policy.
+        """
+        return pulumi.get(self, "index")
+
+    @index.setter
+    def index(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyIndexArgs']]):
+        pulumi.set(self, "index", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def inherit(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to inherit.
+        """
+        return pulumi.get(self, "inherit")
+
+    @inherit.setter
+    def inherit(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "inherit", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def lifecycle(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyLifecycleArgs']]:
+        """
+        Data lifecycle policy.
+        """
+        return pulumi.get(self, "lifecycle")
+
+    @lifecycle.setter
+    def lifecycle(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyLifecycleArgs']]):
+        pulumi.set(self, "lifecycle", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def resources(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceArgs']]]]:
+        """
+        Data governance resources.
+        """
+        return pulumi.get(self, "resources")
+
+    @resources.setter
+    def resources(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceArgs']]]]):
+        pulumi.set(self, "resources", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tableExpiration")
+    def table_expiration(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyTableExpirationArgs']]:
+        """
+        Table expiration policy.
+        """
+        return pulumi.get(self, "table_expiration")
+
+    @table_expiration.setter
+    def table_expiration(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyTableExpirationArgs']]):
+        pulumi.set(self, "table_expiration", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def written(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenArgs']]:
+        """
+        Data rewrite policy.
+        """
+        return pulumi.get(self, "written")
+
+    @written.setter
+    def written(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenArgs']]):
+        pulumi.set(self, "written", value)
+
+
+class MetaDatabaseSmartPolicyPolicyChangeTableArgsDict(TypedDict):
+    data_retention_time: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Data retention time of change table, in days.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyChangeTableArgs:
+    def __init__(__self__, *,
+                 data_retention_time: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.int] data_retention_time: Data retention time of change table, in days.
+        """
+        if data_retention_time is not None:
+            pulumi.set(__self__, "data_retention_time", data_retention_time)
+
+    @_builtins.property
+    @pulumi.getter(name="dataRetentionTime")
+    def data_retention_time(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Data retention time of change table, in days.
+        """
+        return pulumi.get(self, "data_retention_time")
+
+    @data_retention_time.setter
+    def data_retention_time(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "data_retention_time", value)
+
+
+class MetaDatabaseSmartPolicyPolicyIndexArgsDict(TypedDict):
+    index_enable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to enable index.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyIndexArgs:
+    def __init__(__self__, *,
+                 index_enable: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] index_enable: Whether to enable index.
+        """
+        if index_enable is not None:
+            pulumi.set(__self__, "index_enable", index_enable)
+
+    @_builtins.property
+    @pulumi.getter(name="indexEnable")
+    def index_enable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable index.
+        """
+        return pulumi.get(self, "index_enable")
+
+    @index_enable.setter
+    def index_enable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "index_enable", value)
+
+
+class MetaDatabaseSmartPolicyPolicyLifecycleArgsDict(TypedDict):
+    drop_table: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to drop table (deprecated, use table_expiration instead).
+    """
+    expiration: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Expiration time.
+    """
+    expired_field: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Expired field.
+    """
+    expired_field_format: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Expired field format.
+    """
+    lifecycle_enable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to enable lifecycle.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyLifecycleArgs:
+    def __init__(__self__, *,
+                 drop_table: pulumi.Input[Optional[_builtins.bool]] = None,
+                 expiration: pulumi.Input[Optional[_builtins.int]] = None,
+                 expired_field: pulumi.Input[Optional[_builtins.str]] = None,
+                 expired_field_format: pulumi.Input[Optional[_builtins.str]] = None,
+                 lifecycle_enable: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.bool] drop_table: Whether to drop table (deprecated, use table_expiration instead).
+        :param pulumi.Input[_builtins.int] expiration: Expiration time.
+        :param pulumi.Input[_builtins.str] expired_field: Expired field.
+        :param pulumi.Input[_builtins.str] expired_field_format: Expired field format.
+        :param pulumi.Input[_builtins.str] lifecycle_enable: Whether to enable lifecycle.
+        """
+        if drop_table is not None:
+            pulumi.set(__self__, "drop_table", drop_table)
+        if expiration is not None:
+            pulumi.set(__self__, "expiration", expiration)
+        if expired_field is not None:
+            pulumi.set(__self__, "expired_field", expired_field)
+        if expired_field_format is not None:
+            pulumi.set(__self__, "expired_field_format", expired_field_format)
+        if lifecycle_enable is not None:
+            pulumi.set(__self__, "lifecycle_enable", lifecycle_enable)
+
+    @_builtins.property
+    @pulumi.getter(name="dropTable")
+    def drop_table(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to drop table (deprecated, use table_expiration instead).
+        """
+        return pulumi.get(self, "drop_table")
+
+    @drop_table.setter
+    def drop_table(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "drop_table", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def expiration(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Expiration time.
+        """
+        return pulumi.get(self, "expiration")
+
+    @expiration.setter
+    def expiration(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "expiration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="expiredField")
+    def expired_field(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Expired field.
+        """
+        return pulumi.get(self, "expired_field")
+
+    @expired_field.setter
+    def expired_field(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "expired_field", value)
+
+    @_builtins.property
+    @pulumi.getter(name="expiredFieldFormat")
+    def expired_field_format(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Expired field format.
+        """
+        return pulumi.get(self, "expired_field_format")
+
+    @expired_field_format.setter
+    def expired_field_format(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "expired_field_format", value)
+
+    @_builtins.property
+    @pulumi.getter(name="lifecycleEnable")
+    def lifecycle_enable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable lifecycle.
+        """
+        return pulumi.get(self, "lifecycle_enable")
+
+    @lifecycle_enable.setter
+    def lifecycle_enable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "lifecycle_enable", value)
+
+
+class MetaDatabaseSmartPolicyPolicyResourceArgsDict(TypedDict):
+    attribution_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Attribution type.
+    """
+    favors: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceFavorArgsDict']]]]]
+    """
+    Affinity info.
+    """
+    instance: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Instance name.
+    """
+    name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Engine name.
+    """
+    resource_conf: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyResourceResourceConfArgsDict']]]
+    """
+    Resource config info.
+    """
+    resource_group_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Standard engine resource group name.
+    """
+    resource_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Resource type.
+    """
+    status: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Status.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyResourceArgs:
+    def __init__(__self__, *,
+                 attribution_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 favors: pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceFavorArgs']]]] = None,
+                 instance: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_conf: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs']] = None,
+                 resource_group_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] attribution_type: Attribution type.
+        :param pulumi.Input[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceFavorArgs']]] favors: Affinity info.
+        :param pulumi.Input[_builtins.str] instance: Instance name.
+        :param pulumi.Input[_builtins.str] name: Engine name.
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs'] resource_conf: Resource config info.
+        :param pulumi.Input[_builtins.str] resource_group_name: Standard engine resource group name.
+        :param pulumi.Input[_builtins.str] resource_type: Resource type.
+        :param pulumi.Input[_builtins.int] status: Status.
+        """
+        if attribution_type is not None:
+            pulumi.set(__self__, "attribution_type", attribution_type)
+        if favors is not None:
+            pulumi.set(__self__, "favors", favors)
+        if instance is not None:
+            pulumi.set(__self__, "instance", instance)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if resource_conf is not None:
+            pulumi.set(__self__, "resource_conf", resource_conf)
+        if resource_group_name is not None:
+            pulumi.set(__self__, "resource_group_name", resource_group_name)
+        if resource_type is not None:
+            pulumi.set(__self__, "resource_type", resource_type)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter(name="attributionType")
+    def attribution_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Attribution type.
+        """
+        return pulumi.get(self, "attribution_type")
+
+    @attribution_type.setter
+    def attribution_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "attribution_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def favors(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceFavorArgs']]]]:
+        """
+        Affinity info.
+        """
+        return pulumi.get(self, "favors")
+
+    @favors.setter
+    def favors(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyResourceFavorArgs']]]]):
+        pulumi.set(self, "favors", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def instance(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance name.
+        """
+        return pulumi.get(self, "instance")
+
+    @instance.setter
+    def instance(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Engine name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resourceConf")
+    def resource_conf(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs']]:
+        """
+        Resource config info.
+        """
+        return pulumi.get(self, "resource_conf")
+
+    @resource_conf.setter
+    def resource_conf(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs']]):
+        pulumi.set(self, "resource_conf", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resourceGroupName")
+    def resource_group_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Standard engine resource group name.
+        """
+        return pulumi.get(self, "resource_group_name")
+
+    @resource_group_name.setter
+    def resource_group_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "resource_group_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @resource_type.setter
+    def resource_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "resource_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Status.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "status", value)
+
+
+class MetaDatabaseSmartPolicyPolicyResourceFavorArgsDict(TypedDict):
+    catalog: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Catalog name.
+    """
+    data_base: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Database name.
+    """
+    priority: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Priority.
+    """
+    table: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Table name.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyResourceFavorArgs:
+    def __init__(__self__, *,
+                 catalog: pulumi.Input[Optional[_builtins.str]] = None,
+                 data_base: pulumi.Input[Optional[_builtins.str]] = None,
+                 priority: pulumi.Input[Optional[_builtins.int]] = None,
+                 table: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] catalog: Catalog name.
+        :param pulumi.Input[_builtins.str] data_base: Database name.
+        :param pulumi.Input[_builtins.int] priority: Priority.
+        :param pulumi.Input[_builtins.str] table: Table name.
+        """
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if data_base is not None:
+            pulumi.set(__self__, "data_base", data_base)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+
+    @_builtins.property
+    @pulumi.getter
+    def catalog(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Catalog name.
+        """
+        return pulumi.get(self, "catalog")
+
+    @catalog.setter
+    def catalog(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "catalog", value)
+
+    @_builtins.property
+    @pulumi.getter(name="dataBase")
+    def data_base(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Database name.
+        """
+        return pulumi.get(self, "data_base")
+
+    @data_base.setter
+    def data_base(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "data_base", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def priority(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Priority.
+        """
+        return pulumi.get(self, "priority")
+
+    @priority.setter
+    def priority(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "priority", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def table(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Table name.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "table", value)
+
+
+class MetaDatabaseSmartPolicyPolicyResourceResourceConfArgsDict(TypedDict):
+    parallelism: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Parallelism of the optimize task.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyResourceResourceConfArgs:
+    def __init__(__self__, *,
+                 parallelism: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.int] parallelism: Parallelism of the optimize task.
+        """
+        if parallelism is not None:
+            pulumi.set(__self__, "parallelism", parallelism)
+
+    @_builtins.property
+    @pulumi.getter
+    def parallelism(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Parallelism of the optimize task.
+        """
+        return pulumi.get(self, "parallelism")
+
+    @parallelism.setter
+    def parallelism(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "parallelism", value)
+
+
+class MetaDatabaseSmartPolicyPolicyTableExpirationArgsDict(TypedDict):
+    enabled: pulumi.Input[_builtins.bool]
+    """
+    Whether to enable the policy.
+    """
+    expiration: pulumi.Input[_builtins.int]
+    """
+    Table expiration time, in days.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyTableExpirationArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[_builtins.bool],
+                 expiration: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.bool] enabled: Whether to enable the policy.
+        :param pulumi.Input[_builtins.int] expiration: Table expiration time, in days.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "expiration", expiration)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[_builtins.bool]:
+        """
+        Whether to enable the policy.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[_builtins.bool]):
+        pulumi.set(self, "enabled", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def expiration(self) -> pulumi.Input[_builtins.int]:
+        """
+        Table expiration time, in days.
+        """
+        return pulumi.get(self, "expiration")
+
+    @expiration.setter
+    def expiration(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "expiration", value)
+
+
+class MetaDatabaseSmartPolicyPolicyWrittenArgsDict(TypedDict):
+    advance_policy: NotRequired[pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgsDict']]]
+    """
+    User custom advance params.
+    """
+    written_enable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to enable, `none`/`enable`/`disable`/`default`.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyWrittenArgs:
+    def __init__(__self__, *,
+                 advance_policy: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs']] = None,
+                 written_enable: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs'] advance_policy: User custom advance params.
+        :param pulumi.Input[_builtins.str] written_enable: Whether to enable, `none`/`enable`/`disable`/`default`.
+        """
+        if advance_policy is not None:
+            pulumi.set(__self__, "advance_policy", advance_policy)
+        if written_enable is not None:
+            pulumi.set(__self__, "written_enable", written_enable)
+
+    @_builtins.property
+    @pulumi.getter(name="advancePolicy")
+    def advance_policy(self) -> pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs']]:
+        """
+        User custom advance params.
+        """
+        return pulumi.get(self, "advance_policy")
+
+    @advance_policy.setter
+    def advance_policy(self, value: pulumi.Input[Optional['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs']]):
+        pulumi.set(self, "advance_policy", value)
+
+    @_builtins.property
+    @pulumi.getter(name="writtenEnable")
+    def written_enable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable, `none`/`enable`/`disable`/`default`.
+        """
+        return pulumi.get(self, "written_enable")
+
+    @written_enable.setter
+    def written_enable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "written_enable", value)
+
+
+class MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgsDict(TypedDict):
+    before_days: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Snapshot expire before days.
+    """
+    compact_enable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to enable compact.
+    """
+    compact_strategy: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    File compact strategy.
+    """
+    cow_compact_enable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to enable COW table compact.
+    """
+    delete_enable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to enable history data cleanup.
+    """
+    expired_snapshots_interval_min: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Snapshot expire interval in minutes.
+    """
+    min_input_files: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Min input files to compact.
+    """
+    remove_orphan_interval_min: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Remove orphan files interval in minutes.
+    """
+    retain_last: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Retain last snapshot count.
+    """
+    sort_orders: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgsDict']]]]]
+    """
+    Sort compact strategy rules.
+    """
+    target_file_size_bytes: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Target file size after compact.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicyArgs:
+    def __init__(__self__, *,
+                 before_days: pulumi.Input[Optional[_builtins.int]] = None,
+                 compact_enable: pulumi.Input[Optional[_builtins.str]] = None,
+                 compact_strategy: pulumi.Input[Optional[_builtins.str]] = None,
+                 cow_compact_enable: pulumi.Input[Optional[_builtins.str]] = None,
+                 delete_enable: pulumi.Input[Optional[_builtins.str]] = None,
+                 expired_snapshots_interval_min: pulumi.Input[Optional[_builtins.int]] = None,
+                 min_input_files: pulumi.Input[Optional[_builtins.int]] = None,
+                 remove_orphan_interval_min: pulumi.Input[Optional[_builtins.int]] = None,
+                 retain_last: pulumi.Input[Optional[_builtins.int]] = None,
+                 sort_orders: pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs']]]] = None,
+                 target_file_size_bytes: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.int] before_days: Snapshot expire before days.
+        :param pulumi.Input[_builtins.str] compact_enable: Whether to enable compact.
+        :param pulumi.Input[_builtins.str] compact_strategy: File compact strategy.
+        :param pulumi.Input[_builtins.str] cow_compact_enable: Whether to enable COW table compact.
+        :param pulumi.Input[_builtins.str] delete_enable: Whether to enable history data cleanup.
+        :param pulumi.Input[_builtins.int] expired_snapshots_interval_min: Snapshot expire interval in minutes.
+        :param pulumi.Input[_builtins.int] min_input_files: Min input files to compact.
+        :param pulumi.Input[_builtins.int] remove_orphan_interval_min: Remove orphan files interval in minutes.
+        :param pulumi.Input[_builtins.int] retain_last: Retain last snapshot count.
+        :param pulumi.Input[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs']]] sort_orders: Sort compact strategy rules.
+        :param pulumi.Input[_builtins.int] target_file_size_bytes: Target file size after compact.
+        """
+        if before_days is not None:
+            pulumi.set(__self__, "before_days", before_days)
+        if compact_enable is not None:
+            pulumi.set(__self__, "compact_enable", compact_enable)
+        if compact_strategy is not None:
+            pulumi.set(__self__, "compact_strategy", compact_strategy)
+        if cow_compact_enable is not None:
+            pulumi.set(__self__, "cow_compact_enable", cow_compact_enable)
+        if delete_enable is not None:
+            pulumi.set(__self__, "delete_enable", delete_enable)
+        if expired_snapshots_interval_min is not None:
+            pulumi.set(__self__, "expired_snapshots_interval_min", expired_snapshots_interval_min)
+        if min_input_files is not None:
+            pulumi.set(__self__, "min_input_files", min_input_files)
+        if remove_orphan_interval_min is not None:
+            pulumi.set(__self__, "remove_orphan_interval_min", remove_orphan_interval_min)
+        if retain_last is not None:
+            pulumi.set(__self__, "retain_last", retain_last)
+        if sort_orders is not None:
+            pulumi.set(__self__, "sort_orders", sort_orders)
+        if target_file_size_bytes is not None:
+            pulumi.set(__self__, "target_file_size_bytes", target_file_size_bytes)
+
+    @_builtins.property
+    @pulumi.getter(name="beforeDays")
+    def before_days(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Snapshot expire before days.
+        """
+        return pulumi.get(self, "before_days")
+
+    @before_days.setter
+    def before_days(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "before_days", value)
+
+    @_builtins.property
+    @pulumi.getter(name="compactEnable")
+    def compact_enable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable compact.
+        """
+        return pulumi.get(self, "compact_enable")
+
+    @compact_enable.setter
+    def compact_enable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "compact_enable", value)
+
+    @_builtins.property
+    @pulumi.getter(name="compactStrategy")
+    def compact_strategy(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        File compact strategy.
+        """
+        return pulumi.get(self, "compact_strategy")
+
+    @compact_strategy.setter
+    def compact_strategy(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "compact_strategy", value)
+
+    @_builtins.property
+    @pulumi.getter(name="cowCompactEnable")
+    def cow_compact_enable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable COW table compact.
+        """
+        return pulumi.get(self, "cow_compact_enable")
+
+    @cow_compact_enable.setter
+    def cow_compact_enable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cow_compact_enable", value)
+
+    @_builtins.property
+    @pulumi.getter(name="deleteEnable")
+    def delete_enable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable history data cleanup.
+        """
+        return pulumi.get(self, "delete_enable")
+
+    @delete_enable.setter
+    def delete_enable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "delete_enable", value)
+
+    @_builtins.property
+    @pulumi.getter(name="expiredSnapshotsIntervalMin")
+    def expired_snapshots_interval_min(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Snapshot expire interval in minutes.
+        """
+        return pulumi.get(self, "expired_snapshots_interval_min")
+
+    @expired_snapshots_interval_min.setter
+    def expired_snapshots_interval_min(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "expired_snapshots_interval_min", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minInputFiles")
+    def min_input_files(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Min input files to compact.
+        """
+        return pulumi.get(self, "min_input_files")
+
+    @min_input_files.setter
+    def min_input_files(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "min_input_files", value)
+
+    @_builtins.property
+    @pulumi.getter(name="removeOrphanIntervalMin")
+    def remove_orphan_interval_min(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Remove orphan files interval in minutes.
+        """
+        return pulumi.get(self, "remove_orphan_interval_min")
+
+    @remove_orphan_interval_min.setter
+    def remove_orphan_interval_min(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "remove_orphan_interval_min", value)
+
+    @_builtins.property
+    @pulumi.getter(name="retainLast")
+    def retain_last(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Retain last snapshot count.
+        """
+        return pulumi.get(self, "retain_last")
+
+    @retain_last.setter
+    def retain_last(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "retain_last", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sortOrders")
+    def sort_orders(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs']]]]:
+        """
+        Sort compact strategy rules.
+        """
+        return pulumi.get(self, "sort_orders")
+
+    @sort_orders.setter
+    def sort_orders(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs']]]]):
+        pulumi.set(self, "sort_orders", value)
+
+    @_builtins.property
+    @pulumi.getter(name="targetFileSizeBytes")
+    def target_file_size_bytes(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Target file size after compact.
+        """
+        return pulumi.get(self, "target_file_size_bytes")
+
+    @target_file_size_bytes.setter
+    def target_file_size_bytes(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "target_file_size_bytes", value)
+
+
+class MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgsDict(TypedDict):
+    column: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Sort column name.
+    """
+    null_order: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Null order, `first` or `last`.
+    """
+    sort_direction: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Sort direction, `asc` or `desc`.
+    """
+
+@pulumi.input_type
+class MetaDatabaseSmartPolicyPolicyWrittenAdvancePolicySortOrderArgs:
+    def __init__(__self__, *,
+                 column: pulumi.Input[Optional[_builtins.str]] = None,
+                 null_order: pulumi.Input[Optional[_builtins.str]] = None,
+                 sort_direction: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] column: Sort column name.
+        :param pulumi.Input[_builtins.str] null_order: Null order, `first` or `last`.
+        :param pulumi.Input[_builtins.str] sort_direction: Sort direction, `asc` or `desc`.
+        """
+        if column is not None:
+            pulumi.set(__self__, "column", column)
+        if null_order is not None:
+            pulumi.set(__self__, "null_order", null_order)
+        if sort_direction is not None:
+            pulumi.set(__self__, "sort_direction", sort_direction)
+
+    @_builtins.property
+    @pulumi.getter
+    def column(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Sort column name.
+        """
+        return pulumi.get(self, "column")
+
+    @column.setter
+    def column(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "column", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nullOrder")
+    def null_order(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Null order, `first` or `last`.
+        """
+        return pulumi.get(self, "null_order")
+
+    @null_order.setter
+    def null_order(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "null_order", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sortDirection")
+    def sort_direction(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Sort direction, `asc` or `desc`.
+        """
+        return pulumi.get(self, "sort_direction")
+
+    @sort_direction.setter
+    def sort_direction(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sort_direction", value)
 
 
 class StandardEngineResourceGroupConfigInfoDynamicConfContextArgsDict(TypedDict):

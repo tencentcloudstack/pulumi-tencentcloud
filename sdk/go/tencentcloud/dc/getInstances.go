@@ -14,6 +14,12 @@ import (
 // Use this data source to query detailed information of DC instances.
 //
 // ## Example Usage
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult

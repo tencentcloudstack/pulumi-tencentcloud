@@ -1298,6 +1298,16 @@ class DeployContainerGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DeployContainerGroup](https://www.tencentcloud.com/search/?wd=DeployContainerGroup&type=document&lang=en)
+          - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+        * Read: [DescribeContainerGroupDeployInfo](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupDeployInfo&type=document&lang=en)
+        * Update: [ModifyContainerReplicas](https://www.tencentcloud.com/search/?wd=ModifyContainerReplicas&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1412,6 +1422,16 @@ class DeployContainerGroup(pulumi.CustomResource):
                 "enabled": False,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DeployContainerGroup](https://www.tencentcloud.com/search/?wd=DeployContainerGroup&type=document&lang=en)
+          - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+        * Read: [DescribeContainerGroupDeployInfo](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupDeployInfo&type=document&lang=en)
+        * Update: [ModifyContainerReplicas](https://www.tencentcloud.com/search/?wd=ModifyContainerReplicas&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

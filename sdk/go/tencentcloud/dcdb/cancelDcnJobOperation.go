@@ -88,6 +88,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CancelDcnJob](https://www.tencentcloud.com/document/api/1042/41451)
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1042/40887)
 type CancelDcnJobOperation struct {
 	pulumi.CustomResourceState
 

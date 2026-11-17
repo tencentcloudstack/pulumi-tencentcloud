@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
 func GetInstanceByCertId(ctx *pulumi.Context, args *GetInstanceByCertIdArgs, opts ...pulumi.InvokeOption) (*GetInstanceByCertIdResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceByCertIdResult

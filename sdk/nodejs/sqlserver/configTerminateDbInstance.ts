@@ -57,6 +57,14 @@ import * as utilities from "../utilities";
  * const exampleConfigTerminateDbInstance = new tencentcloud.sqlserver.ConfigTerminateDbInstance("example", {instanceId: example.id});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ * * Update: [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+ *
  * ## Import
  *
  * sqlserver configTerminateDbInstance can be imported using the id, e.g.

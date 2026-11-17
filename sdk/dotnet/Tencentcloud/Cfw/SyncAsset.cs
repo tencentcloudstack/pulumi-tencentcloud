@@ -27,6 +27,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAssetSync](https://www.tencentcloud.com/search/?wd=DescribeAssetSync&amp;type=document&amp;lang=en)
+    ///   - [ModifyAssetSync](https://www.tencentcloud.com/search/?wd=ModifyAssetSync&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/syncAsset:SyncAsset")]
     public partial class SyncAsset : global::Pulumi.CustomResource

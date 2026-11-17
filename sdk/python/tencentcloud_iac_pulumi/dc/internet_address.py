@@ -152,6 +152,14 @@ class InternetAddress(pulumi.CustomResource):
             addr_proto=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyInternetAddress](https://www.tencentcloud.com/document/api/216/39499)
+        * Read: [DescribeInternetAddress](https://www.tencentcloud.com/document/api/216/39498)
+        * Delete: [ReleaseInternetAddress](https://www.tencentcloud.com/document/api/216/39493)
+
         ## Import
 
         dc internet_address can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class InternetAddress(pulumi.CustomResource):
             addr_type=2,
             addr_proto=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyInternetAddress](https://www.tencentcloud.com/document/api/216/39499)
+        * Read: [DescribeInternetAddress](https://www.tencentcloud.com/document/api/216/39498)
+        * Delete: [ReleaseInternetAddress](https://www.tencentcloud.com/document/api/216/39493)
 
         ## Import
 

@@ -118,6 +118,12 @@ def get_rocketmq_role(cluster_id: Optional[_builtins.str] = None,
         cluster_id=cluster.cluster_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID (required).
     :param _builtins.str result_output_file: Used to save results.
@@ -160,6 +166,12 @@ def get_rocketmq_role_output(cluster_id: pulumi.Input[Optional[_builtins.str]] =
     role = tencentcloud.tdmq.get_rocketmq_role_output(role_name=role_rocketmq_role.role_name,
         cluster_id=cluster.cluster_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID (required).

@@ -43,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Outputs
         /// </summary>
         public readonly string? Function;
         /// <summary>
-        /// ID of the resource.
+        /// The policy ID.
         /// </summary>
         public readonly int? Id;
         /// <summary>

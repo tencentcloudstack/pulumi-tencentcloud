@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     scenarioType: "pts-jmeter",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
  */
 export function getScenarioWithJobs(args: GetScenarioWithJobsArgs, opts?: pulumi.InvokeOptions): Promise<GetScenarioWithJobsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -136,6 +142,12 @@ export interface GetScenarioWithJobsResult {
  *     scenarioType: "pts-jmeter",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
  */
 export function getScenarioWithJobsOutput(args: GetScenarioWithJobsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetScenarioWithJobsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

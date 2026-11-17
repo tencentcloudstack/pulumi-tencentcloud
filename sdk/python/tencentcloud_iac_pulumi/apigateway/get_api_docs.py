@@ -86,6 +86,12 @@ def get_api_docs(result_output_file: Optional[_builtins.str] = None,
     my_api_doc = tencentcloud.apigateway.get_api_docs()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAPIDocs](https://www.tencentcloud.com/search/?wd=DescribeAPIDocs&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_api_docs_output(result_output_file: pulumi.Input[Optional[Optional[_buil
 
     my_api_doc = tencentcloud.apigateway.get_api_docs()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAPIDocs](https://www.tencentcloud.com/search/?wd=DescribeAPIDocs&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

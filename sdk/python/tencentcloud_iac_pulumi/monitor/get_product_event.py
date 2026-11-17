@@ -226,6 +226,12 @@ def get_product_event(dimensions: Optional[Sequence[Union['GetProductEventDimens
         product_names=["cvm"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
+
 
     :param Sequence[Union['GetProductEventDimensionArgs', 'GetProductEventDimensionArgsDict']] dimensions: Dimensional composition of instance objects.
     :param _builtins.int end_time: End timestamp for this query, eg:`1588232111`. Default start time is `now-3000`.
@@ -297,6 +303,12 @@ def get_product_event_output(dimensions: pulumi.Input[Optional[Optional[Sequence
         is_alarm_config=0,
         product_names=["cvm"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
 
 
     :param Sequence[Union['GetProductEventDimensionArgs', 'GetProductEventDimensionArgsDict']] dimensions: Dimensional composition of instance objects.

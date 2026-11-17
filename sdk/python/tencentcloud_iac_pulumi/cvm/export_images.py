@@ -284,6 +284,14 @@ class ExportImages(pulumi.CustomResource):
             file_name_prefix="test-")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [ExportImages](https://www.tencentcloud.com/document/api/213/47833)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -315,6 +323,14 @@ class ExportImages(pulumi.CustomResource):
             image_id="img-xxxxxx",
             file_name_prefix="test-")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [ExportImages](https://www.tencentcloud.com/document/api/213/47833)
 
 
         :param str resource_name: The name of the resource.

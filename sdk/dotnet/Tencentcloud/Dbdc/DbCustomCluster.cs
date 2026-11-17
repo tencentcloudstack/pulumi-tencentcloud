@@ -27,6 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
     ///     {
     ///         ClusterName = "tf-example",
     ///         ClusterDescription = "cluster description.",
+    ///         DeletionProtection = true,
     ///         ContainerNetwork = new Tencentcloud.Dbdc.Inputs.DbCustomClusterContainerNetworkArgs
     ///         {
     ///             VpcId = "vpc-py7mlxqm",
@@ -50,6 +51,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDBCustomCluster](https://www.tencentcloud.com/search/?wd=CreateDBCustomCluster&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDBCustomClusterDetail](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterDetail&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifyDBCustomClusterAttributes](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterAttributes&amp;type=document&amp;lang=en)
+    ///   - [ModifyDBCustomClusterTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterTags&amp;type=document&amp;lang=en)
+    /// * Delete: [DestroyDBCustomCluster](https://www.tencentcloud.com/search/?wd=DestroyDBCustomCluster&amp;type=document&amp;lang=en)
     /// 
     /// ## Import
     /// 
@@ -115,6 +127,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// </summary>
         [Output("createdTime")]
         public Output<string> CreatedTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable cluster deletion protection. Valid values: `True` (enabled, API default), `False` (disabled).
+        /// </summary>
+        [Output("deletionProtection")]
+        public Output<bool> DeletionProtection { get; private set; } = null!;
 
         /// <summary>
         /// Region that the cluster belongs to.
@@ -199,6 +217,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         [Input("containerNetwork", required: true)]
         public Input<Inputs.DbCustomClusterContainerNetworkArgs> ContainerNetwork { get; set; } = null!;
 
+        /// <summary>
+        /// Whether to enable cluster deletion protection. Valid values: `True` (enabled, API default), `False` (disabled).
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
@@ -272,6 +296,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// </summary>
         [Input("createdTime")]
         public Input<string>? CreatedTime { get; set; }
+
+        /// <summary>
+        /// Whether to enable cluster deletion protection. Valid values: `True` (enabled, API default), `False` (disabled).
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
 
         /// <summary>
         /// Region that the cluster belongs to.

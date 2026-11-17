@@ -153,6 +153,12 @@ def get_replication_instance_sync_status(registry_id: Optional[_builtins.str] = 
         show_replication_log=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
+
 
     :param _builtins.str registry_id: master registry id.
     :param _builtins.int replication_region_id: synchronization instance region id.
@@ -199,6 +205,12 @@ def get_replication_instance_sync_status_output(registry_id: pulumi.Input[Option
         replication_region_id=int(dst_region_id),
         show_replication_log=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
 
 
     :param _builtins.str registry_id: master registry id.

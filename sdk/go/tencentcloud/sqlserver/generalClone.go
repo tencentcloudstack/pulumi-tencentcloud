@@ -113,6 +113,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CloneDB](https://www.tencentcloud.com/document/api/238/39659)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//
+// * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+// * Update:
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [ModifyDBName](https://www.tencentcloud.com/document/api/238/32101)
+//
+// * Delete:
+//   - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//
 // ## Import
 //
 // sqlserver generalCommunication can be imported using the id, e.g.

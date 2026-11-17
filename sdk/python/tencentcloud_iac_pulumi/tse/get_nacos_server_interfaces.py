@@ -96,6 +96,12 @@ def get_nacos_server_interfaces(instance_id: Optional[_builtins.str] = None,
     nacos_server_interfaces = tencentcloud.tse.get_nacos_server_interfaces(instance_id="ins-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&type=document&lang=en)
+
 
     :param _builtins.str instance_id: engine instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_nacos_server_interfaces_output(instance_id: pulumi.Input[Optional[Option
 
     nacos_server_interfaces = tencentcloud.tse.get_nacos_server_interfaces(instance_id="ins-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&type=document&lang=en)
 
 
     :param _builtins.str instance_id: engine instance ID.

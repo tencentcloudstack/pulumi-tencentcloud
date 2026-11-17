@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetNativeSparkSessionsResult> InvokeAsync(GetNativeSparkSessionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNativeSparkSessionsResult>("tencentcloud:Dlc/getNativeSparkSessions:getNativeSparkSessions", args ?? new GetNativeSparkSessionsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNativeSparkSessionsResult> Invoke(GetNativeSparkSessionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNativeSparkSessionsResult>("tencentcloud:Dlc/getNativeSparkSessions:getNativeSparkSessions", args ?? new GetNativeSparkSessionsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNativeSparkSessionsResult> Invoke(GetNativeSparkSessionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNativeSparkSessionsResult>("tencentcloud:Dlc/getNativeSparkSessions:getNativeSparkSessions", args ?? new GetNativeSparkSessionsInvokeArgs(), options.WithDefaults());

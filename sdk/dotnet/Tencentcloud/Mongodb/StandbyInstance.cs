@@ -23,43 +23,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var mongodb = new Tencentcloud.Mongodb.Instance("mongodb", new()
+    ///     var example = new Tencentcloud.Mongodb.Instance("example", new()
     ///     {
-    ///         InstanceName = "tf-mongodb-test",
+    ///         InstanceName = "tf-example",
+    ///         Cpu = 2,
     ///         Memory = 4,
     ///         Volume = 100,
-    ///         EngineVersion = "MONGO_40_WT",
-    ///         MachineType = "HIO10G",
-    ///         AvailableZone = availabilityZone,
+    ///         EngineVersion = "MONGO_80_WT",
+    ///         MachineType = "GE.LD.T1",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         ProjectId = 0,
-    ///         Password = "test1234",
-    ///         Tags = 
-    ///         {
-    ///             { "test", "test" },
-    ///         },
+    ///         Password = "Password@2026",
+    ///         DataEncryption = "TDE",
+    ///         EncryptionKeySource = "manual",
+    ///         KeyId = "KMS-MONGODB",
+    ///         KmsRegion = "ap-guangzhou",
     ///     });
     /// 
-    ///     var mongodbStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("mongodb", new()
+    ///     var exampleStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("example", new()
     ///     {
-    ///         InstanceName = "tf-mongodb-standby-test",
+    ///         InstanceName = "tf-example",
+    ///         Cpu = 2,
     ///         Memory = 4,
     ///         Volume = 100,
-    ///         AvailableZone = "ap-shanghai-2",
+    ///         AvailableZone = "ap-guangzhou-7",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-d4umunpy",
     ///         ProjectId = 0,
-    ///         FatherInstanceId = mongodb.Id,
+    ///         FatherInstanceId = example.Id,
     ///         FatherInstanceRegion = "ap-guangzhou",
+    ///         DataEncryption = "TDE",
+    ///         EncryptionKeySource = "manual",
+    ///         KeyId = "KMS-MONGODB",
+    ///         KmsRegion = "ap-guangzhou",
     ///         Tags = 
     ///         {
-    ///             { "test", "test" },
+    ///             { "createBy", "Terraform" },
     ///         },
     ///     });
     /// 
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&amp;type=document&amp;lang=en)
+    ///   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+    /// * Read:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+    ///   - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+    ///   - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+    ///   - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+    ///   - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+    ///   - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+    ///   - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+    /// * Delete:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+    ///   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+    ///   - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
+    /// 
     /// ## Import
     /// 
-    /// Mongodb instance can be imported using the id, e.g.
+    /// Mongodb standby instance can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
@@ -87,10 +124,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string?> ChargeType { get; private set; } = null!;
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Output("createTime")]
         public Output<string> CreateTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("dataEncryption")]
+        public Output<string> DataEncryption { get; private set; } = null!;
+
+        /// <summary>
+        /// If TDE storage encryption is selected, the key source must be specified. `Auto`: Automatically generate the key. `Manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("encryptionKeySource")]
+        public Output<string?> EncryptionKeySource { get; private set; } = null!;
 
         /// <summary>
         /// Version of the standby Mongodb instance and must be same as the version of main instance.
@@ -124,6 +179,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
+
+        /// <summary>
+        /// Please note that this field is the CMK name, corresponding to the `Alias` field in KMS. Key ID. If `Manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("keyId")]
+        public Output<string> KeyId { get; private set; } = null!;
+
+        /// <summary>
+        /// Key ID. If `Manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("kmsRegion")]
+        public Output<string> KmsRegion { get; private set; } = null!;
 
         /// <summary>
         /// Type of standby Mongodb instance and must be same as the type of main instance.
@@ -263,6 +330,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
+        /// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("dataEncryption")]
+        public Input<string>? DataEncryption { get; set; }
+
+        /// <summary>
+        /// If TDE storage encryption is selected, the key source must be specified. `Auto`: Automatically generate the key. `Manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("encryptionKeySource")]
+        public Input<string>? EncryptionKeySource { get; set; }
+
+        /// <summary>
         /// Indicates the main instance ID of standby instances.
         /// </summary>
         [Input("fatherInstanceId", required: true)]
@@ -288,6 +373,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
+
+        /// <summary>
+        /// Please note that this field is the CMK name, corresponding to the `Alias` field in KMS. Key ID. If `Manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("keyId")]
+        public Input<string>? KeyId { get; set; }
+
+        /// <summary>
+        /// Key ID. If `Manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("kmsRegion")]
+        public Input<string>? KmsRegion { get; set; }
 
         /// <summary>
         /// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -376,10 +473,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
+
+        /// <summary>
+        /// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("dataEncryption")]
+        public Input<string>? DataEncryption { get; set; }
+
+        /// <summary>
+        /// If TDE storage encryption is selected, the key source must be specified. `Auto`: Automatically generate the key. `Manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("encryptionKeySource")]
+        public Input<string>? EncryptionKeySource { get; set; }
 
         /// <summary>
         /// Version of the standby Mongodb instance and must be same as the version of main instance.
@@ -413,6 +528,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Please note that this field is the CMK name, corresponding to the `Alias` field in KMS. Key ID. If `Manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("keyId")]
+        public Input<string>? KeyId { get; set; }
+
+        /// <summary>
+        /// Key ID. If `Manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("kmsRegion")]
+        public Input<string>? KmsRegion { get; set; }
 
         /// <summary>
         /// Type of standby Mongodb instance and must be same as the type of main instance.

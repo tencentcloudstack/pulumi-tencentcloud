@@ -77,6 +77,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyRabbitMQPermission](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQPermission&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeRabbitMQPermission](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQPermission&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyRabbitMQPermission](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQPermission&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteRabbitMQPermission](https://www.tencentcloud.com/search/?wd=DeleteRabbitMQPermission&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tdmq RabbitmqUserPermission can be imported using the id, e.g.

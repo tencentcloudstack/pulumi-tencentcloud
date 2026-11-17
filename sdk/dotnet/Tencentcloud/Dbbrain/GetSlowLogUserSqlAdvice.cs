@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserSqlAdvice](https://www.tencentcloud.com/document/api/1035/41181)
         /// </summary>
         public static Task<GetSlowLogUserSqlAdviceResult> InvokeAsync(GetSlowLogUserSqlAdviceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserSqlAdvice](https://www.tencentcloud.com/document/api/1035/41181)
         /// </summary>
         public static Output<GetSlowLogUserSqlAdviceResult> Invoke(GetSlowLogUserSqlAdviceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserSqlAdvice](https://www.tencentcloud.com/document/api/1035/41181)
         /// </summary>
         public static Output<GetSlowLogUserSqlAdviceResult> Invoke(GetSlowLogUserSqlAdviceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceInvokeArgs(), options.WithDefaults());

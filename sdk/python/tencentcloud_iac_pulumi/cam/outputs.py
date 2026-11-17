@@ -16,6 +16,7 @@ else:
 from .. import _utilities
 
 __all__ = [
+    'GetAccountsUserResult',
     'GetGroupMembershipsMembershipListResult',
     'GetGroupPolicyAttachmentsGroupPolicyAttachmentListResult',
     'GetGroupUserAccountGroupInfoResult',
@@ -43,6 +44,7 @@ __all__ = [
     'MfaFlagLoginFlag',
     'PolicyVersionPolicyVersion',
     'TagRoleAttachmentTag',
+    'UpdatePasswordRuleConfigRules',
 ]
 
 @pulumi.output_type
@@ -234,6 +236,229 @@ class TagRoleAttachmentTag(dict):
         Label.
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class UpdatePasswordRuleConfigRules(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "forcePasswordChange":
+            suggest = "force_password_change"
+        elif key == "minimumLength":
+            suggest = "minimum_length"
+        elif key == "mustContain":
+            suggest = "must_contain"
+        elif key == "passwordExpirationInvalidation":
+            suggest = "password_expiration_invalidation"
+        elif key == "retryPasswordLimit":
+            suggest = "retry_password_limit"
+        elif key == "reusePasswordLimit":
+            suggest = "reuse_password_limit"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpdatePasswordRuleConfigRules. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpdatePasswordRuleConfigRules.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpdatePasswordRuleConfigRules.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 force_password_change: Optional[_builtins.int] = None,
+                 minimum_length: Optional[_builtins.int] = None,
+                 must_contain: Optional[_builtins.str] = None,
+                 password_expiration_invalidation: Optional[_builtins.int] = None,
+                 retry_password_limit: Optional[_builtins.int] = None,
+                 reuse_password_limit: Optional[_builtins.int] = None):
+        """
+        :param _builtins.int force_password_change: Forced password change period.
+        :param _builtins.int minimum_length: Minimum password length.
+        :param _builtins.str must_contain: Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+        :param _builtins.int password_expiration_invalidation: Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+        :param _builtins.int retry_password_limit: Number of allowed password retries.
+        :param _builtins.int reuse_password_limit: Number of previous passwords that cannot be reused.
+        """
+        if force_password_change is not None:
+            pulumi.set(__self__, "force_password_change", force_password_change)
+        if minimum_length is not None:
+            pulumi.set(__self__, "minimum_length", minimum_length)
+        if must_contain is not None:
+            pulumi.set(__self__, "must_contain", must_contain)
+        if password_expiration_invalidation is not None:
+            pulumi.set(__self__, "password_expiration_invalidation", password_expiration_invalidation)
+        if retry_password_limit is not None:
+            pulumi.set(__self__, "retry_password_limit", retry_password_limit)
+        if reuse_password_limit is not None:
+            pulumi.set(__self__, "reuse_password_limit", reuse_password_limit)
+
+    @_builtins.property
+    @pulumi.getter(name="forcePasswordChange")
+    def force_password_change(self) -> Optional[_builtins.int]:
+        """
+        Forced password change period.
+        """
+        return pulumi.get(self, "force_password_change")
+
+    @_builtins.property
+    @pulumi.getter(name="minimumLength")
+    def minimum_length(self) -> Optional[_builtins.int]:
+        """
+        Minimum password length.
+        """
+        return pulumi.get(self, "minimum_length")
+
+    @_builtins.property
+    @pulumi.getter(name="mustContain")
+    def must_contain(self) -> Optional[_builtins.str]:
+        """
+        Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+        """
+        return pulumi.get(self, "must_contain")
+
+    @_builtins.property
+    @pulumi.getter(name="passwordExpirationInvalidation")
+    def password_expiration_invalidation(self) -> Optional[_builtins.int]:
+        """
+        Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+        """
+        return pulumi.get(self, "password_expiration_invalidation")
+
+    @_builtins.property
+    @pulumi.getter(name="retryPasswordLimit")
+    def retry_password_limit(self) -> Optional[_builtins.int]:
+        """
+        Number of allowed password retries.
+        """
+        return pulumi.get(self, "retry_password_limit")
+
+    @_builtins.property
+    @pulumi.getter(name="reusePasswordLimit")
+    def reuse_password_limit(self) -> Optional[_builtins.int]:
+        """
+        Number of previous passwords that cannot be reused.
+        """
+        return pulumi.get(self, "reuse_password_limit")
+
+
+@pulumi.output_type
+class GetAccountsUserResult(dict):
+    def __init__(__self__, *,
+                 console_login: _builtins.int,
+                 country_code: _builtins.str,
+                 create_time: _builtins.str,
+                 email: _builtins.str,
+                 name: _builtins.str,
+                 phone_num: _builtins.str,
+                 remark: _builtins.str,
+                 uid: _builtins.int,
+                 uin: _builtins.int,
+                 user_type: _builtins.str):
+        """
+        :param _builtins.int console_login: Whether the account can log in to the console. Returned as the raw int value from the API.
+        :param _builtins.str country_code: Country code.
+        :param _builtins.str create_time: Creation time. Format: YYYY-MM-DD hh:mm:ss.
+        :param _builtins.str email: Email.
+        :param _builtins.str name: Account name.
+        :param _builtins.str phone_num: Phone number.
+        :param _builtins.str remark: Account remark.
+        :param _builtins.int uid: Account UID.
+        :param _builtins.int uin: Account ID (Uin).
+        :param _builtins.str user_type: Account type to filter by. Valid values: `Owner` (master account), `SubUser` (sub user), `CICUser` (CIC sub user), `WechatCorpUser` (WeCom sub user), `AgentIdentity` (AgentIdentity sub user), `Collaborator` (collaborator), `MessageReceiver` (message receiver).
+        """
+        pulumi.set(__self__, "console_login", console_login)
+        pulumi.set(__self__, "country_code", country_code)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "phone_num", phone_num)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "uid", uid)
+        pulumi.set(__self__, "uin", uin)
+        pulumi.set(__self__, "user_type", user_type)
+
+    @_builtins.property
+    @pulumi.getter(name="consoleLogin")
+    def console_login(self) -> _builtins.int:
+        """
+        Whether the account can log in to the console. Returned as the raw int value from the API.
+        """
+        return pulumi.get(self, "console_login")
+
+    @_builtins.property
+    @pulumi.getter(name="countryCode")
+    def country_code(self) -> _builtins.str:
+        """
+        Country code.
+        """
+        return pulumi.get(self, "country_code")
+
+    @_builtins.property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> _builtins.str:
+        """
+        Creation time. Format: YYYY-MM-DD hh:mm:ss.
+        """
+        return pulumi.get(self, "create_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def email(self) -> _builtins.str:
+        """
+        Email.
+        """
+        return pulumi.get(self, "email")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Account name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="phoneNum")
+    def phone_num(self) -> _builtins.str:
+        """
+        Phone number.
+        """
+        return pulumi.get(self, "phone_num")
+
+    @_builtins.property
+    @pulumi.getter
+    def remark(self) -> _builtins.str:
+        """
+        Account remark.
+        """
+        return pulumi.get(self, "remark")
+
+    @_builtins.property
+    @pulumi.getter
+    def uid(self) -> _builtins.int:
+        """
+        Account UID.
+        """
+        return pulumi.get(self, "uid")
+
+    @_builtins.property
+    @pulumi.getter
+    def uin(self) -> _builtins.int:
+        """
+        Account ID (Uin).
+        """
+        return pulumi.get(self, "uin")
+
+    @_builtins.property
+    @pulumi.getter(name="userType")
+    def user_type(self) -> _builtins.str:
+        """
+        Account type to filter by. Valid values: `Owner` (master account), `SubUser` (sub user), `CICUser` (CIC sub user), `WechatCorpUser` (WeCom sub user), `AgentIdentity` (AgentIdentity sub user), `Collaborator` (collaborator), `MessageReceiver` (message receiver).
+        """
+        return pulumi.get(self, "user_type")
 
 
 @pulumi.output_type

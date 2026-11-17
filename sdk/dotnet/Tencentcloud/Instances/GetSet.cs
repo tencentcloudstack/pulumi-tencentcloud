@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
         /// </summary>
         public static Task<GetSetResult> InvokeAsync(GetSetArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
         /// </summary>
         public static Output<GetSetResult> Invoke(GetSetInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
         /// </summary>
         public static Output<GetSetResult> Invoke(GetSetInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetInvokeArgs(), options.WithDefaults());

@@ -32,6 +32,15 @@ import * as utilities from "../utilities";
  *     versionId: v1.versionId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+ *   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+ *   - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
  */
 export function getSecretVersions(args: GetSecretVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecretVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -105,6 +114,15 @@ export interface GetSecretVersionsResult {
  *     versionId: v1.versionId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+ *   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+ *   - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
  */
 export function getSecretVersionsOutput(args: GetSecretVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecretVersionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

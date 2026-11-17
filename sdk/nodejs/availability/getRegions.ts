@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     name: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegions](https://www.tencentcloud.com/search/?wd=DescribeRegions&type=document&lang=en)
  */
 export function getRegions(args?: GetRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionsResult> {
     args = args || {};
@@ -80,6 +86,12 @@ export interface GetRegionsResult {
  *     name: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegions](https://www.tencentcloud.com/search/?wd=DescribeRegions&type=document&lang=en)
  */
 export function getRegionsOutput(args?: GetRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionsResult> {
     args = args || {};

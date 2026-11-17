@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     budgetId: "1971489821259956225",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&type=document&lang=en)
  */
 export function getBudgetOperationLog(args: GetBudgetOperationLogArgs, opts?: pulumi.InvokeOptions): Promise<GetBudgetOperationLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetBudgetOperationLogResult {
  *     budgetId: "1971489821259956225",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&type=document&lang=en)
  */
 export function getBudgetOperationLogOutput(args: GetBudgetOperationLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBudgetOperationLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

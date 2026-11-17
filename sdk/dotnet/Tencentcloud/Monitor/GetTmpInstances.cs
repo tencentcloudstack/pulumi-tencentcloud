@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
         /// </summary>
         public static Task<GetTmpInstancesResult> InvokeAsync(GetTmpInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTmpInstancesResult>("tencentcloud:Monitor/getTmpInstances:getTmpInstances", args ?? new GetTmpInstancesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
         /// </summary>
         public static Output<GetTmpInstancesResult> Invoke(GetTmpInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTmpInstancesResult>("tencentcloud:Monitor/getTmpInstances:getTmpInstances", args ?? new GetTmpInstancesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
         /// </summary>
         public static Output<GetTmpInstancesResult> Invoke(GetTmpInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTmpInstancesResult>("tencentcloud:Monitor/getTmpInstances:getTmpInstances", args ?? new GetTmpInstancesInvokeArgs(), options.WithDefaults());

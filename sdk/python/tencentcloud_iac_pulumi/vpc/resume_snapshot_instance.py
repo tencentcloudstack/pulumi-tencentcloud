@@ -195,6 +195,12 @@ class ResumeSnapshotInstance(pulumi.CustomResource):
             instance_id="policy-1t6cob")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResumeSnapshotInstance](https://www.tencentcloud.com/document/api/215/55049)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -265,6 +271,12 @@ class ResumeSnapshotInstance(pulumi.CustomResource):
             snapshot_file_id=example.snapshot_file_sets[0].snapshot_file_id,
             instance_id="policy-1t6cob")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResumeSnapshotInstance](https://www.tencentcloud.com/document/api/215/55049)
 
 
         :param str resource_name: The name of the resource.

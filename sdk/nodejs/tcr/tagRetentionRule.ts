@@ -51,6 +51,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateTagRetentionRule](https://www.tencentcloud.com/document/api/1051/50690)
+ *   - [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
+ *   - [DescribeTagRetentionRules](https://www.tencentcloud.com/document/api/1051/50686)
+ * * Read: [DescribeTagRetentionRules](https://www.tencentcloud.com/document/api/1051/50686)
+ * * Update:
+ *   - [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
+ *   - [ModifyTagRetentionRule](https://www.tencentcloud.com/document/api/1051/50685)
+ * * Delete: [DeleteTagRetentionRule](https://www.tencentcloud.com/document/api/1051/50689)
+ *
  * ## Import
  *
  * TCR tag retention rule can be imported using the registryId#namespaceName#retentionId, e.g.

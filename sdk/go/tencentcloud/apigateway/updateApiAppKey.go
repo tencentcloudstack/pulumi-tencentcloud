@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateApiAppKey](https://www.tencentcloud.com/search/?wd=UpdateApiAppKey&type=document&lang=en)
 type UpdateApiAppKey struct {
 	pulumi.CustomResourceState
 

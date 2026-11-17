@@ -27,6 +27,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateVpcEndPoint](https://www.tencentcloud.com/document/api/215/40159)
+ *   - [ModifyVpcEndPointAttribute](https://www.tencentcloud.com/document/api/215/40148)
+ * * Read: [DescribeVpcEndPoint](https://www.tencentcloud.com/document/api/215/40153)
+ * * Update: [ModifyVpcEndPointAttribute](https://www.tencentcloud.com/document/api/215/40148)
+ * * Delete: [DeleteVpcEndPoint](https://www.tencentcloud.com/document/api/215/40156)
+ *
  * ## Import
  *
  * VPC end point can be imported using the id, e.g.

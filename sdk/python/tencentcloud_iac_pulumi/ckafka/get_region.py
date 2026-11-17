@@ -86,6 +86,12 @@ def get_region(result_output_file: Optional[_builtins.str] = None,
     region = tencentcloud.ckafka.get_region()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegion](https://www.tencentcloud.com/document/api/597/40317)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_region_output(result_output_file: pulumi.Input[Optional[Optional[_builti
 
     region = tencentcloud.ckafka.get_region()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegion](https://www.tencentcloud.com/document/api/597/40317)
 
 
     :param _builtins.str result_output_file: Used to save results.

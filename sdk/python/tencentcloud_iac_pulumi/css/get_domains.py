@@ -144,6 +144,12 @@ def get_domains(domain_prefix: Optional[_builtins.str] = None,
         is_delay_live=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveDomains](https://www.tencentcloud.com/document/api/267/35186)
+
 
     :param _builtins.str domain_prefix: domain name prefix.
     :param _builtins.int domain_status: domain name status filter. 0-disable, 1-enable.
@@ -191,6 +197,12 @@ def get_domains_output(domain_prefix: pulumi.Input[Optional[Optional[_builtins.s
         play_type=1,
         is_delay_live=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveDomains](https://www.tencentcloud.com/document/api/267/35186)
 
 
     :param _builtins.str domain_prefix: domain name prefix.

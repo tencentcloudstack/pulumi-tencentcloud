@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
 func GetBlackHeader(ctx *pulumi.Context, args *GetBlackHeaderArgs, opts ...pulumi.InvokeOption) (*GetBlackHeaderResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBlackHeaderResult

@@ -130,6 +130,18 @@ class ClusterAttachment(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+          - [LinkClusterList](https://www.tencentcloud.com/search/?wd=LinkClusterList&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Delete:
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+          - [UnlinkCluster](https://www.tencentcloud.com/search/?wd=UnlinkCluster&type=document&lang=en)
+
         ## Import
 
         tcm cluster_attachment can be imported using the mesh_id#cluster_id, e.g.
@@ -169,6 +181,18 @@ class ClusterAttachment(pulumi.CustomResource):
                 "type": "TKE",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+          - [LinkClusterList](https://www.tencentcloud.com/search/?wd=LinkClusterList&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Delete:
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+          - [UnlinkCluster](https://www.tencentcloud.com/search/?wd=UnlinkCluster&type=document&lang=en)
 
         ## Import
 

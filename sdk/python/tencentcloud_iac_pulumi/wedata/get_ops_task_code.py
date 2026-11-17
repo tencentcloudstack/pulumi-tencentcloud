@@ -107,6 +107,12 @@ def get_ops_task_code(project_id: Optional[_builtins.str] = None,
         task_id="20230901114849281")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetOpsTaskCode](https://www.tencentcloud.com/document/api/1174/73830)
+
 
     :param _builtins.str project_id: Project id.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_ops_task_code_output(project_id: pulumi.Input[Optional[_builtins.str]] =
     wedata_ops_task_code = tencentcloud.wedata.get_ops_task_code(project_id="1859317240494305280",
         task_id="20230901114849281")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetOpsTaskCode](https://www.tencentcloud.com/document/api/1174/73830)
 
 
     :param _builtins.str project_id: Project id.

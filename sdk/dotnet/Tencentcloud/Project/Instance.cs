@@ -34,6 +34,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Project
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddProject](https://www.tencentcloud.com/document/api/651/66288)
+    ///   - [UpdateProject](https://www.tencentcloud.com/search/?wd=UpdateProject&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/651/54679)
+    /// * Update: [UpdateProject](https://www.tencentcloud.com/search/?wd=UpdateProject&amp;type=document&amp;lang=en)
+    /// * Delete: [UpdateProject](https://www.tencentcloud.com/search/?wd=UpdateProject&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tag project can be imported using the id, e.g.

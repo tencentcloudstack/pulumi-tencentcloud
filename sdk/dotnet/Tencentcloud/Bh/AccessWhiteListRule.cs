@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAccessWhiteListRule](https://www.tencentcloud.com/search/?wd=CreateAccessWhiteListRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAccessWhiteListRules](https://www.tencentcloud.com/search/?wd=DescribeAccessWhiteListRules&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAccessWhiteListRule](https://www.tencentcloud.com/search/?wd=ModifyAccessWhiteListRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAccessWhiteListRules](https://www.tencentcloud.com/search/?wd=DeleteAccessWhiteListRules&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// BH access white list rule can be imported using the id, e.g.

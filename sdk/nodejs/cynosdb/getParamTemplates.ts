@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const paramTemplates = tencentcloud.cynosdb.getParamTemplates({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
  */
 export function getParamTemplates(args?: GetParamTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetParamTemplatesResult> {
     args = args || {};
@@ -127,6 +133,12 @@ export interface GetParamTemplatesResult {
  *
  * const paramTemplates = tencentcloud.cynosdb.getParamTemplates({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
  */
 export function getParamTemplatesOutput(args?: GetParamTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetParamTemplatesResult> {
     args = args || {};

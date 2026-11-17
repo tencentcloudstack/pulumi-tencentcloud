@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&type=document&lang=en)
 func GetXp2pDetailInfoList(ctx *pulumi.Context, args *GetXp2pDetailInfoListArgs, opts ...pulumi.InvokeOption) (*GetXp2pDetailInfoListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetXp2pDetailInfoListResult

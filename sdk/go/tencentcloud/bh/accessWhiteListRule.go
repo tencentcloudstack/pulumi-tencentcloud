@@ -41,6 +41,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAccessWhiteListRule](https://www.tencentcloud.com/search/?wd=CreateAccessWhiteListRule&type=document&lang=en)
+// * Read: [DescribeAccessWhiteListRules](https://www.tencentcloud.com/search/?wd=DescribeAccessWhiteListRules&type=document&lang=en)
+// * Update: [ModifyAccessWhiteListRule](https://www.tencentcloud.com/search/?wd=ModifyAccessWhiteListRule&type=document&lang=en)
+// * Delete: [DeleteAccessWhiteListRules](https://www.tencentcloud.com/search/?wd=DeleteAccessWhiteListRules&type=document&lang=en)
+//
 // ## Import
 //
 // BH access white list rule can be imported using the id, e.g.

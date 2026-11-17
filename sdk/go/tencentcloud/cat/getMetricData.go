@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProbeMetricData](https://www.tencentcloud.com/search/?wd=DescribeProbeMetricData&type=document&lang=en)
 func GetMetricData(ctx *pulumi.Context, args *GetMetricDataArgs, opts ...pulumi.InvokeOption) (*GetMetricDataResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMetricDataResult

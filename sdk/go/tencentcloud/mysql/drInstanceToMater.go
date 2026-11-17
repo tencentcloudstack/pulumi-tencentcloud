@@ -102,6 +102,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [SwitchDrInstanceToMaster](https://www.tencentcloud.com/document/api/236/39627)
+//
+// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+// * Update:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [SwitchDrInstanceToMaster](https://www.tencentcloud.com/document/api/236/39627)
+//
 // ## Import
 //
 // mysql drInstanceToMater can be imported using the id, e.g.

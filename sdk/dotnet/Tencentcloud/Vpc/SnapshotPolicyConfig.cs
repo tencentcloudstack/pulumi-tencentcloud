@@ -66,6 +66,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DisableSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55052)
+    ///   - [EnableSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55051)
+    /// * Read: [DescribeSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55054)
+    /// * Update:
+    ///   - [DisableSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55052)
+    ///   - [EnableSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55051)
+    /// 
     /// ## Import
     /// 
     /// vpc SnapshotPolicyConfig can be imported using the id, e.g.

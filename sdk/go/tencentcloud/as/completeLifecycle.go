@@ -153,6 +153,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CompleteLifecycleAction](https://www.tencentcloud.com/document/api/377/33200)
 type CompleteLifecycle struct {
 	pulumi.CustomResourceState
 

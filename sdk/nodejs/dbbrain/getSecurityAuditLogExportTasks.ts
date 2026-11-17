@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     asyncRequestIds: [task.asyncRequestId],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
  */
 export function getSecurityAuditLogExportTasks(args: GetSecurityAuditLogExportTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityAuditLogExportTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -108,6 +114,12 @@ export interface GetSecurityAuditLogExportTasksResult {
  *     asyncRequestIds: [task.asyncRequestId],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
  */
 export function getSecurityAuditLogExportTasksOutput(args: GetSecurityAuditLogExportTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityAuditLogExportTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

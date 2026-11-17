@@ -153,6 +153,12 @@ class ModifyDomainOwnerOperation(pulumi.CustomResource):
             domain_id=123)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainOwner](https://www.tencentcloud.com/document/api/1157/53849)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -180,6 +186,12 @@ class ModifyDomainOwnerOperation(pulumi.CustomResource):
             account="xxxxxxxxx",
             domain_id=123)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainOwner](https://www.tencentcloud.com/document/api/1157/53849)
 
 
         :param str resource_name: The name of the resource.

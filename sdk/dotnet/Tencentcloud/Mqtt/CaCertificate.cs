@@ -76,6 +76,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RegisterCaCertificate](https://www.tencentcloud.com/search/?wd=RegisterCaCertificate&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeCaCertificate](https://www.tencentcloud.com/search/?wd=DescribeCaCertificate&amp;type=document&amp;lang=en)
+    ///   - [DescribeCaCertificates](https://www.tencentcloud.com/search/?wd=DescribeCaCertificates&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ActivateCaCertificate](https://www.tencentcloud.com/search/?wd=ActivateCaCertificate&amp;type=document&amp;lang=en)
+    ///   - [DeactivateCaCertificate](https://www.tencentcloud.com/search/?wd=DeactivateCaCertificate&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeactivateCaCertificate](https://www.tencentcloud.com/search/?wd=DeactivateCaCertificate&amp;type=document&amp;lang=en)
+    ///   - [DeleteCaCertificate](https://www.tencentcloud.com/search/?wd=DeleteCaCertificate&amp;type=document&amp;lang=en)
+    ///   - [DescribeCaCertificate](https://www.tencentcloud.com/search/?wd=DescribeCaCertificate&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// MQTT CA certificate can be imported using the id, e.g.

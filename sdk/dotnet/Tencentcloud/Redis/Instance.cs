@@ -475,6 +475,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+    ///   - [CreateInstances](https://www.tencentcloud.com/document/api/239/32069)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+    ///   - [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
+    ///   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+    /// * Read:
+    ///   - [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/api/239/32081)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+    /// * Update:
+    ///   - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+    ///   - [ApplyParamsTemplate](https://www.tencentcloud.com/document/api/239/41922)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
+    ///   - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+    ///   - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+    ///   - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/239/37320)
+    ///   - [ModifyInstance](https://www.tencentcloud.com/document/api/239/32057)
+    ///   - [ModifyInstanceAvailabilityZones](https://www.tencentcloud.com/document/api/239/59383)
+    ///   - [ModifyInstanceChargeType](https://www.tencentcloud.com/document/api/239/78762)
+    ///   - [ModifyNetworkConfig](https://www.tencentcloud.com/document/api/239/32056)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+    ///   - [ResetPassword](https://www.tencentcloud.com/document/api/239/32054)
+    ///   - [UpgradeInstance](https://www.tencentcloud.com/document/api/239/32052)
+    ///   - [UpgradeInstanceVersion](https://www.tencentcloud.com/document/api/239/37831)
+    /// * Delete:
+    ///   - [CleanUpInstance](https://www.tencentcloud.com/document/api/239/32071)
+    ///   - [DescribeInstanceDealDetail](https://www.tencentcloud.com/document/api/239/32067)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [DestroyPostpaidInstance](https://www.tencentcloud.com/document/api/239/32063)
+    ///   - [DestroyPrepaidInstance](https://www.tencentcloud.com/document/api/239/32062)
+    /// 
     /// ## Import
     /// 
     /// Redis instance can be imported, e.g.
@@ -583,7 +626,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
-        /// Specify the product version of the instance. `Local`: Local disk version, `Cloud`: Cloud disk version, `Cdc`: Exclusive cluster version. Default is `Local`.
+        /// Specify the product version of the instance. `Local`: common type I;`localv2 `: common type II; `Cloud`: cloud native,Currently not available for sale; `Cdc`: dedicated cluster type. Default is `Local`.
         /// </summary>
         [Output("productVersion")]
         public Output<string> ProductVersion { get; private set; } = null!;
@@ -830,7 +873,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Specify the product version of the instance. `Local`: Local disk version, `Cloud`: Cloud disk version, `Cdc`: Exclusive cluster version. Default is `Local`.
+        /// Specify the product version of the instance. `Local`: common type I;`localv2 `: common type II; `Cloud`: cloud native,Currently not available for sale; `Cdc`: dedicated cluster type. Default is `Local`.
         /// </summary>
         [Input("productVersion")]
         public Input<string>? ProductVersion { get; set; }
@@ -1064,7 +1107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Specify the product version of the instance. `Local`: Local disk version, `Cloud`: Cloud disk version, `Cdc`: Exclusive cluster version. Default is `Local`.
+        /// Specify the product version of the instance. `Local`: common type I;`localv2 `: common type II; `Cloud`: cloud native,Currently not available for sale; `Cdc`: dedicated cluster type. Default is `Local`.
         /// </summary>
         [Input("productVersion")]
         public Input<string>? ProductVersion { get; set; }

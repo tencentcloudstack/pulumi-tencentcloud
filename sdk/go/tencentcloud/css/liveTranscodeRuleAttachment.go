@@ -73,6 +73,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLiveTranscodeRule](https://www.tencentcloud.com/document/api/267/30791)
+// * Read: [DescribeLiveTranscodeRules](https://www.tencentcloud.com/document/api/267/30787)
+// * Delete: [DeleteLiveTranscodeRule](https://www.tencentcloud.com/document/api/267/30789)
+//
 // ## Import
 //
 // css liveTranscodeRuleAttachment can be imported using the id, e.g.

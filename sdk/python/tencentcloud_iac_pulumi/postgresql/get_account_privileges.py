@@ -122,6 +122,12 @@ def get_account_privileges(database_object_sets: Optional[Sequence[Union['GetAcc
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
+
 
     :param Sequence[Union['GetAccountPrivilegesDatabaseObjectSetArgs', 'GetAccountPrivilegesDatabaseObjectSetArgsDict']] database_object_sets: Instance database object info.
     :param _builtins.str db_instance_id: Instance ID.
@@ -164,6 +170,12 @@ def get_account_privileges_output(database_object_sets: pulumi.Input[Optional[Se
             "object_type": "database",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
 
 
     :param Sequence[Union['GetAccountPrivilegesDatabaseObjectSetArgs', 'GetAccountPrivilegesDatabaseObjectSetArgsDict']] database_object_sets: Instance database object info.

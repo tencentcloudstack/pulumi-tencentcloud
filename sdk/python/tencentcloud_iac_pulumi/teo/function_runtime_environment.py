@@ -166,6 +166,15 @@ class FunctionRuntimeEnvironment(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [HandleFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64808)
+        * Read: [DescribeFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64810)
+        * Update: [HandleFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64808)
+        * Delete: [HandleFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64808)
+
         ## Import
 
         teo teo_function_runtime_environment can be imported using the id, e.g.
@@ -212,6 +221,15 @@ class FunctionRuntimeEnvironment(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [HandleFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64808)
+        * Read: [DescribeFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64810)
+        * Update: [HandleFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64808)
+        * Delete: [HandleFunctionRuntimeEnvironment](https://www.tencentcloud.com/document/api/1145/64808)
 
         ## Import
 

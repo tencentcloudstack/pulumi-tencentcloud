@@ -96,6 +96,12 @@ def get_custom_header(result_output_file: Optional[_builtins.str] = None,
     custom_header = tencentcloud.gaap.get_custom_header(rule_id="rule-hddrxgpd")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str rule_id: Rule IdNote: This field may return null, indicating that a valid value cannot be obtained.
@@ -125,6 +131,12 @@ def get_custom_header_output(result_output_file: pulumi.Input[Optional[Optional[
 
     custom_header = tencentcloud.gaap.get_custom_header(rule_id="rule-hddrxgpd")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
 
 
     :param _builtins.str result_output_file: Used to save results.

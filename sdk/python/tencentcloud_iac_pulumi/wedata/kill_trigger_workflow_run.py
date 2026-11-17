@@ -164,6 +164,12 @@ class KillTriggerWorkflowRun(pulumi.CustomResource):
             workflow_execution_id=trigger_workflow_runs.datas[0].items[0].execution_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [KillTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77887)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -203,6 +209,12 @@ class KillTriggerWorkflowRun(pulumi.CustomResource):
             workflow_id="333368d7-bc8e-4b95-9a66-7a5151063eb2",
             workflow_execution_id=trigger_workflow_runs.datas[0].items[0].execution_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [KillTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77887)
 
 
         :param str resource_name: The name of the resource.

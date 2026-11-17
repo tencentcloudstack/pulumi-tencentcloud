@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeleteBlackList](https://www.tencentcloud.com/document/api/1084/39417)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/blackListDelete:BlackListDelete")]
     public partial class BlackListDelete : global::Pulumi.CustomResource

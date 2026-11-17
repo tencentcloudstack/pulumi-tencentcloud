@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     policyId: 236245899,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
  */
 export function getPolicyDetail(args: GetPolicyDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetPolicyDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetPolicyDetailResult {
  *     policyId: 236245899,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
  */
 export function getPolicyDetailOutput(args: GetPolicyDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPolicyDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

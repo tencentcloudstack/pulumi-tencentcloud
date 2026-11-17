@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetProbeDataResult> InvokeAsync(GetProbeDataArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProbeDataResult> Invoke(GetProbeDataInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProbeDataResult> Invoke(GetProbeDataInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProbeDataResult>("tencentcloud:Cat/getProbeData:getProbeData", args ?? new GetProbeDataInvokeArgs(), options.WithDefaults());

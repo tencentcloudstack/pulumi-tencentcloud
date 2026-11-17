@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOverviewIndexResult> InvokeAsync(GetOverviewIndexArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOverviewIndexResult> Invoke(GetOverviewIndexInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOverviewIndexResult> Invoke(GetOverviewIndexInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewIndexResult>("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args ?? new GetOverviewIndexInvokeArgs(), options.WithDefaults());

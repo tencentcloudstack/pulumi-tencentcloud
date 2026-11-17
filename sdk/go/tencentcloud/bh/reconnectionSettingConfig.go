@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyReconnectionSetting](https://www.tencentcloud.com/search/?wd=ModifyReconnectionSetting&type=document&lang=en)
+// * Read: [DescribeSecuritySetting](https://www.tencentcloud.com/search/?wd=DescribeSecuritySetting&type=document&lang=en)
+// * Update: [ModifyReconnectionSetting](https://www.tencentcloud.com/search/?wd=ModifyReconnectionSetting&type=document&lang=en)
+//
 // ## Import
 //
 // BH reconnection setting config can be imported using the customId(like uuid or base64 string), e.g.

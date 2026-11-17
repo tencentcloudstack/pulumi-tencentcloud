@@ -280,6 +280,15 @@ class Flow(pulumi.CustomResource):
             opts = pulumi.ResourceOptions(depends_on=[output]))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStreamLinkFlow](https://www.tencentcloud.com/search/?wd=CreateStreamLinkFlow&type=document&lang=en)
+        * Read: [DescribeStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkFlow&type=document&lang=en)
+        * Update: [ModifyStreamLinkFlow](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkFlow&type=document&lang=en)
+        * Delete: [DeleteStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkFlow&type=document&lang=en)
+
         ## Import
 
         mps flow can be imported using the id, e.g.
@@ -407,6 +416,15 @@ class Flow(pulumi.CustomResource):
             start=True,
             opts = pulumi.ResourceOptions(depends_on=[output]))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStreamLinkFlow](https://www.tencentcloud.com/search/?wd=CreateStreamLinkFlow&type=document&lang=en)
+        * Read: [DescribeStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkFlow&type=document&lang=en)
+        * Update: [ModifyStreamLinkFlow](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkFlow&type=document&lang=en)
+        * Delete: [DeleteStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkFlow&type=document&lang=en)
 
         ## Import
 

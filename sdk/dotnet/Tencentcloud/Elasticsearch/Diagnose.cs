@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateDiagnoseSettings](https://www.tencentcloud.com/search/?wd=UpdateDiagnoseSettings&amp;type=document&amp;lang=en)
+    /// * Read: [GetDiagnoseSettings](https://www.tencentcloud.com/search/?wd=GetDiagnoseSettings&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateDiagnoseSettings](https://www.tencentcloud.com/search/?wd=UpdateDiagnoseSettings&amp;type=document&amp;lang=en)
+    /// * Delete: [UpdateDiagnoseSettings](https://www.tencentcloud.com/search/?wd=UpdateDiagnoseSettings&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// es diagnose can be imported using the id, e.g.

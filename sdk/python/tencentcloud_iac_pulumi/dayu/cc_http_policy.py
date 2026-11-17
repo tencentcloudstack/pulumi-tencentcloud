@@ -431,6 +431,19 @@ class CcHttpPolicy(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=CreateCCSelfDefinePolicy&type=document&lang=en)
+          - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+        * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+        * Update: [ModifyCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=ModifyCCSelfDefinePolicy&type=document&lang=en)
+        * Delete:
+          - [DeleteCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DeleteCCSelfDefinePolicy&type=document&lang=en)
+          - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -509,6 +522,19 @@ class CcHttpPolicy(pulumi.CustomResource):
                 "value": "123",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=CreateCCSelfDefinePolicy&type=document&lang=en)
+          - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+        * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+        * Update: [ModifyCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=ModifyCCSelfDefinePolicy&type=document&lang=en)
+        * Delete:
+          - [DeleteCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DeleteCCSelfDefinePolicy&type=document&lang=en)
+          - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

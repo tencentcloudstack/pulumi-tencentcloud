@@ -56,6 +56,30 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateVpnConnection](https://www.tencentcloud.com/document/api/215/17522)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+ *   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+ *   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+ * * Update:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+ *   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [ModifyVpnConnectionAttribute](https://www.tencentcloud.com/document/api/215/17508)
+ * * Delete:
+ *   - [DeleteVpnConnection](https://www.tencentcloud.com/document/api/215/17519)
+ *   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+ *
  * ## Import
  *
  * VPN connection can be imported using the id, e.g.

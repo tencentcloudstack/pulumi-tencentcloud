@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [GenerateTmpKey](https://www.tencentcloud.com/document/api/1249/68501)
 type TmpKeyGenerate struct {
 	pulumi.CustomResourceState
 

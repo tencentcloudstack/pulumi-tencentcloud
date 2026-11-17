@@ -119,6 +119,14 @@ class StorageSetAttachment(pulumi.CustomResource):
             instance_id="ins-jqlegd42")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachDisks](https://www.tencentcloud.com/document/api/362/16313)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+        * Delete: [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class StorageSetAttachment(pulumi.CustomResource):
             storage_id="disk-kdt0sq6m",
             instance_id="ins-jqlegd42")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachDisks](https://www.tencentcloud.com/document/api/362/16313)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+        * Delete: [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
 
 
         :param str resource_name: The name of the resource.

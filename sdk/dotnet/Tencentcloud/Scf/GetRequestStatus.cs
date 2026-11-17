@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
         /// </summary>
         public static Task<GetRequestStatusResult> InvokeAsync(GetRequestStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
         /// </summary>
         public static Output<GetRequestStatusResult> Invoke(GetRequestStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
         /// </summary>
         public static Output<GetRequestStatusResult> Invoke(GetRequestStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRequestStatusResult>("tencentcloud:Scf/getRequestStatus:getRequestStatus", args ?? new GetRequestStatusInvokeArgs(), options.WithDefaults());

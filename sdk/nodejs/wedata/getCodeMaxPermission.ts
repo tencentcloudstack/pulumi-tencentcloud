@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceId: "f0c14b9d-003e-4325-8830-d1a9fa934ed6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
  */
 export function getCodeMaxPermission(args: GetCodeMaxPermissionArgs, opts?: pulumi.InvokeOptions): Promise<GetCodeMaxPermissionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetCodeMaxPermissionResult {
  *     resourceId: "f0c14b9d-003e-4325-8830-d1a9fa934ed6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
  */
 export function getCodeMaxPermissionOutput(args: GetCodeMaxPermissionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCodeMaxPermissionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRouteConflictsResult> InvokeAsync(GetRouteConflictsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRouteConflictsResult> Invoke(GetRouteConflictsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRouteConflictsResult> Invoke(GetRouteConflictsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsInvokeArgs(), options.WithDefaults());

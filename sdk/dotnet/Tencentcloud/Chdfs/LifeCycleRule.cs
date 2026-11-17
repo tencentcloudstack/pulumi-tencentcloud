@@ -45,6 +45,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42440)
+    ///   - [DescribeLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42438)
+    /// * Read: [DescribeLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42438)
+    /// * Update: [ModifyLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42437)
+    /// * Delete: [DeleteLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42439)
+    /// 
     /// ## Import
     /// 
     /// chdfs LifeCycleRule can be imported using the id, e.g.

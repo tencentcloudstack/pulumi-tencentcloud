@@ -98,6 +98,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateVpcFwGroup](https://www.tencentcloud.com/search/?wd=CreateVpcFwGroup&amp;type=document&amp;lang=en)
+    ///   - [DescribeFwGroupInstanceInfo](https://www.tencentcloud.com/search/?wd=DescribeFwGroupInstanceInfo&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeFwGroupInstanceInfo](https://www.tencentcloud.com/search/?wd=DescribeFwGroupInstanceInfo&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyVpcFwGroup](https://www.tencentcloud.com/search/?wd=ModifyVpcFwGroup&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteVpcFwGroup](https://www.tencentcloud.com/search/?wd=DeleteVpcFwGroup&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW vpc instance can be imported using the id, e.g.

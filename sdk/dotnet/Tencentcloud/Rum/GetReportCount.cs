@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
         /// </summary>
         public static Task<GetReportCountResult> InvokeAsync(GetReportCountArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
         /// </summary>
         public static Output<GetReportCountResult> Invoke(GetReportCountInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
         /// </summary>
         public static Output<GetReportCountResult> Invoke(GetReportCountInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetReportCountResult>("tencentcloud:Rum/getReportCount:getReportCount", args ?? new GetReportCountInvokeArgs(), options.WithDefaults());

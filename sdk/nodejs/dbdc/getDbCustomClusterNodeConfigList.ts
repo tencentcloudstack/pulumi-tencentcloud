@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     nodeIds: ["dbcn-vvkg2xls"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeConfig&type=document&lang=en)
  */
 export function getDbCustomClusterNodeConfigList(args: GetDbCustomClusterNodeConfigListArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCustomClusterNodeConfigListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetDbCustomClusterNodeConfigListResult {
  *     nodeIds: ["dbcn-vvkg2xls"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeConfig&type=document&lang=en)
  */
 export function getDbCustomClusterNodeConfigListOutput(args: GetDbCustomClusterNodeConfigListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCustomClusterNodeConfigListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

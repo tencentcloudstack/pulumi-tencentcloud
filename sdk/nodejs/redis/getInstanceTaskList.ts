@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     operateUins: [""],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
  */
 export function getInstanceTaskList(args?: GetInstanceTaskListArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceTaskListResult> {
     args = args || {};
@@ -147,6 +153,12 @@ export interface GetInstanceTaskListResult {
  *     operateUins: [""],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
  */
 export function getInstanceTaskListOutput(args?: GetInstanceTaskListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceTaskListResult> {
     args = args || {};

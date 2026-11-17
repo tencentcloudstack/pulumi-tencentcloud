@@ -69,6 +69,15 @@ class OpenServiceOperation(pulumi.CustomResource):
         example = tencentcloud.cls.OpenServiceOperation("example")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
+          - [OpenClsService](https://www.tencentcloud.com/document/api/614/80500)
+        * Read: [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -90,6 +99,15 @@ class OpenServiceOperation(pulumi.CustomResource):
 
         example = tencentcloud.cls.OpenServiceOperation("example")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
+          - [OpenClsService](https://www.tencentcloud.com/document/api/614/80500)
+        * Read: [GetClsService](https://www.tencentcloud.com/document/api/614/80501)
 
 
         :param str resource_name: The name of the resource.

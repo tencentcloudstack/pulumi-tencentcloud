@@ -96,6 +96,12 @@ def get_clone_list(instance_id: Optional[_builtins.str] = None,
     clone_list = tencentcloud.mysql.get_clone_list(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
+
 
     :param _builtins.str instance_id: Query the list of cloning tasks for the specified source instance.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_clone_list_output(instance_id: pulumi.Input[Optional[_builtins.str]] = N
 
     clone_list = tencentcloud.mysql.get_clone_list(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
 
 
     :param _builtins.str instance_id: Query the list of cloning tasks for the specified source instance.

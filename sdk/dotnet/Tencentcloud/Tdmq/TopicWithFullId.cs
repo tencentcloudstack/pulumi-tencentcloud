@@ -59,6 +59,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// Tdmq Topic can be imported, e.g.

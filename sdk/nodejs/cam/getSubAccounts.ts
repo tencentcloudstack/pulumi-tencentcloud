@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     filterSubAccountUins: [100037718139],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
  */
 export function getSubAccounts(args: GetSubAccountsArgs, opts?: pulumi.InvokeOptions): Promise<GetSubAccountsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSubAccountsResult {
  *     filterSubAccountUins: [100037718139],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
  */
 export function getSubAccountsOutput(args: GetSubAccountsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSubAccountsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

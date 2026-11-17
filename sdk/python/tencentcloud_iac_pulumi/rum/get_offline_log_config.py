@@ -107,6 +107,12 @@ def get_offline_log_config(project_key: Optional[_builtins.str] = None,
     offline_log_config = tencentcloud.rum.get_offline_log_config(project_key="ZEYrYfvaYQ30jRdmPx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
+
 
     :param _builtins.str project_key: Unique project key for reporting.
     :param _builtins.str result_output_file: Used to save results.
@@ -137,6 +143,12 @@ def get_offline_log_config_output(project_key: pulumi.Input[Optional[_builtins.s
 
     offline_log_config = tencentcloud.rum.get_offline_log_config(project_key="ZEYrYfvaYQ30jRdmPx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
 
 
     :param _builtins.str project_key: Unique project key for reporting.

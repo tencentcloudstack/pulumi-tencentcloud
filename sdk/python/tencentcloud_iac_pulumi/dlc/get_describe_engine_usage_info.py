@@ -106,6 +106,12 @@ def get_describe_engine_usage_info(data_engine_id: Optional[_builtins.str] = Non
     example = tencentcloud.dlc.get_describe_engine_usage_info(data_engine_id="DataEngine-80ibn1cj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEngineUsageInfo](https://www.tencentcloud.com/document/api/1155/54453)
+
 
     :param _builtins.str data_engine_id: The data engine ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -136,6 +142,12 @@ def get_describe_engine_usage_info_output(data_engine_id: pulumi.Input[Optional[
 
     example = tencentcloud.dlc.get_describe_engine_usage_info(data_engine_id="DataEngine-80ibn1cj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEngineUsageInfo](https://www.tencentcloud.com/document/api/1155/54453)
 
 
     :param _builtins.str data_engine_id: The data engine ID.

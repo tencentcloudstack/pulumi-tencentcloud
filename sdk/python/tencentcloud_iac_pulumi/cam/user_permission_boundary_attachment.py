@@ -119,6 +119,14 @@ class UserPermissionBoundaryAttachment(pulumi.CustomResource):
             policy_id=234290251)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutUserPermissionsBoundary](https://www.tencentcloud.com/document/api/598/37925)
+        * Read: [GetUserPermissionBoundary](https://www.tencentcloud.com/search/?wd=GetUserPermissionBoundary&type=document&lang=en)
+        * Delete: [DeleteUserPermissionsBoundary](https://www.tencentcloud.com/document/api/598/37926)
+
         ## Import
 
         CAM user permission boundary can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class UserPermissionBoundaryAttachment(pulumi.CustomResource):
             target_uin=int(100037718101),
             policy_id=234290251)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutUserPermissionsBoundary](https://www.tencentcloud.com/document/api/598/37925)
+        * Read: [GetUserPermissionBoundary](https://www.tencentcloud.com/search/?wd=GetUserPermissionBoundary&type=document&lang=en)
+        * Delete: [DeleteUserPermissionsBoundary](https://www.tencentcloud.com/document/api/598/37926)
 
         ## Import
 

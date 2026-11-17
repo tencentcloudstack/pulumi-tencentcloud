@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetResourceGroupMetrics](https://www.tencentcloud.com/document/api/1174/77853)
         /// </summary>
         public static Task<GetResourceGroupMetricsResult> InvokeAsync(GetResourceGroupMetricsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceGroupMetricsResult>("tencentcloud:Wedata/getResourceGroupMetrics:getResourceGroupMetrics", args ?? new GetResourceGroupMetricsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetResourceGroupMetrics](https://www.tencentcloud.com/document/api/1174/77853)
         /// </summary>
         public static Output<GetResourceGroupMetricsResult> Invoke(GetResourceGroupMetricsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceGroupMetricsResult>("tencentcloud:Wedata/getResourceGroupMetrics:getResourceGroupMetrics", args ?? new GetResourceGroupMetricsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetResourceGroupMetrics](https://www.tencentcloud.com/document/api/1174/77853)
         /// </summary>
         public static Output<GetResourceGroupMetricsResult> Invoke(GetResourceGroupMetricsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceGroupMetricsResult>("tencentcloud:Wedata/getResourceGroupMetrics:getResourceGroupMetrics", args ?? new GetResourceGroupMetricsInvokeArgs(), options.WithDefaults());

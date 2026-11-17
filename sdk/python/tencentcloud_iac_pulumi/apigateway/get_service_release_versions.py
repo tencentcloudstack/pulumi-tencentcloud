@@ -96,6 +96,12 @@ def get_service_release_versions(result_output_file: Optional[_builtins.str] = N
     example = tencentcloud.apigateway.get_service_release_versions(service_id="service-nxz6yync")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str service_id: The unique ID of the service to be queried.
@@ -125,6 +131,12 @@ def get_service_release_versions_output(result_output_file: pulumi.Input[Optiona
 
     example = tencentcloud.apigateway.get_service_release_versions(service_id="service-nxz6yync")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

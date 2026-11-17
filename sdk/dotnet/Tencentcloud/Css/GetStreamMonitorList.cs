@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetStreamMonitorListResult> InvokeAsync(GetStreamMonitorListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetStreamMonitorListResult> Invoke(GetStreamMonitorListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetStreamMonitorListResult> Invoke(GetStreamMonitorListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStreamMonitorListResult>("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args ?? new GetStreamMonitorListInvokeArgs(), options.WithDefaults());

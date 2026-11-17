@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetWorkSpacesResult> InvokeAsync(GetWorkSpacesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWorkSpacesResult> Invoke(GetWorkSpacesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWorkSpacesResult> Invoke(GetWorkSpacesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkSpacesResult>("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args ?? new GetWorkSpacesInvokeArgs(), options.WithDefaults());

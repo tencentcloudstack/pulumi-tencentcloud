@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
 func GetWebSecurityTemplates(ctx *pulumi.Context, args *GetWebSecurityTemplatesArgs, opts ...pulumi.InvokeOption) (*GetWebSecurityTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWebSecurityTemplatesResult

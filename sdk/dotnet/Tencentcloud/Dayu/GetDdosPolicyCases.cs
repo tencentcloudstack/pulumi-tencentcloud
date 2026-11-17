@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDdosPolicyCasesResult> InvokeAsync(GetDdosPolicyCasesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDdosPolicyCasesResult>("tencentcloud:Dayu/getDdosPolicyCases:getDdosPolicyCases", args ?? new GetDdosPolicyCasesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDdosPolicyCasesResult> Invoke(GetDdosPolicyCasesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDdosPolicyCasesResult>("tencentcloud:Dayu/getDdosPolicyCases:getDdosPolicyCases", args ?? new GetDdosPolicyCasesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDdosPolicyCasesResult> Invoke(GetDdosPolicyCasesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDdosPolicyCasesResult>("tencentcloud:Dayu/getDdosPolicyCases:getDdosPolicyCases", args ?? new GetDdosPolicyCasesInvokeArgs(), options.WithDefaults());

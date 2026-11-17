@@ -39,6 +39,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+//   - [ResumeSyncJob](https://www.tencentcloud.com/document/api/571/51788)
 type SyncJobResumeOperation struct {
 	pulumi.CustomResourceState
 

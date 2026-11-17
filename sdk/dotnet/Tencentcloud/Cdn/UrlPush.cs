@@ -55,6 +55,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read: [DescribePushTasks](https://www.tencentcloud.com/document/api/228/33603)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdn/urlPush:UrlPush")]
     public partial class UrlPush : global::Pulumi.CustomResource

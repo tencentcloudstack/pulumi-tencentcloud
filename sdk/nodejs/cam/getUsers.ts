@@ -28,6 +28,12 @@ import * as utilities from "../utilities";
  *     phoneNum: "12345678910",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListUsers](https://www.tencentcloud.com/document/api/598/32256)
  */
 export function getUsers(args?: GetUsersArgs, opts?: pulumi.InvokeOptions): Promise<GetUsersResult> {
     args = args || {};
@@ -152,6 +158,12 @@ export interface GetUsersResult {
  *     phoneNum: "12345678910",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListUsers](https://www.tencentcloud.com/document/api/598/32256)
  */
 export function getUsersOutput(args?: GetUsersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUsersResult> {
     args = args || {};

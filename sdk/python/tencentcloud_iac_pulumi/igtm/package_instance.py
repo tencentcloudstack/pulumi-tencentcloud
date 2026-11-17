@@ -203,6 +203,16 @@ class PackageInstance(pulumi.CustomResource):
             auto_voucher=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePackageAndPay](https://www.tencentcloud.com/search/?wd=CreatePackageAndPay&type=document&lang=en)
+        * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&type=document&lang=en)
+        * Update:
+          - [CreatePackageAndPay](https://www.tencentcloud.com/search/?wd=CreatePackageAndPay&type=document&lang=en)
+          - [ModifyPackageAutoRenew](https://www.tencentcloud.com/search/?wd=ModifyPackageAutoRenew&type=document&lang=en)
+
         ## Import
 
         IGTM package instance can be imported using the id, e.g.
@@ -240,6 +250,16 @@ class PackageInstance(pulumi.CustomResource):
             time_span=1,
             auto_voucher=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePackageAndPay](https://www.tencentcloud.com/search/?wd=CreatePackageAndPay&type=document&lang=en)
+        * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&type=document&lang=en)
+        * Update:
+          - [CreatePackageAndPay](https://www.tencentcloud.com/search/?wd=CreatePackageAndPay&type=document&lang=en)
+          - [ModifyPackageAutoRenew](https://www.tencentcloud.com/search/?wd=ModifyPackageAutoRenew&type=document&lang=en)
 
         ## Import
 

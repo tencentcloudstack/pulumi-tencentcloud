@@ -36,6 +36,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePrivateNatGateway](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGateway&amp;type=document&amp;lang=en)
+    ///   - [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&amp;type=document&amp;lang=en)
+    ///   - [ModifyPrivateNatGatewayAttribute](https://www.tencentcloud.com/search/?wd=ModifyPrivateNatGatewayAttribute&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeletePrivateNatGateway](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGateway&amp;type=document&amp;lang=en)
+    ///   - [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// VPC private nat gateway can be imported using the id, e.g.

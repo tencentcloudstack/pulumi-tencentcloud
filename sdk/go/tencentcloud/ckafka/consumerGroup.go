@@ -44,6 +44,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateConsumer](https://www.tencentcloud.com/document/api/597/45903)
+// * Read: [DescribeConsumerGroup](https://www.tencentcloud.com/document/api/597/35351)
+// * Delete: [DeleteGroup](https://www.tencentcloud.com/document/api/597/74427)
+//
 // ## Import
 //
 // ckafka consumerGroup can be imported using the id, e.g.

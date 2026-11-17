@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     category: "All",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
  */
 export function getKeys(args?: GetKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetKeysResult> {
     args = args || {};
@@ -107,6 +113,12 @@ export interface GetKeysResult {
  *     category: "All",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
  */
 export function getKeysOutput(args?: GetKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetKeysResult> {
     args = args || {};

@@ -5,7 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tag attachment
+ * Provides a resource to create a tag attachment. This is the v1 resource; changing `tagValue` destroys and recreates the binding. To update `tagValue` in place, use `tencentcloud.Tag.AttachmentV2`.
+ *
+ * > **NOTE**: This is the v1 resource, where changing `tagValue` forces the binding to be destroyed and recreated (the field is `ForceNew`). If you need to update `tagValue` **in place** without destroying the binding, please use the v2 resource `tencentcloud.Tag.AttachmentV2` instead.
  *
  * ## Example Usage
  *
@@ -19,6 +21,14 @@ import * as utilities from "../utilities";
  *     resource: "qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddResourceTag](https://www.tencentcloud.com/document/api/651/33016)
+ * * Read: [GetResources](https://www.tencentcloud.com/document/api/651/46539)
+ * * Delete: [DeleteResourceTag](https://www.tencentcloud.com/document/api/651/33014)
  *
  * ## Import
  *

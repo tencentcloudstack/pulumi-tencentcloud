@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
         /// </summary>
         public static Task<GetInstanceQpsLimitResult> InvokeAsync(GetInstanceQpsLimitArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
         /// </summary>
         public static Output<GetInstanceQpsLimitResult> Invoke(GetInstanceQpsLimitInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
         /// </summary>
         public static Output<GetInstanceQpsLimitResult> Invoke(GetInstanceQpsLimitInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitInvokeArgs(), options.WithDefaults());

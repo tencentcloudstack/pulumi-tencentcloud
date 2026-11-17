@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.dbdc.getDbCustomZones({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomZones](https://www.tencentcloud.com/search/?wd=DescribeDBCustomZones&type=document&lang=en)
  */
 export function getDbCustomZones(args?: GetDbCustomZonesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCustomZonesResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetDbCustomZonesResult {
  *
  * const example = tencentcloud.dbdc.getDbCustomZones({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomZones](https://www.tencentcloud.com/search/?wd=DescribeDBCustomZones&type=document&lang=en)
  */
 export function getDbCustomZonesOutput(args?: GetDbCustomZonesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCustomZonesResult> {
     args = args || {};

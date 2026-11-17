@@ -123,8 +123,15 @@ class InstancesAcceptAttach(pulumi.CustomResource):
                 "instance_id": "vpc-j9yhbzpn",
                 "instance_region": "ap-guangzhou",
                 "instance_type": "VPC",
+                "order_type": "PayByCcnOwner",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AcceptAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34793)
 
 
         :param str resource_name: The name of the resource.
@@ -153,8 +160,15 @@ class InstancesAcceptAttach(pulumi.CustomResource):
                 "instance_id": "vpc-j9yhbzpn",
                 "instance_region": "ap-guangzhou",
                 "instance_type": "VPC",
+                "order_type": "PayByCcnOwner",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AcceptAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34793)
 
 
         :param str resource_name: The name of the resource.

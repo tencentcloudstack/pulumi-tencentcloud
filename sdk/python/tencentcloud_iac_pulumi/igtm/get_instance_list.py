@@ -124,6 +124,12 @@ def get_instance_list(filters: Optional[Sequence[Union['GetInstanceListFilterArg
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeInstanceList&type=document&lang=en)
+
 
     :param Sequence[Union['GetInstanceListFilterArgs', 'GetInstanceListFilterArgsDict']] filters: Filter conditions.
     :param _builtins.str result_output_file: Used to save results.
@@ -169,6 +175,12 @@ def get_instance_list_output(filters: pulumi.Input[Optional[Optional[Sequence[Un
         "fuzzy": True,
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeInstanceList&type=document&lang=en)
 
 
     :param Sequence[Union['GetInstanceListFilterArgs', 'GetInstanceListFilterArgsDict']] filters: Filter conditions.

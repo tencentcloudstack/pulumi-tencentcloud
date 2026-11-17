@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [SyncDevicesToIOA](https://www.tencentcloud.com/search/?wd=SyncDevicesToIOA&type=document&lang=en)
 type SyncDevicesToIoaOperation struct {
 	pulumi.CustomResourceState
 

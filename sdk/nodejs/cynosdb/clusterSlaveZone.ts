@@ -58,8 +58,25 @@ import * as utilities from "../utilities";
  * const exampleClusterSlaveZone = new tencentcloud.cynosdb.ClusterSlaveZone("example", {
  *     clusterId: example.id,
  *     slaveZone: "ap-guangzhou-7",
+ *     binlogSyncWay: "async",
+ *     semiSyncTimeout: 10000,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AddClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50016)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+ * * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+ * * Update:
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+ *   - [ModifyClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50015)
+ * * Delete:
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+ *   - [RemoveClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50014)
  *
  * ## Import
  *
@@ -98,9 +115,17 @@ export class ClusterSlaveZone extends pulumi.CustomResource {
     }
 
     /**
+     * Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+     */
+    declare public readonly binlogSyncWay: pulumi.Output<string>;
+    /**
      * The ID of cluster.
      */
     declare public readonly clusterId: pulumi.Output<string>;
+    /**
+     * Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+     */
+    declare public readonly semiSyncTimeout: pulumi.Output<number>;
     /**
      * Slave zone.
      */
@@ -119,7 +144,9 @@ export class ClusterSlaveZone extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClusterSlaveZoneState | undefined;
+            resourceInputs["binlogSyncWay"] = state?.binlogSyncWay;
             resourceInputs["clusterId"] = state?.clusterId;
+            resourceInputs["semiSyncTimeout"] = state?.semiSyncTimeout;
             resourceInputs["slaveZone"] = state?.slaveZone;
         } else {
             const args = argsOrState as ClusterSlaveZoneArgs | undefined;
@@ -129,7 +156,9 @@ export class ClusterSlaveZone extends pulumi.CustomResource {
             if (args?.slaveZone === undefined && !opts.urn) {
                 throw new Error("Missing required property 'slaveZone'");
             }
+            resourceInputs["binlogSyncWay"] = args?.binlogSyncWay;
             resourceInputs["clusterId"] = args?.clusterId;
+            resourceInputs["semiSyncTimeout"] = args?.semiSyncTimeout;
             resourceInputs["slaveZone"] = args?.slaveZone;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -142,9 +171,17 @@ export class ClusterSlaveZone extends pulumi.CustomResource {
  */
 export interface ClusterSlaveZoneState {
     /**
+     * Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+     */
+    binlogSyncWay?: pulumi.Input<string | undefined>;
+    /**
      * The ID of cluster.
      */
     clusterId?: pulumi.Input<string | undefined>;
+    /**
+     * Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+     */
+    semiSyncTimeout?: pulumi.Input<number | undefined>;
     /**
      * Slave zone.
      */
@@ -156,9 +193,17 @@ export interface ClusterSlaveZoneState {
  */
 export interface ClusterSlaveZoneArgs {
     /**
+     * Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+     */
+    binlogSyncWay?: pulumi.Input<string | undefined>;
+    /**
      * The ID of cluster.
      */
     clusterId: pulumi.Input<string>;
+    /**
+     * Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+     */
+    semiSyncTimeout?: pulumi.Input<number | undefined>;
     /**
      * Slave zone.
      */

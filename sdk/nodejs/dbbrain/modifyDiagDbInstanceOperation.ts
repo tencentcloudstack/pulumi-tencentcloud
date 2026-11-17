@@ -38,6 +38,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["%s"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDiagDBInstanceConf](https://www.tencentcloud.com/document/api/1035/41186)
  */
 export class ModifyDiagDbInstanceOperation extends pulumi.CustomResource {
     /**

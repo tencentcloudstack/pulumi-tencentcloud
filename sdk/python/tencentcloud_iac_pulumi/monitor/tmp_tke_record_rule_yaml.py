@@ -313,6 +313,15 @@ class TmpTkeRecordRuleYaml(pulumi.CustomResource):
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53334)
+        * Read: [DescribePrometheusRecordRules](https://www.tencentcloud.com/document/api/248/53319)
+        * Update: [ModifyPrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53330)
+        * Delete: [DeletePrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53333)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -468,6 +477,15 @@ class TmpTkeRecordRuleYaml(pulumi.CustomResource):
         \"\"\",
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53334)
+        * Read: [DescribePrometheusRecordRules](https://www.tencentcloud.com/document/api/248/53319)
+        * Update: [ModifyPrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53330)
+        * Delete: [DeletePrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53333)
 
 
         :param str resource_name: The name of the resource.

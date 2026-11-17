@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
         /// </summary>
         public static Task<GetAsyncEventStatusResult> InvokeAsync(GetAsyncEventStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
         /// </summary>
         public static Output<GetAsyncEventStatusResult> Invoke(GetAsyncEventStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
         /// </summary>
         public static Output<GetAsyncEventStatusResult> Invoke(GetAsyncEventStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAsyncEventStatusResult>("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args ?? new GetAsyncEventStatusInvokeArgs(), options.WithDefaults());

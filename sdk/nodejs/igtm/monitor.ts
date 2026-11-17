@@ -50,6 +50,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateMonitor](https://www.tencentcloud.com/search/?wd=CreateMonitor&type=document&lang=en)
+ * * Read: [DescribeMonitorDetail](https://www.tencentcloud.com/search/?wd=DescribeMonitorDetail&type=document&lang=en)
+ * * Update: [ModifyMonitor](https://www.tencentcloud.com/search/?wd=ModifyMonitor&type=document&lang=en)
+ * * Delete: [DeleteMonitor](https://www.tencentcloud.com/search/?wd=DeleteMonitor&type=document&lang=en)
+ *
  * ## Import
  *
  * IGTM monitor can be imported using the id, e.g.

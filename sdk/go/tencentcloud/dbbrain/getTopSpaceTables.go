@@ -70,6 +70,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
 func GetTopSpaceTables(ctx *pulumi.Context, args *GetTopSpaceTablesArgs, opts ...pulumi.InvokeOption) (*GetTopSpaceTablesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopSpaceTablesResult

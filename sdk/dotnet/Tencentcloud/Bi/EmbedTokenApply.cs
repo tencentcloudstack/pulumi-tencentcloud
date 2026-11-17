@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateEmbedToken](https://www.tencentcloud.com/document/api/1270/72621)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/embedTokenApply:EmbedTokenApply")]
     public partial class EmbedTokenApply : global::Pulumi.CustomResource

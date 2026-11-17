@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     dcgId: ccnMain.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
  */
 export function getGatewayInstances(args?: GetGatewayInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayInstancesResult> {
     args = args || {};
@@ -113,6 +119,12 @@ export interface GetGatewayInstancesResult {
  *     dcgId: ccnMain.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
  */
 export function getGatewayInstancesOutput(args?: GetGatewayInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayInstancesResult> {
     args = args || {};

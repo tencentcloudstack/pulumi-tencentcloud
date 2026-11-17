@@ -52,6 +52,14 @@ import * as utilities from "../utilities";
  *     apiName: api.apiName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+ *   - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&type=document&lang=en)
  */
 export function getApis(args: GetApisArgs, opts?: pulumi.InvokeOptions): Promise<GetApisResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -154,6 +162,14 @@ export interface GetApisResult {
  *     apiName: api.apiName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+ *   - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&type=document&lang=en)
  */
 export function getApisOutput(args: GetApisOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApisResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

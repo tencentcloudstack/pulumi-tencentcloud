@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     types: ["L7AccelerationConfig"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
  */
 export function getExportZoneConfig(args: GetExportZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetExportZoneConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetExportZoneConfigResult {
  *     types: ["L7AccelerationConfig"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
  */
 export function getExportZoneConfigOutput(args: GetExportZoneConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetExportZoneConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -122,6 +122,12 @@ class ResetRootAccount(pulumi.CustomResource):
         example_reset_root_account = tencentcloud.mysql.ResetRootAccount("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetRootAccount](https://www.tencentcloud.com/document/api/236/46757)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -181,6 +187,12 @@ class ResetRootAccount(pulumi.CustomResource):
             })
         example_reset_root_account = tencentcloud.mysql.ResetRootAccount("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetRootAccount](https://www.tencentcloud.com/document/api/236/46757)
 
 
         :param str resource_name: The name of the resource.

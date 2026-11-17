@@ -36,6 +36,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&type=document&lang=en)
+ *   - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+ * * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+ * * Update: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+ * * Delete:
+ *   - [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&type=document&lang=en)
+ *   - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+ *
  * ## Import
  *
  * mongodb auditLogFile can be imported using the composite instance_id#file_name, e.g.

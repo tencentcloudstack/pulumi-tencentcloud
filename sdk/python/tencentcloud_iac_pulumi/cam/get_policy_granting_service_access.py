@@ -130,6 +130,12 @@ def get_policy_granting_service_access(group_id: Optional[_builtins.int] = None,
         service_type="cam")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&type=document&lang=en)
+
 
     :param _builtins.int group_id: Group Id, one of the three (TargetUin, RoleId, GroupId) must be passed.
     :param _builtins.str result_output_file: Used to save results.
@@ -172,6 +178,12 @@ def get_policy_granting_service_access_output(group_id: pulumi.Input[Optional[Op
     policy_granting_service_access = tencentcloud.cam.get_policy_granting_service_access(role_id=int(4611686018436805021),
         service_type="cam")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&type=document&lang=en)
 
 
     :param _builtins.int group_id: Group Id, one of the three (TargetUin, RoleId, GroupId) must be passed.

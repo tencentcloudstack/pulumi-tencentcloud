@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     lang: "zh",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
  */
 export function getOrgShareArea(args?: GetOrgShareAreaArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgShareAreaResult> {
     args = args || {};
@@ -72,6 +78,12 @@ export interface GetOrgShareAreaResult {
  *     lang: "zh",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
  */
 export function getOrgShareAreaOutput(args?: GetOrgShareAreaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgShareAreaResult> {
     args = args || {};

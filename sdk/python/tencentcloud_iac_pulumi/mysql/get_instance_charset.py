@@ -94,6 +94,12 @@ def get_instance_charset(instance_id: Optional[_builtins.str] = None,
     instance_charset = tencentcloud.mysql.get_instance_charset(instance_id="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
+
 
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_instance_charset_output(instance_id: pulumi.Input[Optional[_builtins.str
 
     instance_charset = tencentcloud.mysql.get_instance_charset(instance_id="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
 
 
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.

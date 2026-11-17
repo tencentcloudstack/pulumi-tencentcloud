@@ -16,6 +16,14 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.vpc.TrafficPackage("example", {trafficAmount: 10});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateTrafficPackages](https://www.tencentcloud.com/search/?wd=CreateTrafficPackages&type=document&lang=en)
+ * * Read: [DescribeTrafficPackages](https://www.tencentcloud.com/document/api/215/52740)
+ * * Delete: [DeleteTrafficPackages](https://www.tencentcloud.com/document/api/215/56576)
+ *
  * ## Import
  *
  * vpc trafficPackage can be imported using the id, e.g.

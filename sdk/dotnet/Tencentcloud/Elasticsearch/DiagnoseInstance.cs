@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DiagnoseInstance](https://www.tencentcloud.com/search/?wd=DiagnoseInstance&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/diagnoseInstance:DiagnoseInstance")]
     public partial class DiagnoseInstance : global::Pulumi.CustomResource

@@ -157,6 +157,12 @@ def get_container_group(application_id: Optional[_builtins.str] = None,
         namespace_id="namespace-aemrg36v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeContainerGroups](https://www.tencentcloud.com/search/?wd=DescribeContainerGroups&type=document&lang=en)
+
 
     :param _builtins.str application_id: ApplicationId, required.
     :param _builtins.str cluster_id: Cluster Id.
@@ -211,6 +217,12 @@ def get_container_group_output(application_id: pulumi.Input[Optional[Optional[_b
         cluster_id="cluster-vwgj5e6y",
         namespace_id="namespace-aemrg36v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeContainerGroups](https://www.tencentcloud.com/search/?wd=DescribeContainerGroups&type=document&lang=en)
 
 
     :param _builtins.str application_id: ApplicationId, required.

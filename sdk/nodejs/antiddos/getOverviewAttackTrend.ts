@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     endTime: "2023-11-22 10:28:31",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewAttackTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewAttackTrend&type=document&lang=en)
  */
 export function getOverviewAttackTrend(args: GetOverviewAttackTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewAttackTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -104,6 +110,12 @@ export interface GetOverviewAttackTrendResult {
  *     endTime: "2023-11-22 10:28:31",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewAttackTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewAttackTrend&type=document&lang=en)
  */
 export function getOverviewAttackTrendOutput(args: GetOverviewAttackTrendOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOverviewAttackTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -32,10 +32,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
         public Input<string> UniqVpcId { get; set; } = null!;
 
         /// <summary>
-        /// VPC NAME.
+        /// It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
         /// </summary>
-        [Input("vpcName", required: true)]
-        public Input<string> VpcName { get; set; } = null!;
+        [Input("vpcName")]
+        public Input<string>? VpcName { get; set; }
 
         public ZoneAccountVpcSetArgs()
         {

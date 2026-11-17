@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ResetAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34780)
 type InstancesResetAttach struct {
 	pulumi.CustomResourceState
 

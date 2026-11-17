@@ -102,6 +102,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+    ///   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15851)
+    ///   - [ModifyAutoRenewFlag](https://www.tencentcloud.com/document/api/236/34479)
+    ///   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/236/15877)
+    ///   - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/236/15853)
+    ///   - [ModifyDBInstanceVipVport](https://www.tencentcloud.com/document/api/236/15867)
+    ///   - [ModifyInstanceDestroyProtect](https://www.tencentcloud.com/search/?wd=ModifyInstanceDestroyProtect&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [RenewDBInstance](https://www.tencentcloud.com/document/api/236/53308)
+    ///   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/236/15876)
+    ///   - [UpgradeDBInstanceEngineVersion](https://www.tencentcloud.com/document/api/236/15870)
+    /// * Delete:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+    ///   - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
+    /// 
     /// ## Import
     /// 
     /// CDB dr(disaster recovery) instancecan be imported using the id, e.g.

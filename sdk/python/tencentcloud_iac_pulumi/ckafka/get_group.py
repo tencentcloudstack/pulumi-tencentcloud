@@ -107,6 +107,12 @@ def get_group(instance_id: Optional[_builtins.str] = None,
         search_word="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroup](https://www.tencentcloud.com/document/api/597/35350)
+
 
     :param _builtins.str instance_id: InstanceId.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_group_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
     group = tencentcloud.ckafka.get_group(instance_id="ckafka-xxxxxxx",
         search_word="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroup](https://www.tencentcloud.com/document/api/597/35350)
 
 
     :param _builtins.str instance_id: InstanceId.

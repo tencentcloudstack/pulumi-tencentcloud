@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
 {
     /// <summary>
-    /// Provide a resource to create a Readonly mongodb instance.
+    /// Provide a resource to create a Mongodb readonly instance.
     /// 
     /// ## Example Usage
     /// 
@@ -25,30 +25,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var mongodb = new Tencentcloud.Mongodb.ReadonlyInstance("mongodb", new()
+    ///     var example = new Tencentcloud.Mongodb.Instance("example", new()
     ///     {
-    ///         InstanceName = "tf-mongodb-readonly-test",
+    ///         InstanceName = "tf-example",
+    ///         Cpu = 2,
     ///         Memory = 4,
     ///         Volume = 100,
-    ///         EngineVersion = "MONGO_44_WT",
-    ///         MachineType = "HIO10G",
-    ///         AvailableZone = "ap-guangzhou-3",
+    ///         EngineVersion = "MONGO_80_WT",
+    ///         MachineType = "GE.LD.T1",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         ProjectId = 0,
-    ///         FatherInstanceId = "cmgo-xxxxxx",
+    ///         Password = "Password@2026",
+    ///         DataEncryption = "TDE",
+    ///         EncryptionKeySource = "manual",
+    ///         KeyId = "KMS-MONGODB",
+    ///         KmsRegion = "ap-guangzhou",
+    ///     });
+    /// 
+    ///     var exampleReadonlyInstance = new Tencentcloud.Mongodb.ReadonlyInstance("example", new()
+    ///     {
+    ///         InstanceName = "tf-mongodb",
+    ///         Cpu = 2,
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_80_WT",
+    ///         MachineType = "GE.LD.T1",
+    ///         AvailableZone = "ap-guangzhou-7",
+    ///         ProjectId = 0,
+    ///         FatherInstanceId = example.Id,
     ///         FatherInstanceRegion = "ap-guangzhou",
-    ///         VpcId = "vpc-xxxxxx",
-    ///         SubnetId = "subnet-xxxxxx",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-d4umunpy",
     ///         SecurityGroups = new[]
     ///         {
-    ///             "sg-xxxxxx",
+    ///             "sg-n8zf5ry9",
     ///         },
     ///         ClusterType = "REPLSET",
+    ///         DataEncryption = "No_Encryption",
     ///     });
     /// 
     /// });
     /// ```
     /// 
-    /// ### Shard readonly instance
+    /// ### Sharding readonly instance
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -58,38 +79,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var shardingMongodb = new Tencentcloud.Mongodb.ReadonlyInstance("sharding_mongodb", new()
+    ///     var example = new Tencentcloud.Mongodb.ShardingInstance("example", new()
     ///     {
-    ///         InstanceName = "tf-mongodb-readonly-shard",
+    ///         InstanceName = "tf-example",
+    ///         ShardQuantity = 2,
+    ///         NodesPerShard = 3,
+    ///         Cpu = 2,
     ///         Memory = 4,
     ///         Volume = 100,
-    ///         EngineVersion = "MONGO_44_WT",
-    ///         MachineType = "HIO10G",
-    ///         AvailableZone = "ap-guangzhou-3",
+    ///         EngineVersion = "MONGO_80_WT",
+    ///         MachineType = "GE.LD.T1",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         ProjectId = 0,
-    ///         FatherInstanceId = "cmgo-xxxxxx",
+    ///         Password = "Password@2026",
+    ///         MongosCpu = 1,
+    ///         MongosMemory = 2,
+    ///         MongosNodeNum = 3,
+    ///         DataEncryption = "TDE",
+    ///         EncryptionKeySource = "auto",
+    ///     });
+    /// 
+    ///     var exampleReadonlyInstance = new Tencentcloud.Mongodb.ReadonlyInstance("example", new()
+    ///     {
+    ///         InstanceName = "tf-mongodb",
+    ///         Cpu = 2,
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_80_WT",
+    ///         MachineType = "GE.LD.T1",
+    ///         AvailableZone = "ap-guangzhou-7",
+    ///         ProjectId = 0,
+    ///         FatherInstanceId = example.Id,
     ///         FatherInstanceRegion = "ap-guangzhou",
-    ///         VpcId = "vpc-xxxxxx",
-    ///         SubnetId = "subnet-xxxxxx",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-d4umunpy",
     ///         SecurityGroups = new[]
     ///         {
-    ///             "sg-xxxxxx",
+    ///             "sg-n8zf5ry9",
     ///         },
     ///         ClusterType = "SHARD",
     ///         MongosCpu = 1,
     ///         MongosMemory = 2,
     ///         MongosNodeNum = 3,
+    ///         DataEncryption = "TDE",
+    ///         EncryptionKeySource = "manual",
+    ///         KeyId = "KMS-MONGODB",
+    ///         KmsRegion = "ap-guangzhou",
     ///     });
     /// 
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&amp;type=document&amp;lang=en)
+    ///   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+    /// * Read:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+    ///   - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+    ///   - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+    ///   - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+    ///   - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+    ///   - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+    ///   - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+    /// * Delete:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+    ///   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+    ///   - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
+    /// 
     /// ## Import
     /// 
-    /// Mongodb instance can be imported using the id, e.g.
+    /// Mongodb readonly instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-xxxxxx
+    /// $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-7ohkcdu7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance")]
@@ -120,10 +195,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string> ClusterType { get; private set; } = null!;
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Output("createTime")]
         public Output<string> CreateTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("dataEncryption")]
+        public Output<string> DataEncryption { get; private set; } = null!;
+
+        /// <summary>
+        /// If TDE storage encryption is selected, the key source must be specified. `Auto`: Automatically generate the key. `Manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("encryptionKeySource")]
+        public Output<string?> EncryptionKeySource { get; private set; } = null!;
 
         /// <summary>
         /// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -164,6 +257,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
+
+        /// <summary>
+        /// Please note that this field is the CMK name, corresponding to the `Alias` field in KMS. Key ID. If `Manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("keyId")]
+        public Output<string> KeyId { get; private set; } = null!;
+
+        /// <summary>
+        /// Key ID. If `Manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Output("kmsRegion")]
+        public Output<string> KmsRegion { get; private set; } = null!;
 
         /// <summary>
         /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
@@ -345,6 +450,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string> ClusterType { get; set; } = null!;
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
+        /// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("dataEncryption")]
+        public Input<string>? DataEncryption { get; set; }
+
+        /// <summary>
+        /// If TDE storage encryption is selected, the key source must be specified. `Auto`: Automatically generate the key. `Manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("encryptionKeySource")]
+        public Input<string>? EncryptionKeySource { get; set; }
+
+        /// <summary>
         /// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
         /// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
         /// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -383,6 +506,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
+
+        /// <summary>
+        /// Please note that this field is the CMK name, corresponding to the `Alias` field in KMS. Key ID. If `Manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("keyId")]
+        public Input<string>? KeyId { get; set; }
+
+        /// <summary>
+        /// Key ID. If `Manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("kmsRegion")]
+        public Input<string>? KmsRegion { get; set; }
 
         /// <summary>
         /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
@@ -519,10 +654,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ClusterType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
+
+        /// <summary>
+        /// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("dataEncryption")]
+        public Input<string>? DataEncryption { get; set; }
+
+        /// <summary>
+        /// If TDE storage encryption is selected, the key source must be specified. `Auto`: Automatically generate the key. `Manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("encryptionKeySource")]
+        public Input<string>? EncryptionKeySource { get; set; }
 
         /// <summary>
         /// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -563,6 +716,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Please note that this field is the CMK name, corresponding to the `Alias` field in KMS. Key ID. If `Manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("keyId")]
+        public Input<string>? KeyId { get; set; }
+
+        /// <summary>
+        /// Key ID. If `Manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        /// </summary>
+        [Input("kmsRegion")]
+        public Input<string>? KmsRegion { get; set; }
 
         /// <summary>
         /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).

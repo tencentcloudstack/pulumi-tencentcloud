@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     taskId: 21,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&type=document&lang=en)
  */
 export function getUpgradeTaskDetail(args: GetUpgradeTaskDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetUpgradeTaskDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetUpgradeTaskDetailResult {
  *     taskId: 21,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&type=document&lang=en)
  */
 export function getUpgradeTaskDetailOutput(args: GetUpgradeTaskDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUpgradeTaskDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

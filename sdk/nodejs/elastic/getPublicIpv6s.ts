@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     ipv6AddressIds: ["xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
  */
 export function getPublicIpv6s(args?: GetPublicIpv6sArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicIpv6sResult> {
     args = args || {};
@@ -98,6 +104,12 @@ export interface GetPublicIpv6sResult {
  *     ipv6AddressIds: ["xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
  */
 export function getPublicIpv6sOutput(args?: GetPublicIpv6sOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublicIpv6sResult> {
     args = args || {};

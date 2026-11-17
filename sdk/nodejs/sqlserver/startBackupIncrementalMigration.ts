@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  *     incrementalMigrationId: "mssql-incremental-migration-kp7bgv8p",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [StartIncrementalMigration](https://www.tencentcloud.com/document/api/238/39831)
  */
 export class StartBackupIncrementalMigration extends pulumi.CustomResource {
     /**

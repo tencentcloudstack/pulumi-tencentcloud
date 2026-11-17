@@ -88,6 +88,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+    ///   - [ReleaseService](https://www.tencentcloud.com/search/?wd=ReleaseService&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeServiceEnvironmentReleaseHistory](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentReleaseHistory&amp;type=document&amp;lang=en)
+    /// * Delete: [UnReleaseService](https://www.tencentcloud.com/search/?wd=UnReleaseService&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// API gateway service release can be imported using the id, e.g.

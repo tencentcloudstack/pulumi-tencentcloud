@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     groupId: name.lists?.[0]?.groupId,
  * }));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
  */
 export function getBindingObjects(args: GetBindingObjectsArgs, opts?: pulumi.InvokeOptions): Promise<GetBindingObjectsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetBindingObjectsResult {
  *     groupId: name.lists?.[0]?.groupId,
  * }));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
  */
 export function getBindingObjectsOutput(args: GetBindingObjectsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBindingObjectsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

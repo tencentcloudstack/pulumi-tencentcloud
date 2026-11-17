@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+    ///   - [KillTaskInstancesAsync](https://www.tencentcloud.com/document/api/1174/73826)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/taskKillInstanceAsync:TaskKillInstanceAsync")]
     public partial class TaskKillInstanceAsync : global::Pulumi.CustomResource

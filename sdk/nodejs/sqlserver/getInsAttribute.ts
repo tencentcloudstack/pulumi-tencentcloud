@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mssql-gyg9xycl",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
  */
 export function getInsAttribute(args: GetInsAttributeArgs, opts?: pulumi.InvokeOptions): Promise<GetInsAttributeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetInsAttributeResult {
  *     instanceId: "mssql-gyg9xycl",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
  */
 export function getInsAttributeOutput(args: GetInsAttributeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInsAttributeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

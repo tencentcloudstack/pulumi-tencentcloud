@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
         /// </summary>
         public static Task<GetPortsResult> InvokeAsync(GetPortsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
         /// </summary>
         public static Output<GetPortsResult> Invoke(GetPortsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
         /// </summary>
         public static Output<GetPortsResult> Invoke(GetPortsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPortsResult>("tencentcloud:Waf/getPorts:getPorts", args ?? new GetPortsInvokeArgs(), options.WithDefaults());

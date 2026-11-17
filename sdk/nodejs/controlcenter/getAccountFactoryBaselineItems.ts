@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.controlcenter.getAccountFactoryBaselineItems({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
  */
 export function getAccountFactoryBaselineItems(args?: GetAccountFactoryBaselineItemsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountFactoryBaselineItemsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetAccountFactoryBaselineItemsResult {
  *
  * const example = tencentcloud.controlcenter.getAccountFactoryBaselineItems({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
  */
 export function getAccountFactoryBaselineItemsOutput(args?: GetAccountFactoryBaselineItemsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountFactoryBaselineItemsResult> {
     args = args || {};

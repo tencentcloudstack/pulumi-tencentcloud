@@ -57,6 +57,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        ///   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
         /// </summary>
         public static Task<GetConnectionsResult> InvokeAsync(GetConnectionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsArgs(), options.WithDefaults());
@@ -106,6 +114,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        ///   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
         /// </summary>
         public static Output<GetConnectionsResult> Invoke(GetConnectionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsInvokeArgs(), options.WithDefaults());
@@ -155,6 +171,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        ///   - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
         /// </summary>
         public static Output<GetConnectionsResult> Invoke(GetConnectionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsInvokeArgs(), options.WithDefaults());

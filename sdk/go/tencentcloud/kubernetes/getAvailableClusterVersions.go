@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
 func GetAvailableClusterVersions(ctx *pulumi.Context, args *GetAvailableClusterVersionsArgs, opts ...pulumi.InvokeOption) (*GetAvailableClusterVersionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAvailableClusterVersionsResult

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
         /// </summary>
         public static Task<GetAccountSummaryResult> InvokeAsync(GetAccountSummaryArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
         /// </summary>
         public static Output<GetAccountSummaryResult> Invoke(GetAccountSummaryInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
         /// </summary>
         public static Output<GetAccountSummaryResult> Invoke(GetAccountSummaryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryInvokeArgs(), options.WithDefaults());

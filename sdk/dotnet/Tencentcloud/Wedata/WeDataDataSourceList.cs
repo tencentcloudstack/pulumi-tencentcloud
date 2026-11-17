@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
         /// </summary>
         public static Task<WeDataDataSourceListResult> InvokeAsync(WeDataDataSourceListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<WeDataDataSourceListResult>("tencentcloud:Wedata/weDataDataSourceList:WeDataDataSourceList", args ?? new WeDataDataSourceListArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
         /// </summary>
         public static Output<WeDataDataSourceListResult> Invoke(WeDataDataSourceListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<WeDataDataSourceListResult>("tencentcloud:Wedata/weDataDataSourceList:WeDataDataSourceList", args ?? new WeDataDataSourceListInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
         /// </summary>
         public static Output<WeDataDataSourceListResult> Invoke(WeDataDataSourceListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<WeDataDataSourceListResult>("tencentcloud:Wedata/weDataDataSourceList:WeDataDataSourceList", args ?? new WeDataDataSourceListInvokeArgs(), options.WithDefaults());

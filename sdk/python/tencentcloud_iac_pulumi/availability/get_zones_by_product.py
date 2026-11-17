@@ -119,6 +119,12 @@ def get_zones_by_product(include_unavailable: Optional[_builtins.bool] = None,
     all = tencentcloud.availability.get_zones_by_product(product="cvm")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&type=document&lang=en)
+
 
     :param _builtins.bool include_unavailable: A bool variable indicates that the query will include `UNAVAILABLE` zones.
     :param _builtins.str name: When specified, only the zone with the exactly name match will be returned.
@@ -156,6 +162,12 @@ def get_zones_by_product_output(include_unavailable: pulumi.Input[Optional[Optio
 
     all = tencentcloud.availability.get_zones_by_product(product="cvm")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&type=document&lang=en)
 
 
     :param _builtins.bool include_unavailable: A bool variable indicates that the query will include `UNAVAILABLE` zones.

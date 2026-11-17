@@ -31,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         /// </summary>
         public readonly ImmutableArray<string> EventTypes;
         /// <summary>
-        /// ID of the resource.
+        /// trigger Id.
         /// </summary>
         public readonly int? Id;
         /// <summary>

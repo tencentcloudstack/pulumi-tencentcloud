@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
         /// </summary>
         public static Task<GetSgSnapshotFileContentResult> InvokeAsync(GetSgSnapshotFileContentArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
         /// </summary>
         public static Output<GetSgSnapshotFileContentResult> Invoke(GetSgSnapshotFileContentInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
         /// </summary>
         public static Output<GetSgSnapshotFileContentResult> Invoke(GetSgSnapshotFileContentInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSgSnapshotFileContentResult>("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", args ?? new GetSgSnapshotFileContentInvokeArgs(), options.WithDefaults());

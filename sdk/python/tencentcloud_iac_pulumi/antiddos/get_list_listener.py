@@ -98,6 +98,12 @@ def get_list_listener(result_output_file: Optional[_builtins.str] = None,
     list_listener = tencentcloud.antiddos.get_list_listener()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -124,6 +130,12 @@ def get_list_listener_output(result_output_file: pulumi.Input[Optional[Optional[
 
     list_listener = tencentcloud.antiddos.get_list_listener()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
 
 
     :param _builtins.str result_output_file: Used to save results.

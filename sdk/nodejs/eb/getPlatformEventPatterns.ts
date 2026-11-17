@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     productType: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPlatformEventPatterns](https://www.tencentcloud.com/search/?wd=ListPlatformEventPatterns&type=document&lang=en)
  */
 export function getPlatformEventPatterns(args: GetPlatformEventPatternsArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformEventPatternsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetPlatformEventPatternsResult {
  *     productType: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPlatformEventPatterns](https://www.tencentcloud.com/search/?wd=ListPlatformEventPatterns&type=document&lang=en)
  */
 export function getPlatformEventPatternsOutput(args: GetPlatformEventPatternsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPlatformEventPatternsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

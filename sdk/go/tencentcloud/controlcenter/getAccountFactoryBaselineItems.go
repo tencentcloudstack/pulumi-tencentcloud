@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
 func GetAccountFactoryBaselineItems(ctx *pulumi.Context, args *GetAccountFactoryBaselineItemsArgs, opts ...pulumi.InvokeOption) (*GetAccountFactoryBaselineItemsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountFactoryBaselineItemsResult

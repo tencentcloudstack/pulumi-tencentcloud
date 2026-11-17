@@ -32,6 +32,14 @@ import * as utilities from "../utilities";
  * export const accountEmail = example.account;
  * export const accountNickname = example.nickname;
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreatePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44057)
+ * * Read: [DescribePrivateDNSAccountList](https://www.tencentcloud.com/document/api/1097/42527)
+ * * Delete: [DeletePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44056)
  */
 export class Account extends pulumi.CustomResource {
     /**

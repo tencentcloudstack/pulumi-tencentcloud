@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
         /// </summary>
         public static Task<GetClusterParamsResult> InvokeAsync(GetClusterParamsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterParamsResult>("tencentcloud:Cynosdb/getClusterParams:getClusterParams", args ?? new GetClusterParamsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
         /// </summary>
         public static Output<GetClusterParamsResult> Invoke(GetClusterParamsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterParamsResult>("tencentcloud:Cynosdb/getClusterParams:getClusterParams", args ?? new GetClusterParamsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
         /// </summary>
         public static Output<GetClusterParamsResult> Invoke(GetClusterParamsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterParamsResult>("tencentcloud:Cynosdb/getClusterParams:getClusterParams", args ?? new GetClusterParamsInvokeArgs(), options.WithDefaults());

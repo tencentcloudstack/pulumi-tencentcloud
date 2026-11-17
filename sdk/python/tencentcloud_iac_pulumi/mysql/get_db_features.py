@@ -190,6 +190,12 @@ def get_db_features(instance_id: Optional[_builtins.str] = None,
     db_features = tencentcloud.mysql.get_db_features(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
+
 
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -227,6 +233,12 @@ def get_db_features_output(instance_id: pulumi.Input[Optional[_builtins.str]] = 
 
     db_features = tencentcloud.mysql.get_db_features(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
 
 
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.

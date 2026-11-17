@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
         /// </summary>
         public static Task<GetGatewayNodesResult> InvokeAsync(GetGatewayNodesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
         /// </summary>
         public static Output<GetGatewayNodesResult> Invoke(GetGatewayNodesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
         /// </summary>
         public static Output<GetGatewayNodesResult> Invoke(GetGatewayNodesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayNodesResult>("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args ?? new GetGatewayNodesInvokeArgs(), options.WithDefaults());

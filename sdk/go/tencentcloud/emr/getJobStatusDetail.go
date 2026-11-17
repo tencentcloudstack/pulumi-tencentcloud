@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
 func GetJobStatusDetail(ctx *pulumi.Context, args *GetJobStatusDetailArgs, opts ...pulumi.InvokeOption) (*GetJobStatusDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetJobStatusDetailResult

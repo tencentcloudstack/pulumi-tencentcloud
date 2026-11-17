@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListPlatformEventNames](https://www.tencentcloud.com/search/?wd=ListPlatformEventNames&type=document&lang=en)
 func GetPlatformEventNames(ctx *pulumi.Context, args *GetPlatformEventNamesArgs, opts ...pulumi.InvokeOption) (*GetPlatformEventNamesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPlatformEventNamesResult

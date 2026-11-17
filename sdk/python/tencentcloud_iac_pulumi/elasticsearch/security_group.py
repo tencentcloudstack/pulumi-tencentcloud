@@ -124,6 +124,14 @@ class SecurityGroup(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyEsVipSecurityGroup](https://www.tencentcloud.com/search/?wd=ModifyEsVipSecurityGroup&type=document&lang=en)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+        * Update: [ModifyEsVipSecurityGroup](https://www.tencentcloud.com/search/?wd=ModifyEsVipSecurityGroup&type=document&lang=en)
+
         ## Import
 
         elasticsearch security_group can be imported using the id, e.g.
@@ -160,6 +168,14 @@ class SecurityGroup(pulumi.CustomResource):
                 "sg-po2q8cg7",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyEsVipSecurityGroup](https://www.tencentcloud.com/search/?wd=ModifyEsVipSecurityGroup&type=document&lang=en)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+        * Update: [ModifyEsVipSecurityGroup](https://www.tencentcloud.com/search/?wd=ModifyEsVipSecurityGroup&type=document&lang=en)
 
         ## Import
 

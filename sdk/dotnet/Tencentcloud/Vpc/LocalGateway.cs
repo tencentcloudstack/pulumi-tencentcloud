@@ -39,6 +39,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLocalGateway](https://www.tencentcloud.com/document/api/215/40144)
+    /// * Read: [DescribeLocalGateway](https://www.tencentcloud.com/document/api/215/40142)
+    /// * Update: [ModifyLocalGateway](https://www.tencentcloud.com/document/api/215/40141)
+    /// * Delete: [DeleteLocalGateway](https://www.tencentcloud.com/document/api/215/40143)
+    /// 
     /// ## Import
     /// 
     /// vpc LocalGateway can be imported using the id, e.g.

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  * const foo = tencentcloud.kubernetes.getClusterLevels({});
  * export const level5 = foo.then(foo => foo.lists?.[0]?.alias);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
  */
 export function getClusterLevels(args?: GetClusterLevelsArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterLevelsResult> {
     args = args || {};
@@ -69,6 +75,12 @@ export interface GetClusterLevelsResult {
  * const foo = tencentcloud.kubernetes.getClusterLevels({});
  * export const level5 = foo.then(foo => foo.lists?.[0]?.alias);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
  */
 export function getClusterLevelsOutput(args?: GetClusterLevelsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterLevelsResult> {
     args = args || {};

@@ -110,6 +110,12 @@ def get_project_security_groups(project_id: Optional[_builtins.int] = None,
         search_key="自定义模版")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
+
 
     :param _builtins.int project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_project_security_groups_output(project_id: pulumi.Input[Optional[Optiona
     project_security_groups = tencentcloud.cynosdb.get_project_security_groups(project_id=1250480,
         search_key="自定义模版")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
 
 
     :param _builtins.int project_id: Project ID.

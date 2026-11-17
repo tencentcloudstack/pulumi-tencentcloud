@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
         /// </summary>
         public static Task<GetDiagHistoryResult> InvokeAsync(GetDiagHistoryArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
         /// </summary>
         public static Output<GetDiagHistoryResult> Invoke(GetDiagHistoryInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
         /// </summary>
         public static Output<GetDiagHistoryResult> Invoke(GetDiagHistoryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryInvokeArgs(), options.WithDefaults());

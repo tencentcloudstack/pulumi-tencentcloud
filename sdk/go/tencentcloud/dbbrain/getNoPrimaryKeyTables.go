@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&type=document&lang=en)
 func GetNoPrimaryKeyTables(ctx *pulumi.Context, args *GetNoPrimaryKeyTablesArgs, opts ...pulumi.InvokeOption) (*GetNoPrimaryKeyTablesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNoPrimaryKeyTablesResult

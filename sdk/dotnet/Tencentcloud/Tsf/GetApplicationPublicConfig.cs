@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublicConfigs](https://www.tencentcloud.com/search/?wd=DescribePublicConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApplicationPublicConfigResult> InvokeAsync(GetApplicationPublicConfigArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublicConfigs](https://www.tencentcloud.com/search/?wd=DescribePublicConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApplicationPublicConfigResult> Invoke(GetApplicationPublicConfigInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublicConfigs](https://www.tencentcloud.com/search/?wd=DescribePublicConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApplicationPublicConfigResult> Invoke(GetApplicationPublicConfigInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApplicationPublicConfigResult>("tencentcloud:Tsf/getApplicationPublicConfig:getApplicationPublicConfig", args ?? new GetApplicationPublicConfigInvokeArgs(), options.WithDefaults());

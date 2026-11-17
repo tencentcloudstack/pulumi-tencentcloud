@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
 func GetInternetAddressStatistics(ctx *pulumi.Context, args *GetInternetAddressStatisticsArgs, opts ...pulumi.InvokeOption) (*GetInternetAddressStatisticsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInternetAddressStatisticsResult

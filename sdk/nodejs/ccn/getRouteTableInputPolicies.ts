@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     routeTableId: "ccnrtb-4jv5ltb9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
  */
 export function getRouteTableInputPolicies(args: GetRouteTableInputPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetRouteTableInputPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetRouteTableInputPoliciesResult {
  *     routeTableId: "ccnrtb-4jv5ltb9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
  */
 export function getRouteTableInputPoliciesOutput(args: GetRouteTableInputPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRouteTableInputPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

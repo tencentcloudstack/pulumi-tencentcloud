@@ -22,6 +22,7 @@ from .get_binding_objects import *
 from .get_data import *
 from .get_external_cluster_register_command import *
 from .get_grafana_plugin_overviews import *
+from .get_grafana_versions import *
 from .get_notice_content_tmpls import *
 from .get_policy_conditions import *
 from .get_policy_groups import *
@@ -52,7 +53,6 @@ from .tmp_instance import *
 from .tmp_manage_grafana_attachment import *
 from .tmp_multiple_writes_list import *
 from .tmp_recording_rule import *
-from .tmp_scrape_job import *
 from .tmp_tke_alert_policy import *
 from .tmp_tke_basic_config import *
 from .tmp_tke_cluster_agent import *

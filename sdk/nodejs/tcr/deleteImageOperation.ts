@@ -40,6 +40,12 @@ import * as utilities from "../utilities";
  *     namespaceName: exampleNamespace.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DeleteImage](https://www.tencentcloud.com/document/api/1051/50726)
  */
 export class DeleteImageOperation extends pulumi.CustomResource {
     /**

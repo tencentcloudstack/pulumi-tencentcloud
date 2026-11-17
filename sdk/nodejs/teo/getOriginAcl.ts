@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     zoneId: "zone-3fkff38fyw8s",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
  */
 export function getOriginAcl(args: GetOriginAclArgs, opts?: pulumi.InvokeOptions): Promise<GetOriginAclResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetOriginAclResult {
  *     zoneId: "zone-3fkff38fyw8s",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
  */
 export function getOriginAclOutput(args: GetOriginAclOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOriginAclResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

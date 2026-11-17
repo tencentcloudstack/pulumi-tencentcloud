@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
         /// </summary>
         public static Task<GetInstanceTrafficPackageResult> InvokeAsync(GetInstanceTrafficPackageArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
         /// </summary>
         public static Output<GetInstanceTrafficPackageResult> Invoke(GetInstanceTrafficPackageInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
         /// </summary>
         public static Output<GetInstanceTrafficPackageResult> Invoke(GetInstanceTrafficPackageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficPackageResult>("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args ?? new GetInstanceTrafficPackageInvokeArgs(), options.WithDefaults());

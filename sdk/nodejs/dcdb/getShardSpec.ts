@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const shardSpec = tencentcloud.dcdb.getShardSpec({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&type=document&lang=en)
  */
 export function getShardSpec(args?: GetShardSpecArgs, opts?: pulumi.InvokeOptions): Promise<GetShardSpecResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetShardSpecResult {
  *
  * const shardSpec = tencentcloud.dcdb.getShardSpec({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&type=document&lang=en)
  */
 export function getShardSpecOutput(args?: GetShardSpecOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetShardSpecResult> {
     args = args || {};

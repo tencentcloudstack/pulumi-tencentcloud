@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
         /// </summary>
         public static Task<GetProxyGroupsResult> InvokeAsync(GetProxyGroupsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
         /// </summary>
         public static Output<GetProxyGroupsResult> Invoke(GetProxyGroupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
         /// </summary>
         public static Output<GetProxyGroupsResult> Invoke(GetProxyGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyGroupsResult>("tencentcloud:Gaap/getProxyGroups:getProxyGroups", args ?? new GetProxyGroupsInvokeArgs(), options.WithDefaults());

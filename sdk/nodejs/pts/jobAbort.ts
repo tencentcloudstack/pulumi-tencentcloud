@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     scenarioId: "scenario-22q19f3k",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AbortJob](https://www.tencentcloud.com/document/api/1249/68539)
  */
 export class JobAbort extends pulumi.CustomResource {
     /**

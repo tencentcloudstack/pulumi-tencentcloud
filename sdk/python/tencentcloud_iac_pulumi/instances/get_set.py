@@ -185,6 +185,12 @@ def get_set(availability_zone: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+
 
     :param _builtins.str availability_zone: The available zone that the CVM instance locates at.
     :param _builtins.str instance_id: ID of the instances to be queried.
@@ -246,6 +252,12 @@ def get_set_output(availability_zone: pulumi.Input[Optional[Optional[_builtins.s
             "tagKey": "tagValue",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
 
 
     :param _builtins.str availability_zone: The available zone that the CVM instance locates at.

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
         /// </summary>
         public static Task<GetGatewayRoutesResult> InvokeAsync(GetGatewayRoutesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
         /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
         /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());

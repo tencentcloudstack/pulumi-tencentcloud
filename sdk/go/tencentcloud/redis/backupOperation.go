@@ -48,6 +48,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+//   - [ManualBackupInstance](https://www.tencentcloud.com/document/api/239/32073)
 type BackupOperation struct {
 	pulumi.CustomResourceState
 

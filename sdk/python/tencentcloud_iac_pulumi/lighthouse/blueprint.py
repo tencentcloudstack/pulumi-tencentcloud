@@ -154,6 +154,17 @@ class Blueprint(pulumi.CustomResource):
             instance_id="lhins-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBlueprint](https://www.tencentcloud.com/document/api/1103/42506)
+          - [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
+        * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
+        * Update: [ModifyBlueprintAttribute](https://www.tencentcloud.com/document/api/1103/42501)
+        * Delete: [DeleteBlueprints](https://www.tencentcloud.com/document/api/1103/42505)
+
         ## Import
 
         lighthouse blueprint can be imported using the id, e.g.
@@ -189,6 +200,17 @@ class Blueprint(pulumi.CustomResource):
             description="blueprint_description_test",
             instance_id="lhins-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBlueprint](https://www.tencentcloud.com/document/api/1103/42506)
+          - [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
+        * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
+        * Update: [ModifyBlueprintAttribute](https://www.tencentcloud.com/document/api/1103/42501)
+        * Delete: [DeleteBlueprints](https://www.tencentcloud.com/document/api/1103/42505)
 
         ## Import
 

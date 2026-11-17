@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     policyId: dayuDdosPolicyAttachment.policyId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
  */
 export function getDdosPolicyAttachments(args: GetDdosPolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetDdosPolicyAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -107,6 +113,12 @@ export interface GetDdosPolicyAttachmentsResult {
  *     policyId: dayuDdosPolicyAttachment.policyId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
  */
 export function getDdosPolicyAttachmentsOutput(args: GetDdosPolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDdosPolicyAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -120,6 +120,12 @@ def get_upstream_task_instances(instance_key: Optional[_builtins.str] = None,
         instance_key=__value) for __key, __value in enumerate(std.toset(input=instance_keys).result)}
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUpstreamTaskInstances](https://www.tencentcloud.com/document/api/1174/73815)
+
 
     :param _builtins.str instance_key: Unique instance identifier.
     :param _builtins.str project_id: Project ID.
@@ -161,6 +167,12 @@ def get_upstream_task_instances_output(instance_key: pulumi.Input[Optional[_buil
     wedata_upstream_task_instances = {str(__key): tencentcloud.wedata.get_upstream_task_instances(project_id="1859317240494305280",
         instance_key=__value) for __key, __value in enumerate(std.toset(input=instance_keys).result)}
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUpstreamTaskInstances](https://www.tencentcloud.com/document/api/1174/73815)
 
 
     :param _builtins.str instance_key: Unique instance identifier.

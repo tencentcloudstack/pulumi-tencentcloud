@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
 func GetOrders(ctx *pulumi.Context, args *GetOrdersArgs, opts ...pulumi.InvokeOption) (*GetOrdersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrdersResult

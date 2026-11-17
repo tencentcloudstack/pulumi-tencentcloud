@@ -67,6 +67,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
  */
 export function getDbCustomNodes(args?: GetDbCustomNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCustomNodesResult> {
     args = args || {};
@@ -182,6 +188,12 @@ export interface GetDbCustomNodesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
  */
 export function getDbCustomNodesOutput(args?: GetDbCustomNodesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCustomNodesResult> {
     args = args || {};

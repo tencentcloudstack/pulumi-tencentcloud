@@ -99,6 +99,12 @@ def get_project_security_group(project_id: Optional[_builtins.int] = None,
     project_security_group = tencentcloud.mysql.get_project_security_group(project_id=1250480)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
+
 
     :param _builtins.int project_id: project id.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_project_security_group_output(project_id: pulumi.Input[Optional[Optional
 
     project_security_group = tencentcloud.mysql.get_project_security_group(project_id=1250480)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
 
 
     :param _builtins.int project_id: project id.

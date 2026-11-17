@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
 func GetStandardEngineResourceGroupConfigInformation(ctx *pulumi.Context, args *GetStandardEngineResourceGroupConfigInformationArgs, opts ...pulumi.InvokeOption) (*GetStandardEngineResourceGroupConfigInformationResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStandardEngineResourceGroupConfigInformationResult

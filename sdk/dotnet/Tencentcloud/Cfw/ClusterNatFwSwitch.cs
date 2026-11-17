@@ -62,6 +62,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&amp;type=document&amp;lang=en)
+    ///   - [OpenClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=OpenClusterNatFwSwitch&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeNatCcnFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatCcnFwSwitch&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterNatFwSwitch&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [CloseClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=CloseClusterNatFwSwitch&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW cluster NAT firewall switch can be imported using the composite id `nat_ins_id#ccn_id`, e.g.

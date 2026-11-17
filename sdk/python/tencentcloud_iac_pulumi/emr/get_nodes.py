@@ -142,6 +142,12 @@ def get_nodes(hardware_resource_type: Optional[_builtins.str] = None,
         instance_id="emr-rnzqrleq")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
+
 
     :param _builtins.str hardware_resource_type: Resource type: Support all/host/pod, default is all.
     :param _builtins.str instance_id: Cluster instance ID, the instance ID is as follows: emr-xxxxxxxx.
@@ -201,6 +207,12 @@ def get_nodes_output(hardware_resource_type: pulumi.Input[Optional[Optional[_bui
     my_emr_nodes = tencentcloud.emr.get_nodes(node_flag="master",
         instance_id="emr-rnzqrleq")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
 
 
     :param _builtins.str hardware_resource_type: Resource type: Support all/host/pod, default is all.

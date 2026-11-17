@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
 func GetDescribeUserType(ctx *pulumi.Context, args *GetDescribeUserTypeArgs, opts ...pulumi.InvokeOption) (*GetDescribeUserTypeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeUserTypeResult

@@ -106,6 +106,12 @@ def get_instance(limit: Optional[_builtins.int] = None,
     foo = tencentcloud.domains.get_instance()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainNameList](https://www.tencentcloud.com/search/?wd=DescribeDomainNameList&type=document&lang=en)
+
 
     :param _builtins.int limit: Specify data limit in range [1, 100]. Default: 20.
     :param _builtins.int offset: Specify data offset. Default: 0.
@@ -139,6 +145,12 @@ def get_instance_output(limit: pulumi.Input[Optional[Optional[_builtins.int]]] =
 
     foo = tencentcloud.domains.get_instance()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainNameList](https://www.tencentcloud.com/search/?wd=DescribeDomainNameList&type=document&lang=en)
 
 
     :param _builtins.int limit: Specify data limit in range [1, 100]. Default: 20.

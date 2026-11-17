@@ -57,6 +57,20 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [BindSecretIds](https://www.tencentcloud.com/search/?wd=BindSecretIds&type=document&lang=en)
+//   - [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
+//   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&type=document&lang=en)
+//
+// * Read: [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&type=document&lang=en)
+// * Delete:
+//   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&type=document&lang=en)
+//   - [UnBindSecretIds](https://www.tencentcloud.com/search/?wd=UnBindSecretIds&type=document&lang=en)
+//
 // ## Import
 //
 // API gateway attach access key can be imported using the id, e.g.

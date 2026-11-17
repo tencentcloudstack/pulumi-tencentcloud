@@ -155,6 +155,20 @@ class Ssl(pulumi.CustomResource):
             ssl_config="disabled")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/239/51197)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/239/51196)
+        * Read: [DescribeSSLStatus](https://www.tencentcloud.com/document/api/239/54350)
+        * Update:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/239/51197)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/239/51196)
+
         ## Import
 
         redis ssl can be imported using the instanceId, e.g.
@@ -224,6 +238,20 @@ class Ssl(pulumi.CustomResource):
             instance_id=example_instance.id,
             ssl_config="disabled")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/239/51197)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/239/51196)
+        * Read: [DescribeSSLStatus](https://www.tencentcloud.com/document/api/239/54350)
+        * Update:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/239/51197)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/239/51196)
 
         ## Import
 

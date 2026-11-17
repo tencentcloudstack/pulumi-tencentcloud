@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     productCodes: ["p_eip"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationFinancialByProduct](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByProduct&type=document&lang=en)
  */
 export function getOrgFinancialByProduct(args: GetOrgFinancialByProductArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgFinancialByProductResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetOrgFinancialByProductResult {
  *     productCodes: ["p_eip"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationFinancialByProduct](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByProduct&type=document&lang=en)
  */
 export function getOrgFinancialByProductOutput(args: GetOrgFinancialByProductOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgFinancialByProductResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

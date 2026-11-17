@@ -52,6 +52,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePolicy](https://www.tencentcloud.com/document/api/598/32248)
+    ///   - [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
+    /// * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdatePolicy](https://www.tencentcloud.com/document/api/598/45874)
+    /// * Delete: [DeletePolicy](https://www.tencentcloud.com/document/api/598/32247)
+    /// 
     /// ## Import
     /// 
     /// CAM policy can be imported using the id, e.g.

@@ -38,6 +38,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AllocateHosts](https://www.tencentcloud.com/search/?wd=AllocateHosts&amp;type=document&amp;lang=en)
+    ///   - [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&amp;type=document&amp;lang=en)
+    ///   - [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CDH instance can be imported using the id, e.g.

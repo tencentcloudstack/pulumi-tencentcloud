@@ -119,6 +119,12 @@ class ManageTaskOperation(pulumi.CustomResource):
             task_id="2600010949-LiveScheduleTask-xxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ManageTask](https://www.tencentcloud.com/document/api/1041/37462)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class ManageTaskOperation(pulumi.CustomResource):
             operation_type="Abort",
             task_id="2600010949-LiveScheduleTask-xxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ManageTask](https://www.tencentcloud.com/document/api/1041/37462)
 
 
         :param str resource_name: The name of the resource.

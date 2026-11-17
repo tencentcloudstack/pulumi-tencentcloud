@@ -64,6 +64,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ImportInstancesActionTimer](https://www.tencentcloud.com/search/?wd=ImportInstancesActionTimer&type=document&lang=en)
+ * * Read: [DescribeInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DescribeInstancesActionTimer&type=document&lang=en)
+ * * Delete: [DeleteInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DeleteInstancesActionTimer&type=document&lang=en)
  */
 export class ActionTimer extends pulumi.CustomResource {
     /**

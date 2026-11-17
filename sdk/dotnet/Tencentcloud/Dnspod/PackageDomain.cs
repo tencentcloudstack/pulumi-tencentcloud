@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDomainVipList](https://www.tencentcloud.com/search/?wd=DescribeDomainVipList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&amp;type=document&amp;lang=en)
+    /// * Delete: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dnspod PackageDomain can be imported using the id, e.g.

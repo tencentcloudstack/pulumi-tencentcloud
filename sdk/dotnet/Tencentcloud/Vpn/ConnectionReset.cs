@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ResetVpnConnection](https://www.tencentcloud.com/document/api/215/17505)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/connectionReset:ConnectionReset")]
     public partial class ConnectionReset : global::Pulumi.CustomResource

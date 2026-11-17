@@ -102,6 +102,21 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+//   - [ReleaseIsolatedDBInstances](https://www.tencentcloud.com/document/api/236/35703)
+//
+// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+// * Update:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+//   - [ReleaseIsolatedDBInstances](https://www.tencentcloud.com/document/api/236/35703)
 type IsolateInstance struct {
 	pulumi.CustomResourceState
 

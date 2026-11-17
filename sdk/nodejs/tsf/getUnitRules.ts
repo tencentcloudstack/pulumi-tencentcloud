@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     status: "disabled",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&type=document&lang=en)
  */
 export function getUnitRules(args: GetUnitRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetUnitRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetUnitRulesResult {
  *     status: "disabled",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&type=document&lang=en)
  */
 export function getUnitRulesOutput(args: GetUnitRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUnitRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

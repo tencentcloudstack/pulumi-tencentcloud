@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
 func GetListColumnLineage(ctx *pulumi.Context, args *GetListColumnLineageArgs, opts ...pulumi.InvokeOption) (*GetListColumnLineageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListColumnLineageResult

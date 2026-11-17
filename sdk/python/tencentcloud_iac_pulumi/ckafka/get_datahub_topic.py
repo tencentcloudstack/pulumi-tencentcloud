@@ -116,6 +116,12 @@ def get_datahub_topic(limit: Optional[_builtins.int] = None,
     datahub_topic = tencentcloud.ckafka.get_datahub_topic()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
+
 
     :param _builtins.int limit: The maximum number of results returned this time, the default is 50, and the maximum value is 50.
     :param _builtins.int offset: The offset position of this query, the default is 0.
@@ -153,6 +159,12 @@ def get_datahub_topic_output(limit: pulumi.Input[Optional[Optional[_builtins.int
 
     datahub_topic = tencentcloud.ckafka.get_datahub_topic()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
 
 
     :param _builtins.int limit: The maximum number of results returned this time, the default is 50, and the maximum value is 50.

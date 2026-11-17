@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     loadBalancerRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
  */
 export function getIdleInstances(args?: GetIdleInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetIdleInstancesResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetIdleInstancesResult {
  *     loadBalancerRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
  */
 export function getIdleInstancesOutput(args?: GetIdleInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIdleInstancesResult> {
     args = args || {};

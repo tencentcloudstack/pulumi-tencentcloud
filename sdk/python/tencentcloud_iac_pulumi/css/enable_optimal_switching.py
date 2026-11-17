@@ -156,6 +156,14 @@ class EnableOptimalSwitching(pulumi.CustomResource):
             host_group_name="test-group")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&type=document&lang=en)
+        * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+        * Update: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&type=document&lang=en)
+
         ## Import
 
         css domain can be imported using the id, e.g.
@@ -193,6 +201,14 @@ class EnableOptimalSwitching(pulumi.CustomResource):
             enable_switch=1,
             host_group_name="test-group")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&type=document&lang=en)
+        * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+        * Update: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&type=document&lang=en)
 
         ## Import
 

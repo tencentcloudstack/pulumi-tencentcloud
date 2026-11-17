@@ -40,6 +40,15 @@ import * as utilities from "../utilities";
  *     jdkVersion: "8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DeployGroup](https://www.tencentcloud.com/search/?wd=DeployGroup&type=document&lang=en)
+ *   - [DescribeGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeGroupAttribute&type=document&lang=en)
+ * * Read: [DescribeGroup](https://www.tencentcloud.com/search/?wd=DescribeGroup&type=document&lang=en)
  */
 export class DeployVmGroup extends pulumi.CustomResource {
     /**

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSaleInfoResult> InvokeAsync(GetSaleInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSaleInfoResult>("tencentcloud:Mariadb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSaleInfoResult> Invoke(GetSaleInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSaleInfoResult>("tencentcloud:Mariadb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSaleInfoResult> Invoke(GetSaleInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSaleInfoResult>("tencentcloud:Mariadb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoInvokeArgs(), options.WithDefaults());

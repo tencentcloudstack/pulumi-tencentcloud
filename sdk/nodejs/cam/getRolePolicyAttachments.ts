@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
  */
 export function getRolePolicyAttachments(args: GetRolePolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetRolePolicyAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -112,6 +118,12 @@ export interface GetRolePolicyAttachmentsResult {
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
  */
 export function getRolePolicyAttachmentsOutput(args: GetRolePolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRolePolicyAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

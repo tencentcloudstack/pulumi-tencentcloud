@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
         /// </summary>
         public static Task<GetCrossTargetsResult> InvokeAsync(GetCrossTargetsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
         /// </summary>
         public static Output<GetCrossTargetsResult> Invoke(GetCrossTargetsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
         /// </summary>
         public static Output<GetCrossTargetsResult> Invoke(GetCrossTargetsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossTargetsResult>("tencentcloud:Clb/getCrossTargets:getCrossTargets", args ?? new GetCrossTargetsInvokeArgs(), options.WithDefaults());

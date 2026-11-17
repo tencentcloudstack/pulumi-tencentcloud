@@ -31,6 +31,7 @@ class DbCustomNodeArgs:
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  data_disks: pulumi.Input[Optional[Sequence[pulumi.Input['DbCustomNodeDataDiskArgs']]]] = None,
+                 disaster_recover_group_ids: pulumi.Input[Optional[_builtins.str]] = None,
                  host_name: pulumi.Input[Optional[_builtins.str]] = None,
                  login_settings: pulumi.Input[Optional['DbCustomNodeLoginSettingsArgs']] = None,
                  network_mode: pulumi.Input[Optional[_builtins.str]] = None,
@@ -52,6 +53,7 @@ class DbCustomNodeArgs:
         :param pulumi.Input[_builtins.int] auto_voucher: Whether to use voucher to deduct automatically. Valid values: `1` (use), `0` (not use). Default value is `0`.
         :param pulumi.Input[_builtins.str] charge_type: Charge type. Valid values: `PREPAID` (subscription, default), `POSTPAID` (pay-as-you-go).
         :param pulumi.Input[Sequence[pulumi.Input['DbCustomNodeDataDiskArgs']]] data_disks: Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `disk_name` is read-only and ignored as a create input.
+        :param pulumi.Input[_builtins.str] disaster_recover_group_ids: Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
         :param pulumi.Input[_builtins.str] host_name: Hostname of the node. Dots (`.`) and hyphens (`-`) cannot be the first/last character or be used consecutively; underscores (`_`) are not allowed. Windows: 2-15 chars (letters, digits, `-`, no `.`); Linux/others: 2-60 chars (supports multiple dot-separated segments). Write-only: not returned by `DescribeDBCustomNodes`, so the configured value is preserved in state.
         :param pulumi.Input['DbCustomNodeLoginSettingsArgs'] login_settings: Instance login settings. You can set the login method to password, key, or keep the original image login settings. Only one method can be set.
         :param pulumi.Input[_builtins.str] network_mode: Node network mode. Valid values: `privatelink` (four-layer SSH connectivity), `cross_tenant_eni` (three-layer dual-NIC access). Default is `privatelink`. Refreshed from the `DescribeDBCustomNodes` API response.
@@ -75,6 +77,8 @@ class DbCustomNodeArgs:
             pulumi.set(__self__, "charge_type", charge_type)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
+        if disaster_recover_group_ids is not None:
+            pulumi.set(__self__, "disaster_recover_group_ids", disaster_recover_group_ids)
         if host_name is not None:
             pulumi.set(__self__, "host_name", host_name)
         if login_settings is not None:
@@ -203,6 +207,18 @@ class DbCustomNodeArgs:
         pulumi.set(self, "data_disks", value)
 
     @_builtins.property
+    @pulumi.getter(name="disasterRecoverGroupIds")
+    def disaster_recover_group_ids(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+        """
+        return pulumi.get(self, "disaster_recover_group_ids")
+
+    @disaster_recover_group_ids.setter
+    def disaster_recover_group_ids(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "disaster_recover_group_ids", value)
+
+    @_builtins.property
     @pulumi.getter(name="hostName")
     def host_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -321,6 +337,7 @@ class _DbCustomNodeState:
                  cpu: pulumi.Input[Optional[_builtins.int]] = None,
                  created_time: pulumi.Input[Optional[_builtins.str]] = None,
                  data_disks: pulumi.Input[Optional[Sequence[pulumi.Input['DbCustomNodeDataDiskArgs']]]] = None,
+                 disaster_recover_group_ids: pulumi.Input[Optional[_builtins.str]] = None,
                  eni_ip: pulumi.Input[Optional[_builtins.str]] = None,
                  expire_time: pulumi.Input[Optional[_builtins.str]] = None,
                  host_name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -354,6 +371,7 @@ class _DbCustomNodeState:
         :param pulumi.Input[_builtins.int] cpu: Node CPU size, unit: core.
         :param pulumi.Input[_builtins.str] created_time: Node creation time.
         :param pulumi.Input[Sequence[pulumi.Input['DbCustomNodeDataDiskArgs']]] data_disks: Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `disk_name` is read-only and ignored as a create input.
+        :param pulumi.Input[_builtins.str] disaster_recover_group_ids: Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
         :param pulumi.Input[_builtins.str] eni_ip: Node access IP address when the `NetworkModeCrossTenantENI` network mode is selected. Refreshed from the `DescribeDBCustomNodes` API response.
         :param pulumi.Input[_builtins.str] expire_time: Node expiration time.
         :param pulumi.Input[_builtins.str] host_name: Hostname of the node. Dots (`.`) and hyphens (`-`) cannot be the first/last character or be used consecutively; underscores (`_`) are not allowed. Windows: 2-15 chars (letters, digits, `-`, no `.`); Linux/others: 2-60 chars (supports multiple dot-separated segments). Write-only: not returned by `DescribeDBCustomNodes`, so the configured value is preserved in state.
@@ -392,6 +410,8 @@ class _DbCustomNodeState:
             pulumi.set(__self__, "created_time", created_time)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
+        if disaster_recover_group_ids is not None:
+            pulumi.set(__self__, "disaster_recover_group_ids", disaster_recover_group_ids)
         if eni_ip is not None:
             pulumi.set(__self__, "eni_ip", eni_ip)
         if expire_time is not None:
@@ -522,6 +542,18 @@ class _DbCustomNodeState:
     @data_disks.setter
     def data_disks(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['DbCustomNodeDataDiskArgs']]]]):
         pulumi.set(self, "data_disks", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disasterRecoverGroupIds")
+    def disaster_recover_group_ids(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+        """
+        return pulumi.get(self, "disaster_recover_group_ids")
+
+    @disaster_recover_group_ids.setter
+    def disaster_recover_group_ids(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "disaster_recover_group_ids", value)
 
     @_builtins.property
     @pulumi.getter(name="eniIp")
@@ -810,6 +842,7 @@ class DbCustomNode(pulumi.CustomResource):
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  data_disks: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DbCustomNodeDataDiskArgs', 'DbCustomNodeDataDiskArgsDict']]]]] = None,
+                 disaster_recover_group_ids: pulumi.Input[Optional[_builtins.str]] = None,
                  host_name: pulumi.Input[Optional[_builtins.str]] = None,
                  image_id: pulumi.Input[Optional[_builtins.str]] = None,
                  login_settings: pulumi.Input[Optional[Union['DbCustomNodeLoginSettingsArgs', 'DbCustomNodeLoginSettingsArgsDict']]] = None,
@@ -856,6 +889,31 @@ class DbCustomNode(pulumi.CustomResource):
             })
         ```
 
+        ### Create a PREPAID DBDC db custom node with disaster recover group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.dbdc.DbCustomNode("example",
+            zone="ap-shanghai-5",
+            image_id="img-rm13akp3",
+            vpc_id="vpc-cseo7req",
+            subnet_id="subnet-huka6qhj",
+            node_type="DB.AT5.8XLARGE128",
+            period=1,
+            auto_renew=1,
+            charge_type="PREPAID",
+            node_name="tf-example",
+            login_settings={
+                "password": "Password@2026",
+            },
+            disaster_recover_group_ids="dbps-n2qbf6zv",
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
         ### Create a POSTPAID DBDC db custom node
 
         ```python
@@ -889,6 +947,28 @@ class DbCustomNode(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBCustomNodes](https://www.tencentcloud.com/search/?wd=CreateDBCustomNodes&type=document&lang=en)
+          - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+        * Read:
+          - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+        * Update:
+          - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+          - [ModifyDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [ModifyDBCustomNodeTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeTags&type=document&lang=en)
+          - [ModifyDBCustomNodesDisasterRecoverGroup](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodesDisasterRecoverGroup&type=document&lang=en)
+          - [RenewDBCustomNode](https://www.tencentcloud.com/search/?wd=RenewDBCustomNode&type=document&lang=en)
+        * Delete:
+          - [DestroyDBCustomNode](https://www.tencentcloud.com/search/?wd=DestroyDBCustomNode&type=document&lang=en)
+          - [IsolateDBCustomNode](https://www.tencentcloud.com/search/?wd=IsolateDBCustomNode&type=document&lang=en)
+
         ## Import
 
         DBDC db custom node can be imported using the id, e.g.
@@ -904,6 +984,7 @@ class DbCustomNode(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] auto_voucher: Whether to use voucher to deduct automatically. Valid values: `1` (use), `0` (not use). Default value is `0`.
         :param pulumi.Input[_builtins.str] charge_type: Charge type. Valid values: `PREPAID` (subscription, default), `POSTPAID` (pay-as-you-go).
         :param pulumi.Input[Sequence[pulumi.Input[Union['DbCustomNodeDataDiskArgs', 'DbCustomNodeDataDiskArgsDict']]]] data_disks: Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `disk_name` is read-only and ignored as a create input.
+        :param pulumi.Input[_builtins.str] disaster_recover_group_ids: Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
         :param pulumi.Input[_builtins.str] host_name: Hostname of the node. Dots (`.`) and hyphens (`-`) cannot be the first/last character or be used consecutively; underscores (`_`) are not allowed. Windows: 2-15 chars (letters, digits, `-`, no `.`); Linux/others: 2-60 chars (supports multiple dot-separated segments). Write-only: not returned by `DescribeDBCustomNodes`, so the configured value is preserved in state.
         :param pulumi.Input[_builtins.str] image_id: Image ID, format `img-xxxxxxx`. Must be an image owned by the DB Custom product under the current account.
         :param pulumi.Input[Union['DbCustomNodeLoginSettingsArgs', 'DbCustomNodeLoginSettingsArgsDict']] login_settings: Instance login settings. You can set the login method to password, key, or keep the original image login settings. Only one method can be set.
@@ -956,6 +1037,31 @@ class DbCustomNode(pulumi.CustomResource):
             })
         ```
 
+        ### Create a PREPAID DBDC db custom node with disaster recover group
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.dbdc.DbCustomNode("example",
+            zone="ap-shanghai-5",
+            image_id="img-rm13akp3",
+            vpc_id="vpc-cseo7req",
+            subnet_id="subnet-huka6qhj",
+            node_type="DB.AT5.8XLARGE128",
+            period=1,
+            auto_renew=1,
+            charge_type="PREPAID",
+            node_name="tf-example",
+            login_settings={
+                "password": "Password@2026",
+            },
+            disaster_recover_group_ids="dbps-n2qbf6zv",
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
         ### Create a POSTPAID DBDC db custom node
 
         ```python
@@ -989,6 +1095,28 @@ class DbCustomNode(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBCustomNodes](https://www.tencentcloud.com/search/?wd=CreateDBCustomNodes&type=document&lang=en)
+          - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+        * Read:
+          - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+        * Update:
+          - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+          - [ModifyDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeSecurityGroups&type=document&lang=en)
+          - [ModifyDBCustomNodeTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeTags&type=document&lang=en)
+          - [ModifyDBCustomNodesDisasterRecoverGroup](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodesDisasterRecoverGroup&type=document&lang=en)
+          - [RenewDBCustomNode](https://www.tencentcloud.com/search/?wd=RenewDBCustomNode&type=document&lang=en)
+        * Delete:
+          - [DestroyDBCustomNode](https://www.tencentcloud.com/search/?wd=DestroyDBCustomNode&type=document&lang=en)
+          - [IsolateDBCustomNode](https://www.tencentcloud.com/search/?wd=IsolateDBCustomNode&type=document&lang=en)
+
         ## Import
 
         DBDC db custom node can be imported using the id, e.g.
@@ -1017,6 +1145,7 @@ class DbCustomNode(pulumi.CustomResource):
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  data_disks: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DbCustomNodeDataDiskArgs', 'DbCustomNodeDataDiskArgsDict']]]]] = None,
+                 disaster_recover_group_ids: pulumi.Input[Optional[_builtins.str]] = None,
                  host_name: pulumi.Input[Optional[_builtins.str]] = None,
                  image_id: pulumi.Input[Optional[_builtins.str]] = None,
                  login_settings: pulumi.Input[Optional[Union['DbCustomNodeLoginSettingsArgs', 'DbCustomNodeLoginSettingsArgsDict']]] = None,
@@ -1044,6 +1173,7 @@ class DbCustomNode(pulumi.CustomResource):
             __props__.__dict__["auto_voucher"] = auto_voucher
             __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["data_disks"] = data_disks
+            __props__.__dict__["disaster_recover_group_ids"] = disaster_recover_group_ids
             __props__.__dict__["host_name"] = host_name
             if image_id is None and not opts.urn:
                 raise TypeError("Missing required property 'image_id'")
@@ -1097,6 +1227,7 @@ class DbCustomNode(pulumi.CustomResource):
             cpu: pulumi.Input[Optional[_builtins.int]] = None,
             created_time: pulumi.Input[Optional[_builtins.str]] = None,
             data_disks: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DbCustomNodeDataDiskArgs', 'DbCustomNodeDataDiskArgsDict']]]]] = None,
+            disaster_recover_group_ids: pulumi.Input[Optional[_builtins.str]] = None,
             eni_ip: pulumi.Input[Optional[_builtins.str]] = None,
             expire_time: pulumi.Input[Optional[_builtins.str]] = None,
             host_name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1134,6 +1265,7 @@ class DbCustomNode(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] cpu: Node CPU size, unit: core.
         :param pulumi.Input[_builtins.str] created_time: Node creation time.
         :param pulumi.Input[Sequence[pulumi.Input[Union['DbCustomNodeDataDiskArgs', 'DbCustomNodeDataDiskArgsDict']]]] data_disks: Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `disk_name` is read-only and ignored as a create input.
+        :param pulumi.Input[_builtins.str] disaster_recover_group_ids: Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
         :param pulumi.Input[_builtins.str] eni_ip: Node access IP address when the `NetworkModeCrossTenantENI` network mode is selected. Refreshed from the `DescribeDBCustomNodes` API response.
         :param pulumi.Input[_builtins.str] expire_time: Node expiration time.
         :param pulumi.Input[_builtins.str] host_name: Hostname of the node. Dots (`.`) and hyphens (`-`) cannot be the first/last character or be used consecutively; underscores (`_`) are not allowed. Windows: 2-15 chars (letters, digits, `-`, no `.`); Linux/others: 2-60 chars (supports multiple dot-separated segments). Write-only: not returned by `DescribeDBCustomNodes`, so the configured value is preserved in state.
@@ -1169,6 +1301,7 @@ class DbCustomNode(pulumi.CustomResource):
         __props__.__dict__["cpu"] = cpu
         __props__.__dict__["created_time"] = created_time
         __props__.__dict__["data_disks"] = data_disks
+        __props__.__dict__["disaster_recover_group_ids"] = disaster_recover_group_ids
         __props__.__dict__["eni_ip"] = eni_ip
         __props__.__dict__["expire_time"] = expire_time
         __props__.__dict__["host_name"] = host_name
@@ -1249,6 +1382,14 @@ class DbCustomNode(pulumi.CustomResource):
         Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `disk_name` is read-only and ignored as a create input.
         """
         return pulumi.get(self, "data_disks")
+
+    @_builtins.property
+    @pulumi.getter(name="disasterRecoverGroupIds")
+    def disaster_recover_group_ids(self) -> pulumi.Output[_builtins.str]:
+        """
+        Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+        """
+        return pulumi.get(self, "disaster_recover_group_ids")
 
     @_builtins.property
     @pulumi.getter(name="eniIp")

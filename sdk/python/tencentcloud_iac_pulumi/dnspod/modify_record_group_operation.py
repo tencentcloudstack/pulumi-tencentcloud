@@ -186,6 +186,12 @@ class ModifyRecordGroupOperation(pulumi.CustomResource):
             domain_id=123)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyRecordToGroup](https://www.tencentcloud.com/document/api/1157/53840)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -215,6 +221,12 @@ class ModifyRecordGroupOperation(pulumi.CustomResource):
             record_id="234|345",
             domain_id=123)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyRecordToGroup](https://www.tencentcloud.com/document/api/1157/53840)
 
 
         :param str resource_name: The name of the resource.

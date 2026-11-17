@@ -121,6 +121,12 @@ class OverwriteWhiteBoxDeviceFingerprints(pulumi.CustomResource):
         example = tencentcloud.kms.OverwriteWhiteBoxDeviceFingerprints("example", key_id="23e80852-1e38-11e9-b129-5cb9019b4b01")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [OverwriteWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=OverwriteWhiteBoxDeviceFingerprints&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class OverwriteWhiteBoxDeviceFingerprints(pulumi.CustomResource):
 
         example = tencentcloud.kms.OverwriteWhiteBoxDeviceFingerprints("example", key_id="23e80852-1e38-11e9-b129-5cb9019b4b01")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [OverwriteWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=OverwriteWhiteBoxDeviceFingerprints&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

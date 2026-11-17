@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateApiAppKey](https://www.tencentcloud.com/search/?wd=UpdateApiAppKey&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey")]
     public partial class UpdateApiAppKey : global::Pulumi.CustomResource

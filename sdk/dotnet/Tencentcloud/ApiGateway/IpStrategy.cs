@@ -47,6 +47,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateIPStrategy](https://www.tencentcloud.com/search/?wd=CreateIPStrategy&amp;type=document&amp;lang=en)
+    ///   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyIPStrategy](https://www.tencentcloud.com/search/?wd=ModifyIPStrategy&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteIPStrategy](https://www.tencentcloud.com/search/?wd=DeleteIPStrategy&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// IP strategy of API gateway can be imported using the id, e.g.

@@ -139,6 +139,12 @@ def get_image_manifests(image_version: Optional[_builtins.str] = None,
         image_version="v1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageManifests](https://www.tencentcloud.com/document/api/1051/50722)
+
 
     :param _builtins.str image_version: mirror version.
     :param _builtins.str namespace_name: namespace name.
@@ -184,6 +190,12 @@ def get_image_manifests_output(image_version: pulumi.Input[Optional[_builtins.st
         repository_name="%s",
         image_version="v1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageManifests](https://www.tencentcloud.com/document/api/1051/50722)
 
 
     :param _builtins.str image_version: mirror version.

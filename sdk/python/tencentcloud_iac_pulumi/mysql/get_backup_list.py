@@ -108,6 +108,12 @@ def get_backup_list(max_number: Optional[_builtins.int] = None,
         result_output_file="mytestpath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+
 
     :param _builtins.int max_number: The latest files to list, rang from 1 to 10000. And the default value is `10`.
     :param _builtins.str mysql_id: Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
@@ -143,6 +149,12 @@ def get_backup_list_output(max_number: pulumi.Input[Optional[Optional[_builtins.
         max_number=10,
         result_output_file="mytestpath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
 
 
     :param _builtins.int max_number: The latest files to list, rang from 1 to 10000. And the default value is `10`.

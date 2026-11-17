@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AbortCronJobs](https://www.tencentcloud.com/document/api/1249/68540)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/cronJobAbort:CronJobAbort")]
     public partial class CronJobAbort : global::Pulumi.CustomResource

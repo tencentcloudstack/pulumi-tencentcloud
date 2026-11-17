@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     platform: "WEDATA",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
  */
 export function getListColumnLineage(args: GetListColumnLineageArgs, opts?: pulumi.InvokeOptions): Promise<GetListColumnLineageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -98,6 +104,12 @@ export interface GetListColumnLineageResult {
  *     platform: "WEDATA",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
  */
 export function getListColumnLineageOutput(args: GetListColumnLineageOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListColumnLineageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -63,6 +63,21 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateCompareTask](https://www.tencentcloud.com/document/api/571/51821)
+//   - [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
+//   - [StartCompare](https://www.tencentcloud.com/document/api/571/51802)
+//
+// * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
+// * Update: [ModifyCompareTask](https://www.tencentcloud.com/document/api/571/51809)
+// * Delete:
+//   - [DeleteCompareTask](https://www.tencentcloud.com/document/api/571/51818)
+//   - [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
 type CompareTask struct {
 	pulumi.CustomResourceState
 

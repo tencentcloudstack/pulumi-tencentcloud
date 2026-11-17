@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     dbName: "users",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
  */
 export function getClusterDetailDatabases(args: GetClusterDetailDatabasesArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterDetailDatabasesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetClusterDetailDatabasesResult {
  *     dbName: "users",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
  */
 export function getClusterDetailDatabasesOutput(args: GetClusterDetailDatabasesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterDetailDatabasesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

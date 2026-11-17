@@ -41,6 +41,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+// * Read: [DescribeDomainVipList](https://www.tencentcloud.com/search/?wd=DescribeDomainVipList&type=document&lang=en)
+// * Update: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+// * Delete: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+//
 // ## Import
 //
 // dnspod packageDomain can be imported using the id, e.g.

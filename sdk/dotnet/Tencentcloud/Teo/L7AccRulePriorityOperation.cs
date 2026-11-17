@@ -245,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyL7AccRulePriority](https://www.tencentcloud.com/document/api/1145/68767)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/l7AccRulePriorityOperation:L7AccRulePriorityOperation")]
     public partial class L7AccRulePriorityOperation : global::Pulumi.CustomResource

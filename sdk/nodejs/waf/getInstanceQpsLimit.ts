@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "waf_2kxtlbky00b3b4qz",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
  */
 export function getInstanceQpsLimit(args: GetInstanceQpsLimitArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceQpsLimitResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetInstanceQpsLimitResult {
  *     instanceId: "waf_2kxtlbky00b3b4qz",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
  */
 export function getInstanceQpsLimitOutput(args: GetInstanceQpsLimitOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceQpsLimitResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

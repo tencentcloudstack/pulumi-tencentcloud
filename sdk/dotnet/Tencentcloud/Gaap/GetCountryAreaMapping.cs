@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
         /// </summary>
         public static Task<GetCountryAreaMappingResult> InvokeAsync(GetCountryAreaMappingArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
         /// </summary>
         public static Output<GetCountryAreaMappingResult> Invoke(GetCountryAreaMappingInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
         /// </summary>
         public static Output<GetCountryAreaMappingResult> Invoke(GetCountryAreaMappingInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCountryAreaMappingResult>("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args ?? new GetCountryAreaMappingInvokeArgs(), options.WithDefaults());

@@ -11,7 +11,9 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
 {
     /// <summary>
-    /// Provides a resource to create a tag attachment
+    /// Provides a resource to create a tag attachment. This is the v1 resource; changing `TagValue` destroys and recreates the binding. To update `TagValue` in place, use `tencentcloud.Tag.AttachmentV2`.
+    /// 
+    /// &gt; **NOTE**: This is the v1 resource, where changing `TagValue` forces the binding to be destroyed and recreated (the field is `ForceNew`). If you need to update `TagValue` **in place** without destroying the binding, please use the v2 resource `tencentcloud.Tag.AttachmentV2` instead.
     /// 
     /// ## Example Usage
     /// 
@@ -32,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddResourceTag](https://www.tencentcloud.com/document/api/651/33016)
+    /// * Read: [GetResources](https://www.tencentcloud.com/document/api/651/46539)
+    /// * Delete: [DeleteResourceTag](https://www.tencentcloud.com/document/api/651/33014)
     /// 
     /// ## Import
     /// 

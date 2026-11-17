@@ -62,7 +62,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? RuleStatus { get; set; }
 
         /// <summary>
-        /// Update time.
+        /// Update time. Output-only.
         /// </summary>
         [Input("updateTime")]
         public Input<string>? UpdateTime { get; set; }

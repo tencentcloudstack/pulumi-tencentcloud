@@ -55,6 +55,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
         /// </summary>
         public static Task<GetAlarmBasicAlarmsResult> InvokeAsync(GetAlarmBasicAlarmsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsArgs(), options.WithDefaults());
@@ -102,6 +108,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
         /// </summary>
         public static Output<GetAlarmBasicAlarmsResult> Invoke(GetAlarmBasicAlarmsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsInvokeArgs(), options.WithDefaults());
@@ -149,6 +161,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
         /// </summary>
         public static Output<GetAlarmBasicAlarmsResult> Invoke(GetAlarmBasicAlarmsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmBasicAlarmsResult>("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args ?? new GetAlarmBasicAlarmsInvokeArgs(), options.WithDefaults());

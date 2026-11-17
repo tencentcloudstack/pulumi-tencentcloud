@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
         /// </summary>
         public static Task<GetRoMinScaleResult> InvokeAsync(GetRoMinScaleArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
         /// </summary>
         public static Output<GetRoMinScaleResult> Invoke(GetRoMinScaleInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
         /// </summary>
         public static Output<GetRoMinScaleResult> Invoke(GetRoMinScaleInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleInvokeArgs(), options.WithDefaults());

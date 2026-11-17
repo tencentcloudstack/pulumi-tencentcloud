@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
         /// </summary>
         public static Task<GetAlarmMonitorTypeResult> InvokeAsync(GetAlarmMonitorTypeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
         /// </summary>
         public static Output<GetAlarmMonitorTypeResult> Invoke(GetAlarmMonitorTypeInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
         /// </summary>
         public static Output<GetAlarmMonitorTypeResult> Invoke(GetAlarmMonitorTypeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmMonitorTypeResult>("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args ?? new GetAlarmMonitorTypeInvokeArgs(), options.WithDefaults());

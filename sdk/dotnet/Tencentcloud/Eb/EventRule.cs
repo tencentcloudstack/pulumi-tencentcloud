@@ -59,6 +59,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateRule](https://www.tencentcloud.com/document/api/1108/45817)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [GetRule](https://www.tencentcloud.com/document/api/1108/45815)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateRule](https://www.tencentcloud.com/document/api/1108/45813)
+    /// * Delete: [DeleteRule](https://www.tencentcloud.com/document/api/1108/45816)
+    /// 
     /// ## Import
     /// 
     /// eb EventRule can be imported using the id, e.g.

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo config group version
+    /// Provides a resource to create a TEO (EdgeOne) config group version
     /// 
     /// ## Example Usage
     /// 
@@ -344,6 +344,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// ",
     ///         Description = "test version",
     ///         GroupId = "cg-3lchxitnb5pb",
+    ///         SourceVersion = "ver-2kplomhisdcb",
     ///         ZoneId = "zone-2xkazzl8yf6k",
     ///     });
     /// 
@@ -373,6 +374,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57977)
+    /// * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
+    /// 
+    /// ## Import
+    /// 
+    /// TEO config group version can be imported using the zoneId#groupId#versionId, e.g.
+    /// ```sh
+    /// $ pulumi import tencentcloud:Teo/configGroupVersion:ConfigGroupVersion teo_config_group_version zone-2xkazzl8yf6k#cg-3lchxitnb5pb#ver-2kplomhisdcb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/configGroupVersion:ConfigGroupVersion")]
@@ -407,6 +422,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Output("groupType")]
         public Output<string> GroupType { get; private set; } = null!;
+
+        /// <summary>
+        /// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+        /// </summary>
+        [Output("sourceVersion")]
+        public Output<string> SourceVersion { get; private set; } = null!;
 
         /// <summary>
         /// Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
@@ -498,6 +519,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> GroupId { get; set; } = null!;
 
         /// <summary>
+        /// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+        /// </summary>
+        [Input("sourceVersion")]
+        public Input<string>? SourceVersion { get; set; }
+
+        /// <summary>
         /// Zone ID.
         /// </summary>
         [Input("zoneId", required: true)]
@@ -540,6 +567,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("groupType")]
         public Input<string>? GroupType { get; set; }
+
+        /// <summary>
+        /// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+        /// </summary>
+        [Input("sourceVersion")]
+        public Input<string>? SourceVersion { get; set; }
 
         /// <summary>
         /// Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).

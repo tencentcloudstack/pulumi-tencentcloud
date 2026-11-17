@@ -123,6 +123,26 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateServiceAccount](https://www.tencentcloud.com/document/api/1051/56785)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [ModifyServiceAccountPassword](https://www.tencentcloud.com/document/api/1051/59135)
+//
+// * Read:
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//   - [DescribeServiceAccounts](https://www.tencentcloud.com/document/api/1051/56781)
+//
+// * Update:
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [ModifyServiceAccount](https://www.tencentcloud.com/document/api/1051/56779)
+//   - [ModifyServiceAccountPassword](https://www.tencentcloud.com/document/api/1051/59135)
+//
+// * Delete: [DeleteServiceAccount](https://www.tencentcloud.com/document/api/1051/56783)
+//
 // ## Import
 //
 // TCR service account can be imported using the registryId#accountName, e.g.

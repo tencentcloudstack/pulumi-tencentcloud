@@ -42,6 +42,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
+//   - [ProvisionRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63605)
 type RoleConfigurationOperation struct {
 	pulumi.CustomResourceState
 

@@ -48,6 +48,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetBindApiAppsStatusResult> InvokeAsync(GetBindApiAppsStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusArgs(), options.WithDefaults());
@@ -88,6 +94,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBindApiAppsStatusResult> Invoke(GetBindApiAppsStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusInvokeArgs(), options.WithDefaults());
@@ -128,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiBindApiAppsStatus](https://www.tencentcloud.com/search/?wd=DescribeApiBindApiAppsStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBindApiAppsStatusResult> Invoke(GetBindApiAppsStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusInvokeArgs(), options.WithDefaults());

@@ -155,6 +155,12 @@ def get_instances(availability_zone: Optional[_builtins.str] = None,
         project_id=1154137)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+
 
     :param _builtins.str availability_zone: The available zone that the CDH instance locates at.
     :param _builtins.str host_id: ID of the CDH instances to be queried.
@@ -204,6 +210,12 @@ def get_instances_output(availability_zone: pulumi.Input[Optional[Optional[_buil
         host_state="RUNNING",
         project_id=1154137)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
 
 
     :param _builtins.str availability_zone: The available zone that the CDH instance locates at.

@@ -107,6 +107,12 @@ def get_session_image_version(data_engine_id: Optional[_builtins.str] = None,
         framework_type="machine-learning")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
+
 
     :param _builtins.str data_engine_id: Data engine ID.
     :param _builtins.str framework_type: Framework type: machine learning, Python, Spark ML.
@@ -141,6 +147,12 @@ def get_session_image_version_output(data_engine_id: pulumi.Input[Optional[_buil
     example = tencentcloud.dlc.get_session_image_version(data_engine_id="DataEngine-e482ijv6",
         framework_type="machine-learning")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
 
 
     :param _builtins.str data_engine_id: Data engine ID.

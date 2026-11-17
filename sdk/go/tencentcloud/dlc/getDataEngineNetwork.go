@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&type=document&lang=en)
 func GetDataEngineNetwork(ctx *pulumi.Context, args *GetDataEngineNetworkArgs, opts ...pulumi.InvokeOption) (*GetDataEngineNetworkResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDataEngineNetworkResult

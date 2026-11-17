@@ -25,6 +25,16 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateSecurityAuditLogExportTask](https://www.tencentcloud.com/document/api/1035/41198)
+ *   - [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+ * * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+ * * Delete: [DeleteSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41197)
  */
 export class SecurityAuditLogExportTask extends pulumi.CustomResource {
     /**

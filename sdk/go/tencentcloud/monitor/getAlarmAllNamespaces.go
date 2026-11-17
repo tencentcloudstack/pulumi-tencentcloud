@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
 func GetAlarmAllNamespaces(ctx *pulumi.Context, args *GetAlarmAllNamespacesArgs, opts ...pulumi.InvokeOption) (*GetAlarmAllNamespacesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmAllNamespacesResult

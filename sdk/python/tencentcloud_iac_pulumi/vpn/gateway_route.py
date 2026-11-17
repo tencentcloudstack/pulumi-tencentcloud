@@ -315,6 +315,15 @@ class GatewayRoute(pulumi.CustomResource):
             status="DISABLE")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41057)
+        * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
+        * Update: [ModifyVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41054)
+        * Delete: [DeleteVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41056)
+
         ## Import
 
         VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
@@ -356,6 +365,15 @@ class GatewayRoute(pulumi.CustomResource):
             priority=100,
             status="DISABLE")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41057)
+        * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
+        * Update: [ModifyVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41054)
+        * Delete: [DeleteVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41056)
 
         ## Import
 

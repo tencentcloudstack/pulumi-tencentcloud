@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&type=document&lang=en)
 func GetStreamMonitorList(ctx *pulumi.Context, args *GetStreamMonitorListArgs, opts ...pulumi.InvokeOption) (*GetStreamMonitorListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStreamMonitorListResult

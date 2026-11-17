@@ -36,6 +36,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyInstanceKeyValConfigs](https://www.tencentcloud.com/search/?wd=ModifyInstanceKeyValConfigs&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeInstanceKeyValConfigs](https://www.tencentcloud.com/search/?wd=DescribeInstanceKeyValConfigs&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyInstanceKeyValConfigs](https://www.tencentcloud.com/search/?wd=ModifyInstanceKeyValConfigs&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyInstanceKeyValConfigs](https://www.tencentcloud.com/search/?wd=ModifyInstanceKeyValConfigs&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// clickhouse config can be imported using the id, e.g.

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
         /// </summary>
         public static Task<GetSnapshotFilesResult> InvokeAsync(GetSnapshotFilesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotFilesResult>("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", args ?? new GetSnapshotFilesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
         /// </summary>
         public static Output<GetSnapshotFilesResult> Invoke(GetSnapshotFilesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotFilesResult>("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", args ?? new GetSnapshotFilesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
         /// </summary>
         public static Output<GetSnapshotFilesResult> Invoke(GetSnapshotFilesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotFilesResult>("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", args ?? new GetSnapshotFilesInvokeArgs(), options.WithDefaults());

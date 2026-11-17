@@ -27,6 +27,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49644)
+ * * Read: [DescribeLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49645)
+ * * Delete: [UnBindLiveDomainCert](https://www.tencentcloud.com/document/api/267/30774)
+ *
  * ## Import
  *
  * css playDomainCertAttachment can be imported using the id, e.g.

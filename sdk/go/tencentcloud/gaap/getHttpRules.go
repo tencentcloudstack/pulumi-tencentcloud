@@ -79,6 +79,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
 func GetHttpRules(ctx *pulumi.Context, args *GetHttpRulesArgs, opts ...pulumi.InvokeOption) (*GetHttpRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHttpRulesResult

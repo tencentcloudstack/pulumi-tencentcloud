@@ -123,6 +123,12 @@ def get_notice_contents(filters: Optional[Sequence[Union['GetNoticeContentsFilte
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
+
 
     :param Sequence[Union['GetNoticeContentsFilterArgs', 'GetNoticeContentsFilterArgsDict']] filters: Filter conditions. Supported filter names: name (notice content template name), noticeContentId (notice content template ID). Each request supports up to 10 filters, and each filter value list supports up to 100 values.
     :param _builtins.str result_output_file: Used to save results.
@@ -178,6 +184,12 @@ def get_notice_contents_output(filters: pulumi.Input[Optional[Optional[Sequence[
         "values": ["Default-en"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
 
 
     :param Sequence[Union['GetNoticeContentsFilterArgs', 'GetNoticeContentsFilterArgsDict']] filters: Filter conditions. Supported filter names: name (notice content template name), noticeContentId (notice content template ID). Each request supports up to 10 filters, and each filter value list supports up to 100 values.

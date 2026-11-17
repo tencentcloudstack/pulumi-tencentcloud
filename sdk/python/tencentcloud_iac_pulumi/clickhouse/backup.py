@@ -119,6 +119,14 @@ class Backup(pulumi.CustomResource):
             cos_bucket_name="xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [OpenBackUp](https://www.tencentcloud.com/search/?wd=OpenBackUp&type=document&lang=en)
+        * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+        * Delete: [OpenBackUp](https://www.tencentcloud.com/search/?wd=OpenBackUp&type=document&lang=en)
+
         ## Import
 
         clickhouse backup can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class Backup(pulumi.CustomResource):
             instance_id="cdwch-xxxxxx",
             cos_bucket_name="xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [OpenBackUp](https://www.tencentcloud.com/search/?wd=OpenBackUp&type=document&lang=en)
+        * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+        * Delete: [OpenBackUp](https://www.tencentcloud.com/search/?wd=OpenBackUp&type=document&lang=en)
 
         ## Import
 

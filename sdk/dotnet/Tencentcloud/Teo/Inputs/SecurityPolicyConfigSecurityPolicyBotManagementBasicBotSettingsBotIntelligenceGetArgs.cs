@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? Enabled { get; set; }
 
         /// <summary>
-        /// ID of the resource.
+        /// Template ID. Output-only.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

@@ -92,6 +92,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ### Cross-account data transform example:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var logsetSrc = new Tencentcloud.Cls.Logset("logset_src", new()
+    ///     {
+    ///         LogsetName = "tf-example-src",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var topicSrc = new Tencentcloud.Cls.Topic("topic_src", new()
+    ///     {
+    ///         TopicName = "tf-example_src",
+    ///         LogsetId = logsetSrc.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 10,
+    ///         StorageType = "hot",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleCrossAccount = new Tencentcloud.Cls.DataTransform("example_cross_account", new()
+    ///     {
+    ///         FuncType = 1,
+    ///         SrcTopicId = topicSrc.Id,
+    ///         Name = "tf-example-cross-account",
+    ///         EtlContent = "ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")",
+    ///         TaskType = 3,
+    ///         EnableFlag = 1,
+    ///         DstResources = new[]
+    ///         {
+    ///             new Tencentcloud.Cls.Inputs.DataTransformDstResourceArgs
+    ///             {
+    ///                 TopicId = "topic-id-in-target-account",
+    ///                 Alias = "cross-account-dst",
+    ///                 IsCrossAccount = true,
+    ///                 RoleArn = "qcs::cam::uin/123456789:roleName/cls-cross-account-role",
+    ///                 ExternalId = "external-id-value",
+    ///                 TopicName = "target-topic-name",
+    ///                 LogsetName = "target-logset-name",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDataTransform](https://www.tencentcloud.com/document/api/614/56119)
+    /// * Read: [DescribeDataTransformInfo](https://www.tencentcloud.com/document/api/614/56117)
+    /// * Update: [ModifyDataTransform](https://www.tencentcloud.com/document/api/614/56116)
+    /// * Delete: [DeleteDataTransform](https://www.tencentcloud.com/document/api/614/56118)
+    /// 
     /// ## Import
     /// 
     /// CLS data transform can be imported using the id, e.g.

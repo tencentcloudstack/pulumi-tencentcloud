@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ApplyInternetAddress](https://www.tencentcloud.com/document/api/216/39499)
+    /// * Read: [DescribeInternetAddress](https://www.tencentcloud.com/document/api/216/39498)
+    /// * Delete: [ReleaseInternetAddress](https://www.tencentcloud.com/document/api/216/39493)
+    /// 
     /// ## Import
     /// 
     /// dc InternetAddress can be imported using the id, e.g.

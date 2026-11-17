@@ -22,6 +22,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAddressTemplateGroup](https://www.tencentcloud.com/document/api/215/16709)
+ * * Read: [DescribeAddressTemplateGroups](https://www.tencentcloud.com/document/api/215/16716)
+ * * Update: [ModifyAddressTemplateGroupAttribute](https://www.tencentcloud.com/document/api/215/16721)
+ * * Delete:
+ *   - [DeleteAddressTemplateGroup](https://www.tencentcloud.com/document/api/215/16713)
+ *   - [DescribeAddressTemplateGroups](https://www.tencentcloud.com/document/api/215/16716)
+ *
  * ## Import
  *
  * Address template group can be imported using the id, e.g.

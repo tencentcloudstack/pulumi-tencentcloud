@@ -110,6 +110,12 @@ def get_gateway_canary_rules(gateway_id: Optional[_builtins.str] = None,
         service_id="451a9920-e67a-4519-af41-fccac0e72005")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
+
 
     :param _builtins.str gateway_id: gateway ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_gateway_canary_rules_output(gateway_id: pulumi.Input[Optional[_builtins.
     gateway_canary_rules = tencentcloud.tse.get_gateway_canary_rules(gateway_id="gateway-xxxxxx",
         service_id="451a9920-e67a-4519-af41-fccac0e72005")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
 
 
     :param _builtins.str gateway_id: gateway ID.

@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
 func GetAutoScaleRecords(ctx *pulumi.Context, args *GetAutoScaleRecordsArgs, opts ...pulumi.InvokeOption) (*GetAutoScaleRecordsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAutoScaleRecordsResult

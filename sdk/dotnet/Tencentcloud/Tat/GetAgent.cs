@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
         /// </summary>
         public static Task<GetAgentResult> InvokeAsync(GetAgentArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
         /// </summary>
         public static Output<GetAgentResult> Invoke(GetAgentInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
         /// </summary>
         public static Output<GetAgentResult> Invoke(GetAgentInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAgentResult>("tencentcloud:Tat/getAgent:getAgent", args ?? new GetAgentInvokeArgs(), options.WithDefaults());

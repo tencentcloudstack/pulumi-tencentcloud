@@ -230,6 +230,12 @@ class UrlPurge(pulumi.CustomResource):
             redo=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribePurgeTasks](https://www.tencentcloud.com/document/api/228/33604)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -266,6 +272,12 @@ class UrlPurge(pulumi.CustomResource):
             urls=["https://www.example.com/a"],
             redo=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribePurgeTasks](https://www.tencentcloud.com/document/api/228/33604)
 
 
         :param str resource_name: The name of the resource.

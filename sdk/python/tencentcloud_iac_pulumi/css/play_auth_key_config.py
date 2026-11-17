@@ -222,6 +222,14 @@ class PlayAuthKeyConfig(pulumi.CustomResource):
             auth_back_key="testbackkey")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLivePlayAuthKey](https://www.tencentcloud.com/document/api/267/30770)
+        * Read: [DescribeLivePlayAuthKey](https://www.tencentcloud.com/document/api/267/30772)
+        * Update: [ModifyLivePlayAuthKey](https://www.tencentcloud.com/document/api/267/30770)
+
         ## Import
 
         css play_auth_key_config can be imported using the id, e.g.
@@ -261,6 +269,14 @@ class PlayAuthKeyConfig(pulumi.CustomResource):
             auth_delta=3600,
             auth_back_key="testbackkey")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLivePlayAuthKey](https://www.tencentcloud.com/document/api/267/30770)
+        * Read: [DescribeLivePlayAuthKey](https://www.tencentcloud.com/document/api/267/30772)
+        * Update: [ModifyLivePlayAuthKey](https://www.tencentcloud.com/document/api/267/30770)
 
         ## Import
 

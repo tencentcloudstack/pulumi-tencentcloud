@@ -446,6 +446,21 @@ class Instance(pulumi.CustomResource):
             renew_flag="NOTIFY_AND_MANUAL_RENEW")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+          - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&type=document&lang=en)
+        * Read: [DescribeRenewInstances](https://www.tencentcloud.com/search/?wd=DescribeRenewInstances&type=document&lang=en)
+        * Update:
+          - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&type=document&lang=en)
+          - [RenewInstance](https://www.tencentcloud.com/search/?wd=RenewInstance&type=document&lang=en)
+        * Delete:
+          - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&type=document&lang=en)
+          - [RefundInstance](https://www.tencentcloud.com/search/?wd=RefundInstance&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -518,6 +533,21 @@ class Instance(pulumi.CustomResource):
             period_unit="m",
             renew_flag="NOTIFY_AND_MANUAL_RENEW")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+          - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&type=document&lang=en)
+        * Read: [DescribeRenewInstances](https://www.tencentcloud.com/search/?wd=DescribeRenewInstances&type=document&lang=en)
+        * Update:
+          - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&type=document&lang=en)
+          - [RenewInstance](https://www.tencentcloud.com/search/?wd=RenewInstance&type=document&lang=en)
+        * Delete:
+          - [DescribeDealsByCond](https://www.tencentcloud.com/search/?wd=DescribeDealsByCond&type=document&lang=en)
+          - [RefundInstance](https://www.tencentcloud.com/search/?wd=RefundInstance&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

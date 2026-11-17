@@ -60,6 +60,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateConfig](https://www.tencentcloud.com/document/api/614/42813)
+ * * Read: [DescribeConfigs](https://www.tencentcloud.com/document/api/614/42809)
+ * * Update: [ModifyConfig](https://www.tencentcloud.com/document/api/614/42807)
+ * * Delete: [DeleteConfig](https://www.tencentcloud.com/document/api/614/42812)
+ *
  * ## Import
  *
  * CLS config can be imported using the id, e.g.
@@ -109,7 +118,7 @@ export class Config extends pulumi.CustomResource {
      */
     declare public readonly inputType: pulumi.Output<string>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
      */
     declare public readonly logType: pulumi.Output<string | undefined>;
     /**
@@ -186,7 +195,7 @@ export interface ConfigState {
      */
     inputType?: pulumi.Input<string | undefined>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
      */
     logType?: pulumi.Input<string | undefined>;
     /**
@@ -224,7 +233,7 @@ export interface ConfigArgs {
      */
     inputType?: pulumi.Input<string | undefined>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
      */
     logType?: pulumi.Input<string | undefined>;
     /**

@@ -31,6 +31,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateIPStrategy](https://www.tencentcloud.com/search/?wd=CreateIPStrategy&type=document&lang=en)
+ *   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+ * * Read: [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+ * * Update: [ModifyIPStrategy](https://www.tencentcloud.com/search/?wd=ModifyIPStrategy&type=document&lang=en)
+ * * Delete: [DeleteIPStrategy](https://www.tencentcloud.com/search/?wd=DeleteIPStrategy&type=document&lang=en)
+ *
  * ## Import
  *
  * IP strategy of API gateway can be imported using the id, e.g.

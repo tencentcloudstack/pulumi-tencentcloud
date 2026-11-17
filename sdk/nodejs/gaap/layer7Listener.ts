@@ -28,6 +28,30 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateHTTPListener](https://www.tencentcloud.com/document/api/608/33076)
+ *   - [CreateHTTPSListener](https://www.tencentcloud.com/document/api/608/33075)
+ *   - [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
+ *   - [DescribeProxyGroupDetails](https://www.tencentcloud.com/document/api/608/33082)
+ *   - [SetTlsVersion](https://www.tencentcloud.com/search/?wd=SetTlsVersion&type=document&lang=en)
+ * * Read:
+ *   - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+ *   - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
+ * * Update:
+ *   - [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
+ *   - [DescribeProxyGroupDetails](https://www.tencentcloud.com/document/api/608/33082)
+ *   - [ModifyHTTPListenerAttribute](https://www.tencentcloud.com/document/api/608/33066)
+ *   - [ModifyHTTPSListenerAttribute](https://www.tencentcloud.com/document/api/608/33065)
+ *   - [SetTlsVersion](https://www.tencentcloud.com/search/?wd=SetTlsVersion&type=document&lang=en)
+ * * Delete:
+ *   - [DeleteListeners](https://www.tencentcloud.com/document/api/608/33072)
+ *   - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+ *   - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
+ *
  * ## Import
  *
  * GAAP layer7 listener can be imported using the id, e.g.

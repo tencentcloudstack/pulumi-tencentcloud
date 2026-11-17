@@ -65,6 +65,12 @@ import * as utilities from "../utilities";
  *     orderByType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48590)
  */
 export function getInstanceSlowQueries(args: GetInstanceSlowQueriesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceSlowQueriesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -207,6 +213,12 @@ export interface GetInstanceSlowQueriesResult {
  *     orderByType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48590)
  */
 export function getInstanceSlowQueriesOutput(args: GetInstanceSlowQueriesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceSlowQueriesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

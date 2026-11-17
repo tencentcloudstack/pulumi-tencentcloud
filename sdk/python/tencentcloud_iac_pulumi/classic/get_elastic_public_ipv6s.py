@@ -107,6 +107,12 @@ def get_elastic_public_ipv6s(filters: Optional[Sequence[Union['GetElasticPublicI
     classic_elastic_public_ipv6s = tencentcloud.classic.get_elastic_public_ipv6s(ip6_address_ids=["xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
+
 
     :param Sequence[Union['GetElasticPublicIpv6sFilterArgs', 'GetElasticPublicIpv6sFilterArgsDict']] filters: The upper limit for `Filters per request is 10, and the upper limit for`Filter.Values` is 100. Parameters do not support specifying both AddressIds and Filters. The detailed filtering conditions are as follows:
            - address-ip: filter according to IPV6 IP address.
@@ -142,6 +148,12 @@ def get_elastic_public_ipv6s_output(filters: pulumi.Input[Optional[Optional[Sequ
 
     classic_elastic_public_ipv6s = tencentcloud.classic.get_elastic_public_ipv6s(ip6_address_ids=["xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
 
 
     :param Sequence[Union['GetElasticPublicIpv6sFilterArgs', 'GetElasticPublicIpv6sFilterArgsDict']] filters: The upper limit for `Filters per request is 10, and the upper limit for`Filter.Values` is 100. Parameters do not support specifying both AddressIds and Filters. The detailed filtering conditions are as follows:

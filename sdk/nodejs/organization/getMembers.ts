@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     searchKey: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
  */
 export function getMembers(args?: GetMembersArgs, opts?: pulumi.InvokeOptions): Promise<GetMembersResult> {
     args = args || {};
@@ -113,6 +119,12 @@ export interface GetMembersResult {
  *     searchKey: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
  */
 export function getMembersOutput(args?: GetMembersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMembersResult> {
     args = args || {};

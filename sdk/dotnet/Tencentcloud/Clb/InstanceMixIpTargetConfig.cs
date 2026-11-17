@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyLoadBalancerMixIpTarget](https://www.tencentcloud.com/search/?wd=ModifyLoadBalancerMixIpTarget&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+    /// * Update: [ModifyLoadBalancerMixIpTarget](https://www.tencentcloud.com/search/?wd=ModifyLoadBalancerMixIpTarget&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// clb InstanceMixIpTargetConfig can be imported using the id, e.g.

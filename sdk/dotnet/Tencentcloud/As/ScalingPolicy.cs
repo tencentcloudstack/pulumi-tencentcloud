@@ -181,6 +181,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateScalingPolicy](https://www.tencentcloud.com/document/api/377/33210)
+    /// * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
+    /// * Update: [ModifyScalingPolicy](https://www.tencentcloud.com/document/api/377/33206)
+    /// * Delete: [DeleteScalingPolicy](https://www.tencentcloud.com/document/api/377/33209)
+    /// 
     /// ## Import
     /// 
     /// AS scaling policy can be imported using the id, e.g.

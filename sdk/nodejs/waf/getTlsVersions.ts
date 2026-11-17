@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.waf.getTlsVersions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
  */
 export function getTlsVersions(args?: GetTlsVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTlsVersionsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetTlsVersionsResult {
  *
  * const example = tencentcloud.waf.getTlsVersions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
  */
 export function getTlsVersionsOutput(args?: GetTlsVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTlsVersionsResult> {
     args = args || {};

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetQueueResult> InvokeAsync(GetQueueArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetQueueResult> Invoke(GetQueueInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetQueueResult> Invoke(GetQueueInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueInvokeArgs(), options.WithDefaults());

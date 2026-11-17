@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
 func GetInstanceQpsLimit(ctx *pulumi.Context, args *GetInstanceQpsLimitArgs, opts ...pulumi.InvokeOption) (*GetInstanceQpsLimitResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceQpsLimitResult

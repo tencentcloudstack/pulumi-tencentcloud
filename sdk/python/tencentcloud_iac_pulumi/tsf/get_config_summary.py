@@ -164,6 +164,12 @@ def get_config_summary(application_id: Optional[_builtins.str] = None,
         config_id_lists=["dcfg-y54wzk3a"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&type=document&lang=en)
+
 
     :param _builtins.str application_id: Application ID. If not passed, the query will be for all.
     :param Sequence[_builtins.str] config_id_lists: Config Id List.
@@ -222,6 +228,12 @@ def get_config_summary_output(application_id: pulumi.Input[Optional[Optional[_bu
         disable_program_auth_check=True,
         config_id_lists=["dcfg-y54wzk3a"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&type=document&lang=en)
 
 
     :param _builtins.str application_id: Application ID. If not passed, the query will be for all.

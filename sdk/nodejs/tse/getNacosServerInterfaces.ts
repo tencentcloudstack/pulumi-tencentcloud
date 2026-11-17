@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&type=document&lang=en)
  */
 export function getNacosServerInterfaces(args?: GetNacosServerInterfacesArgs, opts?: pulumi.InvokeOptions): Promise<GetNacosServerInterfacesResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetNacosServerInterfacesResult {
  *     instanceId: "ins-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&type=document&lang=en)
  */
 export function getNacosServerInterfacesOutput(args?: GetNacosServerInterfacesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNacosServerInterfacesResult> {
     args = args || {};

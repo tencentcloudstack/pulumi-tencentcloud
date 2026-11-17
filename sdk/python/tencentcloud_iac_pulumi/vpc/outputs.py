@@ -1077,8 +1077,6 @@ class RoutePolicyEntriesRoutePolicyEntrySet(dict):
         :param _builtins.str cidr_block: Destination ip range.
                Note: This field may return null, indicating that no valid value was found.
         :param _builtins.str created_time: Creation time.
-               
-               Note: This field may return null, indicating that no valid value was found.
         :param _builtins.str description: Describes the routing strategy rule.
                Note: This field may return null, indicating that no valid value was found.
         :param _builtins.str gateway_id: Gateway unique ID.
@@ -1154,8 +1152,6 @@ class RoutePolicyEntriesRoutePolicyEntrySet(dict):
     def created_time(self) -> Optional[_builtins.str]:
         """
         Creation time.
-
-        Note: This field may return null, indicating that no valid value was found.
         """
         return pulumi.get(self, "created_time")
 

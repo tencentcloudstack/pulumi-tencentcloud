@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ExportInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48589)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries")]
     public partial class ExportInstanceSlowQueries : global::Pulumi.CustomResource

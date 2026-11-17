@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CheckCnameStatus](https://www.tencentcloud.com/document/api/1145/56175)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/checkCnameStatusOperation:CheckCnameStatusOperation")]
     public partial class CheckCnameStatusOperation : global::Pulumi.CustomResource

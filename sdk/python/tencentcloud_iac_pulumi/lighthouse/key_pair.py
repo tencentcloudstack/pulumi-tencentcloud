@@ -151,6 +151,16 @@ class KeyPair(pulumi.CustomResource):
         pulumi.export("privateKey", key_pair.private_key)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateKeyPair](https://www.tencentcloud.com/document/api/1103/42483)
+          - [ImportKeyPair](https://www.tencentcloud.com/document/api/1103/42478)
+        * Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/1103/42480)
+        * Delete: [DeleteKeyPairs](https://www.tencentcloud.com/document/api/1103/42482)
+
         ## Import
 
         lighthouse key_pair can be imported using the id, e.g.
@@ -183,6 +193,16 @@ class KeyPair(pulumi.CustomResource):
         key_pair = tencentcloud.lighthouse.KeyPair("key_pair", key_name="key_name_test")
         pulumi.export("privateKey", key_pair.private_key)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateKeyPair](https://www.tencentcloud.com/document/api/1103/42483)
+          - [ImportKeyPair](https://www.tencentcloud.com/document/api/1103/42478)
+        * Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/1103/42480)
+        * Delete: [DeleteKeyPairs](https://www.tencentcloud.com/document/api/1103/42482)
 
         ## Import
 

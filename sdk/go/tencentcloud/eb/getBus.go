@@ -54,6 +54,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
 func GetBus(ctx *pulumi.Context, args *GetBusArgs, opts ...pulumi.InvokeOption) (*GetBusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBusResult

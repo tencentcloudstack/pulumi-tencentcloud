@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyGroupOffsets](https://www.tencentcloud.com/document/api/597/35355)
 type ConsumerGroupModifyOffset struct {
 	pulumi.CustomResourceState
 

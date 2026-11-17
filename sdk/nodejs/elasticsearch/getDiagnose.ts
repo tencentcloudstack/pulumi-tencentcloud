@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     limit: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&type=document&lang=en)
  */
 export function getDiagnose(args: GetDiagnoseArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagnoseResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -89,6 +95,12 @@ export interface GetDiagnoseResult {
  *     limit: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&type=document&lang=en)
  */
 export function getDiagnoseOutput(args: GetDiagnoseOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDiagnoseResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

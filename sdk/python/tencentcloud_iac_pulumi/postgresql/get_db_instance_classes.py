@@ -129,6 +129,12 @@ def get_db_instance_classes(db_engine: Optional[_builtins.str] = None,
         storage_type="CLOUD_HSSD")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
+
 
     :param _builtins.str db_engine: Database engines. Valid values: 1. `postgresql` (TencentDB for PostgreSQL) 2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL).
     :param _builtins.str db_major_version: Major version of a database, such as 12 or 13, which can be obtained through the `DescribeDBVersions` API.
@@ -173,6 +179,12 @@ def get_db_instance_classes_output(db_engine: pulumi.Input[Optional[_builtins.st
         db_major_version="13",
         storage_type="CLOUD_HSSD")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
 
 
     :param _builtins.str db_engine: Database engines. Valid values: 1. `postgresql` (TencentDB for PostgreSQL) 2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL).

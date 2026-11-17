@@ -147,6 +147,12 @@ def get_clusters(cluster_ids: Optional[Sequence[_builtins.str]] = None,
         work_space_id="space-2idq8wbr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] cluster_ids: Query one or more clusters by their ID. The maximum number of clusters that can be queried at once is 100.
     :param Sequence[Union['GetClustersFilterArgs', 'GetClustersFilterArgsDict']] filters: The filtering rules.
@@ -205,6 +211,12 @@ def get_clusters_output(cluster_ids: pulumi.Input[Optional[Optional[Sequence[_bu
         }],
         work_space_id="space-2idq8wbr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] cluster_ids: Query one or more clusters by their ID. The maximum number of clusters that can be queried at once is 100.

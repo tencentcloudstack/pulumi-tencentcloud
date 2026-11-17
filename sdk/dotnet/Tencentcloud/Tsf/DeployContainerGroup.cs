@@ -95,6 +95,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DeployContainerGroup](https://www.tencentcloud.com/search/?wd=DeployContainerGroup&amp;type=document&amp;lang=en)
+    ///   - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeContainerGroupDeployInfo](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupDeployInfo&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyContainerReplicas](https://www.tencentcloud.com/search/?wd=ModifyContainerReplicas&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/deployContainerGroup:DeployContainerGroup")]
     public partial class DeployContainerGroup : global::Pulumi.CustomResource

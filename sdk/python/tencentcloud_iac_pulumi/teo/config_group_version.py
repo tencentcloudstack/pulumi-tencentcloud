@@ -22,7 +22,8 @@ class ConfigGroupVersionArgs:
                  content: pulumi.Input[_builtins.str],
                  group_id: pulumi.Input[_builtins.str],
                  zone_id: pulumi.Input[_builtins.str],
-                 description: pulumi.Input[Optional[_builtins.str]] = None):
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 source_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a ConfigGroupVersion resource.
 
@@ -30,12 +31,15 @@ class ConfigGroupVersionArgs:
         :param pulumi.Input[_builtins.str] group_id: GroupId of the version to be created.
         :param pulumi.Input[_builtins.str] zone_id: Zone ID.
         :param pulumi.Input[_builtins.str] description: Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+        :param pulumi.Input[_builtins.str] source_version: Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
         """
         pulumi.set(__self__, "content", content)
         pulumi.set(__self__, "group_id", group_id)
         pulumi.set(__self__, "zone_id", zone_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if source_version is not None:
+            pulumi.set(__self__, "source_version", source_version)
 
     @_builtins.property
     @pulumi.getter
@@ -85,6 +89,18 @@ class ConfigGroupVersionArgs:
     def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
+    @_builtins.property
+    @pulumi.getter(name="sourceVersion")
+    def source_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+        """
+        return pulumi.get(self, "source_version")
+
+    @source_version.setter
+    def source_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "source_version", value)
+
 
 @pulumi.input_type
 class _ConfigGroupVersionState:
@@ -94,6 +110,7 @@ class _ConfigGroupVersionState:
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.str]] = None,
                  group_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 source_version: pulumi.Input[Optional[_builtins.str]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
                  version_id: pulumi.Input[Optional[_builtins.str]] = None,
                  version_number: pulumi.Input[Optional[_builtins.str]] = None,
@@ -106,6 +123,7 @@ class _ConfigGroupVersionState:
         :param pulumi.Input[_builtins.str] description: Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
         :param pulumi.Input[_builtins.str] group_id: GroupId of the version to be created.
         :param pulumi.Input[_builtins.str] group_type: Configuration group type. Valid values: l7_acceleration (Layer 7 acceleration configuration group), edge_functions (Edge function configuration group).
+        :param pulumi.Input[_builtins.str] source_version: Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
         :param pulumi.Input[_builtins.str] status: Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
         :param pulumi.Input[_builtins.str] version_id: Version ID.
         :param pulumi.Input[_builtins.str] version_number: Version number.
@@ -121,6 +139,8 @@ class _ConfigGroupVersionState:
             pulumi.set(__self__, "group_id", group_id)
         if group_type is not None:
             pulumi.set(__self__, "group_type", group_type)
+        if source_version is not None:
+            pulumi.set(__self__, "source_version", source_version)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if version_id is not None:
@@ -191,6 +211,18 @@ class _ConfigGroupVersionState:
         pulumi.set(self, "group_type", value)
 
     @_builtins.property
+    @pulumi.getter(name="sourceVersion")
+    def source_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+        """
+        return pulumi.get(self, "source_version")
+
+    @source_version.setter
+    def source_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "source_version", value)
+
+    @_builtins.property
     @pulumi.getter
     def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -248,10 +280,11 @@ class ConfigGroupVersion(pulumi.CustomResource):
                  content: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 source_version: pulumi.Input[Optional[_builtins.str]] = None,
                  zone_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a teo config group version
+        Provides a resource to create a TEO (EdgeOne) config group version
 
         ## Example Usage
 
@@ -579,6 +612,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
         \"\"\",
             description="test version",
             group_id="cg-3lchxitnb5pb",
+            source_version="ver-2kplomhisdcb",
             zone_id="zone-2xkazzl8yf6k")
         ```
 
@@ -596,12 +630,27 @@ class ConfigGroupVersion(pulumi.CustomResource):
             zone_id="zone-2xkazzl8yf6k")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57977)
+        * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
+
+        ## Import
+
+        TEO config group version can be imported using the zoneId#groupId#versionId, e.g.
+        ```sh
+        $ pulumi import tencentcloud:Teo/configGroupVersion:ConfigGroupVersion teo_config_group_version zone-2xkazzl8yf6k#cg-3lchxitnb5pb#ver-2kplomhisdcb
+        ```
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] content: Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
         :param pulumi.Input[_builtins.str] description: Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
         :param pulumi.Input[_builtins.str] group_id: GroupId of the version to be created.
+        :param pulumi.Input[_builtins.str] source_version: Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
         :param pulumi.Input[_builtins.str] zone_id: Zone ID.
         """
         ...
@@ -611,7 +660,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
                  args: ConfigGroupVersionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a teo config group version
+        Provides a resource to create a TEO (EdgeOne) config group version
 
         ## Example Usage
 
@@ -939,6 +988,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
         \"\"\",
             description="test version",
             group_id="cg-3lchxitnb5pb",
+            source_version="ver-2kplomhisdcb",
             zone_id="zone-2xkazzl8yf6k")
         ```
 
@@ -954,6 +1004,20 @@ class ConfigGroupVersion(pulumi.CustomResource):
             description="test version",
             group_id="cg-3lchxitnb5pb",
             zone_id="zone-2xkazzl8yf6k")
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57977)
+        * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
+
+        ## Import
+
+        TEO config group version can be imported using the zoneId#groupId#versionId, e.g.
+        ```sh
+        $ pulumi import tencentcloud:Teo/configGroupVersion:ConfigGroupVersion teo_config_group_version zone-2xkazzl8yf6k#cg-3lchxitnb5pb#ver-2kplomhisdcb
         ```
 
 
@@ -975,6 +1039,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
                  content: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  group_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 source_version: pulumi.Input[Optional[_builtins.str]] = None,
                  zone_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -992,6 +1057,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
             if group_id is None and not opts.urn:
                 raise TypeError("Missing required property 'group_id'")
             __props__.__dict__["group_id"] = group_id
+            __props__.__dict__["source_version"] = source_version
             if zone_id is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_id'")
             __props__.__dict__["zone_id"] = zone_id
@@ -1015,6 +1081,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
             description: pulumi.Input[Optional[_builtins.str]] = None,
             group_id: pulumi.Input[Optional[_builtins.str]] = None,
             group_type: pulumi.Input[Optional[_builtins.str]] = None,
+            source_version: pulumi.Input[Optional[_builtins.str]] = None,
             status: pulumi.Input[Optional[_builtins.str]] = None,
             version_id: pulumi.Input[Optional[_builtins.str]] = None,
             version_number: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1031,6 +1098,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
         :param pulumi.Input[_builtins.str] group_id: GroupId of the version to be created.
         :param pulumi.Input[_builtins.str] group_type: Configuration group type. Valid values: l7_acceleration (Layer 7 acceleration configuration group), edge_functions (Edge function configuration group).
+        :param pulumi.Input[_builtins.str] source_version: Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
         :param pulumi.Input[_builtins.str] status: Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
         :param pulumi.Input[_builtins.str] version_id: Version ID.
         :param pulumi.Input[_builtins.str] version_number: Version number.
@@ -1045,6 +1113,7 @@ class ConfigGroupVersion(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["group_id"] = group_id
         __props__.__dict__["group_type"] = group_type
+        __props__.__dict__["source_version"] = source_version
         __props__.__dict__["status"] = status
         __props__.__dict__["version_id"] = version_id
         __props__.__dict__["version_number"] = version_number
@@ -1090,6 +1159,14 @@ class ConfigGroupVersion(pulumi.CustomResource):
         Configuration group type. Valid values: l7_acceleration (Layer 7 acceleration configuration group), edge_functions (Edge function configuration group).
         """
         return pulumi.get(self, "group_type")
+
+    @_builtins.property
+    @pulumi.getter(name="sourceVersion")
+    def source_version(self) -> pulumi.Output[_builtins.str]:
+        """
+        Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+        """
+        return pulumi.get(self, "source_version")
 
     @_builtins.property
     @pulumi.getter

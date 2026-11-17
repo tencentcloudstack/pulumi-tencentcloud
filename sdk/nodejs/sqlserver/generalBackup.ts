@@ -67,6 +67,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateBackup](https://www.tencentcloud.com/document/api/238/32130)
+ *   - [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
+ * * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/238/32127)
+ * * Update: [ModifyBackupName](https://www.tencentcloud.com/document/api/238/72774)
+ * * Delete: [RemoveBackups](https://www.tencentcloud.com/document/api/238/72776)
+ *
  * ## Import
  *
  * sqlserver generalBackups can be imported using the id, e.g.

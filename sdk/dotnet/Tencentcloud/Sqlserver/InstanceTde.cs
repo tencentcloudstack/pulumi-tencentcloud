@@ -88,6 +88,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyInstanceEncryptAttributes](https://www.tencentcloud.com/document/api/238/56943)
+    /// * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+    /// * Update:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyInstanceEncryptAttributes](https://www.tencentcloud.com/document/api/238/56943)
+    /// 
     /// ## Import
     /// 
     /// sqlserver InstanceTde can be imported using the id, e.g.

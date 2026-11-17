@@ -123,6 +123,16 @@ class MountPointAttachment(pulumi.CustomResource):
             mount_point_id="f14mpfy5lh4e-KuiL")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateAccessGroups](https://www.tencentcloud.com/document/api/1106/42435)
+        * Read: [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+        * Delete:
+          - [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+          - [DisassociateAccessGroups](https://www.tencentcloud.com/document/api/1106/42430)
+
         ## Import
 
         chdfs mount_point_attachment can be imported using the id, e.g.
@@ -159,6 +169,16 @@ class MountPointAttachment(pulumi.CustomResource):
             ],
             mount_point_id="f14mpfy5lh4e-KuiL")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateAccessGroups](https://www.tencentcloud.com/document/api/1106/42435)
+        * Read: [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+        * Delete:
+          - [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+          - [DisassociateAccessGroups](https://www.tencentcloud.com/document/api/1106/42430)
 
         ## Import
 

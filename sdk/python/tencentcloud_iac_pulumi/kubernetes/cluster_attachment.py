@@ -30,6 +30,8 @@ class ClusterAttachmentArgs:
                  labels: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  password: pulumi.Input[Optional[_builtins.str]] = None,
                  security_groups: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_validate_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  unschedulable: pulumi.Input[Optional[_builtins.int]] = None,
                  worker_config: pulumi.Input[Optional['ClusterAttachmentWorkerConfigArgs']] = None,
                  worker_config_overrides: pulumi.Input[Optional['ClusterAttachmentWorkerConfigOverridesArgs']] = None):
@@ -44,6 +46,8 @@ class ClusterAttachmentArgs:
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[_builtins.str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_groups: A list of security group IDs after attach to cluster.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_options: Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_validate_options: Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
         :param pulumi.Input[_builtins.int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input['ClusterAttachmentWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
         :param pulumi.Input['ClusterAttachmentWorkerConfigOverridesArgs'] worker_config_overrides: Override variable worker_config, commonly used to attach existing instances.
@@ -62,6 +66,10 @@ class ClusterAttachmentArgs:
             pulumi.set(__self__, "password", password)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
+        if skip_options is not None:
+            pulumi.set(__self__, "skip_options", skip_options)
+        if skip_validate_options is not None:
+            pulumi.set(__self__, "skip_validate_options", skip_validate_options)
         if unschedulable is not None:
             pulumi.set(__self__, "unschedulable", unschedulable)
         if worker_config is not None:
@@ -166,6 +174,30 @@ class ClusterAttachmentArgs:
         pulumi.set(self, "security_groups", value)
 
     @_builtins.property
+    @pulumi.getter(name="skipOptions")
+    def skip_options(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        """
+        return pulumi.get(self, "skip_options")
+
+    @skip_options.setter
+    def skip_options(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "skip_options", value)
+
+    @_builtins.property
+    @pulumi.getter(name="skipValidateOptions")
+    def skip_validate_options(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+        """
+        return pulumi.get(self, "skip_validate_options")
+
+    @skip_validate_options.setter
+    def skip_validate_options(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "skip_validate_options", value)
+
+    @_builtins.property
     @pulumi.getter
     def unschedulable(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -213,6 +245,8 @@ class _ClusterAttachmentState:
                  labels: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  password: pulumi.Input[Optional[_builtins.str]] = None,
                  security_groups: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_validate_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  state: pulumi.Input[Optional[_builtins.str]] = None,
                  unschedulable: pulumi.Input[Optional[_builtins.int]] = None,
                  worker_config: pulumi.Input[Optional['ClusterAttachmentWorkerConfigArgs']] = None,
@@ -228,6 +262,8 @@ class _ClusterAttachmentState:
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[_builtins.str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_groups: A list of security group IDs after attach to cluster.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_options: Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_validate_options: Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
         :param pulumi.Input[_builtins.str] state: State of the node.
         :param pulumi.Input[_builtins.int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input['ClusterAttachmentWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
@@ -249,6 +285,10 @@ class _ClusterAttachmentState:
             pulumi.set(__self__, "password", password)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
+        if skip_options is not None:
+            pulumi.set(__self__, "skip_options", skip_options)
+        if skip_validate_options is not None:
+            pulumi.set(__self__, "skip_validate_options", skip_validate_options)
         if state is not None:
             pulumi.set(__self__, "state", state)
         if unschedulable is not None:
@@ -355,6 +395,30 @@ class _ClusterAttachmentState:
         pulumi.set(self, "security_groups", value)
 
     @_builtins.property
+    @pulumi.getter(name="skipOptions")
+    def skip_options(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        """
+        return pulumi.get(self, "skip_options")
+
+    @skip_options.setter
+    def skip_options(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "skip_options", value)
+
+    @_builtins.property
+    @pulumi.getter(name="skipValidateOptions")
+    def skip_validate_options(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+        """
+        return pulumi.get(self, "skip_validate_options")
+
+    @skip_validate_options.setter
+    def skip_validate_options(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "skip_validate_options", value)
+
+    @_builtins.property
     @pulumi.getter
     def state(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -417,6 +481,8 @@ class ClusterAttachment(pulumi.CustomResource):
                  labels: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  password: pulumi.Input[Optional[_builtins.str]] = None,
                  security_groups: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_validate_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  unschedulable: pulumi.Input[Optional[_builtins.int]] = None,
                  worker_config: pulumi.Input[Optional[Union['ClusterAttachmentWorkerConfigArgs', 'ClusterAttachmentWorkerConfigArgsDict']]] = None,
                  worker_config_overrides: pulumi.Input[Optional[Union['ClusterAttachmentWorkerConfigOverridesArgs', 'ClusterAttachmentWorkerConfigOverridesArgsDict']]] = None,
@@ -502,6 +568,17 @@ class ClusterAttachment(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddExistedInstances](https://www.tencentcloud.com/document/api/457/32039)
+        * Read:
+          - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+        * Delete: [DeleteClusterInstances](https://www.tencentcloud.com/document/api/457/32038)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -513,6 +590,8 @@ class ClusterAttachment(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[_builtins.str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_groups: A list of security group IDs after attach to cluster.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_options: Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_validate_options: Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
         :param pulumi.Input[_builtins.int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input[Union['ClusterAttachmentWorkerConfigArgs', 'ClusterAttachmentWorkerConfigArgsDict']] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
         :param pulumi.Input[Union['ClusterAttachmentWorkerConfigOverridesArgs', 'ClusterAttachmentWorkerConfigOverridesArgsDict']] worker_config_overrides: Override variable worker_config, commonly used to attach existing instances.
@@ -604,6 +683,17 @@ class ClusterAttachment(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddExistedInstances](https://www.tencentcloud.com/document/api/457/32039)
+        * Read:
+          - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+        * Delete: [DeleteClusterInstances](https://www.tencentcloud.com/document/api/457/32038)
+
 
         :param str resource_name: The name of the resource.
         :param ClusterAttachmentArgs args: The arguments to use to populate this resource's properties.
@@ -628,6 +718,8 @@ class ClusterAttachment(pulumi.CustomResource):
                  labels: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  password: pulumi.Input[Optional[_builtins.str]] = None,
                  security_groups: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 skip_validate_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  unschedulable: pulumi.Input[Optional[_builtins.int]] = None,
                  worker_config: pulumi.Input[Optional[Union['ClusterAttachmentWorkerConfigArgs', 'ClusterAttachmentWorkerConfigArgsDict']]] = None,
                  worker_config_overrides: pulumi.Input[Optional[Union['ClusterAttachmentWorkerConfigOverridesArgs', 'ClusterAttachmentWorkerConfigOverridesArgsDict']]] = None,
@@ -652,6 +744,8 @@ class ClusterAttachment(pulumi.CustomResource):
             __props__.__dict__["labels"] = labels
             __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
             __props__.__dict__["security_groups"] = security_groups
+            __props__.__dict__["skip_options"] = skip_options
+            __props__.__dict__["skip_validate_options"] = skip_validate_options
             __props__.__dict__["unschedulable"] = unschedulable
             __props__.__dict__["worker_config"] = worker_config
             __props__.__dict__["worker_config_overrides"] = worker_config_overrides
@@ -676,6 +770,8 @@ class ClusterAttachment(pulumi.CustomResource):
             labels: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             password: pulumi.Input[Optional[_builtins.str]] = None,
             security_groups: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            skip_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            skip_validate_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             state: pulumi.Input[Optional[_builtins.str]] = None,
             unschedulable: pulumi.Input[Optional[_builtins.int]] = None,
             worker_config: pulumi.Input[Optional[Union['ClusterAttachmentWorkerConfigArgs', 'ClusterAttachmentWorkerConfigArgsDict']]] = None,
@@ -695,6 +791,8 @@ class ClusterAttachment(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[_builtins.str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_groups: A list of security group IDs after attach to cluster.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_options: Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] skip_validate_options: Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
         :param pulumi.Input[_builtins.str] state: State of the node.
         :param pulumi.Input[_builtins.int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input[Union['ClusterAttachmentWorkerConfigArgs', 'ClusterAttachmentWorkerConfigArgsDict']] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
@@ -712,6 +810,8 @@ class ClusterAttachment(pulumi.CustomResource):
         __props__.__dict__["labels"] = labels
         __props__.__dict__["password"] = password
         __props__.__dict__["security_groups"] = security_groups
+        __props__.__dict__["skip_options"] = skip_options
+        __props__.__dict__["skip_validate_options"] = skip_validate_options
         __props__.__dict__["state"] = state
         __props__.__dict__["unschedulable"] = unschedulable
         __props__.__dict__["worker_config"] = worker_config
@@ -781,6 +881,22 @@ class ClusterAttachment(pulumi.CustomResource):
         A list of security group IDs after attach to cluster.
         """
         return pulumi.get(self, "security_groups")
+
+    @_builtins.property
+    @pulumi.getter(name="skipOptions")
+    def skip_options(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
+        """
+        Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        """
+        return pulumi.get(self, "skip_options")
+
+    @_builtins.property
+    @pulumi.getter(name="skipValidateOptions")
+    def skip_validate_options(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
+        """
+        Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+        """
+        return pulumi.get(self, "skip_validate_options")
 
     @_builtins.property
     @pulumi.getter

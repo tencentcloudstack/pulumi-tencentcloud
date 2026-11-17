@@ -5,31 +5,62 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a snapshot policy resource.
+ * Provides a CBS snapshot policy resource.
+ *
+ * > **NOTE:** `repeatWeekdays`/`repeatMonths`/`intervalDays` are mutually exclusive rules, required and only one policy rule can be set. If mutually exclusive rules are passed in at the same time, only one will take effect, with priority in the order listed above: for example, if all three rules are set, only `repeatWeekdays` will take effect
  *
  * ## Example Usage
+ *
+ * ### Create policy by repeatWeekdays
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotPolicy = new tencentcloud.cbs.SnapshotPolicy("snapshot_policy", {
- *     snapshotPolicyName: "mysnapshotpolicyname",
+ * const example = new tencentcloud.cbs.SnapshotPolicy("example", {
+ *     snapshotPolicyName: "tf-example",
+ *     repeatHours: [1],
  *     repeatWeekdays: [
  *         1,
  *         4,
  *     ],
- *     repeatHours: [1],
+ *     isActivated: true,
+ *     isPermanent: false,
  *     retentionDays: 7,
  * });
  * ```
+ *
+ * ### Create policy by intervalDays
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cbs.SnapshotPolicy("example", {
+ *     snapshotPolicyName: "tf-example",
+ *     repeatHours: [1],
+ *     intervalDays: 30,
+ *     isActivated: true,
+ *     isPermanent: false,
+ *     retentionDays: 7,
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32167)
+ * * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+ * * Update: [ModifyAutoSnapshotPolicyAttribute](https://www.tencentcloud.com/document/api/362/32162)
+ * * Delete: [DeleteAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32166)
  *
  * ## Import
  *
  * CBS snapshot policy can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+ * $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy example asp-jliex1tn
  * ```
  */
 export class SnapshotPolicy extends pulumi.CustomResource {
@@ -61,17 +92,33 @@ export class SnapshotPolicy extends pulumi.CustomResource {
     }
 
     /**
+     * Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+     */
+    declare public readonly intervalDays: pulumi.Output<number | undefined>;
+    /**
+     * Whether the snapshot policy is activated. Default is true.
+     */
+    declare public readonly isActivated: pulumi.Output<boolean>;
+    /**
+     * Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+     */
+    declare public readonly isPermanent: pulumi.Output<boolean>;
+    /**
      * Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
      */
     declare public readonly repeatHours: pulumi.Output<number[]>;
     /**
+     * Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+     */
+    declare public readonly repeatMonths: pulumi.Output<number[] | undefined>;
+    /**
      * Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
      */
-    declare public readonly repeatWeekdays: pulumi.Output<number[]>;
+    declare public readonly repeatWeekdays: pulumi.Output<number[] | undefined>;
     /**
      * Retention days of the snapshot, and the default value is 7.
      */
-    declare public readonly retentionDays: pulumi.Output<number | undefined>;
+    declare public readonly retentionDays: pulumi.Output<number>;
     /**
      * Name of snapshot policy. The maximum length can not exceed 60 bytes.
      */
@@ -90,7 +137,11 @@ export class SnapshotPolicy extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SnapshotPolicyState | undefined;
+            resourceInputs["intervalDays"] = state?.intervalDays;
+            resourceInputs["isActivated"] = state?.isActivated;
+            resourceInputs["isPermanent"] = state?.isPermanent;
             resourceInputs["repeatHours"] = state?.repeatHours;
+            resourceInputs["repeatMonths"] = state?.repeatMonths;
             resourceInputs["repeatWeekdays"] = state?.repeatWeekdays;
             resourceInputs["retentionDays"] = state?.retentionDays;
             resourceInputs["snapshotPolicyName"] = state?.snapshotPolicyName;
@@ -99,13 +150,14 @@ export class SnapshotPolicy extends pulumi.CustomResource {
             if (args?.repeatHours === undefined && !opts.urn) {
                 throw new Error("Missing required property 'repeatHours'");
             }
-            if (args?.repeatWeekdays === undefined && !opts.urn) {
-                throw new Error("Missing required property 'repeatWeekdays'");
-            }
             if (args?.snapshotPolicyName === undefined && !opts.urn) {
                 throw new Error("Missing required property 'snapshotPolicyName'");
             }
+            resourceInputs["intervalDays"] = args?.intervalDays;
+            resourceInputs["isActivated"] = args?.isActivated;
+            resourceInputs["isPermanent"] = args?.isPermanent;
             resourceInputs["repeatHours"] = args?.repeatHours;
+            resourceInputs["repeatMonths"] = args?.repeatMonths;
             resourceInputs["repeatWeekdays"] = args?.repeatWeekdays;
             resourceInputs["retentionDays"] = args?.retentionDays;
             resourceInputs["snapshotPolicyName"] = args?.snapshotPolicyName;
@@ -120,9 +172,25 @@ export class SnapshotPolicy extends pulumi.CustomResource {
  */
 export interface SnapshotPolicyState {
     /**
+     * Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+     */
+    intervalDays?: pulumi.Input<number | undefined>;
+    /**
+     * Whether the snapshot policy is activated. Default is true.
+     */
+    isActivated?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+     */
+    isPermanent?: pulumi.Input<boolean | undefined>;
+    /**
      * Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
      */
     repeatHours?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    /**
+     * Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+     */
+    repeatMonths?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
      */
@@ -142,13 +210,29 @@ export interface SnapshotPolicyState {
  */
 export interface SnapshotPolicyArgs {
     /**
+     * Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+     */
+    intervalDays?: pulumi.Input<number | undefined>;
+    /**
+     * Whether the snapshot policy is activated. Default is true.
+     */
+    isActivated?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+     */
+    isPermanent?: pulumi.Input<boolean | undefined>;
+    /**
      * Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
      */
     repeatHours: pulumi.Input<pulumi.Input<number>[]>;
     /**
+     * Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+     */
+    repeatMonths?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    /**
      * Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
      */
-    repeatWeekdays: pulumi.Input<pulumi.Input<number>[]>;
+    repeatWeekdays?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Retention days of the snapshot, and the default value is 7.
      */

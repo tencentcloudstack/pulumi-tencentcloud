@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhiteBoxDecryptKey](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDecryptKey&type=document&lang=en)
  */
 export function getWhiteBoxDecryptKey(args: GetWhiteBoxDecryptKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetWhiteBoxDecryptKeyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetWhiteBoxDecryptKeyResult {
  *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhiteBoxDecryptKey](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDecryptKey&type=document&lang=en)
  */
 export function getWhiteBoxDecryptKeyOutput(args: GetWhiteBoxDecryptKeyOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWhiteBoxDecryptKeyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

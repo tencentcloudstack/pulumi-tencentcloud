@@ -36,6 +36,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Protocol
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateServiceTemplateGroup](https://www.tencentcloud.com/document/api/215/16711)
+    /// * Read: [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
+    /// * Update: [ModifyServiceTemplateGroupAttribute](https://www.tencentcloud.com/document/api/215/16723)
+    /// * Delete:
+    ///   - [DeleteServiceTemplateGroup](https://www.tencentcloud.com/document/api/215/16715)
+    ///   - [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
+    /// 
     /// ## Import
     /// 
     /// Protocol template group can be imported using the id, e.g.

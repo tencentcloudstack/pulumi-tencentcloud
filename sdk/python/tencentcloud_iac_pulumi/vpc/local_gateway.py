@@ -155,6 +155,15 @@ class LocalGateway(pulumi.CustomResource):
             cdc_id="cluster-j9gyu1iy")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLocalGateway](https://www.tencentcloud.com/document/api/215/40144)
+        * Read: [DescribeLocalGateway](https://www.tencentcloud.com/document/api/215/40142)
+        * Update: [ModifyLocalGateway](https://www.tencentcloud.com/document/api/215/40141)
+        * Delete: [DeleteLocalGateway](https://www.tencentcloud.com/document/api/215/40143)
+
         ## Import
 
         vpc local_gateway can be imported using the id, e.g.
@@ -193,6 +202,15 @@ class LocalGateway(pulumi.CustomResource):
             vpc_id=vpc.id,
             cdc_id="cluster-j9gyu1iy")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLocalGateway](https://www.tencentcloud.com/document/api/215/40144)
+        * Read: [DescribeLocalGateway](https://www.tencentcloud.com/document/api/215/40142)
+        * Update: [ModifyLocalGateway](https://www.tencentcloud.com/document/api/215/40141)
+        * Delete: [DeleteLocalGateway](https://www.tencentcloud.com/document/api/215/40143)
 
         ## Import
 

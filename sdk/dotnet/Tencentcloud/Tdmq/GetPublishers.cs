@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPublishersResult> InvokeAsync(GetPublishersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersArgs(), options.WithDefaults());
@@ -92,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPublishersResult> Invoke(GetPublishersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersInvokeArgs(), options.WithDefaults());
@@ -134,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPublishersResult> Invoke(GetPublishersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublishersResult>("tencentcloud:Tdmq/getPublishers:getPublishers", args ?? new GetPublishersInvokeArgs(), options.WithDefaults());

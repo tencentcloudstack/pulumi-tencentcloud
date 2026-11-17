@@ -7,6 +7,7 @@ from .account import *
 from .audit_log import *
 from .backup_config import *
 from .backup_download_restriction import *
+from .backup_encrypt import *
 from .backup_operation import *
 from .clear_instance_operation import *
 from .connection_config import *
@@ -21,6 +22,7 @@ from .get_instances import *
 from .get_param_records import *
 from .get_zone_config import *
 from .instance import *
+from .instance_password_policy_config import *
 from .log_delivery import *
 from .maintenance_window import *
 from .param import *

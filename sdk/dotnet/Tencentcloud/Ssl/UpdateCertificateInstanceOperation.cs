@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateCertificateInstance](https://www.tencentcloud.com/document/api/1007/57981)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/updateCertificateInstanceOperation:UpdateCertificateInstanceOperation")]
     public partial class UpdateCertificateInstanceOperation : global::Pulumi.CustomResource

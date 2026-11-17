@@ -33,20 +33,20 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := vdb.NewInstance(ctx, "example", &vdb.InstanceArgs{
-//				VpcId:    pulumi.String("vpc-xxxxxxxx"),
-//				SubnetId: pulumi.String("subnet-xxxxxxxx"),
+//				VpcId:    pulumi.String("vpc-i5yyodl9"),
+//				SubnetId: pulumi.String("subnet-hhi88a58"),
 //				PayMode:  pulumi.Int(0),
 //				SecurityGroupIds: pulumi.StringArray{
-//					pulumi.String("sg-xxxxxxxx"),
+//					pulumi.String("sg-4rd5741x"),
 //				},
 //				InstanceName:  pulumi.String("tf-example"),
 //				InstanceType:  pulumi.String("single"),
-//				NodeType:      pulumi.String("normal"),
+//				NodeType:      pulumi.String("store"),
 //				Cpu:           pulumi.Int(2),
-//				Memory:        pulumi.Int(4),
+//				Memory:        pulumi.Int(16),
 //				DiskSize:      pulumi.Int(50),
 //				WorkerNodeNum: pulumi.Int(1),
-//				ForceDelete:   pulumi.Bool(false),
+//				ForceDelete:   pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -72,12 +72,15 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := vdb.NewInstance(ctx, "cluster", &vdb.InstanceArgs{
-//				VpcId:         pulumi.String("vpc-xxxxxxxx"),
-//				SubnetId:      pulumi.String("subnet-xxxxxxxx"),
+//				VpcId:    pulumi.String("vpc-i5yyodl9"),
+//				SubnetId: pulumi.String("subnet-hhi88a58"),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-4rd5741x"),
+//				},
 //				PayMode:       pulumi.Int(1),
 //				PayPeriod:     pulumi.Int(1),
 //				AutoRenew:     pulumi.Int(1),
-//				InstanceName:  pulumi.String("tf-example-cluster"),
+//				InstanceName:  pulumi.String("tf-example"),
 //				InstanceType:  pulumi.String("cluster"),
 //				Mode:          pulumi.String("two"),
 //				ProductType:   pulumi.Int(0),
@@ -88,17 +91,10 @@ import (
 //				WorkerNodeNum: pulumi.Int(2),
 //				Params:        pulumi.String("{\"key\":\"value\"}"),
 //				ForceDelete:   pulumi.Bool(true),
-//				SecurityGroupIds: pulumi.StringArray{
-//					pulumi.String("sg-xxxxxxxx"),
-//				},
 //				ResourceTags: vdb.InstanceResourceTagArray{
 //					&vdb.InstanceResourceTagArgs{
-//						TagKey:   pulumi.String("env"),
-//						TagValue: pulumi.String("test"),
-//					},
-//					&vdb.InstanceResourceTagArgs{
-//						TagKey:   pulumi.String("project"),
-//						TagValue: pulumi.String("demo"),
+//						TagKey:   pulumi.String("createBy"),
+//						TagValue: pulumi.String("Terraform"),
 //					},
 //				},
 //			})
@@ -111,12 +107,26 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+// * Update:
+//   - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceSecurityGroups&type=document&lang=en)
+//   - [ScaleOutInstance](https://www.tencentcloud.com/search/?wd=ScaleOutInstance&type=document&lang=en)
+//   - [ScaleUpInstance](https://www.tencentcloud.com/search/?wd=ScaleUpInstance&type=document&lang=en)
+//
+// * Delete:
+//   - [DestroyInstances](https://www.tencentcloud.com/search/?wd=DestroyInstances&type=document&lang=en)
+//   - [IsolateInstance](https://www.tencentcloud.com/search/?wd=IsolateInstance&type=document&lang=en)
+//
 // ## Import
 //
 // VDB instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-xxxxxxxx
+// $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-oft69wcm
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -124,7 +134,7 @@ type Instance struct {
 	// API version.
 	ApiVersion pulumi.StringOutput `pulumi:"apiVersion"`
 	// Auto-renew flag. 0: disabled, 1: enabled.
-	AutoRenew pulumi.IntPtrOutput `pulumi:"autoRenew"`
+	AutoRenew pulumi.IntOutput `pulumi:"autoRenew"`
 	// CPU cores.
 	Cpu pulumi.IntPtrOutput `pulumi:"cpu"`
 	// Creation time.
@@ -141,8 +151,10 @@ type Instance struct {
 	Extend pulumi.StringOutput `pulumi:"extend"`
 	// Whether to force delete (destroy) the instance. If false, only isolate to recycle bin. If true, isolate then destroy. Default is false.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
+	// Instance ID.
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Instance name. Supports up to 60 characters.
-	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
+	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Instance type. Valid values: base, single, cluster.
 	InstanceType pulumi.StringPtrOutput `pulumi:"instanceType"`
 	// Whether the instance never expires.
@@ -156,7 +168,7 @@ type Instance struct {
 	// Network information.
 	Networks InstanceNetworkArrayOutput `pulumi:"networks"`
 	// Node type. Valid values: compute, normal, store.
-	NodeType pulumi.StringPtrOutput `pulumi:"nodeType"`
+	NodeType pulumi.StringOutput `pulumi:"nodeType"`
 	// Instance node list.
 	Nodes InstanceNodeArrayOutput `pulumi:"nodes"`
 	// Instance extra parameters, submitted via JSON.
@@ -168,7 +180,7 @@ type Instance struct {
 	// Product.
 	Product pulumi.StringOutput `pulumi:"product"`
 	// Product version. 0: standard, 1: capacity-enhanced.
-	ProductType pulumi.IntPtrOutput `pulumi:"productType"`
+	ProductType pulumi.IntOutput `pulumi:"productType"`
 	// Region.
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Tag list.
@@ -255,6 +267,8 @@ type instanceState struct {
 	Extend *string `pulumi:"extend"`
 	// Whether to force delete (destroy) the instance. If false, only isolate to recycle bin. If true, isolate then destroy. Default is false.
 	ForceDelete *bool `pulumi:"forceDelete"`
+	// Instance ID.
+	InstanceId *string `pulumi:"instanceId"`
 	// Instance name. Supports up to 60 characters.
 	InstanceName *string `pulumi:"instanceName"`
 	// Instance type. Valid values: base, single, cluster.
@@ -328,6 +342,8 @@ type InstanceState struct {
 	Extend pulumi.StringPtrInput
 	// Whether to force delete (destroy) the instance. If false, only isolate to recycle bin. If true, isolate then destroy. Default is false.
 	ForceDelete pulumi.BoolPtrInput
+	// Instance ID.
+	InstanceId pulumi.StringPtrInput
 	// Instance name. Supports up to 60 characters.
 	InstanceName pulumi.StringPtrInput
 	// Instance type. Valid values: base, single, cluster.
@@ -556,8 +572,8 @@ func (o InstanceOutput) ApiVersion() pulumi.StringOutput {
 }
 
 // Auto-renew flag. 0: disabled, 1: enabled.
-func (o InstanceOutput) AutoRenew() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoRenew }).(pulumi.IntPtrOutput)
+func (o InstanceOutput) AutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.AutoRenew }).(pulumi.IntOutput)
 }
 
 // CPU cores.
@@ -600,9 +616,14 @@ func (o InstanceOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
+// Instance ID.
+func (o InstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
 // Instance name. Supports up to 60 characters.
-func (o InstanceOutput) InstanceName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.InstanceName }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
 }
 
 // Instance type. Valid values: base, single, cluster.
@@ -636,8 +657,8 @@ func (o InstanceOutput) Networks() InstanceNetworkArrayOutput {
 }
 
 // Node type. Valid values: compute, normal, store.
-func (o InstanceOutput) NodeType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.NodeType }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) NodeType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.NodeType }).(pulumi.StringOutput)
 }
 
 // Instance node list.
@@ -666,8 +687,8 @@ func (o InstanceOutput) Product() pulumi.StringOutput {
 }
 
 // Product version. 0: standard, 1: capacity-enhanced.
-func (o InstanceOutput) ProductType() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProductType }).(pulumi.IntPtrOutput)
+func (o InstanceOutput) ProductType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.ProductType }).(pulumi.IntOutput)
 }
 
 // Region.

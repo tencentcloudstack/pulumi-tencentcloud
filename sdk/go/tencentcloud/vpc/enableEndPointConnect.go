@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [EnableVpcEndPointConnect](https://www.tencentcloud.com/document/api/215/40149)
 type EnableEndPointConnect struct {
 	pulumi.CustomResourceState
 

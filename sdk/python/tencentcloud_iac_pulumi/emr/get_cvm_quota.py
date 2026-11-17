@@ -131,6 +131,12 @@ def get_cvm_quota(cluster_id: Optional[_builtins.str] = None,
         zone_id=100003)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: EMR cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -167,6 +173,12 @@ def get_cvm_quota_output(cluster_id: pulumi.Input[Optional[_builtins.str]] = Non
     cvm_quota = tencentcloud.emr.get_cvm_quota(cluster_id="emr-0ze36vnp",
         zone_id=100003)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: EMR cluster ID.

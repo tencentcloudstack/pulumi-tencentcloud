@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScores](https://www.tencentcloud.com/document/api/1131/45304)
         /// </summary>
         public static Task<GetScoresResult> InvokeAsync(GetScoresArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScores](https://www.tencentcloud.com/document/api/1131/45304)
         /// </summary>
         public static Output<GetScoresResult> Invoke(GetScoresInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScores](https://www.tencentcloud.com/document/api/1131/45304)
         /// </summary>
         public static Output<GetScoresResult> Invoke(GetScoresInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetScoresResult>("tencentcloud:Rum/getScores:getScores", args ?? new GetScoresInvokeArgs(), options.WithDefaults());

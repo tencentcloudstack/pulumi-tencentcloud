@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyAndStatisticsListeners](https://www.tencentcloud.com/document/api/608/33099)
         /// </summary>
         public static Task<GetProxyAndStatisticsListenersResult> InvokeAsync(GetProxyAndStatisticsListenersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyAndStatisticsListenersResult>("tencentcloud:Gaap/getProxyAndStatisticsListeners:getProxyAndStatisticsListeners", args ?? new GetProxyAndStatisticsListenersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyAndStatisticsListeners](https://www.tencentcloud.com/document/api/608/33099)
         /// </summary>
         public static Output<GetProxyAndStatisticsListenersResult> Invoke(GetProxyAndStatisticsListenersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyAndStatisticsListenersResult>("tencentcloud:Gaap/getProxyAndStatisticsListeners:getProxyAndStatisticsListeners", args ?? new GetProxyAndStatisticsListenersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyAndStatisticsListeners](https://www.tencentcloud.com/document/api/608/33099)
         /// </summary>
         public static Output<GetProxyAndStatisticsListenersResult> Invoke(GetProxyAndStatisticsListenersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyAndStatisticsListenersResult>("tencentcloud:Gaap/getProxyAndStatisticsListeners:getProxyAndStatisticsListeners", args ?? new GetProxyAndStatisticsListenersInvokeArgs(), options.WithDefaults());

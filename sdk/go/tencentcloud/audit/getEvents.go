@@ -55,6 +55,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeEvents](https://www.tencentcloud.com/search/?wd=DescribeEvents&type=document&lang=en)
 func GetEvents(ctx *pulumi.Context, args *GetEventsArgs, opts ...pulumi.InvokeOption) (*GetEventsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEventsResult

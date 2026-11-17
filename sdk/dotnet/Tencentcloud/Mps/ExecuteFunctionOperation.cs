@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ExecuteFunction](https://www.tencentcloud.com/document/api/1041/38515)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/executeFunctionOperation:ExecuteFunctionOperation")]
     public partial class ExecuteFunctionOperation : global::Pulumi.CustomResource

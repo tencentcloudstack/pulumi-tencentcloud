@@ -98,6 +98,18 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateBackup](https://www.tencentcloud.com/document/api/236/15844)
+ *   - [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+ * * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+ * * Delete:
+ *   - [DeleteBackup](https://www.tencentcloud.com/document/api/236/15841)
+ *   - [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
  */
 export class Backup extends pulumi.CustomResource {
     /**

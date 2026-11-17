@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
 func GetChcHosts(ctx *pulumi.Context, args *GetChcHostsArgs, opts ...pulumi.InvokeOption) (*GetChcHostsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetChcHostsResult

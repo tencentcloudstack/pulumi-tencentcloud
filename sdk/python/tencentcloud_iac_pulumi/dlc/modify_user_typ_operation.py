@@ -119,6 +119,12 @@ class ModifyUserTypOperation(pulumi.CustomResource):
             user_type="ADMIN")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class ModifyUserTypOperation(pulumi.CustomResource):
             user_id="127382378",
             user_type="ADMIN")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
 
 
         :param str resource_name: The name of the resource.

@@ -3,6 +3,7 @@
 
 import builtins as _builtins
 import sys
+import warnings
 from collections.abc import Sequence
 from typing import Optional
 
@@ -13,6 +14,7 @@ if sys.version_info >= (3, 11):
     from typing import NotRequired, TypedDict
 else:
     from typing_extensions import NotRequired, TypedDict
+from .. import _utilities
 
 __all__ = [
     'AddCalcEnginesToProjectOperationDlcInfoArgs',
@@ -8214,22 +8216,30 @@ class ProjectProjectArgsDict(TypedDict):
     """
     Project mode, SIMPLE (default): Simple mode STANDARD: Standard mode.
     """
+    schedule_mode: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Project schedule mode. task: Task mode; workflow: Workflow mode.
+    """
 
 @pulumi.input_type
 class ProjectProjectArgs:
     def __init__(__self__, *,
                  display_name: pulumi.Input[_builtins.str],
                  project_name: pulumi.Input[_builtins.str],
-                 project_model: pulumi.Input[Optional[_builtins.str]] = None):
+                 project_model: pulumi.Input[Optional[_builtins.str]] = None,
+                 schedule_mode: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] display_name: Project display name, can be Chinese name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
         :param pulumi.Input[_builtins.str] project_name: Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
         :param pulumi.Input[_builtins.str] project_model: Project mode, SIMPLE (default): Simple mode STANDARD: Standard mode.
+        :param pulumi.Input[_builtins.str] schedule_mode: Project schedule mode. task: Task mode; workflow: Workflow mode.
         """
         pulumi.set(__self__, "display_name", display_name)
         pulumi.set(__self__, "project_name", project_name)
         if project_model is not None:
             pulumi.set(__self__, "project_model", project_model)
+        if schedule_mode is not None:
+            pulumi.set(__self__, "schedule_mode", schedule_mode)
 
     @_builtins.property
     @pulumi.getter(name="displayName")
@@ -8266,6 +8276,18 @@ class ProjectProjectArgs:
     @project_model.setter
     def project_model(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "project_model", value)
+
+    @_builtins.property
+    @pulumi.getter(name="scheduleMode")
+    def schedule_mode(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Project schedule mode. task: Task mode; workflow: Workflow mode.
+        """
+        return pulumi.get(self, "schedule_mode")
+
+    @schedule_mode.setter
+    def schedule_mode(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "schedule_mode", value)
 
 
 class QualityRuleCompareRuleArgsDict(TypedDict):
@@ -13310,11 +13332,11 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgsDict(TypedDict):
     """
     trigger_minimum_interval_second: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    Minimum trigger interval in file arrival mode (seconds).
+    This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
     """
     trigger_wait_time_second: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    Trigger wait time in file arrival mode (seconds).
+    This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
     """
 
 @pulumi.input_type
@@ -13345,8 +13367,8 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs:
         :param pulumi.Input[_builtins.str] scheduler_status: Trigger status, ACTIVE or PAUSED.
         :param pulumi.Input[_builtins.str] start_time: Schedule effective start time.
         :param pulumi.Input[_builtins.str] trigger_id: Trigger ID (UUID).
-        :param pulumi.Input[_builtins.int] trigger_minimum_interval_second: Minimum trigger interval in file arrival mode (seconds).
-        :param pulumi.Input[_builtins.int] trigger_wait_time_second: Trigger wait time in file arrival mode (seconds).
+        :param pulumi.Input[_builtins.int] trigger_minimum_interval_second: This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+        :param pulumi.Input[_builtins.int] trigger_wait_time_second: This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
         """
         pulumi.set(__self__, "trigger_mode", trigger_mode)
         if config_mode is not None:
@@ -13370,7 +13392,13 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs:
         if trigger_id is not None:
             pulumi.set(__self__, "trigger_id", trigger_id)
         if trigger_minimum_interval_second is not None:
+            warnings.warn("""This parameter is deprecated and will be removed in a future version.""", DeprecationWarning)
+            pulumi.log.warn("""trigger_minimum_interval_second is deprecated: This parameter is deprecated and will be removed in a future version.""")
+        if trigger_minimum_interval_second is not None:
             pulumi.set(__self__, "trigger_minimum_interval_second", trigger_minimum_interval_second)
+        if trigger_wait_time_second is not None:
+            warnings.warn("""This parameter is deprecated and will be removed in a future version.""", DeprecationWarning)
+            pulumi.log.warn("""trigger_wait_time_second is deprecated: This parameter is deprecated and will be removed in a future version.""")
         if trigger_wait_time_second is not None:
             pulumi.set(__self__, "trigger_wait_time_second", trigger_wait_time_second)
 
@@ -13508,9 +13536,10 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="triggerMinimumIntervalSecond")
+    @_utilities.deprecated("""This parameter is deprecated and will be removed in a future version.""")
     def trigger_minimum_interval_second(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        Minimum trigger interval in file arrival mode (seconds).
+        This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
         """
         return pulumi.get(self, "trigger_minimum_interval_second")
 
@@ -13520,9 +13549,10 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="triggerWaitTimeSecond")
+    @_utilities.deprecated("""This parameter is deprecated and will be removed in a future version.""")
     def trigger_wait_time_second(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        Trigger wait time in file arrival mode (seconds).
+        This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
         """
         return pulumi.get(self, "trigger_wait_time_second")
 

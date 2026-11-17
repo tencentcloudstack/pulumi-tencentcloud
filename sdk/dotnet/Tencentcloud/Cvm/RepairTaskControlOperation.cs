@@ -97,6 +97,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RepairTaskControl](https://www.tencentcloud.com/search/?wd=RepairTaskControl&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// This resource is an operation-style resource and does not support `pulumi import`. The cloud-side authorization is a one-shot side-effect with no `Describe` API to refresh state.

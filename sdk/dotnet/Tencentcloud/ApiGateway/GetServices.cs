@@ -50,6 +50,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
+        ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+        ///   - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&amp;type=document&amp;lang=en)
+        ///   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetServicesResult> InvokeAsync(GetServicesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesArgs(), options.WithDefaults());
@@ -92,6 +102,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
+        ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+        ///   - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&amp;type=document&amp;lang=en)
+        ///   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetServicesResult> Invoke(GetServicesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesInvokeArgs(), options.WithDefaults());
@@ -134,6 +154,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
+        ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+        ///   - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&amp;type=document&amp;lang=en)
+        ///   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetServicesResult> Invoke(GetServicesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesInvokeArgs(), options.WithDefaults());

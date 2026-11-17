@@ -121,6 +121,12 @@ def get_alarm_metric(module: Optional[_builtins.str] = None,
         namespace="cvm_device")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
+
 
     :param _builtins.str module: Fixed value, as `monitor`.
     :param _builtins.str monitor_type: Monitoring Type Filter MT_QCE=Cloud Product Monitoring.
@@ -160,6 +166,12 @@ def get_alarm_metric_output(module: pulumi.Input[Optional[_builtins.str]] = None
         monitor_type="Monitoring",
         namespace="cvm_device")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
 
 
     :param _builtins.str module: Fixed value, as `monitor`.

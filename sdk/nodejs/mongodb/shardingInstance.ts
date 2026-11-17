@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-i5yyodl9",
  *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     password: "Password@123",
+ *     password: "Password@2026",
  *     mongosCpu: 1,
  *     mongosMemory: 2,
  *     mongosNodeNum: 3,
@@ -56,7 +56,7 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-i5yyodl9",
  *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     password: "Password@123",
+ *     password: "Password@2026",
  *     mongosCpu: 1,
  *     mongosMemory: 2,
  *     mongosNodeNum: 3,
@@ -85,7 +85,7 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-i5yyodl9",
  *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     password: "Password@123",
+ *     password: "Password@2026",
  *     mongosCpu: 1,
  *     mongosMemory: 2,
  *     mongosNodeNum: 3,
@@ -96,6 +96,98 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ### Create instance with auto encryption
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mongodb.ShardingInstance("example", {
+ *     instanceName: "tf-example",
+ *     shardQuantity: 2,
+ *     nodesPerShard: 3,
+ *     cpu: 2,
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     projectId: 0,
+ *     password: "Password@2026",
+ *     mongosCpu: 1,
+ *     mongosMemory: 2,
+ *     mongosNodeNum: 3,
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "auto",
+ * });
+ * ```
+ *
+ * ### Create instance with custom encryption
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mongodb.ShardingInstance("example", {
+ *     instanceName: "tf-example",
+ *     shardQuantity: 2,
+ *     nodesPerShard: 3,
+ *     cpu: 2,
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     projectId: 0,
+ *     password: "Password@2026",
+ *     mongosCpu: 1,
+ *     mongosMemory: 2,
+ *     mongosNodeNum: 3,
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "manual",
+ *     keyId: "KMS-MONGODB",
+ *     kmsRegion: "ap-guangzhou",
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+ *   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+ * * Read:
+ *   - [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+ *   - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+ * * Update:
+ *   - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+ *   - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+ *   - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+ *   - [ModifyInstanceAz](https://www.tencentcloud.com/document/api/240/79881)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+ *   - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+ *   - [ResetDBInstancePassword](https://www.tencentcloud.com/document/api/240/37924)
+ *   - [UpgradeDbInstanceVersion](https://www.tencentcloud.com/document/api/240/74526)
+ * * Delete:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+ *   - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
+ *   - [TerminateDBInstances](https://www.tencentcloud.com/document/api/240/74033)
  *
  * ## Import
  *
@@ -166,6 +258,14 @@ export class ShardingInstance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
     /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly dataEncryption: pulumi.Output<string>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly encryptionKeySource: pulumi.Output<string | undefined>;
+    /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
      * - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -191,6 +291,14 @@ export class ShardingInstance extends pulumi.CustomResource {
      * Name of the Mongodb instance.
      */
     declare public readonly instanceName: pulumi.Output<string>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly keyId: pulumi.Output<string>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly kmsRegion: pulumi.Output<string>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
@@ -288,10 +396,14 @@ export class ShardingInstance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = state?.chargeType;
             resourceInputs["cpu"] = state?.cpu;
             resourceInputs["createTime"] = state?.createTime;
+            resourceInputs["dataEncryption"] = state?.dataEncryption;
+            resourceInputs["encryptionKeySource"] = state?.encryptionKeySource;
             resourceInputs["engineVersion"] = state?.engineVersion;
             resourceInputs["hiddenZone"] = state?.hiddenZone;
             resourceInputs["inMaintenance"] = state?.inMaintenance;
             resourceInputs["instanceName"] = state?.instanceName;
+            resourceInputs["keyId"] = state?.keyId;
+            resourceInputs["kmsRegion"] = state?.kmsRegion;
             resourceInputs["machineType"] = state?.machineType;
             resourceInputs["memory"] = state?.memory;
             resourceInputs["mongosCpu"] = state?.mongosCpu;
@@ -343,10 +455,14 @@ export class ShardingInstance extends pulumi.CustomResource {
             resourceInputs["availableZone"] = args?.availableZone;
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["cpu"] = args?.cpu;
+            resourceInputs["dataEncryption"] = args?.dataEncryption;
+            resourceInputs["encryptionKeySource"] = args?.encryptionKeySource;
             resourceInputs["engineVersion"] = args?.engineVersion;
             resourceInputs["hiddenZone"] = args?.hiddenZone;
             resourceInputs["inMaintenance"] = args?.inMaintenance;
             resourceInputs["instanceName"] = args?.instanceName;
+            resourceInputs["keyId"] = args?.keyId;
+            resourceInputs["kmsRegion"] = args?.kmsRegion;
             resourceInputs["machineType"] = args?.machineType;
             resourceInputs["memory"] = args?.memory;
             resourceInputs["mongosCpu"] = args?.mongosCpu;
@@ -412,6 +528,14 @@ export interface ShardingInstanceState {
      */
     createTime?: pulumi.Input<string | undefined>;
     /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    dataEncryption?: pulumi.Input<string | undefined>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    encryptionKeySource?: pulumi.Input<string | undefined>;
+    /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
      * - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -437,6 +561,14 @@ export interface ShardingInstanceState {
      * Name of the Mongodb instance.
      */
     instanceName?: pulumi.Input<string | undefined>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    keyId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
@@ -548,6 +680,14 @@ export interface ShardingInstanceArgs {
      */
     cpu?: pulumi.Input<number | undefined>;
     /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    dataEncryption?: pulumi.Input<string | undefined>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    encryptionKeySource?: pulumi.Input<string | undefined>;
+    /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
      * - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -573,6 +713,14 @@ export interface ShardingInstanceArgs {
      * Name of the Mongodb instance.
      */
     instanceName: pulumi.Input<string>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    keyId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */

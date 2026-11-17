@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     policyCountOrder: "asc=ascending",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
  */
 export function getAlarmConditionsTemplate(args: GetAlarmConditionsTemplateArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmConditionsTemplateResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -119,6 +125,12 @@ export interface GetAlarmConditionsTemplateResult {
  *     policyCountOrder: "asc=ascending",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
  */
 export function getAlarmConditionsTemplateOutput(args: GetAlarmConditionsTemplateOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmConditionsTemplateResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

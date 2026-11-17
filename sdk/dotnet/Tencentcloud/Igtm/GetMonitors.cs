@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMonitorsResult> InvokeAsync(GetMonitorsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMonitorsResult>("tencentcloud:Igtm/getMonitors:getMonitors", args ?? new GetMonitorsArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMonitorsResult> Invoke(GetMonitorsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMonitorsResult>("tencentcloud:Igtm/getMonitors:getMonitors", args ?? new GetMonitorsInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMonitorsResult> Invoke(GetMonitorsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMonitorsResult>("tencentcloud:Igtm/getMonitors:getMonitors", args ?? new GetMonitorsInvokeArgs(), options.WithDefaults());

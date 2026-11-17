@@ -48,6 +48,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRocketMQTopic](https://www.tencentcloud.com/search/?wd=CreateRocketMQTopic&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyRocketMQTopic](https://www.tencentcloud.com/search/?wd=ModifyRocketMQTopic&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteRocketMQTopic](https://www.tencentcloud.com/search/?wd=DeleteRocketMQTopic&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tdmqRocketmq topic can be imported using the id, e.g.

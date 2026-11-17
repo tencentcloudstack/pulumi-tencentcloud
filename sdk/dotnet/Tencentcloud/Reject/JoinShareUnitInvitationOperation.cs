@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reject
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RejectJoinShareUnitInvitation](https://www.tencentcloud.com/document/api/1031/68227)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Reject/joinShareUnitInvitationOperation:JoinShareUnitInvitationOperation")]
     public partial class JoinShareUnitInvitationOperation : global::Pulumi.CustomResource

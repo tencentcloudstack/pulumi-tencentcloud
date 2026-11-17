@@ -159,6 +159,14 @@ def get_throttling_apis(environment_names: Optional[Sequence[_builtins.str]] = N
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+      - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] environment_names: Environment list.
     :param _builtins.str result_output_file: Used to save results.
@@ -242,6 +250,14 @@ def get_throttling_apis_output(environment_names: pulumi.Input[Optional[Optional
             "test",
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+      - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] environment_names: Environment list.

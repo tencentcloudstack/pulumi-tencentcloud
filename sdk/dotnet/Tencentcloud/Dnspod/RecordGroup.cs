@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRecordGroup](https://www.tencentcloud.com/document/api/1157/53845)
+    /// * Read: [DescribeRecordGroupList](https://www.tencentcloud.com/document/api/1157/53842)
+    /// * Update: [ModifyRecordGroup](https://www.tencentcloud.com/document/api/1157/53841)
+    /// * Delete: [DeleteRecordGroup](https://www.tencentcloud.com/document/api/1157/53844)
+    /// 
     /// ## Import
     /// 
     /// dnspod RecordGroup can be imported using the domain#groupId, e.g.

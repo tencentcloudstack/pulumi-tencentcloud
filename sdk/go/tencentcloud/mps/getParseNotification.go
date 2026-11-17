@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ParseNotification](https://www.tencentcloud.com/document/api/1041/33679)
 func GetParseNotification(ctx *pulumi.Context, args *GetParseNotificationArgs, opts ...pulumi.InvokeOption) (*GetParseNotificationResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetParseNotificationResult

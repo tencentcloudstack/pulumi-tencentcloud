@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [VerifyOwnership](https://www.tencentcloud.com/document/api/1145/57426)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/ownershipVerify:OwnershipVerify")]
     public partial class OwnershipVerify : global::Pulumi.CustomResource

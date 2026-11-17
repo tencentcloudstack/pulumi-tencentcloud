@@ -43,6 +43,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateSQLFolder](https://www.tencentcloud.com/document/api/1174/73855)
+// * Read: [GetSQLFolder](https://www.tencentcloud.com/document/api/1174/77903)
+// * Update: [UpdateSQLFolder](https://www.tencentcloud.com/document/api/1174/73840)
+// * Delete: [DeleteSQLFolder](https://www.tencentcloud.com/document/api/1174/73851)
+//
 // ## Import
 //
 // WeData sql folder can be imported using the projectId#folderId, e.g.

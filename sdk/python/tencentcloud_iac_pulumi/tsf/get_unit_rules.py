@@ -113,6 +113,12 @@ def get_unit_rules(gateway_instance_id: Optional[_builtins.str] = None,
         status="disabled")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&type=document&lang=en)
+
 
     :param _builtins.str gateway_instance_id: gateway instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -147,6 +153,12 @@ def get_unit_rules_output(gateway_instance_id: pulumi.Input[Optional[_builtins.s
     unit_rules = tencentcloud.tsf.get_unit_rules(gateway_instance_id="gw-ins-lvdypq5k",
         status="disabled")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&type=document&lang=en)
 
 
     :param _builtins.str gateway_instance_id: gateway instance id.

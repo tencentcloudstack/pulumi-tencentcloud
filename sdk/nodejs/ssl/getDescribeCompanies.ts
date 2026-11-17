@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     companyId: 122,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
  */
 export function getDescribeCompanies(args?: GetDescribeCompaniesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeCompaniesResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetDescribeCompaniesResult {
  *     companyId: 122,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
  */
 export function getDescribeCompaniesOutput(args?: GetDescribeCompaniesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeCompaniesResult> {
     args = args || {};

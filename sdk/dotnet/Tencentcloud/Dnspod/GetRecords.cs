@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
         /// </summary>
         public static Task<GetRecordsResult> InvokeAsync(GetRecordsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsArgs(), options.WithDefaults());
@@ -120,6 +126,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
         /// </summary>
         public static Output<GetRecordsResult> Invoke(GetRecordsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());
@@ -176,6 +188,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
         /// </summary>
         public static Output<GetRecordsResult> Invoke(GetRecordsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:Dnspod/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());

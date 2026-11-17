@@ -151,6 +151,12 @@ def get_overview_attack_trend(dimension: Optional[_builtins.str] = None,
         end_time="2023-11-22 10:28:31")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewAttackTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewAttackTrend&type=document&lang=en)
+
 
     :param _builtins.str dimension: Latitude, currently only attackcount is supported.
     :param _builtins.str end_time: Protection Overview Attack Trend End Time.
@@ -201,6 +207,12 @@ def get_overview_attack_trend_output(dimension: pulumi.Input[Optional[_builtins.
         start_time="2023-11-21 10:28:31",
         end_time="2023-11-22 10:28:31")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewAttackTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewAttackTrend&type=document&lang=en)
 
 
     :param _builtins.str dimension: Latitude, currently only attackcount is supported.

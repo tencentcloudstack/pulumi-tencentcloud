@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateEmbedToken](https://www.tencentcloud.com/document/api/1270/72621)
 type EmbedTokenApply struct {
 	pulumi.CustomResourceState
 

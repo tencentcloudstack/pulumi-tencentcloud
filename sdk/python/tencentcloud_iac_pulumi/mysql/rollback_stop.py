@@ -87,6 +87,14 @@ class RollbackStop(pulumi.CustomResource):
         example = tencentcloud.mysql.RollbackStop("example", instance_id="cdb-fitq5t9h")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [StopRollback](https://www.tencentcloud.com/document/api/236/38951)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -111,6 +119,14 @@ class RollbackStop(pulumi.CustomResource):
 
         example = tencentcloud.mysql.RollbackStop("example", instance_id="cdb-fitq5t9h")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [StopRollback](https://www.tencentcloud.com/document/api/236/38951)
 
 
         :param str resource_name: The name of the resource.

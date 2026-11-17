@@ -21,6 +21,7 @@ __all__ = ['User', 'UserArgs']
 class UserArgs:
     def __init__(__self__, *,
                  user_id: pulumi.Input[_builtins.str],
+                 account_type: pulumi.Input[Optional[_builtins.str]] = None,
                  user_alias: pulumi.Input[Optional[_builtins.str]] = None,
                  user_description: pulumi.Input[Optional[_builtins.str]] = None,
                  user_type: pulumi.Input[Optional[_builtins.str]] = None):
@@ -28,11 +29,14 @@ class UserArgs:
         The set of arguments for constructing a User resource.
 
         :param pulumi.Input[_builtins.str] user_id: Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
+        :param pulumi.Input[_builtins.str] account_type: Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
         :param pulumi.Input[_builtins.str] user_alias: User alias, and its characters are less than 50.
         :param pulumi.Input[_builtins.str] user_description: User description, which can make it easy to identify different users.
         :param pulumi.Input[_builtins.str] user_type: Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
         """
         pulumi.set(__self__, "user_id", user_id)
+        if account_type is not None:
+            pulumi.set(__self__, "account_type", account_type)
         if user_alias is not None:
             pulumi.set(__self__, "user_alias", user_alias)
         if user_description is not None:
@@ -51,6 +55,18 @@ class UserArgs:
     @user_id.setter
     def user_id(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "user_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="accountType")
+    def account_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+        """
+        return pulumi.get(self, "account_type")
+
+    @account_type.setter
+    def account_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "account_type", value)
 
     @_builtins.property
     @pulumi.getter(name="userAlias")
@@ -92,6 +108,7 @@ class UserArgs:
 @pulumi.input_type
 class _UserState:
     def __init__(__self__, *,
+                 account_type: pulumi.Input[Optional[_builtins.str]] = None,
                  user_alias: pulumi.Input[Optional[_builtins.str]] = None,
                  user_description: pulumi.Input[Optional[_builtins.str]] = None,
                  user_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -100,12 +117,15 @@ class _UserState:
         """
         Input properties used for looking up and filtering User resources.
 
+        :param pulumi.Input[_builtins.str] account_type: Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
         :param pulumi.Input[_builtins.str] user_alias: User alias, and its characters are less than 50.
         :param pulumi.Input[_builtins.str] user_description: User description, which can make it easy to identify different users.
         :param pulumi.Input[_builtins.str] user_id: Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
         :param pulumi.Input[_builtins.str] user_type: Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] work_group_ids: Collection of IDs of working groups bound to users.
         """
+        if account_type is not None:
+            pulumi.set(__self__, "account_type", account_type)
         if user_alias is not None:
             pulumi.set(__self__, "user_alias", user_alias)
         if user_description is not None:
@@ -116,6 +136,18 @@ class _UserState:
             pulumi.set(__self__, "user_type", user_type)
         if work_group_ids is not None:
             pulumi.set(__self__, "work_group_ids", work_group_ids)
+
+    @_builtins.property
+    @pulumi.getter(name="accountType")
+    def account_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+        """
+        return pulumi.get(self, "account_type")
+
+    @account_type.setter
+    def account_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "account_type", value)
 
     @_builtins.property
     @pulumi.getter(name="userAlias")
@@ -184,6 +216,7 @@ class User(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 account_type: pulumi.Input[Optional[_builtins.str]] = None,
                  user_alias: pulumi.Input[Optional[_builtins.str]] = None,
                  user_description: pulumi.Input[Optional[_builtins.str]] = None,
                  user_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -202,8 +235,20 @@ class User(pulumi.CustomResource):
             user_id="100027012454",
             user_type="COMMON",
             user_alias="terraform-test",
-            user_description="for terraform test")
+            user_description="for terraform test",
+            account_type="UserAccount")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUser](https://www.tencentcloud.com/document/api/1155/62675)
+        * Read: [DescribeUsers](https://www.tencentcloud.com/document/api/1155/62668)
+        * Update:
+          - [ModifyUser](https://www.tencentcloud.com/document/api/1155/62663)
+          - [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
+        * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/1155/62673)
 
         ## Import
 
@@ -216,6 +261,7 @@ class User(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] account_type: Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
         :param pulumi.Input[_builtins.str] user_alias: User alias, and its characters are less than 50.
         :param pulumi.Input[_builtins.str] user_description: User description, which can make it easy to identify different users.
         :param pulumi.Input[_builtins.str] user_id: Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
@@ -240,8 +286,20 @@ class User(pulumi.CustomResource):
             user_id="100027012454",
             user_type="COMMON",
             user_alias="terraform-test",
-            user_description="for terraform test")
+            user_description="for terraform test",
+            account_type="UserAccount")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUser](https://www.tencentcloud.com/document/api/1155/62675)
+        * Read: [DescribeUsers](https://www.tencentcloud.com/document/api/1155/62668)
+        * Update:
+          - [ModifyUser](https://www.tencentcloud.com/document/api/1155/62663)
+          - [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
+        * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/1155/62673)
 
         ## Import
 
@@ -267,6 +325,7 @@ class User(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 account_type: pulumi.Input[Optional[_builtins.str]] = None,
                  user_alias: pulumi.Input[Optional[_builtins.str]] = None,
                  user_description: pulumi.Input[Optional[_builtins.str]] = None,
                  user_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -280,6 +339,7 @@ class User(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = UserArgs.__new__(UserArgs)
 
+            __props__.__dict__["account_type"] = account_type
             __props__.__dict__["user_alias"] = user_alias
             __props__.__dict__["user_description"] = user_description
             if user_id is None and not opts.urn:
@@ -297,6 +357,7 @@ class User(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            account_type: pulumi.Input[Optional[_builtins.str]] = None,
             user_alias: pulumi.Input[Optional[_builtins.str]] = None,
             user_description: pulumi.Input[Optional[_builtins.str]] = None,
             user_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -309,6 +370,7 @@ class User(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] account_type: Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
         :param pulumi.Input[_builtins.str] user_alias: User alias, and its characters are less than 50.
         :param pulumi.Input[_builtins.str] user_description: User description, which can make it easy to identify different users.
         :param pulumi.Input[_builtins.str] user_id: Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
@@ -319,12 +381,21 @@ class User(pulumi.CustomResource):
 
         __props__ = _UserState.__new__(_UserState)
 
+        __props__.__dict__["account_type"] = account_type
         __props__.__dict__["user_alias"] = user_alias
         __props__.__dict__["user_description"] = user_description
         __props__.__dict__["user_id"] = user_id
         __props__.__dict__["user_type"] = user_type
         __props__.__dict__["work_group_ids"] = work_group_ids
         return User(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="accountType")
+    def account_type(self) -> pulumi.Output[_builtins.str]:
+        """
+        Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+        """
+        return pulumi.get(self, "account_type")
 
     @_builtins.property
     @pulumi.getter(name="userAlias")
@@ -352,7 +423,7 @@ class User(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="userType")
-    def user_type(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def user_type(self) -> pulumi.Output[_builtins.str]:
         """
         Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
         """

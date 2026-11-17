@@ -459,6 +459,14 @@ class ClsLogAttachment(pulumi.CustomResource):
             log_topic="140d4d39-4307-45a8-9655-290f679b063d")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
+        * Read: [DescribeDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57978)
+        * Delete: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -554,6 +562,14 @@ class ClsLogAttachment(pulumi.CustomResource):
             log_set="50d499a8-c4c0-4442-aa04-e8aa8a02437d",
             log_topic="140d4d39-4307-45a8-9655-290f679b063d")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
+        * Read: [DescribeDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57978)
+        * Delete: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
 
 
         :param str resource_name: The name of the resource.

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetTaskInstance](https://www.tencentcloud.com/document/api/1174/69228)
 func GetTaskInstance(ctx *pulumi.Context, args *GetTaskInstanceArgs, opts ...pulumi.InvokeOption) (*GetTaskInstanceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTaskInstanceResult

@@ -69,6 +69,15 @@ class SignUpCfsService(pulumi.CustomResource):
         sign_up_cfs_service = tencentcloud.cfs.SignUpCfsService("sign_up_cfs_service")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
+          - [SignUpCfsService](https://www.tencentcloud.com/document/api/582/34498)
+        * Read: [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -90,6 +99,15 @@ class SignUpCfsService(pulumi.CustomResource):
 
         sign_up_cfs_service = tencentcloud.cfs.SignUpCfsService("sign_up_cfs_service")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
+          - [SignUpCfsService](https://www.tencentcloud.com/document/api/582/34498)
+        * Read: [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
 
 
         :param str resource_name: The name of the resource.

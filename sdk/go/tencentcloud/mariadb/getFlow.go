@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
 func GetFlow(ctx *pulumi.Context, args *GetFlowArgs, opts ...pulumi.InvokeOption) (*GetFlowResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFlowResult

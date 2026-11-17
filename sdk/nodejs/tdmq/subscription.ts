@@ -49,6 +49,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateSubscription](https://www.tencentcloud.com/search/?wd=CreateSubscription&type=document&lang=en)
+ * * Read:
+ *   - [DescribeSubscriptions](https://www.tencentcloud.com/search/?wd=DescribeSubscriptions&type=document&lang=en)
+ *   - [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&type=document&lang=en)
+ * * Delete:
+ *   - [DeleteSubscriptions](https://www.tencentcloud.com/search/?wd=DeleteSubscriptions&type=document&lang=en)
+ *   - [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&type=document&lang=en)
+ *
  * ## Import
  *
  * tdmq subscription can be imported using the id, e.g.

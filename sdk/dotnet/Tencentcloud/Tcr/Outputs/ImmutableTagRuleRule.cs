@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
-        /// ID of the resource.
+        /// rule id.
         /// </summary>
         public readonly int? Id;
         /// <summary>

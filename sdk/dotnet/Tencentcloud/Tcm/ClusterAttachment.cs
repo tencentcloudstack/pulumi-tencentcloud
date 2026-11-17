@@ -43,6 +43,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    ///   - [LinkClusterList](https://www.tencentcloud.com/search/?wd=LinkClusterList&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    ///   - [UnlinkCluster](https://www.tencentcloud.com/search/?wd=UnlinkCluster&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tcm ClusterAttachment can be imported using the mesh_id#cluster_id, e.g.

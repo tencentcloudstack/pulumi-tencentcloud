@@ -29,6 +29,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateOrganizationMember](https://www.tencentcloud.com/document/api/1031/52065)
+ * * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
+ * * Update:
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [MoveOrganizationNodeMembers](https://www.tencentcloud.com/document/api/1031/52060)
+ *   - [UpdateOrganizationMember](https://www.tencentcloud.com/document/api/1031/66424)
+ * * Delete:
+ *   - [DeleteAccount](https://www.tencentcloud.com/search/?wd=DeleteAccount&type=document&lang=en)
+ *   - [DeleteOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52064)
+ *
  * ## Import
  *
  * Organization member can be imported using the id, e.g.

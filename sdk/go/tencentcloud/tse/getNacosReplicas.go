@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNacosReplicas](https://www.tencentcloud.com/search/?wd=DescribeNacosReplicas&type=document&lang=en)
 func GetNacosReplicas(ctx *pulumi.Context, args *GetNacosReplicasArgs, opts ...pulumi.InvokeOption) (*GetNacosReplicasResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNacosReplicasResult

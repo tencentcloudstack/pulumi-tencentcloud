@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/1131/45308)
+    /// * Update:
+    ///   - [ResumeProject](https://www.tencentcloud.com/document/api/1131/53811)
+    ///   - [StopProject](https://www.tencentcloud.com/document/api/1131/53261)
+    /// 
     /// ## Import
     /// 
     /// rum ProjectStatusConfig can be imported using the id, e.g.

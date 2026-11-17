@@ -78,6 +78,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTaskInfo](https://www.tencentcloud.com/search/?wd=DescribeTaskInfo&type=document&lang=en)
 func GetRepairTasks(ctx *pulumi.Context, args *GetRepairTasksArgs, opts ...pulumi.InvokeOption) (*GetRepairTasksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRepairTasksResult

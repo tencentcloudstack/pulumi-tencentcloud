@@ -1048,6 +1048,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBotIdRule](https://www.tencentcloud.com/search/?wd=ModifyBotIdRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBotIdRule](https://www.tencentcloud.com/search/?wd=DescribeBotIdRule&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyBotIdRule](https://www.tencentcloud.com/search/?wd=ModifyBotIdRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// WAF bot id rule can be imported using the domain#sceneId, e.g.

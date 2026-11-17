@@ -43,6 +43,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDataMaskStrategy](https://www.tencentcloud.com/document/api/1155/73721)
+    /// * Read: [DescribeDataMaskStrategies](https://www.tencentcloud.com/document/api/1155/73796)
+    /// * Update: [UpdateDataMaskStrategy](https://www.tencentcloud.com/document/api/1155/73797)
+    /// * Delete: [DeleteDataMaskStrategy](https://www.tencentcloud.com/document/api/1155/73795)
+    /// 
     /// ## Import
     /// 
     /// DLC data mask strategy can be imported using the id, e.g.

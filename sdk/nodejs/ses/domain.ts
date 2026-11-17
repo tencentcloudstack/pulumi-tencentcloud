@@ -15,8 +15,23 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domain = new tencentcloud.ses.Domain("domain", {emailIdentity: "iac.cloud"});
+ * const domain = new tencentcloud.ses.Domain("domain", {
+ *     emailIdentity: "iac.cloud",
+ *     dkimOption: 1,
+ *     tagLists: [{
+ *         tagKey: "env",
+ *         tagValue: "prod",
+ *     }],
+ * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39414)
+ * * Read: [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+ * * Delete: [DeleteEmailIdentity](https://www.tencentcloud.com/document/api/1084/39413)
  *
  * ## Import
  *
@@ -58,9 +73,17 @@ export class Domain extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly attributes: pulumi.Output<outputs.Ses.DomainAttribute[]>;
     /**
+     * DKIM key length. 0: 1024-bit, 1: 2048-bit.
+     */
+    declare public readonly dkimOption: pulumi.Output<number>;
+    /**
      * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
      */
     declare public readonly emailIdentity: pulumi.Output<string>;
+    /**
+     * Tag list.
+     */
+    declare public readonly tagLists: pulumi.Output<outputs.Ses.DomainTagList[]>;
 
     /**
      * Create a Domain resource with the given unique name, arguments, and options.
@@ -76,13 +99,17 @@ export class Domain extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as DomainState | undefined;
             resourceInputs["attributes"] = state?.attributes;
+            resourceInputs["dkimOption"] = state?.dkimOption;
             resourceInputs["emailIdentity"] = state?.emailIdentity;
+            resourceInputs["tagLists"] = state?.tagLists;
         } else {
             const args = argsOrState as DomainArgs | undefined;
             if (args?.emailIdentity === undefined && !opts.urn) {
                 throw new Error("Missing required property 'emailIdentity'");
             }
+            resourceInputs["dkimOption"] = args?.dkimOption;
             resourceInputs["emailIdentity"] = args?.emailIdentity;
+            resourceInputs["tagLists"] = args?.tagLists;
             resourceInputs["attributes"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -99,9 +126,17 @@ export interface DomainState {
      */
     attributes?: pulumi.Input<pulumi.Input<inputs.Ses.DomainAttribute>[] | undefined>;
     /**
+     * DKIM key length. 0: 1024-bit, 1: 2048-bit.
+     */
+    dkimOption?: pulumi.Input<number | undefined>;
+    /**
      * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
      */
     emailIdentity?: pulumi.Input<string | undefined>;
+    /**
+     * Tag list.
+     */
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Ses.DomainTagList>[] | undefined>;
 }
 
 /**
@@ -109,7 +144,15 @@ export interface DomainState {
  */
 export interface DomainArgs {
     /**
+     * DKIM key length. 0: 1024-bit, 1: 2048-bit.
+     */
+    dkimOption?: pulumi.Input<number | undefined>;
+    /**
      * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
      */
     emailIdentity: pulumi.Input<string>;
+    /**
+     * Tag list.
+     */
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Ses.DomainTagList>[] | undefined>;
 }

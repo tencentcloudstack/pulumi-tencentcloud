@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
 func GetWorkflowMaxPermission(ctx *pulumi.Context, args *GetWorkflowMaxPermissionArgs, opts ...pulumi.InvokeOption) (*GetWorkflowMaxPermissionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWorkflowMaxPermissionResult

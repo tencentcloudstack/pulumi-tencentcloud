@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
 func GetWebVitalsPage(ctx *pulumi.Context, args *GetWebVitalsPageArgs, opts ...pulumi.InvokeOption) (*GetWebVitalsPageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWebVitalsPageResult

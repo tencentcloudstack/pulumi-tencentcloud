@@ -94,6 +94,12 @@ def get_instance_shards(instance_id: Optional[_builtins.str] = None,
     instance_shards = tencentcloud.clickhouse.get_instance_shards(instance_id="cdwch-datuhk3z")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Cluster instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_instance_shards_output(instance_id: pulumi.Input[Optional[_builtins.str]
 
     instance_shards = tencentcloud.clickhouse.get_instance_shards(instance_id="cdwch-datuhk3z")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Cluster instance ID.

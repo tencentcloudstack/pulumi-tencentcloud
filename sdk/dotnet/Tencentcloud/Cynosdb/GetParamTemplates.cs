@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
         /// </summary>
         public static Task<GetParamTemplatesResult> InvokeAsync(GetParamTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
         /// </summary>
         public static Output<GetParamTemplatesResult> Invoke(GetParamTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
         /// </summary>
         public static Output<GetParamTemplatesResult> Invoke(GetParamTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParamTemplatesResult>("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args ?? new GetParamTemplatesInvokeArgs(), options.WithDefaults());

@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     startTimeEnd: "2017-12-31 10:40:01",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
  */
 export function getUserTask(args?: GetUserTaskArgs, opts?: pulumi.InvokeOptions): Promise<GetUserTaskResult> {
     args = args || {};
@@ -117,6 +123,12 @@ export interface GetUserTaskResult {
  *     startTimeEnd: "2017-12-31 10:40:01",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
  */
 export function getUserTaskOutput(args?: GetUserTaskOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserTaskResult> {
     args = args || {};

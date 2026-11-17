@@ -131,6 +131,12 @@ def get_cluster(cluster_id_lists: Optional[Sequence[_builtins.str]] = None,
         disable_program_auth_check=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSimpleClusters](https://www.tencentcloud.com/search/?wd=DescribeSimpleClusters&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] cluster_id_lists: Cluster ID list to be queried, if not filled in or passed, all content will be queried.
     :param _builtins.str cluster_type: The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.
@@ -174,6 +180,12 @@ def get_cluster_output(cluster_id_lists: pulumi.Input[Optional[Optional[Sequence
         cluster_type="V",
         disable_program_auth_check=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSimpleClusters](https://www.tencentcloud.com/search/?wd=DescribeSimpleClusters&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] cluster_id_lists: Cluster ID list to be queried, if not filled in or passed, all content will be queried.

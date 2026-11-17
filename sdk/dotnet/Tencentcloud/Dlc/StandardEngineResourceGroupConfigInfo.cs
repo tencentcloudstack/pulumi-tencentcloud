@@ -62,6 +62,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
+    ///   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&amp;type=document&amp;lang=en)
+    ///   - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// DLC standard engine resource group config info can be imported using the id, e.g.

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
         /// </summary>
         public static Task<GetDescribeCertificateResult> InvokeAsync(GetDescribeCertificateArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
         /// </summary>
         public static Output<GetDescribeCertificateResult> Invoke(GetDescribeCertificateInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
         /// </summary>
         public static Output<GetDescribeCertificateResult> Invoke(GetDescribeCertificateInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeCertificateResult>("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args ?? new GetDescribeCertificateInvokeArgs(), options.WithDefaults());

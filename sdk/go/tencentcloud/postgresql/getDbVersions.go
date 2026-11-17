@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
 func GetDbVersions(ctx *pulumi.Context, args *GetDbVersionsArgs, opts ...pulumi.InvokeOption) (*GetDbVersionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbVersionsResult

@@ -260,6 +260,12 @@ def get_migrate_jobs(dst_access_types: Optional[Sequence[_builtins.str]] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
+
 
     :param Sequence[_builtins.str] dst_access_types: destination access type.
     :param Sequence[_builtins.str] dst_database_types: destination database type.
@@ -365,6 +371,12 @@ def get_migrate_jobs_output(dst_access_types: pulumi.Input[Optional[Optional[Seq
             "tag_value": "bbb",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
 
 
     :param Sequence[_builtins.str] dst_access_types: destination access type.

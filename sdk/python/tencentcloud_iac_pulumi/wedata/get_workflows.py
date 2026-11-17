@@ -177,6 +177,12 @@ def get_workflows(bundle_id: Optional[_builtins.str] = None,
         keyword="test_workflow")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
+
 
     :param _builtins.str bundle_id: bundleId item.
     :param Sequence[_builtins.str] create_times: Creation time range yyyy-MM-dd HH:MM:ss. two times must be filled in the array.
@@ -239,6 +245,12 @@ def get_workflows_output(bundle_id: pulumi.Input[Optional[Optional[_builtins.str
     wedata_workflows = tencentcloud.wedata.get_workflows(project_id="2905622749543821312",
         keyword="test_workflow")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
 
 
     :param _builtins.str bundle_id: bundleId item.

@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     bandwidthLimit: 500,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
  */
 export function getBandwidthLimits(args: GetBandwidthLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetBandwidthLimitsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetBandwidthLimitsResult {
  *     bandwidthLimit: 500,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
  */
 export function getBandwidthLimitsOutput(args: GetBandwidthLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBandwidthLimitsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

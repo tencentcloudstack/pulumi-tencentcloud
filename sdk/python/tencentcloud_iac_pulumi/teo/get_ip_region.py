@@ -101,6 +101,12 @@ def get_ip_region(ips: Optional[Sequence[_builtins.str]] = None,
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
+
 
     :param Sequence[_builtins.str] ips: List of IP addresses (IPv4/IPv6) to query, up to 100 entries.
     :param _builtins.str result_output_file: Used to save results.
@@ -135,6 +141,12 @@ def get_ip_region_output(ips: pulumi.Input[Optional[Sequence[_builtins.str]]] = 
         "2.2.2.2",
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
 
 
     :param Sequence[_builtins.str] ips: List of IP addresses (IPv4/IPv6) to query, up to 100 entries.

@@ -47,6 +47,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSyncJob](https://www.tencentcloud.com/document/api/571/51795)
+    /// * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+    /// * Update: [ResizeSyncJob](https://www.tencentcloud.com/document/api/571/51789)
+    /// * Delete:
+    ///   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+    ///   - [DestroySyncJob](https://www.tencentcloud.com/document/api/571/51792)
+    ///   - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
+    /// 
     /// ## Import
     /// 
     /// DTS sync job can be imported using the id, e.g.
@@ -125,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public Output<string> SrcRegion { get; private set; } = null!;
 
         /// <summary>
-        /// Tag information.
+        /// Tag information.Cannot be modified.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<Outputs.SyncJobTag>> Tags { get; private set; } = null!;
@@ -241,7 +253,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         private InputList<Inputs.SyncJobTagArgs>? _tags;
 
         /// <summary>
-        /// Tag information.
+        /// Tag information.Cannot be modified.
         /// </summary>
         public InputList<Inputs.SyncJobTagArgs> Tags
         {
@@ -327,7 +339,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         private InputList<Inputs.SyncJobTagGetArgs>? _tags;
 
         /// <summary>
-        /// Tag information.
+        /// Tag information.Cannot be modified.
         /// </summary>
         public InputList<Inputs.SyncJobTagGetArgs> Tags
         {

@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string EndAt;
         /// <summary>
-        /// ID of the resource.
+        /// Maintenance exclusion ID.
         /// </summary>
         public readonly int? Id;
         /// <summary>

@@ -176,6 +176,14 @@ class AccountFactoryBaselineConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateAccountFactoryBaseline](https://www.tencentcloud.com/document/api/1220/74849)
+        * Read: [GetAccountFactoryBaseline](https://www.tencentcloud.com/document/api/1220/74852)
+        * Update: [UpdateAccountFactoryBaseline](https://www.tencentcloud.com/document/api/1220/74849)
+
         ## Import
 
         Controlcenter account factory baseline config can be imported using the customId(like uuid or base64 string), e.g.
@@ -229,6 +237,14 @@ class AccountFactoryBaselineConfig(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateAccountFactoryBaseline](https://www.tencentcloud.com/document/api/1220/74849)
+        * Read: [GetAccountFactoryBaseline](https://www.tencentcloud.com/document/api/1220/74852)
+        * Update: [UpdateAccountFactoryBaseline](https://www.tencentcloud.com/document/api/1220/74849)
 
         ## Import
 

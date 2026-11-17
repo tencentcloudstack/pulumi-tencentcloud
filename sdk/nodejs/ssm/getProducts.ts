@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const products = tencentcloud.ssm.getProducts({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSupportedProducts](https://www.tencentcloud.com/document/api/1078/41513)
  */
 export function getProducts(args?: GetProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetProductsResult> {
     args = args || {};
@@ -59,6 +65,12 @@ export interface GetProductsResult {
  *
  * const products = tencentcloud.ssm.getProducts({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSupportedProducts](https://www.tencentcloud.com/document/api/1078/41513)
  */
 export function getProductsOutput(args?: GetProductsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProductsResult> {
     args = args || {};

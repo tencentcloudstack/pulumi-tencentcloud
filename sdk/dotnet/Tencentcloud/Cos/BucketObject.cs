@@ -60,6 +60,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+    /// * Update: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketObject:BucketObject")]
     public partial class BucketObject : global::Pulumi.CustomResource

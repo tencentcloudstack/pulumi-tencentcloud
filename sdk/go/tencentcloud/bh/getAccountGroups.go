@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&type=document&lang=en)
 func GetAccountGroups(ctx *pulumi.Context, args *GetAccountGroupsArgs, opts ...pulumi.InvokeOption) (*GetAccountGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountGroupsResult

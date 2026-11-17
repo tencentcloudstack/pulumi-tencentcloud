@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
         /// </summary>
         public static Task<GetDescribeKeysResult> InvokeAsync(GetDescribeKeysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
         /// </summary>
         public static Output<GetDescribeKeysResult> Invoke(GetDescribeKeysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
         /// </summary>
         public static Output<GetDescribeKeysResult> Invoke(GetDescribeKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysInvokeArgs(), options.WithDefaults());

@@ -430,6 +430,12 @@ class OrganizationMemberOperation(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [InviteOrganizationMember](https://www.tencentcloud.com/document/api/1031/64469)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -477,6 +483,12 @@ class OrganizationMemberOperation(pulumi.CustomResource):
                 "tag_value": "Terraform",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [InviteOrganizationMember](https://www.tencentcloud.com/document/api/1031/64469)
 
 
         :param str resource_name: The name of the resource.

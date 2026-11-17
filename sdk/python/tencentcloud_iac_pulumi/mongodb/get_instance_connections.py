@@ -96,6 +96,12 @@ def get_instance_connections(instance_id: Optional[_builtins.str] = None,
     instance_connections = tencentcloud.mongodb.get_instance_connections(instance_id="cmgo-9d0p6umb")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
+
 
     :param _builtins.str instance_id: Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_connections_output(instance_id: pulumi.Input[Optional[_builtins
 
     instance_connections = tencentcloud.mongodb.get_instance_connections(instance_id="cmgo-9d0p6umb")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
 
 
     :param _builtins.str instance_id: Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.

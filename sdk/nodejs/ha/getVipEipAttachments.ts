@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     addressIp: "1.1.1.1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
  */
 export function getVipEipAttachments(args: GetVipEipAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetVipEipAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetVipEipAttachmentsResult {
  *     addressIp: "1.1.1.1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
  */
 export function getVipEipAttachmentsOutput(args: GetVipEipAttachmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVipEipAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

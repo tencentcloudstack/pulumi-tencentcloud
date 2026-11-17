@@ -118,6 +118,12 @@ def get_business_log_configs(config_id_lists: Optional[Sequence[_builtins.str]] 
         config_id_lists=["apm-busi-log-cfg-qv3x3rdv"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBusinessLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeBusinessLogConfigs&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] config_id_lists: Config Id list.
     :param _builtins.bool disable_program_auth_check: Disable Program auth check or not.
@@ -157,6 +163,12 @@ def get_business_log_configs_output(config_id_lists: pulumi.Input[Optional[Optio
         disable_program_auth_check=True,
         config_id_lists=["apm-busi-log-cfg-qv3x3rdv"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBusinessLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeBusinessLogConfigs&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] config_id_lists: Config Id list.

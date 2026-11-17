@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
         /// </summary>
         public static Task<GetDescribeDataEnginePythonSparkImagesResult> InvokeAsync(GetDescribeDataEnginePythonSparkImagesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
         /// </summary>
         public static Output<GetDescribeDataEnginePythonSparkImagesResult> Invoke(GetDescribeDataEnginePythonSparkImagesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
         /// </summary>
         public static Output<GetDescribeDataEnginePythonSparkImagesResult> Invoke(GetDescribeDataEnginePythonSparkImagesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEnginePythonSparkImagesResult>("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args ?? new GetDescribeDataEnginePythonSparkImagesInvokeArgs(), options.WithDefaults());

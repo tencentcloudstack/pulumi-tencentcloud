@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     business: "bgpip",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNewL4Rules](https://www.tencentcloud.com/search/?wd=DescribeNewL4Rules&type=document&lang=en)
  */
 export function getL4RulesV2(args: GetL4RulesV2Args, opts?: pulumi.InvokeOptions): Promise<GetL4RulesV2Result> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetL4RulesV2Result {
  *     business: "bgpip",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNewL4Rules](https://www.tencentcloud.com/search/?wd=DescribeNewL4Rules&type=document&lang=en)
  */
 export function getL4RulesV2Output(args: GetL4RulesV2OutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetL4RulesV2Result> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

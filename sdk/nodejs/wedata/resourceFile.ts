@@ -27,6 +27,15 @@ import * as utilities from "../utilities";
  *     resourceFile: pulumi.interpolate`/datastudio/resource/2905622749543821312/${wedataResourceFolder.parentFolderPath}${wedataResourceFolder.folderName}/test`,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateResourceFile](https://www.tencentcloud.com/document/api/1174/73887)
+ * * Read: [GetResourceFile](https://www.tencentcloud.com/document/api/1174/73877)
+ * * Update: [UpdateResourceFile](https://www.tencentcloud.com/document/api/1174/73863)
+ * * Delete: [DeleteResourceFile](https://www.tencentcloud.com/document/api/1174/61162)
  */
 export class ResourceFile extends pulumi.CustomResource {
     /**

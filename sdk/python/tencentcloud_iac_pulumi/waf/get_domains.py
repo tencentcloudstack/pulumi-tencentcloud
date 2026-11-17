@@ -124,6 +124,12 @@ def get_domains(domain: Optional[_builtins.str] = None,
         domain="tf.example.com")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
+
 
     :param _builtins.str domain: Domain name.
     :param _builtins.str instance_id: Unique ID of Instance.
@@ -169,6 +175,12 @@ def get_domains_output(domain: pulumi.Input[Optional[Optional[_builtins.str]]] =
     example = tencentcloud.waf.get_domains(instance_id="waf_2kxtlbky01b3wceb",
         domain="tf.example.com")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
 
 
     :param _builtins.str domain: Domain name.

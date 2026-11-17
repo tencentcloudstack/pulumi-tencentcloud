@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeleteBackUpData](https://www.tencentcloud.com/search/?wd=DeleteBackUpData&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/deleteBackupData:DeleteBackupData")]
     public partial class DeleteBackupData : global::Pulumi.CustomResource

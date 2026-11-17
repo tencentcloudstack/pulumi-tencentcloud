@@ -41,6 +41,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    ///   - [LinkPrometheus](https://www.tencentcloud.com/search/?wd=LinkPrometheus&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    /// * Delete: [UnlinkPrometheus](https://www.tencentcloud.com/search/?wd=UnlinkPrometheus&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tcm PrometheusAttachment can be imported using the mesh_id, e.g.

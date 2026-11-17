@@ -86,6 +86,12 @@ def get_tls_versions(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.waf.get_tls_versions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_tls_versions_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     example = tencentcloud.waf.get_tls_versions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
 
 
     :param _builtins.str result_output_file: Used to save results.

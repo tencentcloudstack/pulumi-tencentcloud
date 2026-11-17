@@ -149,6 +149,14 @@ def get_instances(limit: Optional[_builtins.int] = None,
         result_output_file="/tmp/redis_instances")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+      - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+
 
     :param _builtins.int limit: The number limitation of results for a query.
     :param _builtins.int project_id: ID of the project to which redis instance belongs.
@@ -198,6 +206,14 @@ def get_instances_output(limit: pulumi.Input[Optional[Optional[_builtins.int]]] 
         limit=20,
         result_output_file="/tmp/redis_instances")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+      - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
 
 
     :param _builtins.int limit: The number limitation of results for a query.

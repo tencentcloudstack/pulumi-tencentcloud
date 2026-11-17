@@ -83,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
         /// </summary>
         public static Task<GetEndPointsResult> InvokeAsync(GetEndPointsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEndPointsResult>("tencentcloud:PrivateDns/getEndPoints:getEndPoints", args ?? new GetEndPointsArgs(), options.WithDefaults());
@@ -158,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
         /// </summary>
         public static Output<GetEndPointsResult> Invoke(GetEndPointsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEndPointsResult>("tencentcloud:PrivateDns/getEndPoints:getEndPoints", args ?? new GetEndPointsInvokeArgs(), options.WithDefaults());
@@ -233,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
         /// </summary>
         public static Output<GetEndPointsResult> Invoke(GetEndPointsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEndPointsResult>("tencentcloud:PrivateDns/getEndPoints:getEndPoints", args ?? new GetEndPointsInvokeArgs(), options.WithDefaults());

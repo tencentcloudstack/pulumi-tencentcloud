@@ -119,6 +119,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyDatabaseCDC](https://www.tencentcloud.com/document/api/238/41640)
+    /// * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+    /// * Update:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyDatabaseCDC](https://www.tencentcloud.com/document/api/238/41640)
+    /// 
     /// ## Import
     /// 
     /// sqlserver ConfigDatabaseCdc can be imported using the id, e.g.

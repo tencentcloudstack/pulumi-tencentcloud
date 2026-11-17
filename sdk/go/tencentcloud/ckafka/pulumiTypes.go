@@ -42083,6 +42083,414 @@ func (o GetRegionResultArrayOutput) Index(i pulumi.IntInput) GetRegionResultOutp
 	}).(GetRegionResultOutput)
 }
 
+type GetRoutesRouter struct {
+	// Instance access type. 0: PLAINTEXT, 1: SASL_PLAINTEXT, 2: SSL, 3: SASL_SSL.
+	AccessType int `pulumi:"accessType"`
+	// Virtual IP list (1 to 1 broker nodes).
+	BrokerVipLists []GetRoutesRouterBrokerVipList `pulumi:"brokerVipLists"`
+	// Delete timestamp.
+	DeleteTimestamp string `pulumi:"deleteTimestamp"`
+	// Domain.
+	Domain string `pulumi:"domain"`
+	// Domain port.
+	DomainPort int `pulumi:"domainPort"`
+	// Remark.
+	Note string `pulumi:"note"`
+	// Route id, used to query a specific route.
+	RouteId int `pulumi:"routeId"`
+	// Route status. 1: creating, 2: created, 3: create failed, 4: deleting, 6: delete failed.
+	Status int `pulumi:"status"`
+	// Subnet id.
+	Subnet string `pulumi:"subnet"`
+	// Virtual IP list.
+	VipLists []GetRoutesRouterVipList `pulumi:"vipLists"`
+	// Routing network type. 3: vpc routing, 7: internal support routing, 1: public network routing.
+	VipType int `pulumi:"vipType"`
+	// Vpc id.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetRoutesRouterInput is an input type that accepts GetRoutesRouterArgs and GetRoutesRouterOutput values.
+// You can construct a concrete instance of `GetRoutesRouterInput` via:
+//
+//	GetRoutesRouterArgs{...}
+type GetRoutesRouterInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouterOutput() GetRoutesRouterOutput
+	ToGetRoutesRouterOutputWithContext(context.Context) GetRoutesRouterOutput
+}
+
+type GetRoutesRouterArgs struct {
+	// Instance access type. 0: PLAINTEXT, 1: SASL_PLAINTEXT, 2: SSL, 3: SASL_SSL.
+	AccessType pulumi.IntInput `pulumi:"accessType"`
+	// Virtual IP list (1 to 1 broker nodes).
+	BrokerVipLists GetRoutesRouterBrokerVipListArrayInput `pulumi:"brokerVipLists"`
+	// Delete timestamp.
+	DeleteTimestamp pulumi.StringInput `pulumi:"deleteTimestamp"`
+	// Domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Domain port.
+	DomainPort pulumi.IntInput `pulumi:"domainPort"`
+	// Remark.
+	Note pulumi.StringInput `pulumi:"note"`
+	// Route id, used to query a specific route.
+	RouteId pulumi.IntInput `pulumi:"routeId"`
+	// Route status. 1: creating, 2: created, 3: create failed, 4: deleting, 6: delete failed.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Subnet id.
+	Subnet pulumi.StringInput `pulumi:"subnet"`
+	// Virtual IP list.
+	VipLists GetRoutesRouterVipListArrayInput `pulumi:"vipLists"`
+	// Routing network type. 3: vpc routing, 7: internal support routing, 1: public network routing.
+	VipType pulumi.IntInput `pulumi:"vipType"`
+	// Vpc id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetRoutesRouterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouter)(nil)).Elem()
+}
+
+func (i GetRoutesRouterArgs) ToGetRoutesRouterOutput() GetRoutesRouterOutput {
+	return i.ToGetRoutesRouterOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouterArgs) ToGetRoutesRouterOutputWithContext(ctx context.Context) GetRoutesRouterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouterOutput)
+}
+
+// GetRoutesRouterArrayInput is an input type that accepts GetRoutesRouterArray and GetRoutesRouterArrayOutput values.
+// You can construct a concrete instance of `GetRoutesRouterArrayInput` via:
+//
+//	GetRoutesRouterArray{ GetRoutesRouterArgs{...} }
+type GetRoutesRouterArrayInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouterArrayOutput() GetRoutesRouterArrayOutput
+	ToGetRoutesRouterArrayOutputWithContext(context.Context) GetRoutesRouterArrayOutput
+}
+
+type GetRoutesRouterArray []GetRoutesRouterInput
+
+func (GetRoutesRouterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouter)(nil)).Elem()
+}
+
+func (i GetRoutesRouterArray) ToGetRoutesRouterArrayOutput() GetRoutesRouterArrayOutput {
+	return i.ToGetRoutesRouterArrayOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouterArray) ToGetRoutesRouterArrayOutputWithContext(ctx context.Context) GetRoutesRouterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouterArrayOutput)
+}
+
+type GetRoutesRouterOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouter)(nil)).Elem()
+}
+
+func (o GetRoutesRouterOutput) ToGetRoutesRouterOutput() GetRoutesRouterOutput {
+	return o
+}
+
+func (o GetRoutesRouterOutput) ToGetRoutesRouterOutputWithContext(ctx context.Context) GetRoutesRouterOutput {
+	return o
+}
+
+// Instance access type. 0: PLAINTEXT, 1: SASL_PLAINTEXT, 2: SSL, 3: SASL_SSL.
+func (o GetRoutesRouterOutput) AccessType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRoutesRouter) int { return v.AccessType }).(pulumi.IntOutput)
+}
+
+// Virtual IP list (1 to 1 broker nodes).
+func (o GetRoutesRouterOutput) BrokerVipLists() GetRoutesRouterBrokerVipListArrayOutput {
+	return o.ApplyT(func(v GetRoutesRouter) []GetRoutesRouterBrokerVipList { return v.BrokerVipLists }).(GetRoutesRouterBrokerVipListArrayOutput)
+}
+
+// Delete timestamp.
+func (o GetRoutesRouterOutput) DeleteTimestamp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouter) string { return v.DeleteTimestamp }).(pulumi.StringOutput)
+}
+
+// Domain.
+func (o GetRoutesRouterOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouter) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Domain port.
+func (o GetRoutesRouterOutput) DomainPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRoutesRouter) int { return v.DomainPort }).(pulumi.IntOutput)
+}
+
+// Remark.
+func (o GetRoutesRouterOutput) Note() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouter) string { return v.Note }).(pulumi.StringOutput)
+}
+
+// Route id, used to query a specific route.
+func (o GetRoutesRouterOutput) RouteId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRoutesRouter) int { return v.RouteId }).(pulumi.IntOutput)
+}
+
+// Route status. 1: creating, 2: created, 3: create failed, 4: deleting, 6: delete failed.
+func (o GetRoutesRouterOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRoutesRouter) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Subnet id.
+func (o GetRoutesRouterOutput) Subnet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouter) string { return v.Subnet }).(pulumi.StringOutput)
+}
+
+// Virtual IP list.
+func (o GetRoutesRouterOutput) VipLists() GetRoutesRouterVipListArrayOutput {
+	return o.ApplyT(func(v GetRoutesRouter) []GetRoutesRouterVipList { return v.VipLists }).(GetRoutesRouterVipListArrayOutput)
+}
+
+// Routing network type. 3: vpc routing, 7: internal support routing, 1: public network routing.
+func (o GetRoutesRouterOutput) VipType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRoutesRouter) int { return v.VipType }).(pulumi.IntOutput)
+}
+
+// Vpc id.
+func (o GetRoutesRouterOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouter) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetRoutesRouterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouter)(nil)).Elem()
+}
+
+func (o GetRoutesRouterArrayOutput) ToGetRoutesRouterArrayOutput() GetRoutesRouterArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouterArrayOutput) ToGetRoutesRouterArrayOutputWithContext(ctx context.Context) GetRoutesRouterArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouterArrayOutput) Index(i pulumi.IntInput) GetRoutesRouterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRoutesRouter {
+		return vs[0].([]GetRoutesRouter)[vs[1].(int)]
+	}).(GetRoutesRouterOutput)
+}
+
+type GetRoutesRouterBrokerVipList struct {
+	// Virtual IP.
+	Vip string `pulumi:"vip"`
+	// Virtual port.
+	Vport string `pulumi:"vport"`
+}
+
+// GetRoutesRouterBrokerVipListInput is an input type that accepts GetRoutesRouterBrokerVipListArgs and GetRoutesRouterBrokerVipListOutput values.
+// You can construct a concrete instance of `GetRoutesRouterBrokerVipListInput` via:
+//
+//	GetRoutesRouterBrokerVipListArgs{...}
+type GetRoutesRouterBrokerVipListInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouterBrokerVipListOutput() GetRoutesRouterBrokerVipListOutput
+	ToGetRoutesRouterBrokerVipListOutputWithContext(context.Context) GetRoutesRouterBrokerVipListOutput
+}
+
+type GetRoutesRouterBrokerVipListArgs struct {
+	// Virtual IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Virtual port.
+	Vport pulumi.StringInput `pulumi:"vport"`
+}
+
+func (GetRoutesRouterBrokerVipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouterBrokerVipList)(nil)).Elem()
+}
+
+func (i GetRoutesRouterBrokerVipListArgs) ToGetRoutesRouterBrokerVipListOutput() GetRoutesRouterBrokerVipListOutput {
+	return i.ToGetRoutesRouterBrokerVipListOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouterBrokerVipListArgs) ToGetRoutesRouterBrokerVipListOutputWithContext(ctx context.Context) GetRoutesRouterBrokerVipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouterBrokerVipListOutput)
+}
+
+// GetRoutesRouterBrokerVipListArrayInput is an input type that accepts GetRoutesRouterBrokerVipListArray and GetRoutesRouterBrokerVipListArrayOutput values.
+// You can construct a concrete instance of `GetRoutesRouterBrokerVipListArrayInput` via:
+//
+//	GetRoutesRouterBrokerVipListArray{ GetRoutesRouterBrokerVipListArgs{...} }
+type GetRoutesRouterBrokerVipListArrayInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouterBrokerVipListArrayOutput() GetRoutesRouterBrokerVipListArrayOutput
+	ToGetRoutesRouterBrokerVipListArrayOutputWithContext(context.Context) GetRoutesRouterBrokerVipListArrayOutput
+}
+
+type GetRoutesRouterBrokerVipListArray []GetRoutesRouterBrokerVipListInput
+
+func (GetRoutesRouterBrokerVipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouterBrokerVipList)(nil)).Elem()
+}
+
+func (i GetRoutesRouterBrokerVipListArray) ToGetRoutesRouterBrokerVipListArrayOutput() GetRoutesRouterBrokerVipListArrayOutput {
+	return i.ToGetRoutesRouterBrokerVipListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouterBrokerVipListArray) ToGetRoutesRouterBrokerVipListArrayOutputWithContext(ctx context.Context) GetRoutesRouterBrokerVipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouterBrokerVipListArrayOutput)
+}
+
+type GetRoutesRouterBrokerVipListOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouterBrokerVipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouterBrokerVipList)(nil)).Elem()
+}
+
+func (o GetRoutesRouterBrokerVipListOutput) ToGetRoutesRouterBrokerVipListOutput() GetRoutesRouterBrokerVipListOutput {
+	return o
+}
+
+func (o GetRoutesRouterBrokerVipListOutput) ToGetRoutesRouterBrokerVipListOutputWithContext(ctx context.Context) GetRoutesRouterBrokerVipListOutput {
+	return o
+}
+
+// Virtual IP.
+func (o GetRoutesRouterBrokerVipListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouterBrokerVipList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Virtual port.
+func (o GetRoutesRouterBrokerVipListOutput) Vport() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouterBrokerVipList) string { return v.Vport }).(pulumi.StringOutput)
+}
+
+type GetRoutesRouterBrokerVipListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouterBrokerVipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouterBrokerVipList)(nil)).Elem()
+}
+
+func (o GetRoutesRouterBrokerVipListArrayOutput) ToGetRoutesRouterBrokerVipListArrayOutput() GetRoutesRouterBrokerVipListArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouterBrokerVipListArrayOutput) ToGetRoutesRouterBrokerVipListArrayOutputWithContext(ctx context.Context) GetRoutesRouterBrokerVipListArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouterBrokerVipListArrayOutput) Index(i pulumi.IntInput) GetRoutesRouterBrokerVipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRoutesRouterBrokerVipList {
+		return vs[0].([]GetRoutesRouterBrokerVipList)[vs[1].(int)]
+	}).(GetRoutesRouterBrokerVipListOutput)
+}
+
+type GetRoutesRouterVipList struct {
+	// Virtual IP.
+	Vip string `pulumi:"vip"`
+	// Virtual port.
+	Vport string `pulumi:"vport"`
+}
+
+// GetRoutesRouterVipListInput is an input type that accepts GetRoutesRouterVipListArgs and GetRoutesRouterVipListOutput values.
+// You can construct a concrete instance of `GetRoutesRouterVipListInput` via:
+//
+//	GetRoutesRouterVipListArgs{...}
+type GetRoutesRouterVipListInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouterVipListOutput() GetRoutesRouterVipListOutput
+	ToGetRoutesRouterVipListOutputWithContext(context.Context) GetRoutesRouterVipListOutput
+}
+
+type GetRoutesRouterVipListArgs struct {
+	// Virtual IP.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Virtual port.
+	Vport pulumi.StringInput `pulumi:"vport"`
+}
+
+func (GetRoutesRouterVipListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouterVipList)(nil)).Elem()
+}
+
+func (i GetRoutesRouterVipListArgs) ToGetRoutesRouterVipListOutput() GetRoutesRouterVipListOutput {
+	return i.ToGetRoutesRouterVipListOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouterVipListArgs) ToGetRoutesRouterVipListOutputWithContext(ctx context.Context) GetRoutesRouterVipListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouterVipListOutput)
+}
+
+// GetRoutesRouterVipListArrayInput is an input type that accepts GetRoutesRouterVipListArray and GetRoutesRouterVipListArrayOutput values.
+// You can construct a concrete instance of `GetRoutesRouterVipListArrayInput` via:
+//
+//	GetRoutesRouterVipListArray{ GetRoutesRouterVipListArgs{...} }
+type GetRoutesRouterVipListArrayInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouterVipListArrayOutput() GetRoutesRouterVipListArrayOutput
+	ToGetRoutesRouterVipListArrayOutputWithContext(context.Context) GetRoutesRouterVipListArrayOutput
+}
+
+type GetRoutesRouterVipListArray []GetRoutesRouterVipListInput
+
+func (GetRoutesRouterVipListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouterVipList)(nil)).Elem()
+}
+
+func (i GetRoutesRouterVipListArray) ToGetRoutesRouterVipListArrayOutput() GetRoutesRouterVipListArrayOutput {
+	return i.ToGetRoutesRouterVipListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouterVipListArray) ToGetRoutesRouterVipListArrayOutputWithContext(ctx context.Context) GetRoutesRouterVipListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouterVipListArrayOutput)
+}
+
+type GetRoutesRouterVipListOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouterVipListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouterVipList)(nil)).Elem()
+}
+
+func (o GetRoutesRouterVipListOutput) ToGetRoutesRouterVipListOutput() GetRoutesRouterVipListOutput {
+	return o
+}
+
+func (o GetRoutesRouterVipListOutput) ToGetRoutesRouterVipListOutputWithContext(ctx context.Context) GetRoutesRouterVipListOutput {
+	return o
+}
+
+// Virtual IP.
+func (o GetRoutesRouterVipListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouterVipList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// Virtual port.
+func (o GetRoutesRouterVipListOutput) Vport() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouterVipList) string { return v.Vport }).(pulumi.StringOutput)
+}
+
+type GetRoutesRouterVipListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouterVipListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouterVipList)(nil)).Elem()
+}
+
+func (o GetRoutesRouterVipListArrayOutput) ToGetRoutesRouterVipListArrayOutput() GetRoutesRouterVipListArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouterVipListArrayOutput) ToGetRoutesRouterVipListArrayOutputWithContext(ctx context.Context) GetRoutesRouterVipListArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouterVipListArrayOutput) Index(i pulumi.IntInput) GetRoutesRouterVipListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRoutesRouterVipList {
+		return vs[0].([]GetRoutesRouterVipList)[vs[1].(int)]
+	}).(GetRoutesRouterVipListOutput)
+}
+
 type GetTaskStatusResult struct {
 	// OutPut Info.
 	Output string `pulumi:"output"`
@@ -45201,6 +45609,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListVipListInput)(nil)).Elem(), GetInstancesInstanceListVipListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionResultInput)(nil)).Elem(), GetRegionResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionResultArrayInput)(nil)).Elem(), GetRegionResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouterInput)(nil)).Elem(), GetRoutesRouterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouterArrayInput)(nil)).Elem(), GetRoutesRouterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouterBrokerVipListInput)(nil)).Elem(), GetRoutesRouterBrokerVipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouterBrokerVipListArrayInput)(nil)).Elem(), GetRoutesRouterBrokerVipListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouterVipListInput)(nil)).Elem(), GetRoutesRouterVipListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouterVipListArrayInput)(nil)).Elem(), GetRoutesRouterVipListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTaskStatusResultInput)(nil)).Elem(), GetTaskStatusResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTaskStatusResultArrayInput)(nil)).Elem(), GetTaskStatusResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTopicFlowRankingResultInput)(nil)).Elem(), GetTopicFlowRankingResultArgs{})
@@ -45656,6 +46070,12 @@ func init() {
 	pulumi.RegisterOutputType(GetInstancesInstanceListVipListOutput{})
 	pulumi.RegisterOutputType(GetRegionResultOutput{})
 	pulumi.RegisterOutputType(GetRegionResultArrayOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouterOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouterArrayOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouterBrokerVipListOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouterBrokerVipListArrayOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouterVipListOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouterVipListArrayOutput{})
 	pulumi.RegisterOutputType(GetTaskStatusResultOutput{})
 	pulumi.RegisterOutputType(GetTaskStatusResultArrayOutput{})
 	pulumi.RegisterOutputType(GetTopicFlowRankingResultOutput{})

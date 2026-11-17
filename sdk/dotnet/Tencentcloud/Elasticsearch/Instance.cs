@@ -13,6 +13,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// <summary>
     /// Provides an elasticsearch instance resource.
     /// 
+    /// &gt; **NOTE:** After executing `terraform destroy`, the resource instance will be isolated in the recycle bin(reserved for 24 hours by default). If you need to completely destroy the instance, you can set `ForceDelete` to `True`.
+    /// 
+    /// &gt; **NOTE:** Currently, Once the `EnableCerebro` field is `True`, it cannot be `False`.
+    /// 
+    /// &gt; **NOTE:** `SubProductCode` specifies the sub-product of the instance (e.g. `SpEsEnterprise` for enterprise edition). It can only be set at creation time. If omitted, the backend maps it from `LicenseType`.
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a basic version of elasticsearch instance paid by the hour
@@ -154,6 +160,134 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// });
     /// ```
     /// 
+    /// ### Create a elasticsearch instance with Cerebro public access enabled
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         Version = "7.14.2",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         Password = "Password@2026",
+    ///         LicenseType = "platinum",
+    ///         BasicSecurityType = 2,
+    ///         EnableCerebro = true,
+    ///         ForceDelete = true,
+    ///         WebNodeTypeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///             {
+    ///                 NodeNum = 1,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///             },
+    ///         },
+    ///         NodeInfoLists = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "dedicatedMaster",
+    ///                 NodeNum = 3,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "hotData",
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+    ///         {
+    ///             WhiteLists = new[]
+    ///             {
+    ///                 "127.0.0.1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create a elasticsearch instance with Cerebro private access enabled
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         Version = "7.14.2",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         Password = "Password@2026",
+    ///         LicenseType = "platinum",
+    ///         BasicSecurityType = 2,
+    ///         EnableCerebro = true,
+    ///         CerebroPrivateAccess = "OPEN",
+    ///         CerebroPrivateDomain = "http://10.0.30.56:9000",
+    ///         ForceDelete = true,
+    ///         WebNodeTypeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///             {
+    ///                 NodeNum = 1,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///             },
+    ///         },
+    ///         NodeInfoLists = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "dedicatedMaster",
+    ///                 NodeNum = 3,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "hotData",
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+    ///         {
+    ///             WhiteLists = new[]
+    ///             {
+    ///                 "127.0.0.1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### Create a basic version of elasticsearch instance for multi-availability zone deployment
     /// 
     /// ```csharp
@@ -256,6 +390,106 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// });
     /// ```
     /// 
+    /// ### Create a basic version of elasticsearch instance with dedicated coordinating node
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var availabilityZone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    ///     {
+    ///         Product = "es",
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         Name = "tf_es_vpc",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         Name = "tf_es_subnet",
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf_example_es",
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         Version = "7.10.1",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Password = "Test12345",
+    ///         LicenseType = "basic",
+    ///         BasicSecurityType = 2,
+    ///         WebNodeTypeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///             {
+    ///                 NodeNum = 1,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///             },
+    ///         },
+    ///         NodeInfoLists = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "hotData",
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 DiskType = "CLOUD_SSD",
+    ///                 DiskSize = 100,
+    ///                 Encrypt = false,
+    ///             },
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "dedicatedMaster",
+    ///                 NodeNum = 3,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///                 DiskType = "CLOUD_SSD",
+    ///                 DiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "dedicatedCoordinating",
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///                 DiskType = "CLOUD_SSD",
+    ///                 DiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateInstance](https://www.tencentcloud.com/document/api/845/32218)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+    ///   - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+    /// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+    ///   - [UpgradeInstance](https://www.tencentcloud.com/document/api/845/34396)
+    ///   - [UpgradeLicense](https://www.tencentcloud.com/document/api/845/34395)
+    /// * Delete:
+    ///   - [DeleteInstance](https://www.tencentcloud.com/document/api/845/32217)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+    /// 
     /// ## Import
     /// 
     /// Elasticsearch instance can be imported using the id, e.g.
@@ -278,6 +512,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Output("basicSecurityType")]
         public Output<int?> BasicSecurityType { get; private set; } = null!;
+
+        /// <summary>
+        /// Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Output("cerebroPrivateAccess")]
+        public Output<string> CerebroPrivateAccess { get; private set; } = null!;
+
+        /// <summary>
+        /// Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Output("cerebroPrivateDomain")]
+        public Output<string> CerebroPrivateDomain { get; private set; } = null!;
+
+        /// <summary>
+        /// Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Output("cerebroPublicAccess")]
+        public Output<string> CerebroPublicAccess { get; private set; } = null!;
 
         /// <summary>
         /// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when ChargeType is set to `PREPAID`.
@@ -328,6 +580,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<string> ElasticsearchVip { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Output("enableCerebro")]
+        public Output<bool> EnableCerebro { get; private set; } = null!;
+
+        /// <summary>
         /// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         /// </summary>
         [Output("enableDestroyProtection")]
@@ -350,6 +608,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Output("esPublicUrl")]
         public Output<string> EsPublicUrl { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to force delete the instance. Default is `False`. Set it to `True` while deleting the instance.
+        /// </summary>
+        [Output("forceDelete")]
+        public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
         /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -428,6 +692,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Output("sceneType")]
         public Output<int> SceneType { get; private set; } = null!;
+
+        /// <summary>
+        /// Sub-product code of the instance. Valid values: `SpEsIo2` (open source), `SpEsBasic` (basic), `SpEsPlatinum` (platinum), `SpEsEnterprise` (enterprise), `SpEsCdcPlatinum` (CDC platinum), `SpEsEnlogging` (logging enhanced), `SpEsAisearch` (AI search enhanced), `SpTsearchIo2` (tsearch), `SpEsLogstash` (logstash). If omitted, the value is mapped from `LicenseType` by the backend. NOTE: this field can only be set when creating the instance.
+        /// </summary>
+        [Output("subProductCode")]
+        public Output<string> SubProductCode { get; private set; } = null!;
 
         /// <summary>
         /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
@@ -523,6 +793,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<int>? BasicSecurityType { get; set; }
 
         /// <summary>
+        /// Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("cerebroPrivateAccess")]
+        public Input<string>? CerebroPrivateAccess { get; set; }
+
+        /// <summary>
+        /// Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("cerebroPrivateDomain")]
+        public Input<string>? CerebroPrivateDomain { get; set; }
+
+        /// <summary>
+        /// Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("cerebroPublicAccess")]
+        public Input<string>? CerebroPublicAccess { get; set; }
+
+        /// <summary>
         /// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when ChargeType is set to `PREPAID`.
         /// </summary>
         [Input("chargePeriod")]
@@ -547,6 +835,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<int>? DeployMode { get; set; }
 
         /// <summary>
+        /// Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("enableCerebro")]
+        public Input<bool>? EnableCerebro { get; set; }
+
+        /// <summary>
         /// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         /// </summary>
         [Input("enableDestroyProtection")]
@@ -563,6 +857,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("esPublicAcl")]
         public Input<Inputs.InstanceEsPublicAclArgs>? EsPublicAcl { get; set; }
+
+        /// <summary>
+        /// Whether to force delete the instance. Default is `False`. Set it to `True` while deleting the instance.
+        /// </summary>
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
         /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -653,6 +953,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<int>? SceneType { get; set; }
 
         /// <summary>
+        /// Sub-product code of the instance. Valid values: `SpEsIo2` (open source), `SpEsBasic` (basic), `SpEsPlatinum` (platinum), `SpEsEnterprise` (enterprise), `SpEsCdcPlatinum` (CDC platinum), `SpEsEnlogging` (logging enhanced), `SpEsAisearch` (AI search enhanced), `SpTsearchIo2` (tsearch), `SpEsLogstash` (logstash). If omitted, the value is mapped from `LicenseType` by the backend. NOTE: this field can only be set when creating the instance.
+        /// </summary>
+        [Input("subProductCode")]
+        public Input<string>? SubProductCode { get; set; }
+
+        /// <summary>
         /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
         /// </summary>
         [Input("subnetId")]
@@ -715,6 +1021,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<int>? BasicSecurityType { get; set; }
 
         /// <summary>
+        /// Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("cerebroPrivateAccess")]
+        public Input<string>? CerebroPrivateAccess { get; set; }
+
+        /// <summary>
+        /// Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("cerebroPrivateDomain")]
+        public Input<string>? CerebroPrivateDomain { get; set; }
+
+        /// <summary>
+        /// Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("cerebroPublicAccess")]
+        public Input<string>? CerebroPublicAccess { get; set; }
+
+        /// <summary>
         /// The tenancy of the prepaid instance, and uint is month. NOTE: it only works when ChargeType is set to `PREPAID`.
         /// </summary>
         [Input("chargePeriod")]
@@ -763,6 +1087,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? ElasticsearchVip { get; set; }
 
         /// <summary>
+        /// Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        /// </summary>
+        [Input("enableCerebro")]
+        public Input<bool>? EnableCerebro { get; set; }
+
+        /// <summary>
         /// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         /// </summary>
         [Input("enableDestroyProtection")]
@@ -785,6 +1115,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("esPublicUrl")]
         public Input<string>? EsPublicUrl { get; set; }
+
+        /// <summary>
+        /// Whether to force delete the instance. Default is `False`. Set it to `True` while deleting the instance.
+        /// </summary>
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
         /// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -885,6 +1221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("sceneType")]
         public Input<int>? SceneType { get; set; }
+
+        /// <summary>
+        /// Sub-product code of the instance. Valid values: `SpEsIo2` (open source), `SpEsBasic` (basic), `SpEsPlatinum` (platinum), `SpEsEnterprise` (enterprise), `SpEsCdcPlatinum` (CDC platinum), `SpEsEnlogging` (logging enhanced), `SpEsAisearch` (AI search enhanced), `SpTsearchIo2` (tsearch), `SpEsLogstash` (logstash). If omitted, the value is mapped from `LicenseType` by the backend. NOTE: this field can only be set when creating the instance.
+        /// </summary>
+        [Input("subProductCode")]
+        public Input<string>? SubProductCode { get; set; }
 
         /// <summary>
         /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.

@@ -456,6 +456,17 @@ class DnsRecord(pulumi.CustomResource):
             status="enable")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDnsRecord](https://www.tencentcloud.com/document/api/1145/50488)
+        * Read: [DescribeDnsRecords](https://www.tencentcloud.com/document/api/1145/50484)
+        * Update:
+          - [ModifyDnsRecords](https://www.tencentcloud.com/document/api/1145/67541)
+          - [ModifyDnsRecordsStatus](https://www.tencentcloud.com/document/api/1145/67540)
+        * Delete: [DeleteDnsRecords](https://www.tencentcloud.com/document/api/1145/50486)
+
         ## Import
 
         teo teo_dns_record can be imported using the id, e.g.
@@ -516,6 +527,17 @@ class DnsRecord(pulumi.CustomResource):
             weight=-1,
             status="enable")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDnsRecord](https://www.tencentcloud.com/document/api/1145/50488)
+        * Read: [DescribeDnsRecords](https://www.tencentcloud.com/document/api/1145/50484)
+        * Update:
+          - [ModifyDnsRecords](https://www.tencentcloud.com/document/api/1145/67541)
+          - [ModifyDnsRecordsStatus](https://www.tencentcloud.com/document/api/1145/67540)
+        * Delete: [DeleteDnsRecords](https://www.tencentcloud.com/document/api/1145/50486)
 
         ## Import
 

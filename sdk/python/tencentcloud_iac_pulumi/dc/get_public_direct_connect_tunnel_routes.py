@@ -107,6 +107,12 @@ def get_public_direct_connect_tunnel_routes(direct_connect_tunnel_id: Optional[_
     public_direct_connect_tunnel_routes = tencentcloud.dc.get_public_direct_connect_tunnel_routes(direct_connect_tunnel_id="dcx-4z49tnws")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&type=document&lang=en)
+
 
     :param _builtins.str direct_connect_tunnel_id: direct connect tunnel id.
     :param Sequence[Union['GetPublicDirectConnectTunnelRoutesFilterArgs', 'GetPublicDirectConnectTunnelRoutesFilterArgsDict']] filters: filter condition: route-type: route type, value: BGP/STATIC route-subnet: route cidr, value such as: 192.68.1.0/24.
@@ -140,6 +146,12 @@ def get_public_direct_connect_tunnel_routes_output(direct_connect_tunnel_id: pul
 
     public_direct_connect_tunnel_routes = tencentcloud.dc.get_public_direct_connect_tunnel_routes(direct_connect_tunnel_id="dcx-4z49tnws")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&type=document&lang=en)
 
 
     :param _builtins.str direct_connect_tunnel_id: direct connect tunnel id.

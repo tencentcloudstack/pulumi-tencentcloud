@@ -137,6 +137,15 @@ class RestartDbInstancesOperation(pulumi.CustomResource):
         example_restart_db_instances_operation = tencentcloud.mysql.RestartDbInstancesOperation("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [RestartDBInstances](https://www.tencentcloud.com/document/api/236/17488)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+
         ## Import
 
         mysql restart_db_instances_operation can be imported using the id, e.g.
@@ -203,6 +212,15 @@ class RestartDbInstancesOperation(pulumi.CustomResource):
             })
         example_restart_db_instances_operation = tencentcloud.mysql.RestartDbInstancesOperation("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [RestartDBInstances](https://www.tencentcloud.com/document/api/236/17488)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 
         ## Import
 

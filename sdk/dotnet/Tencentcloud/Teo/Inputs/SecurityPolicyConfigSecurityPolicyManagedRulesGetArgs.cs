@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         [Input("enabled", required: true)]
         public Input<string> Enabled { get; set; } = null!;
 
+        /// <summary>
+        /// High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+        /// </summary>
+        [Input("frequentScanningProtection")]
+        public Input<Inputs.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionGetArgs>? FrequentScanningProtection { get; set; }
+
         [Input("managedRuleGroups")]
         private InputList<Inputs.SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupGetArgs>? _managedRuleGroups;
 

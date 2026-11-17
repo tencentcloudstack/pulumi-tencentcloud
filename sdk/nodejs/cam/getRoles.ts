@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     name: "cam-role-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
  */
 export function getRoles(args?: GetRolesArgs, opts?: pulumi.InvokeOptions): Promise<GetRolesResult> {
     args = args || {};
@@ -102,6 +108,12 @@ export interface GetRolesResult {
  *     name: "cam-role-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
  */
 export function getRolesOutput(args?: GetRolesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRolesResult> {
     args = args || {};

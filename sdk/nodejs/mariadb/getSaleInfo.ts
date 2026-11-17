@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const saleInfo = tencentcloud.mariadb.getSaleInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&type=document&lang=en)
  */
 export function getSaleInfo(args?: GetSaleInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetSaleInfoResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetSaleInfoResult {
  *
  * const saleInfo = tencentcloud.mariadb.getSaleInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeSaleInfo&type=document&lang=en)
  */
 export function getSaleInfoOutput(args?: GetSaleInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSaleInfoResult> {
     args = args || {};

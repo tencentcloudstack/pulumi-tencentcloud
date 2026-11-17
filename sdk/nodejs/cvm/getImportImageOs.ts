@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const importImageOs = tencentcloud.cvm.getImportImageOs({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
  */
 export function getImportImageOs(args?: GetImportImageOsArgs, opts?: pulumi.InvokeOptions): Promise<GetImportImageOsResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetImportImageOsResult {
  *
  * const importImageOs = tencentcloud.cvm.getImportImageOs({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
  */
 export function getImportImageOsOutput(args?: GetImportImageOsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImportImageOsResult> {
     args = args || {};

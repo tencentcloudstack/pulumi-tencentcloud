@@ -152,6 +152,16 @@ class CallbackRuleAttachment(pulumi.CustomResource):
             app_name="live")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveCallbackRule](https://www.tencentcloud.com/document/api/267/30816)
+        * Read: [DescribeLiveCallbackRules](https://www.tencentcloud.com/document/api/267/30812)
+        * Delete:
+          - [DeleteLiveCallbackRule](https://www.tencentcloud.com/document/api/267/30814)
+          - [DescribeLiveCallbackRules](https://www.tencentcloud.com/document/api/267/30812)
+
         ## Import
 
         css callback_rule can be imported using the id, e.g.
@@ -187,6 +197,16 @@ class CallbackRuleAttachment(pulumi.CustomResource):
             template_id=434039,
             app_name="live")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveCallbackRule](https://www.tencentcloud.com/document/api/267/30816)
+        * Read: [DescribeLiveCallbackRules](https://www.tencentcloud.com/document/api/267/30812)
+        * Delete:
+          - [DeleteLiveCallbackRule](https://www.tencentcloud.com/document/api/267/30814)
+          - [DescribeLiveCallbackRules](https://www.tencentcloud.com/document/api/267/30812)
 
         ## Import
 

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
         /// </summary>
         public static Task<GetFileSystemClientsResult> InvokeAsync(GetFileSystemClientsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
         /// </summary>
         public static Output<GetFileSystemClientsResult> Invoke(GetFileSystemClientsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
         /// </summary>
         public static Output<GetFileSystemClientsResult> Invoke(GetFileSystemClientsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemClientsResult>("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args ?? new GetFileSystemClientsInvokeArgs(), options.WithDefaults());

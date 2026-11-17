@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     nameKeyword: exampleRocketmqCluster.clusterName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQClusters](https://www.tencentcloud.com/search/?wd=DescribeRocketMQClusters&type=document&lang=en)
  */
 export function getRocketmqCluster(args?: GetRocketmqClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqClusterResult> {
     args = args || {};
@@ -91,6 +97,12 @@ export interface GetRocketmqClusterResult {
  *     nameKeyword: exampleRocketmqCluster.clusterName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQClusters](https://www.tencentcloud.com/search/?wd=DescribeRocketMQClusters&type=document&lang=en)
  */
 export function getRocketmqClusterOutput(args?: GetRocketmqClusterOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqClusterResult> {
     args = args || {};

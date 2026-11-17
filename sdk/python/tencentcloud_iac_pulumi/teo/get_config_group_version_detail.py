@@ -80,6 +80,9 @@ class GetConfigGroupVersionDetailResult:
     @_builtins.property
     @pulumi.getter(name="versionId")
     def version_id(self) -> _builtins.str:
+        """
+        Version ID.
+        """
         return pulumi.get(self, "version_id")
 
     @_builtins.property
@@ -115,9 +118,15 @@ def get_config_group_version_detail(result_output_file: Optional[_builtins.str] 
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    teo_config_group_version_detail = tencentcloud.teo.get_config_group_version_detail(zone_id="zone-2qtuhspy7cr6",
+    example = tencentcloud.teo.get_config_group_version_detail(zone_id="zone-2qtuhspy7cr6",
         version_id="sv-2quhspyeq8r6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
 
 
     :param _builtins.str result_output_file: Used to save results.
@@ -151,9 +160,15 @@ def get_config_group_version_detail_output(result_output_file: pulumi.Input[Opti
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    teo_config_group_version_detail = tencentcloud.teo.get_config_group_version_detail(zone_id="zone-2qtuhspy7cr6",
+    example = tencentcloud.teo.get_config_group_version_detail(zone_id="zone-2qtuhspy7cr6",
         version_id="sv-2quhspyeq8r6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
 
 
     :param _builtins.str result_output_file: Used to save results.

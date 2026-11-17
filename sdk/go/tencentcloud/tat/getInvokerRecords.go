@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
 func GetInvokerRecords(ctx *pulumi.Context, args *GetInvokerRecordsArgs, opts ...pulumi.InvokeOption) (*GetInvokerRecordsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInvokerRecordsResult

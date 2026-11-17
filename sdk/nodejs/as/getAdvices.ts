@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     autoScalingGroupIds: ["asc-lo0b94oy"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
  */
 export function getAdvices(args: GetAdvicesArgs, opts?: pulumi.InvokeOptions): Promise<GetAdvicesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetAdvicesResult {
  *     autoScalingGroupIds: ["asc-lo0b94oy"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
  */
 export function getAdvicesOutput(args: GetAdvicesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAdvicesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

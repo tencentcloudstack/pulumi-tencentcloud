@@ -86,6 +86,14 @@ class IsolateDbInstanceOperation(pulumi.CustomResource):
         isolate_db_instance_operation = tencentcloud.postgresql.IsolateDbInstanceOperation("isolate_db_instance_operation", db_instance_id_sets=[pgsql_id])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [IsolateDBInstances](https://www.tencentcloud.com/document/api/409/40109)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -108,6 +116,14 @@ class IsolateDbInstanceOperation(pulumi.CustomResource):
 
         isolate_db_instance_operation = tencentcloud.postgresql.IsolateDbInstanceOperation("isolate_db_instance_operation", db_instance_id_sets=[pgsql_id])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [IsolateDBInstances](https://www.tencentcloud.com/document/api/409/40109)
 
 
         :param str resource_name: The name of the resource.

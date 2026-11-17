@@ -135,6 +135,12 @@ def get_private_zone_list(filters: Optional[Sequence[Union['GetPrivateZoneListFi
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
+
 
     :param Sequence[Union['GetPrivateZoneListFilterArgs', 'GetPrivateZoneListFilterArgsDict']] filters: filters.
     :param _builtins.str result_output_file: Used to save results.
@@ -202,6 +208,12 @@ def get_private_zone_list_output(filters: pulumi.Input[Optional[Optional[Sequenc
         "values": ["vpc-axrsmmrv"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
 
 
     :param Sequence[Union['GetPrivateZoneListFilterArgs', 'GetPrivateZoneListFilterArgsDict']] filters: filters.

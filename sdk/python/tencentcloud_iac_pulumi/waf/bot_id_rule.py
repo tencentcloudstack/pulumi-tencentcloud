@@ -1087,6 +1087,14 @@ class BotIdRule(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBotIdRule](https://www.tencentcloud.com/search/?wd=ModifyBotIdRule&type=document&lang=en)
+        * Read: [DescribeBotIdRule](https://www.tencentcloud.com/search/?wd=DescribeBotIdRule&type=document&lang=en)
+        * Update: [ModifyBotIdRule](https://www.tencentcloud.com/search/?wd=ModifyBotIdRule&type=document&lang=en)
+
         ## Import
 
         WAF bot id rule can be imported using the domain#sceneId, e.g.
@@ -1989,6 +1997,14 @@ class BotIdRule(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBotIdRule](https://www.tencentcloud.com/search/?wd=ModifyBotIdRule&type=document&lang=en)
+        * Read: [DescribeBotIdRule](https://www.tencentcloud.com/search/?wd=DescribeBotIdRule&type=document&lang=en)
+        * Update: [ModifyBotIdRule](https://www.tencentcloud.com/search/?wd=ModifyBotIdRule&type=document&lang=en)
 
         ## Import
 

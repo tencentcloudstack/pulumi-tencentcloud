@@ -19,15 +19,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly string CertificateContent;
         /// <summary>
-        /// Client certificate name.
+        /// Server certificate name.
         /// </summary>
         public readonly string? CertificateName;
         /// <summary>
-        /// Deploy time of client certificate.
+        /// Deploy time of server certificate.
         /// </summary>
         public readonly string? DeployTime;
         /// <summary>
-        /// Expire time of client certificate.
+        /// Expire time of server certificate.
         /// </summary>
         public readonly string? ExpireTime;
 

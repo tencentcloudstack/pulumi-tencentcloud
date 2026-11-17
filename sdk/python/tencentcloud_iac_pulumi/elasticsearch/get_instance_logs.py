@@ -146,6 +146,12 @@ def get_instance_logs(end_time: Optional[_builtins.str] = None,
     elasticsearch_instance_logs = tencentcloud.elasticsearch.get_instance_logs(instance_id="es-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceLogs](https://www.tencentcloud.com/document/api/845/32216)
+
 
     :param _builtins.str end_time: End time. The format is YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53.
     :param _builtins.str instance_id: Instance id.
@@ -201,6 +207,12 @@ def get_instance_logs_output(end_time: pulumi.Input[Optional[Optional[_builtins.
 
     elasticsearch_instance_logs = tencentcloud.elasticsearch.get_instance_logs(instance_id="es-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceLogs](https://www.tencentcloud.com/document/api/845/32216)
 
 
     :param _builtins.str end_time: End time. The format is YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53.

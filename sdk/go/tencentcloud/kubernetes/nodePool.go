@@ -442,6 +442,31 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateClusterNodePool](https://www.tencentcloud.com/document/api/457/38781)
+// * Read:
+//   - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+//   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+//
+// * Update:
+//   - [DeleteMachine](https://www.tencentcloud.com/document/api/296/30907)
+//   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+//   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+//   - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+//   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+//   - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+//   - [ModifyClusterNodePool](https://www.tencentcloud.com/document/api/457/38776)
+//   - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+//   - [ModifyNodePoolDesiredCapacityAboutAsg](https://www.tencentcloud.com/search/?wd=ModifyNodePoolDesiredCapacityAboutAsg&type=document&lang=en)
+//   - [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+//   - [UseAsClient](https://www.tencentcloud.com/search/?wd=UseAsClient&type=document&lang=en)
+//
+// * Delete: [DeleteClusterNodePool](https://www.tencentcloud.com/document/api/457/38779)
+//
 // ## Import
 //
 // tke node pool can be imported, e.g.
@@ -485,11 +510,11 @@ type NodePool struct {
 	// Minimum number of node.
 	MinSize pulumi.IntOutput `pulumi:"minSize"`
 	// Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
-	MultiZoneSubnetPolicy pulumi.StringPtrOutput `pulumi:"multiZoneSubnetPolicy"`
+	MultiZoneSubnetPolicy pulumi.StringOutput `pulumi:"multiZoneSubnetPolicy"`
 	// Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Node config.
-	NodeConfig NodePoolNodeConfigPtrOutput `pulumi:"nodeConfig"`
+	NodeConfig NodePoolNodeConfigOutput `pulumi:"nodeConfig"`
 	// The total node count.
 	NodeCount pulumi.IntOutput `pulumi:"nodeCount"`
 	// Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
@@ -1019,8 +1044,8 @@ func (o NodePoolOutput) MinSize() pulumi.IntOutput {
 }
 
 // Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
-func (o NodePoolOutput) MultiZoneSubnetPolicy() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *NodePool) pulumi.StringPtrOutput { return v.MultiZoneSubnetPolicy }).(pulumi.StringPtrOutput)
+func (o NodePoolOutput) MultiZoneSubnetPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v *NodePool) pulumi.StringOutput { return v.MultiZoneSubnetPolicy }).(pulumi.StringOutput)
 }
 
 // Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
@@ -1029,8 +1054,8 @@ func (o NodePoolOutput) Name() pulumi.StringOutput {
 }
 
 // Node config.
-func (o NodePoolOutput) NodeConfig() NodePoolNodeConfigPtrOutput {
-	return o.ApplyT(func(v *NodePool) NodePoolNodeConfigPtrOutput { return v.NodeConfig }).(NodePoolNodeConfigPtrOutput)
+func (o NodePoolOutput) NodeConfig() NodePoolNodeConfigOutput {
+	return o.ApplyT(func(v *NodePool) NodePoolNodeConfigOutput { return v.NodeConfig }).(NodePoolNodeConfigOutput)
 }
 
 // The total node count.

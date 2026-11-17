@@ -110,6 +110,12 @@ def get_shards(instance_id: Optional[_builtins.str] = None,
         shard_instance_ids=["shard1_id"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_shards_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
     shards = tencentcloud.dcdb.get_shards(instance_id="your_instance_id",
         shard_instance_ids=["shard1_id"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
 
 
     :param _builtins.str instance_id: instance id.

@@ -143,6 +143,12 @@ class PutEvents(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutEvents](https://www.tencentcloud.com/search/?wd=PutEvents&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -189,6 +195,12 @@ class PutEvents(pulumi.CustomResource):
                 "time": int(1691572461939),
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutEvents](https://www.tencentcloud.com/search/?wd=PutEvents&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

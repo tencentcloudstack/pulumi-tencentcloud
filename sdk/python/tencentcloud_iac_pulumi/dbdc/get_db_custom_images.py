@@ -117,6 +117,12 @@ def get_db_custom_images(filters: Optional[Sequence[Union['GetDbCustomImagesFilt
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&type=document&lang=en)
+
 
     :param Sequence[Union['GetDbCustomImagesFilterArgs', 'GetDbCustomImagesFilterArgsDict']] filters: Filter conditions of the DescribeDBCustomImages API. Each filter combines a name with one or more values, and multiple filters are combined with AND logic.
     :param _builtins.str result_output_file: Used to save results.
@@ -166,6 +172,12 @@ def get_db_custom_images_output(filters: pulumi.Input[Optional[Optional[Sequence
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&type=document&lang=en)
 
 
     :param Sequence[Union['GetDbCustomImagesFilterArgs', 'GetDbCustomImagesFilterArgsDict']] filters: Filter conditions of the DescribeDBCustomImages API. Each filter combines a name with one or more values, and multiple filters are combined with AND logic.

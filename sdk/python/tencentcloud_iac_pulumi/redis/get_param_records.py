@@ -96,6 +96,12 @@ def get_param_records(instance_id: Optional[_builtins.str] = None,
     param_records = tencentcloud.redis.get_param_records(instance_id="crs-c1nl9rpv")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/239/32083)
+
 
     :param _builtins.str instance_id: The ID of instance.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_param_records_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
 
     param_records = tencentcloud.redis.get_param_records(instance_id="crs-c1nl9rpv")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/239/32083)
 
 
     :param _builtins.str instance_id: The ID of instance.

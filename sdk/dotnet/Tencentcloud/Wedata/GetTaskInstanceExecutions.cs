@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTaskInstanceExecutions](https://www.tencentcloud.com/document/api/1174/73818)
         /// </summary>
         public static Task<GetTaskInstanceExecutionsResult> InvokeAsync(GetTaskInstanceExecutionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskInstanceExecutionsResult>("tencentcloud:Wedata/getTaskInstanceExecutions:getTaskInstanceExecutions", args ?? new GetTaskInstanceExecutionsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTaskInstanceExecutions](https://www.tencentcloud.com/document/api/1174/73818)
         /// </summary>
         public static Output<GetTaskInstanceExecutionsResult> Invoke(GetTaskInstanceExecutionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskInstanceExecutionsResult>("tencentcloud:Wedata/getTaskInstanceExecutions:getTaskInstanceExecutions", args ?? new GetTaskInstanceExecutionsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTaskInstanceExecutions](https://www.tencentcloud.com/document/api/1174/73818)
         /// </summary>
         public static Output<GetTaskInstanceExecutionsResult> Invoke(GetTaskInstanceExecutionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskInstanceExecutionsResult>("tencentcloud:Wedata/getTaskInstanceExecutions:getTaskInstanceExecutions", args ?? new GetTaskInstanceExecutionsInvokeArgs(), options.WithDefaults());

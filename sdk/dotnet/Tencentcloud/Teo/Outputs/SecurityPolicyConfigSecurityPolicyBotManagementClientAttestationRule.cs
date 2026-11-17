@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string Condition;
         /// <summary>
+        /// Client device configurations. One profile per client type.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile> DeviceProfiles;
+        /// <summary>
         /// Whether the rule is enabled. Valid values: `On`, `Off`.
         /// </summary>
         public readonly string Enabled;
@@ -49,6 +53,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             string condition,
 
+            ImmutableArray<Outputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile> deviceProfiles,
+
             string enabled,
 
             string? id,
@@ -61,6 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         {
             AttesterId = attesterId;
             Condition = condition;
+            DeviceProfiles = deviceProfiles;
             Enabled = enabled;
             Id = id;
             InvalidAttestationAction = invalidAttestationAction;

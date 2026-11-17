@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const platformProducts = tencentcloud.eb.getPlatformProducts({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&type=document&lang=en)
  */
 export function getPlatformProducts(args?: GetPlatformProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformProductsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetPlatformProductsResult {
  *
  * const platformProducts = tencentcloud.eb.getPlatformProducts({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&type=document&lang=en)
  */
 export function getPlatformProductsOutput(args?: GetPlatformProductsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPlatformProductsResult> {
     args = args || {};

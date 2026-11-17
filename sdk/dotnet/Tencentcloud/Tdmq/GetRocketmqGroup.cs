@@ -57,6 +57,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRocketmqGroupResult> InvokeAsync(GetRocketmqGroupArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqGroupResult>("tencentcloud:Tdmq/getRocketmqGroup:getRocketmqGroup", args ?? new GetRocketmqGroupArgs(), options.WithDefaults());
@@ -106,6 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqGroupResult> Invoke(GetRocketmqGroupInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqGroupResult>("tencentcloud:Tdmq/getRocketmqGroup:getRocketmqGroup", args ?? new GetRocketmqGroupInvokeArgs(), options.WithDefaults());
@@ -155,6 +167,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqGroupResult> Invoke(GetRocketmqGroupInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqGroupResult>("tencentcloud:Tdmq/getRocketmqGroup:getRocketmqGroup", args ?? new GetRocketmqGroupInvokeArgs(), options.WithDefaults());

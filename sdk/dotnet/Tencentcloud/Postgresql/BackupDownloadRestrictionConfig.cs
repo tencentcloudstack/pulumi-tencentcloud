@@ -85,6 +85,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/409/55666)
+    /// * Read: [DescribeBackupDownloadRestriction](https://www.tencentcloud.com/document/api/409/55667)
+    /// * Update: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/409/55666)
+    /// 
     /// ## Import
     /// 
     /// postgresql BackupDownloadRestrictionConfig can be imported using the id, e.g.

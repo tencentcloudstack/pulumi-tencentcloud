@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
         /// </summary>
         public static Task<GetInstanceBlueprintResult> InvokeAsync(GetInstanceBlueprintArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
         /// </summary>
         public static Output<GetInstanceBlueprintResult> Invoke(GetInstanceBlueprintInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlueprintInstances](https://www.tencentcloud.com/document/api/1103/42504)
         /// </summary>
         public static Output<GetInstanceBlueprintResult> Invoke(GetInstanceBlueprintInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintInvokeArgs(), options.WithDefaults());

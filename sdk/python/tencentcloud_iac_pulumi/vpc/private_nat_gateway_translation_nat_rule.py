@@ -275,6 +275,19 @@ class PrivateNatGatewayTranslationNatRule(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+        * Read: [DescribePrivateNatGatewayTranslationNatRules](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGatewayTranslationNatRules&type=document&lang=en)
+        * Update:
+          - [CreatePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+          - [DeletePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+        * Delete:
+          - [DeletePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+          - [DescribePrivateNatGatewayTranslationNatRules](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGatewayTranslationNatRules&type=document&lang=en)
+
         ## Import
 
         VPC private nat gateway translation nat rule can be imported using the id, e.g.
@@ -355,6 +368,19 @@ class PrivateNatGatewayTranslationNatRule(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+        * Read: [DescribePrivateNatGatewayTranslationNatRules](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGatewayTranslationNatRules&type=document&lang=en)
+        * Update:
+          - [CreatePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+          - [DeletePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+        * Delete:
+          - [DeletePrivateNatGatewayTranslationNatRule](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGatewayTranslationNatRule&type=document&lang=en)
+          - [DescribePrivateNatGatewayTranslationNatRules](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGatewayTranslationNatRules&type=document&lang=en)
 
         ## Import
 

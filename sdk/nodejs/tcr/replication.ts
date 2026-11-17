@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a TCR replication
+ * Provides a resource to create and update a TCR replication
  *
  * ## Example Usage
  *
@@ -80,6 +80,15 @@ import * as utilities from "../utilities";
  *     description: "remark.",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ManageReplication](https://www.tencentcloud.com/document/api/1051/42669)
+ * * Read: [DescribeReplicationPolicies](https://www.tencentcloud.com/search/?wd=DescribeReplicationPolicies&type=document&lang=en)
+ * * Update: [ModifyReplication](https://www.tencentcloud.com/search/?wd=ModifyReplication&type=document&lang=en)
+ * * Delete: [DeleteReplicationRule](https://www.tencentcloud.com/search/?wd=DeleteReplicationRule&type=document&lang=en)
  */
 export class Replication extends pulumi.CustomResource {
     /**

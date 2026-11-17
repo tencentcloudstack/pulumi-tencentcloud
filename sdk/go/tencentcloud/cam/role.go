@@ -191,6 +191,28 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateRole](https://www.tencentcloud.com/document/api/598/33561)
+//   - [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//   - [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
+//
+// * Update:
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateAssumeRolePolicy](https://www.tencentcloud.com/document/api/598/33555)
+//   - [UpdateRoleConsoleLogin](https://www.tencentcloud.com/document/api/598/35737)
+//   - [UpdateRoleDescription](https://www.tencentcloud.com/document/api/598/33554)
+//   - [UpdateRoleSessionDuration](https://www.tencentcloud.com/search/?wd=UpdateRoleSessionDuration&type=document&lang=en)
+//
+// * Delete: [DeleteRole](https://www.tencentcloud.com/document/api/598/33560)
+//
 // ## Import
 //
 // CAM role can be imported using the id, e.g.

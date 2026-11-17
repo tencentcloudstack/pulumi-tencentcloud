@@ -38,6 +38,32 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create a PREPAID DBDC db custom node with disaster recover group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.dbdc.DbCustomNode("example", {
+ *     zone: "ap-shanghai-5",
+ *     imageId: "img-rm13akp3",
+ *     vpcId: "vpc-cseo7req",
+ *     subnetId: "subnet-huka6qhj",
+ *     nodeType: "DB.AT5.8XLARGE128",
+ *     period: 1,
+ *     autoRenew: 1,
+ *     chargeType: "PREPAID",
+ *     nodeName: "tf-example",
+ *     loginSettings: {
+ *         password: "Password@2026",
+ *     },
+ *     disasterRecoverGroupIds: "dbps-n2qbf6zv",
+ *     tags: {
+ *         createBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
  * ### Create a POSTPAID DBDC db custom node
  *
  * ```typescript
@@ -71,6 +97,28 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDBCustomNodes](https://www.tencentcloud.com/search/?wd=CreateDBCustomNodes&type=document&lang=en)
+ *   - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+ *   - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+ * * Read:
+ *   - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+ *   - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+ * * Update:
+ *   - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+ *   - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+ *   - [ModifyDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeSecurityGroups&type=document&lang=en)
+ *   - [ModifyDBCustomNodeTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeTags&type=document&lang=en)
+ *   - [ModifyDBCustomNodesDisasterRecoverGroup](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodesDisasterRecoverGroup&type=document&lang=en)
+ *   - [RenewDBCustomNode](https://www.tencentcloud.com/search/?wd=RenewDBCustomNode&type=document&lang=en)
+ * * Delete:
+ *   - [DestroyDBCustomNode](https://www.tencentcloud.com/search/?wd=DestroyDBCustomNode&type=document&lang=en)
+ *   - [IsolateDBCustomNode](https://www.tencentcloud.com/search/?wd=IsolateDBCustomNode&type=document&lang=en)
  *
  * ## Import
  *
@@ -136,6 +184,10 @@ export class DbCustomNode extends pulumi.CustomResource {
      * Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `diskName` is read-only and ignored as a create input.
      */
     declare public readonly dataDisks: pulumi.Output<outputs.Dbdc.DbCustomNodeDataDisk[]>;
+    /**
+     * Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+     */
+    declare public readonly disasterRecoverGroupIds: pulumi.Output<string>;
     /**
      * Node access IP address when the `NetworkModeCrossTenantENI` network mode is selected. Refreshed from the `DescribeDBCustomNodes` API response.
      */
@@ -249,6 +301,7 @@ export class DbCustomNode extends pulumi.CustomResource {
             resourceInputs["cpu"] = state?.cpu;
             resourceInputs["createdTime"] = state?.createdTime;
             resourceInputs["dataDisks"] = state?.dataDisks;
+            resourceInputs["disasterRecoverGroupIds"] = state?.disasterRecoverGroupIds;
             resourceInputs["eniIp"] = state?.eniIp;
             resourceInputs["expireTime"] = state?.expireTime;
             resourceInputs["hostName"] = state?.hostName;
@@ -293,6 +346,7 @@ export class DbCustomNode extends pulumi.CustomResource {
             resourceInputs["autoVoucher"] = args?.autoVoucher;
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["dataDisks"] = args?.dataDisks;
+            resourceInputs["disasterRecoverGroupIds"] = args?.disasterRecoverGroupIds;
             resourceInputs["hostName"] = args?.hostName;
             resourceInputs["imageId"] = args?.imageId;
             resourceInputs["loginSettings"] = args?.loginSettings;
@@ -357,6 +411,10 @@ export interface DbCustomNodeState {
      * Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `diskName` is read-only and ignored as a create input.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Dbdc.DbCustomNodeDataDisk>[] | undefined>;
+    /**
+     * Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+     */
+    disasterRecoverGroupIds?: pulumi.Input<string | undefined>;
     /**
      * Node access IP address when the `NetworkModeCrossTenantENI` network mode is selected. Refreshed from the `DescribeDBCustomNodes` API response.
      */
@@ -471,6 +529,10 @@ export interface DbCustomNodeArgs {
      * Data disk configuration. Only cloud-disk node types (e.g. `DB.SA5`) support setting this; local-disk types (e.g. `DB.AT5`) do not. Refreshed from the `DescribeDBCustomNodes` API response. Note: `diskName` is read-only and ignored as a create input.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Dbdc.DbCustomNodeDataDisk>[] | undefined>;
+    /**
+     * Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+     */
+    disasterRecoverGroupIds?: pulumi.Input<string | undefined>;
     /**
      * Hostname of the node. Dots (`.`) and hyphens (`-`) cannot be the first/last character or be used consecutively; underscores (`_`) are not allowed. Windows: 2-15 chars (letters, digits, `-`, no `.`); Linux/others: 2-60 chars (supports multiple dot-separated segments). Write-only: not returned by `DescribeDBCustomNodes`, so the configured value is preserved in state.
      */

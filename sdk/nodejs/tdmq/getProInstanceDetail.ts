@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     clusterId: "pulsar-9n95ax58b9vn",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
  */
 export function getProInstanceDetail(args: GetProInstanceDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetProInstanceDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetProInstanceDetailResult {
  *     clusterId: "pulsar-9n95ax58b9vn",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
  */
 export function getProInstanceDetailOutput(args: GetProInstanceDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProInstanceDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

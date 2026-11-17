@@ -124,6 +124,12 @@ def get_accounts(instance_id: Optional[_builtins.str] = None,
         name="myaccount")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+
 
     :param _builtins.str instance_id: SQL server instance ID that the account belongs to.
     :param _builtins.str name: Name of the SQL server account to be queried.
@@ -169,6 +175,12 @@ def get_accounts_output(instance_id: pulumi.Input[Optional[_builtins.str]] = Non
     example = tencentcloud.sqlserver.get_accounts(instance_id="mssql-3cdq7kx5",
         name="myaccount")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
 
 
     :param _builtins.str instance_id: SQL server instance ID that the account belongs to.

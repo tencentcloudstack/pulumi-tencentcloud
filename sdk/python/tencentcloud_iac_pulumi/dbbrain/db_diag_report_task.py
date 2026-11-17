@@ -285,6 +285,16 @@ class DbDiagReportTask(pulumi.CustomResource):
             product="mysql")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBDiagReportTask](https://www.tencentcloud.com/document/api/1035/41199)
+          - [DescribeDBDiagReportTasks](https://www.tencentcloud.com/document/api/1035/41202)
+        * Read: [DescribeDBDiagReportTasks](https://www.tencentcloud.com/document/api/1035/41202)
+        * Delete: [DeleteDBDiagReportTasks](https://www.tencentcloud.com/document/api/1035/54782)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -318,6 +328,16 @@ class DbDiagReportTask(pulumi.CustomResource):
             send_mail_flag=0,
             product="mysql")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBDiagReportTask](https://www.tencentcloud.com/document/api/1035/41199)
+          - [DescribeDBDiagReportTasks](https://www.tencentcloud.com/document/api/1035/41202)
+        * Read: [DescribeDBDiagReportTasks](https://www.tencentcloud.com/document/api/1035/41202)
+        * Delete: [DeleteDBDiagReportTasks](https://www.tencentcloud.com/document/api/1035/54782)
 
 
         :param str resource_name: The name of the resource.

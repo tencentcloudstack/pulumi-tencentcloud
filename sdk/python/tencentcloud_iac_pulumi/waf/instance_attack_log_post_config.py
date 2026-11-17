@@ -121,6 +121,14 @@ class InstanceAttackLogPostConfig(pulumi.CustomResource):
             attack_log_post=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyInstanceAttackLogPost](https://www.tencentcloud.com/search/?wd=ModifyInstanceAttackLogPost&type=document&lang=en)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/627/64766)
+        * Update: [ModifyInstanceAttackLogPost](https://www.tencentcloud.com/search/?wd=ModifyInstanceAttackLogPost&type=document&lang=en)
+
         ## Import
 
         WAF instance attack log post config can be imported using the id, e.g.
@@ -156,6 +164,14 @@ class InstanceAttackLogPostConfig(pulumi.CustomResource):
             instance_id="waf_2kxtlbky11b4wcrb",
             attack_log_post=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyInstanceAttackLogPost](https://www.tencentcloud.com/search/?wd=ModifyInstanceAttackLogPost&type=document&lang=en)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/627/64766)
+        * Update: [ModifyInstanceAttackLogPost](https://www.tencentcloud.com/search/?wd=ModifyInstanceAttackLogPost&type=document&lang=en)
 
         ## Import
 

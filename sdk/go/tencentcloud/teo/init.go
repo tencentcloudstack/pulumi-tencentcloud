@@ -53,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DeployConfigGroupVersion{}
 	case "tencentcloud:Teo/dnsRecord:DnsRecord":
 		r = &DnsRecord{}
+	case "tencentcloud:Teo/dnsRecordsStatus:DnsRecordsStatus":
+		r = &DnsRecordsStatus{}
 	case "tencentcloud:Teo/domainSharedCnameAttachment:DomainSharedCnameAttachment":
 		r = &DomainSharedCnameAttachment{}
 	case "tencentcloud:Teo/edgeKv:EdgeKv":
@@ -224,6 +226,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Teo/dnsRecord",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/dnsRecordsStatus",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

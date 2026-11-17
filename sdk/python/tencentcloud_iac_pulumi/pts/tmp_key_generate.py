@@ -171,6 +171,12 @@ class TmpKeyGenerate(pulumi.CustomResource):
             scenario_id="scenario-abc")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [GenerateTmpKey](https://www.tencentcloud.com/document/api/1249/68501)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -196,6 +202,12 @@ class TmpKeyGenerate(pulumi.CustomResource):
             project_id="project-1b0zqmhg",
             scenario_id="scenario-abc")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [GenerateTmpKey](https://www.tencentcloud.com/document/api/1249/68501)
 
 
         :param str resource_name: The name of the resource.

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
  */
 export function getDbCharsets(args: GetDbCharsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCharsetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetDbCharsetsResult {
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
  */
 export function getDbCharsetsOutput(args: GetDbCharsetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCharsetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

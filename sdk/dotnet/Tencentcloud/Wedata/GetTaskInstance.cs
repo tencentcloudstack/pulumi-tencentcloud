@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskInstance](https://www.tencentcloud.com/document/api/1174/69228)
         /// </summary>
         public static Task<GetTaskInstanceResult> InvokeAsync(GetTaskInstanceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskInstanceResult>("tencentcloud:Wedata/getTaskInstance:getTaskInstance", args ?? new GetTaskInstanceArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskInstance](https://www.tencentcloud.com/document/api/1174/69228)
         /// </summary>
         public static Output<GetTaskInstanceResult> Invoke(GetTaskInstanceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskInstanceResult>("tencentcloud:Wedata/getTaskInstance:getTaskInstance", args ?? new GetTaskInstanceInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskInstance](https://www.tencentcloud.com/document/api/1174/69228)
         /// </summary>
         public static Output<GetTaskInstanceResult> Invoke(GetTaskInstanceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskInstanceResult>("tencentcloud:Wedata/getTaskInstance:getTaskInstance", args ?? new GetTaskInstanceInvokeArgs(), options.WithDefaults());

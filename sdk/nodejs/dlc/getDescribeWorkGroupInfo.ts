@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     sorting: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWorkGroupInfo](https://www.tencentcloud.com/document/api/1155/62667)
  */
 export function getDescribeWorkGroupInfo(args?: GetDescribeWorkGroupInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeWorkGroupInfoResult> {
     args = args || {};
@@ -107,6 +113,12 @@ export interface GetDescribeWorkGroupInfoResult {
  *     sorting: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWorkGroupInfo](https://www.tencentcloud.com/document/api/1155/62667)
  */
 export function getDescribeWorkGroupInfoOutput(args?: GetDescribeWorkGroupInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeWorkGroupInfoResult> {
     args = args || {};

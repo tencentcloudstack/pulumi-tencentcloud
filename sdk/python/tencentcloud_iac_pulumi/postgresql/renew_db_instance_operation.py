@@ -187,6 +187,14 @@ class RenewDbInstanceOperation(pulumi.CustomResource):
             auto_voucher=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [RenewInstance](https://www.tencentcloud.com/document/api/409/18098)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -215,6 +223,14 @@ class RenewDbInstanceOperation(pulumi.CustomResource):
             period=1,
             auto_voucher=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [RenewInstance](https://www.tencentcloud.com/document/api/409/18098)
 
 
         :param str resource_name: The name of the resource.

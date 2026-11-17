@@ -136,6 +136,12 @@ def get_instances(cluster_type: Optional[_builtins.str] = None,
         cluster_type="REPLSET")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+
 
     :param _builtins.str cluster_type: Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
     :param _builtins.str instance_id: ID of the Mongodb instance to be queried.
@@ -178,6 +184,12 @@ def get_instances_output(cluster_type: pulumi.Input[Optional[Optional[_builtins.
     mongodb = tencentcloud.mongodb.get_instances(instance_id="cmgo-l6lwdsel",
         cluster_type="REPLSET")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
 
 
     :param _builtins.str cluster_type: Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).

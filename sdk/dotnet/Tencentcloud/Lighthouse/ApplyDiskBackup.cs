@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ApplyDiskBackup](https://www.tencentcloud.com/search/?wd=ApplyDiskBackup&amp;type=document&amp;lang=en)
+    ///   - [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/applyDiskBackup:ApplyDiskBackup")]
     public partial class ApplyDiskBackup : global::Pulumi.CustomResource

@@ -35,6 +35,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateHttpAuthenticator](https://www.tencentcloud.com/search/?wd=CreateHttpAuthenticator&type=document&lang=en)
+ * * Read: [DescribeAuthenticator](https://www.tencentcloud.com/search/?wd=DescribeAuthenticator&type=document&lang=en)
+ * * Update: [ModifyHttpAuthenticator](https://www.tencentcloud.com/search/?wd=ModifyHttpAuthenticator&type=document&lang=en)
+ * * Delete: [DeleteAuthenticator](https://www.tencentcloud.com/search/?wd=DeleteAuthenticator&type=document&lang=en)
+ *
  * ## Import
  *
  * MQTT http authenticator can be imported using the id, e.g.

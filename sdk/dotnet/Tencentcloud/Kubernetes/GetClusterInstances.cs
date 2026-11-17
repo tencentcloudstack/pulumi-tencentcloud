@@ -48,6 +48,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
         /// </summary>
         public static Task<GetClusterInstancesResult> InvokeAsync(GetClusterInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesArgs(), options.WithDefaults());
@@ -88,6 +94,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
         /// </summary>
         public static Output<GetClusterInstancesResult> Invoke(GetClusterInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesInvokeArgs(), options.WithDefaults());
@@ -128,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
         /// </summary>
         public static Output<GetClusterInstancesResult> Invoke(GetClusterInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterInstancesResult>("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args ?? new GetClusterInstancesInvokeArgs(), options.WithDefaults());

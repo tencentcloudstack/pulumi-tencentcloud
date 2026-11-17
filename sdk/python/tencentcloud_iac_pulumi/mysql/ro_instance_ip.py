@@ -197,6 +197,13 @@ class RoInstanceIp(pulumi.CustomResource):
             uniq_vpc_id=vpc.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRoInstanceIp](https://www.tencentcloud.com/document/api/236/37830)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -235,6 +242,13 @@ class RoInstanceIp(pulumi.CustomResource):
             uniq_subnet_id=subnet.id,
             uniq_vpc_id=vpc.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRoInstanceIp](https://www.tencentcloud.com/document/api/236/37830)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 
 
         :param str resource_name: The name of the resource.

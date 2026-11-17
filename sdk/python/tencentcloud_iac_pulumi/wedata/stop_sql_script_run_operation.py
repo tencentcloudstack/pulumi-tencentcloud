@@ -119,6 +119,12 @@ class StopSqlScriptRunOperation(pulumi.CustomResource):
             project_id="2983848457986924544")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StopSQLScriptRun](https://www.tencentcloud.com/document/api/1174/73843)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class StopSqlScriptRunOperation(pulumi.CustomResource):
             job_id="ac13aceb-7a30-4414-91c0-6504f177462f",
             project_id="2983848457986924544")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StopSQLScriptRun](https://www.tencentcloud.com/document/api/1174/73843)
 
 
         :param str resource_name: The name of the resource.

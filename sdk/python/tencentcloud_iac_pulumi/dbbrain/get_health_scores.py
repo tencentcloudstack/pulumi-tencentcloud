@@ -118,6 +118,12 @@ def get_health_scores(instance_id: Optional[_builtins.str] = None,
         product="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
+
 
     :param _builtins.str instance_id: The ID of the instance whose health score needs to be obtained.
     :param _builtins.str product: Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database TDSQL-C for MySQL, the default is mysql.
@@ -157,6 +163,12 @@ def get_health_scores_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
         time="",
         product="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
 
 
     :param _builtins.str instance_id: The ID of the instance whose health score needs to be obtained.

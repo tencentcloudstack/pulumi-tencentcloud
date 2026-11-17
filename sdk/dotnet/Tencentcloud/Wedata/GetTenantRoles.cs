@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTenantRoles](https://www.tencentcloud.com/document/api/1174/77862)
         /// </summary>
         public static Task<GetTenantRolesResult> InvokeAsync(GetTenantRolesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTenantRolesResult>("tencentcloud:Wedata/getTenantRoles:getTenantRoles", args ?? new GetTenantRolesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTenantRoles](https://www.tencentcloud.com/document/api/1174/77862)
         /// </summary>
         public static Output<GetTenantRolesResult> Invoke(GetTenantRolesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTenantRolesResult>("tencentcloud:Wedata/getTenantRoles:getTenantRoles", args ?? new GetTenantRolesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTenantRoles](https://www.tencentcloud.com/document/api/1174/77862)
         /// </summary>
         public static Output<GetTenantRolesResult> Invoke(GetTenantRolesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTenantRolesResult>("tencentcloud:Wedata/getTenantRoles:getTenantRoles", args ?? new GetTenantRolesInvokeArgs(), options.WithDefaults());

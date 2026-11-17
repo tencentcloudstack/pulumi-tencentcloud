@@ -268,6 +268,14 @@ class ReadOnlyInstanceExclusiveAccess(pulumi.CustomResource):
             security_group_ids=[cynosdb_cluster_security_group_id])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [OpenReadOnlyInstanceExclusiveAccess](https://www.tencentcloud.com/document/api/1098/55910)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -316,6 +324,14 @@ class ReadOnlyInstanceExclusiveAccess(pulumi.CustomResource):
             port=1234,
             security_group_ids=[cynosdb_cluster_security_group_id])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [OpenReadOnlyInstanceExclusiveAccess](https://www.tencentcloud.com/document/api/1098/55910)
 
 
         :param str resource_name: The name of the resource.

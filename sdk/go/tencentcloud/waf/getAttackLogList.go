@@ -78,6 +78,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
 func GetAttackLogList(ctx *pulumi.Context, args *GetAttackLogListArgs, opts ...pulumi.InvokeOption) (*GetAttackLogListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAttackLogListResult

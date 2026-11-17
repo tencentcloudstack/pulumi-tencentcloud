@@ -142,6 +142,12 @@ def get_group_policy_attachments(create_mode: Optional[_builtins.int] = None,
         policy_id=foo_tencentcloud_cam_policy["id"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+
 
     :param _builtins.int create_mode: Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
     :param _builtins.str group_id: ID of the attached CAM group to be queried.
@@ -187,6 +193,12 @@ def get_group_policy_attachments_output(create_mode: pulumi.Input[Optional[Optio
     bar = tencentcloud.cam.get_group_policy_attachments(group_id=foo_tencentcloud_cam_group["id"],
         policy_id=foo_tencentcloud_cam_policy["id"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
 
 
     :param _builtins.int create_mode: Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.

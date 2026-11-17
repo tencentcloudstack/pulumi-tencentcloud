@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
 func GetClassicLinkInstances(ctx *pulumi.Context, args *GetClassicLinkInstancesArgs, opts ...pulumi.InvokeOption) (*GetClassicLinkInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClassicLinkInstancesResult

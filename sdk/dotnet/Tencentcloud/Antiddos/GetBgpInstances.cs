@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetBgpInstancesResult> InvokeAsync(GetBgpInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBgpInstancesResult>("tencentcloud:Antiddos/getBgpInstances:getBgpInstances", args ?? new GetBgpInstancesArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBgpInstancesResult> Invoke(GetBgpInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBgpInstancesResult>("tencentcloud:Antiddos/getBgpInstances:getBgpInstances", args ?? new GetBgpInstancesInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBgpInstancesResult> Invoke(GetBgpInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBgpInstancesResult>("tencentcloud:Antiddos/getBgpInstances:getBgpInstances", args ?? new GetBgpInstancesInvokeArgs(), options.WithDefaults());

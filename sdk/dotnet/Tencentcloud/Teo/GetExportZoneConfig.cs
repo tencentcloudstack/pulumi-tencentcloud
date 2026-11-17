@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
         /// </summary>
         public static Task<GetExportZoneConfigResult> InvokeAsync(GetExportZoneConfigArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetExportZoneConfigResult>("tencentcloud:Teo/getExportZoneConfig:getExportZoneConfig", args ?? new GetExportZoneConfigArgs(), options.WithDefaults());
@@ -104,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
         /// </summary>
         public static Output<GetExportZoneConfigResult> Invoke(GetExportZoneConfigInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetExportZoneConfigResult>("tencentcloud:Teo/getExportZoneConfig:getExportZoneConfig", args ?? new GetExportZoneConfigInvokeArgs(), options.WithDefaults());
@@ -152,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
         /// </summary>
         public static Output<GetExportZoneConfigResult> Invoke(GetExportZoneConfigInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetExportZoneConfigResult>("tencentcloud:Teo/getExportZoneConfig:getExportZoneConfig", args ?? new GetExportZoneConfigInvokeArgs(), options.WithDefaults());

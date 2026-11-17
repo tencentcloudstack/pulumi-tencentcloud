@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&type=document&lang=en)
 func GetRouteConflicts(ctx *pulumi.Context, args *GetRouteConflictsArgs, opts ...pulumi.InvokeOption) (*GetRouteConflictsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRouteConflictsResult

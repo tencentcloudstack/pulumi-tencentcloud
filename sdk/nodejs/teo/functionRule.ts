@@ -39,6 +39,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateFunctionRule](https://www.tencentcloud.com/document/api/1145/64814)
+ * * Read: [DescribeFunctionRules](https://www.tencentcloud.com/document/api/1145/64811)
+ * * Update: [ModifyFunctionRule](https://www.tencentcloud.com/document/api/1145/64806)
+ * * Delete: [DeleteFunctionRules](https://www.tencentcloud.com/document/api/1145/64812)
+ *
  * ## Import
  *
  * teo teoFunctionRule can be imported using the zoneId#functionId#ruleId, e.g.

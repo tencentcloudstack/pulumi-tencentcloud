@@ -97,6 +97,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RenewInstances](https://www.tencentcloud.com/document/api/213/72769)
 type RenewInstance struct {
 	pulumi.CustomResourceState
 

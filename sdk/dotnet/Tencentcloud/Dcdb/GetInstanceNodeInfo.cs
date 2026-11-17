@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
         /// </summary>
         public static Task<GetInstanceNodeInfoResult> InvokeAsync(GetInstanceNodeInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
         /// </summary>
         public static Output<GetInstanceNodeInfoResult> Invoke(GetInstanceNodeInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
         /// </summary>
         public static Output<GetInstanceNodeInfoResult> Invoke(GetInstanceNodeInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoInvokeArgs(), options.WithDefaults());

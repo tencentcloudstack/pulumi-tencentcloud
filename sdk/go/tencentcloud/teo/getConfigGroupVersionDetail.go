@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
 func GetConfigGroupVersionDetail(ctx *pulumi.Context, args *GetConfigGroupVersionDetailArgs, opts ...pulumi.InvokeOption) (*GetConfigGroupVersionDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetConfigGroupVersionDetailResult
@@ -68,8 +74,9 @@ type GetConfigGroupVersionDetailResult struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id               string  `pulumi:"id"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	VersionId        string  `pulumi:"versionId"`
-	ZoneId           string  `pulumi:"zoneId"`
+	// Version ID.
+	VersionId string `pulumi:"versionId"`
+	ZoneId    string `pulumi:"zoneId"`
 }
 
 func GetConfigGroupVersionDetailOutput(ctx *pulumi.Context, args GetConfigGroupVersionDetailOutputArgs, opts ...pulumi.InvokeOption) GetConfigGroupVersionDetailResultOutput {
@@ -127,6 +134,7 @@ func (o GetConfigGroupVersionDetailResultOutput) ResultOutputFile() pulumi.Strin
 	return o.ApplyT(func(v GetConfigGroupVersionDetailResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
+// Version ID.
 func (o GetConfigGroupVersionDetailResultOutput) VersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigGroupVersionDetailResult) string { return v.VersionId }).(pulumi.StringOutput)
 }

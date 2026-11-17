@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyIpsModeSwitch](https://www.tencentcloud.com/search/?wd=ModifyIpsModeSwitch&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeIpsModeSwitch](https://www.tencentcloud.com/search/?wd=DescribeIpsModeSwitch&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyIpsModeSwitch](https://www.tencentcloud.com/search/?wd=ModifyIpsModeSwitch&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW ips mode switch can be imported using the customId(like uuid or base64 string), e.g.

@@ -57,6 +57,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
         /// </summary>
         public static Task<GetAlarmHistoryResult> InvokeAsync(GetAlarmHistoryArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryArgs(), options.WithDefaults());
@@ -106,6 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
         /// </summary>
         public static Output<GetAlarmHistoryResult> Invoke(GetAlarmHistoryInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryInvokeArgs(), options.WithDefaults());
@@ -155,6 +167,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
         /// </summary>
         public static Output<GetAlarmHistoryResult> Invoke(GetAlarmHistoryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryInvokeArgs(), options.WithDefaults());

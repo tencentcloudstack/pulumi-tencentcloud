@@ -45,6 +45,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
         /// </summary>
         public static Task<GetDescribeInstanceErrorLogsResult> InvokeAsync(GetDescribeInstanceErrorLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsArgs(), options.WithDefaults());
@@ -82,6 +88,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
         /// </summary>
         public static Output<GetDescribeInstanceErrorLogsResult> Invoke(GetDescribeInstanceErrorLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsInvokeArgs(), options.WithDefaults());
@@ -119,6 +131,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
         /// </summary>
         public static Output<GetDescribeInstanceErrorLogsResult> Invoke(GetDescribeInstanceErrorLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsInvokeArgs(), options.WithDefaults());

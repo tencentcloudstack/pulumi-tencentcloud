@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     fileType: "csv",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ExportInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48589)
  */
 export class ExportInstanceSlowQueries extends pulumi.CustomResource {
     /**

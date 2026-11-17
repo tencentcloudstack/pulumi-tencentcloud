@@ -190,6 +190,15 @@ class StreamLiveInput(pulumi.CustomResource):
             security_group_ids=["6405DF9D000007DFB4EC"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36229)
+        * Read: [DescribeStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36227)
+        * Update: [ModifyStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36225)
+        * Delete: [DeleteStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36228)
+
         ## Import
 
         mdl stream_live_input can be imported using the id, e.g.
@@ -226,6 +235,15 @@ class StreamLiveInput(pulumi.CustomResource):
             type="RTP_PUSH",
             security_group_ids=["6405DF9D000007DFB4EC"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36229)
+        * Read: [DescribeStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36227)
+        * Update: [ModifyStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36225)
+        * Delete: [DeleteStreamLiveInput](https://www.tencentcloud.com/document/api/1048/36228)
 
         ## Import
 

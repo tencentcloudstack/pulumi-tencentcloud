@@ -115,6 +115,12 @@ def get_rocketmq_namespace(cluster_id: Optional[_builtins.str] = None,
         name_keyword=example_rocketmq_namespace.namespace_name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str name_keyword: Search by name.
@@ -157,6 +163,12 @@ def get_rocketmq_namespace_output(cluster_id: pulumi.Input[Optional[_builtins.st
     example = tencentcloud.tdmq.get_rocketmq_namespace_output(cluster_id=example_rocketmq_cluster.cluster_id,
         name_keyword=example_rocketmq_namespace.namespace_name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

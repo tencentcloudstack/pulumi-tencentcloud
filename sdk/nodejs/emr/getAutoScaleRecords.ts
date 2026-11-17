@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
  */
 export function getAutoScaleRecords(args: GetAutoScaleRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetAutoScaleRecordsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetAutoScaleRecordsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
  */
 export function getAutoScaleRecordsOutput(args: GetAutoScaleRecordsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAutoScaleRecordsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

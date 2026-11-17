@@ -130,6 +130,12 @@ class StartConfigRuleEvaluationOperation(pulumi.CustomResource):
         example = tencentcloud.config.StartConfigRuleEvaluationOperation("example", compliance_pack_id="cp-3kr5im1ssbg6tdo5jbi9")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StartConfigRuleEvaluation](https://www.tencentcloud.com/document/api/1164/84958)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -164,6 +170,12 @@ class StartConfigRuleEvaluationOperation(pulumi.CustomResource):
 
         example = tencentcloud.config.StartConfigRuleEvaluationOperation("example", compliance_pack_id="cp-3kr5im1ssbg6tdo5jbi9")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StartConfigRuleEvaluation](https://www.tencentcloud.com/document/api/1164/84958)
 
 
         :param str resource_name: The name of the resource.

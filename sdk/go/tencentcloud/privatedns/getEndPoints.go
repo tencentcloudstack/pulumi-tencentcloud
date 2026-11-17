@@ -89,6 +89,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
 func GetEndPoints(ctx *pulumi.Context, args *GetEndPointsArgs, opts ...pulumi.InvokeOption) (*GetEndPointsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEndPointsResult

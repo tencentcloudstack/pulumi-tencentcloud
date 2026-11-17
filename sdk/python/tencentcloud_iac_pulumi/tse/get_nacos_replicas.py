@@ -96,6 +96,12 @@ def get_nacos_replicas(instance_id: Optional[_builtins.str] = None,
     nacos_replicas = tencentcloud.tse.get_nacos_replicas(instance_id="ins-8078da86")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNacosReplicas](https://www.tencentcloud.com/search/?wd=DescribeNacosReplicas&type=document&lang=en)
+
 
     :param _builtins.str instance_id: engine instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_nacos_replicas_output(instance_id: pulumi.Input[Optional[_builtins.str]]
 
     nacos_replicas = tencentcloud.tse.get_nacos_replicas(instance_id="ins-8078da86")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNacosReplicas](https://www.tencentcloud.com/search/?wd=DescribeNacosReplicas&type=document&lang=en)
 
 
     :param _builtins.str instance_id: engine instance ID.

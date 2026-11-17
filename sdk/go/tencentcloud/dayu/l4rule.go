@@ -64,6 +64,26 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateL4HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL4HealthConfig&type=document&lang=en)
+//   - [CreateL4Rules](https://www.tencentcloud.com/search/?wd=CreateL4Rules&type=document&lang=en)
+//   - [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
+//   - [ModifyL4KeepTime](https://www.tencentcloud.com/search/?wd=ModifyL4KeepTime&type=document&lang=en)
+//
+// * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
+// * Update:
+//   - [CreateL4HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL4HealthConfig&type=document&lang=en)
+//   - [ModifyL4KeepTime](https://www.tencentcloud.com/search/?wd=ModifyL4KeepTime&type=document&lang=en)
+//   - [ModifyL4Rules](https://www.tencentcloud.com/search/?wd=ModifyL4Rules&type=document&lang=en)
+//
+// * Delete:
+//   - [DeleteL4Rules](https://www.tencentcloud.com/search/?wd=DeleteL4Rules&type=document&lang=en)
+//   - [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
 type L4Rule struct {
 	pulumi.CustomResourceState
 

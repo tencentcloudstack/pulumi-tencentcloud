@@ -123,6 +123,12 @@ def get_pro_instance_detail(cluster_id: Optional[_builtins.str] = None,
     pro_instance_detail = tencentcloud.tdmq.get_pro_instance_detail(cluster_id="pulsar-9n95ax58b9vn")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -154,6 +160,12 @@ def get_pro_instance_detail_output(cluster_id: pulumi.Input[Optional[_builtins.s
 
     pro_instance_detail = tencentcloud.tdmq.get_pro_instance_detail(cluster_id="pulsar-9n95ax58b9vn")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster Id.

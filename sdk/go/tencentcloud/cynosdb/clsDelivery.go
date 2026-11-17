@@ -84,6 +84,28 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateCLSDelivery](https://www.tencentcloud.com/document/api/1098/74207)
+//   - [DescribeInstanceCLSLogDelivery](https://www.tencentcloud.com/document/api/1098/74204)
+//   - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+//   - [StopCLSDelivery](https://www.tencentcloud.com/document/api/1098/74200)
+//
+// * Read: [DescribeInstanceCLSLogDelivery](https://www.tencentcloud.com/document/api/1098/74204)
+// * Update:
+//   - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+//   - [StartCLSDelivery](https://www.tencentcloud.com/document/api/1098/74201)
+//   - [StopCLSDelivery](https://www.tencentcloud.com/document/api/1098/74200)
+//
+// * Delete:
+//   - [DeleteCLSDelivery](https://www.tencentcloud.com/document/api/1098/74206)
+//   - [DescribeInstanceCLSLogDelivery](https://www.tencentcloud.com/document/api/1098/74204)
+//   - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+//   - [StopCLSDelivery](https://www.tencentcloud.com/document/api/1098/74200)
+//
 // ## Import
 //
 // CynosDB cls delivery can be imported using the instanceId#topicId, e.g.

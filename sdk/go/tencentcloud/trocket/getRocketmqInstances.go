@@ -85,6 +85,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
 func GetRocketmqInstances(ctx *pulumi.Context, args *GetRocketmqInstancesArgs, opts ...pulumi.InvokeOption) (*GetRocketmqInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRocketmqInstancesResult

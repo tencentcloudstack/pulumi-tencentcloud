@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     topicName: "topic_name",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&type=document&lang=en)
  */
 export function getTopic(args?: GetTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicResult> {
     args = args || {};
@@ -104,6 +110,12 @@ export interface GetTopicResult {
  *     topicName: "topic_name",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&type=document&lang=en)
  */
 export function getTopicOutput(args?: GetTopicOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTopicResult> {
     args = args || {};

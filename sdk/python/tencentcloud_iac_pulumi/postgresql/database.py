@@ -299,6 +299,15 @@ class Database(pulumi.CustomResource):
             ctype="C")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatabase](https://www.tencentcloud.com/document/api/409/78813)
+        * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/409/37118)
+        * Update: [ModifyDatabaseOwner](https://www.tencentcloud.com/document/api/409/78811)
+        * Delete: [DeleteDatabase](https://www.tencentcloud.com/search/?wd=DeleteDatabase&type=document&lang=en)
+
         ## Import
 
         PostgreSQL database can be imported using the composite ID `db_instance_id#database_name`, e.g.
@@ -385,6 +394,15 @@ class Database(pulumi.CustomResource):
             collate="C",
             ctype="C")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDatabase](https://www.tencentcloud.com/document/api/409/78813)
+        * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/409/37118)
+        * Update: [ModifyDatabaseOwner](https://www.tencentcloud.com/document/api/409/78811)
+        * Delete: [DeleteDatabase](https://www.tencentcloud.com/search/?wd=DeleteDatabase&type=document&lang=en)
 
         ## Import
 

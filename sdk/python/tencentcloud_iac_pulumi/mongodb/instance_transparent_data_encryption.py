@@ -191,6 +191,17 @@ class InstanceTransparentDataEncryption(pulumi.CustomResource):
             kms_region="ap-guangzhou")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+          - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+          - [EnableTransparentDataEncryption](https://www.tencentcloud.com/document/api/240/74801)
+        * Read: [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+        * Update: [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+
         ## Import
 
         mongodb transparent data encryption can be imported using the id, e.g.
@@ -225,6 +236,17 @@ class InstanceTransparentDataEncryption(pulumi.CustomResource):
             instance_id="cmgo-xxxxxx",
             kms_region="ap-guangzhou")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+          - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+          - [EnableTransparentDataEncryption](https://www.tencentcloud.com/document/api/240/74801)
+        * Read: [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+        * Update: [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
 
         ## Import
 

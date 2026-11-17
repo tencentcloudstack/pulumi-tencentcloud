@@ -140,6 +140,12 @@ def get_redis_top_big_keys(date: Optional[_builtins.str] = None,
         key_type="string")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&type=document&lang=en)
+
 
     :param _builtins.str date: Query date, such as 2021-05-27, the earliest date can be the previous 30 days.
     :param _builtins.str instance_id: instance id.
@@ -189,6 +195,12 @@ def get_redis_top_big_keys_output(date: pulumi.Input[Optional[_builtins.str]] = 
         sort_by="Capacity",
         key_type="string")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&type=document&lang=en)
 
 
     :param _builtins.str date: Query date, such as 2021-05-27, the earliest date can be the previous 30 days.

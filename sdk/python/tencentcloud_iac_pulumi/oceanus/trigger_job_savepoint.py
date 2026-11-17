@@ -154,6 +154,12 @@ class TriggerJobSavepoint(pulumi.CustomResource):
             work_space_id="space-2idq8wbr")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TriggerJobSavepoint](https://www.tencentcloud.com/search/?wd=TriggerJobSavepoint&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -181,6 +187,12 @@ class TriggerJobSavepoint(pulumi.CustomResource):
             description="description.",
             work_space_id="space-2idq8wbr")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TriggerJobSavepoint](https://www.tencentcloud.com/search/?wd=TriggerJobSavepoint&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

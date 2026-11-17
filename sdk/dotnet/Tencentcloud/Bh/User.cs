@@ -35,6 +35,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUser](https://www.tencentcloud.com/search/?wd=CreateUser&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeDepartments](https://www.tencentcloud.com/search/?wd=DescribeDepartments&amp;type=document&amp;lang=en)
+    ///   - [DescribeUsers](https://www.tencentcloud.com/search/?wd=DescribeUsers&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyUser](https://www.tencentcloud.com/search/?wd=ModifyUser&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteUsers](https://www.tencentcloud.com/search/?wd=DeleteUsers&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// BH user can be imported using the id, e.g.

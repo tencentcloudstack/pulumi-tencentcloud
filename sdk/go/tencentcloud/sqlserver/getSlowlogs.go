@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
 func GetSlowlogs(ctx *pulumi.Context, args *GetSlowlogsArgs, opts ...pulumi.InvokeOption) (*GetSlowlogsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowlogsResult

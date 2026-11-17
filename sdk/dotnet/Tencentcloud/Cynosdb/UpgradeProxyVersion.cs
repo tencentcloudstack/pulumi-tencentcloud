@@ -31,6 +31,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+    ///   - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/1098/56550)
+    /// * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+    /// * Update:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/1098/56550)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/upgradeProxyVersion:UpgradeProxyVersion")]
     public partial class UpgradeProxyVersion : global::Pulumi.CustomResource

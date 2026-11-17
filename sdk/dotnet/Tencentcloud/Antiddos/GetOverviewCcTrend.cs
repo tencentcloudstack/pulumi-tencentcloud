@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOverviewCcTrendResult> InvokeAsync(GetOverviewCcTrendArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewCcTrendResult>("tencentcloud:Antiddos/getOverviewCcTrend:getOverviewCcTrend", args ?? new GetOverviewCcTrendArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOverviewCcTrendResult> Invoke(GetOverviewCcTrendInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewCcTrendResult>("tencentcloud:Antiddos/getOverviewCcTrend:getOverviewCcTrend", args ?? new GetOverviewCcTrendInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOverviewCcTrendResult> Invoke(GetOverviewCcTrendInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewCcTrendResult>("tencentcloud:Antiddos/getOverviewCcTrend:getOverviewCcTrend", args ?? new GetOverviewCcTrendInvokeArgs(), options.WithDefaults());

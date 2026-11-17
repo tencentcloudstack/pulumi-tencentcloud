@@ -388,6 +388,12 @@ def get_record_list(domain: Optional[_builtins.str] = None,
         is_exact_sub_domain=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&type=document&lang=en)
+
 
     :param _builtins.str domain: The domain to which the resolution record belongs.
     :param _builtins.int domain_id: The domain ID to which the resolution record belongs. If DomainId is provided, the system will ignore the Domain parameter. You can find all Domain and DomainId through the DescribeDomainList interface.
@@ -534,6 +540,12 @@ def get_record_list_output(domain: pulumi.Input[Optional[_builtins.str]] = None,
         remark="",
         is_exact_sub_domain=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&type=document&lang=en)
 
 
     :param _builtins.str domain: The domain to which the resolution record belongs.

@@ -1243,8 +1243,6 @@ class RoutePolicyEntriesRoutePolicyEntrySetArgsDict(TypedDict):
     created_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     Creation time.
-
-    Note: This field may return null, indicating that no valid value was found.
     """
     description: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -1317,8 +1315,6 @@ class RoutePolicyEntriesRoutePolicyEntrySetArgs:
         :param pulumi.Input[_builtins.str] cidr_block: Destination ip range.
                Note: This field may return null, indicating that no valid value was found.
         :param pulumi.Input[_builtins.str] created_time: Creation time.
-               
-               Note: This field may return null, indicating that no valid value was found.
         :param pulumi.Input[_builtins.str] description: Describes the routing strategy rule.
                Note: This field may return null, indicating that no valid value was found.
         :param pulumi.Input[_builtins.str] gateway_id: Gateway unique ID.
@@ -1402,8 +1398,6 @@ class RoutePolicyEntriesRoutePolicyEntrySetArgs:
     def created_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Creation time.
-
-        Note: This field may return null, indicating that no valid value was found.
         """
         return pulumi.get(self, "created_time")
 

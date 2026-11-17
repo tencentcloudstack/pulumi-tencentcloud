@@ -152,6 +152,15 @@ class ResourceFolder(pulumi.CustomResource):
             folder_name="folder")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateResourceFolder](https://www.tencentcloud.com/document/api/1174/73886)
+        * Read: [ListResourceFolders](https://www.tencentcloud.com/document/api/1174/73870)
+        * Update: [UpdateResourceFolder](https://www.tencentcloud.com/document/api/1174/73862)
+        * Delete: [DeleteResourceFolder](https://www.tencentcloud.com/document/api/1174/73881)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +188,15 @@ class ResourceFolder(pulumi.CustomResource):
             parent_folder_path="/",
             folder_name="folder")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateResourceFolder](https://www.tencentcloud.com/document/api/1174/73886)
+        * Read: [ListResourceFolders](https://www.tencentcloud.com/document/api/1174/73870)
+        * Update: [UpdateResourceFolder](https://www.tencentcloud.com/document/api/1174/73862)
+        * Delete: [DeleteResourceFolder](https://www.tencentcloud.com/document/api/1174/73881)
 
 
         :param str resource_name: The name of the resource.

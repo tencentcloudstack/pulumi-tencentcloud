@@ -82,6 +82,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [ModifyDatabaseCDC](https://www.tencentcloud.com/document/api/238/41640)
+ * * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+ * * Update:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [ModifyDatabaseCDC](https://www.tencentcloud.com/document/api/238/41640)
+ *
  * ## Import
  *
  * sqlserver configDatabaseCdc can be imported using the id, e.g.

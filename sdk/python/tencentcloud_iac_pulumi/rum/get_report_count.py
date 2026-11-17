@@ -137,6 +137,12 @@ def get_report_count(end_time: Optional[_builtins.int] = None,
         report_type="log")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
+
 
     :param _builtins.int end_time: End time but is represented using a timestamp in seconds.
     :param _builtins.str instance_id: Instance ID.
@@ -185,6 +191,12 @@ def get_report_count_output(end_time: pulumi.Input[Optional[_builtins.int]] = No
         project_id=1,
         report_type="log")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
 
 
     :param _builtins.int end_time: End time but is represented using a timestamp in seconds.

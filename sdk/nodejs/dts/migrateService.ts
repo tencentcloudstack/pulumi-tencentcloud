@@ -29,6 +29,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateMigrationService](https://www.tencentcloud.com/document/api/571/51819)
+ *   - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+ * * Read: [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+ * * Update: [ModifyMigrateJobSpec](https://www.tencentcloud.com/document/api/571/51807)
+ * * Delete:
+ *   - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+ *   - [DestroyMigrateJob](https://www.tencentcloud.com/document/api/571/51811)
+ *   - [IsolateMigrateJob](https://www.tencentcloud.com/document/api/571/51810)
+ *
  * ## Import
  *
  * DTS migrate service can be imported using the id, e.g.

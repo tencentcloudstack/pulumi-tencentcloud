@@ -22,6 +22,22 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AddRealServers](https://www.tencentcloud.com/document/api/608/33061)
+ *   - [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyRealServerName](https://www.tencentcloud.com/document/api/608/33058)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [RemoveRealServers](https://www.tencentcloud.com/document/api/608/33057)
+ *
  * ## Import
  *
  * GAAP realserver can be imported using the id, e.g.

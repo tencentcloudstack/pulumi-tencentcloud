@@ -75,6 +75,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreatePrivateNatGatewayTranslationAclRule](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGatewayTranslationAclRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePrivateNatGatewayTranslationAclRules](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGatewayTranslationAclRules&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyPrivateNatGatewayTranslationAclRule](https://www.tencentcloud.com/search/?wd=ModifyPrivateNatGatewayTranslationAclRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeletePrivateNatGatewayTranslationAclRule](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGatewayTranslationAclRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// VPC private nat gateway translation acl rule can be imported using the natGatewayId#translationDirection#translationType#translationIp[#originalIp]#aclruleId, e.g.

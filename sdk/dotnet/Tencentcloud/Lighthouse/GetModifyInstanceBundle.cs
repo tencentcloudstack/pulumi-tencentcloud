@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
         /// </summary>
         public static Task<GetModifyInstanceBundleResult> InvokeAsync(GetModifyInstanceBundleArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
         /// </summary>
         public static Output<GetModifyInstanceBundleResult> Invoke(GetModifyInstanceBundleInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
         /// </summary>
         public static Output<GetModifyInstanceBundleResult> Invoke(GetModifyInstanceBundleInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetModifyInstanceBundleResult>("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args ?? new GetModifyInstanceBundleInvokeArgs(), options.WithDefaults());

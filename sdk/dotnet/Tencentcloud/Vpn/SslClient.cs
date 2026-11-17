@@ -58,6 +58,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateVpnGatewaySslClient](https://www.tencentcloud.com/search/?wd=CreateVpnGatewaySslClient&amp;type=document&amp;lang=en)
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    /// * Read:
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeVpnGatewaySslClients](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslClients&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete:
+    ///   - [DeleteVpnGatewaySslClient](https://www.tencentcloud.com/search/?wd=DeleteVpnGatewaySslClient&amp;type=document&amp;lang=en)
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    /// 
     /// ## Import
     /// 
     /// VPN SSL Client can be imported, e.g.

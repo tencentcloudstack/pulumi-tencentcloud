@@ -185,6 +185,12 @@ class JobAbort(pulumi.CustomResource):
             scenario_id="scenario-22q19f3k")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AbortJob](https://www.tencentcloud.com/document/api/1249/68539)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -213,6 +219,12 @@ class JobAbort(pulumi.CustomResource):
             project_id="project-45vw7v82",
             scenario_id="scenario-22q19f3k")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AbortJob](https://www.tencentcloud.com/document/api/1249/68539)
 
 
         :param str resource_name: The name of the resource.

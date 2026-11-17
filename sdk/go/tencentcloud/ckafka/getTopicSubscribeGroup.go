@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopicSubscribeGroup](https://www.tencentcloud.com/document/api/597/42130)
 func GetTopicSubscribeGroup(ctx *pulumi.Context, args *GetTopicSubscribeGroupArgs, opts ...pulumi.InvokeOption) (*GetTopicSubscribeGroupResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopicSubscribeGroupResult

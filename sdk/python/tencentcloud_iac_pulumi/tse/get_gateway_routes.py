@@ -121,6 +121,12 @@ def get_gateway_routes(gateway_id: Optional[_builtins.str] = None,
         route_name="keep-routes")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+
 
     :param _builtins.str gateway_id: gateway ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -160,6 +166,12 @@ def get_gateway_routes_output(gateway_id: pulumi.Input[Optional[_builtins.str]] 
         service_name="test",
         route_name="keep-routes")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
 
 
     :param _builtins.str gateway_id: gateway ID.

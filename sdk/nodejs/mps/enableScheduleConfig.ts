@@ -164,6 +164,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DisableSchedule](https://www.tencentcloud.com/document/api/1041/54032)
+ *   - [EnableSchedule](https://www.tencentcloud.com/document/api/1041/54031)
+ * * Read: [DescribeSchedules](https://www.tencentcloud.com/document/api/1041/54033)
+ * * Update:
+ *   - [DisableSchedule](https://www.tencentcloud.com/document/api/1041/54032)
+ *   - [EnableSchedule](https://www.tencentcloud.com/document/api/1041/54031)
+ *
  * ## Import
  *
  * mps enableScheduleConfig can be imported using the id, e.g.

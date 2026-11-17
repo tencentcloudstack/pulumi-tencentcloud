@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     dimensions: ["uuid"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
  */
 export function getAlarmBasicMetric(args: GetAlarmBasicMetricArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmBasicMetricResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -95,6 +101,12 @@ export interface GetAlarmBasicMetricResult {
  *     dimensions: ["uuid"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
  */
 export function getAlarmBasicMetricOutput(args: GetAlarmBasicMetricOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmBasicMetricResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

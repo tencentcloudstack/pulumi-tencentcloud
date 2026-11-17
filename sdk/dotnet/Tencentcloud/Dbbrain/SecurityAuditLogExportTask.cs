@@ -39,6 +39,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateSecurityAuditLogExportTask](https://www.tencentcloud.com/document/api/1035/41198)
+    ///   - [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+    /// * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+    /// * Delete: [DeleteSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41197)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/securityAuditLogExportTask:SecurityAuditLogExportTask")]
     public partial class SecurityAuditLogExportTask : global::Pulumi.CustomResource

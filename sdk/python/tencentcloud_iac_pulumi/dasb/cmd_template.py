@@ -120,6 +120,15 @@ class CmdTemplate(pulumi.CustomResource):
             cmd_list="rm -rf*")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCmdTemplate](https://www.tencentcloud.com/search/?wd=CreateCmdTemplate&type=document&lang=en)
+        * Read: [DescribeCmdTemplates](https://www.tencentcloud.com/search/?wd=DescribeCmdTemplates&type=document&lang=en)
+        * Update: [ModifyCmdTemplate](https://www.tencentcloud.com/search/?wd=ModifyCmdTemplate&type=document&lang=en)
+        * Delete: [DeleteCmdTemplates](https://www.tencentcloud.com/search/?wd=DeleteCmdTemplates&type=document&lang=en)
+
         ## Import
 
         dasb cmd_template can be imported using the id, e.g.
@@ -153,6 +162,15 @@ class CmdTemplate(pulumi.CustomResource):
             name="tf_example",
             cmd_list="rm -rf*")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCmdTemplate](https://www.tencentcloud.com/search/?wd=CreateCmdTemplate&type=document&lang=en)
+        * Read: [DescribeCmdTemplates](https://www.tencentcloud.com/search/?wd=DescribeCmdTemplates&type=document&lang=en)
+        * Update: [ModifyCmdTemplate](https://www.tencentcloud.com/search/?wd=ModifyCmdTemplate&type=document&lang=en)
+        * Delete: [DeleteCmdTemplates](https://www.tencentcloud.com/search/?wd=DeleteCmdTemplates&type=document&lang=en)
 
         ## Import
 

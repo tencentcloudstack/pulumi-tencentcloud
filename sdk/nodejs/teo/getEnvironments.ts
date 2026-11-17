@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of teo environments
+ * Use this data source to query detailed information of TEO environments, including the environment list and the source version (`sourceVersion`) of each effective config group version.
  *
  * ## Example Usage
  *
@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     zoneId: "zone-2qtuhspy7cr6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
  */
 export function getEnvironments(args: GetEnvironmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetEnvironmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -58,7 +64,7 @@ export interface GetEnvironmentsResult {
     readonly zoneId: string;
 }
 /**
- * Use this data source to query detailed information of teo environments
+ * Use this data source to query detailed information of TEO environments, including the environment list and the source version (`sourceVersion`) of each effective config group version.
  *
  * ## Example Usage
  *
@@ -70,6 +76,12 @@ export interface GetEnvironmentsResult {
  *     zoneId: "zone-2qtuhspy7cr6",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
  */
 export function getEnvironmentsOutput(args: GetEnvironmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEnvironmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

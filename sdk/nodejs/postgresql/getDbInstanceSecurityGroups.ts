@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     readOnlyGroupId: "pgrogrp-6fexzcmy",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
  */
 export function getDbInstanceSecurityGroups(args?: GetDbInstanceSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstanceSecurityGroupsResult> {
     args = args || {};
@@ -103,6 +109,12 @@ export interface GetDbInstanceSecurityGroupsResult {
  *     readOnlyGroupId: "pgrogrp-6fexzcmy",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
  */
 export function getDbInstanceSecurityGroupsOutput(args?: GetDbInstanceSecurityGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbInstanceSecurityGroupsResult> {
     args = args || {};

@@ -574,6 +574,17 @@ class CngwRoute(pulumi.CustomResource):
             strip_path=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79292)
+        * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+        * Update:
+          - [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+          - [ModifyCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79241)
+        * Delete: [DeleteCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79278)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -674,6 +685,17 @@ class CngwRoute(pulumi.CustomResource):
             service_id=cngw_service.service_id,
             strip_path=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79292)
+        * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+        * Update:
+          - [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+          - [ModifyCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79241)
+        * Delete: [DeleteCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79278)
 
 
         :param str resource_name: The name of the resource.

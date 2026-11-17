@@ -59,6 +59,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRecordListResult> InvokeAsync(GetRecordListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListArgs(), options.WithDefaults());
@@ -110,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRecordListResult> Invoke(GetRecordListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListInvokeArgs(), options.WithDefaults());
@@ -161,6 +173,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRecordListResult> Invoke(GetRecordListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordListResult>("tencentcloud:Dnspod/getRecordList:getRecordList", args ?? new GetRecordListInvokeArgs(), options.WithDefaults());

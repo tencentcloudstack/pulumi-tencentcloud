@@ -51,6 +51,26 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [AddUser](https://www.tencentcloud.com/document/api/598/32265)
+//   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+//
+// * Update:
+//   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateUser](https://www.tencentcloud.com/document/api/598/32252)
+//
+// * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/598/32261)
+//
 // ## Import
 //
 // CAM user can be imported using the user name, e.g.

@@ -68,7 +68,7 @@ class InstanceArgs:
         :param pulumi.Input[_builtins.str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[_builtins.int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         :param pulumi.Input[_builtins.int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[_builtins.int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[_builtins.str] redis_cluster_id: Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
@@ -305,7 +305,7 @@ class InstanceArgs:
     @pulumi.getter(name="productVersion")
     def product_version(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         """
         return pulumi.get(self, "product_version")
 
@@ -551,7 +551,7 @@ class _InstanceState:
         :param pulumi.Input[_builtins.str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[_builtins.int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         :param pulumi.Input[_builtins.int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[_builtins.int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[_builtins.str] redis_cluster_id: Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
@@ -838,7 +838,7 @@ class _InstanceState:
     @pulumi.getter(name="productVersion")
     def product_version(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         """
         return pulumi.get(self, "product_version")
 
@@ -1385,6 +1385,49 @@ class Instance(pulumi.CustomResource):
             redis_cluster_id=clusters.resources[0].redis_cluster_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+          - [CreateInstances](https://www.tencentcloud.com/document/api/239/32069)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+        * Read:
+          - [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/api/239/32081)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+        * Update:
+          - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+          - [ApplyParamsTemplate](https://www.tencentcloud.com/document/api/239/41922)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
+          - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+          - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+          - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/239/37320)
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/239/32057)
+          - [ModifyInstanceAvailabilityZones](https://www.tencentcloud.com/document/api/239/59383)
+          - [ModifyInstanceChargeType](https://www.tencentcloud.com/document/api/239/78762)
+          - [ModifyNetworkConfig](https://www.tencentcloud.com/document/api/239/32056)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+          - [ResetPassword](https://www.tencentcloud.com/document/api/239/32054)
+          - [UpgradeInstance](https://www.tencentcloud.com/document/api/239/32052)
+          - [UpgradeInstanceVersion](https://www.tencentcloud.com/document/api/239/37831)
+        * Delete:
+          - [CleanUpInstance](https://www.tencentcloud.com/document/api/239/32071)
+          - [DescribeInstanceDealDetail](https://www.tencentcloud.com/document/api/239/32067)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DestroyPostpaidInstance](https://www.tencentcloud.com/document/api/239/32063)
+          - [DestroyPrepaidInstance](https://www.tencentcloud.com/document/api/239/32062)
+
         ## Import
 
         Redis instance can be imported, e.g.
@@ -1409,7 +1452,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[_builtins.int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         :param pulumi.Input[_builtins.int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[_builtins.int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[_builtins.str] redis_cluster_id: Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
@@ -1729,6 +1772,49 @@ class Instance(pulumi.CustomResource):
             redis_cluster_id=clusters.resources[0].redis_cluster_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+          - [CreateInstances](https://www.tencentcloud.com/document/api/239/32069)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+        * Read:
+          - [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/api/239/32081)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+        * Update:
+          - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+          - [ApplyParamsTemplate](https://www.tencentcloud.com/document/api/239/41922)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
+          - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+          - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+          - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/239/37320)
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/239/32057)
+          - [ModifyInstanceAvailabilityZones](https://www.tencentcloud.com/document/api/239/59383)
+          - [ModifyInstanceChargeType](https://www.tencentcloud.com/document/api/239/78762)
+          - [ModifyNetworkConfig](https://www.tencentcloud.com/document/api/239/32056)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+          - [ResetPassword](https://www.tencentcloud.com/document/api/239/32054)
+          - [UpgradeInstance](https://www.tencentcloud.com/document/api/239/32052)
+          - [UpgradeInstanceVersion](https://www.tencentcloud.com/document/api/239/37831)
+        * Delete:
+          - [CleanUpInstance](https://www.tencentcloud.com/document/api/239/32071)
+          - [DescribeInstanceDealDetail](https://www.tencentcloud.com/document/api/239/32067)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [DestroyPostpaidInstance](https://www.tencentcloud.com/document/api/239/32063)
+          - [DestroyPrepaidInstance](https://www.tencentcloud.com/document/api/239/32062)
+
         ## Import
 
         Redis instance can be imported, e.g.
@@ -1898,7 +1984,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         :param pulumi.Input[_builtins.int] port: The port used to access a redis instance. The default value is 6379. When the `operation_network` is `changeVPort` or `changeVip`, this parameter needs to be configured.
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        :param pulumi.Input[_builtins.str] product_version: Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         :param pulumi.Input[_builtins.int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[_builtins.int] recycle: Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
         :param pulumi.Input[_builtins.str] redis_cluster_id: Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
@@ -2089,7 +2175,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="productVersion")
     def product_version(self) -> pulumi.Output[_builtins.str]:
         """
-        Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        Specify the product version of the instance. `local`: common type I;` localv2  `: common type II; `cloud`: cloud native,Currently not available for sale; `cdc`: dedicated cluster type. Default is `local`.
         """
         return pulumi.get(self, "product_version")
 

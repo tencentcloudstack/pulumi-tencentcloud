@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDbCustomImagesResult> InvokeAsync(GetDbCustomImagesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCustomImagesResult>("tencentcloud:Dbdc/getDbCustomImages:getDbCustomImages", args ?? new GetDbCustomImagesArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomImagesResult> Invoke(GetDbCustomImagesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomImagesResult>("tencentcloud:Dbdc/getDbCustomImages:getDbCustomImages", args ?? new GetDbCustomImagesInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomImagesResult> Invoke(GetDbCustomImagesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomImagesResult>("tencentcloud:Dbdc/getDbCustomImages:getDbCustomImages", args ?? new GetDbCustomImagesInvokeArgs(), options.WithDefaults());

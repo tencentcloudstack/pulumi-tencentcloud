@@ -24,5 +24,6 @@ from .instance_srv_connection import *
 from .instance_ssl import *
 from .instance_transparent_data_encryption import *
 from .readonly_instance import *
+from .scale_up_db_instance_cpu import *
 from .sharding_instance import *
 from .standby_instance import *

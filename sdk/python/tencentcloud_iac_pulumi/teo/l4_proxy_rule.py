@@ -164,6 +164,18 @@ class L4ProxyRule(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59027)
+        * Read: [DescribeL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59023)
+        * Update: [ModifyL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59021)
+        * Delete:
+          - [DeleteL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59025)
+          - [DescribeL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59023)
+          - [ModifyL4ProxyRulesStatus](https://www.tencentcloud.com/document/api/1145/59020)
+
         ## Import
 
         teo teo_l4_proxy can be imported using the id, e.g.
@@ -209,6 +221,18 @@ class L4ProxyRule(pulumi.CustomResource):
                 "session_persist_time": 3600,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59027)
+        * Read: [DescribeL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59023)
+        * Update: [ModifyL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59021)
+        * Delete:
+          - [DeleteL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59025)
+          - [DescribeL4ProxyRules](https://www.tencentcloud.com/document/api/1145/59023)
+          - [ModifyL4ProxyRulesStatus](https://www.tencentcloud.com/document/api/1145/59020)
 
         ## Import
 

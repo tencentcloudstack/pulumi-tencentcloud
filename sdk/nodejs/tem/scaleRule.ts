@@ -58,6 +58,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52755)
+ * * Read: [DescribeApplicationAutoscalerList](https://www.tencentcloud.com/document/api/1094/52753)
+ * * Update: [ModifyApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52750)
+ * * Delete:
+ *   - [DeleteApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52754)
+ *   - [DisableApplicationAutoscaler](https://www.tencentcloud.com/document/api/1094/52752)
+ *
  * ## Import
  *
  * tem scaleRule can be imported using the id, e.g.

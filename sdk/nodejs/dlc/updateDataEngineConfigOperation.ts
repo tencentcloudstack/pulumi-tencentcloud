@@ -18,6 +18,15 @@ import * as utilities from "../utilities";
  *     dataEngineConfigCommand: "UpdateSparkSQLLakefsPath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+ *   - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+ *   - [UpdateDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62645)
  */
 export class UpdateDataEngineConfigOperation extends pulumi.CustomResource {
     /**

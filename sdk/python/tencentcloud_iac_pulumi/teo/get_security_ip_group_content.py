@@ -118,6 +118,12 @@ def get_security_ip_group_content(group_id: Optional[_builtins.int] = None,
         group_id=33711)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
+
 
     :param _builtins.int group_id: IP group ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -153,6 +159,12 @@ def get_security_ip_group_content_output(group_id: pulumi.Input[Optional[_builti
     example = tencentcloud.teo.get_security_ip_group_content(zone_id="zone-3fkff38fyw8s",
         group_id=33711)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
 
 
     :param _builtins.int group_id: IP group ID.

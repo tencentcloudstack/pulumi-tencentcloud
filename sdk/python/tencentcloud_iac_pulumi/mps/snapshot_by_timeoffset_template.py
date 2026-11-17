@@ -290,6 +290,15 @@ class SnapshotByTimeoffsetTemplate(pulumi.CustomResource):
             width=140)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/1041/33672)
+        * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/1041/33656)
+        * Update: [ModifySnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/1041/33648)
+        * Delete: [DeleteSnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/1041/33664)
+
         ## Import
 
         mps snapshot_by_timeoffset_template can be imported using the id, e.g.
@@ -332,6 +341,15 @@ class SnapshotByTimeoffsetTemplate(pulumi.CustomResource):
             resolution_adaptive="open",
             width=140)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/1041/33672)
+        * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/1041/33656)
+        * Update: [ModifySnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/1041/33648)
+        * Delete: [DeleteSnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/1041/33664)
 
         ## Import
 

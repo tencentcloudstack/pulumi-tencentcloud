@@ -129,6 +129,12 @@ def get_list_schema(catalog_name: Optional[_builtins.str] = None,
     example = tencentcloud.wedata.get_list_schema()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
+
 
     :param _builtins.str catalog_name: Catalog name.
     :param _builtins.str database_name: Database name.
@@ -170,6 +176,12 @@ def get_list_schema_output(catalog_name: pulumi.Input[Optional[Optional[_builtin
 
     example = tencentcloud.wedata.get_list_schema()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
 
 
     :param _builtins.str catalog_name: Catalog name.

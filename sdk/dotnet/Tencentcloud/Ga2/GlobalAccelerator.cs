@@ -63,6 +63,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ga2
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateGlobalAccelerator](https://www.tencentcloud.com/document/api/1299/83741)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    /// * Read: [DescribeGlobalAccelerators](https://www.tencentcloud.com/document/api/1299/83812)
+    /// * Update:
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    ///   - [ModifyGlobalAccelerator](https://www.tencentcloud.com/document/api/1299/83744)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete:
+    ///   - [DeleteGlobalAccelerator](https://www.tencentcloud.com/document/api/1299/83827)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    /// 
     /// ## Import
     /// 
     /// GA2 global accelerator instance can be imported using the id, e.g.

@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
         /// </summary>
         public static Task<GetGatewayInstancesResult> InvokeAsync(GetGatewayInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayInstancesResult>("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args ?? new GetGatewayInstancesArgs(), options.WithDefaults());
@@ -98,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
         /// </summary>
         public static Output<GetGatewayInstancesResult> Invoke(GetGatewayInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayInstancesResult>("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args ?? new GetGatewayInstancesInvokeArgs(), options.WithDefaults());
@@ -143,6 +155,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
         /// </summary>
         public static Output<GetGatewayInstancesResult> Invoke(GetGatewayInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayInstancesResult>("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args ?? new GetGatewayInstancesInvokeArgs(), options.WithDefaults());

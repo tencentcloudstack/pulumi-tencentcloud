@@ -41,6 +41,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [PutEvents](https://www.tencentcloud.com/search/?wd=PutEvents&type=document&lang=en)
  */
 export class PutEvents extends pulumi.CustomResource {
     /**

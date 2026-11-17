@@ -159,6 +159,14 @@ class RenewDisk(pulumi.CustomResource):
             auto_voucher=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+          - [RenewDisks](https://www.tencentcloud.com/document/api/1103/57992)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -190,6 +198,14 @@ class RenewDisk(pulumi.CustomResource):
             },
             auto_voucher=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+          - [RenewDisks](https://www.tencentcloud.com/document/api/1103/57992)
 
 
         :param str resource_name: The name of the resource.

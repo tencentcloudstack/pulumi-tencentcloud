@@ -57,6 +57,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePostCLSFlow](https://www.tencentcloud.com/search/?wd=CreatePostCLSFlow&amp;type=document&amp;lang=en)
+    ///   - [DescribePostCLSFlows](https://www.tencentcloud.com/search/?wd=DescribePostCLSFlows&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePostCLSFlows](https://www.tencentcloud.com/search/?wd=DescribePostCLSFlows&amp;type=document&amp;lang=en)
+    /// * Update: [CreatePostCLSFlow](https://www.tencentcloud.com/search/?wd=CreatePostCLSFlow&amp;type=document&amp;lang=en)
+    /// * Delete: [DestroyPostCLSFlow](https://www.tencentcloud.com/search/?wd=DestroyPostCLSFlow&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// WAF log post cls flow can be imported using the id, e.g.

@@ -39,6 +39,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddExternalSAMLIdPCertificate](https://www.tencentcloud.com/document/api/1031/63588)
+    ///   - [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
+    /// * Read: [GetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63586)
+    /// * Update:
+    ///   - [AddExternalSAMLIdPCertificate](https://www.tencentcloud.com/document/api/1031/63588)
+    ///   - [RemoveExternalSAMLIdPCertificate](https://www.tencentcloud.com/document/api/1031/63583)
+    /// * Delete: [ClearExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63587)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/externalSamlIdentityProvider:ExternalSamlIdentityProvider")]
     public partial class ExternalSamlIdentityProvider : global::Pulumi.CustomResource

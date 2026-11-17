@@ -188,6 +188,14 @@ class DisisolateDbInstanceOperation(pulumi.CustomResource):
             auto_voucher=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [DisIsolateDBInstances](https://www.tencentcloud.com/document/api/409/40110)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -216,6 +224,14 @@ class DisisolateDbInstanceOperation(pulumi.CustomResource):
             period=1,
             auto_voucher=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [DisIsolateDBInstances](https://www.tencentcloud.com/document/api/409/40110)
 
 
         :param str resource_name: The name of the resource.

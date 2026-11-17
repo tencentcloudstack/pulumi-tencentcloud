@@ -287,6 +287,12 @@ def get_instances(auto_renews: Optional[Sequence[_builtins.int]] = None,
         billing_mode="postpaid")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&type=document&lang=en)
+
 
     :param Sequence[_builtins.int] auto_renews: Filter by renewal mode. 0: manual renewal; 1: auto-renewal; 2: no renewal on expiry.
     :param _builtins.str billing_mode: Filter by billing mode. postpaid: pay-as-you-go; prepaid: prepaid.
@@ -395,6 +401,12 @@ def get_instances_output(auto_renews: pulumi.Input[Optional[Optional[Sequence[_b
         uniq_subnet_ids=["subnet-1ed4w7to"],
         billing_mode="postpaid")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&type=document&lang=en)
 
 
     :param Sequence[_builtins.int] auto_renews: Filter by renewal mode. 0: manual renewal; 1: auto-renewal; 2: no renewal on expiry.

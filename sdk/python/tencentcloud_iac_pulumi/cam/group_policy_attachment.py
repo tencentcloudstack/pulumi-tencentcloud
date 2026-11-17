@@ -193,6 +193,16 @@ class GroupPolicyAttachment(pulumi.CustomResource):
             policy_id=policy.policy_lists[0].policy_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachGroupPolicy](https://www.tencentcloud.com/document/api/598/32250)
+          - [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+        * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+        * Delete: [DetachGroupPolicy](https://www.tencentcloud.com/document/api/598/32246)
+
         ## Import
 
         CAM group policy attachment can be imported using the id, e.g.
@@ -236,6 +246,16 @@ class GroupPolicyAttachment(pulumi.CustomResource):
             group_id=groups.group_lists[0].group_id,
             policy_id=policy.policy_lists[0].policy_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachGroupPolicy](https://www.tencentcloud.com/document/api/598/32250)
+          - [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+        * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+        * Delete: [DetachGroupPolicy](https://www.tencentcloud.com/document/api/598/32246)
 
         ## Import
 

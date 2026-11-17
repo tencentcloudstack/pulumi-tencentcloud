@@ -94,6 +94,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read: [DescribeBackupConfig](https://www.tencentcloud.com/document/api/236/15837)
+    /// * Update: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/236/15839)
+    /// * Delete: [ModifyBackupConfig](https://www.tencentcloud.com/document/api/236/15839)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/backupPolicy:BackupPolicy")]
     public partial class BackupPolicy : global::Pulumi.CustomResource

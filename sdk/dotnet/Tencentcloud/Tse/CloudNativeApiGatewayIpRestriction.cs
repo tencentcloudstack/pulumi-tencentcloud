@@ -40,6 +40,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateOrModifyCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=CreateOrModifyCloudNativeAPIGatewayIPRestriction&amp;type=document&amp;lang=en)
+    ///   - [DescribeCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DescribeCloudNativeAPIGatewayIPRestriction&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DescribeCloudNativeAPIGatewayIPRestriction&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CreateOrModifyCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=CreateOrModifyCloudNativeAPIGatewayIPRestriction&amp;type=document&amp;lang=en)
+    ///   - [DescribeCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DescribeCloudNativeAPIGatewayIPRestriction&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteCloudNativeAPIGatewayIPRestriction](https://www.tencentcloud.com/search/?wd=DeleteCloudNativeAPIGatewayIPRestriction&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tse cloud native api gateway ip restriction can be imported using the composite id, e.g.

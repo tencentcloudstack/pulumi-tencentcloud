@@ -33,6 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateNamespace](https://www.tencentcloud.com/search/?wd=CreateNamespace&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeSimpleNamespaces](https://www.tencentcloud.com/search/?wd=DescribeSimpleNamespaces&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyNamespace](https://www.tencentcloud.com/search/?wd=ModifyNamespace&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteNamespace](https://www.tencentcloud.com/search/?wd=DeleteNamespace&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/namespace:Namespace")]
     public partial class Namespace : global::Pulumi.CustomResource

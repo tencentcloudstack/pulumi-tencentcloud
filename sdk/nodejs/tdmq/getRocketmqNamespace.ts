@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     nameKeyword: exampleRocketmqNamespace.namespaceName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
  */
 export function getRocketmqNamespace(args: GetRocketmqNamespaceArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqNamespaceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetRocketmqNamespaceResult {
  *     nameKeyword: exampleRocketmqNamespace.namespaceName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
  */
 export function getRocketmqNamespaceOutput(args: GetRocketmqNamespaceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqNamespaceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

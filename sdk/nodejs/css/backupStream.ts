@@ -23,6 +23,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&type=document&lang=en)
+ * * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+ * * Update: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&type=document&lang=en)
+ *
  * ## Import
  *
  * css backupStream can be imported using the id, e.g.

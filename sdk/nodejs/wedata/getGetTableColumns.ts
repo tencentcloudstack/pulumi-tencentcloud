@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     tableGuid: "ktDR4ymhp2_nlfClXhwxRQ",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
  */
 export function getGetTableColumns(args: GetGetTableColumnsArgs, opts?: pulumi.InvokeOptions): Promise<GetGetTableColumnsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetGetTableColumnsResult {
  *     tableGuid: "ktDR4ymhp2_nlfClXhwxRQ",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
  */
 export function getGetTableColumnsOutput(args: GetGetTableColumnsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGetTableColumnsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

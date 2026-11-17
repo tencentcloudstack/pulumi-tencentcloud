@@ -74,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCLSIndex](https://www.tencentcloud.com/document/api/1145/59509)
+    /// 
     /// ## Import
     /// 
     /// The resource can be imported by using the `ZoneId`, e.g.

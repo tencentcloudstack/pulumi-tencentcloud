@@ -35,6 +35,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddPermissionPolicyToRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63603)
+ * * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
+ * * Delete: [RemovePermissionPolicyFromRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63596)
+ *
  * ## Import
  *
  * organization identityCenterRoleConfigurationPermissionCustomPolicyAttachment can be imported using the id, e.g.

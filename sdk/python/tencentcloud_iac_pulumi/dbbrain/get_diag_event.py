@@ -228,6 +228,12 @@ def get_diag_event(event_id: Optional[_builtins.int] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBDiagEvent](https://www.tencentcloud.com/document/api/1035/41211)
+
 
     :param _builtins.int event_id: Event ID. Obtain it through `Get Instance Diagnosis History DescribeDBDiagHistory`.
     :param _builtins.str instance_id: isntance id.
@@ -280,6 +286,12 @@ def get_diag_event_output(event_id: pulumi.Input[Optional[Optional[_builtins.int
         event_id=diag_history.events[0].event_id,
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBDiagEvent](https://www.tencentcloud.com/document/api/1035/41211)
 
 
     :param _builtins.int event_id: Event ID. Obtain it through `Get Instance Diagnosis History DescribeDBDiagHistory`.

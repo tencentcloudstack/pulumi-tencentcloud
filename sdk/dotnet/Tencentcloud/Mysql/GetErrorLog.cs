@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
         /// </summary>
         public static Task<GetErrorLogResult> InvokeAsync(GetErrorLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
         /// </summary>
         public static Output<GetErrorLogResult> Invoke(GetErrorLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
         /// </summary>
         public static Output<GetErrorLogResult> Invoke(GetErrorLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetErrorLogResult>("tencentcloud:Mysql/getErrorLog:getErrorLog", args ?? new GetErrorLogInvokeArgs(), options.WithDefaults());

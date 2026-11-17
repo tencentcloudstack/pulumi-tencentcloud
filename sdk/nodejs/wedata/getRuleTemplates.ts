@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
  */
 export function getRuleTemplates(args?: GetRuleTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleTemplatesResult> {
     args = args || {};
@@ -112,6 +118,12 @@ export interface GetRuleTemplatesResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
  */
 export function getRuleTemplatesOutput(args?: GetRuleTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRuleTemplatesResult> {
     args = args || {};

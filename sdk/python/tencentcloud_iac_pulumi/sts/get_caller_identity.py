@@ -132,6 +132,12 @@ def get_caller_identity(result_output_file: Optional[_builtins.str] = None,
     caller_identity = tencentcloud.sts.get_caller_identity()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -161,6 +167,12 @@ def get_caller_identity_output(result_output_file: pulumi.Input[Optional[Optiona
 
     caller_identity = tencentcloud.sts.get_caller_identity()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
 
 
     :param _builtins.str result_output_file: Used to save results.

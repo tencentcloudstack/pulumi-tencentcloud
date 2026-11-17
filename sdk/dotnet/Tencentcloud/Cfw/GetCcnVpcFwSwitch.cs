@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCcnVpcFwSwitchResult> InvokeAsync(GetCcnVpcFwSwitchArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCcnVpcFwSwitchResult>("tencentcloud:Cfw/getCcnVpcFwSwitch:getCcnVpcFwSwitch", args ?? new GetCcnVpcFwSwitchArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcnVpcFwSwitchResult> Invoke(GetCcnVpcFwSwitchInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcnVpcFwSwitchResult>("tencentcloud:Cfw/getCcnVpcFwSwitch:getCcnVpcFwSwitch", args ?? new GetCcnVpcFwSwitchInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcnVpcFwSwitchResult> Invoke(GetCcnVpcFwSwitchInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcnVpcFwSwitchResult>("tencentcloud:Cfw/getCcnVpcFwSwitch:getCcnVpcFwSwitch", args ?? new GetCcnVpcFwSwitchInvokeArgs(), options.WithDefaults());

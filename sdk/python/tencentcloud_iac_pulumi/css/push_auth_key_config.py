@@ -222,6 +222,14 @@ class PushAuthKeyConfig(pulumi.CustomResource):
             auth_delta=1800)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLivePushAuthKey](https://www.tencentcloud.com/document/api/267/30769)
+        * Read: [DescribeLivePushAuthKey](https://www.tencentcloud.com/document/api/267/30771)
+        * Update: [ModifyLivePushAuthKey](https://www.tencentcloud.com/document/api/267/30769)
+
         ## Import
 
         css push_auth_key_config can be imported using the id, e.g.
@@ -261,6 +269,14 @@ class PushAuthKeyConfig(pulumi.CustomResource):
             backup_auth_key="testbackkey",
             auth_delta=1800)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLivePushAuthKey](https://www.tencentcloud.com/document/api/267/30769)
+        * Read: [DescribeLivePushAuthKey](https://www.tencentcloud.com/document/api/267/30771)
+        * Update: [ModifyLivePushAuthKey](https://www.tencentcloud.com/document/api/267/30769)
 
         ## Import
 

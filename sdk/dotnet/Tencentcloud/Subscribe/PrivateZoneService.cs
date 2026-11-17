@@ -27,6 +27,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subscribe
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SubscribePrivateZoneService](https://www.tencentcloud.com/document/api/1097/42109)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Subscribe/privateZoneService:PrivateZoneService")]
     public partial class PrivateZoneService : global::Pulumi.CustomResource

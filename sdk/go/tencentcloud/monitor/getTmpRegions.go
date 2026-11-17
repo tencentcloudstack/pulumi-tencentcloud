@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&type=document&lang=en)
 func GetTmpRegions(ctx *pulumi.Context, args *GetTmpRegionsArgs, opts ...pulumi.InvokeOption) (*GetTmpRegionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTmpRegionsResult

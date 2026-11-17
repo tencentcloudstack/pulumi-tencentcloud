@@ -194,6 +194,20 @@ class ServiceLinkedRole(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateServiceLinkedRole](https://www.tencentcloud.com/document/api/598/36308)
+        * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateRoleDescription](https://www.tencentcloud.com/document/api/598/33554)
+        * Delete:
+          - [DeleteServiceLinkedRole](https://www.tencentcloud.com/document/api/598/36307)
+          - [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+          - [GetServiceLinkedRoleDeletionStatus](https://www.tencentcloud.com/document/api/598/36306)
+
         ## Import
 
         CAM service linked role can be imported using the id, e.g.
@@ -236,6 +250,20 @@ class ServiceLinkedRole(pulumi.CustomResource):
                 "createdBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateServiceLinkedRole](https://www.tencentcloud.com/document/api/598/36308)
+        * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateRoleDescription](https://www.tencentcloud.com/document/api/598/33554)
+        * Delete:
+          - [DeleteServiceLinkedRole](https://www.tencentcloud.com/document/api/598/36307)
+          - [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+          - [GetServiceLinkedRoleDeletionStatus](https://www.tencentcloud.com/document/api/598/36306)
 
         ## Import
 

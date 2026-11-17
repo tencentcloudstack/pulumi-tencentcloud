@@ -126,6 +126,18 @@ class VpcPolicyOrderConfig(pulumi.CustomResource):
         ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+          - [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&type=document&lang=en)
+        * Read: [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+        * Update:
+          - [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+          - [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&type=document&lang=en)
+
         ## Import
 
         CFW vpc policy order config can be imported using the customId(like uuid or base64 string), e.g.
@@ -195,6 +207,18 @@ class VpcPolicyOrderConfig(pulumi.CustomResource):
             example2.uuid,
         ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+          - [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&type=document&lang=en)
+        * Read: [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+        * Update:
+          - [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+          - [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&type=document&lang=en)
 
         ## Import
 

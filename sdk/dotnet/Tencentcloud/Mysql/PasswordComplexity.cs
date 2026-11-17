@@ -109,6 +109,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [ModifyInstancePasswordComplexity](https://www.tencentcloud.com/document/api/236/49500)
+    /// * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+    /// * Update:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [ModifyInstancePasswordComplexity](https://www.tencentcloud.com/document/api/236/49500)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/passwordComplexity:PasswordComplexity")]
     public partial class PasswordComplexity : global::Pulumi.CustomResource

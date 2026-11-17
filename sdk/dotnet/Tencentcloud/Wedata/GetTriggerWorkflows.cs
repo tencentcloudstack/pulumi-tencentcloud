@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77918)
         /// </summary>
         public static Task<GetTriggerWorkflowsResult> InvokeAsync(GetTriggerWorkflowsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggerWorkflowsResult>("tencentcloud:Wedata/getTriggerWorkflows:getTriggerWorkflows", args ?? new GetTriggerWorkflowsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77918)
         /// </summary>
         public static Output<GetTriggerWorkflowsResult> Invoke(GetTriggerWorkflowsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerWorkflowsResult>("tencentcloud:Wedata/getTriggerWorkflows:getTriggerWorkflows", args ?? new GetTriggerWorkflowsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77918)
         /// </summary>
         public static Output<GetTriggerWorkflowsResult> Invoke(GetTriggerWorkflowsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerWorkflowsResult>("tencentcloud:Wedata/getTriggerWorkflows:getTriggerWorkflows", args ?? new GetTriggerWorkflowsInvokeArgs(), options.WithDefaults());

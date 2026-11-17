@@ -152,6 +152,12 @@ def get_projects(project_ids: Optional[Sequence[_builtins.str]] = None,
         project_model="SIMPLE")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListProjects](https://www.tencentcloud.com/document/api/1174/77863)
+
 
     :param Sequence[_builtins.str] project_ids: List of project IDs.
     :param _builtins.str project_model: Project model, optional values: SIMPLE, STANDARD.
@@ -210,6 +216,12 @@ def get_projects_output(project_ids: pulumi.Input[Optional[Optional[Sequence[_bu
         status=1,
         project_model="SIMPLE")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListProjects](https://www.tencentcloud.com/document/api/1174/77863)
 
 
     :param Sequence[_builtins.str] project_ids: List of project IDs.

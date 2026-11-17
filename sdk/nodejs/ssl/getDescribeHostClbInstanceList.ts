@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     certificateId: "8u8DII0l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostClbInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostClbInstanceList&type=document&lang=en)
  */
 export function getDescribeHostClbInstanceList(args: GetDescribeHostClbInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostClbInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetDescribeHostClbInstanceListResult {
  *     certificateId: "8u8DII0l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostClbInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostClbInstanceList&type=document&lang=en)
  */
 export function getDescribeHostClbInstanceListOutput(args: GetDescribeHostClbInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostClbInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

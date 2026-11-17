@@ -29,8 +29,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
         public readonly string? CidrBlock;
         /// <summary>
         /// Creation time.
-        /// 
-        /// Note: This field may return null, indicating that no valid value was found.
         /// </summary>
         public readonly string? CreatedTime;
         /// <summary>

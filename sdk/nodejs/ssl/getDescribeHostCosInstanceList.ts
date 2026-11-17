@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "cos",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostCosInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCosInstanceList&type=document&lang=en)
  */
 export function getDescribeHostCosInstanceList(args: GetDescribeHostCosInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostCosInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetDescribeHostCosInstanceListResult {
  *     resourceType: "cos",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostCosInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCosInstanceList&type=document&lang=en)
  */
 export function getDescribeHostCosInstanceListOutput(args: GetDescribeHostCosInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostCosInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

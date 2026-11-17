@@ -110,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BalanceRoGroupLoad](https://www.tencentcloud.com/document/api/236/35192)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/roGroupLoadOperation:RoGroupLoadOperation")]
     public partial class RoGroupLoadOperation : global::Pulumi.CustomResource

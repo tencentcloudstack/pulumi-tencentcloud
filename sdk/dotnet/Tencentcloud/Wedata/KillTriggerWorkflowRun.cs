@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [KillTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77887)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/killTriggerWorkflowRun:KillTriggerWorkflowRun")]
     public partial class KillTriggerWorkflowRun : global::Pulumi.CustomResource

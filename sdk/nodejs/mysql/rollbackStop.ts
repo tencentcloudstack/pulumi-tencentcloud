@@ -17,6 +17,14 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.mysql.RollbackStop("example", {instanceId: "cdb-fitq5t9h"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [StopRollback](https://www.tencentcloud.com/document/api/236/38951)
  */
 export class RollbackStop extends pulumi.CustomResource {
     /**

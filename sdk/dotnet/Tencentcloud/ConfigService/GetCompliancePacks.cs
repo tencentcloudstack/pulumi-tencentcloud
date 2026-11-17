@@ -78,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
         /// </summary>
         public static Task<GetCompliancePacksResult> InvokeAsync(GetCompliancePacksArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCompliancePacksResult>("tencentcloud:Config/getCompliancePacks:getCompliancePacks", args ?? new GetCompliancePacksArgs(), options.WithDefaults());
@@ -148,6 +154,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
         /// </summary>
         public static Output<GetCompliancePacksResult> Invoke(GetCompliancePacksInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCompliancePacksResult>("tencentcloud:Config/getCompliancePacks:getCompliancePacks", args ?? new GetCompliancePacksInvokeArgs(), options.WithDefaults());
@@ -218,6 +230,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
         /// </summary>
         public static Output<GetCompliancePacksResult> Invoke(GetCompliancePacksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCompliancePacksResult>("tencentcloud:Config/getCompliancePacks:getCompliancePacks", args ?? new GetCompliancePacksInvokeArgs(), options.WithDefaults());

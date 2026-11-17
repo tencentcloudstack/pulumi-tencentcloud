@@ -60,6 +60,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreatePostCKafkaFlow](https://www.tencentcloud.com/search/?wd=CreatePostCKafkaFlow&type=document&lang=en)
+ *   - [DescribePostCKafkaFlows](https://www.tencentcloud.com/search/?wd=DescribePostCKafkaFlows&type=document&lang=en)
+ * * Read: [DescribePostCKafkaFlows](https://www.tencentcloud.com/search/?wd=DescribePostCKafkaFlows&type=document&lang=en)
+ * * Update: [CreatePostCKafkaFlow](https://www.tencentcloud.com/search/?wd=CreatePostCKafkaFlow&type=document&lang=en)
+ * * Delete: [DestroyPostCKafkaFlow](https://www.tencentcloud.com/search/?wd=DestroyPostCKafkaFlow&type=document&lang=en)
+ *
  * ## Import
  *
  * WAF log post ckafka flow can be imported using the id, e.g.

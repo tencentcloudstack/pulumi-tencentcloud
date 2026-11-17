@@ -164,6 +164,14 @@ class StartInstanceRefresh(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeRefreshActivities](https://www.tencentcloud.com/document/api/377/59082)
+          - [StartInstanceRefresh](https://www.tencentcloud.com/document/api/377/59079)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -200,6 +208,14 @@ class StartInstanceRefresh(pulumi.CustomResource):
                 "check_instance_target_health_timeout": 1800,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeRefreshActivities](https://www.tencentcloud.com/document/api/377/59082)
+          - [StartInstanceRefresh](https://www.tencentcloud.com/document/api/377/59079)
 
 
         :param str resource_name: The name of the resource.

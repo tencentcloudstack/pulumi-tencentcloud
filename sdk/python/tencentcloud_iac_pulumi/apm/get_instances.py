@@ -191,6 +191,12 @@ def get_instances(all_regions_flag: Optional[_builtins.int] = None,
     pulumi.export("instances", by_tags.instance_lists)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApmInstances](https://www.tencentcloud.com/document/api/1166/68213)
+
 
     :param _builtins.int all_regions_flag: Whether to query instances in all regions. 0: no, 1: yes. Default is 0.
     :param _builtins.int demo_instance_flag: Whether to query official demo instances. 0: non-demo, 1: demo. Default is 0.
@@ -279,6 +285,12 @@ def get_instances_output(all_regions_flag: pulumi.Input[Optional[Optional[_built
     })
     pulumi.export("instances", by_tags.instance_lists)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApmInstances](https://www.tencentcloud.com/document/api/1166/68213)
 
 
     :param _builtins.int all_regions_flag: Whether to query instances in all regions. 0: no, 1: yes. Default is 0.

@@ -45,6 +45,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeResourceConfigs](https://www.tencentcloud.com/search/?wd=DescribeResourceConfigs&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteResources](https://www.tencentcloud.com/search/?wd=DeleteResources&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/resource:Resource")]
     public partial class Resource : global::Pulumi.CustomResource

@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&type=document&lang=en)
  */
 export function getOrgFinancialByMember(args: GetOrgFinancialByMemberArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgFinancialByMemberResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetOrgFinancialByMemberResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&type=document&lang=en)
  */
 export function getOrgFinancialByMemberOutput(args: GetOrgFinancialByMemberOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgFinancialByMemberResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

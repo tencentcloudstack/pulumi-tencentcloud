@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
         /// </summary>
         public static Task<GetProxiesStatusResult> InvokeAsync(GetProxiesStatusArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
         /// </summary>
         public static Output<GetProxiesStatusResult> Invoke(GetProxiesStatusInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
         /// </summary>
         public static Output<GetProxiesStatusResult> Invoke(GetProxiesStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusInvokeArgs(), options.WithDefaults());

@@ -83,6 +83,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateApi](https://www.tencentcloud.com/search/?wd=CreateApi&amp;type=document&amp;lang=en)
+    ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+    ///   - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&amp;type=document&amp;lang=en)
+    ///   - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifyApi](https://www.tencentcloud.com/search/?wd=ModifyApi&amp;type=document&amp;lang=en)
+    ///   - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&amp;type=document&amp;lang=en)
+    ///   - [ModifyApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyApiEnvironmentStrategy&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/api:Api")]
     public partial class Api : global::Pulumi.CustomResource

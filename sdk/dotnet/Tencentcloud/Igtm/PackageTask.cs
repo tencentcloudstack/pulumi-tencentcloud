@@ -34,6 +34,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreatePackageAndPay](https://www.tencentcloud.com/search/?wd=CreatePackageAndPay&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CreatePackageAndPay](https://www.tencentcloud.com/search/?wd=CreatePackageAndPay&amp;type=document&amp;lang=en)
+    ///   - [ModifyPackageAutoRenew](https://www.tencentcloud.com/search/?wd=ModifyPackageAutoRenew&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// IGTM package task can be imported using the id, e.g.

@@ -99,6 +99,12 @@ def get_group_config_release(group_id: Optional[_builtins.str] = None,
     group_config_release = tencentcloud.tsf.get_group_config_release(group_id="group-yrjkln9v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupRelease](https://www.tencentcloud.com/search/?wd=DescribeGroupRelease&type=document&lang=en)
+
 
     :param _builtins.str group_id: groupId.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_group_config_release_output(group_id: pulumi.Input[Optional[_builtins.st
 
     group_config_release = tencentcloud.tsf.get_group_config_release(group_id="group-yrjkln9v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupRelease](https://www.tencentcloud.com/search/?wd=DescribeGroupRelease&type=document&lang=en)
 
 
     :param _builtins.str group_id: groupId.

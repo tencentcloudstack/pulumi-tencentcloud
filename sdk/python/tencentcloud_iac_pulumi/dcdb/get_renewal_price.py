@@ -128,6 +128,12 @@ def get_renewal_price(amount_unit: Optional[_builtins.str] = None,
         amount_unit="pent")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&type=document&lang=en)
+
 
     :param _builtins.str amount_unit: Price unit. Valid values: `pent` (cent), `microPent` (microcent).
     :param _builtins.str instance_id: Instance ID.
@@ -168,6 +174,12 @@ def get_renewal_price_output(amount_unit: pulumi.Input[Optional[Optional[_builti
         period=1,
         amount_unit="pent")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&type=document&lang=en)
 
 
     :param _builtins.str amount_unit: Price unit. Valid values: `pent` (cent), `microPent` (microcent).

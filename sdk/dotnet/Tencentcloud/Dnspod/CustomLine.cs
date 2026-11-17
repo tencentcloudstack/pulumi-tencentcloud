@@ -35,6 +35,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDomainCustomLine](https://www.tencentcloud.com/search/?wd=CreateDomainCustomLine&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDomainCustomLineList](https://www.tencentcloud.com/search/?wd=DescribeDomainCustomLineList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyDomainCustomLine](https://www.tencentcloud.com/search/?wd=ModifyDomainCustomLine&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteDomainCustomLine](https://www.tencentcloud.com/search/?wd=DeleteDomainCustomLine&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dnspod CustomLine can be imported using the id, e.g.

@@ -86,6 +86,12 @@ def get_account_factory_baseline_items(result_output_file: Optional[_builtins.st
     example = tencentcloud.controlcenter.get_account_factory_baseline_items()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_account_factory_baseline_items_output(result_output_file: pulumi.Input[O
 
     example = tencentcloud.controlcenter.get_account_factory_baseline_items()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
 
 
     :param _builtins.str result_output_file: Used to save results.

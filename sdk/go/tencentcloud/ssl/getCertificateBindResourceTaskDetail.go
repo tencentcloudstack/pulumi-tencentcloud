@@ -104,6 +104,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
 func GetCertificateBindResourceTaskDetail(ctx *pulumi.Context, args *GetCertificateBindResourceTaskDetailArgs, opts ...pulumi.InvokeOption) (*GetCertificateBindResourceTaskDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCertificateBindResourceTaskDetailResult

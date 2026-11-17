@@ -119,6 +119,12 @@ class DeployCertificateRecordRetryOperation(pulumi.CustomResource):
         deploy_certificate_record_retry = tencentcloud.ssl.DeployCertificateRecordRetryOperation("deploy_certificate_record_retry", deploy_record_id=35474)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeployCertificateRecordRetry](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRetry&type=document&lang=en)
+
         ## Import
 
         ssl deploy_certificate_record_retry can be imported using the id, e.g.
@@ -150,6 +156,12 @@ class DeployCertificateRecordRetryOperation(pulumi.CustomResource):
 
         deploy_certificate_record_retry = tencentcloud.ssl.DeployCertificateRecordRetryOperation("deploy_certificate_record_retry", deploy_record_id=35474)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeployCertificateRecordRetry](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRetry&type=document&lang=en)
 
         ## Import
 

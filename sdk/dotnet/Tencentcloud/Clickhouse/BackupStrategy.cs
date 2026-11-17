@@ -66,6 +66,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&amp;type=document&amp;lang=en)
+    ///   - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&amp;type=document&amp;lang=en)
+    ///   - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// clickhouse BackupStrategy can be imported using the id, e.g.

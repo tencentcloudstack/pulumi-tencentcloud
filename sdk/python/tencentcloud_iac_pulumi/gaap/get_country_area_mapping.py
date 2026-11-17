@@ -86,6 +86,12 @@ def get_country_area_mapping(result_output_file: Optional[_builtins.str] = None,
     country_area_mapping = tencentcloud.gaap.get_country_area_mapping()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_country_area_mapping_output(result_output_file: pulumi.Input[Optional[Op
 
     country_area_mapping = tencentcloud.gaap.get_country_area_mapping()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
 
 
     :param _builtins.str result_output_file: Used to save results.

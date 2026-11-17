@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
         /// </summary>
         public static Task<GetCheckDataEngineImageCanBeUpgradeResult> InvokeAsync(GetCheckDataEngineImageCanBeUpgradeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
         /// </summary>
         public static Output<GetCheckDataEngineImageCanBeUpgradeResult> Invoke(GetCheckDataEngineImageCanBeUpgradeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
         /// </summary>
         public static Output<GetCheckDataEngineImageCanBeUpgradeResult> Invoke(GetCheckDataEngineImageCanBeUpgradeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeInvokeArgs(), options.WithDefaults());

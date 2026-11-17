@@ -161,6 +161,13 @@ class BindDeviceAccountPrivateKey(pulumi.CustomResource):
             private_key_password="TerraformPassword")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindDeviceAccountPrivateKey](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPrivateKey&type=document&lang=en)
+        * Delete: [ResetDeviceAccountPrivateKey](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPrivateKey&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -196,6 +203,13 @@ class BindDeviceAccountPrivateKey(pulumi.CustomResource):
             private_key="MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh",
             private_key_password="TerraformPassword")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindDeviceAccountPrivateKey](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPrivateKey&type=document&lang=en)
+        * Delete: [ResetDeviceAccountPrivateKey](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPrivateKey&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

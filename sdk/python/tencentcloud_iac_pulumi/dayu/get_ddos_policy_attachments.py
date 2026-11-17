@@ -129,6 +129,12 @@ def get_ddos_policy_attachments(policy_id: Optional[_builtins.str] = None,
         policy_id=dayu_ddos_policy_attachment["policyId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+
 
     :param _builtins.str policy_id: Id of the policy to be queried.
     :param _builtins.str resource_id: ID of the attached resource to be queried.
@@ -170,6 +176,12 @@ def get_ddos_policy_attachments_output(policy_id: pulumi.Input[Optional[Optional
     foo_policy = tencentcloud.dayu.get_ddos_policy_attachments(resource_type=dayu_ddos_policy_attachment["resourceType"],
         policy_id=dayu_ddos_policy_attachment["policyId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
 
 
     :param _builtins.str policy_id: Id of the policy to be queried.

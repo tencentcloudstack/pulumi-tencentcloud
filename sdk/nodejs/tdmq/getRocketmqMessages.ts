@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     queryDlqMsg: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&type=document&lang=en)
  */
 export function getRocketmqMessages(args: GetRocketmqMessagesArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqMessagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -122,6 +128,12 @@ export interface GetRocketmqMessagesResult {
  *     queryDlqMsg: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&type=document&lang=en)
  */
 export function getRocketmqMessagesOutput(args: GetRocketmqMessagesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqMessagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

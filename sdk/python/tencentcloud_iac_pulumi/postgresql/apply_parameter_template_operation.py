@@ -119,6 +119,17 @@ class ApplyParameterTemplateOperation(pulumi.CustomResource):
             template_id="xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [DescribeDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43284)
+          - [DescribeParameterTemplateAttributes](https://www.tencentcloud.com/document/api/409/52652)
+          - [DescribeParamsEvent](https://www.tencentcloud.com/document/api/409/43283)
+          - [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +155,17 @@ class ApplyParameterTemplateOperation(pulumi.CustomResource):
             db_instance_id="postgres-xxxxxx",
             template_id="xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [DescribeDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43284)
+          - [DescribeParameterTemplateAttributes](https://www.tencentcloud.com/document/api/409/52652)
+          - [DescribeParamsEvent](https://www.tencentcloud.com/document/api/409/43283)
+          - [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
 
 
         :param str resource_name: The name of the resource.

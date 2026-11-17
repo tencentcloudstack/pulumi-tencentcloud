@@ -549,6 +549,639 @@ import (
 //
 // ```
 //
+// ### Create EMR cluster with meta database
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/emr"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := emr.NewClusterV2(ctx, "example", &emr.ClusterV2Args{
+//				ProductVersion:      pulumi.String("EMR-V3.7.0"),
+//				EnableSupportHaFlag: pulumi.Bool(true),
+//				InstanceName:        pulumi.String("tf-example"),
+//				InstanceChargeType:  pulumi.String("POSTPAID_BY_HOUR"),
+//				NeedMasterWan:       pulumi.String("NEED_MASTER_WAN"),
+//				LoginSettings: &emr.ClusterV2LoginSettingsArgs{
+//					Password: pulumi.String("Password@123"),
+//				},
+//				SceneSoftwareConfig: &emr.ClusterV2SceneSoftwareConfigArgs{
+//					SceneName: pulumi.String("Hadoop-Default"),
+//				},
+//				MetaDbInfo: &emr.ClusterV2MetaDbInfoArgs{
+//					MetaType: pulumi.String("EMR_DEFAULT_META"),
+//				},
+//				Tags: emr.ClusterV2TagArray{
+//					&emr.ClusterV2TagArgs{
+//						TagKey:   pulumi.String("createBy"),
+//						TagValue: pulumi.String("Terraform"),
+//					},
+//				},
+//				SecurityGroupIds: pulumi.String("sg-37tigqat"),
+//				SgIp:             pulumi.String("10.0.0.0/8"),
+//				ZoneResourceConfigurations: emr.ClusterV2ZoneResourceConfigurationArray{
+//					&emr.ClusterV2ZoneResourceConfigurationArgs{
+//						VirtualPrivateCloud: &emr.ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs{
+//							VpcId:    pulumi.String("vpc-i5yyodl9"),
+//							SubnetId: pulumi.String("subnet-hhi88a58"),
+//						},
+//						Placement: &emr.ClusterV2ZoneResourceConfigurationPlacementArgs{
+//							Zone: pulumi.String("ap-guangzhou-6"),
+//						},
+//						AllNodeResourceSpec: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs{
+//							MasterResourceSpecs: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray{
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("master_node_1"),
+//									InstanceType: pulumi.String("SA5.2XLARGE16"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("master_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("master_disk_2"),
+//											DiskSize:   pulumi.Int(200),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NameNode"),
+//												pulumi.String("ZKFailoverController"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("ResourceManager"),
+//												pulumi.String("JobHistoryServer"),
+//												pulumi.String("TimeLineServer"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("OPENLDAP-2.4.44"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("slapd"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("KNOX-1.6.1"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("gateway"),
+//												pulumi.String("ldap"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HIVE-3.1.3"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("HiveMetaStore"),
+//												pulumi.String("HiveServer2"),
+//												pulumi.String("HiveWebHcat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HUE-4.10.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Hue"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RANGER-2.3.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("EmbeddedServer"),
+//												pulumi.String("EnableUnixAuth"),
+//												pulumi.String("Solr"),
+//											},
+//										},
+//									},
+//								},
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("master_node_2"),
+//									InstanceType: pulumi.String("SA5.2XLARGE16"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("master_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("master_disk_2"),
+//											DiskSize:   pulumi.Int(200),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NameNode"),
+//												pulumi.String("ZKFailoverController"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("ResourceManager"),
+//												pulumi.String("JobHistoryServer"),
+//												pulumi.String("TimeLineServer"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("OPENLDAP-2.4.44"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("slapd"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("KNOX-1.6.1"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("gateway"),
+//												pulumi.String("ldap"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HIVE-3.1.3"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("HiveMetaStore"),
+//												pulumi.String("HiveServer2"),
+//												pulumi.String("HiveWebHcat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HUE-4.10.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Hue"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RANGER-2.3.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("EmbeddedServer"),
+//												pulumi.String("EnableUnixAuth"),
+//												pulumi.String("Solr"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//							CoreResourceSpecs: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray{
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("core_node_1"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("core_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("core_disk_2"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("DataNode"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NodeManager"),
+//											},
+//										},
+//									},
+//								},
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("core_node_2"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("core_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("core_disk_2"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("DataNode"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NodeManager"),
+//											},
+//										},
+//									},
+//								},
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("core_node_3"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("core_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("core_disk_2"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("DataNode"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NodeManager"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//							TaskResourceSpecs: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray{
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("task_node_1"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("task_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("task_disk_2"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NodeManager"),
+//											},
+//										},
+//									},
+//								},
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("task_node_2"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("task_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("task_disk_2"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{
+//											Services: pulumi.String("YARN-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("NodeManager"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//							CommonResourceSpecs: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray{
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("common_node_1"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("common_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("JournalNode"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("ZOOKEEPER-3.8.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Zookeeper"),
+//											},
+//										},
+//									},
+//								},
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("common_node_2"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("common_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("JournalNode"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("ZOOKEEPER-3.8.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Zookeeper"),
+//											},
+//										},
+//									},
+//								},
+//								&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs{
+//									_nodeIndex:   pulumi.String("common_node_3"),
+//									InstanceType: pulumi.String("SA5.LARGE8"),
+//									SystemDisk: &emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{
+//										DiskSize: pulumi.Int(100),
+//										DiskType: pulumi.String("CLOUD_HSSD"),
+//									},
+//									DataDisks: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs{
+//											_diskIndex: pulumi.String("common_disk_1"),
+//											DiskSize:   pulumi.Int(100),
+//											DiskType:   pulumi.String("CLOUD_SSD"),
+//										},
+//									},
+//									Softwares: emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray{
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("RUNTIME-1.0.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Sysctl"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("FILEBEAT-7.2.0"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Filebeat"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("HDFS-3.3.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("JournalNode"),
+//											},
+//										},
+//										&emr.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{
+//											Services: pulumi.String("ZOOKEEPER-3.8.4"),
+//											Roles: pulumi.StringArray{
+//												pulumi.String("Zookeeper"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//				MetaDbGroupInfos: emr.ClusterV2MetaDbGroupInfoArray{
+//					&emr.ClusterV2MetaDbGroupInfoArgs{
+//						MetaType: pulumi.String("EMR_DEFAULT_META"),
+//						Components: pulumi.StringArray{
+//							pulumi.String("RANGER"),
+//						},
+//						DefaultMetaVersion: pulumi.String("mysql8"),
+//					},
+//					&emr.ClusterV2MetaDbGroupInfoArgs{
+//						MetaType: pulumi.String("USER_CUSTOM_META"),
+//						Components: pulumi.StringArray{
+//							pulumi.String("HIVE"),
+//						},
+//						MetaDataJdbcUrl: pulumi.String("jdbc:mysql://10.0.30.13:3306/hivemetastore"),
+//						MetaDataUser:    pulumi.String("root"),
+//						MetaDataPass:    pulumi.String("Password@123"),
+//					},
+//					&emr.ClusterV2MetaDbGroupInfoArgs{
+//						MetaType: pulumi.String("EMR_EXIST_META"),
+//						Components: pulumi.StringArray{
+//							pulumi.String("HUE"),
+//						},
+//						UnifyMetaInstanceId: pulumi.String("cdb-jg8rqjn0"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateCluster](https://www.tencentcloud.com/document/api/1026/52522)
+//   - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+//   - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+//
+// * Read:
+//   - [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+//   - [DescribeMetaDBInfo](https://www.tencentcloud.com/document/api/1026/84709)
+//   - [DescribeNodeDataDisks](https://www.tencentcloud.com/document/api/1026/73216)
+//
+// * Update:
+//   - [AttachDisks](https://www.tencentcloud.com/document/api/1026/73274)
+//   - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+//   - [InstallSoftware](https://www.tencentcloud.com/document/api/1026/84708)
+//   - [ModifyInstanceBasic](https://www.tencentcloud.com/document/api/1026/73226)
+//   - [ModifyResource](https://www.tencentcloud.com/document/api/1026/73270)
+//   - [ModifyResourcesTags](https://www.tencentcloud.com/document/api/1026/58392)
+//   - [ResizeDataDisks](https://www.tencentcloud.com/document/api/1026/73268)
+//   - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+//   - [TerminateClusterNodes](https://www.tencentcloud.com/document/api/1026/54558)
+//
+// * Delete:
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+//   - [TerminateInstance](https://www.tencentcloud.com/document/api/1026/31044)
+//
 // ## Import
 //
 // EMR cluster (v2) can be imported using the instance ID, e.g.
@@ -591,6 +1224,8 @@ type ClusterV2 struct {
 	LoadBalancerId pulumi.StringPtrOutput `pulumi:"loadBalancerId"`
 	// Login settings for purchased nodes.
 	LoginSettings ClusterV2LoginSettingsOutput `pulumi:"loginSettings"`
+	// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `metaType` is `EMR_EXIST_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
+	MetaDbGroupInfos ClusterV2MetaDbGroupInfoArrayOutput `pulumi:"metaDbGroupInfos"`
 	// Metadata database information. When `metaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
 	MetaDbInfo ClusterV2MetaDbInfoPtrOutput `pulumi:"metaDbInfo"`
 	// Whether to enable database auditing.
@@ -699,6 +1334,8 @@ type clusterV2State struct {
 	LoadBalancerId *string `pulumi:"loadBalancerId"`
 	// Login settings for purchased nodes.
 	LoginSettings *ClusterV2LoginSettings `pulumi:"loginSettings"`
+	// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `metaType` is `EMR_EXIST_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
+	MetaDbGroupInfos []ClusterV2MetaDbGroupInfo `pulumi:"metaDbGroupInfos"`
 	// Metadata database information. When `metaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
 	MetaDbInfo *ClusterV2MetaDbInfo `pulumi:"metaDbInfo"`
 	// Whether to enable database auditing.
@@ -760,6 +1397,8 @@ type ClusterV2State struct {
 	LoadBalancerId pulumi.StringPtrInput
 	// Login settings for purchased nodes.
 	LoginSettings ClusterV2LoginSettingsPtrInput
+	// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `metaType` is `EMR_EXIST_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
+	MetaDbGroupInfos ClusterV2MetaDbGroupInfoArrayInput
 	// Metadata database information. When `metaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
 	MetaDbInfo ClusterV2MetaDbInfoPtrInput
 	// Whether to enable database auditing.
@@ -823,6 +1462,8 @@ type clusterV2Args struct {
 	LoadBalancerId *string `pulumi:"loadBalancerId"`
 	// Login settings for purchased nodes.
 	LoginSettings ClusterV2LoginSettings `pulumi:"loginSettings"`
+	// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `metaType` is `EMR_EXIST_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
+	MetaDbGroupInfos []ClusterV2MetaDbGroupInfo `pulumi:"metaDbGroupInfos"`
 	// Metadata database information. When `metaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
 	MetaDbInfo *ClusterV2MetaDbInfo `pulumi:"metaDbInfo"`
 	// Whether to enable database auditing.
@@ -881,6 +1522,8 @@ type ClusterV2Args struct {
 	LoadBalancerId pulumi.StringPtrInput
 	// Login settings for purchased nodes.
 	LoginSettings ClusterV2LoginSettingsInput
+	// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `metaType` is `EMR_EXIST_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
+	MetaDbGroupInfos ClusterV2MetaDbGroupInfoArrayInput
 	// Metadata database information. When `metaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
 	MetaDbInfo ClusterV2MetaDbInfoPtrInput
 	// Whether to enable database auditing.
@@ -1072,6 +1715,11 @@ func (o ClusterV2Output) LoadBalancerId() pulumi.StringPtrOutput {
 // Login settings for purchased nodes.
 func (o ClusterV2Output) LoginSettings() ClusterV2LoginSettingsOutput {
 	return o.ApplyT(func(v *ClusterV2) ClusterV2LoginSettingsOutput { return v.LoginSettings }).(ClusterV2LoginSettingsOutput)
+}
+
+// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `metaType` is `EMR_EXIST_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.
+func (o ClusterV2Output) MetaDbGroupInfos() ClusterV2MetaDbGroupInfoArrayOutput {
+	return o.ApplyT(func(v *ClusterV2) ClusterV2MetaDbGroupInfoArrayOutput { return v.MetaDbGroupInfos }).(ClusterV2MetaDbGroupInfoArrayOutput)
 }
 
 // Metadata database information. When `metaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `metaDataJdbcUrl`/`metaDataUser`/`metaDataPass` must be set.

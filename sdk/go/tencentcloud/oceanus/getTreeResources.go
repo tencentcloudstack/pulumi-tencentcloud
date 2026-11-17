@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&type=document&lang=en)
 func GetTreeResources(ctx *pulumi.Context, args *GetTreeResourcesArgs, opts ...pulumi.InvokeOption) (*GetTreeResourcesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTreeResourcesResult

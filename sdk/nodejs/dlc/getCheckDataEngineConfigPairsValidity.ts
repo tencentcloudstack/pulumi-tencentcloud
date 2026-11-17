@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckDataEngineConfigPairsValidity](https://www.tencentcloud.com/document/api/1155/62696)
  */
 export function getCheckDataEngineConfigPairsValidity(args?: GetCheckDataEngineConfigPairsValidityArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckDataEngineConfigPairsValidityResult> {
     args = args || {};
@@ -87,6 +93,12 @@ export interface GetCheckDataEngineConfigPairsValidityResult {
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckDataEngineConfigPairsValidity](https://www.tencentcloud.com/document/api/1155/62696)
  */
 export function getCheckDataEngineConfigPairsValidityOutput(args?: GetCheckDataEngineConfigPairsValidityOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCheckDataEngineConfigPairsValidityResult> {
     args = args || {};

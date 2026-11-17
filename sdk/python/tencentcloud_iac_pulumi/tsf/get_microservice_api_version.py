@@ -118,6 +118,12 @@ def get_microservice_api_version(method: Optional[_builtins.str] = None,
         method="get")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&type=document&lang=en)
+
 
     :param _builtins.str method: request method.
     :param _builtins.str microservice_id: Microservice ID.
@@ -157,6 +163,12 @@ def get_microservice_api_version_output(method: pulumi.Input[Optional[Optional[_
         path="",
         method="get")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&type=document&lang=en)
 
 
     :param _builtins.str method: request method.

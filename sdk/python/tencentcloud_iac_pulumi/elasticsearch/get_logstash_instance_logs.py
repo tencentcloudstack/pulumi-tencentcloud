@@ -149,6 +149,12 @@ def get_logstash_instance_logs(end_time: Optional[_builtins.str] = None,
         end_time="2023-10-31 10:30:10")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLogstashInstanceLogs](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceLogs&type=document&lang=en)
+
 
     :param _builtins.str end_time: Log end time, in YYYY-MM-DD HH:MM:SS format, such as 2019-01-22 20:15:53.
     :param _builtins.str instance_id: Instance id.
@@ -204,6 +210,12 @@ def get_logstash_instance_logs_output(end_time: pulumi.Input[Optional[Optional[_
         start_time="2023-10-31 10:30:00",
         end_time="2023-10-31 10:30:10")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLogstashInstanceLogs](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceLogs&type=document&lang=en)
 
 
     :param _builtins.str end_time: Log end time, in YYYY-MM-DD HH:MM:SS format, such as 2019-01-22 20:15:53.

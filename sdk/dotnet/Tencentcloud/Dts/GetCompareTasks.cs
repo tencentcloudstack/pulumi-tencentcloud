@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
         /// </summary>
         public static Task<GetCompareTasksResult> InvokeAsync(GetCompareTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
         /// </summary>
         public static Output<GetCompareTasksResult> Invoke(GetCompareTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
         /// </summary>
         public static Output<GetCompareTasksResult> Invoke(GetCompareTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCompareTasksResult>("tencentcloud:Dts/getCompareTasks:getCompareTasks", args ?? new GetCompareTasksInvokeArgs(), options.WithDefaults());

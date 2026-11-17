@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     moduleCollection: "sys_common_user",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectList](https://www.tencentcloud.com/document/api/1270/72624)
  */
 export function getProject(args?: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
     args = args || {};
@@ -103,6 +109,12 @@ export interface GetProjectResult {
  *     moduleCollection: "sys_common_user",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectList](https://www.tencentcloud.com/document/api/1270/72624)
  */
 export function getProjectOutput(args?: GetProjectOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProjectResult> {
     args = args || {};

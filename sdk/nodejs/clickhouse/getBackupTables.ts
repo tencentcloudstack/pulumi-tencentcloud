@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&type=document&lang=en)
  */
 export function getBackupTables(args: GetBackupTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetBackupTablesResult {
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&type=document&lang=en)
  */
 export function getBackupTablesOutput(args: GetBackupTablesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataLogUrlStatistics](https://www.tencentcloud.com/document/api/1131/45326)
         /// </summary>
         public static Task<GetLogUrlStatisticsResult> InvokeAsync(GetLogUrlStatisticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataLogUrlStatistics](https://www.tencentcloud.com/document/api/1131/45326)
         /// </summary>
         public static Output<GetLogUrlStatisticsResult> Invoke(GetLogUrlStatisticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataLogUrlStatistics](https://www.tencentcloud.com/document/api/1131/45326)
         /// </summary>
         public static Output<GetLogUrlStatisticsResult> Invoke(GetLogUrlStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsInvokeArgs(), options.WithDefaults());

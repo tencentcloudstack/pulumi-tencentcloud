@@ -193,6 +193,21 @@ class GeneralClone(pulumi.CustomResource):
             new_name="tf_example_db_clone")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloneDB](https://www.tencentcloud.com/document/api/238/39659)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+        * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBName](https://www.tencentcloud.com/document/api/238/32101)
+        * Delete:
+          - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+
         ## Import
 
         sqlserver general_communication can be imported using the id, e.g.
@@ -269,6 +284,21 @@ class GeneralClone(pulumi.CustomResource):
             old_name=example_db.name,
             new_name="tf_example_db_clone")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloneDB](https://www.tencentcloud.com/document/api/238/39659)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+        * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBName](https://www.tencentcloud.com/document/api/238/32101)
+        * Delete:
+          - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
 
         ## Import
 

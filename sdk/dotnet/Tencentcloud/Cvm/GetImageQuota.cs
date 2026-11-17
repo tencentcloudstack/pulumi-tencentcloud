@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
         /// </summary>
         public static Task<GetImageQuotaResult> InvokeAsync(GetImageQuotaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
         /// </summary>
         public static Output<GetImageQuotaResult> Invoke(GetImageQuotaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
         /// </summary>
         public static Output<GetImageQuotaResult> Invoke(GetImageQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageQuotaResult>("tencentcloud:Cvm/getImageQuota:getImageQuota", args ?? new GetImageQuotaInvokeArgs(), options.WithDefaults());

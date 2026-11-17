@@ -430,6 +430,14 @@ class AccessLogConfig(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&type=document&lang=en)
+        * Read: [DescribeAccessLogConfig](https://www.tencentcloud.com/search/?wd=DescribeAccessLogConfig&type=document&lang=en)
+        * Update: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&type=document&lang=en)
+
         ## Import
 
         tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
@@ -514,6 +522,14 @@ class AccessLogConfig(pulumi.CustomResource):
                 "enable": False,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&type=document&lang=en)
+        * Read: [DescribeAccessLogConfig](https://www.tencentcloud.com/search/?wd=DescribeAccessLogConfig&type=document&lang=en)
+        * Update: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&type=document&lang=en)
 
         ## Import
 

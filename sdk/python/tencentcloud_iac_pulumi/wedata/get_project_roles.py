@@ -110,6 +110,12 @@ def get_project_roles(project_id: Optional[_builtins.str] = None,
         role_display_name="tf_example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_project_roles_output(project_id: pulumi.Input[Optional[_builtins.str]] =
     example = tencentcloud.wedata.get_project_roles(project_id="2982667120655491072",
         role_display_name="tf_example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
 
 
     :param _builtins.str project_id: Project ID.

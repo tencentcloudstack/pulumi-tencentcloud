@@ -48,6 +48,12 @@ import * as utilities from "../utilities";
  *     orderType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
  */
 export function getCompliancePacks(args?: GetCompliancePacksArgs, opts?: pulumi.InvokeOptions): Promise<GetCompliancePacksResult> {
     args = args || {};
@@ -165,6 +171,12 @@ export interface GetCompliancePacksResult {
  *     orderType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
  */
 export function getCompliancePacksOutput(args?: GetCompliancePacksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCompliancePacksResult> {
     args = args || {};

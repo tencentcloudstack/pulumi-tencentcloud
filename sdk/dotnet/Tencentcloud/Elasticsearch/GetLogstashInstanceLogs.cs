@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLogstashInstanceLogs](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceLogs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetLogstashInstanceLogsResult> InvokeAsync(GetLogstashInstanceLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogstashInstanceLogsResult>("tencentcloud:Elasticsearch/getLogstashInstanceLogs:getLogstashInstanceLogs", args ?? new GetLogstashInstanceLogsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLogstashInstanceLogs](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceLogs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetLogstashInstanceLogsResult> Invoke(GetLogstashInstanceLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogstashInstanceLogsResult>("tencentcloud:Elasticsearch/getLogstashInstanceLogs:getLogstashInstanceLogs", args ?? new GetLogstashInstanceLogsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLogstashInstanceLogs](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceLogs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetLogstashInstanceLogsResult> Invoke(GetLogstashInstanceLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogstashInstanceLogsResult>("tencentcloud:Elasticsearch/getLogstashInstanceLogs:getLogstashInstanceLogs", args ?? new GetLogstashInstanceLogsInvokeArgs(), options.WithDefaults());

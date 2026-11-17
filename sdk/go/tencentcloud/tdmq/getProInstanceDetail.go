@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
 func GetProInstanceDetail(ctx *pulumi.Context, args *GetProInstanceDetailArgs, opts ...pulumi.InvokeOption) (*GetProInstanceDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProInstanceDetailResult

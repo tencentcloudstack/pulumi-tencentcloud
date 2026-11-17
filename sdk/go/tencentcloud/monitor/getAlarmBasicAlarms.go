@@ -56,6 +56,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
 func GetAlarmBasicAlarms(ctx *pulumi.Context, args *GetAlarmBasicAlarmsArgs, opts ...pulumi.InvokeOption) (*GetAlarmBasicAlarmsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmBasicAlarmsResult

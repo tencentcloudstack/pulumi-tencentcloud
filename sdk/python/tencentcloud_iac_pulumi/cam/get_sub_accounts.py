@@ -96,6 +96,12 @@ def get_sub_accounts(filter_sub_account_uins: Optional[Sequence[_builtins.int]] 
     example = tencentcloud.cam.get_sub_accounts(filter_sub_account_uins=[int(100037718139)])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+
 
     :param Sequence[_builtins.int] filter_sub_account_uins: List of sub-user UINs. Up to 50 UINs are supported.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_sub_accounts_output(filter_sub_account_uins: pulumi.Input[Optional[Seque
 
     example = tencentcloud.cam.get_sub_accounts(filter_sub_account_uins=[int(100037718139)])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
 
 
     :param Sequence[_builtins.int] filter_sub_account_uins: List of sub-user UINs. Up to 50 UINs are supported.

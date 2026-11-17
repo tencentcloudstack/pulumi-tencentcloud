@@ -96,6 +96,12 @@ def get_target_health(load_balancer_ids: Optional[Sequence[_builtins.str]] = Non
     target_health = tencentcloud.clb.get_target_health(load_balancer_ids=["lb-5dnrkgry"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
+
 
     :param Sequence[_builtins.str] load_balancer_ids: List of IDs of CLB instances to be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_target_health_output(load_balancer_ids: pulumi.Input[Optional[Sequence[_
 
     target_health = tencentcloud.clb.get_target_health(load_balancer_ids=["lb-5dnrkgry"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
 
 
     :param Sequence[_builtins.str] load_balancer_ids: List of IDs of CLB instances to be queried.

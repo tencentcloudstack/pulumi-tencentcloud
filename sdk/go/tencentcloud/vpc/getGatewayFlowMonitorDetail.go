@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
 func GetGatewayFlowMonitorDetail(ctx *pulumi.Context, args *GetGatewayFlowMonitorDetailArgs, opts ...pulumi.InvokeOption) (*GetGatewayFlowMonitorDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayFlowMonitorDetailResult

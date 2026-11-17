@@ -50,6 +50,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&type=document&lang=en)
 func GetSystemResource(ctx *pulumi.Context, args *GetSystemResourceArgs, opts ...pulumi.InvokeOption) (*GetSystemResourceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSystemResourceResult

@@ -118,6 +118,12 @@ def get_workflow_max_permission(entity_id: Optional[_builtins.str] = None,
         entity_type="folder")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
+
 
     :param _builtins.str entity_id: Authorization entity ID.
     :param _builtins.str entity_type: Authorization entity type, folder/workflow.
@@ -157,6 +163,12 @@ def get_workflow_max_permission_output(entity_id: pulumi.Input[Optional[_builtin
         entity_id="53e78f97-f145-11f0-ba36-b8cef6a5af5c",
         entity_type="folder")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
 
 
     :param _builtins.str entity_id: Authorization entity ID.

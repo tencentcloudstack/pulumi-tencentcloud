@@ -50,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// Type of the certificate. Values: `Default`: Default certificate `Upload`: Specified certificate `Managed`: Tencent Cloud-managed certificate.
+        /// Type of the certificate.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

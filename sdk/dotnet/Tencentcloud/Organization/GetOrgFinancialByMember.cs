@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOrgFinancialByMemberResult> InvokeAsync(GetOrgFinancialByMemberArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOrgFinancialByMemberResult> Invoke(GetOrgFinancialByMemberInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOrgFinancialByMemberResult> Invoke(GetOrgFinancialByMemberInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberInvokeArgs(), options.WithDefaults());

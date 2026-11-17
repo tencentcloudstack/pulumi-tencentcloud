@@ -694,7 +694,7 @@ type InstanceNodeInfoList struct {
 	NodeNum int `pulumi:"nodeNum"`
 	// Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
 	NodeType string `pulumi:"nodeType"`
-	// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+	// Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
 	Type *string `pulumi:"type"`
 }
 
@@ -720,7 +720,7 @@ type InstanceNodeInfoListArgs struct {
 	NodeNum pulumi.IntInput `pulumi:"nodeNum"`
 	// Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
 	NodeType pulumi.StringInput `pulumi:"nodeType"`
-	// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+	// Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
 	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
@@ -800,7 +800,7 @@ func (o InstanceNodeInfoListOutput) NodeType() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) string { return v.NodeType }).(pulumi.StringOutput)
 }
 
-// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+// Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
 func (o InstanceNodeInfoListOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *string { return v.Type }).(pulumi.StringPtrOutput)
 }

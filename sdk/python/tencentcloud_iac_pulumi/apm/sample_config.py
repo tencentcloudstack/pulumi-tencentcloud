@@ -300,6 +300,15 @@ class SampleConfig(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74314)
+        * Read: [DescribeApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74310)
+        * Update: [ModifyApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74307)
+        * Delete: [DeleteApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74313)
+
         ## Import
 
         APM sample config can be imported using the instanceId#sampleName, e.g.
@@ -353,6 +362,15 @@ class SampleConfig(pulumi.CustomResource):
                 "value": "Terraform",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74314)
+        * Read: [DescribeApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74310)
+        * Update: [ModifyApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74307)
+        * Delete: [DeleteApmSampleConfig](https://www.tencentcloud.com/document/api/1166/74313)
 
         ## Import
 

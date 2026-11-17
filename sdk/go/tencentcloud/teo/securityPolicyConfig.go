@@ -267,6 +267,16 @@ import (
 //								},
 //								Enabled: pulumi.String("off"),
 //							},
+//							&teo.SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs{
+//								Name:      pulumi.String("Skip managed rule set submodule"),
+//								Condition: pulumi.String("${http.request.uri.path} in ['/legacy/api']"),
+//								SkipScope: pulumi.String("WebSecuritySubmodules"),
+//								WebSecuritySubmodulesForExceptions: pulumi.StringArray{
+//									pulumi.String("websec-mod-managed-rules/managed-rule-groups"),
+//									pulumi.String("websec-mod-rate-limiting-rules"),
+//								},
+//								Enabled: pulumi.String("off"),
+//							},
 //						},
 //					},
 //					BotManagementLite: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteArgs{
@@ -280,6 +290,84 @@ import (
 //								DenyActionParameters: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs{
 //									BlockIp:         pulumi.String("on"),
 //									BlockIpDuration: pulumi.String("120s"),
+//								},
+//							},
+//						},
+//					},
+//					BotManagement: &teo.SecurityPolicyConfigSecurityPolicyBotManagementArgs{
+//						BasicBotSettings: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsArgs{
+//							SourceIdc: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcArgs{
+//								BaseAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcBaseActionArgs{
+//									Name: pulumi.String("Monitor"),
+//								},
+//								ActionOverrides: teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArray{
+//									&teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgs{
+//										RuleIds: pulumi.StringArray{
+//											pulumi.String("rule-a"),
+//											pulumi.String("rule-b"),
+//										},
+//										Action: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgs{
+//											Name: pulumi.String("Deny"),
+//										},
+//									},
+//								},
+//							},
+//							SearchEngineBots: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsArgs{
+//								BaseAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsBaseActionArgs{
+//									Name: pulumi.String("Monitor"),
+//								},
+//								ActionOverrides: teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArray{
+//									&teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgs{
+//										RuleIds: pulumi.StringArray{
+//											pulumi.String("rule-c"),
+//										},
+//										Action: &teo.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgs{
+//											Name: pulumi.String("Monitor"),
+//										},
+//									},
+//								},
+//							},
+//						},
+//						ClientAttestationRules: teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArray{
+//							&teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs{
+//								Name:       pulumi.String("client-attestation-rule"),
+//								Enabled:    pulumi.String("on"),
+//								Priority:   pulumi.Int(10),
+//								Condition:  pulumi.String("${http.request.host} contain ['abc']"),
+//								AttesterId: pulumi.String("attester-xxxx"),
+//								InvalidAttestationAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs{
+//									Name: pulumi.String("Monitor"),
+//								},
+//								DeviceProfiles: teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray{
+//									&teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs{
+//										ClientType:       pulumi.String("iOS"),
+//										HighRiskMinScore: pulumi.Int(60),
+//										HighRiskRequestAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs{
+//											Name: pulumi.String("Deny"),
+//											DenyActionParameters: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs{
+//												BlockIp:         pulumi.String("on"),
+//												BlockIpDuration: pulumi.String("120s"),
+//											},
+//										},
+//										MediumRiskMinScore: pulumi.Int(20),
+//										MediumRiskRequestAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs{
+//											Name: pulumi.String("Monitor"),
+//										},
+//									},
+//									&teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs{
+//										ClientType:       pulumi.String("Android"),
+//										HighRiskMinScore: pulumi.Int(50),
+//										HighRiskRequestAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs{
+//											Name: pulumi.String("Challenge"),
+//											ChallengeActionParameters: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs{
+//												ChallengeOption: pulumi.String("JSChallenge"),
+//											},
+//										},
+//										MediumRiskMinScore: pulumi.Int(15),
+//										MediumRiskRequestAction: &teo.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs{
+//											Name: pulumi.String("Monitor"),
+//										},
+//									},
 //								},
 //							},
 //						},
@@ -664,6 +752,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
+// * Read: [DescribeSecurityPolicy](https://www.tencentcloud.com/document/api/1145/50958)
+// * Update: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
 //
 // ## Import
 //

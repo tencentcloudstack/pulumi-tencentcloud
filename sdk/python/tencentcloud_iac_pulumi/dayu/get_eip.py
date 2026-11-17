@@ -126,6 +126,12 @@ def get_eip(bind_statuses: Optional[Sequence[_builtins.str]] = None,
     test = tencentcloud.dayu.get_eip(resource_id="bgpip-000004xg")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+
 
     :param Sequence[_builtins.str] bind_statuses: The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].
     :param _builtins.int limit: The number of pages, default is `10`.
@@ -167,6 +173,12 @@ def get_eip_output(bind_statuses: pulumi.Input[Optional[Optional[Sequence[_built
 
     test = tencentcloud.dayu.get_eip(resource_id="bgpip-000004xg")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
 
 
     :param Sequence[_builtins.str] bind_statuses: The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].

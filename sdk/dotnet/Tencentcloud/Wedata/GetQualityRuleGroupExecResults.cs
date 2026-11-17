@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetQualityRuleGroupExecResultsResult> InvokeAsync(GetQualityRuleGroupExecResultsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetQualityRuleGroupExecResultsResult>("tencentcloud:Wedata/getQualityRuleGroupExecResults:getQualityRuleGroupExecResults", args ?? new GetQualityRuleGroupExecResultsArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetQualityRuleGroupExecResultsResult> Invoke(GetQualityRuleGroupExecResultsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetQualityRuleGroupExecResultsResult>("tencentcloud:Wedata/getQualityRuleGroupExecResults:getQualityRuleGroupExecResults", args ?? new GetQualityRuleGroupExecResultsInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetQualityRuleGroupExecResultsResult> Invoke(GetQualityRuleGroupExecResultsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetQualityRuleGroupExecResultsResult>("tencentcloud:Wedata/getQualityRuleGroupExecResults:getQualityRuleGroupExecResults", args ?? new GetQualityRuleGroupExecResultsInvokeArgs(), options.WithDefaults());

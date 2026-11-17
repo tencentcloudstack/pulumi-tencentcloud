@@ -178,6 +178,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddCustomRule](https://www.tencentcloud.com/document/api/627/64553)
+    ///   - [ModifyCustomRuleStatus](https://www.tencentcloud.com/document/api/627/64512)
+    /// * Read: [DescribeCustomRuleList](https://www.tencentcloud.com/document/api/627/64523)
+    /// * Update:
+    ///   - [ModifyCustomRule](https://www.tencentcloud.com/document/api/627/64513)
+    ///   - [ModifyCustomRuleStatus](https://www.tencentcloud.com/document/api/627/64512)
+    /// * Delete: [DeleteCustomRule](https://www.tencentcloud.com/document/api/627/64550)
+    /// 
     /// ## Import
     /// 
     /// waf custom rule can be imported using the id, e.g.

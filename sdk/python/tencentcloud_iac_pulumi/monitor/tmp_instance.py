@@ -365,6 +365,25 @@ class TmpInstance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrometheusMultiTenantInstancePostPayMode](https://www.tencentcloud.com/document/api/248/48764)
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyPrometheusInstanceAttributes](https://www.tencentcloud.com/document/api/248/48747)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [DestroyPrometheusInstance](https://www.tencentcloud.com/document/api/248/48749)
+          - [TerminatePrometheusInstances](https://www.tencentcloud.com/document/api/248/48746)
+
         ## Import
 
         monitor tmpInstance can be imported using the id, e.g.
@@ -421,6 +440,25 @@ class TmpInstance(pulumi.CustomResource):
                 "createdBy": "terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrometheusMultiTenantInstancePostPayMode](https://www.tencentcloud.com/document/api/248/48764)
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyPrometheusInstanceAttributes](https://www.tencentcloud.com/document/api/248/48747)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [DestroyPrometheusInstance](https://www.tencentcloud.com/document/api/248/48749)
+          - [TerminatePrometheusInstances](https://www.tencentcloud.com/document/api/248/48746)
 
         ## Import
 

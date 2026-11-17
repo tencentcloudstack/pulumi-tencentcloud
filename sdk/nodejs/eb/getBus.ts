@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
  */
 export function getBus(args?: GetBusArgs, opts?: pulumi.InvokeOptions): Promise<GetBusResult> {
     args = args || {};
@@ -111,6 +117,12 @@ export interface GetBusResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListEventBuses](https://www.tencentcloud.com/document/api/1108/45826)
  */
 export function getBusOutput(args?: GetBusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBusResult> {
     args = args || {};

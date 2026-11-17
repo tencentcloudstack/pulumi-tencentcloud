@@ -47,6 +47,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=CreateCCSelfDefinePolicy&amp;type=document&amp;lang=en)
+    ///   - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=ModifyCCSelfDefinePolicy&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DeleteCCSelfDefinePolicy&amp;type=document&amp;lang=en)
+    ///   - [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ccHttpsPolicy:CcHttpsPolicy")]
     public partial class CcHttpsPolicy : global::Pulumi.CustomResource

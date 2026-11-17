@@ -47,6 +47,38 @@ import (
 //
 // ```
 //
+// ### Encrypted Nfs CFS
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cfs"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cfs.NewFileSystem(ctx, "foo", &cfs.FileSystemArgs{
+//				Name:             pulumi.String("test_file_system"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				AccessGroupId:    pulumi.String("pgroup-7nx89k7l"),
+//				Protocol:         pulumi.String("NFS"),
+//				VpcId:            pulumi.String("vpc-ah9fbkap"),
+//				SubnetId:         pulumi.String("subnet-9mu2t9iw"),
+//				Encrypted:        pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ### High-Performance Nfs CFS
 //
 // ```go
@@ -147,6 +179,29 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateCfsFileSystem](https://www.tencentcloud.com/document/api/582/34517)
+//   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+//   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [ScaleUpFileSystem](https://www.tencentcloud.com/document/api/582/55870)
+//   - [UpdateCfsFileSystemName](https://www.tencentcloud.com/document/api/582/35059)
+//   - [UpdateCfsFileSystemPGroup](https://www.tencentcloud.com/document/api/582/34512)
+//
+// * Delete: [DeleteCfsFileSystem](https://www.tencentcloud.com/document/api/582/34516)
+//
 // ## Import
 //
 // Cloud file system can be imported using the id, e.g.
@@ -169,6 +224,8 @@ type FileSystem struct {
 	CidrBlock pulumi.StringOutput `pulumi:"cidrBlock"`
 	// Create time of the file system.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
+	// Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+	Encrypted pulumi.BoolOutput `pulumi:"encrypted"`
 	// Mount root-directory.
 	FsId pulumi.StringOutput `pulumi:"fsId"`
 	// IP of mount point.
@@ -237,6 +294,8 @@ type fileSystemState struct {
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Create time of the file system.
 	CreateTime *string `pulumi:"createTime"`
+	// Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+	Encrypted *bool `pulumi:"encrypted"`
 	// Mount root-directory.
 	FsId *string `pulumi:"fsId"`
 	// IP of mount point.
@@ -270,6 +329,8 @@ type FileSystemState struct {
 	CidrBlock pulumi.StringPtrInput
 	// Create time of the file system.
 	CreateTime pulumi.StringPtrInput
+	// Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+	Encrypted pulumi.BoolPtrInput
 	// Mount root-directory.
 	FsId pulumi.StringPtrInput
 	// IP of mount point.
@@ -305,6 +366,8 @@ type fileSystemArgs struct {
 	CcnId *string `pulumi:"ccnId"`
 	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
 	CidrBlock *string `pulumi:"cidrBlock"`
+	// Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+	Encrypted *bool `pulumi:"encrypted"`
 	// IP of mount point.
 	MountIp *string `pulumi:"mountIp"`
 	// Name of a file system.
@@ -335,6 +398,8 @@ type FileSystemArgs struct {
 	CcnId pulumi.StringPtrInput
 	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
 	CidrBlock pulumi.StringPtrInput
+	// Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+	Encrypted pulumi.BoolPtrInput
 	// IP of mount point.
 	MountIp pulumi.StringPtrInput
 	// Name of a file system.
@@ -468,6 +533,11 @@ func (o FileSystemOutput) CidrBlock() pulumi.StringOutput {
 // Create time of the file system.
 func (o FileSystemOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *FileSystem) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+func (o FileSystemOutput) Encrypted() pulumi.BoolOutput {
+	return o.ApplyT(func(v *FileSystem) pulumi.BoolOutput { return v.Encrypted }).(pulumi.BoolOutput)
 }
 
 // Mount root-directory.

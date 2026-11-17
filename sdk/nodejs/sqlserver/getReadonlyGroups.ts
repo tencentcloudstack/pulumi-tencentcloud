@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mssql-ds1xhnt9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReadOnlyGroupList](https://www.tencentcloud.com/document/api/238/72738)
  */
 export function getReadonlyGroups(args?: GetReadonlyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetReadonlyGroupsResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetReadonlyGroupsResult {
  *     instanceId: "mssql-ds1xhnt9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReadOnlyGroupList](https://www.tencentcloud.com/document/api/238/72738)
  */
 export function getReadonlyGroupsOutput(args?: GetReadonlyGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetReadonlyGroupsResult> {
     args = args || {};

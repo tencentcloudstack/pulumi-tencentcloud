@@ -120,6 +120,12 @@ def get_cluster_authentication_options(cluster_id: Optional[_builtins.str] = Non
     cluster_authentication_options = tencentcloud.kubernetes.get_cluster_authentication_options(cluster_id="cls-kzilgv5m")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -151,6 +157,12 @@ def get_cluster_authentication_options_output(cluster_id: pulumi.Input[Optional[
 
     cluster_authentication_options = tencentcloud.kubernetes.get_cluster_authentication_options(cluster_id="cls-kzilgv5m")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
 
 
     :param _builtins.str cluster_id: Cluster ID.

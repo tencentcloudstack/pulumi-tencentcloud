@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     ip: fooRealserver.ip,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
  */
 export function getRealservers(args?: GetRealserversArgs, opts?: pulumi.InvokeOptions): Promise<GetRealserversResult> {
     args = args || {};
@@ -118,6 +124,12 @@ export interface GetRealserversResult {
  *     ip: fooRealserver.ip,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
  */
 export function getRealserversOutput(args?: GetRealserversOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRealserversResult> {
     args = args || {};

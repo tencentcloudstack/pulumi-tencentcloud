@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly ImmutableArray<string> ApiServiceIds;
         /// <summary>
-        /// ID of the resource.
+        /// API resource ID, e.g. `apires-xxxxxxxx`.
         /// </summary>
         public readonly string? Id;
         /// <summary>

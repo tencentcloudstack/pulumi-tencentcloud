@@ -35,6 +35,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateConfigDeliver](https://www.tencentcloud.com/document/api/1164/84990)
+    /// * Read: [DescribeConfigDeliver](https://www.tencentcloud.com/document/api/1164/84992)
+    /// * Update: [UpdateConfigDeliver](https://www.tencentcloud.com/document/api/1164/84990)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Config/deliverConfig:DeliverConfig")]
     public partial class DeliverConfig : global::Pulumi.CustomResource

@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     instType: "slave",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
  */
 export function getErrorLog(args: GetErrorLogArgs, opts?: pulumi.InvokeOptions): Promise<GetErrorLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetErrorLogResult {
  *     instType: "slave",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
  */
 export function getErrorLogOutput(args: GetErrorLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetErrorLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

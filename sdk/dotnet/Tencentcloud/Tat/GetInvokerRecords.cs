@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
         /// </summary>
         public static Task<GetInvokerRecordsResult> InvokeAsync(GetInvokerRecordsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
         /// </summary>
         public static Output<GetInvokerRecordsResult> Invoke(GetInvokerRecordsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
         /// </summary>
         public static Output<GetInvokerRecordsResult> Invoke(GetInvokerRecordsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInvokerRecordsResult>("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args ?? new GetInvokerRecordsInvokeArgs(), options.WithDefaults());

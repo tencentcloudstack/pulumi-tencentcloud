@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// </summary>
         public readonly string CfsId;
         /// <summary>
-        /// (Readonly) File system ip address.
+        /// If fixed intranet IP is enabled, this field returns the IP list used.
         /// </summary>
         public readonly string? IpAddress;
         /// <summary>

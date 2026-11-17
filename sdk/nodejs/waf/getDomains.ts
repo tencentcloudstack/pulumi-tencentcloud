@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     domain: "tf.example.com",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
  */
 export function getDomains(args?: GetDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainsResult> {
     args = args || {};
@@ -107,6 +113,12 @@ export interface GetDomainsResult {
  *     domain: "tf.example.com",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
  */
 export function getDomainsOutput(args?: GetDomainsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainsResult> {
     args = args || {};

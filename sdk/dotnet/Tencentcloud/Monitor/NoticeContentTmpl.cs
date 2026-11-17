@@ -128,6 +128,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=CreateNoticeContentTmpl&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=ModifyNoticeContentTmpl&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteNoticeContentTmpls](https://www.tencentcloud.com/search/?wd=DeleteNoticeContentTmpls&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// Monitor notice content template can be imported using the id, e.g.

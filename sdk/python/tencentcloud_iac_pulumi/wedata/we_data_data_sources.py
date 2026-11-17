@@ -155,6 +155,12 @@ def we_data_data_sources(creator: Optional[_builtins.str] = None,
         creator="user")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListDataSources](https://www.tencentcloud.com/document/api/1174/77866)
+
 
     :param _builtins.str creator: Creator.
     :param _builtins.str display_name: Data source display name.
@@ -263,6 +269,12 @@ def we_data_data_sources_output(creator: pulumi.Input[Optional[Optional[_builtin
         ],
         creator="user")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListDataSources](https://www.tencentcloud.com/document/api/1174/77866)
 
 
     :param _builtins.str creator: Creator.

@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
         /// </summary>
         public static Task<GetParameterTemplatesResult> InvokeAsync(GetParameterTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesArgs(), options.WithDefaults());
@@ -96,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
         /// </summary>
         public static Output<GetParameterTemplatesResult> Invoke(GetParameterTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesInvokeArgs(), options.WithDefaults());
@@ -140,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
         /// </summary>
         public static Output<GetParameterTemplatesResult> Invoke(GetParameterTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesInvokeArgs(), options.WithDefaults());

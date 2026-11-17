@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
 func GetCenterUsers(ctx *pulumi.Context, args *GetCenterUsersArgs, opts ...pulumi.InvokeOption) (*GetCenterUsersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCenterUsersResult

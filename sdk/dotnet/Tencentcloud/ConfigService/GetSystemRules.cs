@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
         /// </summary>
         public static Task<GetSystemRulesResult> InvokeAsync(GetSystemRulesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSystemRulesResult>("tencentcloud:Config/getSystemRules:getSystemRules", args ?? new GetSystemRulesArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
         /// </summary>
         public static Output<GetSystemRulesResult> Invoke(GetSystemRulesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSystemRulesResult>("tencentcloud:Config/getSystemRules:getSystemRules", args ?? new GetSystemRulesInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
         /// </summary>
         public static Output<GetSystemRulesResult> Invoke(GetSystemRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSystemRulesResult>("tencentcloud:Config/getSystemRules:getSystemRules", args ?? new GetSystemRulesInvokeArgs(), options.WithDefaults());

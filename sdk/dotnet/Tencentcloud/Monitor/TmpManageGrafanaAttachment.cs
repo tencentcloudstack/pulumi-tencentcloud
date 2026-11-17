@@ -78,6 +78,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindPrometheusManagedGrafana](https://www.tencentcloud.com/document/api/248/48768)
+    /// * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+    /// * Delete:
+    ///   - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+    ///   - [UnbindPrometheusManagedGrafana](https://www.tencentcloud.com/document/api/248/48745)
+    /// 
     /// ## Import
     /// 
     /// monitor TmpManageGrafanaAttachment can be imported using the id, e.g.

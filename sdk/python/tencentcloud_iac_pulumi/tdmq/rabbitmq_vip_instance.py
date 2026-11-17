@@ -596,6 +596,19 @@ class RabbitmqVipInstance(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=CreateRabbitMQVipInstance&type=document&lang=en)
+          - [DescribeRabbitMQVipInstances](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstances&type=document&lang=en)
+        * Read:
+          - [DescribeRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstance&type=document&lang=en)
+          - [DescribeRabbitMQVipInstances](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstances&type=document&lang=en)
+        * Update: [ModifyRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQVipInstance&type=document&lang=en)
+        * Delete: [DeleteRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=DeleteRabbitMQVipInstance&type=document&lang=en)
+
         ## Import
 
         TDMQ rabbitmq vip instance can be imported using the id, e.g.
@@ -657,6 +670,19 @@ class RabbitmqVipInstance(pulumi.CustomResource):
                 "tag_value": "tagValue",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=CreateRabbitMQVipInstance&type=document&lang=en)
+          - [DescribeRabbitMQVipInstances](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstances&type=document&lang=en)
+        * Read:
+          - [DescribeRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstance&type=document&lang=en)
+          - [DescribeRabbitMQVipInstances](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstances&type=document&lang=en)
+        * Update: [ModifyRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQVipInstance&type=document&lang=en)
+        * Delete: [DeleteRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=DeleteRabbitMQVipInstance&type=document&lang=en)
 
         ## Import
 

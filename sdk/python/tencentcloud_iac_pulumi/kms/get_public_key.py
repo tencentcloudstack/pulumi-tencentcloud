@@ -113,6 +113,12 @@ def get_public_key(key_id: Optional[_builtins.str] = None,
     example = tencentcloud.kms.get_public_key_output(key_id=example_key.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetPublicKey](https://www.tencentcloud.com/document/api/1030/35179)
+
 
     :param _builtins.str key_id: CMK unique identifier.
     :param _builtins.str result_output_file: Used to save results.
@@ -150,6 +156,12 @@ def get_public_key_output(key_id: pulumi.Input[Optional[_builtins.str]] = None,
         pending_delete_window_in_days=7)
     example = tencentcloud.kms.get_public_key_output(key_id=example_key.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetPublicKey](https://www.tencentcloud.com/document/api/1030/35179)
 
 
     :param _builtins.str key_id: CMK unique identifier.

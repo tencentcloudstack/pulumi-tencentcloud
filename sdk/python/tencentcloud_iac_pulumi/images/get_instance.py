@@ -192,6 +192,12 @@ def get_instance(image_id: Optional[_builtins.str] = None,
     example = tencentcloud.images.get_instance(instance_type="S1.SMALL1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+
 
     :param _builtins.str image_id: ID of the image to be queried.
     :param _builtins.str image_name_regex: A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. **NOTE**: it is not wildcard, should look like `image_name_regex = "^CentOS\\s+6\\.8\\s+64\\w*"`.
@@ -284,6 +290,12 @@ def get_instance_output(image_id: pulumi.Input[Optional[Optional[_builtins.str]]
 
     example = tencentcloud.images.get_instance(instance_type="S1.SMALL1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
 
 
     :param _builtins.str image_id: ID of the image to be queried.

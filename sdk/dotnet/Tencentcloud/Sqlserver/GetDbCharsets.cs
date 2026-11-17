@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
         /// </summary>
         public static Task<GetDbCharsetsResult> InvokeAsync(GetDbCharsetsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
         /// </summary>
         public static Output<GetDbCharsetsResult> Invoke(GetDbCharsetsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
         /// </summary>
         public static Output<GetDbCharsetsResult> Invoke(GetDbCharsetsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsInvokeArgs(), options.WithDefaults());

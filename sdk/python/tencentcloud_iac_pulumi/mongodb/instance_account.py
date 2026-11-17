@@ -261,6 +261,22 @@ class InstanceAccount(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAccountUser](https://www.tencentcloud.com/document/api/240/74806)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+        * Read: [DescribeAccountUsers](https://www.tencentcloud.com/document/api/240/79919)
+        * Update:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+          - [ResetDBInstancePassword](https://www.tencentcloud.com/document/api/240/37924)
+          - [SetAccountUserPrivilege](https://www.tencentcloud.com/document/api/240/74805)
+        * Delete:
+          - [DeleteAccountUser](https://www.tencentcloud.com/document/api/240/74804)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -297,6 +313,22 @@ class InstanceAccount(pulumi.CustomResource):
                 "namespace": "*",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAccountUser](https://www.tencentcloud.com/document/api/240/74806)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+        * Read: [DescribeAccountUsers](https://www.tencentcloud.com/document/api/240/79919)
+        * Update:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+          - [ResetDBInstancePassword](https://www.tencentcloud.com/document/api/240/37924)
+          - [SetAccountUserPrivilege](https://www.tencentcloud.com/document/api/240/74805)
+        * Delete:
+          - [DeleteAccountUser](https://www.tencentcloud.com/document/api/240/74804)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
 
 
         :param str resource_name: The name of the resource.

@@ -277,6 +277,15 @@ class RabbitmqUserPermission(pulumi.CustomResource):
             read_regexp=".*")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyRabbitMQPermission](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQPermission&type=document&lang=en)
+        * Read: [DescribeRabbitMQPermission](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQPermission&type=document&lang=en)
+        * Update: [ModifyRabbitMQPermission](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQPermission&type=document&lang=en)
+        * Delete: [DeleteRabbitMQPermission](https://www.tencentcloud.com/search/?wd=DeleteRabbitMQPermission&type=document&lang=en)
+
         ## Import
 
         tdmq rabbitmq_user_permission can be imported using the id, e.g.
@@ -344,6 +353,15 @@ class RabbitmqUserPermission(pulumi.CustomResource):
             write_regexp=".*",
             read_regexp=".*")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyRabbitMQPermission](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQPermission&type=document&lang=en)
+        * Read: [DescribeRabbitMQPermission](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQPermission&type=document&lang=en)
+        * Update: [ModifyRabbitMQPermission](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQPermission&type=document&lang=en)
+        * Delete: [DeleteRabbitMQPermission](https://www.tencentcloud.com/search/?wd=DeleteRabbitMQPermission&type=document&lang=en)
 
         ## Import
 

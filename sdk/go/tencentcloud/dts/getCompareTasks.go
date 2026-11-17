@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
 func GetCompareTasks(ctx *pulumi.Context, args *GetCompareTasksArgs, opts ...pulumi.InvokeOption) (*GetCompareTasksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCompareTasksResult

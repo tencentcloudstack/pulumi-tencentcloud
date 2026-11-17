@@ -108,6 +108,12 @@ def get_monitor_report(monitor_id: Optional[_builtins.str] = None,
     monitor_report = tencentcloud.css.get_monitor_report(monitor_id="0e8a12b5-df2a-4a1b-aa98-97d5610aa142")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&type=document&lang=en)
+
 
     :param _builtins.str monitor_id: Monitor ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -138,6 +144,12 @@ def get_monitor_report_output(monitor_id: pulumi.Input[Optional[_builtins.str]] 
 
     monitor_report = tencentcloud.css.get_monitor_report(monitor_id="0e8a12b5-df2a-4a1b-aa98-97d5610aa142")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&type=document&lang=en)
 
 
     :param _builtins.str monitor_id: Monitor ID.

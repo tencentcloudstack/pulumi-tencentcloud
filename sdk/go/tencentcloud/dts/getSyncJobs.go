@@ -55,6 +55,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
 func GetSyncJobs(ctx *pulumi.Context, args *GetSyncJobsArgs, opts ...pulumi.InvokeOption) (*GetSyncJobsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSyncJobsResult

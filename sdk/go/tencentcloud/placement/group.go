@@ -74,6 +74,18 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/33264)
+// * Read: [DescribeDisasterRecoverGroups](https://www.tencentcloud.com/document/api/213/33261)
+// * Update:
+//   - [ModifyDisasterRecoverGroupAttribute](https://www.tencentcloud.com/document/api/213/33247)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Delete: [DeleteDisasterRecoverGroups](https://www.tencentcloud.com/document/api/213/33263)
+//
 // ## Import
 //
 // Placement group can be imported using the id, e.g.

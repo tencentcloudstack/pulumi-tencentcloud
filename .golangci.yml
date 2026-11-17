@@ -1,24 +1,45 @@
-linters:
-  enable:
-    - errcheck
-    - goconst
-    - gofmt
-    - gosec
-    - govet
-    - ineffassign
-    - lll
-    - megacheck
-    - misspell
-    - nakedret
-    - revive
-    - unconvert
-    - unused
-  enable-all: false
+version: "2"
 
 run:
   timeout: 20m
 
-issues:
-  exclude-files:
-    - schema.go
-    - pulumiManifest.go
+linters:
+  default: none
+  enable:
+    - errcheck
+    - goconst
+    - gosec
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - nakedret
+    - revive
+    - staticcheck
+    - unconvert
+    - unused
+  settings:
+    staticcheck:
+      checks:
+        - all
+        - -QF*
+        - -ST1000
+        - -ST1003
+        - -ST1016
+        - -ST1020
+        - -ST1021
+        - -ST1022
+  exclusions:
+    presets:
+      - comments
+    paths:
+      - schema.go
+      - pulumiManifest.go
+
+formatters:
+  enable:
+    - gofmt
+  exclusions:
+    paths:
+      - schema.go
+      - pulumiManifest.go

@@ -311,6 +311,15 @@ class AiRecognitionTemplate(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAIRecognitionTemplate](https://www.tencentcloud.com/document/api/1041/33677)
+        * Read: [DescribeAIRecognitionTemplates](https://www.tencentcloud.com/document/api/1041/33661)
+        * Update: [ModifyAIRecognitionTemplate](https://www.tencentcloud.com/document/api/1041/33653)
+        * Delete: [DeleteAIRecognitionTemplate](https://www.tencentcloud.com/document/api/1041/33669)
+
         ## Import
 
         mps ai_recognition_template can be imported using the id, e.g.
@@ -372,6 +381,15 @@ class AiRecognitionTemplate(pulumi.CustomResource):
                 "switch": "OFF",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAIRecognitionTemplate](https://www.tencentcloud.com/document/api/1041/33677)
+        * Read: [DescribeAIRecognitionTemplates](https://www.tencentcloud.com/document/api/1041/33661)
+        * Update: [ModifyAIRecognitionTemplate](https://www.tencentcloud.com/document/api/1041/33653)
+        * Delete: [DeleteAIRecognitionTemplate](https://www.tencentcloud.com/document/api/1041/33669)
 
         ## Import
 

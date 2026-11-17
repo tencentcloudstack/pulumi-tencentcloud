@@ -113,6 +113,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ResumeSnapshotInstance](https://www.tencentcloud.com/document/api/215/55049)
 type ResumeSnapshotInstance struct {
 	pulumi.CustomResourceState
 

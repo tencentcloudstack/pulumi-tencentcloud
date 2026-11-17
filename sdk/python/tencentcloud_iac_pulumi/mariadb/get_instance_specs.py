@@ -86,6 +86,12 @@ def get_instance_specs(result_output_file: Optional[_builtins.str] = None,
     instance_specs = tencentcloud.mariadb.get_instance_specs()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_instance_specs_output(result_output_file: pulumi.Input[Optional[Optional
 
     instance_specs = tencentcloud.mariadb.get_instance_specs()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

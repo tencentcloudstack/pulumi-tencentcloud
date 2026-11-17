@@ -67,6 +67,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
  */
 export function getPlans(args?: GetPlansArgs, opts?: pulumi.InvokeOptions): Promise<GetPlansResult> {
     args = args || {};
@@ -179,6 +185,12 @@ export interface GetPlansResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
  */
 export function getPlansOutput(args?: GetPlansOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPlansResult> {
     args = args || {};

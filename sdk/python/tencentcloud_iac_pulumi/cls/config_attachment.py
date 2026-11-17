@@ -108,6 +108,14 @@ class ConfigAttachment(pulumi.CustomResource):
         """
         Provides a resource to create a cls config attachment
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyConfigToMachineGroup](https://www.tencentcloud.com/document/api/614/42814)
+        * Read: [DescribeConfigMachineGroups](https://www.tencentcloud.com/document/api/614/42810)
+        * Delete: [DeleteConfigFromMachineGroup](https://www.tencentcloud.com/document/api/614/42811)
+
         ## Import
 
         cls config_attachment can be imported using the id, e.g.
@@ -129,6 +137,14 @@ class ConfigAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a cls config attachment
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyConfigToMachineGroup](https://www.tencentcloud.com/document/api/614/42814)
+        * Read: [DescribeConfigMachineGroups](https://www.tencentcloud.com/document/api/614/42810)
+        * Delete: [DeleteConfigFromMachineGroup](https://www.tencentcloud.com/document/api/614/42811)
 
         ## Import
 

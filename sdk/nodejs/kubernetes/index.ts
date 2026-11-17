@@ -85,6 +85,11 @@ export type EncryptionProtection = import("./encryptionProtection").EncryptionPr
 export const EncryptionProtection: typeof import("./encryptionProtection").EncryptionProtection = null as any;
 utilities.lazyLoad(exports, ["EncryptionProtection"], () => require("./encryptionProtection"));
 
+export { GetAddonValuesArgs, GetAddonValuesResult, GetAddonValuesOutputArgs } from "./getAddonValues";
+export const getAddonValues: typeof import("./getAddonValues").getAddonValues = null as any;
+export const getAddonValuesOutput: typeof import("./getAddonValues").getAddonValuesOutput = null as any;
+utilities.lazyLoad(exports, ["getAddonValues","getAddonValuesOutput"], () => require("./getAddonValues"));
+
 export { GetAddonsArgs, GetAddonsResult, GetAddonsOutputArgs } from "./getAddons";
 export const getAddons: typeof import("./getAddons").getAddons = null as any;
 export const getAddonsOutput: typeof import("./getAddons").getAddonsOutput = null as any;

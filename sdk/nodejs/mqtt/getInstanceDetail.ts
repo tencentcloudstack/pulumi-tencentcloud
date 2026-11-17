@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mqtt-kngmpg9p",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
  */
 export function getInstanceDetail(args: GetInstanceDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -156,6 +162,12 @@ export interface GetInstanceDetailResult {
  *     instanceId: "mqtt-kngmpg9p",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
  */
 export function getInstanceDetailOutput(args: GetInstanceDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

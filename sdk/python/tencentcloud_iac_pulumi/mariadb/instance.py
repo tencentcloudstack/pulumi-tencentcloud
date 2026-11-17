@@ -1290,6 +1290,29 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBInstance](https://www.tencentcloud.com/document/api/237/52461)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/237/16190)
+          - [ModifyDBInstancesProject](https://www.tencentcloud.com/document/api/237/16176)
+          - [ModifyInstanceNetwork](https://www.tencentcloud.com/document/api/237/51318)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+          - [DestroyDBInstance](https://www.tencentcloud.com/document/api/237/48711)
+          - [IsolateDBInstance](https://www.tencentcloud.com/document/api/237/51454)
+
         ## Import
 
         MariaDB instance(prepaid) can be imported using the id, e.g.
@@ -1373,6 +1396,29 @@ class Instance(pulumi.CustomResource):
                 "createBy": "Terrafrom",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBInstance](https://www.tencentcloud.com/document/api/237/52461)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/237/16190)
+          - [ModifyDBInstancesProject](https://www.tencentcloud.com/document/api/237/16176)
+          - [ModifyInstanceNetwork](https://www.tencentcloud.com/document/api/237/51318)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+          - [DestroyDBInstance](https://www.tencentcloud.com/document/api/237/48711)
+          - [IsolateDBInstance](https://www.tencentcloud.com/document/api/237/51454)
 
         ## Import
 

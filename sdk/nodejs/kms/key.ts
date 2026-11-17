@@ -27,6 +27,25 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create kms instance with key rotation and rotate days.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.kms.Key("example", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
+ *     keyUsage: "ENCRYPT_DECRYPT",
+ *     keyRotationEnabled: true,
+ *     rotateDays: 30,
+ *     isEnabled: true,
+ *     tags: {
+ *         createdBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
  * ### Create kms instance with HSM
  *
  * ```typescript
@@ -76,6 +95,30 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [ArchiveKey](https://www.tencentcloud.com/document/api/1030/38198)
+ *   - [CreateKey](https://www.tencentcloud.com/document/api/1030/32199)
+ *   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+ *   - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+ *   - [EnableKeyRotation](https://www.tencentcloud.com/document/api/1030/32191)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [UpdateAlias](https://www.tencentcloud.com/document/api/1030/32182)
+ *   - [UpdateKeyDescription](https://www.tencentcloud.com/document/api/1030/32181)
+ * * Delete:
+ *   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+ *   - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+ *   - [ScheduleKeyDeletion](https://www.tencentcloud.com/document/api/1030/33534)
  *
  * ## Import
  *
@@ -150,6 +193,10 @@ export class Key extends pulumi.CustomResource {
      */
     declare public readonly pendingDeleteWindowInDays: pulumi.Output<number | undefined>;
     /**
+     * Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+     */
+    declare public readonly rotateDays: pulumi.Output<number>;
+    /**
      * Tags of CMK.
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
@@ -176,6 +223,7 @@ export class Key extends pulumi.CustomResource {
             resourceInputs["keyState"] = state?.keyState;
             resourceInputs["keyUsage"] = state?.keyUsage;
             resourceInputs["pendingDeleteWindowInDays"] = state?.pendingDeleteWindowInDays;
+            resourceInputs["rotateDays"] = state?.rotateDays;
             resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as KeyArgs | undefined;
@@ -190,6 +238,7 @@ export class Key extends pulumi.CustomResource {
             resourceInputs["keyRotationEnabled"] = args?.keyRotationEnabled;
             resourceInputs["keyUsage"] = args?.keyUsage;
             resourceInputs["pendingDeleteWindowInDays"] = args?.pendingDeleteWindowInDays;
+            resourceInputs["rotateDays"] = args?.rotateDays;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["keyState"] = undefined /*out*/;
         }
@@ -239,6 +288,10 @@ export interface KeyState {
      */
     pendingDeleteWindowInDays?: pulumi.Input<number | undefined>;
     /**
+     * Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+     */
+    rotateDays?: pulumi.Input<number | undefined>;
+    /**
      * Tags of CMK.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
@@ -280,6 +333,10 @@ export interface KeyArgs {
      * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
     pendingDeleteWindowInDays?: pulumi.Input<number | undefined>;
+    /**
+     * Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+     */
+    rotateDays?: pulumi.Input<number | undefined>;
     /**
      * Tags of CMK.
      */

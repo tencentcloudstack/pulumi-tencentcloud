@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogTopSqls](https://www.tencentcloud.com/document/api/1035/41183)
         /// </summary>
         public static Task<GetSlowLogTopSqlsResult> InvokeAsync(GetSlowLogTopSqlsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogTopSqls](https://www.tencentcloud.com/document/api/1035/41183)
         /// </summary>
         public static Output<GetSlowLogTopSqlsResult> Invoke(GetSlowLogTopSqlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogTopSqls](https://www.tencentcloud.com/document/api/1035/41183)
         /// </summary>
         public static Output<GetSlowLogTopSqlsResult> Invoke(GetSlowLogTopSqlsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogTopSqlsResult>("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args ?? new GetSlowLogTopSqlsInvokeArgs(), options.WithDefaults());

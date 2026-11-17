@@ -256,6 +256,12 @@ def get_service_node_infos(conf_status: Optional[_builtins.int] = None,
         data_node_maintenance_id=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
+
 
     :param _builtins.int conf_status: Configuration Status, -2: Configuration Failed, -1: Configuration Expired, 1: Synchronized, -99 All.
     :param _builtins.int data_node_maintenance_id: Filter Condition: Whether DN is in Maintenance Mode - 0 represents all statuses, 1 represents in maintenance mode.
@@ -342,6 +348,12 @@ def get_service_node_infos_output(conf_status: pulumi.Input[Optional[Optional[_b
         node_type_name="master",
         data_node_maintenance_id=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
 
 
     :param _builtins.int conf_status: Configuration Status, -2: Configuration Failed, -1: Configuration Expired, 1: Synchronized, -99 All.

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSavepointListResult> InvokeAsync(GetSavepointListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSavepointListResult> Invoke(GetSavepointListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSavepointListResult> Invoke(GetSavepointListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSavepointListResult>("tencentcloud:Oceanus/getSavepointList:getSavepointList", args ?? new GetSavepointListInvokeArgs(), options.WithDefaults());

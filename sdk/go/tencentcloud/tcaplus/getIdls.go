@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
 func GetIdls(ctx *pulumi.Context, args *GetIdlsArgs, opts ...pulumi.InvokeOption) (*GetIdlsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetIdlsResult

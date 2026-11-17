@@ -181,6 +181,12 @@ def get_job_status_detail(flow_param: Optional[Union['GetJobStatusDetailFlowPara
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+
 
     :param Union['GetJobStatusDetailFlowParamArgs', 'GetJobStatusDetailFlowParamArgsDict'] flow_param: Flow-related Parameters.
     :param _builtins.str instance_id: EMR Instance ID.
@@ -227,6 +233,12 @@ def get_job_status_detail_output(flow_param: pulumi.Input[Optional[Union['GetJob
             "f_value": "1921228",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
 
 
     :param Union['GetJobStatusDetailFlowParamArgs', 'GetJobStatusDetailFlowParamArgsDict'] flow_param: Flow-related Parameters.

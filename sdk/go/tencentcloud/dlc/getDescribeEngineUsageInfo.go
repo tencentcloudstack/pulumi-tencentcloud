@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeEngineUsageInfo](https://www.tencentcloud.com/document/api/1155/54453)
 func GetDescribeEngineUsageInfo(ctx *pulumi.Context, args *GetDescribeEngineUsageInfoArgs, opts ...pulumi.InvokeOption) (*GetDescribeEngineUsageInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeEngineUsageInfoResult

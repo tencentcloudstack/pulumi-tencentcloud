@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cls-satg5125",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
  */
 export function getTokens(args: GetTokensArgs, opts?: pulumi.InvokeOptions): Promise<GetTokensResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -79,6 +85,12 @@ export interface GetTokensResult {
  *     instanceId: "cls-satg5125",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
  */
 export function getTokensOutput(args: GetTokensOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTokensResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

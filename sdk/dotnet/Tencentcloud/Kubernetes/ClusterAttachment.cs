@@ -129,6 +129,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddExistedInstances](https://www.tencentcloud.com/document/api/457/32039)
+    /// * Read:
+    ///   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    /// * Delete: [DeleteClusterInstances](https://www.tencentcloud.com/document/api/457/32038)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/clusterAttachment:ClusterAttachment")]
     public partial class ClusterAttachment : global::Pulumi.CustomResource
@@ -180,6 +191,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("securityGroups")]
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
+
+        /// <summary>
+        /// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        /// </summary>
+        [Output("skipOptions")]
+        public Output<ImmutableArray<string>> SkipOptions { get; private set; } = null!;
+
+        /// <summary>
+        /// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+        /// </summary>
+        [Output("skipValidateOptions")]
+        public Output<ImmutableArray<string>> SkipValidateOptions { get; private set; } = null!;
 
         /// <summary>
         /// State of the node.
@@ -326,6 +349,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             set => _securityGroups = value;
         }
 
+        [Input("skipOptions")]
+        private InputList<string>? _skipOptions;
+
+        /// <summary>
+        /// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        /// </summary>
+        public InputList<string> SkipOptions
+        {
+            get => _skipOptions ?? (_skipOptions = new InputList<string>());
+            set => _skipOptions = value;
+        }
+
+        [Input("skipValidateOptions")]
+        private InputList<string>? _skipValidateOptions;
+
+        /// <summary>
+        /// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+        /// </summary>
+        public InputList<string> SkipValidateOptions
+        {
+            get => _skipValidateOptions ?? (_skipValidateOptions = new InputList<string>());
+            set => _skipValidateOptions = value;
+        }
+
         /// <summary>
         /// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         /// </summary>
@@ -420,6 +467,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         {
             get => _securityGroups ?? (_securityGroups = new InputList<string>());
             set => _securityGroups = value;
+        }
+
+        [Input("skipOptions")]
+        private InputList<string>? _skipOptions;
+
+        /// <summary>
+        /// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+        /// </summary>
+        public InputList<string> SkipOptions
+        {
+            get => _skipOptions ?? (_skipOptions = new InputList<string>());
+            set => _skipOptions = value;
+        }
+
+        [Input("skipValidateOptions")]
+        private InputList<string>? _skipValidateOptions;
+
+        /// <summary>
+        /// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+        /// </summary>
+        public InputList<string> SkipValidateOptions
+        {
+            get => _skipValidateOptions ?? (_skipValidateOptions = new InputList<string>());
+            set => _skipValidateOptions = value;
         }
 
         /// <summary>

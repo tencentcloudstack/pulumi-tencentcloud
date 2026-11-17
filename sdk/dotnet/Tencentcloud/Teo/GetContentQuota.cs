@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
         /// </summary>
         public static Task<GetContentQuotaResult> InvokeAsync(GetContentQuotaArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetContentQuotaResult>("tencentcloud:Teo/getContentQuota:getContentQuota", args ?? new GetContentQuotaArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
         /// </summary>
         public static Output<GetContentQuotaResult> Invoke(GetContentQuotaInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetContentQuotaResult>("tencentcloud:Teo/getContentQuota:getContentQuota", args ?? new GetContentQuotaInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
         /// </summary>
         public static Output<GetContentQuotaResult> Invoke(GetContentQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetContentQuotaResult>("tencentcloud:Teo/getContentQuota:getContentQuota", args ?? new GetContentQuotaInvokeArgs(), options.WithDefaults());

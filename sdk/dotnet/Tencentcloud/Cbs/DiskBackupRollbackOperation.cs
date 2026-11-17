@@ -31,6 +31,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ApplyDiskBackup](https://www.tencentcloud.com/document/api/362/50790)
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/diskBackupRollbackOperation:DiskBackupRollbackOperation")]
     public partial class DiskBackupRollbackOperation : global::Pulumi.CustomResource

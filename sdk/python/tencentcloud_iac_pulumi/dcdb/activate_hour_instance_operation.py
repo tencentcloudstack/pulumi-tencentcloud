@@ -85,6 +85,12 @@ class ActivateHourInstanceOperation(pulumi.CustomResource):
         activate_hour_instance_operation = tencentcloud.dcdb.ActivateHourInstanceOperation("activate_hour_instance_operation", instance_id=dcdb_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ActiveHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45900)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +113,12 @@ class ActivateHourInstanceOperation(pulumi.CustomResource):
 
         activate_hour_instance_operation = tencentcloud.dcdb.ActivateHourInstanceOperation("activate_hour_instance_operation", instance_id=dcdb_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ActiveHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45900)
 
 
         :param str resource_name: The name of the resource.

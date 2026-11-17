@@ -36,6 +36,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16179)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+    ///   - [ModifyRealServerAccessStrategy](https://www.tencentcloud.com/search/?wd=ModifyRealServerAccessStrategy&amp;type=document&amp;lang=en)
+    ///   - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16174)
+    /// * Read: [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+    /// * Update:
+    ///   - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16179)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+    ///   - [ModifyRealServerAccessStrategy](https://www.tencentcloud.com/search/?wd=ModifyRealServerAccessStrategy&amp;type=document&amp;lang=en)
+    ///   - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/237/16174)
+    /// 
     /// ## Import
     /// 
     /// mariadb InstanceConfig can be imported using the id, e.g.

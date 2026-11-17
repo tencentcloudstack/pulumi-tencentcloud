@@ -48,6 +48,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLaunchTemplateVersion](https://www.tencentcloud.com/document/api/213/45361)
+// * Read: [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+// * Delete: [DeleteLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45359)
+//
 // ## Import
 //
 // cvm launchTemplateVersion can be imported using the id, e.g.

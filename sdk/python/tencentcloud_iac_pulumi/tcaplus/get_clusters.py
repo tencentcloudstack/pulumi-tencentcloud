@@ -115,6 +115,12 @@ def get_clusters(cluster_id: Optional[_builtins.str] = None,
         cluster_name="cluster")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1016/35050)
+
 
     :param _builtins.str cluster_id: ID of the TcaplusDB cluster to be query.
     :param _builtins.str cluster_name: Name of the TcaplusDB cluster to be query.
@@ -151,6 +157,12 @@ def get_clusters_output(cluster_id: pulumi.Input[Optional[Optional[_builtins.str
     idname = tencentcloud.tcaplus.get_clusters(cluster_id=test["id"],
         cluster_name="cluster")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1016/35050)
 
 
     :param _builtins.str cluster_id: ID of the TcaplusDB cluster to be query.

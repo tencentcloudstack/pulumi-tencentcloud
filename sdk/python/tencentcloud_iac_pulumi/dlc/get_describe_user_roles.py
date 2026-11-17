@@ -118,6 +118,12 @@ def get_describe_user_roles(fuzzy: Optional[_builtins.str] = None,
         sorting="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
+
 
     :param _builtins.str fuzzy: Fuzzy enumeration by arn.
     :param _builtins.str result_output_file: Used to save results.
@@ -157,6 +163,12 @@ def get_describe_user_roles_output(fuzzy: pulumi.Input[Optional[Optional[_builti
         sort_by="modify-time",
         sorting="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
 
 
     :param _builtins.str fuzzy: Fuzzy enumeration by arn.

@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&type=document&lang=en)
 func GetPlatformProducts(ctx *pulumi.Context, args *GetPlatformProductsArgs, opts ...pulumi.InvokeOption) (*GetPlatformProductsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPlatformProductsResult

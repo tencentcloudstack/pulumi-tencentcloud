@@ -61,6 +61,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAccounts](https://www.tencentcloud.com/document/api/1098/46319)
+    ///   - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+    /// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1098/40762)
+    /// * Update:
+    ///   - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1098/55925)
+    ///   - [ModifyAccountHost](https://www.tencentcloud.com/document/api/1098/55924)
+    ///   - [ModifyAccountParams](https://www.tencentcloud.com/search/?wd=ModifyAccountParams&amp;type=document&amp;lang=en)
+    ///   - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1098/52496)
+    /// * Delete: [DeleteAccounts](https://www.tencentcloud.com/document/api/1098/55927)
+    /// 
     /// ## Import
     /// 
     /// cynosdb account can be imported using the clusterId#accountName#host, e.g.

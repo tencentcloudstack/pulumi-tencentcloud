@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     wrappingKeySpec: "RSA_2048",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
  */
 export function getGetParametersForImport(args: GetGetParametersForImportArgs, opts?: pulumi.InvokeOptions): Promise<GetGetParametersForImportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetGetParametersForImportResult {
  *     wrappingKeySpec: "RSA_2048",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
  */
 export function getGetParametersForImportOutput(args: GetGetParametersForImportOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGetParametersForImportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

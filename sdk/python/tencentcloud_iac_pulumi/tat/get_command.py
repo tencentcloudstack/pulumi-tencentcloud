@@ -139,6 +139,12 @@ def get_command(command_id: Optional[_builtins.str] = None,
         created_by="TAT")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
+
 
     :param _builtins.str command_id: Command ID.
     :param _builtins.str command_name: Command name.
@@ -181,6 +187,12 @@ def get_command_output(command_id: pulumi.Input[Optional[Optional[_builtins.str]
     command = tencentcloud.tat.get_command(command_type="SHELL",
         created_by="TAT")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
 
 
     :param _builtins.str command_id: Command ID.

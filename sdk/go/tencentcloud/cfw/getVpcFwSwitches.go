@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
 func GetVpcFwSwitches(ctx *pulumi.Context, args *GetVpcFwSwitchesArgs, opts ...pulumi.InvokeOption) (*GetVpcFwSwitchesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVpcFwSwitchesResult

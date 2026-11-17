@@ -60,6 +60,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//   - [RollBackCluster](https://www.tencentcloud.com/document/api/1098/74208)
 type RollBackCluster struct {
 	pulumi.CustomResourceState
 

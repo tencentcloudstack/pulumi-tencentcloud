@@ -59,6 +59,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateMultiPathGatewayLine](https://www.tencentcloud.com/document/api/1145/72304)
+    /// * Read: [DescribeMultiPathGatewayLine](https://www.tencentcloud.com/document/api/1145/72299)
+    /// * Update: [ModifyMultiPathGatewayLine](https://www.tencentcloud.com/document/api/1145/72294)
+    /// * Delete: [DeleteMultiPathGatewayLine](https://www.tencentcloud.com/document/api/1145/72301)
+    /// 
     /// ## Import
     /// 
     /// teo multi path gateway line can be imported using the id, e.g.

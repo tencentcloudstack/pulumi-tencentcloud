@@ -70,6 +70,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//   - [OpenReadOnlyInstanceExclusiveAccess](https://www.tencentcloud.com/document/api/1098/55910)
 type ReadOnlyInstanceExclusiveAccess struct {
 	pulumi.CustomResourceState
 

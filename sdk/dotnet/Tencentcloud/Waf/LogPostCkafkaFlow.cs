@@ -80,6 +80,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePostCKafkaFlow](https://www.tencentcloud.com/search/?wd=CreatePostCKafkaFlow&amp;type=document&amp;lang=en)
+    ///   - [DescribePostCKafkaFlows](https://www.tencentcloud.com/search/?wd=DescribePostCKafkaFlows&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePostCKafkaFlows](https://www.tencentcloud.com/search/?wd=DescribePostCKafkaFlows&amp;type=document&amp;lang=en)
+    /// * Update: [CreatePostCKafkaFlow](https://www.tencentcloud.com/search/?wd=CreatePostCKafkaFlow&amp;type=document&amp;lang=en)
+    /// * Delete: [DestroyPostCKafkaFlow](https://www.tencentcloud.com/search/?wd=DestroyPostCKafkaFlow&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// WAF log post ckafka flow can be imported using the id, e.g.

@@ -27,6 +27,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
+    ///   - [SignUpCfsService](https://www.tencentcloud.com/document/api/582/34498)
+    /// * Read: [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/signUpCfsService:SignUpCfsService")]
     public partial class SignUpCfsService : global::Pulumi.CustomResource

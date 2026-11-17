@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
  */
 export function getStandardEngineResourceGroupConfigInformation(args?: GetStandardEngineResourceGroupConfigInformationArgs, opts?: pulumi.InvokeOptions): Promise<GetStandardEngineResourceGroupConfigInformationResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetStandardEngineResourceGroupConfigInformationResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
  */
 export function getStandardEngineResourceGroupConfigInformationOutput(args?: GetStandardEngineResourceGroupConfigInformationOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStandardEngineResourceGroupConfigInformationResult> {
     args = args || {};

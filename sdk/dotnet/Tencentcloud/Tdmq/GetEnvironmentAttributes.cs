@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetEnvironmentAttributesResult> InvokeAsync(GetEnvironmentAttributesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEnvironmentAttributesResult> Invoke(GetEnvironmentAttributesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEnvironmentAttributesResult> Invoke(GetEnvironmentAttributesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesInvokeArgs(), options.WithDefaults());

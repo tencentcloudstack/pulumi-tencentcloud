@@ -835,6 +835,15 @@ class Cc(pulumi.CustomResource):
             cel_rule="(has(request.url) && request.url.startsWith('/prefix')) && (has(request.method) && request.method == 'POST')")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+        * Read: [DescribeCCRuleList](https://www.tencentcloud.com/document/api/627/64524)
+        * Update: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+        * Delete: [DeleteCCRule](https://www.tencentcloud.com/document/api/627/64551)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -973,6 +982,15 @@ class Cc(pulumi.CustomResource):
             logical_op="or",
             cel_rule="(has(request.url) && request.url.startsWith('/prefix')) && (has(request.method) && request.method == 'POST')")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+        * Read: [DescribeCCRuleList](https://www.tencentcloud.com/document/api/627/64524)
+        * Update: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+        * Delete: [DeleteCCRule](https://www.tencentcloud.com/document/api/627/64551)
 
 
         :param str resource_name: The name of the resource.

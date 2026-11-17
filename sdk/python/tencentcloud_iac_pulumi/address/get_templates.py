@@ -100,6 +100,12 @@ def get_templates(id: Optional[_builtins.str] = None,
     name = tencentcloud.address.get_templates(name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressTemplates](https://www.tencentcloud.com/document/api/215/16717)
+
 
     :param _builtins.str id: ID of the address template to query.
     :param _builtins.str name: Name of the address template to query.
@@ -132,6 +138,12 @@ def get_templates_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = N
 
     name = tencentcloud.address.get_templates(name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressTemplates](https://www.tencentcloud.com/document/api/215/16717)
 
 
     :param _builtins.str id: ID of the address template to query.

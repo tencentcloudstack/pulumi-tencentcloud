@@ -313,6 +313,29 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateClusterNodePool](https://www.tencentcloud.com/document/api/457/38781)
+ * * Read:
+ *   - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+ *   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+ * * Update:
+ *   - [DeleteMachine](https://www.tencentcloud.com/document/api/296/30907)
+ *   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+ *   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+ *   - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+ *   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+ *   - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+ *   - [ModifyClusterNodePool](https://www.tencentcloud.com/document/api/457/38776)
+ *   - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+ *   - [ModifyNodePoolDesiredCapacityAboutAsg](https://www.tencentcloud.com/search/?wd=ModifyNodePoolDesiredCapacityAboutAsg&type=document&lang=en)
+ *   - [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+ *   - [UseAsClient](https://www.tencentcloud.com/search/?wd=UseAsClient&type=document&lang=en)
+ * * Delete: [DeleteClusterNodePool](https://www.tencentcloud.com/document/api/457/38779)
+ *
  * ## Import
  *
  * tke node pool can be imported, e.g.
@@ -416,7 +439,7 @@ export class NodePool extends pulumi.CustomResource {
     /**
      * Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
      */
-    declare public readonly multiZoneSubnetPolicy: pulumi.Output<string | undefined>;
+    declare public readonly multiZoneSubnetPolicy: pulumi.Output<string>;
     /**
      * Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
      */
@@ -424,7 +447,7 @@ export class NodePool extends pulumi.CustomResource {
     /**
      * Node config.
      */
-    declare public readonly nodeConfig: pulumi.Output<outputs.Kubernetes.NodePoolNodeConfig | undefined>;
+    declare public readonly nodeConfig: pulumi.Output<outputs.Kubernetes.NodePoolNodeConfig>;
     /**
      * The total node count.
      */

@@ -108,6 +108,12 @@ def get_listener_real_servers(listener_id: Optional[_builtins.str] = None,
     listener_real_servers = tencentcloud.gaap.get_listener_real_servers(listener_id="listener-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
+
 
     :param _builtins.str listener_id: listener ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -138,6 +144,12 @@ def get_listener_real_servers_output(listener_id: pulumi.Input[Optional[_builtin
 
     listener_real_servers = tencentcloud.gaap.get_listener_real_servers(listener_id="listener-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
 
 
     :param _builtins.str listener_id: listener ID.

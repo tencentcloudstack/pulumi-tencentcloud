@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
         /// </summary>
         public static Task<GetImportImageOsResult> InvokeAsync(GetImportImageOsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
         /// </summary>
         public static Output<GetImportImageOsResult> Invoke(GetImportImageOsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
         /// </summary>
         public static Output<GetImportImageOsResult> Invoke(GetImportImageOsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsInvokeArgs(), options.WithDefaults());

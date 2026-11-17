@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     directConnectTunnelId: "dcx-4z49tnws",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&type=document&lang=en)
  */
 export function getPublicDirectConnectTunnelRoutes(args: GetPublicDirectConnectTunnelRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicDirectConnectTunnelRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetPublicDirectConnectTunnelRoutesResult {
  *     directConnectTunnelId: "dcx-4z49tnws",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&type=document&lang=en)
  */
 export function getPublicDirectConnectTunnelRoutesOutput(args: GetPublicDirectConnectTunnelRoutesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublicDirectConnectTunnelRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

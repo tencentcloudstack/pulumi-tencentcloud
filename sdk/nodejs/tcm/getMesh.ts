@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     meshClusters: ["cls-xxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&type=document&lang=en)
  */
 export function getMesh(args?: GetMeshArgs, opts?: pulumi.InvokeOptions): Promise<GetMeshResult> {
     args = args || {};
@@ -98,6 +104,12 @@ export interface GetMeshResult {
  *     meshClusters: ["cls-xxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&type=document&lang=en)
  */
 export function getMeshOutput(args?: GetMeshOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMeshResult> {
     args = args || {};

@@ -145,6 +145,12 @@ def get_db_instances(instance_ids: Optional[Sequence[_builtins.str]] = None,
         subnet_id="3454730")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
+
 
     :param Sequence[_builtins.str] instance_ids: instance ids.
     :param Sequence[_builtins.int] project_ids: project ids.
@@ -193,6 +199,12 @@ def get_db_instances_output(instance_ids: pulumi.Input[Optional[Optional[Sequenc
         vpc_id="5556791",
         subnet_id="3454730")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
 
 
     :param Sequence[_builtins.str] instance_ids: instance ids.

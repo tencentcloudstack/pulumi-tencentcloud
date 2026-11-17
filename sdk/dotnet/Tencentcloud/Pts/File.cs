@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateFile](https://www.tencentcloud.com/document/api/1249/68533)
+    /// * Read: [DescribeFiles](https://www.tencentcloud.com/document/api/1249/68516)
+    /// * Delete: [DeleteFiles](https://www.tencentcloud.com/document/api/1249/68527)
+    /// 
     /// ## Import
     /// 
     /// pts file can be imported using the project_id#file_id, e.g.

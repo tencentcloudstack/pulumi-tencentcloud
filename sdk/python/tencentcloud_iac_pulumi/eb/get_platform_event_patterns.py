@@ -96,6 +96,12 @@ def get_platform_event_patterns(product_type: Optional[_builtins.str] = None,
     platform_event_patterns = tencentcloud.eb.get_platform_event_patterns(product_type="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPlatformEventPatterns](https://www.tencentcloud.com/search/?wd=ListPlatformEventPatterns&type=document&lang=en)
+
 
     :param _builtins.str product_type: Platform product type.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_platform_event_patterns_output(product_type: pulumi.Input[Optional[_buil
 
     platform_event_patterns = tencentcloud.eb.get_platform_event_patterns(product_type="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPlatformEventPatterns](https://www.tencentcloud.com/search/?wd=ListPlatformEventPatterns&type=document&lang=en)
 
 
     :param _builtins.str product_type: Platform product type.

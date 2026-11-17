@@ -58,6 +58,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateStreamLinkInput](https://www.tencentcloud.com/search/?wd=CreateStreamLinkInput&type=document&lang=en)
+// * Read: [DescribeStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkFlow&type=document&lang=en)
+// * Update: [ModifyStreamLinkInput](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkInput&type=document&lang=en)
+//
 // ## Import
 //
 // mps input can be imported using the id, e.g.

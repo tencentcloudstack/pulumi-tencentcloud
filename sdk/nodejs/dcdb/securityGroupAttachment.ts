@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/1042/39460)
+ * * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
+ * * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/1042/39457)
+ *
  * ## Import
  *
  * dcdb securityGroupAttachment can be imported using the id, e.g.

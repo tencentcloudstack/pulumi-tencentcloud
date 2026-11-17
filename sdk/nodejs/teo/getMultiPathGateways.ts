@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
  */
 export function getMultiPathGateways(args: GetMultiPathGatewaysArgs, opts?: pulumi.InvokeOptions): Promise<GetMultiPathGatewaysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetMultiPathGatewaysResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
  */
 export function getMultiPathGatewaysOutput(args: GetMultiPathGatewaysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMultiPathGatewaysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

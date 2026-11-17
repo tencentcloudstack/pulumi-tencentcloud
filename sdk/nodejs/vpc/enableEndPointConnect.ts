@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     acceptFlag: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [EnableVpcEndPointConnect](https://www.tencentcloud.com/document/api/215/40149)
  */
 export class EnableEndPointConnect extends pulumi.CustomResource {
     /**

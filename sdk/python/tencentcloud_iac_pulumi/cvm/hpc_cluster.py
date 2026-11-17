@@ -154,6 +154,15 @@ class HpcCluster(pulumi.CustomResource):
             remark="create for test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateHpcCluster](https://www.tencentcloud.com/search/?wd=CreateHpcCluster&type=document&lang=en)
+        * Read: [DescribeHpcClusters](https://www.tencentcloud.com/search/?wd=DescribeHpcClusters&type=document&lang=en)
+        * Update: [ModifyHpcClusterAttribute](https://www.tencentcloud.com/search/?wd=ModifyHpcClusterAttribute&type=document&lang=en)
+        * Delete: [DeleteHpcClusters](https://www.tencentcloud.com/search/?wd=DeleteHpcClusters&type=document&lang=en)
+
         ## Import
 
         cvm hpc_cluster can be imported using the id, e.g.
@@ -189,6 +198,15 @@ class HpcCluster(pulumi.CustomResource):
             name="terraform-test",
             remark="create for test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateHpcCluster](https://www.tencentcloud.com/search/?wd=CreateHpcCluster&type=document&lang=en)
+        * Read: [DescribeHpcClusters](https://www.tencentcloud.com/search/?wd=DescribeHpcClusters&type=document&lang=en)
+        * Update: [ModifyHpcClusterAttribute](https://www.tencentcloud.com/search/?wd=ModifyHpcClusterAttribute&type=document&lang=en)
+        * Delete: [DeleteHpcClusters](https://www.tencentcloud.com/search/?wd=DeleteHpcClusters&type=document&lang=en)
 
         ## Import
 

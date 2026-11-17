@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWhitelist](https://www.tencentcloud.com/document/api/1131/45342)
+    /// * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
+    /// * Delete: [DeleteWhitelist](https://www.tencentcloud.com/document/api/1131/45334)
+    /// 
     /// ## Import
     /// 
     /// rum whitelist can be imported using the id, e.g.

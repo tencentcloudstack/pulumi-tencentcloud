@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTaskVersions](https://www.tencentcloud.com/document/api/1174/73869)
         /// </summary>
         public static Task<GetTaskVersionsResult> InvokeAsync(GetTaskVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskVersionsResult>("tencentcloud:Wedata/getTaskVersions:getTaskVersions", args ?? new GetTaskVersionsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTaskVersions](https://www.tencentcloud.com/document/api/1174/73869)
         /// </summary>
         public static Output<GetTaskVersionsResult> Invoke(GetTaskVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskVersionsResult>("tencentcloud:Wedata/getTaskVersions:getTaskVersions", args ?? new GetTaskVersionsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListTaskVersions](https://www.tencentcloud.com/document/api/1174/73869)
         /// </summary>
         public static Output<GetTaskVersionsResult> Invoke(GetTaskVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskVersionsResult>("tencentcloud:Wedata/getTaskVersions:getTaskVersions", args ?? new GetTaskVersionsInvokeArgs(), options.WithDefaults());

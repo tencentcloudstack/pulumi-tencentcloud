@@ -263,6 +263,14 @@ class MemberAuthPolicyAttachment(pulumi.CustomResource):
             org_sub_account_uin=int(100037718939))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindOrganizationPolicySubAccount](https://www.tencentcloud.com/document/api/1031/78346)
+        * Read: [DescribeOrganizationMembersAuthPolicy](https://www.tencentcloud.com/document/api/1031/78344)
+        * Delete: [CancelOrganizationPolicySubAccount](https://www.tencentcloud.com/document/api/1031/78345)
+
         ## Import
 
         Organization member auth policy attachment can be imported using the id, e.g.
@@ -296,6 +304,14 @@ class MemberAuthPolicyAttachment(pulumi.CustomResource):
             policy_id=252421751,
             org_sub_account_uin=int(100037718939))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindOrganizationPolicySubAccount](https://www.tencentcloud.com/document/api/1031/78346)
+        * Read: [DescribeOrganizationMembersAuthPolicy](https://www.tencentcloud.com/document/api/1031/78344)
+        * Delete: [CancelOrganizationPolicySubAccount](https://www.tencentcloud.com/document/api/1031/78345)
 
         ## Import
 

@@ -947,7 +947,7 @@ func (o FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput) Index(i pu
 type FunctionCfsConfig struct {
 	// File system instance ID.
 	CfsId string `pulumi:"cfsId"`
-	// (Readonly) File system ip address.
+	// If fixed intranet IP is enabled, this field returns the IP list used.
 	IpAddress *string `pulumi:"ipAddress"`
 	// Local mount directory.
 	LocalMountDir string `pulumi:"localMountDir"`
@@ -979,7 +979,7 @@ type FunctionCfsConfigInput interface {
 type FunctionCfsConfigArgs struct {
 	// File system instance ID.
 	CfsId pulumi.StringInput `pulumi:"cfsId"`
-	// (Readonly) File system ip address.
+	// If fixed intranet IP is enabled, this field returns the IP list used.
 	IpAddress pulumi.StringPtrInput `pulumi:"ipAddress"`
 	// Local mount directory.
 	LocalMountDir pulumi.StringInput `pulumi:"localMountDir"`
@@ -1053,7 +1053,7 @@ func (o FunctionCfsConfigOutput) CfsId() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.CfsId }).(pulumi.StringOutput)
 }
 
-// (Readonly) File system ip address.
+// If fixed intranet IP is enabled, this field returns the IP list used.
 func (o FunctionCfsConfigOutput) IpAddress() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
 }

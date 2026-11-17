@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+    ///   - [StartInstances](https://www.tencentcloud.com/document/api/1103/42488)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/startInstance:StartInstance")]
     public partial class StartInstance : global::Pulumi.CustomResource

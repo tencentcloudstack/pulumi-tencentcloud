@@ -43,6 +43,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateOrganizationMemberAuthIdentity](https://www.tencentcloud.com/document/api/1031/66411)
+// * Read: [DescribeOrganizationMemberAuthIdentities](https://www.tencentcloud.com/document/api/1031/52053)
+// * Delete: [DeleteOrganizationMemberAuthIdentity](https://www.tencentcloud.com/document/api/1031/66408)
+//
 // ## Import
 //
 // organization orgMemberAuthIdentity can be imported using the id, e.g.

@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
         /// </summary>
         public static Task<GetDbInstanceVersionsResult> InvokeAsync(GetDbInstanceVersionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsArgs(), options.WithDefaults());
@@ -90,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
         /// </summary>
         public static Output<GetDbInstanceVersionsResult> Invoke(GetDbInstanceVersionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsInvokeArgs(), options.WithDefaults());
@@ -131,6 +143,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
         /// </summary>
         public static Output<GetDbInstanceVersionsResult> Invoke(GetDbInstanceVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsInvokeArgs(), options.WithDefaults());

@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPodInstancesResult> InvokeAsync(GetPodInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPodInstancesResult> Invoke(GetPodInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPodInstancesResult> Invoke(GetPodInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesInvokeArgs(), options.WithDefaults());

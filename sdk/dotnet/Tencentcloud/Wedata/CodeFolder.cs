@@ -33,6 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCodeFolder](https://www.tencentcloud.com/document/api/1174/73856)
+    /// * Read: [GetCodeFolder](https://www.tencentcloud.com/document/api/1174/77905)
+    /// * Update: [UpdateCodeFolder](https://www.tencentcloud.com/document/api/1174/73841)
+    /// * Delete: [DeleteCodeFolder](https://www.tencentcloud.com/document/api/1174/73852)
+    /// 
     /// ## Import
     /// 
     /// WeData code folder can be imported using the projectId#folderId, e.g.

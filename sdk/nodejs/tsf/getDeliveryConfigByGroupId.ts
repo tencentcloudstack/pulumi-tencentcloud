@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     groupId: "group-yrjkln9v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&type=document&lang=en)
  */
 export function getDeliveryConfigByGroupId(args: GetDeliveryConfigByGroupIdArgs, opts?: pulumi.InvokeOptions): Promise<GetDeliveryConfigByGroupIdResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetDeliveryConfigByGroupIdResult {
  *     groupId: "group-yrjkln9v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&type=document&lang=en)
  */
 export function getDeliveryConfigByGroupIdOutput(args: GetDeliveryConfigByGroupIdOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDeliveryConfigByGroupIdResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

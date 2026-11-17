@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
         /// </summary>
         public static Task<GetSlowlogsResult> InvokeAsync(GetSlowlogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
         /// </summary>
         public static Output<GetSlowlogsResult> Invoke(GetSlowlogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowlogs](https://www.tencentcloud.com/document/api/238/32133)
         /// </summary>
         public static Output<GetSlowlogsResult> Invoke(GetSlowlogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowlogsResult>("tencentcloud:Sqlserver/getSlowlogs:getSlowlogs", args ?? new GetSlowlogsInvokeArgs(), options.WithDefaults());

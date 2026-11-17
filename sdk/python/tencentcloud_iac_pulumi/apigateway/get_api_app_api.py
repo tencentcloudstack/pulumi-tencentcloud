@@ -124,6 +124,12 @@ def get_api_app_api(api_id: Optional[_builtins.str] = None,
         api_region="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiForApiApp](https://www.tencentcloud.com/search/?wd=DescribeApiForApiApp&type=document&lang=en)
+
 
     :param _builtins.str api_id: API interface unique ID.
     :param _builtins.str api_region: Api region.
@@ -163,6 +169,12 @@ def get_api_app_api_output(api_id: pulumi.Input[Optional[_builtins.str]] = None,
         api_id="api-0cvmf4x4",
         api_region="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiForApiApp](https://www.tencentcloud.com/search/?wd=DescribeApiForApiApp&type=document&lang=en)
 
 
     :param _builtins.str api_id: API interface unique ID.

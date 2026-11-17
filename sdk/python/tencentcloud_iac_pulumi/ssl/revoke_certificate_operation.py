@@ -118,6 +118,12 @@ class RevokeCertificateOperation(pulumi.CustomResource):
         revoke_certificate = tencentcloud.ssl.RevokeCertificateOperation("revoke_certificate", certificate_id="7zUGkVab")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RevokeCertificate](https://www.tencentcloud.com/document/api/1007/79958)
+
         ## Import
 
         ssl revoke_certificate can be imported using the id, e.g.
@@ -149,6 +155,12 @@ class RevokeCertificateOperation(pulumi.CustomResource):
 
         revoke_certificate = tencentcloud.ssl.RevokeCertificateOperation("revoke_certificate", certificate_id="7zUGkVab")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RevokeCertificate](https://www.tencentcloud.com/document/api/1007/79958)
 
         ## Import
 

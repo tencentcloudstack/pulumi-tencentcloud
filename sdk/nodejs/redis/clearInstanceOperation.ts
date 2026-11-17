@@ -47,6 +47,14 @@ import * as utilities from "../utilities";
  *     password: password,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [ClearInstance](https://www.tencentcloud.com/document/api/239/32070)
+ *   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
  */
 export class ClearInstanceOperation extends pulumi.CustomResource {
     /**

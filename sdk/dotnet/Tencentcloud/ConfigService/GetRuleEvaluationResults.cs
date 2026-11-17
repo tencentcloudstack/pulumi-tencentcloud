@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
         /// </summary>
         public static Task<GetRuleEvaluationResultsResult> InvokeAsync(GetRuleEvaluationResultsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRuleEvaluationResultsResult>("tencentcloud:Config/getRuleEvaluationResults:getRuleEvaluationResults", args ?? new GetRuleEvaluationResultsArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
         /// </summary>
         public static Output<GetRuleEvaluationResultsResult> Invoke(GetRuleEvaluationResultsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRuleEvaluationResultsResult>("tencentcloud:Config/getRuleEvaluationResults:getRuleEvaluationResults", args ?? new GetRuleEvaluationResultsInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
         /// </summary>
         public static Output<GetRuleEvaluationResultsResult> Invoke(GetRuleEvaluationResultsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRuleEvaluationResultsResult>("tencentcloud:Config/getRuleEvaluationResults:getRuleEvaluationResults", args ?? new GetRuleEvaluationResultsInvokeArgs(), options.WithDefaults());

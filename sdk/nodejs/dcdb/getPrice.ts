@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     amountUnit: "pent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBPrice](https://www.tencentcloud.com/document/api/1042/52375)
  */
 export function getPrice(args: GetPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetPriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -136,6 +142,12 @@ export interface GetPriceResult {
  *     amountUnit: "pent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBPrice](https://www.tencentcloud.com/document/api/1042/52375)
  */
 export function getPriceOutput(args: GetPriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

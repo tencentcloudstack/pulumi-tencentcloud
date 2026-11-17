@@ -256,6 +256,21 @@ class UserPolicyAttachment(pulumi.CustomResource):
             policy_id=policy_basic.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachUserPolicy](https://www.tencentcloud.com/document/api/598/32249)
+          - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+          - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
+        * Read:
+          - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+          - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
+        * Delete:
+          - [DetachUserPolicy](https://www.tencentcloud.com/document/api/598/32245)
+          - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+
         ## Import
 
         CAM user policy attachment can be imported using the id, e.g.
@@ -320,6 +335,21 @@ class UserPolicyAttachment(pulumi.CustomResource):
             user_name=users.user_lists[0].user_id,
             policy_id=policy_basic.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachUserPolicy](https://www.tencentcloud.com/document/api/598/32249)
+          - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+          - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
+        * Read:
+          - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+          - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
+        * Delete:
+          - [DetachUserPolicy](https://www.tencentcloud.com/document/api/598/32245)
+          - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
 
         ## Import
 

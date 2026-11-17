@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
  */
 export function getInstanceCharset(args: GetInstanceCharsetArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceCharsetResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetInstanceCharsetResult {
  *     instanceId: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
  */
 export function getInstanceCharsetOutput(args: GetInstanceCharsetOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceCharsetResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

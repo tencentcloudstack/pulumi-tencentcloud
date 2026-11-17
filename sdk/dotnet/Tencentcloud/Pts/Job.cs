@@ -34,6 +34,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [StartJob](https://www.tencentcloud.com/document/api/1249/68499)
+    /// * Read: [DescribeJobs](https://www.tencentcloud.com/document/api/1249/68515)
+    /// * Update: [UpdateJob](https://www.tencentcloud.com/document/api/1249/68495)
+    /// * Delete: [DeleteJobs](https://www.tencentcloud.com/document/api/1249/68526)
+    /// 
     /// ## Import
     /// 
     /// pts job can be imported using the projectId#scenarioId#jobId, e.g.

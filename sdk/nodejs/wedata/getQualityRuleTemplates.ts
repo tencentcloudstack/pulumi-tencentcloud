@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
  */
 export function getQualityRuleTemplates(args: GetQualityRuleTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetQualityRuleTemplatesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -104,6 +110,12 @@ export interface GetQualityRuleTemplatesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
  */
 export function getQualityRuleTemplatesOutput(args: GetQualityRuleTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetQualityRuleTemplatesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

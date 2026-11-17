@@ -56,6 +56,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+//   - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
 func GetLayer7Listeners(ctx *pulumi.Context, args *GetLayer7ListenersArgs, opts ...pulumi.InvokeOption) (*GetLayer7ListenersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLayer7ListenersResult

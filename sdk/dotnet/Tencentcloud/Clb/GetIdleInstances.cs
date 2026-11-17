@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
         /// </summary>
         public static Task<GetIdleInstancesResult> InvokeAsync(GetIdleInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
         /// </summary>
         public static Output<GetIdleInstancesResult> Invoke(GetIdleInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
         /// </summary>
         public static Output<GetIdleInstancesResult> Invoke(GetIdleInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesInvokeArgs(), options.WithDefaults());

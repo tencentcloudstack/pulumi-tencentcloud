@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
         /// </summary>
         public static Task<GetListColumnLineageResult> InvokeAsync(GetListColumnLineageArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListColumnLineageResult>("tencentcloud:Wedata/getListColumnLineage:getListColumnLineage", args ?? new GetListColumnLineageArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
         /// </summary>
         public static Output<GetListColumnLineageResult> Invoke(GetListColumnLineageInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListColumnLineageResult>("tencentcloud:Wedata/getListColumnLineage:getListColumnLineage", args ?? new GetListColumnLineageInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
         /// </summary>
         public static Output<GetListColumnLineageResult> Invoke(GetListColumnLineageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListColumnLineageResult>("tencentcloud:Wedata/getListColumnLineage:getListColumnLineage", args ?? new GetListColumnLineageInvokeArgs(), options.WithDefaults());

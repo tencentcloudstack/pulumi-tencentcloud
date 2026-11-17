@@ -167,6 +167,12 @@ def get_attack_log_histogram(domain: Optional[_builtins.str] = None,
         query_string="method:GET")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
+
 
     :param _builtins.str domain: Domain for query, all domain use all.
     :param _builtins.str end_time: End time.
@@ -227,6 +233,12 @@ def get_attack_log_histogram_output(domain: pulumi.Input[Optional[_builtins.str]
         end_time="2023-09-29 00:00:00",
         query_string="method:GET")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
 
 
     :param _builtins.str domain: Domain for query, all domain use all.

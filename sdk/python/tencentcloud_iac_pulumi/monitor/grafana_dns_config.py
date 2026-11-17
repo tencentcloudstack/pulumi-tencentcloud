@@ -125,6 +125,18 @@ class GrafanaDnsConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateDNSConfig](https://www.tencentcloud.com/document/api/248/49746)
+        * Read: [DescribeDNSConfig](https://www.tencentcloud.com/document/api/248/49762)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateDNSConfig](https://www.tencentcloud.com/document/api/248/49746)
+
         ## Import
 
         monitor grafana_dns_config can be imported using the id, e.g.
@@ -162,6 +174,18 @@ class GrafanaDnsConfig(pulumi.CustomResource):
                 "10.1.2.3",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateDNSConfig](https://www.tencentcloud.com/document/api/248/49746)
+        * Read: [DescribeDNSConfig](https://www.tencentcloud.com/document/api/248/49762)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateDNSConfig](https://www.tencentcloud.com/document/api/248/49746)
 
         ## Import
 

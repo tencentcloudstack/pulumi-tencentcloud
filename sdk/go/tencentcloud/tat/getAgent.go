@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
 func GetAgent(ctx *pulumi.Context, args *GetAgentArgs, opts ...pulumi.InvokeOption) (*GetAgentResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAgentResult

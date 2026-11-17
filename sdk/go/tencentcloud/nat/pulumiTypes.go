@@ -153,13 +153,13 @@ type GetGatewaySnatsSnatList struct {
 	Description string `pulumi:"description"`
 	// Instance ID.
 	InstanceId *string `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr *string `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId string `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs []string `pulumi:"publicIpAddrs"`
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType string `pulumi:"resourceType"`
 	// SNAT rule ID.
 	SnatId string `pulumi:"snatId"`
@@ -187,13 +187,13 @@ type GetGatewaySnatsSnatListArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
 	// Instance ID.
 	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 	InstancePrivateIpAddr pulumi.StringPtrInput `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringInput `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs pulumi.StringArrayInput `pulumi:"publicIpAddrs"`
-	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 	ResourceType pulumi.StringInput `pulumi:"resourceType"`
 	// SNAT rule ID.
 	SnatId pulumi.StringInput `pulumi:"snatId"`
@@ -269,7 +269,7 @@ func (o GetGatewaySnatsSnatListOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
 func (o GetGatewaySnatsSnatListOutput) InstancePrivateIpAddr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) *string { return v.InstancePrivateIpAddr }).(pulumi.StringPtrOutput)
 }
@@ -284,7 +284,7 @@ func (o GetGatewaySnatsSnatListOutput) PublicIpAddrs() pulumi.StringArrayOutput 
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) []string { return v.PublicIpAddrs }).(pulumi.StringArrayOutput)
 }
 
-// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
 func (o GetGatewaySnatsSnatListOutput) ResourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) string { return v.ResourceType }).(pulumi.StringOutput)
 }

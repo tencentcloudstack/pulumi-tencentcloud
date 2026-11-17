@@ -175,6 +175,30 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreatePublishSubscribe](https://www.tencentcloud.com/document/api/238/72748)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+//
+// * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+// * Update:
+//   - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+//   - [DeletePublishSubscribe](https://www.tencentcloud.com/document/api/238/72747)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+//   - [ModifyPublishSubscribeName](https://www.tencentcloud.com/document/api/238/72744)
+//
+// * Delete:
+//   - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+//   - [DeletePublishSubscribe](https://www.tencentcloud.com/document/api/238/72747)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+//
 // ## Import
 //
 // SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.

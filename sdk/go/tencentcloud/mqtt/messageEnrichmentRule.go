@@ -60,6 +60,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateMessageEnrichmentRule](https://www.tencentcloud.com/document/api/1294/76517)
+// * Read: [DescribeMessageEnrichmentRules](https://www.tencentcloud.com/document/api/1294/76515)
+// * Update: [ModifyMessageEnrichmentRule](https://www.tencentcloud.com/document/api/1294/76514)
+// * Delete: [DeleteMessageEnrichmentRule](https://www.tencentcloud.com/document/api/1294/76516)
+//
 // ## Import
 //
 // MQTT message enrichment rule can be imported using the instanceId#ruleId, e.g.

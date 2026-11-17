@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
 func GetClusterAdminRole(ctx *pulumi.Context, args *GetClusterAdminRoleArgs, opts ...pulumi.InvokeOption) (*GetClusterAdminRoleResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterAdminRoleResult

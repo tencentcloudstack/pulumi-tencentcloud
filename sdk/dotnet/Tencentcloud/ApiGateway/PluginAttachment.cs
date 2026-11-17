@@ -110,6 +110,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AttachPlugin](https://www.tencentcloud.com/search/?wd=AttachPlugin&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePluginApis](https://www.tencentcloud.com/search/?wd=DescribePluginApis&amp;type=document&amp;lang=en)
+    /// * Delete: [DetachPlugin](https://www.tencentcloud.com/search/?wd=DetachPlugin&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// apiGateway PluginAttachment can be imported using the id, e.g.

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     namespace: fooNamespace.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
  */
 export function getNamespaces(args?: GetNamespacesArgs, opts?: pulumi.InvokeOptions): Promise<GetNamespacesResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetNamespacesResult {
  *     namespace: fooNamespace.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
  */
 export function getNamespacesOutput(args?: GetNamespacesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNamespacesResult> {
     args = args || {};

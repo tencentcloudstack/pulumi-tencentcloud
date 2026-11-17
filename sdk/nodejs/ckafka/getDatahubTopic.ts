@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const datahubTopic = tencentcloud.ckafka.getDatahubTopic({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
  */
 export function getDatahubTopic(args?: GetDatahubTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubTopicResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetDatahubTopicResult {
  *
  * const datahubTopic = tencentcloud.ckafka.getDatahubTopic({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
  */
 export function getDatahubTopicOutput(args?: GetDatahubTopicOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatahubTopicResult> {
     args = args || {};

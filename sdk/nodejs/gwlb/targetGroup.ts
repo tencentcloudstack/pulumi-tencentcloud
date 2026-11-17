@@ -35,6 +35,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateTargetGroup](https://www.tencentcloud.com/document/api/1245/66066)
+ * * Read:
+ *   - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/1245/66062)
+ *   - [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/1245/66061)
+ * * Update: [ModifyTargetGroupAttribute](https://www.tencentcloud.com/document/api/1245/66058)
+ * * Delete: [DeleteTargetGroups](https://www.tencentcloud.com/document/api/1245/66065)
+ *
  * ## Import
  *
  * gwlb gwlbTargetGroup can be imported using the id, e.g.

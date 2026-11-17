@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
 func GetAddressQuota(ctx *pulumi.Context, args *GetAddressQuotaArgs, opts ...pulumi.InvokeOption) (*GetAddressQuotaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAddressQuotaResult

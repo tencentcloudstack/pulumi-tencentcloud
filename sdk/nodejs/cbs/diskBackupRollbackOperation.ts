@@ -18,6 +18,15 @@ import * as utilities from "../utilities";
  *     diskId: "disk-xxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [ApplyDiskBackup](https://www.tencentcloud.com/document/api/362/50790)
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
  */
 export class DiskBackupRollbackOperation extends pulumi.CustomResource {
     /**

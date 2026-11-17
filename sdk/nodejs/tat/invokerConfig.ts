@@ -19,6 +19,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+ *   - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+ * * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+ * * Update:
+ *   - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+ *   - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+ *
  * ## Import
  *
  * tat invokerConfig can be imported using the id, e.g.

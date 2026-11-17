@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     noticeIds: [],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
  */
 export function getAlarmNotices(args?: GetAlarmNoticesArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmNoticesResult> {
     args = args || {};
@@ -131,6 +137,12 @@ export interface GetAlarmNoticesResult {
  *     noticeIds: [],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
  */
 export function getAlarmNoticesOutput(args?: GetAlarmNoticesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmNoticesResult> {
     args = args || {};

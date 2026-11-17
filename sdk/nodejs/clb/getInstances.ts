@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     input: example.clbLists?.[0]?.exclusiveCluster,
  * })).then(invoke => invoke.result);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -123,6 +129,12 @@ export interface GetInstancesResult {
  *     input: example.clbLists?.[0]?.exclusiveCluster,
  * })).then(invoke => invoke.result);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

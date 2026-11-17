@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPlatformProductsResult> InvokeAsync(GetPlatformProductsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPlatformProductsResult> Invoke(GetPlatformProductsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPlatformProductsResult> Invoke(GetPlatformProductsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlatformProductsResult>("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args ?? new GetPlatformProductsInvokeArgs(), options.WithDefaults());

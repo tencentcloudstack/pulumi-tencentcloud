@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApiGroupResult> InvokeAsync(GetApiGroupArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiGroupResult> Invoke(GetApiGroupInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiGroupResult> Invoke(GetApiGroupInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiGroupResult>("tencentcloud:Tsf/getApiGroup:getApiGroup", args ?? new GetApiGroupInvokeArgs(), options.WithDefaults());

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     projectId: "1859317240494305280",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
  */
 export function getOpsAlarmRules(args: GetOpsAlarmRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetOpsAlarmRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -136,6 +142,12 @@ export interface GetOpsAlarmRulesResult {
  *     projectId: "1859317240494305280",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
  */
 export function getOpsAlarmRulesOutput(args: GetOpsAlarmRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOpsAlarmRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

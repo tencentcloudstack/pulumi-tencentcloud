@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     filterSlave: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
  */
 export function getInstanceShards(args: GetInstanceShardsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceShardsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetInstanceShardsResult {
  *     filterSlave: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
  */
 export function getInstanceShardsOutput(args: GetInstanceShardsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceShardsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

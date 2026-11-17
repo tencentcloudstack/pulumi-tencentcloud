@@ -26,6 +26,17 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [BindSubDomain](https://www.tencentcloud.com/search/?wd=BindSubDomain&type=document&lang=en)
+ * * Read:
+ *   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+ *   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
+ * * Update: [ModifySubDomain](https://www.tencentcloud.com/search/?wd=ModifySubDomain&type=document&lang=en)
+ * * Delete: [UnBindSubDomain](https://www.tencentcloud.com/search/?wd=UnBindSubDomain&type=document&lang=en)
  */
 export class CustomDomain extends pulumi.CustomResource {
     /**

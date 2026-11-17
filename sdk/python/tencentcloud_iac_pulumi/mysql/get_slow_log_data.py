@@ -184,6 +184,12 @@ def get_slow_log_data(data_bases: Optional[Sequence[_builtins.str]] = None,
         inst_type="slave")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogData](https://www.tencentcloud.com/document/api/236/35668)
+
 
     :param Sequence[_builtins.str] data_bases: List of databases accessed.
     :param _builtins.int end_time: End timestamp. For example 1585142640.
@@ -253,6 +259,12 @@ def get_slow_log_data_output(data_bases: pulumi.Input[Optional[Optional[Sequence
         order_by="ASC",
         inst_type="slave")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogData](https://www.tencentcloud.com/document/api/236/35668)
 
 
     :param Sequence[_builtins.str] data_bases: List of databases accessed.

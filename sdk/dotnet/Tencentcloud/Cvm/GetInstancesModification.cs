@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesModification](https://www.tencentcloud.com/search/?wd=DescribeInstancesModification&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstancesModificationResult> InvokeAsync(GetInstancesModificationArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesModification](https://www.tencentcloud.com/search/?wd=DescribeInstancesModification&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancesModificationResult> Invoke(GetInstancesModificationInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesModification](https://www.tencentcloud.com/search/?wd=DescribeInstancesModification&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancesModificationResult> Invoke(GetInstancesModificationInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationInvokeArgs(), options.WithDefaults());

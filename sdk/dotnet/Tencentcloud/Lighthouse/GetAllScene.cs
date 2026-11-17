@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAllScenes](https://www.tencentcloud.com/document/api/1103/52167)
         /// </summary>
         public static Task<GetAllSceneResult> InvokeAsync(GetAllSceneArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAllScenes](https://www.tencentcloud.com/document/api/1103/52167)
         /// </summary>
         public static Output<GetAllSceneResult> Invoke(GetAllSceneInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAllScenes](https://www.tencentcloud.com/document/api/1103/52167)
         /// </summary>
         public static Output<GetAllSceneResult> Invoke(GetAllSceneInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAllSceneResult>("tencentcloud:Lighthouse/getAllScene:getAllScene", args ?? new GetAllSceneInvokeArgs(), options.WithDefaults());

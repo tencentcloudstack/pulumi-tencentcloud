@@ -74,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
         /// </summary>
         public static Task<GetHttpRulesResult> InvokeAsync(GetHttpRulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesArgs(), options.WithDefaults());
@@ -140,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
         /// </summary>
         public static Output<GetHttpRulesResult> Invoke(GetHttpRulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesInvokeArgs(), options.WithDefaults());
@@ -206,6 +218,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
         /// </summary>
         public static Output<GetHttpRulesResult> Invoke(GetHttpRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesInvokeArgs(), options.WithDefaults());

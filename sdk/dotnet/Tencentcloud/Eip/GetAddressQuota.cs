@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
         /// </summary>
         public static Task<GetAddressQuotaResult> InvokeAsync(GetAddressQuotaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
         /// </summary>
         public static Output<GetAddressQuotaResult> Invoke(GetAddressQuotaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
         /// </summary>
         public static Output<GetAddressQuotaResult> Invoke(GetAddressQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAddressQuotaResult>("tencentcloud:Eip/getAddressQuota:getAddressQuota", args ?? new GetAddressQuotaInvokeArgs(), options.WithDefaults());

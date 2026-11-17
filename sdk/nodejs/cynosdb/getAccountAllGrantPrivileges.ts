@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountAllGrantPrivileges](https://www.tencentcloud.com/search/?wd=DescribeAccountAllGrantPrivileges&type=document&lang=en)
  */
 export function getAccountAllGrantPrivileges(args: GetAccountAllGrantPrivilegesArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountAllGrantPrivilegesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetAccountAllGrantPrivilegesResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountAllGrantPrivileges](https://www.tencentcloud.com/search/?wd=DescribeAccountAllGrantPrivileges&type=document&lang=en)
  */
 export function getAccountAllGrantPrivilegesOutput(args: GetAccountAllGrantPrivilegesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountAllGrantPrivilegesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

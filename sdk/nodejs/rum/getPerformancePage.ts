@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     level: "1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
  */
 export function getPerformancePage(args: GetPerformancePageArgs, opts?: pulumi.InvokeOptions): Promise<GetPerformancePageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -208,6 +214,12 @@ export interface GetPerformancePageResult {
  *     level: "1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
  */
 export function getPerformancePageOutput(args: GetPerformancePageOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPerformancePageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

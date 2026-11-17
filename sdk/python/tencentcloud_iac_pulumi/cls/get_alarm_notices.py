@@ -127,6 +127,12 @@ def get_alarm_notices(filters: Optional[Sequence[Union['GetAlarmNoticesFilterArg
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
+
 
     :param Sequence[Union['GetAlarmNoticesFilterArgs', 'GetAlarmNoticesFilterArgsDict']] filters: Filter conditions. Maximum 10 filters, each with up to 5 values. Multiple values within the same filter use OR logic, multiple filters use AND logic.
     :param _builtins.bool has_alarm_shield_count: Whether to query alarm shield count statistics. Default is false.
@@ -180,6 +186,12 @@ def get_alarm_notices_output(filters: pulumi.Input[Optional[Optional[Sequence[Un
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
 
 
     :param Sequence[Union['GetAlarmNoticesFilterArgs', 'GetAlarmNoticesFilterArgsDict']] filters: Filter conditions. Maximum 10 filters, each with up to 5 values. Multiple values within the same filter use OR logic, multiple filters use AND logic.

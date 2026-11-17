@@ -204,6 +204,15 @@ class IncreBackupMigration(pulumi.CustomResource):
             is_recovery="YES")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateIncrementalMigration](https://www.tencentcloud.com/document/api/238/39842)
+        * Read: [DescribeIncrementalMigration](https://www.tencentcloud.com/document/api/238/39836)
+        * Update: [ModifyIncrementalMigration](https://www.tencentcloud.com/document/api/238/39833)
+        * Delete: [DeleteIncrementalMigration](https://www.tencentcloud.com/document/api/238/39840)
+
         ## Import
 
         sqlserver incre_backup_migration can be imported using the id, e.g.
@@ -241,6 +250,15 @@ class IncreBackupMigration(pulumi.CustomResource):
             backup_files=[],
             is_recovery="YES")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateIncrementalMigration](https://www.tencentcloud.com/document/api/238/39842)
+        * Read: [DescribeIncrementalMigration](https://www.tencentcloud.com/document/api/238/39836)
+        * Update: [ModifyIncrementalMigration](https://www.tencentcloud.com/document/api/238/39833)
+        * Delete: [DeleteIncrementalMigration](https://www.tencentcloud.com/document/api/238/39840)
 
         ## Import
 

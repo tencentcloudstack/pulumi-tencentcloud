@@ -86,6 +86,12 @@ def get_regions(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_regions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/238/32111)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_regions_output(result_output_file: pulumi.Input[Optional[Optional[_built
 
     example = tencentcloud.sqlserver.get_regions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/238/32111)
 
 
     :param _builtins.str result_output_file: Used to save results.

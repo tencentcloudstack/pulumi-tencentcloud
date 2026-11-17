@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
         /// </summary>
         public static Task<GetGatewaySnatsResult> InvokeAsync(GetGatewaySnatsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
         /// </summary>
         public static Output<GetGatewaySnatsResult> Invoke(GetGatewaySnatsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
         /// </summary>
         public static Output<GetGatewaySnatsResult> Invoke(GetGatewaySnatsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsInvokeArgs(), options.WithDefaults());

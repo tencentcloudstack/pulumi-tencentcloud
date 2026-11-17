@@ -119,6 +119,12 @@ class ExecuteFunctionOperation(pulumi.CustomResource):
             function_arg="arg1")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExecuteFunction](https://www.tencentcloud.com/document/api/1041/38515)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class ExecuteFunctionOperation(pulumi.CustomResource):
             function_name="ExampleFunc",
             function_arg="arg1")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExecuteFunction](https://www.tencentcloud.com/document/api/1041/38515)
 
 
         :param str resource_name: The name of the resource.

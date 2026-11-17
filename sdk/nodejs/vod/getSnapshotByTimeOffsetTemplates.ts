@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     definition: fooSnapshotByTimeOffsetTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
  */
 export function getSnapshotByTimeOffsetTemplates(args?: GetSnapshotByTimeOffsetTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotByTimeOffsetTemplatesResult> {
     args = args || {};
@@ -109,6 +115,12 @@ export interface GetSnapshotByTimeOffsetTemplatesResult {
  *     definition: fooSnapshotByTimeOffsetTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
  */
 export function getSnapshotByTimeOffsetTemplatesOutput(args?: GetSnapshotByTimeOffsetTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSnapshotByTimeOffsetTemplatesResult> {
     args = args || {};

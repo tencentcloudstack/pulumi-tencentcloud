@@ -137,6 +137,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateBasicDBInstances](https://www.tencentcloud.com/document/api/238/66344)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+    ///   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+    ///   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+    ///   - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72731)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72728)
+    ///   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+    ///   - [ModifyDBInstanceProject](https://www.tencentcloud.com/document/api/238/32103)
+    ///   - [ModifyDBInstanceRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceRenewFlag&amp;type=document&amp;lang=en)
+    ///   - [ModifyMaintenanceSpan](https://www.tencentcloud.com/document/api/238/72749)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+    /// * Delete:
+    ///   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+    /// 
     /// ## Import
     /// 
     /// SQL Server basic instance can be imported using the id, e.g.
@@ -207,6 +238,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Output("engineVersion")]
         public Output<string?> EngineVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance ID.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
         /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
@@ -297,6 +334,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Output("timeZone")]
         public Output<string> TimeZone { get; private set; } = null!;
+
+        /// <summary>
+        /// Unique UID of the instance.
+        /// </summary>
+        [Output("uid")]
+        public Output<string> Uid { get; private set; } = null!;
 
         /// <summary>
         /// IP for private access.
@@ -600,6 +643,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
+        /// Instance ID.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
         /// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         /// </summary>
         [Input("machineType")]
@@ -706,6 +755,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("timeZone")]
         public Input<string>? TimeZone { get; set; }
+
+        /// <summary>
+        /// Unique UID of the instance.
+        /// </summary>
+        [Input("uid")]
+        public Input<string>? Uid { get; set; }
 
         /// <summary>
         /// IP for private access.

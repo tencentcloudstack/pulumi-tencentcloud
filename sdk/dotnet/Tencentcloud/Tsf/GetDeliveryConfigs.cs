@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDeliveryConfigsResult> InvokeAsync(GetDeliveryConfigsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDeliveryConfigsResult> Invoke(GetDeliveryConfigsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDeliveryConfigsResult> Invoke(GetDeliveryConfigsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsInvokeArgs(), options.WithDefaults());

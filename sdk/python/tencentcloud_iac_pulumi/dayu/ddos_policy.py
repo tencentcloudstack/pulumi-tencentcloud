@@ -439,6 +439,19 @@ class DdosPolicy(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDDoSPolicy](https://www.tencentcloud.com/search/?wd=CreateDDoSPolicy&type=document&lang=en)
+        * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+        * Update:
+          - [ModifyDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyDDoSPolicy&type=document&lang=en)
+          - [ModifyDDoSPolicyName](https://www.tencentcloud.com/search/?wd=ModifyDDoSPolicyName&type=document&lang=en)
+        * Delete:
+          - [DeleteDDoSPolicy](https://www.tencentcloud.com/search/?wd=DeleteDDoSPolicy&type=document&lang=en)
+          - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -525,6 +538,19 @@ class DdosPolicy(pulumi.CustomResource):
                 "open_switch": True,
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDDoSPolicy](https://www.tencentcloud.com/search/?wd=CreateDDoSPolicy&type=document&lang=en)
+        * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+        * Update:
+          - [ModifyDDoSPolicy](https://www.tencentcloud.com/search/?wd=ModifyDDoSPolicy&type=document&lang=en)
+          - [ModifyDDoSPolicyName](https://www.tencentcloud.com/search/?wd=ModifyDDoSPolicyName&type=document&lang=en)
+        * Delete:
+          - [DeleteDDoSPolicy](https://www.tencentcloud.com/search/?wd=DeleteDDoSPolicy&type=document&lang=en)
+          - [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

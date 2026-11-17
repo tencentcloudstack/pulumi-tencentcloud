@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&type=document&lang=en)
  */
 export function getPublishers(args: GetPublishersArgs, opts?: pulumi.InvokeOptions): Promise<GetPublishersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -114,6 +120,12 @@ export interface GetPublishersResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&type=document&lang=en)
  */
 export function getPublishersOutput(args: GetPublishersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublishersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

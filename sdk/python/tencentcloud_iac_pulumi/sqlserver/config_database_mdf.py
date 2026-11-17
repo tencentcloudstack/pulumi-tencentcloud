@@ -160,6 +160,18 @@ class ConfigDatabaseMdf(pulumi.CustomResource):
             instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseMdf](https://www.tencentcloud.com/document/api/238/41638)
+        * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseMdf](https://www.tencentcloud.com/document/api/238/41638)
+
         ## Import
 
         sqlserver config_database_mdf can be imported using the id, e.g.
@@ -234,6 +246,18 @@ class ConfigDatabaseMdf(pulumi.CustomResource):
             db_name=example_db.name,
             instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseMdf](https://www.tencentcloud.com/document/api/238/41638)
+        * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseMdf](https://www.tencentcloud.com/document/api/238/41638)
 
         ## Import
 

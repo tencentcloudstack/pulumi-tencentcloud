@@ -153,6 +153,12 @@ def get_project(all_page: Optional[_builtins.bool] = None,
         module_collection="sys_common_user")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectList](https://www.tencentcloud.com/document/api/1270/72624)
+
 
     :param _builtins.bool all_page: Whether to display all, if true, ignore paging.
     :param _builtins.str keyword: Retrieve fuzzy fields.
@@ -199,6 +205,12 @@ def get_project_output(all_page: pulumi.Input[Optional[Optional[_builtins.bool]]
         all_page=True,
         module_collection="sys_common_user")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectList](https://www.tencentcloud.com/document/api/1270/72624)
 
 
     :param _builtins.bool all_page: Whether to display all, if true, ignore paging.

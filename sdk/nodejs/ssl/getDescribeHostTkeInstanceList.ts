@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     certificateId: "8u8DII0l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostTkeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostTkeInstanceList&type=document&lang=en)
  */
 export function getDescribeHostTkeInstanceList(args: GetDescribeHostTkeInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostTkeInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetDescribeHostTkeInstanceListResult {
  *     certificateId: "8u8DII0l",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostTkeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostTkeInstanceList&type=document&lang=en)
  */
 export function getDescribeHostTkeInstanceListOutput(args: GetDescribeHostTkeInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostTkeInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

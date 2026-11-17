@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSecurityGroupLimits](https://www.tencentcloud.com/search/?wd=DescribeSecurityGroupLimits&type=document&lang=en)
 func GetSecurityGroupLimits(ctx *pulumi.Context, args *GetSecurityGroupLimitsArgs, opts ...pulumi.InvokeOption) (*GetSecurityGroupLimitsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityGroupLimitsResult

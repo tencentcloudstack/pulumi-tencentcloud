@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
 func GetDescribeDataEnginePythonSparkImages(ctx *pulumi.Context, args *GetDescribeDataEnginePythonSparkImagesArgs, opts ...pulumi.InvokeOption) (*GetDescribeDataEnginePythonSparkImagesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeDataEnginePythonSparkImagesResult

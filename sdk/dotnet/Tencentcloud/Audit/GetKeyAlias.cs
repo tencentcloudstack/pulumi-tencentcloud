@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetKeyAliasResult> InvokeAsync(GetKeyAliasArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetKeyAliasResult> Invoke(GetKeyAliasInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetKeyAliasResult> Invoke(GetKeyAliasInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetKeyAliasResult>("tencentcloud:Audit/getKeyAlias:getKeyAlias", args ?? new GetKeyAliasInvokeArgs(), options.WithDefaults());

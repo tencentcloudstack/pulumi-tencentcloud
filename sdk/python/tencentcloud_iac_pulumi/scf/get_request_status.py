@@ -144,6 +144,12 @@ def get_request_status(end_time: Optional[_builtins.str] = None,
         namespace="default")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
+
 
     :param _builtins.str end_time: End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.
     :param _builtins.str function_name: Function name.
@@ -191,6 +197,12 @@ def get_request_status_output(end_time: pulumi.Input[Optional[Optional[_builtins
         function_request_id="9de9405a-e33a-498d-bb59-e80b7bed1191",
         namespace="default")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetRequestStatus](https://www.tencentcloud.com/document/api/583/44481)
 
 
     :param _builtins.str end_time: End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.

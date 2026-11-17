@@ -132,6 +132,12 @@ def get_black_email_address(email_address: Optional[_builtins.str] = None,
         task_id="7000")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
+
 
     :param _builtins.str email_address: You can specify an email address to query.
     :param _builtins.str end_date: End date in the format of `YYYY-MM-DD`.
@@ -176,6 +182,12 @@ def get_black_email_address_output(email_address: pulumi.Input[Optional[Optional
         email_address="xxx@mail.qcloud.com",
         task_id="7000")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
 
 
     :param _builtins.str email_address: You can specify an email address to query.

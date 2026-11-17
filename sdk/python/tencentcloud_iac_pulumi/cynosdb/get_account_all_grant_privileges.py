@@ -147,6 +147,12 @@ def get_account_all_grant_privileges(account: Optional[Union['GetAccountAllGrant
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountAllGrantPrivileges](https://www.tencentcloud.com/search/?wd=DescribeAccountAllGrantPrivileges&type=document&lang=en)
+
 
     :param Union['GetAccountAllGrantPrivilegesAccountArgs', 'GetAccountAllGrantPrivilegesAccountArgsDict'] account: account information.
     :param _builtins.str cluster_id: Cluster ID.
@@ -187,6 +193,12 @@ def get_account_all_grant_privileges_output(account: pulumi.Input[Optional[Union
             "host": "%",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountAllGrantPrivileges](https://www.tencentcloud.com/search/?wd=DescribeAccountAllGrantPrivileges&type=document&lang=en)
 
 
     :param Union['GetAccountAllGrantPrivilegesAccountArgs', 'GetAccountAllGrantPrivilegesAccountArgsDict'] account: account information.

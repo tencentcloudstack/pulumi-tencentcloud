@@ -586,6 +586,29 @@ class Topic(pulumi.CustomResource):
             max_message_bytes=4096)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateTopic](https://www.tencentcloud.com/document/api/597/35347)
+          - [CreateTopicIpWhiteList](https://www.tencentcloud.com/document/api/597/35346)
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+        * Read:
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+        * Update:
+          - [CreatePartition](https://www.tencentcloud.com/document/api/597/35348)
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+          - [ModifyTopicAttributes](https://www.tencentcloud.com/document/api/597/35340)
+        * Delete:
+          - [DeleteTopic](https://www.tencentcloud.com/document/api/597/35345)
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+
         ## Import
 
         ckafka topic can be imported using the instance_id#topic_name, e.g.
@@ -639,6 +662,29 @@ class Topic(pulumi.CustomResource):
             retention=60000,
             max_message_bytes=4096)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateTopic](https://www.tencentcloud.com/document/api/597/35347)
+          - [CreateTopicIpWhiteList](https://www.tencentcloud.com/document/api/597/35346)
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+        * Read:
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+        * Update:
+          - [CreatePartition](https://www.tencentcloud.com/document/api/597/35348)
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+          - [ModifyTopicAttributes](https://www.tencentcloud.com/document/api/597/35340)
+        * Delete:
+          - [DeleteTopic](https://www.tencentcloud.com/document/api/597/35345)
+          - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+          - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
 
         ## Import
 

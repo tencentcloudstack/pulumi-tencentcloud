@@ -7,9 +7,9 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a teo web security template
+ * Provides a resource to create a TEO web security template
  *
- * > **NOTE:** The current resources do not support managed_rule_groups.
+ * > **NOTE:** The current resources do not support `managedRuleGroups`.
  *
  * ## Example Usage
  *
@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const webSecurityTemplate = new tencentcloud.teo.WebSecurityTemplate("web_security_template", {
+ * const example = new tencentcloud.teo.WebSecurityTemplate("example", {
  *     templateName: "tf_example",
  *     zoneId: "zone-3fkff38fyw8s",
  *     securityPolicy: {
@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  *                     botManagementActionOverrides: [{
  *                         ids: ["9126905504"],
  *                         action: {
- *                             name: "Deny",
+ *                             name: "Allow",
  *                         },
  *                     }],
  *                 },
@@ -120,6 +120,17 @@ import * as utilities from "../utilities";
  *                         },
  *                     }],
  *                 }],
+ *             },
+ *         },
+ *         botManagementLite: {
+ *             captchaPageChallenge: {
+ *                 enabled: "on",
+ *             },
+ *             aiCrawlerDetection: {
+ *                 enabled: "on",
+ *                 action: {
+ *                     name: "Deny",
+ *                 },
  *             },
  *         },
  *         customRules: {
@@ -252,12 +263,23 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71948)
+ * * Read:
+ *   - [DescribeWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71946)
+ *   - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+ * * Update: [ModifyWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71944)
+ * * Delete: [DeleteWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71947)
+ *
  * ## Import
  *
- * teo web security template can be imported using the id, e.g.
+ * TEO web security template can be imported using the zoneId#templateId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-rpccs7c6
+ * $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-3u86ilp39yyn
  * ```
  */
 export class WebSecurityTemplate extends pulumi.CustomResource {
@@ -293,6 +315,10 @@ export class WebSecurityTemplate extends pulumi.CustomResource {
      */
     declare public readonly securityPolicy: pulumi.Output<outputs.Teo.WebSecurityTemplateSecurityPolicy>;
     /**
+     * Template ID.
+     */
+    declare public /*out*/ readonly templateId: pulumi.Output<string>;
+    /**
      * Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
      */
     declare public readonly templateName: pulumi.Output<string>;
@@ -315,6 +341,7 @@ export class WebSecurityTemplate extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as WebSecurityTemplateState | undefined;
             resourceInputs["securityPolicy"] = state?.securityPolicy;
+            resourceInputs["templateId"] = state?.templateId;
             resourceInputs["templateName"] = state?.templateName;
             resourceInputs["zoneId"] = state?.zoneId;
         } else {
@@ -328,6 +355,7 @@ export class WebSecurityTemplate extends pulumi.CustomResource {
             resourceInputs["securityPolicy"] = args?.securityPolicy;
             resourceInputs["templateName"] = args?.templateName;
             resourceInputs["zoneId"] = args?.zoneId;
+            resourceInputs["templateId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(WebSecurityTemplate.__pulumiType, name, resourceInputs, opts);
@@ -342,6 +370,10 @@ export interface WebSecurityTemplateState {
      * Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
      */
     securityPolicy?: pulumi.Input<inputs.Teo.WebSecurityTemplateSecurityPolicy | undefined>;
+    /**
+     * Template ID.
+     */
+    templateId?: pulumi.Input<string | undefined>;
     /**
      * Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
      */

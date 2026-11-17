@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
         /// </summary>
         public static Task<GetRuleTemplatesResult> InvokeAsync(GetRuleTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
         /// </summary>
         public static Output<GetRuleTemplatesResult> Invoke(GetRuleTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
         /// </summary>
         public static Output<GetRuleTemplatesResult> Invoke(GetRuleTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRuleTemplatesResult>("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args ?? new GetRuleTemplatesInvokeArgs(), options.WithDefaults());

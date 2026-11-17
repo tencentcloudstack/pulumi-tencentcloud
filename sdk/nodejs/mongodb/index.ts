@@ -110,6 +110,11 @@ export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
 export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
 utilities.lazyLoad(exports, ["ReadonlyInstance"], () => require("./readonlyInstance"));
 
+export { ScaleUpDbInstanceCpuArgs, ScaleUpDbInstanceCpuState } from "./scaleUpDbInstanceCpu";
+export type ScaleUpDbInstanceCpu = import("./scaleUpDbInstanceCpu").ScaleUpDbInstanceCpu;
+export const ScaleUpDbInstanceCpu: typeof import("./scaleUpDbInstanceCpu").ScaleUpDbInstanceCpu = null as any;
+utilities.lazyLoad(exports, ["ScaleUpDbInstanceCpu"], () => require("./scaleUpDbInstanceCpu"));
+
 export { ShardingInstanceArgs, ShardingInstanceState } from "./shardingInstance";
 export type ShardingInstance = import("./shardingInstance").ShardingInstance;
 export const ShardingInstance: typeof import("./shardingInstance").ShardingInstance = null as any;
@@ -149,6 +154,8 @@ const _module = {
                 return new InstanceTransparentDataEncryption(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance":
                 return new ReadonlyInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Mongodb/scaleUpDbInstanceCpu:ScaleUpDbInstanceCpu":
+                return new ScaleUpDbInstanceCpu(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/shardingInstance:ShardingInstance":
                 return new ShardingInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/standbyInstance:StandbyInstance":
@@ -170,5 +177,6 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceSrvConnec
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceSsl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceTransparentDataEncryption", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/readonlyInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/scaleUpDbInstanceCpu", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/shardingInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/standbyInstance", _module)

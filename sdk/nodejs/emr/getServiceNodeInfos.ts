@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     dataNodeMaintenanceId: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
  */
 export function getServiceNodeInfos(args: GetServiceNodeInfosArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceNodeInfosResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -171,6 +177,12 @@ export interface GetServiceNodeInfosResult {
  *     dataNodeMaintenanceId: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceNodeInfos](https://www.tencentcloud.com/document/api/1026/73239)
  */
 export function getServiceNodeInfosOutput(args: GetServiceNodeInfosOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetServiceNodeInfosResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

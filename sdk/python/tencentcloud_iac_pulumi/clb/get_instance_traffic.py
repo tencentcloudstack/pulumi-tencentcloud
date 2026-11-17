@@ -96,6 +96,12 @@ def get_instance_traffic(load_balancer_region: Optional[_builtins.str] = None,
     instance_traffic = tencentcloud.clb.get_instance_traffic(load_balancer_region="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
+
 
     :param _builtins.str load_balancer_region: CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_traffic_output(load_balancer_region: pulumi.Input[Optional[Opti
 
     instance_traffic = tencentcloud.clb.get_instance_traffic(load_balancer_region="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
 
 
     :param _builtins.str load_balancer_region: CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.

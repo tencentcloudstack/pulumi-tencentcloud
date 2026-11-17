@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
 type ModifyUserTypOperation struct {
 	pulumi.CustomResourceState
 

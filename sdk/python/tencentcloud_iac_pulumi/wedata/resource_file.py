@@ -337,6 +337,15 @@ class ResourceFile(pulumi.CustomResource):
         )
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateResourceFile](https://www.tencentcloud.com/document/api/1174/73887)
+        * Read: [GetResourceFile](https://www.tencentcloud.com/document/api/1174/73877)
+        * Update: [UpdateResourceFile](https://www.tencentcloud.com/document/api/1174/73863)
+        * Delete: [DeleteResourceFile](https://www.tencentcloud.com/document/api/1174/61162)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -386,6 +395,15 @@ class ResourceFile(pulumi.CustomResource):
         ).apply(lambda resolved_outputs: f"/datastudio/resource/2905622749543821312/{resolved_outputs['parent_folder_path']}{resolved_outputs['folder_name']}/test")
         )
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateResourceFile](https://www.tencentcloud.com/document/api/1174/73887)
+        * Read: [GetResourceFile](https://www.tencentcloud.com/document/api/1174/73877)
+        * Update: [UpdateResourceFile](https://www.tencentcloud.com/document/api/1174/73863)
+        * Delete: [DeleteResourceFile](https://www.tencentcloud.com/document/api/1174/61162)
 
 
         :param str resource_name: The name of the resource.

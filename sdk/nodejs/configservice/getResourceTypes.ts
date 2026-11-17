@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.config.getResourceTypes({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
  */
 export function getResourceTypes(args?: GetResourceTypesArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceTypesResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetResourceTypesResult {
  *
  * const example = tencentcloud.config.getResourceTypes({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
  */
 export function getResourceTypesOutput(args?: GetResourceTypesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourceTypesResult> {
     args = args || {};

@@ -88,6 +88,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15852)
+    /// * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+    /// * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15851)
+    /// 
     /// ## Import
     /// 
     /// mysql SecurityGroupsAttachment can be imported using the id, e.g.

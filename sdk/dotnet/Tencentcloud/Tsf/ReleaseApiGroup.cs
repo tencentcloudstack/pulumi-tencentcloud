@@ -30,6 +30,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ReleaseApiGroup](https://www.tencentcloud.com/search/?wd=ReleaseApiGroup&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeApiGroup](https://www.tencentcloud.com/search/?wd=DescribeApiGroup&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/releaseApiGroup:ReleaseApiGroup")]
     public partial class ReleaseApiGroup : global::Pulumi.CustomResource

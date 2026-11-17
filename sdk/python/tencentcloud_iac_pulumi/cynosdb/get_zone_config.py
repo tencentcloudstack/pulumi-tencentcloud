@@ -86,6 +86,12 @@ def get_zone_config(result_output_file: Optional[_builtins.str] = None,
     foo = tencentcloud.cynosdb.get_zone_config()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceSpecs](https://www.tencentcloud.com/document/api/1098/40748)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_zone_config_output(result_output_file: pulumi.Input[Optional[Optional[_b
 
     foo = tencentcloud.cynosdb.get_zone_config()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceSpecs](https://www.tencentcloud.com/document/api/1098/40748)
 
 
     :param _builtins.str result_output_file: Used to save results.

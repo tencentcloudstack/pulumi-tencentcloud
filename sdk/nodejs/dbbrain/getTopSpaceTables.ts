@@ -36,6 +36,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
  */
 export function getTopSpaceTables(args: GetTopSpaceTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetTopSpaceTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -126,6 +132,12 @@ export interface GetTopSpaceTablesResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
  */
 export function getTopSpaceTablesOutput(args: GetTopSpaceTablesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTopSpaceTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

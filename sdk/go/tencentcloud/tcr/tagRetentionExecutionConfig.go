@@ -81,6 +81,19 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+//   - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+//
+// * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+// * Update:
+//   - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+//   - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
 type TagRetentionExecutionConfig struct {
 	pulumi.CustomResourceState
 

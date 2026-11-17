@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceEnvironmentList](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetServiceEnvironmentListResult> InvokeAsync(GetServiceEnvironmentListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceEnvironmentList](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetServiceEnvironmentListResult> Invoke(GetServiceEnvironmentListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceEnvironmentList](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetServiceEnvironmentListResult> Invoke(GetServiceEnvironmentListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceEnvironmentListResult>("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args ?? new GetServiceEnvironmentListInvokeArgs(), options.WithDefaults());

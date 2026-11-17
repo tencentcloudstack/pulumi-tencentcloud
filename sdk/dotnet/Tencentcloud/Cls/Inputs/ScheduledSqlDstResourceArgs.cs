@@ -19,11 +19,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         [Input("bizType")]
         public Input<int>? BizType { get; set; }
 
+        [Input("customMetricLabels")]
+        private InputList<Inputs.ScheduledSqlDstResourceCustomMetricLabelArgs>? _customMetricLabels;
+
+        /// <summary>
+        /// custom metric labels, used to add static dimensions to metrics.
+        /// </summary>
+        public InputList<Inputs.ScheduledSqlDstResourceCustomMetricLabelArgs> CustomMetricLabels
+        {
+            get => _customMetricLabels ?? (_customMetricLabels = new InputList<Inputs.ScheduledSqlDstResourceCustomMetricLabelArgs>());
+            set => _customMetricLabels = value;
+        }
+
+        /// <summary>
+        /// metric timestamp field, the default value is the left boundary time of the SQL query range.
+        /// </summary>
+        [Input("customTime")]
+        public Input<string>? CustomTime { get; set; }
+
+        [Input("metricLabels")]
+        private InputList<string>? _metricLabels;
+
+        /// <summary>
+        /// metric dimensions, time type is not accepted.
+        /// </summary>
+        public InputList<string> MetricLabels
+        {
+            get => _metricLabels ?? (_metricLabels = new InputList<string>());
+            set => _metricLabels = value;
+        }
+
         /// <summary>
         /// metric name.
         /// </summary>
         [Input("metricName")]
         public Input<string>? MetricName { get; set; }
+
+        [Input("metricNames")]
+        private InputList<string>? _metricNames;
+
+        /// <summary>
+        /// metric names, used when BizType is 1 (metric topic) for multi-metric scenarios.
+        /// </summary>
+        public InputList<string> MetricNames
+        {
+            get => _metricNames ?? (_metricNames = new InputList<string>());
+            set => _metricNames = value;
+        }
 
         /// <summary>
         /// topic region.

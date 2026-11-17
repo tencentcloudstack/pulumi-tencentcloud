@@ -174,6 +174,18 @@ class BackupStrategy(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+          - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+        * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+        * Update:
+          - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+          - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+
         ## Import
 
         clickhouse backup_strategy can be imported using the id, e.g.
@@ -227,6 +239,18 @@ class BackupStrategy(pulumi.CustomResource):
                 "execute_hour": 3,
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+          - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+        * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+        * Update:
+          - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+          - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
 
         ## Import
 

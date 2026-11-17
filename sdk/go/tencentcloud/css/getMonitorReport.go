@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&type=document&lang=en)
 func GetMonitorReport(ctx *pulumi.Context, args *GetMonitorReportArgs, opts ...pulumi.InvokeOption) (*GetMonitorReportResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMonitorReportResult

@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
 func GetCrossTargets(ctx *pulumi.Context, args *GetCrossTargetsArgs, opts ...pulumi.InvokeOption) (*GetCrossTargetsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossTargetsResult

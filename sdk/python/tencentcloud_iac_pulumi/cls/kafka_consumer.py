@@ -181,6 +181,19 @@ class KafkaConsumer(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeKafkaConsumer](https://www.tencentcloud.com/document/api/614/59908)
+          - [OpenKafkaConsumer](https://www.tencentcloud.com/document/api/614/46784)
+        * Read: [DescribeKafkaConsumer](https://www.tencentcloud.com/document/api/614/59908)
+        * Update:
+          - [DescribeKafkaConsumer](https://www.tencentcloud.com/document/api/614/59908)
+          - [ModifyKafkaConsumer](https://www.tencentcloud.com/document/api/614/59907)
+        * Delete: [CloseKafkaConsumer](https://www.tencentcloud.com/document/api/614/46785)
+
         ## Import
 
         CLS kafka consumer can be imported using the id, e.g.
@@ -225,6 +238,19 @@ class KafkaConsumer(pulumi.CustomResource):
                 "tag_transaction": 2,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeKafkaConsumer](https://www.tencentcloud.com/document/api/614/59908)
+          - [OpenKafkaConsumer](https://www.tencentcloud.com/document/api/614/46784)
+        * Read: [DescribeKafkaConsumer](https://www.tencentcloud.com/document/api/614/59908)
+        * Update:
+          - [DescribeKafkaConsumer](https://www.tencentcloud.com/document/api/614/59908)
+          - [ModifyKafkaConsumer](https://www.tencentcloud.com/document/api/614/59907)
+        * Delete: [CloseKafkaConsumer](https://www.tencentcloud.com/document/api/614/46785)
 
         ## Import
 

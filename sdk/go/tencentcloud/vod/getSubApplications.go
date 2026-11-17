@@ -154,6 +154,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
 func GetSubApplications(ctx *pulumi.Context, args *GetSubApplicationsArgs, opts ...pulumi.InvokeOption) (*GetSubApplicationsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSubApplicationsResult

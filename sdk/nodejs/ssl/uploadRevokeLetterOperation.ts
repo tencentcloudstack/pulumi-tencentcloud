@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UploadRevokeLetter](https://www.tencentcloud.com/search/?wd=UploadRevokeLetter&type=document&lang=en)
+ *
  * ## Import
  *
  * ssl uploadRevokeLetter can be imported using the id, e.g.

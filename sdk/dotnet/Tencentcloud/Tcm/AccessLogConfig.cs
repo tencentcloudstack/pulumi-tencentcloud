@@ -82,6 +82,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAccessLogConfig](https://www.tencentcloud.com/search/?wd=DescribeAccessLogConfig&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tcm AccessLogConfig can be imported using the mesh_id(mesh_name), e.g.

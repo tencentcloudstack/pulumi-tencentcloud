@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifySwitchTimePeriod](https://www.tencentcloud.com/document/api/409/41612)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/modifySwitchTimePeriodOperation:ModifySwitchTimePeriodOperation")]
     public partial class ModifySwitchTimePeriodOperation : global::Pulumi.CustomResource

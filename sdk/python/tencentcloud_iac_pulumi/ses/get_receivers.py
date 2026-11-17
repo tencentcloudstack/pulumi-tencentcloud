@@ -107,6 +107,12 @@ def get_receivers(key_word: Optional[_builtins.str] = None,
         key_word="keep")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
+
 
     :param _builtins.str key_word: Group name keyword for fuzzy query.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_receivers_output(key_word: pulumi.Input[Optional[Optional[_builtins.str]
     receivers = tencentcloud.ses.get_receivers(status=3,
         key_word="keep")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
 
 
     :param _builtins.str key_word: Group name keyword for fuzzy query.

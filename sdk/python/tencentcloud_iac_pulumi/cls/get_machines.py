@@ -110,6 +110,12 @@ def get_machines(group_id: Optional[_builtins.str] = None,
     machines = tencentcloud.cls.get_machines_output(group_id=group.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/614/42817)
+
 
     :param _builtins.str group_id: Group id.
     :param _builtins.str result_output_file: Used to save results.
@@ -153,6 +159,12 @@ def get_machines_output(group_id: pulumi.Input[Optional[_builtins.str]] = None,
         })
     machines = tencentcloud.cls.get_machines_output(group_id=group.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/614/42817)
 
 
     :param _builtins.str group_id: Group id.

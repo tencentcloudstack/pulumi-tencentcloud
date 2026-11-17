@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
         /// </summary>
         public static Task<GetAccessRegionsByDestRegionResult> InvokeAsync(GetAccessRegionsByDestRegionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessRegionsByDestRegionResult>("tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion", args ?? new GetAccessRegionsByDestRegionArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
         /// </summary>
         public static Output<GetAccessRegionsByDestRegionResult> Invoke(GetAccessRegionsByDestRegionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccessRegionsByDestRegionResult>("tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion", args ?? new GetAccessRegionsByDestRegionInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
         /// </summary>
         public static Output<GetAccessRegionsByDestRegionResult> Invoke(GetAccessRegionsByDestRegionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccessRegionsByDestRegionResult>("tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion", args ?? new GetAccessRegionsByDestRegionInvokeArgs(), options.WithDefaults());

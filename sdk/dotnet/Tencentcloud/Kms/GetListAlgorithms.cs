@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
         /// </summary>
         public static Task<GetListAlgorithmsResult> InvokeAsync(GetListAlgorithmsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
         /// </summary>
         public static Output<GetListAlgorithmsResult> Invoke(GetListAlgorithmsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
         /// </summary>
         public static Output<GetListAlgorithmsResult> Invoke(GetListAlgorithmsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListAlgorithmsResult>("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args ?? new GetListAlgorithmsInvokeArgs(), options.WithDefaults());

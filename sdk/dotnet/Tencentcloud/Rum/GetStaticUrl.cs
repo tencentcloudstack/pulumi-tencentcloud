@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticUrl](https://www.tencentcloud.com/document/api/1131/45317)
         /// </summary>
         public static Task<GetStaticUrlResult> InvokeAsync(GetStaticUrlArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticUrl](https://www.tencentcloud.com/document/api/1131/45317)
         /// </summary>
         public static Output<GetStaticUrlResult> Invoke(GetStaticUrlInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticUrl](https://www.tencentcloud.com/document/api/1131/45317)
         /// </summary>
         public static Output<GetStaticUrlResult> Invoke(GetStaticUrlInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlInvokeArgs(), options.WithDefaults());

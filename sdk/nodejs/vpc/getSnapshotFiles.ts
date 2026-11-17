@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     endDate: "2023-10-30 19:00:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
  */
 export function getSnapshotFiles(args: GetSnapshotFilesArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotFilesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -97,6 +103,12 @@ export interface GetSnapshotFilesResult {
  *     endDate: "2023-10-30 19:00:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
  */
 export function getSnapshotFilesOutput(args: GetSnapshotFilesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSnapshotFilesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

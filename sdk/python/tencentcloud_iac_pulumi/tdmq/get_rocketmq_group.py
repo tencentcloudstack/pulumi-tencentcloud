@@ -153,6 +153,12 @@ def get_rocketmq_group(cluster_id: Optional[_builtins.str] = None,
         filter_group=example_rocketmq_group.group_name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str filter_group: Consumer group query by consumer group name. Fuzzy query is supported.
@@ -215,6 +221,12 @@ def get_rocketmq_group_output(cluster_id: pulumi.Input[Optional[_builtins.str]] 
         namespace_id=example_rocketmq_namespace.namespace_name,
         filter_group=example_rocketmq_group.group_name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

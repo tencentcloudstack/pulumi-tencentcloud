@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
         /// </summary>
         public static Task<GetInstanceParamRecordsResult> InvokeAsync(GetInstanceParamRecordsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
         /// </summary>
         public static Output<GetInstanceParamRecordsResult> Invoke(GetInstanceParamRecordsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
         /// </summary>
         public static Output<GetInstanceParamRecordsResult> Invoke(GetInstanceParamRecordsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamRecordsResult>("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args ?? new GetInstanceParamRecordsInvokeArgs(), options.WithDefaults());

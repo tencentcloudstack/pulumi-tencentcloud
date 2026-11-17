@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-cr2rfq78",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
  */
 export function getNetworkInterfaceLimit(args: GetNetworkInterfaceLimitArgs, opts?: pulumi.InvokeOptions): Promise<GetNetworkInterfaceLimitResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetNetworkInterfaceLimitResult {
  *     instanceId: "ins-cr2rfq78",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
  */
 export function getNetworkInterfaceLimitOutput(args: GetNetworkInterfaceLimitOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNetworkInterfaceLimitResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

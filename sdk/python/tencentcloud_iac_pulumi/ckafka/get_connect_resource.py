@@ -139,6 +139,12 @@ def get_connect_resource(limit: Optional[_builtins.int] = None,
     connect_resource = tencentcloud.ckafka.get_connect_resource()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&type=document&lang=en)
+
 
     :param _builtins.int limit: Return the number, the default is 20, the maximum is 100.
     :param _builtins.int offset: Page offset, default is 0.
@@ -184,6 +190,12 @@ def get_connect_resource_output(limit: pulumi.Input[Optional[Optional[_builtins.
 
     connect_resource = tencentcloud.ckafka.get_connect_resource()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&type=document&lang=en)
 
 
     :param _builtins.int limit: Return the number, the default is 20, the maximum is 100.

@@ -48,6 +48,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateForwardRule](https://www.tencentcloud.com/document/api/1097/65937)
+    /// * Read: [DescribeForwardRule](https://www.tencentcloud.com/document/api/1097/67594)
+    /// * Update: [ModifyForwardRule](https://www.tencentcloud.com/document/api/1097/67593)
+    /// * Delete: [DeleteForwardRule](https://www.tencentcloud.com/document/api/1097/67597)
+    /// 
     /// ## Import
     /// 
     /// Private Dns forward rule can be imported using the id, e.g.

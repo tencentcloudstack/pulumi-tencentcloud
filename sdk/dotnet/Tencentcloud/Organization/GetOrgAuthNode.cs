@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOrgAuthNodeResult> InvokeAsync(GetOrgAuthNodeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOrgAuthNodeResult> Invoke(GetOrgAuthNodeInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOrgAuthNodeResult> Invoke(GetOrgAuthNodeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeInvokeArgs(), options.WithDefaults());

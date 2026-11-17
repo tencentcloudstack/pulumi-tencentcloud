@@ -201,6 +201,12 @@ def get_ops_workflows(create_time: Optional[_builtins.str] = None,
         sort_type="ASC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsWorkflows](https://www.tencentcloud.com/document/api/1174/73819)
+
 
     :param _builtins.str create_time: Creation time, format yyyy-MM-dd HH:mm:ss.
     :param _builtins.str create_user_uin: Creator ID.
@@ -275,6 +281,12 @@ def get_ops_workflows_output(create_time: pulumi.Input[Optional[Optional[_builti
         workflow_type="Cycle",
         sort_type="ASC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsWorkflows](https://www.tencentcloud.com/document/api/1174/73819)
 
 
     :param _builtins.str create_time: Creation time, format yyyy-MM-dd HH:mm:ss.

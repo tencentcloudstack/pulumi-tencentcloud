@@ -97,6 +97,12 @@ def get_cluster_admin_role(cluster_id: Optional[_builtins.str] = None,
     pulumi.export("requestId", foo.request_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -129,6 +135,12 @@ def get_cluster_admin_role_output(cluster_id: pulumi.Input[Optional[_builtins.st
     foo = tencentcloud.kubernetes.get_cluster_admin_role(cluster_id="cls-xxxxxxxx")
     pulumi.export("requestId", foo.request_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
 
 
     :param _builtins.str cluster_id: Cluster ID.

@@ -95,6 +95,12 @@ def get_record_type(domain_grade: Optional[_builtins.str] = None,
     record_type = tencentcloud.dnspod.get_record_type(domain_grade="DP_FREE")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
+
 
     :param _builtins.str domain_grade: Domain level. + Old packages: D_FREE, D_PLUS, D_EXTRA, D_EXPERT, D_ULTRA correspond to free package, personal luxury, enterprise 1, enterprise 2, enterprise 3. + New packages: DP_FREE, DP_PLUS, DP_EXTRA, DP_EXPERT, DP_ULTRA correspond to new free, personal professional, enterprise basic, enterprise standard, enterprise flagship.
     :param _builtins.str result_output_file: Used to save results.
@@ -124,6 +130,12 @@ def get_record_type_output(domain_grade: pulumi.Input[Optional[_builtins.str]] =
 
     record_type = tencentcloud.dnspod.get_record_type(domain_grade="DP_FREE")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
 
 
     :param _builtins.str domain_grade: Domain level. + Old packages: D_FREE, D_PLUS, D_EXTRA, D_EXPERT, D_ULTRA correspond to free package, personal luxury, enterprise 1, enterprise 2, enterprise 3. + New packages: DP_FREE, DP_PLUS, DP_EXTRA, DP_EXPERT, DP_ULTRA correspond to new free, personal professional, enterprise basic, enterprise standard, enterprise flagship.

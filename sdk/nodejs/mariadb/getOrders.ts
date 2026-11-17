@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     dealName: "20230607164033835942781",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
  */
 export function getOrders(args: GetOrdersArgs, opts?: pulumi.InvokeOptions): Promise<GetOrdersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetOrdersResult {
  *     dealName: "20230607164033835942781",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
  */
 export function getOrdersOutput(args: GetOrdersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrdersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

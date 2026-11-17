@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
         /// </summary>
         public static Task<GetLayersResult> InvokeAsync(GetLayersArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
         /// </summary>
         public static Output<GetLayersResult> Invoke(GetLayersInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
         /// </summary>
         public static Output<GetLayersResult> Invoke(GetLayersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersInvokeArgs(), options.WithDefaults());

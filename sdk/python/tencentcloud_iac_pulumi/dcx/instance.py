@@ -617,6 +617,39 @@ class Instance(pulumi.CustomResource):
             customer_address="10.8.254.9/30")
         ```
 
+        ### Update bandwidth in place
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.dcx.Instance("example",
+            dc_id="dc-ink7y3qf",
+            name="tf-example",
+            dc_owner_account="100017971194",
+            network_type="VPC",
+            network_region="ap-guangzhou",
+            vpc_id="vpc-nzuu8dyj",
+            dcg_id="dcg-ehr22qfb",
+            bandwidth=200,
+            route_type="BGP",
+            bgp_asn=64511,
+            vlan=60,
+            tencent_address="10.8.254.14/30",
+            customer_address="10.8.254.13/30")
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19821)
+          - [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+        * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+        * Update: [ModifyDirectConnectTunnelAttribute](https://www.tencentcloud.com/document/api/216/19818)
+        * Delete: [DeleteDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19820)
+
         ## Import
 
         DCX instance can be imported using the id, e.g.
@@ -699,6 +732,39 @@ class Instance(pulumi.CustomResource):
             tencent_address="10.8.254.10/30",
             customer_address="10.8.254.9/30")
         ```
+
+        ### Update bandwidth in place
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.dcx.Instance("example",
+            dc_id="dc-ink7y3qf",
+            name="tf-example",
+            dc_owner_account="100017971194",
+            network_type="VPC",
+            network_region="ap-guangzhou",
+            vpc_id="vpc-nzuu8dyj",
+            dcg_id="dcg-ehr22qfb",
+            bandwidth=200,
+            route_type="BGP",
+            bgp_asn=64511,
+            vlan=60,
+            tencent_address="10.8.254.14/30",
+            customer_address="10.8.254.13/30")
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19821)
+          - [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+        * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+        * Update: [ModifyDirectConnectTunnelAttribute](https://www.tencentcloud.com/document/api/216/19818)
+        * Delete: [DeleteDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19820)
 
         ## Import
 

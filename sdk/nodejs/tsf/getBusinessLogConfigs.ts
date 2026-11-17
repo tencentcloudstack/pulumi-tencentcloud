@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     configIdLists: ["apm-busi-log-cfg-qv3x3rdv"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBusinessLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeBusinessLogConfigs&type=document&lang=en)
  */
 export function getBusinessLogConfigs(args?: GetBusinessLogConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetBusinessLogConfigsResult> {
     args = args || {};
@@ -87,6 +93,12 @@ export interface GetBusinessLogConfigsResult {
  *     configIdLists: ["apm-busi-log-cfg-qv3x3rdv"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBusinessLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeBusinessLogConfigs&type=document&lang=en)
  */
 export function getBusinessLogConfigsOutput(args?: GetBusinessLogConfigsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBusinessLogConfigsResult> {
     args = args || {};

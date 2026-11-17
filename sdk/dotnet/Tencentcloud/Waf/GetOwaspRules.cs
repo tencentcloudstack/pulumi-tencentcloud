@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
         /// </summary>
         public static Task<GetOwaspRulesResult> InvokeAsync(GetOwaspRulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOwaspRulesResult>("tencentcloud:Waf/getOwaspRules:getOwaspRules", args ?? new GetOwaspRulesArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
         /// </summary>
         public static Output<GetOwaspRulesResult> Invoke(GetOwaspRulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOwaspRulesResult>("tencentcloud:Waf/getOwaspRules:getOwaspRules", args ?? new GetOwaspRulesInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
         /// </summary>
         public static Output<GetOwaspRulesResult> Invoke(GetOwaspRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOwaspRulesResult>("tencentcloud:Waf/getOwaspRules:getOwaspRules", args ?? new GetOwaspRulesInvokeArgs(), options.WithDefaults());

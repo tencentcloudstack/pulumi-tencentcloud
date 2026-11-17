@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetNatFwClusterRegionStatusResult> InvokeAsync(GetNatFwClusterRegionStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNatFwClusterRegionStatusResult>("tencentcloud:Cfw/getNatFwClusterRegionStatus:getNatFwClusterRegionStatus", args ?? new GetNatFwClusterRegionStatusArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNatFwClusterRegionStatusResult> Invoke(GetNatFwClusterRegionStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNatFwClusterRegionStatusResult>("tencentcloud:Cfw/getNatFwClusterRegionStatus:getNatFwClusterRegionStatus", args ?? new GetNatFwClusterRegionStatusInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNatFwClusterRegionStatusResult> Invoke(GetNatFwClusterRegionStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNatFwClusterRegionStatusResult>("tencentcloud:Cfw/getNatFwClusterRegionStatus:getNatFwClusterRegionStatus", args ?? new GetNatFwClusterRegionStatusInvokeArgs(), options.WithDefaults());

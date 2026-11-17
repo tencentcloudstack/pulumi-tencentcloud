@@ -121,6 +121,18 @@ class StartStreamMonitor(pulumi.CustomResource):
             audible_input_index_lists=[1])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+          - [StartLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=StartLiveStreamMonitor&type=document&lang=en)
+        * Read: [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+        * Delete:
+          - [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+          - [StopLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=StopLiveStreamMonitor&type=document&lang=en)
+
         ## Import
 
         css start_stream_monitor can be imported using the id, e.g.
@@ -154,6 +166,18 @@ class StartStreamMonitor(pulumi.CustomResource):
             monitor_id="3d5738dd-1ca2-4601-a6e9-004c5ec75c0b",
             audible_input_index_lists=[1])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+          - [StartLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=StartLiveStreamMonitor&type=document&lang=en)
+        * Read: [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+        * Delete:
+          - [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+          - [StopLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=StopLiveStreamMonitor&type=document&lang=en)
 
         ## Import
 

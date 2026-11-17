@@ -317,6 +317,14 @@ class TmpTkeTemplateAttachment(pulumi.CustomResource):
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SyncPrometheusTemp](https://www.tencentcloud.com/document/api/248/53314)
+        * Read: [DescribePrometheusTempSync](https://www.tencentcloud.com/document/api/248/53317)
+        * Delete: [DeletePrometheusTempSync](https://www.tencentcloud.com/document/api/248/53325)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -538,6 +546,14 @@ class TmpTkeTemplateAttachment(pulumi.CustomResource):
             },
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SyncPrometheusTemp](https://www.tencentcloud.com/document/api/248/53314)
+        * Read: [DescribePrometheusTempSync](https://www.tencentcloud.com/document/api/248/53317)
+        * Delete: [DeletePrometheusTempSync](https://www.tencentcloud.com/document/api/248/53325)
 
 
         :param str resource_name: The name of the resource.

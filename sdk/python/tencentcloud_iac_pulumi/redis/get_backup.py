@@ -152,6 +152,12 @@ def get_backup(begin_time: Optional[_builtins.str] = None,
         instance_name="Keep-terraform")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceBackups](https://www.tencentcloud.com/document/api/239/32074)
+
 
     :param _builtins.str begin_time: start time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
     :param _builtins.str end_time: End time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
@@ -201,6 +207,12 @@ def get_backup_output(begin_time: pulumi.Input[Optional[Optional[_builtins.str]]
         statuses=[2],
         instance_name="Keep-terraform")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceBackups](https://www.tencentcloud.com/document/api/239/32074)
 
 
     :param _builtins.str begin_time: start time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.

@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.eip.NormalAddressReturn("example", {addressIps: ["172.16.17.32"]});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ReturnNormalAddresses](https://www.tencentcloud.com/document/api/215/52741)
  */
 export class NormalAddressReturn extends pulumi.CustomResource {
     /**

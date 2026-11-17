@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  *     type: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
+ * * Read: [DescribeSpartaProtectionInfo](https://www.tencentcloud.com/document/api/627/64518)
+ * * Update: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
  */
 export class ProtectionMode extends pulumi.CustomResource {
     /**

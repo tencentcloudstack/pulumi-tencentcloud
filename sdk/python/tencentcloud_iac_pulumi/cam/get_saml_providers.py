@@ -112,6 +112,12 @@ def get_saml_providers(description: Optional[_builtins.str] = None,
     foo = tencentcloud.cam.get_saml_providers(name="cam-test-provider")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
+
 
     :param _builtins.str description: The description of the CAM SAML provider.
     :param _builtins.str name: Name of the CAM SAML provider to be queried.
@@ -145,6 +151,12 @@ def get_saml_providers_output(description: pulumi.Input[Optional[Optional[_built
 
     foo = tencentcloud.cam.get_saml_providers(name="cam-test-provider")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
 
 
     :param _builtins.str description: The description of the CAM SAML provider.

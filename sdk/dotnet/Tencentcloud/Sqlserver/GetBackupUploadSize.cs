@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupUploadSize](https://www.tencentcloud.com/document/api/238/39837)
         /// </summary>
         public static Task<GetBackupUploadSizeResult> InvokeAsync(GetBackupUploadSizeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupUploadSize](https://www.tencentcloud.com/document/api/238/39837)
         /// </summary>
         public static Output<GetBackupUploadSizeResult> Invoke(GetBackupUploadSizeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupUploadSize](https://www.tencentcloud.com/document/api/238/39837)
         /// </summary>
         public static Output<GetBackupUploadSizeResult> Invoke(GetBackupUploadSizeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeInvokeArgs(), options.WithDefaults());

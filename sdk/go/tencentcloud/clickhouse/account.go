@@ -43,6 +43,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ActionAlterCkUser](https://www.tencentcloud.com/search/?wd=ActionAlterCkUser&type=document&lang=en)
+// * Read: [DescribeCkSqlApis](https://www.tencentcloud.com/search/?wd=DescribeCkSqlApis&type=document&lang=en)
+// * Update: [ActionAlterCkUser](https://www.tencentcloud.com/search/?wd=ActionAlterCkUser&type=document&lang=en)
+// * Delete: [DescribeCkSqlApis](https://www.tencentcloud.com/search/?wd=DescribeCkSqlApis&type=document&lang=en)
+//
 // ## Import
 //
 // clickhouse account can be imported using the id, e.g.

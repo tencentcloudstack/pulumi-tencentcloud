@@ -158,6 +158,12 @@ def get_db_custom_cluster_resources(cluster_id: Optional[_builtins.str] = None,
     example = tencentcloud.dbdc.get_db_custom_cluster_resources(cluster_id="dbcc-b2arjlee")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusterResources](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterResources&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -194,6 +200,12 @@ def get_db_custom_cluster_resources_output(cluster_id: pulumi.Input[Optional[_bu
 
     example = tencentcloud.dbdc.get_db_custom_cluster_resources(cluster_id="dbcc-b2arjlee")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusterResources](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterResources&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

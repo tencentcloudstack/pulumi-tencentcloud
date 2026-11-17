@@ -114,6 +114,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAlertChannel](https://www.tencentcloud.com/document/api/1249/68536)
+    /// * Read: [DescribeAlertChannels](https://www.tencentcloud.com/document/api/1249/68523)
+    /// * Delete: [DeleteAlertChannel](https://www.tencentcloud.com/document/api/1249/68530)
+    /// 
     /// ## Import
     /// 
     /// pts AlertChannel can be imported using the project_id#notice_id, e.g.

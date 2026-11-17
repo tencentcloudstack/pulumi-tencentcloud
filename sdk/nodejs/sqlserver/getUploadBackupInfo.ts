@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     backupMigrationId: "mssql-backup-migration-8a0f3eht",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
  */
 export function getUploadBackupInfo(args: GetUploadBackupInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetUploadBackupInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -104,6 +110,12 @@ export interface GetUploadBackupInfoResult {
  *     backupMigrationId: "mssql-backup-migration-8a0f3eht",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
  */
 export function getUploadBackupInfoOutput(args: GetUploadBackupInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUploadBackupInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

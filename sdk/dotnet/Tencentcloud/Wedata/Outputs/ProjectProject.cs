@@ -26,6 +26,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Outputs
         /// Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
         /// </summary>
         public readonly string ProjectName;
+        /// <summary>
+        /// Project schedule mode. task: Task mode; workflow: Workflow mode.
+        /// </summary>
+        public readonly string? ScheduleMode;
 
         [OutputConstructor]
         private ProjectProject(
@@ -33,11 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Outputs
 
             string? projectModel,
 
-            string projectName)
+            string projectName,
+
+            string? scheduleMode)
         {
             DisplayName = displayName;
             ProjectModel = projectModel;
             ProjectName = projectName;
+            ScheduleMode = scheduleMode;
         }
     }
 }

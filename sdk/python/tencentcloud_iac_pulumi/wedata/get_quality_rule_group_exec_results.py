@@ -125,6 +125,12 @@ def get_quality_rule_group_exec_results(filters: Optional[Sequence[Union['GetQua
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&type=document&lang=en)
+
 
     :param Sequence[Union['GetQualityRuleGroupExecResultsFilterArgs', 'GetQualityRuleGroupExecResultsFilterArgsDict']] filters: Filter conditions. Supported filters:
            1. GroupType - Rule group type: DEFAULT (default type), WORKFLOW_NODE (workflow node type)
@@ -197,6 +203,12 @@ def get_quality_rule_group_exec_results_output(filters: pulumi.Input[Optional[Op
             "direction": "DESC",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&type=document&lang=en)
 
 
     :param Sequence[Union['GetQualityRuleGroupExecResultsFilterArgs', 'GetQualityRuleGroupExecResultsFilterArgsDict']] filters: Filter conditions. Supported filters:

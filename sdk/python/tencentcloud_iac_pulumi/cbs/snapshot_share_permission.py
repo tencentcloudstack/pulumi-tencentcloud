@@ -123,6 +123,17 @@ class SnapshotSharePermission(pulumi.CustomResource):
             snapshot_id="snap-cs5kj0j8")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySnapshotsSharePermission](https://www.tencentcloud.com/document/api/362/33299)
+        * Read: [DescribeSnapshotSharePermission](https://www.tencentcloud.com/document/api/362/33300)
+        * Update: [ModifySnapshotsSharePermission](https://www.tencentcloud.com/document/api/362/33299)
+        * Delete:
+          - [DescribeSnapshotSharePermission](https://www.tencentcloud.com/document/api/362/33300)
+          - [ModifySnapshotsSharePermission](https://www.tencentcloud.com/document/api/362/33299)
+
         ## Import
 
         CBS snapshot share permission can be imported using the id, e.g.
@@ -159,6 +170,17 @@ class SnapshotSharePermission(pulumi.CustomResource):
             ],
             snapshot_id="snap-cs5kj0j8")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySnapshotsSharePermission](https://www.tencentcloud.com/document/api/362/33299)
+        * Read: [DescribeSnapshotSharePermission](https://www.tencentcloud.com/document/api/362/33300)
+        * Update: [ModifySnapshotsSharePermission](https://www.tencentcloud.com/document/api/362/33299)
+        * Delete:
+          - [DescribeSnapshotSharePermission](https://www.tencentcloud.com/document/api/362/33300)
+          - [ModifySnapshotsSharePermission](https://www.tencentcloud.com/document/api/362/33299)
 
         ## Import
 

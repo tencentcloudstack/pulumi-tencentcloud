@@ -54,6 +54,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72677)
+// * Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+// * Update: [ModifyDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72632)
+// * Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
 type DatasourceCloud struct {
 	pulumi.CustomResourceState
 

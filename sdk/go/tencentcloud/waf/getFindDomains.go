@@ -67,6 +67,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
 func GetFindDomains(ctx *pulumi.Context, args *GetFindDomainsArgs, opts ...pulumi.InvokeOption) (*GetFindDomainsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFindDomainsResult

@@ -117,6 +117,12 @@ def get_db_instance_security_groups(db_instance_id: Optional[_builtins.str] = No
     example = tencentcloud.postgresql.get_db_instance_security_groups(read_only_group_id="pgrogrp-6fexzcmy")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+
 
     :param _builtins.str db_instance_id: Instance ID, which can be obtained via the DescribeDBInstances API. DBInstanceId, ReadOnlyGroupId at least pass one; if you want to query the security group associated with the instance, only pass the DBInstanceId field.
     :param _builtins.str read_only_group_id: Read-only group ID, which can be obtained via the DescribeReadOnlyGroups API. DBInstanceId, ReadOnlyGroupId at least pass one; if you want to query the security group associated with the read-only group, only pass the ReadOnlyGroupId.
@@ -161,6 +167,12 @@ def get_db_instance_security_groups_output(db_instance_id: pulumi.Input[Optional
 
     example = tencentcloud.postgresql.get_db_instance_security_groups(read_only_group_id="pgrogrp-6fexzcmy")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
 
 
     :param _builtins.str db_instance_id: Instance ID, which can be obtained via the DescribeDBInstances API. DBInstanceId, ReadOnlyGroupId at least pass one; if you want to query the security group associated with the instance, only pass the DBInstanceId field.

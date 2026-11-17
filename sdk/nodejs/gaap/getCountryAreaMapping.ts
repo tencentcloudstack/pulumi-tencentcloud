@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const countryAreaMapping = tencentcloud.gaap.getCountryAreaMapping({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
  */
 export function getCountryAreaMapping(args?: GetCountryAreaMappingArgs, opts?: pulumi.InvokeOptions): Promise<GetCountryAreaMappingResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetCountryAreaMappingResult {
  *
  * const countryAreaMapping = tencentcloud.gaap.getCountryAreaMapping({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
  */
 export function getCountryAreaMappingOutput(args?: GetCountryAreaMappingOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCountryAreaMappingResult> {
     args = args || {};

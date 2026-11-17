@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDeviceAccount](https://www.tencentcloud.com/search/?wd=CreateDeviceAccount&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDeviceAccounts](https://www.tencentcloud.com/search/?wd=DescribeDeviceAccounts&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteDeviceAccounts](https://www.tencentcloud.com/search/?wd=DeleteDeviceAccounts&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dasb DeviceAccount can be imported using the id, e.g.

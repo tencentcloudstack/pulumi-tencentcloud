@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
 func GetBlackEmailAddress(ctx *pulumi.Context, args *GetBlackEmailAddressArgs, opts ...pulumi.InvokeOption) (*GetBlackEmailAddressResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBlackEmailAddressResult

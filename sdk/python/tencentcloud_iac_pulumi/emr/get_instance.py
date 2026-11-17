@@ -122,6 +122,12 @@ def get_instance(display_strategy: Optional[_builtins.str] = None,
         instance_ids=["emr-rnzqrleq"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+
 
     :param _builtins.str display_strategy: Display strategy(e.g.:clusterList, monitorManage).
     :param Sequence[_builtins.str] instance_ids: fetch all instances with same prefix(e.g.:emr-xxxxxx).
@@ -162,6 +168,12 @@ def get_instance_output(display_strategy: pulumi.Input[Optional[_builtins.str]] 
     my_emr = tencentcloud.emr.get_instance(display_strategy="clusterList",
         instance_ids=["emr-rnzqrleq"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
 
 
     :param _builtins.str display_strategy: Display strategy(e.g.:clusterList, monitorManage).

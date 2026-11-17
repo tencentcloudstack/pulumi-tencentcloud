@@ -85,7 +85,7 @@ class ImmutableTagRuleRule(dict):
         :param _builtins.str tag_decoration: tag decoration type: matches or excludes.
         :param _builtins.str tag_pattern: tag matching rules.
         :param _builtins.bool disabled: disable rule.
-        :param _builtins.int id: ID of the resource.
+        :param _builtins.int id: rule id.
         :param _builtins.str ns_name: namespace name.
         """
         pulumi.set(__self__, "repository_decoration", repository_decoration)
@@ -143,7 +143,7 @@ class ImmutableTagRuleRule(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.int]:
         """
-        ID of the resource.
+        rule id.
         """
         return pulumi.get(self, "id")
 
@@ -185,7 +185,7 @@ class InstanceReplication(dict):
                  region_name: Optional[_builtins.str] = None,
                  syn_tag: Optional[_builtins.bool] = None):
         """
-        :param _builtins.str id: ID of the resource.
+        :param _builtins.str id: Replication registry ID (readonly).
         :param _builtins.int region_id: Replication region ID, check the example at the top of page to find out id of region.
         :param _builtins.str region_name: Replication region name.
         :param _builtins.bool syn_tag: Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
@@ -203,7 +203,7 @@ class InstanceReplication(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         """
-        ID of the resource.
+        Replication registry ID (readonly).
         """
         return pulumi.get(self, "id")
 
@@ -425,13 +425,15 @@ class ReplicationRule(dict):
                  filters: Sequence['outputs.ReplicationRuleFilter'],
                  name: _builtins.str,
                  override: _builtins.bool,
-                 deletion: Optional[_builtins.bool] = None):
+                 deletion: Optional[_builtins.bool] = None,
+                 enabled: Optional[_builtins.bool] = None):
         """
         :param _builtins.str dest_namespace: Destination namespace.
         :param Sequence['ReplicationRuleFilterArgs'] filters: Synchronization filters.
         :param _builtins.str name: Name of synchronization rule.
         :param _builtins.bool override: Whether to override.
         :param _builtins.bool deletion: Whether synchronous deletion event.
+        :param _builtins.bool enabled: Whether to enable the rule.
         """
         pulumi.set(__self__, "dest_namespace", dest_namespace)
         pulumi.set(__self__, "filters", filters)
@@ -439,6 +441,8 @@ class ReplicationRule(dict):
         pulumi.set(__self__, "override", override)
         if deletion is not None:
             pulumi.set(__self__, "deletion", deletion)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
 
     @_builtins.property
     @pulumi.getter(name="destNamespace")
@@ -479,6 +483,14 @@ class ReplicationRule(dict):
         Whether synchronous deletion event.
         """
         return pulumi.get(self, "deletion")
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to enable the rule.
+        """
+        return pulumi.get(self, "enabled")
 
 
 @pulumi.output_type
@@ -761,7 +773,7 @@ class WebhookTriggerTrigger(dict):
         :param _builtins.str name: trigger name.
         :param Sequence['WebhookTriggerTriggerTargetArgs'] targets: trigger target.
         :param _builtins.str description: trigger description.
-        :param _builtins.int id: ID of the resource.
+        :param _builtins.int id: trigger Id.
         :param _builtins.int namespace_id: the namespace Id to which the trigger belongs.
         """
         pulumi.set(__self__, "condition", condition)
@@ -828,7 +840,7 @@ class WebhookTriggerTrigger(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.int]:
         """
-        ID of the resource.
+        trigger Id.
         """
         return pulumi.get(self, "id")
 

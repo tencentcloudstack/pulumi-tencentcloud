@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
  */
 export function getSlowLog(args: GetSlowLogArgs, opts?: pulumi.InvokeOptions): Promise<GetSlowLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSlowLogResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
  */
 export function getSlowLogOutput(args: GetSlowLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSlowLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

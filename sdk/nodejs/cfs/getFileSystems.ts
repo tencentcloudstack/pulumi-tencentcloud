@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+ *   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
  */
 export function getFileSystems(args?: GetFileSystemsArgs, opts?: pulumi.InvokeOptions): Promise<GetFileSystemsResult> {
     args = args || {};
@@ -108,6 +116,14 @@ export interface GetFileSystemsResult {
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+ *   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
  */
 export function getFileSystemsOutput(args?: GetFileSystemsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFileSystemsResult> {
     args = args || {};

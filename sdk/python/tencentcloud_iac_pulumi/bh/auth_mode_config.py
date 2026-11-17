@@ -119,6 +119,14 @@ class AuthModeConfig(pulumi.CustomResource):
         example = tencentcloud.bh.AuthModeConfig("example", auth_mode=2)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&type=document&lang=en)
+        * Read: [DescribeSecuritySetting](https://www.tencentcloud.com/search/?wd=DescribeSecuritySetting&type=document&lang=en)
+        * Update: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -142,6 +150,14 @@ class AuthModeConfig(pulumi.CustomResource):
 
         example = tencentcloud.bh.AuthModeConfig("example", auth_mode=2)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&type=document&lang=en)
+        * Read: [DescribeSecuritySetting](https://www.tencentcloud.com/search/?wd=DescribeSecuritySetting&type=document&lang=en)
+        * Update: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

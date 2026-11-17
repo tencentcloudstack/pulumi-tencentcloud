@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDatahubTopics](https://www.tencentcloud.com/document/api/597/54003)
 func LookupDatahubTopic(ctx *pulumi.Context, args *LookupDatahubTopicArgs, opts ...pulumi.InvokeOption) (*LookupDatahubTopicResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupDatahubTopicResult

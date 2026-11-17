@@ -39,6 +39,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AuthorizeDataSource](https://www.tencentcloud.com/document/api/1174/77896)
+ * * Read: [DescribeDataSourceAuthority](https://www.tencentcloud.com/document/api/1174/77895)
+ * * Update:
+ *   - [AuthorizeDataSource](https://www.tencentcloud.com/document/api/1174/77896)
+ *   - [RevokeDataSourceAuthorization](https://www.tencentcloud.com/document/api/1174/77894)
+ * * Delete: [RevokeDataSourceAuthorization](https://www.tencentcloud.com/document/api/1174/77894)
+ *
  * ## Import
  *
  * WeData authorize data source can be imported using the id, e.g.

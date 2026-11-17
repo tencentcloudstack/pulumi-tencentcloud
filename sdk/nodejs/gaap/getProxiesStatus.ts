@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     proxyIds: ["link-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
  */
 export function getProxiesStatus(args?: GetProxiesStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetProxiesStatusResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetProxiesStatusResult {
  *     proxyIds: ["link-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
  */
 export function getProxiesStatusOutput(args?: GetProxiesStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProxiesStatusResult> {
     args = args || {};

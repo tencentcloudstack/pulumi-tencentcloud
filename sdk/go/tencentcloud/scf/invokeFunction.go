@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [Invoke](https://www.tencentcloud.com/document/api/583/17243)
 type InvokeFunction struct {
 	pulumi.CustomResourceState
 

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMicroserviceApiVersionResult> InvokeAsync(GetMicroserviceApiVersionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMicroserviceApiVersionResult> Invoke(GetMicroserviceApiVersionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiVersions](https://www.tencentcloud.com/search/?wd=DescribeApiVersions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMicroserviceApiVersionResult> Invoke(GetMicroserviceApiVersionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMicroserviceApiVersionResult>("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args ?? new GetMicroserviceApiVersionInvokeArgs(), options.WithDefaults());

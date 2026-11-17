@@ -55,6 +55,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAddressPool](https://www.tencentcloud.com/search/?wd=CreateAddressPool&type=document&lang=en)
+// * Read: [DescribeAddressPoolDetail](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolDetail&type=document&lang=en)
+// * Update: [ModifyAddressPool](https://www.tencentcloud.com/search/?wd=ModifyAddressPool&type=document&lang=en)
+// * Delete: [DeleteAddressPool](https://www.tencentcloud.com/search/?wd=DeleteAddressPool&type=document&lang=en)
+//
 // ## Import
 //
 // IGTM address pool can be imported using the id, e.g.

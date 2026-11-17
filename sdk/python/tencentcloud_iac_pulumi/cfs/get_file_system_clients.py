@@ -96,6 +96,12 @@ def get_file_system_clients(file_system_id: Optional[_builtins.str] = None,
     file_system_clients = tencentcloud.cfs.get_file_system_clients(file_system_id="cfs-iobiaxtj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
+
 
     :param _builtins.str file_system_id: File system ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_file_system_clients_output(file_system_id: pulumi.Input[Optional[_builti
 
     file_system_clients = tencentcloud.cfs.get_file_system_clients(file_system_id="cfs-iobiaxtj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
 
 
     :param _builtins.str file_system_id: File system ID.

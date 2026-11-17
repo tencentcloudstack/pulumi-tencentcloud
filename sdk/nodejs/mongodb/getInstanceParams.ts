@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cmgo-gwqk8669",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
  */
 export function getInstanceParams(args: GetInstanceParamsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceParamsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetInstanceParamsResult {
  *     instanceId: "cmgo-gwqk8669",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
  */
 export function getInstanceParamsOutput(args: GetInstanceParamsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceParamsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

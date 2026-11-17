@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Serverless
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
         /// </summary>
         public static Task<GetHbaseInstancesResult> InvokeAsync(GetHbaseInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetHbaseInstancesResult>("tencentcloud:Serverless/getHbaseInstances:getHbaseInstances", args ?? new GetHbaseInstancesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Serverless
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
         /// </summary>
         public static Output<GetHbaseInstancesResult> Invoke(GetHbaseInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetHbaseInstancesResult>("tencentcloud:Serverless/getHbaseInstances:getHbaseInstances", args ?? new GetHbaseInstancesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Serverless
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
         /// </summary>
         public static Output<GetHbaseInstancesResult> Invoke(GetHbaseInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetHbaseInstancesResult>("tencentcloud:Serverless/getHbaseInstances:getHbaseInstances", args ?? new GetHbaseInstancesInvokeArgs(), options.WithDefaults());

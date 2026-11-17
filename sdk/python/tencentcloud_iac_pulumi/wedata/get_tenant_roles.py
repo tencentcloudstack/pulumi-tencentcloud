@@ -99,6 +99,12 @@ def get_tenant_roles(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.wedata.get_tenant_roles(role_display_name="tf_example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTenantRoles](https://www.tencentcloud.com/document/api/1174/77862)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str role_display_name: Role Chinese display name fuzzy search, can only pass one value.
@@ -128,6 +134,12 @@ def get_tenant_roles_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     example = tencentcloud.wedata.get_tenant_roles(role_display_name="tf_example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTenantRoles](https://www.tencentcloud.com/document/api/1174/77862)
 
 
     :param _builtins.str result_output_file: Used to save results.

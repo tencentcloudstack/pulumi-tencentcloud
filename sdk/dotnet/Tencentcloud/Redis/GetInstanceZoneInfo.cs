@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
         /// </summary>
         public static Task<GetInstanceZoneInfoResult> InvokeAsync(GetInstanceZoneInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
         /// </summary>
         public static Output<GetInstanceZoneInfoResult> Invoke(GetInstanceZoneInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
         /// </summary>
         public static Output<GetInstanceZoneInfoResult> Invoke(GetInstanceZoneInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceZoneInfoResult>("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args ?? new GetInstanceZoneInfoInvokeArgs(), options.WithDefaults());

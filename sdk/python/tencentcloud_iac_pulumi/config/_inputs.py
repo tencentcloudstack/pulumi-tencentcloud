@@ -15,6 +15,12 @@ else:
     from typing_extensions import NotRequired, TypedDict
 
 __all__ = [
+    'AggregateCompliancePackConfigRuleArgs',
+    'AggregateCompliancePackConfigRuleArgsDict',
+    'AggregateCompliancePackConfigRuleInputParameterArgs',
+    'AggregateCompliancePackConfigRuleInputParameterArgsDict',
+    'AggregatorAggregatorAccountArgs',
+    'AggregatorAggregatorAccountArgsDict',
     'CompliancePackConfigRuleArgs',
     'CompliancePackConfigRuleArgsDict',
     'CompliancePackConfigRuleInputParameterArgs',
@@ -30,6 +36,287 @@ __all__ = [
     'RuleTriggerTypeArgs',
     'RuleTriggerTypeArgsDict',
 ]
+
+class AggregateCompliancePackConfigRuleArgsDict(TypedDict):
+    input_parameters: pulumi.Input[Sequence[pulumi.Input['AggregateCompliancePackConfigRuleInputParameterArgsDict']]]
+    """
+    Rule input parameters.
+    """
+    risk_level: pulumi.Input[_builtins.int]
+    """
+    Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+    """
+    rule_name: pulumi.Input[_builtins.str]
+    """
+    Rule name.
+    """
+    compliance_pack_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Compliance pack id that this rule belongs to.
+    """
+    config_rule_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Config rule id.
+    """
+    description: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Rule description.
+    """
+    identifier: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Rule identifier (managed rule name or custom rule cloud function ARN).
+    """
+    managed_rule_identifier: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Managed rule identifier (preset rule identity).
+    """
+
+@pulumi.input_type
+class AggregateCompliancePackConfigRuleArgs:
+    def __init__(__self__, *,
+                 input_parameters: pulumi.Input[Sequence[pulumi.Input['AggregateCompliancePackConfigRuleInputParameterArgs']]],
+                 risk_level: pulumi.Input[_builtins.int],
+                 rule_name: pulumi.Input[_builtins.str],
+                 compliance_pack_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 config_rule_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 identifier: pulumi.Input[Optional[_builtins.str]] = None,
+                 managed_rule_identifier: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['AggregateCompliancePackConfigRuleInputParameterArgs']]] input_parameters: Rule input parameters.
+        :param pulumi.Input[_builtins.int] risk_level: Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+        :param pulumi.Input[_builtins.str] rule_name: Rule name.
+        :param pulumi.Input[_builtins.str] compliance_pack_id: Compliance pack id that this rule belongs to.
+        :param pulumi.Input[_builtins.str] config_rule_id: Config rule id.
+        :param pulumi.Input[_builtins.str] description: Rule description.
+        :param pulumi.Input[_builtins.str] identifier: Rule identifier (managed rule name or custom rule cloud function ARN).
+        :param pulumi.Input[_builtins.str] managed_rule_identifier: Managed rule identifier (preset rule identity).
+        """
+        pulumi.set(__self__, "input_parameters", input_parameters)
+        pulumi.set(__self__, "risk_level", risk_level)
+        pulumi.set(__self__, "rule_name", rule_name)
+        if compliance_pack_id is not None:
+            pulumi.set(__self__, "compliance_pack_id", compliance_pack_id)
+        if config_rule_id is not None:
+            pulumi.set(__self__, "config_rule_id", config_rule_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if identifier is not None:
+            pulumi.set(__self__, "identifier", identifier)
+        if managed_rule_identifier is not None:
+            pulumi.set(__self__, "managed_rule_identifier", managed_rule_identifier)
+
+    @_builtins.property
+    @pulumi.getter(name="inputParameters")
+    def input_parameters(self) -> pulumi.Input[Sequence[pulumi.Input['AggregateCompliancePackConfigRuleInputParameterArgs']]]:
+        """
+        Rule input parameters.
+        """
+        return pulumi.get(self, "input_parameters")
+
+    @input_parameters.setter
+    def input_parameters(self, value: pulumi.Input[Sequence[pulumi.Input['AggregateCompliancePackConfigRuleInputParameterArgs']]]):
+        pulumi.set(self, "input_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="riskLevel")
+    def risk_level(self) -> pulumi.Input[_builtins.int]:
+        """
+        Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+        """
+        return pulumi.get(self, "risk_level")
+
+    @risk_level.setter
+    def risk_level(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "risk_level", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleName")
+    def rule_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Rule name.
+        """
+        return pulumi.get(self, "rule_name")
+
+    @rule_name.setter
+    def rule_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "rule_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="compliancePackId")
+    def compliance_pack_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Compliance pack id that this rule belongs to.
+        """
+        return pulumi.get(self, "compliance_pack_id")
+
+    @compliance_pack_id.setter
+    def compliance_pack_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "compliance_pack_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="configRuleId")
+    def config_rule_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Config rule id.
+        """
+        return pulumi.get(self, "config_rule_id")
+
+    @config_rule_id.setter
+    def config_rule_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "config_rule_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Rule description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def identifier(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Rule identifier (managed rule name or custom rule cloud function ARN).
+        """
+        return pulumi.get(self, "identifier")
+
+    @identifier.setter
+    def identifier(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "identifier", value)
+
+    @_builtins.property
+    @pulumi.getter(name="managedRuleIdentifier")
+    def managed_rule_identifier(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Managed rule identifier (preset rule identity).
+        """
+        return pulumi.get(self, "managed_rule_identifier")
+
+    @managed_rule_identifier.setter
+    def managed_rule_identifier(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "managed_rule_identifier", value)
+
+
+class AggregateCompliancePackConfigRuleInputParameterArgsDict(TypedDict):
+    parameter_key: pulumi.Input[_builtins.str]
+    """
+    Parameter key.
+    """
+    type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Parameter type. Required: `Require`, optional: `Optional`.
+    """
+    value: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Parameter value.
+    """
+
+@pulumi.input_type
+class AggregateCompliancePackConfigRuleInputParameterArgs:
+    def __init__(__self__, *,
+                 parameter_key: pulumi.Input[_builtins.str],
+                 type: pulumi.Input[Optional[_builtins.str]] = None,
+                 value: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] parameter_key: Parameter key.
+        :param pulumi.Input[_builtins.str] type: Parameter type. Required: `Require`, optional: `Optional`.
+        :param pulumi.Input[_builtins.str] value: Parameter value.
+        """
+        pulumi.set(__self__, "parameter_key", parameter_key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter(name="parameterKey")
+    def parameter_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        Parameter key.
+        """
+        return pulumi.get(self, "parameter_key")
+
+    @parameter_key.setter
+    def parameter_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "parameter_key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Parameter type. Required: `Require`, optional: `Optional`.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Parameter value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "value", value)
+
+
+class AggregatorAggregatorAccountArgsDict(TypedDict):
+    member_name: pulumi.Input[_builtins.str]
+    """
+    Member account name.
+    """
+    member_uin: pulumi.Input[_builtins.int]
+    """
+    Member account ID.
+    """
+
+@pulumi.input_type
+class AggregatorAggregatorAccountArgs:
+    def __init__(__self__, *,
+                 member_name: pulumi.Input[_builtins.str],
+                 member_uin: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.str] member_name: Member account name.
+        :param pulumi.Input[_builtins.int] member_uin: Member account ID.
+        """
+        pulumi.set(__self__, "member_name", member_name)
+        pulumi.set(__self__, "member_uin", member_uin)
+
+    @_builtins.property
+    @pulumi.getter(name="memberName")
+    def member_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Member account name.
+        """
+        return pulumi.get(self, "member_name")
+
+    @member_name.setter
+    def member_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "member_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="memberUin")
+    def member_uin(self) -> pulumi.Input[_builtins.int]:
+        """
+        Member account ID.
+        """
+        return pulumi.get(self, "member_uin")
+
+    @member_uin.setter
+    def member_uin(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "member_uin", value)
+
 
 class CompliancePackConfigRuleArgsDict(TypedDict):
     identifier: pulumi.Input[_builtins.str]

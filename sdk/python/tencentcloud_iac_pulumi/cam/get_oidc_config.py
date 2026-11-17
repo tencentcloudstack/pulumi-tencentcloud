@@ -157,6 +157,12 @@ def get_oidc_config(name: Optional[_builtins.str] = None,
     pulumi.export("identityUrl", oidc_config.identity_url)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
+
 
     :param _builtins.str name: Name.
     :param _builtins.str result_output_file: Used to save results.
@@ -193,6 +199,12 @@ def get_oidc_config_output(name: pulumi.Input[Optional[_builtins.str]] = None,
     pulumi.export("identityKey", oidc_config.identity_key)
     pulumi.export("identityUrl", oidc_config.identity_url)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
 
 
     :param _builtins.str name: Name.

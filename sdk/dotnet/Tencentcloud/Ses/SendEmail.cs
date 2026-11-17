@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SendEmail](https://www.tencentcloud.com/document/api/1084/39408)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/sendEmail:SendEmail")]
     public partial class SendEmail : global::Pulumi.CustomResource

@@ -80,6 +80,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CancelDcnJob](https://www.tencentcloud.com/document/api/1042/41451)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1042/40887)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/cancelDcnJobOperation:CancelDcnJobOperation")]
     public partial class CancelDcnJobOperation : global::Pulumi.CustomResource

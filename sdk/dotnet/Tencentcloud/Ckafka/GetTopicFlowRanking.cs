@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTopicFlowRankingResult> InvokeAsync(GetTopicFlowRankingArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTopicFlowRankingResult> Invoke(GetTopicFlowRankingInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTopicFlowRankingResult> Invoke(GetTopicFlowRankingInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicFlowRankingResult>("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args ?? new GetTopicFlowRankingInvokeArgs(), options.WithDefaults());

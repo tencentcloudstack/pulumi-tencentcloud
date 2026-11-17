@@ -203,6 +203,18 @@ class WafProtection(pulumi.CustomResource):
             operate="open")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseWafProtection](https://www.tencentcloud.com/document/api/1290/79298)
+          - [OpenWafProtection](https://www.tencentcloud.com/document/api/1290/79231)
+        * Read: [DescribeWafProtection](https://www.tencentcloud.com/document/api/1290/79246)
+        * Update:
+          - [CloseWafProtection](https://www.tencentcloud.com/document/api/1290/79298)
+          - [OpenWafProtection](https://www.tencentcloud.com/document/api/1290/79231)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -232,6 +244,18 @@ class WafProtection(pulumi.CustomResource):
             lists=["7324a769-9d87-48ce-a904-48c3defc4abd"],
             operate="open")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseWafProtection](https://www.tencentcloud.com/document/api/1290/79298)
+          - [OpenWafProtection](https://www.tencentcloud.com/document/api/1290/79231)
+        * Read: [DescribeWafProtection](https://www.tencentcloud.com/document/api/1290/79246)
+        * Update:
+          - [CloseWafProtection](https://www.tencentcloud.com/document/api/1290/79298)
+          - [OpenWafProtection](https://www.tencentcloud.com/document/api/1290/79231)
 
 
         :param str resource_name: The name of the resource.

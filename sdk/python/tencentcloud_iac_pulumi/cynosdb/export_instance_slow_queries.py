@@ -306,6 +306,12 @@ class ExportInstanceSlowQueries(pulumi.CustomResource):
             file_type="csv")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExportInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48589)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -341,6 +347,12 @@ class ExportInstanceSlowQueries(pulumi.CustomResource):
             database="db1",
             file_type="csv")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExportInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48589)
 
 
         :param str resource_name: The name of the resource.

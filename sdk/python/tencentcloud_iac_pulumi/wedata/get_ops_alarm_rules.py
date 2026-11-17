@@ -206,6 +206,12 @@ def get_ops_alarm_rules(alarm_level: Optional[_builtins.int] = None,
     wedata_ops_alarm_rules = tencentcloud.wedata.get_ops_alarm_rules(project_id="1859317240494305280")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
+
 
     :param _builtins.int alarm_level: Alarm level: 1. Normal, 2. Major, 3. Urgent.
     :param _builtins.str alarm_recipient_id: Query the alarm rules configured for the corresponding alarm recipient.
@@ -279,6 +285,12 @@ def get_ops_alarm_rules_output(alarm_level: pulumi.Input[Optional[Optional[_buil
 
     wedata_ops_alarm_rules = tencentcloud.wedata.get_ops_alarm_rules(project_id="1859317240494305280")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
 
 
     :param _builtins.int alarm_level: Alarm level: 1. Normal, 2. Major, 3. Urgent.

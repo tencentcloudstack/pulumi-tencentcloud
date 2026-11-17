@@ -261,6 +261,19 @@ class MigrateJobConfig(pulumi.CustomResource):
             action="recover")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+        * Update:
+          - [CompleteMigrateJob](https://www.tencentcloud.com/document/api/571/51822)
+          - [ContinueMigrateJob](https://www.tencentcloud.com/document/api/571/53982)
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [PauseMigrateJob](https://www.tencentcloud.com/document/api/571/53981)
+          - [RecoverMigrateJob](https://www.tencentcloud.com/document/api/571/51804)
+          - [StopMigrateJob](https://www.tencentcloud.com/document/api/571/51799)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -396,6 +409,19 @@ class MigrateJobConfig(pulumi.CustomResource):
             job_id=start["id"],
             action="recover")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+        * Update:
+          - [CompleteMigrateJob](https://www.tencentcloud.com/document/api/571/51822)
+          - [ContinueMigrateJob](https://www.tencentcloud.com/document/api/571/53982)
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [PauseMigrateJob](https://www.tencentcloud.com/document/api/571/53981)
+          - [RecoverMigrateJob](https://www.tencentcloud.com/document/api/571/51804)
+          - [StopMigrateJob](https://www.tencentcloud.com/document/api/571/51799)
 
 
         :param str resource_name: The name of the resource.

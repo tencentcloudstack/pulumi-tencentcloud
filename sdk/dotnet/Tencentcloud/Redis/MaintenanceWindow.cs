@@ -66,6 +66,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37832)
+    /// * Read: [DescribeMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37833)
+    /// * Update: [ModifyMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37832)
+    /// 
     /// ## Import
     /// 
     /// redis maintenance window can be imported using the id, e.g.

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     gatewayId: "gw-12345678",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
  */
 export function getMultiPathGatewayOriginAcl(args: GetMultiPathGatewayOriginAclArgs, opts?: pulumi.InvokeOptions): Promise<GetMultiPathGatewayOriginAclResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetMultiPathGatewayOriginAclResult {
  *     gatewayId: "gw-12345678",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
  */
 export function getMultiPathGatewayOriginAclOutput(args: GetMultiPathGatewayOriginAclOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMultiPathGatewayOriginAclResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

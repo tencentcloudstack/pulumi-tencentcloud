@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
 func GetZoneAvailablePlans(ctx *pulumi.Context, args *GetZoneAvailablePlansArgs, opts ...pulumi.InvokeOption) (*GetZoneAvailablePlansResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetZoneAvailablePlansResult

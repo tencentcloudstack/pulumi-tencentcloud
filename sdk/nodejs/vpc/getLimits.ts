@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&type=document&lang=en)
  */
 export function getLimits(args: GetLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetLimitsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetLimitsResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&type=document&lang=en)
  */
 export function getLimitsOutput(args: GetLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLimitsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

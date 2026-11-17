@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RejectAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34781)
 type InstancesRejectAttach struct {
 	pulumi.CustomResourceState
 

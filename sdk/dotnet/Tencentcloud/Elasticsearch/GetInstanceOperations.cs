@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceOperations](https://www.tencentcloud.com/document/api/845/32215)
         /// </summary>
         public static Task<GetInstanceOperationsResult> InvokeAsync(GetInstanceOperationsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceOperations](https://www.tencentcloud.com/document/api/845/32215)
         /// </summary>
         public static Output<GetInstanceOperationsResult> Invoke(GetInstanceOperationsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceOperations](https://www.tencentcloud.com/document/api/845/32215)
         /// </summary>
         public static Output<GetInstanceOperationsResult> Invoke(GetInstanceOperationsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceOperationsResult>("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args ?? new GetInstanceOperationsInvokeArgs(), options.WithDefaults());

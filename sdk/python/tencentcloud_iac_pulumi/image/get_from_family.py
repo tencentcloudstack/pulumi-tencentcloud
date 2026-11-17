@@ -96,6 +96,12 @@ def get_from_family(image_family: Optional[_builtins.str] = None,
     example = tencentcloud.image.get_from_family(image_family="business-daily-update")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
+
 
     :param _builtins.str image_family: Image family name.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_from_family_output(image_family: pulumi.Input[Optional[_builtins.str]] =
 
     example = tencentcloud.image.get_from_family(image_family="business-daily-update")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
 
 
     :param _builtins.str image_family: Image family name.

@@ -63,6 +63,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDbCustomClusterNodesResult> InvokeAsync(GetDbCustomClusterNodesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCustomClusterNodesResult>("tencentcloud:Dbdc/getDbCustomClusterNodes:getDbCustomClusterNodes", args ?? new GetDbCustomClusterNodesArgs(), options.WithDefaults());
@@ -118,6 +124,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomClusterNodesResult> Invoke(GetDbCustomClusterNodesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomClusterNodesResult>("tencentcloud:Dbdc/getDbCustomClusterNodes:getDbCustomClusterNodes", args ?? new GetDbCustomClusterNodesInvokeArgs(), options.WithDefaults());
@@ -173,6 +185,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomClusterNodesResult> Invoke(GetDbCustomClusterNodesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomClusterNodesResult>("tencentcloud:Dbdc/getDbCustomClusterNodes:getDbCustomClusterNodes", args ?? new GetDbCustomClusterNodesInvokeArgs(), options.WithDefaults());

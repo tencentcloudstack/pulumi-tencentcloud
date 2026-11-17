@@ -130,6 +130,12 @@ def get_region_and_price(ip_address_version: Optional[_builtins.str] = None,
     region_and_price = tencentcloud.gaap.get_region_and_price()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
+
 
     :param _builtins.str ip_address_version: IP version. Available values: IPv4, IPv6. Default is IPv4.
     :param _builtins.str package_type: Type of channel package. `Thunder` represents standard channel group, `Accelerator` represents game accelerator channel, and `CrossBorder` represents cross-border channel.
@@ -165,6 +171,12 @@ def get_region_and_price_output(ip_address_version: pulumi.Input[Optional[Option
 
     region_and_price = tencentcloud.gaap.get_region_and_price()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
 
 
     :param _builtins.str ip_address_version: IP version. Available values: IPv4, IPv6. Default is IPv4.

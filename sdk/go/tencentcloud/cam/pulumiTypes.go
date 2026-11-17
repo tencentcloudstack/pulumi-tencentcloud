@@ -593,6 +593,416 @@ func (o TagRoleAttachmentTagArrayOutput) Index(i pulumi.IntInput) TagRoleAttachm
 	}).(TagRoleAttachmentTagOutput)
 }
 
+type UpdatePasswordRuleConfigRules struct {
+	// Forced password change period.
+	ForcePasswordChange *int `pulumi:"forcePasswordChange"`
+	// Minimum password length.
+	MinimumLength *int `pulumi:"minimumLength"`
+	// Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+	MustContain *string `pulumi:"mustContain"`
+	// Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+	PasswordExpirationInvalidation *int `pulumi:"passwordExpirationInvalidation"`
+	// Number of allowed password retries.
+	RetryPasswordLimit *int `pulumi:"retryPasswordLimit"`
+	// Number of previous passwords that cannot be reused.
+	ReusePasswordLimit *int `pulumi:"reusePasswordLimit"`
+}
+
+// UpdatePasswordRuleConfigRulesInput is an input type that accepts UpdatePasswordRuleConfigRulesArgs and UpdatePasswordRuleConfigRulesOutput values.
+// You can construct a concrete instance of `UpdatePasswordRuleConfigRulesInput` via:
+//
+//	UpdatePasswordRuleConfigRulesArgs{...}
+type UpdatePasswordRuleConfigRulesInput interface {
+	pulumi.Input
+
+	ToUpdatePasswordRuleConfigRulesOutput() UpdatePasswordRuleConfigRulesOutput
+	ToUpdatePasswordRuleConfigRulesOutputWithContext(context.Context) UpdatePasswordRuleConfigRulesOutput
+}
+
+type UpdatePasswordRuleConfigRulesArgs struct {
+	// Forced password change period.
+	ForcePasswordChange pulumi.IntPtrInput `pulumi:"forcePasswordChange"`
+	// Minimum password length.
+	MinimumLength pulumi.IntPtrInput `pulumi:"minimumLength"`
+	// Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+	MustContain pulumi.StringPtrInput `pulumi:"mustContain"`
+	// Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+	PasswordExpirationInvalidation pulumi.IntPtrInput `pulumi:"passwordExpirationInvalidation"`
+	// Number of allowed password retries.
+	RetryPasswordLimit pulumi.IntPtrInput `pulumi:"retryPasswordLimit"`
+	// Number of previous passwords that cannot be reused.
+	ReusePasswordLimit pulumi.IntPtrInput `pulumi:"reusePasswordLimit"`
+}
+
+func (UpdatePasswordRuleConfigRulesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UpdatePasswordRuleConfigRules)(nil)).Elem()
+}
+
+func (i UpdatePasswordRuleConfigRulesArgs) ToUpdatePasswordRuleConfigRulesOutput() UpdatePasswordRuleConfigRulesOutput {
+	return i.ToUpdatePasswordRuleConfigRulesOutputWithContext(context.Background())
+}
+
+func (i UpdatePasswordRuleConfigRulesArgs) ToUpdatePasswordRuleConfigRulesOutputWithContext(ctx context.Context) UpdatePasswordRuleConfigRulesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpdatePasswordRuleConfigRulesOutput)
+}
+
+func (i UpdatePasswordRuleConfigRulesArgs) ToUpdatePasswordRuleConfigRulesPtrOutput() UpdatePasswordRuleConfigRulesPtrOutput {
+	return i.ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(context.Background())
+}
+
+func (i UpdatePasswordRuleConfigRulesArgs) ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(ctx context.Context) UpdatePasswordRuleConfigRulesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpdatePasswordRuleConfigRulesOutput).ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(ctx)
+}
+
+// UpdatePasswordRuleConfigRulesPtrInput is an input type that accepts UpdatePasswordRuleConfigRulesArgs, UpdatePasswordRuleConfigRulesPtr and UpdatePasswordRuleConfigRulesPtrOutput values.
+// You can construct a concrete instance of `UpdatePasswordRuleConfigRulesPtrInput` via:
+//
+//	        UpdatePasswordRuleConfigRulesArgs{...}
+//
+//	or:
+//
+//	        nil
+type UpdatePasswordRuleConfigRulesPtrInput interface {
+	pulumi.Input
+
+	ToUpdatePasswordRuleConfigRulesPtrOutput() UpdatePasswordRuleConfigRulesPtrOutput
+	ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(context.Context) UpdatePasswordRuleConfigRulesPtrOutput
+}
+
+type updatePasswordRuleConfigRulesPtrType UpdatePasswordRuleConfigRulesArgs
+
+func UpdatePasswordRuleConfigRulesPtr(v *UpdatePasswordRuleConfigRulesArgs) UpdatePasswordRuleConfigRulesPtrInput {
+	return (*updatePasswordRuleConfigRulesPtrType)(v)
+}
+
+func (*updatePasswordRuleConfigRulesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**UpdatePasswordRuleConfigRules)(nil)).Elem()
+}
+
+func (i *updatePasswordRuleConfigRulesPtrType) ToUpdatePasswordRuleConfigRulesPtrOutput() UpdatePasswordRuleConfigRulesPtrOutput {
+	return i.ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(context.Background())
+}
+
+func (i *updatePasswordRuleConfigRulesPtrType) ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(ctx context.Context) UpdatePasswordRuleConfigRulesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UpdatePasswordRuleConfigRulesPtrOutput)
+}
+
+type UpdatePasswordRuleConfigRulesOutput struct{ *pulumi.OutputState }
+
+func (UpdatePasswordRuleConfigRulesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UpdatePasswordRuleConfigRules)(nil)).Elem()
+}
+
+func (o UpdatePasswordRuleConfigRulesOutput) ToUpdatePasswordRuleConfigRulesOutput() UpdatePasswordRuleConfigRulesOutput {
+	return o
+}
+
+func (o UpdatePasswordRuleConfigRulesOutput) ToUpdatePasswordRuleConfigRulesOutputWithContext(ctx context.Context) UpdatePasswordRuleConfigRulesOutput {
+	return o
+}
+
+func (o UpdatePasswordRuleConfigRulesOutput) ToUpdatePasswordRuleConfigRulesPtrOutput() UpdatePasswordRuleConfigRulesPtrOutput {
+	return o.ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(context.Background())
+}
+
+func (o UpdatePasswordRuleConfigRulesOutput) ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(ctx context.Context) UpdatePasswordRuleConfigRulesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UpdatePasswordRuleConfigRules) *UpdatePasswordRuleConfigRules {
+		return &v
+	}).(UpdatePasswordRuleConfigRulesPtrOutput)
+}
+
+// Forced password change period.
+func (o UpdatePasswordRuleConfigRulesOutput) ForcePasswordChange() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v UpdatePasswordRuleConfigRules) *int { return v.ForcePasswordChange }).(pulumi.IntPtrOutput)
+}
+
+// Minimum password length.
+func (o UpdatePasswordRuleConfigRulesOutput) MinimumLength() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v UpdatePasswordRuleConfigRules) *int { return v.MinimumLength }).(pulumi.IntPtrOutput)
+}
+
+// Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+func (o UpdatePasswordRuleConfigRulesOutput) MustContain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UpdatePasswordRuleConfigRules) *string { return v.MustContain }).(pulumi.StringPtrOutput)
+}
+
+// Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+func (o UpdatePasswordRuleConfigRulesOutput) PasswordExpirationInvalidation() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v UpdatePasswordRuleConfigRules) *int { return v.PasswordExpirationInvalidation }).(pulumi.IntPtrOutput)
+}
+
+// Number of allowed password retries.
+func (o UpdatePasswordRuleConfigRulesOutput) RetryPasswordLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v UpdatePasswordRuleConfigRules) *int { return v.RetryPasswordLimit }).(pulumi.IntPtrOutput)
+}
+
+// Number of previous passwords that cannot be reused.
+func (o UpdatePasswordRuleConfigRulesOutput) ReusePasswordLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v UpdatePasswordRuleConfigRules) *int { return v.ReusePasswordLimit }).(pulumi.IntPtrOutput)
+}
+
+type UpdatePasswordRuleConfigRulesPtrOutput struct{ *pulumi.OutputState }
+
+func (UpdatePasswordRuleConfigRulesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**UpdatePasswordRuleConfigRules)(nil)).Elem()
+}
+
+func (o UpdatePasswordRuleConfigRulesPtrOutput) ToUpdatePasswordRuleConfigRulesPtrOutput() UpdatePasswordRuleConfigRulesPtrOutput {
+	return o
+}
+
+func (o UpdatePasswordRuleConfigRulesPtrOutput) ToUpdatePasswordRuleConfigRulesPtrOutputWithContext(ctx context.Context) UpdatePasswordRuleConfigRulesPtrOutput {
+	return o
+}
+
+func (o UpdatePasswordRuleConfigRulesPtrOutput) Elem() UpdatePasswordRuleConfigRulesOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) UpdatePasswordRuleConfigRules {
+		if v != nil {
+			return *v
+		}
+		var ret UpdatePasswordRuleConfigRules
+		return ret
+	}).(UpdatePasswordRuleConfigRulesOutput)
+}
+
+// Forced password change period.
+func (o UpdatePasswordRuleConfigRulesPtrOutput) ForcePasswordChange() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ForcePasswordChange
+	}).(pulumi.IntPtrOutput)
+}
+
+// Minimum password length.
+func (o UpdatePasswordRuleConfigRulesPtrOutput) MinimumLength() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MinimumLength
+	}).(pulumi.IntPtrOutput)
+}
+
+// Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+func (o UpdatePasswordRuleConfigRulesPtrOutput) MustContain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MustContain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+func (o UpdatePasswordRuleConfigRulesPtrOutput) PasswordExpirationInvalidation() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PasswordExpirationInvalidation
+	}).(pulumi.IntPtrOutput)
+}
+
+// Number of allowed password retries.
+func (o UpdatePasswordRuleConfigRulesPtrOutput) RetryPasswordLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RetryPasswordLimit
+	}).(pulumi.IntPtrOutput)
+}
+
+// Number of previous passwords that cannot be reused.
+func (o UpdatePasswordRuleConfigRulesPtrOutput) ReusePasswordLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *UpdatePasswordRuleConfigRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ReusePasswordLimit
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetAccountsUser struct {
+	// Whether the account can log in to the console. Returned as the raw int value from the API.
+	ConsoleLogin int `pulumi:"consoleLogin"`
+	// Country code.
+	CountryCode string `pulumi:"countryCode"`
+	// Creation time. Format: YYYY-MM-DD hh:mm:ss.
+	CreateTime string `pulumi:"createTime"`
+	// Email.
+	Email string `pulumi:"email"`
+	// Account name.
+	Name string `pulumi:"name"`
+	// Phone number.
+	PhoneNum string `pulumi:"phoneNum"`
+	// Account remark.
+	Remark string `pulumi:"remark"`
+	// Account UID.
+	Uid int `pulumi:"uid"`
+	// Account ID (Uin).
+	Uin int `pulumi:"uin"`
+	// Account type to filter by. Valid values: `Owner` (master account), `SubUser` (sub user), `CICUser` (CIC sub user), `WechatCorpUser` (WeCom sub user), `AgentIdentity` (AgentIdentity sub user), `Collaborator` (collaborator), `MessageReceiver` (message receiver).
+	UserType string `pulumi:"userType"`
+}
+
+// GetAccountsUserInput is an input type that accepts GetAccountsUserArgs and GetAccountsUserOutput values.
+// You can construct a concrete instance of `GetAccountsUserInput` via:
+//
+//	GetAccountsUserArgs{...}
+type GetAccountsUserInput interface {
+	pulumi.Input
+
+	ToGetAccountsUserOutput() GetAccountsUserOutput
+	ToGetAccountsUserOutputWithContext(context.Context) GetAccountsUserOutput
+}
+
+type GetAccountsUserArgs struct {
+	// Whether the account can log in to the console. Returned as the raw int value from the API.
+	ConsoleLogin pulumi.IntInput `pulumi:"consoleLogin"`
+	// Country code.
+	CountryCode pulumi.StringInput `pulumi:"countryCode"`
+	// Creation time. Format: YYYY-MM-DD hh:mm:ss.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Email.
+	Email pulumi.StringInput `pulumi:"email"`
+	// Account name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Phone number.
+	PhoneNum pulumi.StringInput `pulumi:"phoneNum"`
+	// Account remark.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Account UID.
+	Uid pulumi.IntInput `pulumi:"uid"`
+	// Account ID (Uin).
+	Uin pulumi.IntInput `pulumi:"uin"`
+	// Account type to filter by. Valid values: `Owner` (master account), `SubUser` (sub user), `CICUser` (CIC sub user), `WechatCorpUser` (WeCom sub user), `AgentIdentity` (AgentIdentity sub user), `Collaborator` (collaborator), `MessageReceiver` (message receiver).
+	UserType pulumi.StringInput `pulumi:"userType"`
+}
+
+func (GetAccountsUserArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountsUser)(nil)).Elem()
+}
+
+func (i GetAccountsUserArgs) ToGetAccountsUserOutput() GetAccountsUserOutput {
+	return i.ToGetAccountsUserOutputWithContext(context.Background())
+}
+
+func (i GetAccountsUserArgs) ToGetAccountsUserOutputWithContext(ctx context.Context) GetAccountsUserOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountsUserOutput)
+}
+
+// GetAccountsUserArrayInput is an input type that accepts GetAccountsUserArray and GetAccountsUserArrayOutput values.
+// You can construct a concrete instance of `GetAccountsUserArrayInput` via:
+//
+//	GetAccountsUserArray{ GetAccountsUserArgs{...} }
+type GetAccountsUserArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountsUserArrayOutput() GetAccountsUserArrayOutput
+	ToGetAccountsUserArrayOutputWithContext(context.Context) GetAccountsUserArrayOutput
+}
+
+type GetAccountsUserArray []GetAccountsUserInput
+
+func (GetAccountsUserArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountsUser)(nil)).Elem()
+}
+
+func (i GetAccountsUserArray) ToGetAccountsUserArrayOutput() GetAccountsUserArrayOutput {
+	return i.ToGetAccountsUserArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountsUserArray) ToGetAccountsUserArrayOutputWithContext(ctx context.Context) GetAccountsUserArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountsUserArrayOutput)
+}
+
+type GetAccountsUserOutput struct{ *pulumi.OutputState }
+
+func (GetAccountsUserOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountsUser)(nil)).Elem()
+}
+
+func (o GetAccountsUserOutput) ToGetAccountsUserOutput() GetAccountsUserOutput {
+	return o
+}
+
+func (o GetAccountsUserOutput) ToGetAccountsUserOutputWithContext(ctx context.Context) GetAccountsUserOutput {
+	return o
+}
+
+// Whether the account can log in to the console. Returned as the raw int value from the API.
+func (o GetAccountsUserOutput) ConsoleLogin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountsUser) int { return v.ConsoleLogin }).(pulumi.IntOutput)
+}
+
+// Country code.
+func (o GetAccountsUserOutput) CountryCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.CountryCode }).(pulumi.StringOutput)
+}
+
+// Creation time. Format: YYYY-MM-DD hh:mm:ss.
+func (o GetAccountsUserOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Email.
+func (o GetAccountsUserOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// Account name.
+func (o GetAccountsUserOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Phone number.
+func (o GetAccountsUserOutput) PhoneNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.PhoneNum }).(pulumi.StringOutput)
+}
+
+// Account remark.
+func (o GetAccountsUserOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Account UID.
+func (o GetAccountsUserOutput) Uid() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountsUser) int { return v.Uid }).(pulumi.IntOutput)
+}
+
+// Account ID (Uin).
+func (o GetAccountsUserOutput) Uin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountsUser) int { return v.Uin }).(pulumi.IntOutput)
+}
+
+// Account type to filter by. Valid values: `Owner` (master account), `SubUser` (sub user), `CICUser` (CIC sub user), `WechatCorpUser` (WeCom sub user), `AgentIdentity` (AgentIdentity sub user), `Collaborator` (collaborator), `MessageReceiver` (message receiver).
+func (o GetAccountsUserOutput) UserType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountsUser) string { return v.UserType }).(pulumi.StringOutput)
+}
+
+type GetAccountsUserArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountsUserArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountsUser)(nil)).Elem()
+}
+
+func (o GetAccountsUserArrayOutput) ToGetAccountsUserArrayOutput() GetAccountsUserArrayOutput {
+	return o
+}
+
+func (o GetAccountsUserArrayOutput) ToGetAccountsUserArrayOutputWithContext(ctx context.Context) GetAccountsUserArrayOutput {
+	return o
+}
+
+func (o GetAccountsUserArrayOutput) Index(i pulumi.IntInput) GetAccountsUserOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountsUser {
+		return vs[0].([]GetAccountsUser)[vs[1].(int)]
+	}).(GetAccountsUserOutput)
+}
+
 type GetGroupMembershipsMembershipList struct {
 	// ID of CAM group to be queried.
 	GroupId string `pulumi:"groupId"`
@@ -3741,6 +4151,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyVersionPolicyVersionArrayInput)(nil)).Elem(), PolicyVersionPolicyVersionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TagRoleAttachmentTagInput)(nil)).Elem(), TagRoleAttachmentTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TagRoleAttachmentTagArrayInput)(nil)).Elem(), TagRoleAttachmentTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpdatePasswordRuleConfigRulesInput)(nil)).Elem(), UpdatePasswordRuleConfigRulesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UpdatePasswordRuleConfigRulesPtrInput)(nil)).Elem(), UpdatePasswordRuleConfigRulesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountsUserInput)(nil)).Elem(), GetAccountsUserArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountsUserArrayInput)(nil)).Elem(), GetAccountsUserArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupMembershipsMembershipListInput)(nil)).Elem(), GetGroupMembershipsMembershipListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupMembershipsMembershipListArrayInput)(nil)).Elem(), GetGroupMembershipsMembershipListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput)(nil)).Elem(), GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{})
@@ -3795,6 +4209,10 @@ func init() {
 	pulumi.RegisterOutputType(PolicyVersionPolicyVersionArrayOutput{})
 	pulumi.RegisterOutputType(TagRoleAttachmentTagOutput{})
 	pulumi.RegisterOutputType(TagRoleAttachmentTagArrayOutput{})
+	pulumi.RegisterOutputType(UpdatePasswordRuleConfigRulesOutput{})
+	pulumi.RegisterOutputType(UpdatePasswordRuleConfigRulesPtrOutput{})
+	pulumi.RegisterOutputType(GetAccountsUserOutput{})
+	pulumi.RegisterOutputType(GetAccountsUserArrayOutput{})
 	pulumi.RegisterOutputType(GetGroupMembershipsMembershipListOutput{})
 	pulumi.RegisterOutputType(GetGroupMembershipsMembershipListArrayOutput{})
 	pulumi.RegisterOutputType(GetGroupPolicyAttachmentsGroupPolicyAttachmentListOutput{})

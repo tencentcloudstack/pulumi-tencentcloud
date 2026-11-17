@@ -151,6 +151,12 @@ def get_sql_templates(instance_id: Optional[_builtins.str] = None,
         product="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&type=document&lang=en)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str product: Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL, the default is mysql.
@@ -197,6 +203,12 @@ def get_sql_templates_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
         sql_text="",
         product="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&type=document&lang=en)
 
 
     :param _builtins.str instance_id: instance id.

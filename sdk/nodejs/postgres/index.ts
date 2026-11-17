@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { AuditLogFileArgs, AuditLogFileState } from "./auditLogFile";
+export type AuditLogFile = import("./auditLogFile").AuditLogFile;
+export const AuditLogFile: typeof import("./auditLogFile").AuditLogFile = null as any;
+utilities.lazyLoad(exports, ["AuditLogFile"], () => require("./auditLogFile"));
+
 export { AuditServiceArgs, AuditServiceState } from "./auditService";
 export type AuditService = import("./auditService").AuditService;
 export const AuditService: typeof import("./auditService").AuditService = null as any;
@@ -15,6 +20,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Postgres/auditLogFile:AuditLogFile":
+                return new AuditLogFile(name, <any>undefined, { urn })
             case "tencentcloud:Postgres/auditService:AuditService":
                 return new AuditService(name, <any>undefined, { urn })
             default:
@@ -22,4 +29,5 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgres/auditLogFile", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgres/auditService", _module)

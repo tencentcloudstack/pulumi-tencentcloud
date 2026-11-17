@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
         /// </summary>
         public static Task<GetChcHostsResult> InvokeAsync(GetChcHostsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
         /// </summary>
         public static Output<GetChcHostsResult> Invoke(GetChcHostsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
         /// </summary>
         public static Output<GetChcHostsResult> Invoke(GetChcHostsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetChcHostsResult>("tencentcloud:Cvm/getChcHosts:getChcHosts", args ?? new GetChcHostsInvokeArgs(), options.WithDefaults());

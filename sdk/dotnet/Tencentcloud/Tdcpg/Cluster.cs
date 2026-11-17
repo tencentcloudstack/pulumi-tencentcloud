@@ -44,6 +44,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCluster](https://www.tencentcloud.com/search/?wd=CreateCluster&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourcesByDealName](https://www.tencentcloud.com/search/?wd=DescribeResourcesByDealName&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyClusterName](https://www.tencentcloud.com/search/?wd=ModifyClusterName&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteCluster](https://www.tencentcloud.com/search/?wd=DeleteCluster&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&amp;type=document&amp;lang=en)
+    ///   - [IsolateCluster](https://www.tencentcloud.com/search/?wd=IsolateCluster&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tdcpg cluster can be imported using the id, e.g.

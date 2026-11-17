@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     searchWord: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&type=document&lang=en)
  */
 export function getDeliveryConfigs(args?: GetDeliveryConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetDeliveryConfigsResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetDeliveryConfigsResult {
  *     searchWord: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&type=document&lang=en)
  */
 export function getDeliveryConfigsOutput(args?: GetDeliveryConfigsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDeliveryConfigsResult> {
     args = args || {};

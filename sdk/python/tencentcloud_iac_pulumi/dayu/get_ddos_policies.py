@@ -110,6 +110,12 @@ def get_ddos_policies(policy_id: Optional[_builtins.str] = None,
         policy_id=test_policy["policyId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
+
 
     :param _builtins.str policy_id: ID of the DDoS policy to be query.
     :param _builtins.str resource_type: Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
@@ -144,6 +150,12 @@ def get_ddos_policies_output(policy_id: pulumi.Input[Optional[Optional[_builtins
     id_test = tencentcloud.dayu.get_ddos_policies(resource_type=test_policy["resourceType"],
         policy_id=test_policy["policyId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
 
 
     :param _builtins.str policy_id: ID of the DDoS policy to be query.

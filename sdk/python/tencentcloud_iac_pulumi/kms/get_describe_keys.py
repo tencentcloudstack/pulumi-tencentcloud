@@ -99,6 +99,12 @@ def get_describe_keys(key_ids: Optional[Sequence[_builtins.str]] = None,
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
+
 
     :param Sequence[_builtins.str] key_ids: Query the ID list of CMK, batch query supports up to 100 KeyIds at a time.
     :param _builtins.str result_output_file: Used to save results.
@@ -131,6 +137,12 @@ def get_describe_keys_output(key_ids: pulumi.Input[Optional[Sequence[_builtins.s
         "bffae4ed-6465-11ee-90b2-5254000ef00e",
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
 
 
     :param Sequence[_builtins.str] key_ids: Query the ID list of CMK, batch query supports up to 100 KeyIds at a time.

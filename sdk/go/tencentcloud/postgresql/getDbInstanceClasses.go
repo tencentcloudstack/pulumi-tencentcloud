@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
 func GetDbInstanceClasses(ctx *pulumi.Context, args *GetDbInstanceClassesArgs, opts ...pulumi.InvokeOption) (*GetDbInstanceClassesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbInstanceClassesResult

@@ -320,6 +320,14 @@ class ApplicationConfig(pulumi.CustomResource):
             encode_with_base64=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateConfigWithDetailResp&type=document&lang=en)
+        * Read: [DescribeConfigs](https://www.tencentcloud.com/search/?wd=DescribeConfigs&type=document&lang=en)
+        * Delete: [DeleteConfig](https://www.tencentcloud.com/search/?wd=DeleteConfig&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -355,6 +363,14 @@ class ApplicationConfig(pulumi.CustomResource):
             config_version_desc="test2",
             encode_with_base64=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateConfigWithDetailResp&type=document&lang=en)
+        * Read: [DescribeConfigs](https://www.tencentcloud.com/search/?wd=DescribeConfigs&type=document&lang=en)
+        * Delete: [DeleteConfig](https://www.tencentcloud.com/search/?wd=DeleteConfig&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

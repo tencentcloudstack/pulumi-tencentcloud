@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
         /// </summary>
         public static Task<GetInstanceTrafficResult> InvokeAsync(GetInstanceTrafficArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
         /// </summary>
         public static Output<GetInstanceTrafficResult> Invoke(GetInstanceTrafficInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
         /// </summary>
         public static Output<GetInstanceTrafficResult> Invoke(GetInstanceTrafficInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficInvokeArgs(), options.WithDefaults());

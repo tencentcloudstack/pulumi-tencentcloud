@@ -16,6 +16,12 @@ import * as utilities from "../utilities";
  * const updateCertificateRecordRetry = new tencentcloud.ssl.UpdateCertificateRecordRetryOperation("update_certificate_record_retry", {deployRecordId: 1603});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateCertificateRecordRetry](https://www.tencentcloud.com/document/api/1007/57980)
+ *
  * ## Import
  *
  * ssl updateCertificateRecordRetry can be imported using the id, e.g.

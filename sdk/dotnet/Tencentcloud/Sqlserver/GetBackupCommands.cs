@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupCommand](https://www.tencentcloud.com/document/api/238/39839)
         /// </summary>
         public static Task<GetBackupCommandsResult> InvokeAsync(GetBackupCommandsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupCommand](https://www.tencentcloud.com/document/api/238/39839)
         /// </summary>
         public static Output<GetBackupCommandsResult> Invoke(GetBackupCommandsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupCommand](https://www.tencentcloud.com/document/api/238/39839)
         /// </summary>
         public static Output<GetBackupCommandsResult> Invoke(GetBackupCommandsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupCommandsResult>("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args ?? new GetBackupCommandsInvokeArgs(), options.WithDefaults());

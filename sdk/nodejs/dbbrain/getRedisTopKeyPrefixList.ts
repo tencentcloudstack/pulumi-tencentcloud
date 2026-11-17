@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     product: "redis",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
  */
 export function getRedisTopKeyPrefixList(args: GetRedisTopKeyPrefixListArgs, opts?: pulumi.InvokeOptions): Promise<GetRedisTopKeyPrefixListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetRedisTopKeyPrefixListResult {
  *     product: "redis",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
  */
 export function getRedisTopKeyPrefixListOutput(args: GetRedisTopKeyPrefixListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRedisTopKeyPrefixListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

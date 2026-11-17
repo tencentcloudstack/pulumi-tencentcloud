@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
         /// </summary>
         public static Task<GetLogExportListResult> InvokeAsync(GetLogExportListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
         /// </summary>
         public static Output<GetLogExportListResult> Invoke(GetLogExportListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
         /// </summary>
         public static Output<GetLogExportListResult> Invoke(GetLogExportListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListInvokeArgs(), options.WithDefaults());

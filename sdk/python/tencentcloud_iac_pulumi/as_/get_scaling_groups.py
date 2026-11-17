@@ -140,6 +140,12 @@ def get_scaling_groups(configuration_id: Optional[_builtins.str] = None,
         result_output_file="my_test_path")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
+
 
     :param _builtins.str configuration_id: Filter results by launch configuration ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -183,6 +189,12 @@ def get_scaling_groups_output(configuration_id: pulumi.Input[Optional[Optional[_
         configuration_id="asc-oqio4yyj",
         result_output_file="my_test_path")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
 
 
     :param _builtins.str configuration_id: Filter results by launch configuration ID.

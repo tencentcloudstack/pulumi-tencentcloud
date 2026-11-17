@@ -22,6 +22,14 @@ import * as utilities from "../utilities";
  *     storageDays: 7,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+ *   - [ManualBackupInstance](https://www.tencentcloud.com/document/api/239/32073)
  */
 export class BackupOperation extends pulumi.CustomResource {
     /**

@@ -127,6 +127,12 @@ def get_alarm_basic_metric(dimensions: Optional[Sequence[_builtins.str]] = None,
         dimensions=["uuid"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
+
 
     :param Sequence[_builtins.str] dimensions: Optional parameters, filtered by dimension.
     :param _builtins.str metric_name: Indicator names are different for each cloud product. To obtain indicator names, please go to the monitoring indicator documents of each product, such as the indicator names of cloud servers, which can be found in Cloud Server Monitoring Indicators.
@@ -166,6 +172,12 @@ def get_alarm_basic_metric_output(dimensions: pulumi.Input[Optional[Optional[Seq
         metric_name="WanOuttraffic",
         dimensions=["uuid"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
 
 
     :param Sequence[_builtins.str] dimensions: Optional parameters, filtered by dimension.

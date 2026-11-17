@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     companyId: 11772,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
  */
 export function getDescribeManagers(args: GetDescribeManagersArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeManagersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetDescribeManagersResult {
  *     companyId: 11772,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeManagers](https://www.tencentcloud.com/document/api/1007/79832)
  */
 export function getDescribeManagersOutput(args: GetDescribeManagersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeManagersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -213,6 +213,12 @@ def get_ops_tasks(cycle_type: Optional[_builtins.str] = None,
         status="F")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsTasks](https://www.tencentcloud.com/document/api/1174/73820)
+
 
     :param _builtins.str cycle_type: Task Cycle Type: ONEOFF_CYCLE: One-time, YEAR_CYCLE: Yearly, MONTH_CYCLE: Monthly, WEEK_CYCLE: Weekly, DAY_CYCLE: Daily, HOUR_CYCLE: Hourly, MINUTE_CYCLE: Minute-level, CRONTAB_CYCLE: Crontab expression-based.
     :param _builtins.str executor_group_id: Executor Group ID.
@@ -293,6 +299,12 @@ def get_ops_tasks_output(cycle_type: pulumi.Input[Optional[Optional[_builtins.st
         cycle_type="MINUTE_CYCLE",
         status="F")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsTasks](https://www.tencentcloud.com/document/api/1174/73820)
 
 
     :param _builtins.str cycle_type: Task Cycle Type: ONEOFF_CYCLE: One-time, YEAR_CYCLE: Yearly, MONTH_CYCLE: Monthly, WEEK_CYCLE: Weekly, DAY_CYCLE: Daily, HOUR_CYCLE: Hourly, MINUTE_CYCLE: Minute-level, CRONTAB_CYCLE: Crontab expression-based.

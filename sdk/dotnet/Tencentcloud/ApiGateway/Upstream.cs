@@ -186,6 +186,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateUpstream](https://www.tencentcloud.com/search/?wd=CreateUpstream&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeUpstreams](https://www.tencentcloud.com/search/?wd=DescribeUpstreams&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifyUpstream](https://www.tencentcloud.com/search/?wd=ModifyUpstream&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteUpstream](https://www.tencentcloud.com/search/?wd=DeleteUpstream&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// apigateway upstream can be imported using the id, e.g.

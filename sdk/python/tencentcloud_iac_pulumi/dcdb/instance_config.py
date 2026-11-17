@@ -119,6 +119,13 @@ class InstanceConfig(pulumi.CustomResource):
             rs_access_strategy=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribeDCDBInstanceDetail](https://www.tencentcloud.com/document/api/1042/54586)
+        * Update: [ModifyRealServerAccessStrategy](https://www.tencentcloud.com/search/?wd=ModifyRealServerAccessStrategy&type=document&lang=en)
+
         ## Import
 
         dcdb instance_config can be imported using the id, e.g.
@@ -152,6 +159,13 @@ class InstanceConfig(pulumi.CustomResource):
             instance_id=dcdb_id,
             rs_access_strategy=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribeDCDBInstanceDetail](https://www.tencentcloud.com/document/api/1042/54586)
+        * Update: [ModifyRealServerAccessStrategy](https://www.tencentcloud.com/search/?wd=ModifyRealServerAccessStrategy&type=document&lang=en)
 
         ## Import
 

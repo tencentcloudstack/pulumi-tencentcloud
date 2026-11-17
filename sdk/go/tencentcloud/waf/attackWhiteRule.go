@@ -123,6 +123,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AddAttackWhiteRule](https://www.tencentcloud.com/search/?wd=AddAttackWhiteRule&type=document&lang=en)
+// * Read: [DescribeAttackWhiteRule](https://www.tencentcloud.com/search/?wd=DescribeAttackWhiteRule&type=document&lang=en)
+// * Update: [ModifyAttackWhiteRule](https://www.tencentcloud.com/search/?wd=ModifyAttackWhiteRule&type=document&lang=en)
+// * Delete: [DeleteAttackWhiteRule](https://www.tencentcloud.com/search/?wd=DeleteAttackWhiteRule&type=document&lang=en)
+//
 // ## Import
 //
 // WAF attack white rule can be imported using the id, e.g.

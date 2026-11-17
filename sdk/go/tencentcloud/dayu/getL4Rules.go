@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
 func GetL4Rules(ctx *pulumi.Context, args *GetL4RulesArgs, opts ...pulumi.InvokeOption) (*GetL4RulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetL4RulesResult

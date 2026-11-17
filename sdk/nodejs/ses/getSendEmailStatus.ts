@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     toEmailAddress: "example@cloud.com",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
  */
 export function getSendEmailStatus(args: GetSendEmailStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetSendEmailStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetSendEmailStatusResult {
  *     toEmailAddress: "example@cloud.com",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
  */
 export function getSendEmailStatusOutput(args: GetSendEmailStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSendEmailStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

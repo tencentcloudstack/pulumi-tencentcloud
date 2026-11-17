@@ -122,6 +122,12 @@ def get_data_engine_network(filters: Optional[Sequence[Union['GetDataEngineNetwo
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&type=document&lang=en)
+
 
     :param Sequence[Union['GetDataEngineNetworkFilterArgs', 'GetDataEngineNetworkFilterArgsDict']] filters: Filter conditions are optional, engine-network-id--engine network ID, engine-network-state--engine network status.
     :param _builtins.str result_output_file: Used to save results.
@@ -164,6 +170,12 @@ def get_data_engine_network_output(filters: pulumi.Input[Optional[Optional[Seque
             "values": ["DataEngine_Network-g1sxyw8v"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&type=document&lang=en)
 
 
     :param Sequence[Union['GetDataEngineNetworkFilterArgs', 'GetDataEngineNetworkFilterArgsDict']] filters: Filter conditions are optional, engine-network-id--engine network ID, engine-network-state--engine network status.

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
 func GetHbaseInstances(ctx *pulumi.Context, args *GetHbaseInstancesArgs, opts ...pulumi.InvokeOption) (*GetHbaseInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHbaseInstancesResult

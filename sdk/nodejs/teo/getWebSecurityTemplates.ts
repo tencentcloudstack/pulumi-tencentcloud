@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     zoneIds: ["zone-3fkff38fyw8s"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
  */
 export function getWebSecurityTemplates(args: GetWebSecurityTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetWebSecurityTemplatesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetWebSecurityTemplatesResult {
  *     zoneIds: ["zone-3fkff38fyw8s"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
  */
 export function getWebSecurityTemplatesOutput(args: GetWebSecurityTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWebSecurityTemplatesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

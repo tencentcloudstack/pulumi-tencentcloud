@@ -63,6 +63,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDirectConnectTunnelExtra](https://www.tencentcloud.com/search/?wd=ModifyDirectConnectTunnelExtra&type=document&lang=en)
+// * Read: [DescribeDirectConnectTunnelExtra](https://www.tencentcloud.com/search/?wd=DescribeDirectConnectTunnelExtra&type=document&lang=en)
+// * Update: [ModifyDirectConnectTunnelExtra](https://www.tencentcloud.com/search/?wd=ModifyDirectConnectTunnelExtra&type=document&lang=en)
+//
 // ## Import
 //
 // DC extra config can be imported using the id, e.g.

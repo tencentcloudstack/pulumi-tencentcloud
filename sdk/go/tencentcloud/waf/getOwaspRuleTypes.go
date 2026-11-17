@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
 func GetOwaspRuleTypes(ctx *pulumi.Context, args *GetOwaspRuleTypesArgs, opts ...pulumi.InvokeOption) (*GetOwaspRuleTypesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOwaspRuleTypesResult

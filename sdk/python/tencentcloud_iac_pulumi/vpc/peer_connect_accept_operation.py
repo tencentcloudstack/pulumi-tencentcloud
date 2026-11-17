@@ -85,6 +85,12 @@ class PeerConnectAcceptOperation(pulumi.CustomResource):
         peer_connect_accept_operation = tencentcloud.vpc.PeerConnectAcceptOperation("peer_connect_accept_operation", peering_connection_id="pcx-abced")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AcceptVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=AcceptVpcPeeringConnection&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +113,12 @@ class PeerConnectAcceptOperation(pulumi.CustomResource):
 
         peer_connect_accept_operation = tencentcloud.vpc.PeerConnectAcceptOperation("peer_connect_accept_operation", peering_connection_id="pcx-abced")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AcceptVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=AcceptVpcPeeringConnection&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

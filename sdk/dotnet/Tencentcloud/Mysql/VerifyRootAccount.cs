@@ -88,6 +88,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [VerifyRootAccount](https://www.tencentcloud.com/search/?wd=VerifyRootAccount&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/verifyRootAccount:VerifyRootAccount")]
     public partial class VerifyRootAccount : global::Pulumi.CustomResource

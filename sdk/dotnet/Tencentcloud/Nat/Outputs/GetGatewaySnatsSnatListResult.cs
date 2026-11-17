@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat.Outputs
         /// </summary>
         public readonly string? InstanceId;
         /// <summary>
-        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE.
+        /// Private IPs of the instance's primary ENI, required when `ResourceType` is NETWORKINTERFACE or USERDEFINED.
         /// </summary>
         public readonly string? InstancePrivateIpAddr;
         /// <summary>
@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat.Outputs
         /// </summary>
         public readonly ImmutableArray<string> PublicIpAddrs;
         /// <summary>
-        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        /// Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         /// </summary>
         public readonly string ResourceType;
         /// <summary>

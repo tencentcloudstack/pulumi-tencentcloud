@@ -154,6 +154,14 @@ class RestartInstance(pulumi.CustomResource):
             node_types=["gtm"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+          - [RestartInstance](https://www.tencentcloud.com/document/api/1138/69329)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -180,6 +188,14 @@ class RestartInstance(pulumi.CustomResource):
             instance_id="cdwpg-zpiemnyd",
             node_types=["gtm"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+          - [RestartInstance](https://www.tencentcloud.com/document/api/1138/69329)
 
 
         :param str resource_name: The name of the resource.

@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateEndPoint](https://www.tencentcloud.com/document/api/1097/65936)
+    /// * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
+    /// * Delete: [DeleteEndPoint](https://www.tencentcloud.com/document/api/1097/67598)
+    /// 
     /// ## Import
     /// 
     /// Private Dns end point can be imported using the id, e.g.

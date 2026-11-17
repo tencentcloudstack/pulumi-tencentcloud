@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
 func GetDbCustomNodeSecurityGroups(ctx *pulumi.Context, args *GetDbCustomNodeSecurityGroupsArgs, opts ...pulumi.InvokeOption) (*GetDbCustomNodeSecurityGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbCustomNodeSecurityGroupsResult

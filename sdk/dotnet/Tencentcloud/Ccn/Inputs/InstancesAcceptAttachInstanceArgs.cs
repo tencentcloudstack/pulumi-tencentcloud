@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Inputs
         public Input<string>? InstanceType { get; set; }
 
         /// <summary>
+        /// Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+        /// </summary>
+        [Input("orderType")]
+        public Input<string>? OrderType { get; set; }
+
+        /// <summary>
         /// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("routeTableId")]

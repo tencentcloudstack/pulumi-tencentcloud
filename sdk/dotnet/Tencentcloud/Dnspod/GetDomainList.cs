@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDomainListResult> InvokeAsync(GetDomainListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListArgs(), options.WithDefaults());
@@ -120,6 +126,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDomainListResult> Invoke(GetDomainListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListInvokeArgs(), options.WithDefaults());
@@ -176,6 +188,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDomainListResult> Invoke(GetDomainListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListInvokeArgs(), options.WithDefaults());

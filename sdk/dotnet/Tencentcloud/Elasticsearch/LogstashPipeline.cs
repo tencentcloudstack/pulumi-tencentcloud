@@ -53,6 +53,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&amp;type=document&amp;lang=en)
+    ///   - [SaveAndDeployLogstashPipeline](https://www.tencentcloud.com/search/?wd=SaveAndDeployLogstashPipeline&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&amp;type=document&amp;lang=en)
+    ///   - [SaveAndDeployLogstashPipeline](https://www.tencentcloud.com/search/?wd=SaveAndDeployLogstashPipeline&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteLogstashPipelines](https://www.tencentcloud.com/search/?wd=DeleteLogstashPipelines&amp;type=document&amp;lang=en)
+    ///   - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// elasticsearch LogstashPipeline can be imported using the id, e.g.

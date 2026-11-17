@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
         /// </summary>
         public static Task<GetInstanceDetailResult> InvokeAsync(GetInstanceDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceDetailResult>("tencentcloud:Mqtt/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
         /// </summary>
         public static Output<GetInstanceDetailResult> Invoke(GetInstanceDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceDetailResult>("tencentcloud:Mqtt/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
         /// </summary>
         public static Output<GetInstanceDetailResult> Invoke(GetInstanceDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceDetailResult>("tencentcloud:Mqtt/getInstanceDetail:getInstanceDetail", args ?? new GetInstanceDetailInvokeArgs(), options.WithDefaults());

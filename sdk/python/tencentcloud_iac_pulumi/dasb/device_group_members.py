@@ -126,6 +126,14 @@ class DeviceGroupMembers(pulumi.CustomResource):
             member_id_sets=[example.id.apply(lambda x: int(x))])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddDeviceGroupMembers](https://www.tencentcloud.com/search/?wd=AddDeviceGroupMembers&type=document&lang=en)
+        * Read: [DescribeDeviceGroupMembers](https://www.tencentcloud.com/search/?wd=DescribeDeviceGroupMembers&type=document&lang=en)
+        * Delete: [DeleteDeviceGroupMembers](https://www.tencentcloud.com/search/?wd=DeleteDeviceGroupMembers&type=document&lang=en)
+
         ## Import
 
         dasb device_group_members can be imported using the id, e.g.
@@ -165,6 +173,14 @@ class DeviceGroupMembers(pulumi.CustomResource):
             device_group_id=example_device_group.id.apply(lambda x: int(x)),
             member_id_sets=[example.id.apply(lambda x: int(x))])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddDeviceGroupMembers](https://www.tencentcloud.com/search/?wd=AddDeviceGroupMembers&type=document&lang=en)
+        * Read: [DescribeDeviceGroupMembers](https://www.tencentcloud.com/search/?wd=DescribeDeviceGroupMembers&type=document&lang=en)
+        * Delete: [DeleteDeviceGroupMembers](https://www.tencentcloud.com/search/?wd=DeleteDeviceGroupMembers&type=document&lang=en)
 
         ## Import
 

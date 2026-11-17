@@ -136,6 +136,12 @@ def get_pairs(key_id: Optional[_builtins.str] = None,
     key_name = tencentcloud.key.get_pairs(key_name="^test$")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+
 
     :param _builtins.str key_id: ID of the key pair to be queried.
     :param _builtins.str key_name: Name of the key pair to be queried. Support regular expression search, only `^` and `$` are supported.
@@ -184,6 +190,12 @@ def get_pairs_output(key_id: pulumi.Input[Optional[Optional[_builtins.str]]] = N
 
     key_name = tencentcloud.key.get_pairs(key_name="^test$")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
 
 
     :param _builtins.str key_id: ID of the key pair to be queried.

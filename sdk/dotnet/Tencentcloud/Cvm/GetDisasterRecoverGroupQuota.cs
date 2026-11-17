@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
         /// </summary>
         public static Task<GetDisasterRecoverGroupQuotaResult> InvokeAsync(GetDisasterRecoverGroupQuotaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
         /// </summary>
         public static Output<GetDisasterRecoverGroupQuotaResult> Invoke(GetDisasterRecoverGroupQuotaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
         /// </summary>
         public static Output<GetDisasterRecoverGroupQuotaResult> Invoke(GetDisasterRecoverGroupQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDisasterRecoverGroupQuotaResult>("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args ?? new GetDisasterRecoverGroupQuotaInvokeArgs(), options.WithDefaults());

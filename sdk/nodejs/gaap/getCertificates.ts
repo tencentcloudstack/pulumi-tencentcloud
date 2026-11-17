@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     id: fooCertificate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCertificates](https://www.tencentcloud.com/document/api/608/33115)
  */
 export function getCertificates(args?: GetCertificatesArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificatesResult> {
     args = args || {};
@@ -98,6 +104,12 @@ export interface GetCertificatesResult {
  *     id: fooCertificate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCertificates](https://www.tencentcloud.com/document/api/608/33115)
  */
 export function getCertificatesOutput(args?: GetCertificatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCertificatesResult> {
     args = args || {};

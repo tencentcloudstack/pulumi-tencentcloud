@@ -469,14 +469,26 @@ class SecurityPolicyConfig(pulumi.CustomResource):
                     }],
                 },
                 "exception_rules": {
-                    "rules": [{
-                        "name": "High-frequency API bypasses rate limits",
-                        "condition": "${http.request.method} in ['POST'] and ${http.request.uri.path} in ['/api/EventLogUpload']",
-                        "skip_scope": "WebSecurityModules",
-                        "skip_option": "SkipOnAllRequestFields",
-                        "web_security_modules_for_exceptions": ["websec-mod-adaptive-control"],
-                        "enabled": "off",
-                    }],
+                    "rules": [
+                        {
+                            "name": "High-frequency API bypasses rate limits",
+                            "condition": "${http.request.method} in ['POST'] and ${http.request.uri.path} in ['/api/EventLogUpload']",
+                            "skip_scope": "WebSecurityModules",
+                            "skip_option": "SkipOnAllRequestFields",
+                            "web_security_modules_for_exceptions": ["websec-mod-adaptive-control"],
+                            "enabled": "off",
+                        },
+                        {
+                            "name": "Skip managed rule set submodule",
+                            "condition": "${http.request.uri.path} in ['/legacy/api']",
+                            "skip_scope": "WebSecuritySubmodules",
+                            "web_security_submodules_for_exceptions": [
+                                "websec-mod-managed-rules/managed-rule-groups",
+                                "websec-mod-rate-limiting-rules",
+                            ],
+                            "enabled": "off",
+                        },
+                    ],
                 },
                 "bot_management_lite": {
                     "captcha_page_challenge": {
@@ -492,6 +504,76 @@ class SecurityPolicyConfig(pulumi.CustomResource):
                             },
                         },
                     },
+                },
+                "bot_management": {
+                    "basic_bot_settings": {
+                        "source_idc": {
+                            "base_action": {
+                                "name": "Monitor",
+                            },
+                            "action_overrides": [{
+                                "rule_ids": [
+                                    "rule-a",
+                                    "rule-b",
+                                ],
+                                "action": {
+                                    "name": "Deny",
+                                },
+                            }],
+                        },
+                        "search_engine_bots": {
+                            "base_action": {
+                                "name": "Monitor",
+                            },
+                            "action_overrides": [{
+                                "rule_ids": ["rule-c"],
+                                "action": {
+                                    "name": "Monitor",
+                                },
+                            }],
+                        },
+                    },
+                    "client_attestation_rules": [{
+                        "name": "client-attestation-rule",
+                        "enabled": "on",
+                        "priority": 10,
+                        "condition": "${http.request.host} contain ['abc']",
+                        "attester_id": "attester-xxxx",
+                        "invalid_attestation_action": {
+                            "name": "Monitor",
+                        },
+                        "device_profiles": [
+                            {
+                                "client_type": "iOS",
+                                "high_risk_min_score": 60,
+                                "high_risk_request_action": {
+                                    "name": "Deny",
+                                    "deny_action_parameters": {
+                                        "block_ip": "on",
+                                        "block_ip_duration": "120s",
+                                    },
+                                },
+                                "medium_risk_min_score": 20,
+                                "medium_risk_request_action": {
+                                    "name": "Monitor",
+                                },
+                            },
+                            {
+                                "client_type": "Android",
+                                "high_risk_min_score": 50,
+                                "high_risk_request_action": {
+                                    "name": "Challenge",
+                                    "challenge_action_parameters": {
+                                        "challenge_option": "JSChallenge",
+                                    },
+                                },
+                                "medium_risk_min_score": 15,
+                                "medium_risk_request_action": {
+                                    "name": "Monitor",
+                                },
+                            },
+                        ],
+                    }],
                 },
             })
         ```
@@ -825,6 +907,14 @@ class SecurityPolicyConfig(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
+        * Read: [DescribeSecurityPolicy](https://www.tencentcloud.com/document/api/1145/50958)
+        * Update: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
 
         ## Import
 
@@ -1093,14 +1183,26 @@ class SecurityPolicyConfig(pulumi.CustomResource):
                     }],
                 },
                 "exception_rules": {
-                    "rules": [{
-                        "name": "High-frequency API bypasses rate limits",
-                        "condition": "${http.request.method} in ['POST'] and ${http.request.uri.path} in ['/api/EventLogUpload']",
-                        "skip_scope": "WebSecurityModules",
-                        "skip_option": "SkipOnAllRequestFields",
-                        "web_security_modules_for_exceptions": ["websec-mod-adaptive-control"],
-                        "enabled": "off",
-                    }],
+                    "rules": [
+                        {
+                            "name": "High-frequency API bypasses rate limits",
+                            "condition": "${http.request.method} in ['POST'] and ${http.request.uri.path} in ['/api/EventLogUpload']",
+                            "skip_scope": "WebSecurityModules",
+                            "skip_option": "SkipOnAllRequestFields",
+                            "web_security_modules_for_exceptions": ["websec-mod-adaptive-control"],
+                            "enabled": "off",
+                        },
+                        {
+                            "name": "Skip managed rule set submodule",
+                            "condition": "${http.request.uri.path} in ['/legacy/api']",
+                            "skip_scope": "WebSecuritySubmodules",
+                            "web_security_submodules_for_exceptions": [
+                                "websec-mod-managed-rules/managed-rule-groups",
+                                "websec-mod-rate-limiting-rules",
+                            ],
+                            "enabled": "off",
+                        },
+                    ],
                 },
                 "bot_management_lite": {
                     "captcha_page_challenge": {
@@ -1116,6 +1218,76 @@ class SecurityPolicyConfig(pulumi.CustomResource):
                             },
                         },
                     },
+                },
+                "bot_management": {
+                    "basic_bot_settings": {
+                        "source_idc": {
+                            "base_action": {
+                                "name": "Monitor",
+                            },
+                            "action_overrides": [{
+                                "rule_ids": [
+                                    "rule-a",
+                                    "rule-b",
+                                ],
+                                "action": {
+                                    "name": "Deny",
+                                },
+                            }],
+                        },
+                        "search_engine_bots": {
+                            "base_action": {
+                                "name": "Monitor",
+                            },
+                            "action_overrides": [{
+                                "rule_ids": ["rule-c"],
+                                "action": {
+                                    "name": "Monitor",
+                                },
+                            }],
+                        },
+                    },
+                    "client_attestation_rules": [{
+                        "name": "client-attestation-rule",
+                        "enabled": "on",
+                        "priority": 10,
+                        "condition": "${http.request.host} contain ['abc']",
+                        "attester_id": "attester-xxxx",
+                        "invalid_attestation_action": {
+                            "name": "Monitor",
+                        },
+                        "device_profiles": [
+                            {
+                                "client_type": "iOS",
+                                "high_risk_min_score": 60,
+                                "high_risk_request_action": {
+                                    "name": "Deny",
+                                    "deny_action_parameters": {
+                                        "block_ip": "on",
+                                        "block_ip_duration": "120s",
+                                    },
+                                },
+                                "medium_risk_min_score": 20,
+                                "medium_risk_request_action": {
+                                    "name": "Monitor",
+                                },
+                            },
+                            {
+                                "client_type": "Android",
+                                "high_risk_min_score": 50,
+                                "high_risk_request_action": {
+                                    "name": "Challenge",
+                                    "challenge_action_parameters": {
+                                        "challenge_option": "JSChallenge",
+                                    },
+                                },
+                                "medium_risk_min_score": 15,
+                                "medium_risk_request_action": {
+                                    "name": "Monitor",
+                                },
+                            },
+                        ],
+                    }],
                 },
             })
         ```
@@ -1449,6 +1621,14 @@ class SecurityPolicyConfig(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
+        * Read: [DescribeSecurityPolicy](https://www.tencentcloud.com/document/api/1145/50958)
+        * Update: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
 
         ## Import
 

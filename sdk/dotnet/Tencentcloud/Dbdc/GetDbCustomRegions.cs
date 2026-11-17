@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomRegions](https://www.tencentcloud.com/search/?wd=DescribeDBCustomRegions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDbCustomRegionsResult> InvokeAsync(GetDbCustomRegionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCustomRegionsResult>("tencentcloud:Dbdc/getDbCustomRegions:getDbCustomRegions", args ?? new GetDbCustomRegionsArgs(), options.WithDefaults());
@@ -54,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomRegions](https://www.tencentcloud.com/search/?wd=DescribeDBCustomRegions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomRegionsResult> Invoke(GetDbCustomRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomRegionsResult>("tencentcloud:Dbdc/getDbCustomRegions:getDbCustomRegions", args ?? new GetDbCustomRegionsInvokeArgs(), options.WithDefaults());
@@ -77,6 +89,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomRegions](https://www.tencentcloud.com/search/?wd=DescribeDBCustomRegions&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomRegionsResult> Invoke(GetDbCustomRegionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomRegionsResult>("tencentcloud:Dbdc/getDbCustomRegions:getDbCustomRegions", args ?? new GetDbCustomRegionsInvokeArgs(), options.WithDefaults());

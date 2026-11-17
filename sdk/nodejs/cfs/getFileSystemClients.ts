@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     fileSystemId: "cfs-iobiaxtj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
  */
 export function getFileSystemClients(args: GetFileSystemClientsArgs, opts?: pulumi.InvokeOptions): Promise<GetFileSystemClientsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetFileSystemClientsResult {
  *     fileSystemId: "cfs-iobiaxtj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
  */
 export function getFileSystemClientsOutput(args: GetFileSystemClientsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFileSystemClientsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

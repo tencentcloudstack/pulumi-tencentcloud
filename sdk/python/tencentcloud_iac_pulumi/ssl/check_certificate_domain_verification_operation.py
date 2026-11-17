@@ -117,6 +117,12 @@ class CheckCertificateDomainVerificationOperation(pulumi.CustomResource):
         example = tencentcloud.ssl.CheckCertificateDomainVerificationOperation("example", certificate_id="6BE701Jx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CheckCertificateDomainVerification](https://www.tencentcloud.com/document/api/1007/79938)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -152,6 +158,12 @@ class CheckCertificateDomainVerificationOperation(pulumi.CustomResource):
 
         example = tencentcloud.ssl.CheckCertificateDomainVerificationOperation("example", certificate_id="6BE701Jx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CheckCertificateDomainVerification](https://www.tencentcloud.com/document/api/1007/79938)
 
 
         :param str resource_name: The name of the resource.

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSpecResult> InvokeAsync(GetSpecArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSpecResult> Invoke(GetSpecInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSpecResult> Invoke(GetSpecInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSpecResult>("tencentcloud:Clickhouse/getSpec:getSpec", args ?? new GetSpecInvokeArgs(), options.WithDefaults());

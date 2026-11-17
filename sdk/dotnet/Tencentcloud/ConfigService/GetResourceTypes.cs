@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
         /// </summary>
         public static Task<GetResourceTypesResult> InvokeAsync(GetResourceTypesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceTypesResult>("tencentcloud:Config/getResourceTypes:getResourceTypes", args ?? new GetResourceTypesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
         /// </summary>
         public static Output<GetResourceTypesResult> Invoke(GetResourceTypesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceTypesResult>("tencentcloud:Config/getResourceTypes:getResourceTypes", args ?? new GetResourceTypesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
         /// </summary>
         public static Output<GetResourceTypesResult> Invoke(GetResourceTypesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceTypesResult>("tencentcloud:Config/getResourceTypes:getResourceTypes", args ?? new GetResourceTypesInvokeArgs(), options.WithDefaults());

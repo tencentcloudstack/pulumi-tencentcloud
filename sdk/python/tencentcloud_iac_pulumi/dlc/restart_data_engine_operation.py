@@ -120,6 +120,15 @@ class RestartDataEngineOperation(pulumi.CustomResource):
             forced_operation=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [RestartDataEngine](https://www.tencentcloud.com/document/api/1155/62648)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +154,15 @@ class RestartDataEngineOperation(pulumi.CustomResource):
             data_engine_id="DataEngine-g5ds87d8",
             forced_operation=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [RestartDataEngine](https://www.tencentcloud.com/document/api/1155/62648)
 
 
         :param str resource_name: The name of the resource.

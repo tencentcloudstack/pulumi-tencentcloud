@@ -103,6 +103,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [VerifyRootAccount](https://www.tencentcloud.com/search/?wd=VerifyRootAccount&type=document&lang=en)
 type VerifyRootAccount struct {
 	pulumi.CustomResourceState
 

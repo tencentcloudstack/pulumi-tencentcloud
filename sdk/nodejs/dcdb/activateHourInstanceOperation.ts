@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const activateHourInstanceOperation = new tencentcloud.dcdb.ActivateHourInstanceOperation("activate_hour_instance_operation", {instanceId: dcdbId});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ActiveHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45900)
  */
 export class ActivateHourInstanceOperation extends pulumi.CustomResource {
     /**

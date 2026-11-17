@@ -31,6 +31,7 @@ import (
 //			_, err := dbdc.NewDbCustomCluster(ctx, "example", &dbdc.DbCustomClusterArgs{
 //				ClusterName:        pulumi.String("tf-example"),
 //				ClusterDescription: pulumi.String("cluster description."),
+//				DeletionProtection: pulumi.Bool(true),
 //				ContainerNetwork: &dbdc.DbCustomClusterContainerNetworkArgs{
 //					VpcId: pulumi.String("vpc-py7mlxqm"),
 //					SubnetIds: pulumi.StringArray{
@@ -55,6 +56,18 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateDBCustomCluster](https://www.tencentcloud.com/search/?wd=CreateDBCustomCluster&type=document&lang=en)
+// * Read: [DescribeDBCustomClusterDetail](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterDetail&type=document&lang=en)
+// * Update:
+//   - [ModifyDBCustomClusterAttributes](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterAttributes&type=document&lang=en)
+//   - [ModifyDBCustomClusterTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterTags&type=document&lang=en)
+//
+// * Delete: [DestroyDBCustomCluster](https://www.tencentcloud.com/search/?wd=DestroyDBCustomCluster&type=document&lang=en)
 //
 // ## Import
 //
@@ -84,6 +97,8 @@ type DbCustomCluster struct {
 	ContainerNetwork DbCustomClusterContainerNetworkOutput `pulumi:"containerNetwork"`
 	// Creation time.
 	CreatedTime pulumi.StringOutput `pulumi:"createdTime"`
+	// Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+	DeletionProtection pulumi.BoolOutput `pulumi:"deletionProtection"`
 	// Region that the cluster belongs to.
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Cluster tags.
@@ -147,6 +162,8 @@ type dbCustomClusterState struct {
 	ContainerNetwork *DbCustomClusterContainerNetwork `pulumi:"containerNetwork"`
 	// Creation time.
 	CreatedTime *string `pulumi:"createdTime"`
+	// Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// Region that the cluster belongs to.
 	Region *string `pulumi:"region"`
 	// Cluster tags.
@@ -172,6 +189,8 @@ type DbCustomClusterState struct {
 	ContainerNetwork DbCustomClusterContainerNetworkPtrInput
 	// Creation time.
 	CreatedTime pulumi.StringPtrInput
+	// Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+	DeletionProtection pulumi.BoolPtrInput
 	// Region that the cluster belongs to.
 	Region pulumi.StringPtrInput
 	// Cluster tags.
@@ -191,6 +210,8 @@ type dbCustomClusterArgs struct {
 	ClusterName string `pulumi:"clusterName"`
 	// Container network. All pods in this cluster are connected to this network.
 	ContainerNetwork DbCustomClusterContainerNetwork `pulumi:"containerNetwork"`
+	// Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// Cluster tags.
 	Tags map[string]string `pulumi:"tags"`
 }
@@ -205,6 +226,8 @@ type DbCustomClusterArgs struct {
 	ClusterName pulumi.StringInput
 	// Container network. All pods in this cluster are connected to this network.
 	ContainerNetwork DbCustomClusterContainerNetworkInput
+	// Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+	DeletionProtection pulumi.BoolPtrInput
 	// Cluster tags.
 	Tags pulumi.StringMapInput
 }
@@ -339,6 +362,11 @@ func (o DbCustomClusterOutput) ContainerNetwork() DbCustomClusterContainerNetwor
 // Creation time.
 func (o DbCustomClusterOutput) CreatedTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *DbCustomCluster) pulumi.StringOutput { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+func (o DbCustomClusterOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v *DbCustomCluster) pulumi.BoolOutput { return v.DeletionProtection }).(pulumi.BoolOutput)
 }
 
 // Region that the cluster belongs to.

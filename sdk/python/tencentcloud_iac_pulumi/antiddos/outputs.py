@@ -36,6 +36,9 @@ __all__ = [
     'GetBgpInstancesBgpInstanceListStandardPlusPackageConfigResult',
     'GetBgpInstancesBgpInstanceListTagInfoListResult',
     'GetBgpInstancesFilterTagResult',
+    'GetDdosBlockRecordsBlockRecordResult',
+    'GetDdosBlockRecordsFilterResult',
+    'GetDdosBlockRecordsUnblockQuotaInfoResult',
     'GetListListenerLayer4ListenerInstanceDetailResult',
     'GetListListenerLayer4ListenerInstanceDetailRuleResult',
     'GetListListenerLayer4ListenerRealServerResult',
@@ -1641,6 +1644,126 @@ class GetBgpInstancesFilterTagResult(dict):
         Tag value.
         """
         return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetDdosBlockRecordsBlockRecordResult(dict):
+    def __init__(__self__, *,
+                 block_time: _builtins.str,
+                 resource: _builtins.str,
+                 status: _builtins.str):
+        """
+        :param _builtins.str block_time: Block time.
+        :param _builtins.str resource: Blocked resource, public network IP.
+        :param _builtins.str status: Block/unblock status. Enum: Blocked, Unblocking, Unblocked.
+        """
+        pulumi.set(__self__, "block_time", block_time)
+        pulumi.set(__self__, "resource", resource)
+        pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter(name="blockTime")
+    def block_time(self) -> _builtins.str:
+        """
+        Block time.
+        """
+        return pulumi.get(self, "block_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def resource(self) -> _builtins.str:
+        """
+        Blocked resource, public network IP.
+        """
+        return pulumi.get(self, "resource")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Block/unblock status. Enum: Blocked, Unblocking, Unblocked.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDdosBlockRecordsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 values: Sequence[_builtins.str]):
+        """
+        :param _builtins.str name: Filter field name. Supported: Resource, Status.
+        :param Sequence[_builtins.str] values: Filter field value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Filter field name. Supported: Resource, Status.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Sequence[_builtins.str]:
+        """
+        Filter field value.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetDdosBlockRecordsUnblockQuotaInfoResult(dict):
+    def __init__(__self__, *,
+                 quota_end_time: _builtins.str,
+                 quota_start_time: _builtins.str,
+                 total_quota: _builtins.int,
+                 used_quota: _builtins.int):
+        """
+        :param _builtins.str quota_end_time: Quota effective end time.
+        :param _builtins.str quota_start_time: Quota effective start time.
+        :param _builtins.int total_quota: Total unblock quota.
+        :param _builtins.int used_quota: Used unblock quota.
+        """
+        pulumi.set(__self__, "quota_end_time", quota_end_time)
+        pulumi.set(__self__, "quota_start_time", quota_start_time)
+        pulumi.set(__self__, "total_quota", total_quota)
+        pulumi.set(__self__, "used_quota", used_quota)
+
+    @_builtins.property
+    @pulumi.getter(name="quotaEndTime")
+    def quota_end_time(self) -> _builtins.str:
+        """
+        Quota effective end time.
+        """
+        return pulumi.get(self, "quota_end_time")
+
+    @_builtins.property
+    @pulumi.getter(name="quotaStartTime")
+    def quota_start_time(self) -> _builtins.str:
+        """
+        Quota effective start time.
+        """
+        return pulumi.get(self, "quota_start_time")
+
+    @_builtins.property
+    @pulumi.getter(name="totalQuota")
+    def total_quota(self) -> _builtins.int:
+        """
+        Total unblock quota.
+        """
+        return pulumi.get(self, "total_quota")
+
+    @_builtins.property
+    @pulumi.getter(name="usedQuota")
+    def used_quota(self) -> _builtins.int:
+        """
+        Used unblock quota.
+        """
+        return pulumi.get(self, "used_quota")
 
 
 @pulumi.output_type

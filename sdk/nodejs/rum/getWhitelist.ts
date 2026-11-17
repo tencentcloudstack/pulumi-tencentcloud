@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "rum-pasZKEI3RLgakj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
  */
 export function getWhitelist(args: GetWhitelistArgs, opts?: pulumi.InvokeOptions): Promise<GetWhitelistResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetWhitelistResult {
  *     instanceId: "rum-pasZKEI3RLgakj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
  */
 export function getWhitelistOutput(args: GetWhitelistOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWhitelistResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

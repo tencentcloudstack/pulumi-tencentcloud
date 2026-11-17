@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     addonName: "ip-masq-agent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
  */
 export function getAddons(args: GetAddonsArgs, opts?: pulumi.InvokeOptions): Promise<GetAddonsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -103,6 +109,12 @@ export interface GetAddonsResult {
  *     addonName: "ip-masq-agent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
  */
 export function getAddonsOutput(args: GetAddonsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAddonsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

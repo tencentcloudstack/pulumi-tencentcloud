@@ -139,6 +139,12 @@ def get_procedure_templates(name: Optional[_builtins.str] = None,
         name=foo_procedure_template.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
+
 
     :param _builtins.str name: Name of procedure template.
     :param _builtins.str result_output_file: Used to save results.
@@ -193,6 +199,12 @@ def get_procedure_templates_output(name: pulumi.Input[Optional[Optional[_builtin
     foo = tencentcloud.vod.get_procedure_templates_output(type="Custom",
         name=foo_procedure_template.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
 
 
     :param _builtins.str name: Name of procedure template.

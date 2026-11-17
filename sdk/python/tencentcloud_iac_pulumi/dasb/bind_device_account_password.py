@@ -127,6 +127,13 @@ class BindDeviceAccountPassword(pulumi.CustomResource):
             password="TerraformPassword")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPassword&type=document&lang=en)
+        * Delete: [ResetDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPassword&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +167,13 @@ class BindDeviceAccountPassword(pulumi.CustomResource):
             device_account_id=example_device_account.id.apply(lambda x: int(x)),
             password="TerraformPassword")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPassword&type=document&lang=en)
+        * Delete: [ResetDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPassword&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

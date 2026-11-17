@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
         /// </summary>
         public static Task<GetWorkflowFoldersResult> InvokeAsync(GetWorkflowFoldersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWorkflowFoldersResult>("tencentcloud:Wedata/getWorkflowFolders:getWorkflowFolders", args ?? new GetWorkflowFoldersArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
         /// </summary>
         public static Output<GetWorkflowFoldersResult> Invoke(GetWorkflowFoldersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkflowFoldersResult>("tencentcloud:Wedata/getWorkflowFolders:getWorkflowFolders", args ?? new GetWorkflowFoldersInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
         /// </summary>
         public static Output<GetWorkflowFoldersResult> Invoke(GetWorkflowFoldersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkflowFoldersResult>("tencentcloud:Wedata/getWorkflowFolders:getWorkflowFolders", args ?? new GetWorkflowFoldersInvokeArgs(), options.WithDefaults());

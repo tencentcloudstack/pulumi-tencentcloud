@@ -49,6 +49,12 @@ import * as utilities from "../utilities";
  *     domain: fooHttpRule.domain,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
  */
 export function getHttpRules(args: GetHttpRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetHttpRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -160,6 +166,12 @@ export interface GetHttpRulesResult {
  *     domain: fooHttpRule.domain,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
  */
 export function getHttpRulesOutput(args: GetHttpRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetHttpRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

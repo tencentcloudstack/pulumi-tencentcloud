@@ -99,6 +99,81 @@ import (
 //
 // ```
 //
+// ### Cross-account data transform example:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			logsetSrc, err := cls.NewLogset(ctx, "logset_src", &cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf-example-src"),
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topicSrc, err := cls.NewTopic(ctx, "topic_src", &cls.TopicArgs{
+//				TopicName:          pulumi.String("tf-example_src"),
+//				LogsetId:           logsetSrc.ID().ToIDOutput().ToStringOutput(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(10),
+//				StorageType:        pulumi.String("hot"),
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cls.NewDataTransform(ctx, "example_cross_account", &cls.DataTransformArgs{
+//				FuncType:   pulumi.Int(1),
+//				SrcTopicId: topicSrc.ID().ToIDOutput().ToStringOutput(),
+//				Name:       pulumi.String("tf-example-cross-account"),
+//				EtlContent: pulumi.String("ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")"),
+//				TaskType:   pulumi.Int(3),
+//				EnableFlag: pulumi.Int(1),
+//				DstResources: cls.DataTransformDstResourceArray{
+//					&cls.DataTransformDstResourceArgs{
+//						TopicId:        pulumi.String("topic-id-in-target-account"),
+//						Alias:          pulumi.String("cross-account-dst"),
+//						IsCrossAccount: pulumi.Bool(true),
+//						RoleArn:        pulumi.String("qcs::cam::uin/123456789:roleName/cls-cross-account-role"),
+//						ExternalId:     pulumi.String("external-id-value"),
+//						TopicName:      pulumi.String("target-topic-name"),
+//						LogsetName:     pulumi.String("target-logset-name"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateDataTransform](https://www.tencentcloud.com/document/api/614/56119)
+// * Read: [DescribeDataTransformInfo](https://www.tencentcloud.com/document/api/614/56117)
+// * Update: [ModifyDataTransform](https://www.tencentcloud.com/document/api/614/56116)
+// * Delete: [DeleteDataTransform](https://www.tencentcloud.com/document/api/614/56118)
+//
 // ## Import
 //
 // CLS data transform can be imported using the id, e.g.

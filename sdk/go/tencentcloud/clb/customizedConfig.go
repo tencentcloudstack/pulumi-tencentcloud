@@ -74,6 +74,22 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeCustomizedConfigAssociateList](https://www.tencentcloud.com/document/api/214/42308)
+//   - [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/api/214/42307)
+//   - [SetCustomizedConfigForLoadBalancer](https://www.tencentcloud.com/document/api/214/51215)
+//
+// * Read:
+//   - [DescribeCustomizedConfigAssociateList](https://www.tencentcloud.com/document/api/214/42308)
+//   - [DescribeCustomizedConfigList](https://www.tencentcloud.com/document/api/214/42307)
+//
+// * Update: [SetCustomizedConfigForLoadBalancer](https://www.tencentcloud.com/document/api/214/51215)
+// * Delete: [SetCustomizedConfigForLoadBalancer](https://www.tencentcloud.com/document/api/214/51215)
+//
 // ## Import
 //
 // CLB customized config can be imported using the id, e.g.

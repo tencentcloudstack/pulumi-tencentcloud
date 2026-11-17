@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RunSQLScript](https://www.tencentcloud.com/document/api/1174/73844)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/runSqlScriptOperation:RunSqlScriptOperation")]
     public partial class RunSqlScriptOperation : global::Pulumi.CustomResource

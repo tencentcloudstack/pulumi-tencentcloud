@@ -489,6 +489,22 @@ class Cluster(pulumi.CustomResource):
             project_id=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCluster](https://www.tencentcloud.com/search/?wd=CreateCluster&type=document&lang=en)
+          - [DescribeResourcesByDealName](https://www.tencentcloud.com/search/?wd=DescribeResourcesByDealName&type=document&lang=en)
+        * Read:
+          - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+          - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+        * Update: [ModifyClusterName](https://www.tencentcloud.com/search/?wd=ModifyClusterName&type=document&lang=en)
+        * Delete:
+          - [DeleteCluster](https://www.tencentcloud.com/search/?wd=DeleteCluster&type=document&lang=en)
+          - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+          - [IsolateCluster](https://www.tencentcloud.com/search/?wd=IsolateCluster&type=document&lang=en)
+
         ## Import
 
         tdcpg cluster can be imported using the id, e.g.
@@ -544,6 +560,22 @@ class Cluster(pulumi.CustomResource):
             period=1,
             project_id=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCluster](https://www.tencentcloud.com/search/?wd=CreateCluster&type=document&lang=en)
+          - [DescribeResourcesByDealName](https://www.tencentcloud.com/search/?wd=DescribeResourcesByDealName&type=document&lang=en)
+        * Read:
+          - [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+          - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+        * Update: [ModifyClusterName](https://www.tencentcloud.com/search/?wd=ModifyClusterName&type=document&lang=en)
+        * Delete:
+          - [DeleteCluster](https://www.tencentcloud.com/search/?wd=DeleteCluster&type=document&lang=en)
+          - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&type=document&lang=en)
+          - [IsolateCluster](https://www.tencentcloud.com/search/?wd=IsolateCluster&type=document&lang=en)
 
         ## Import
 

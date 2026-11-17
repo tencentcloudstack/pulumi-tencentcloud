@@ -48,6 +48,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+//   - [ModifyNetworkAccessStrategy](https://www.tencentcloud.com/document/api/1290/79234)
+//
+// * Read: [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+// * Update:
+//   - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+//   - [ModifyNetworkAccessStrategy](https://www.tencentcloud.com/document/api/1290/79234)
+//
 // ## Import
 //
 // tse cngwRouteRateLimit can be imported using the id, e.g.

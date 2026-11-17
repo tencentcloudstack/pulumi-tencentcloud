@@ -86,6 +86,12 @@ class DeployCertificateRecordRollbackOperation(pulumi.CustomResource):
         deploy_certificate_record_rollback = tencentcloud.ssl.DeployCertificateRecordRollbackOperation("deploy_certificate_record_rollback", deploy_record_id=35471)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeployCertificateRecordRollback](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRollback&type=document&lang=en)
+
         ## Import
 
         ssl deploy_certificate_record_rollback can be imported using the id, e.g.
@@ -116,6 +122,12 @@ class DeployCertificateRecordRollbackOperation(pulumi.CustomResource):
 
         deploy_certificate_record_rollback = tencentcloud.ssl.DeployCertificateRecordRollbackOperation("deploy_certificate_record_rollback", deploy_record_id=35471)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeployCertificateRecordRollback](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRollback&type=document&lang=en)
 
         ## Import
 

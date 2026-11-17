@@ -421,6 +421,14 @@ class ApplicationFileConfig(pulumi.CustomResource):
             encode_with_base64=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateFileConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateFileConfigWithDetailResp&type=document&lang=en)
+        * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
+        * Delete: [DeleteFileConfig](https://www.tencentcloud.com/search/?wd=DeleteFileConfig&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -463,6 +471,14 @@ class ApplicationFileConfig(pulumi.CustomResource):
             config_post_cmd="source .bashrc",
             encode_with_base64=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateFileConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateFileConfigWithDetailResp&type=document&lang=en)
+        * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
+        * Delete: [DeleteFileConfig](https://www.tencentcloud.com/search/?wd=DeleteFileConfig&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
 func GetMigrateDbInstances(ctx *pulumi.Context, args *GetMigrateDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetMigrateDbInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMigrateDbInstancesResult

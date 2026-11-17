@@ -106,6 +106,12 @@ def get_recovery_time(db_instance_id: Optional[_builtins.str] = None,
     recovery_time = tencentcloud.postgresql.get_recovery_time(db_instance_id=pgsql_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
+
 
     :param _builtins.str db_instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -136,6 +142,12 @@ def get_recovery_time_output(db_instance_id: pulumi.Input[Optional[_builtins.str
 
     recovery_time = tencentcloud.postgresql.get_recovery_time(db_instance_id=pgsql_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
 
 
     :param _builtins.str db_instance_id: Instance ID.

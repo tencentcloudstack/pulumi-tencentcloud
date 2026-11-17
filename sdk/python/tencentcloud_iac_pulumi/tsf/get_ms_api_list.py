@@ -107,6 +107,12 @@ def get_ms_api_list(microservice_id: Optional[_builtins.str] = None,
         search_word="echo")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&type=document&lang=en)
+
 
     :param _builtins.str microservice_id: Microservice Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_ms_api_list_output(microservice_id: pulumi.Input[Optional[_builtins.str]
     ms_api_list = tencentcloud.tsf.get_ms_api_list(microservice_id="ms-yq3jo6jd",
         search_word="echo")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&type=document&lang=en)
 
 
     :param _builtins.str microservice_id: Microservice Id.

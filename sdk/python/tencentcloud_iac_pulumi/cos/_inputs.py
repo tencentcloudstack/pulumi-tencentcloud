@@ -3214,6 +3214,10 @@ class BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs:
 
 
 class BucketWebsiteArgsDict(TypedDict):
+    charity404: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+    """
     endpoint: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     `Endpoint` of the static website.
@@ -3225,6 +3229,10 @@ class BucketWebsiteArgsDict(TypedDict):
     index_document: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     COS returns this index document when requests are made to the root domain or any of the subfolders.
+    """
+    original_http_status: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
     """
     redirect_all_requests_to: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -3238,28 +3246,48 @@ class BucketWebsiteArgsDict(TypedDict):
 @pulumi.input_type
 class BucketWebsiteArgs:
     def __init__(__self__, *,
+                 charity404: pulumi.Input[Optional[_builtins.str]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  error_document: pulumi.Input[Optional[_builtins.str]] = None,
                  index_document: pulumi.Input[Optional[_builtins.str]] = None,
+                 original_http_status: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_all_requests_to: pulumi.Input[Optional[_builtins.str]] = None,
                  routing_rules: pulumi.Input[Optional['BucketWebsiteRoutingRulesArgs']] = None):
         """
+        :param pulumi.Input[_builtins.str] charity404: To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
         :param pulumi.Input[_builtins.str] endpoint: `Endpoint` of the static website.
         :param pulumi.Input[_builtins.str] error_document: An absolute path to the document to return in case of a 4XX error.
         :param pulumi.Input[_builtins.str] index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
+        :param pulumi.Input[_builtins.str] original_http_status: The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
         :param pulumi.Input[_builtins.str] redirect_all_requests_to: Redirects all request configurations. Valid values: http, https. Default is `http`.
         :param pulumi.Input['BucketWebsiteRoutingRulesArgs'] routing_rules: Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.
         """
+        if charity404 is not None:
+            pulumi.set(__self__, "charity404", charity404)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if error_document is not None:
             pulumi.set(__self__, "error_document", error_document)
         if index_document is not None:
             pulumi.set(__self__, "index_document", index_document)
+        if original_http_status is not None:
+            pulumi.set(__self__, "original_http_status", original_http_status)
         if redirect_all_requests_to is not None:
             pulumi.set(__self__, "redirect_all_requests_to", redirect_all_requests_to)
         if routing_rules is not None:
             pulumi.set(__self__, "routing_rules", routing_rules)
+
+    @_builtins.property
+    @pulumi.getter
+    def charity404(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+        """
+        return pulumi.get(self, "charity404")
+
+    @charity404.setter
+    def charity404(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "charity404", value)
 
     @_builtins.property
     @pulumi.getter
@@ -3296,6 +3324,18 @@ class BucketWebsiteArgs:
     @index_document.setter
     def index_document(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "index_document", value)
+
+    @_builtins.property
+    @pulumi.getter(name="originalHttpStatus")
+    def original_http_status(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+        """
+        return pulumi.get(self, "original_http_status")
+
+    @original_http_status.setter
+    def original_http_status(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "original_http_status", value)
 
     @_builtins.property
     @pulumi.getter(name="redirectAllRequestsTo")

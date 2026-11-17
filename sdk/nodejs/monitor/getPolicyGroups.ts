@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     name: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
  */
 export function getPolicyGroups(args?: GetPolicyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetPolicyGroupsResult> {
     args = args || {};
@@ -89,6 +95,12 @@ export interface GetPolicyGroupsResult {
  *     name: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
  */
 export function getPolicyGroupsOutput(args?: GetPolicyGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPolicyGroupsResult> {
     args = args || {};

@@ -108,6 +108,21 @@ class ClusterNatFwSwitch(pulumi.CustomResource):
         })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [OpenClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=OpenClusterNatFwSwitch&type=document&lang=en)
+        * Read: [DescribeNatCcnFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatCcnFwSwitch&type=document&lang=en)
+        * Update:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [ModifyClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterNatFwSwitch&type=document&lang=en)
+        * Delete:
+          - [CloseClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=CloseClusterNatFwSwitch&type=document&lang=en)
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+
         ## Import
 
         CFW cluster NAT firewall switch can be imported using the composite id `nat_ins_id#ccn_id`, e.g.
@@ -159,6 +174,21 @@ class ClusterNatFwSwitch(pulumi.CustomResource):
             ],
         })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [OpenClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=OpenClusterNatFwSwitch&type=document&lang=en)
+        * Read: [DescribeNatCcnFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatCcnFwSwitch&type=document&lang=en)
+        * Update:
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
+          - [ModifyClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterNatFwSwitch&type=document&lang=en)
+        * Delete:
+          - [CloseClusterNatFwSwitch](https://www.tencentcloud.com/search/?wd=CloseClusterNatFwSwitch&type=document&lang=en)
+          - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&type=document&lang=en)
 
         ## Import
 

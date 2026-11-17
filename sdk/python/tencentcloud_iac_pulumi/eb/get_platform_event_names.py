@@ -96,6 +96,12 @@ def get_platform_event_names(product_type: Optional[_builtins.str] = None,
     platform_event_names = tencentcloud.eb.get_platform_event_names(product_type="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPlatformEventNames](https://www.tencentcloud.com/search/?wd=ListPlatformEventNames&type=document&lang=en)
+
 
     :param _builtins.str product_type: Platform product event type.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_platform_event_names_output(product_type: pulumi.Input[Optional[_builtin
 
     platform_event_names = tencentcloud.eb.get_platform_event_names(product_type="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPlatformEventNames](https://www.tencentcloud.com/search/?wd=ListPlatformEventNames&type=document&lang=en)
 
 
     :param _builtins.str product_type: Platform product event type.

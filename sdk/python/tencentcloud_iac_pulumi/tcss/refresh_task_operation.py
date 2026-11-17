@@ -131,6 +131,12 @@ class RefreshTaskOperation(pulumi.CustomResource):
             is_sync_list_only=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRefreshTask](https://www.tencentcloud.com/document/api/1163/53206)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -165,6 +171,12 @@ class RefreshTaskOperation(pulumi.CustomResource):
             cluster_ids=["cls-fdy7hm1q"],
             is_sync_list_only=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRefreshTask](https://www.tencentcloud.com/document/api/1163/53206)
 
 
         :param str resource_name: The name of the resource.

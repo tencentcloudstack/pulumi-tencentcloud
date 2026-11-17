@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Batch
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BatchApplyAccountBaselines](https://www.tencentcloud.com/document/api/1220/63390)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Batch/applyAccountBaselines:ApplyAccountBaselines")]
     public partial class ApplyAccountBaselines : global::Pulumi.CustomResource

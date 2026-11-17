@@ -36,6 +36,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
+    ///   - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1042/34433)
+    /// * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
+    /// * Update:
+    ///   - [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
+    ///   - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1042/34433)
+    /// 
     /// ## Import
     /// 
     /// dcdb DbParameters can be imported using the id, e.g.

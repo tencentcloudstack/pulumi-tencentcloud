@@ -96,6 +96,12 @@ def get_tmp_regions(pay_mode: Optional[_builtins.int] = None,
     tmp_regions = tencentcloud.monitor.get_tmp_regions(pay_mode=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&type=document&lang=en)
+
 
     :param _builtins.int pay_mode: Pay mode. `1`-Prepaid, `2`-Postpaid, `3`-All regions (default is all regions if not filled in).
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_tmp_regions_output(pay_mode: pulumi.Input[Optional[Optional[_builtins.in
 
     tmp_regions = tencentcloud.monitor.get_tmp_regions(pay_mode=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&type=document&lang=en)
 
 
     :param _builtins.int pay_mode: Pay mode. `1`-Prepaid, `2`-Postpaid, `3`-All regions (default is all regions if not filled in).

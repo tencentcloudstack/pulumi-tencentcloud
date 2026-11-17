@@ -1052,6 +1052,14 @@ class ImportOpenApi(pulumi.CustomResource):
             content_version="openAPI")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ImportOpenApi](https://www.tencentcloud.com/search/?wd=ImportOpenApi&type=document&lang=en)
+        * Read: [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+        * Delete: [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1127,6 +1135,14 @@ class ImportOpenApi(pulumi.CustomResource):
             encode_type="JSON",
             content_version="openAPI")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ImportOpenApi](https://www.tencentcloud.com/search/?wd=ImportOpenApi&type=document&lang=en)
+        * Read: [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+        * Delete: [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

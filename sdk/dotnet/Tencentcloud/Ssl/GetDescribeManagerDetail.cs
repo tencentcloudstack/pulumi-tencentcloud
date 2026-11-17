@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeManagerDetail](https://www.tencentcloud.com/search/?wd=DescribeManagerDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDescribeManagerDetailResult> InvokeAsync(GetDescribeManagerDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeManagerDetailResult>("tencentcloud:Ssl/getDescribeManagerDetail:getDescribeManagerDetail", args ?? new GetDescribeManagerDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeManagerDetail](https://www.tencentcloud.com/search/?wd=DescribeManagerDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeManagerDetailResult> Invoke(GetDescribeManagerDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeManagerDetailResult>("tencentcloud:Ssl/getDescribeManagerDetail:getDescribeManagerDetail", args ?? new GetDescribeManagerDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeManagerDetail](https://www.tencentcloud.com/search/?wd=DescribeManagerDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeManagerDetailResult> Invoke(GetDescribeManagerDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeManagerDetailResult>("tencentcloud:Ssl/getDescribeManagerDetail:getDescribeManagerDetail", args ?? new GetDescribeManagerDetailInvokeArgs(), options.WithDefaults());

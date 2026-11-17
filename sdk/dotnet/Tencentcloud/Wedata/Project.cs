@@ -30,6 +30,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     ///             ProjectName = "tf_example",
     ///             DisplayName = "display_name",
     ///             ProjectModel = "SIMPLE",
+    ///             ScheduleMode = "task",
     ///         },
     ///         DlcInfo = new Tencentcloud.Wedata.Inputs.ProjectDlcInfoArgs
     ///         {
@@ -52,6 +53,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateProject](https://www.tencentcloud.com/document/api/1174/77876)
+    ///   - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+    /// * Read: [GetProject](https://www.tencentcloud.com/document/api/1174/77868)
+    /// * Update:
+    ///   - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+    ///   - [EnableProject](https://www.tencentcloud.com/document/api/1174/77871)
+    ///   - [UpdateProject](https://www.tencentcloud.com/document/api/1174/77859)
+    /// * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1174/77880)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/project:Project")]
     public partial class Project : global::Pulumi.CustomResource

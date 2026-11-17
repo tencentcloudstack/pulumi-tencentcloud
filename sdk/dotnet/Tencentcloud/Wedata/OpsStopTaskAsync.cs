@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+    ///   - [StopOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73811)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/opsStopTaskAsync:OpsStopTaskAsync")]
     public partial class OpsStopTaskAsync : global::Pulumi.CustomResource

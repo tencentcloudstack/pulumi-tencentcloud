@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
  */
 export function getListenersByTargets(args: GetListenersByTargetsArgs, opts?: pulumi.InvokeOptions): Promise<GetListenersByTargetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetListenersByTargetsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
  */
 export function getListenersByTargetsOutput(args: GetListenersByTargetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListenersByTargetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -188,6 +188,12 @@ def get_scenario_with_jobs(ascend: Optional[_builtins.bool] = None,
         scenario_type="pts-jmeter")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
+
 
     :param _builtins.bool ascend: Whether to use ascending order.
     :param _builtins.bool ignore_dataset: Whether to ignore the dataset.
@@ -255,6 +261,12 @@ def get_scenario_with_jobs_output(ascend: pulumi.Input[Optional[Optional[_builti
         ignore_dataset=True,
         scenario_type="pts-jmeter")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
 
 
     :param _builtins.bool ascend: Whether to use ascending order.

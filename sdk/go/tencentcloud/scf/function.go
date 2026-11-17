@@ -184,11 +184,86 @@ import (
 //
 // ```
 //
+// ### If funcType is Event
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
+//				Name:            pulumi.String("test"),
+//				Namespace:       pulumi.String("default"),
+//				AsyncRunEnable:  pulumi.String("FALSE"),
+//				Description:     pulumi.String("terraform demo"),
+//				EnablePublicNet: pulumi.Bool(true),
+//				FuncType:        pulumi.String("Event"),
+//				L5Enable:        pulumi.Bool(false),
+//				MemSize:         pulumi.Int(128),
+//				Runtime:         pulumi.String("CustomImage"),
+//				Timeout:         pulumi.Int(3),
+//				ImageConfigs: scf.FunctionImageConfigArray{
+//					&scf.FunctionImageConfigArgs{
+//						ContainerImageAccelerate: pulumi.Bool(false),
+//						ImagePort:                pulumi.Int(-1),
+//						ImageType:                pulumi.String("personal"),
+//						ImageUri:                 pulumi.String("ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c"),
+//					},
+//				},
+//				InstanceConcurrencyConfig: &scf.FunctionInstanceConcurrencyConfigArgs{
+//					DynamicEnabled: pulumi.String("FALSE"),
+//					MaxConcurrency: pulumi.Int(1),
+//				},
+//				IntranetConfig: &scf.FunctionIntranetConfigArgs{
+//					IpFixed: pulumi.String("DISABLE"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateFunction](https://www.tencentcloud.com/search/?wd=CreateFunction&type=document&lang=en)
+//   - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+//   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+//   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+//   - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+//
+// * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+// * Update:
+//   - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+//   - [DeleteTrigger](https://www.tencentcloud.com/document/api/583/18588)
+//   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+//   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateFunctionCode](https://www.tencentcloud.com/document/api/583/18581)
+//   - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+//
+// * Delete:
+//   - [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+//   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+//
 // ## Import
 //
 // SCF function can be imported, e.g.
 //
-// > **NOTE:** function id is `<function namespace>+<function name>`
+// > **NOTE:** resource id is `<function namespace>+<function name>`
 //
 // ```sh
 // $ pulumi import tencentcloud:Scf/function:Function example default+test
@@ -262,7 +337,7 @@ type Function struct {
 	Namespace pulumi.StringPtrOutput `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role pulumi.StringPtrOutput `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `imageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
 	Runtime pulumi.StringPtrOutput `pulumi:"runtime"`
 	// SCF function status.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -382,7 +457,7 @@ type functionState struct {
 	Namespace *string `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role *string `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `imageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
 	Runtime *string `pulumi:"runtime"`
 	// SCF function status.
 	Status *string `pulumi:"status"`
@@ -473,7 +548,7 @@ type FunctionState struct {
 	Namespace pulumi.StringPtrInput
 	// Role of the SCF function.
 	Role pulumi.StringPtrInput
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `imageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
 	Runtime pulumi.StringPtrInput
 	// SCF function status.
 	Status pulumi.StringPtrInput
@@ -548,7 +623,7 @@ type functionArgs struct {
 	Namespace *string `pulumi:"namespace"`
 	// Role of the SCF function.
 	Role *string `pulumi:"role"`
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `imageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
 	Runtime *string `pulumi:"runtime"`
 	// Subnet ID of the SCF function.
 	SubnetId *string `pulumi:"subnetId"`
@@ -612,7 +687,7 @@ type FunctionArgs struct {
 	Namespace pulumi.StringPtrInput
 	// Role of the SCF function.
 	Role pulumi.StringPtrInput
-	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+	// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `imageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
 	Runtime pulumi.StringPtrInput
 	// Subnet ID of the SCF function.
 	SubnetId pulumi.StringPtrInput
@@ -880,7 +955,7 @@ func (o FunctionOutput) Role() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Role }).(pulumi.StringPtrOutput)
 }
 
-// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `imageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
 func (o FunctionOutput) Runtime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Function) pulumi.StringPtrOutput { return v.Runtime }).(pulumi.StringPtrOutput)
 }

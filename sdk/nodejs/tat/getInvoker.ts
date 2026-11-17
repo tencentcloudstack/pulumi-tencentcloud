@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const invoker = tencentcloud.tat.getInvoker({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
  */
 export function getInvoker(args?: GetInvokerArgs, opts?: pulumi.InvokeOptions): Promise<GetInvokerResult> {
     args = args || {};
@@ -88,6 +94,12 @@ export interface GetInvokerResult {
  *
  * const invoker = tencentcloud.tat.getInvoker({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
  */
 export function getInvokerOutput(args?: GetInvokerOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInvokerResult> {
     args = args || {};

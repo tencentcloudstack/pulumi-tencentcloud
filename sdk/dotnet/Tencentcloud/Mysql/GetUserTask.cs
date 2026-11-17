@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
         /// </summary>
         public static Task<GetUserTaskResult> InvokeAsync(GetUserTaskArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
         /// </summary>
         public static Output<GetUserTaskResult> Invoke(GetUserTaskInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
         /// </summary>
         public static Output<GetUserTaskResult> Invoke(GetUserTaskInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskInvokeArgs(), options.WithDefaults());

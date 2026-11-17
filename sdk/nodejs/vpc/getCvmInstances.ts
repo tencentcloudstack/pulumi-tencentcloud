@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
  */
 export function getCvmInstances(args: GetCvmInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetCvmInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetCvmInstancesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
  */
 export function getCvmInstancesOutput(args: GetCvmInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCvmInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

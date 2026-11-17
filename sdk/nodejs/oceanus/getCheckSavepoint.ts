@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&type=document&lang=en)
  */
 export function getCheckSavepoint(args: GetCheckSavepointArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckSavepointResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetCheckSavepointResult {
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&type=document&lang=en)
  */
 export function getCheckSavepointOutput(args: GetCheckSavepointOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCheckSavepointResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

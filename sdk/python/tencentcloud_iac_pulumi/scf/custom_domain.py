@@ -229,6 +229,15 @@ class CustomDomain(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCustomDomain](https://www.tencentcloud.com/search/?wd=CreateCustomDomain&type=document&lang=en)
+        * Read: [GetCustomDomain](https://www.tencentcloud.com/search/?wd=GetCustomDomain&type=document&lang=en)
+        * Update: [UpdateCustomDomain](https://www.tencentcloud.com/search/?wd=UpdateCustomDomain&type=document&lang=en)
+        * Delete: [DeleteCustomDomain](https://www.tencentcloud.com/search/?wd=DeleteCustomDomain&type=document&lang=en)
+
         ## Import
 
         scf scf_custom_domain can be imported using the id, e.g.
@@ -274,6 +283,15 @@ class CustomDomain(pulumi.CustomResource):
                 "waf_open": "CLOSE",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCustomDomain](https://www.tencentcloud.com/search/?wd=CreateCustomDomain&type=document&lang=en)
+        * Read: [GetCustomDomain](https://www.tencentcloud.com/search/?wd=GetCustomDomain&type=document&lang=en)
+        * Update: [UpdateCustomDomain](https://www.tencentcloud.com/search/?wd=UpdateCustomDomain&type=document&lang=en)
+        * Delete: [DeleteCustomDomain](https://www.tencentcloud.com/search/?wd=DeleteCustomDomain&type=document&lang=en)
 
         ## Import
 

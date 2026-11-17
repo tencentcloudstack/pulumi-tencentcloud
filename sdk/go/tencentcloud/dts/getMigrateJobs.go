@@ -82,6 +82,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
 func GetMigrateJobs(ctx *pulumi.Context, args *GetMigrateJobsArgs, opts ...pulumi.InvokeOption) (*GetMigrateJobsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMigrateJobsResult

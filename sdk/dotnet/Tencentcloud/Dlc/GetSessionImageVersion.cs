@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
         /// </summary>
         public static Task<GetSessionImageVersionResult> InvokeAsync(GetSessionImageVersionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSessionImageVersionResult>("tencentcloud:Dlc/getSessionImageVersion:getSessionImageVersion", args ?? new GetSessionImageVersionArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
         /// </summary>
         public static Output<GetSessionImageVersionResult> Invoke(GetSessionImageVersionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSessionImageVersionResult>("tencentcloud:Dlc/getSessionImageVersion:getSessionImageVersion", args ?? new GetSessionImageVersionInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
         /// </summary>
         public static Output<GetSessionImageVersionResult> Invoke(GetSessionImageVersionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSessionImageVersionResult>("tencentcloud:Dlc/getSessionImageVersion:getSessionImageVersion", args ?? new GetSessionImageVersionInvokeArgs(), options.WithDefaults());

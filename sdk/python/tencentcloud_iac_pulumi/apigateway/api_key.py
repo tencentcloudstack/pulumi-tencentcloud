@@ -267,6 +267,22 @@ class ApiKey(pulumi.CustomResource):
             access_key_secret="0198a4b8c3105080f4acd9e507599eff")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateApiKey](https://www.tencentcloud.com/search/?wd=CreateApiKey&type=document&lang=en)
+          - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+        * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
+        * Update:
+          - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+          - [EnableApiKey](https://www.tencentcloud.com/search/?wd=EnableApiKey&type=document&lang=en)
+          - [UpdateApiKey](https://www.tencentcloud.com/search/?wd=UpdateApiKey&type=document&lang=en)
+        * Delete:
+          - [DeleteApiKey](https://www.tencentcloud.com/search/?wd=DeleteApiKey&type=document&lang=en)
+          - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+
         ## Import
 
         API gateway access key can be imported using the id, e.g.
@@ -319,6 +335,22 @@ class ApiKey(pulumi.CustomResource):
             access_key_id="28e287e340507fa147b2c8284dab542f",
             access_key_secret="0198a4b8c3105080f4acd9e507599eff")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateApiKey](https://www.tencentcloud.com/search/?wd=CreateApiKey&type=document&lang=en)
+          - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+        * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
+        * Update:
+          - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
+          - [EnableApiKey](https://www.tencentcloud.com/search/?wd=EnableApiKey&type=document&lang=en)
+          - [UpdateApiKey](https://www.tencentcloud.com/search/?wd=UpdateApiKey&type=document&lang=en)
+        * Delete:
+          - [DeleteApiKey](https://www.tencentcloud.com/search/?wd=DeleteApiKey&type=document&lang=en)
+          - [DisableApiKey](https://www.tencentcloud.com/search/?wd=DisableApiKey&type=document&lang=en)
 
         ## Import
 

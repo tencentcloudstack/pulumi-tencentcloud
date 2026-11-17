@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DeployCertificateInstance](https://www.tencentcloud.com/search/?wd=DeployCertificateInstance&type=document&lang=en)
+ *
  * ## Import
  *
  * ssl deployCertificateInstance can be imported using the id, e.g.

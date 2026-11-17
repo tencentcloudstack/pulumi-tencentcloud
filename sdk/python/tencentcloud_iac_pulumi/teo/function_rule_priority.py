@@ -156,6 +156,14 @@ class FunctionRulePriority(pulumi.CustomResource):
             zone_id="zone-2qtuhspy7cr6")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyFunctionRulePriority](https://www.tencentcloud.com/document/api/1145/64805)
+        * Read: [DescribeFunctionRules](https://www.tencentcloud.com/document/api/1145/64811)
+        * Update: [ModifyFunctionRulePriority](https://www.tencentcloud.com/document/api/1145/64805)
+
         ## Import
 
         teo teo_function_rule_priority can be imported using the id, e.g.
@@ -194,6 +202,14 @@ class FunctionRulePriority(pulumi.CustomResource):
             ],
             zone_id="zone-2qtuhspy7cr6")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyFunctionRulePriority](https://www.tencentcloud.com/document/api/1145/64805)
+        * Read: [DescribeFunctionRules](https://www.tencentcloud.com/document/api/1145/64811)
+        * Update: [ModifyFunctionRulePriority](https://www.tencentcloud.com/document/api/1145/64805)
 
         ## Import
 

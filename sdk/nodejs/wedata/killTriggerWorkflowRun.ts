@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     workflowExecutionId: triggerWorkflowRuns.then(triggerWorkflowRuns => triggerWorkflowRuns.datas?.[0]?.items?.[0]?.executionId),
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [KillTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77887)
  */
 export class KillTriggerWorkflowRun extends pulumi.CustomResource {
     /**

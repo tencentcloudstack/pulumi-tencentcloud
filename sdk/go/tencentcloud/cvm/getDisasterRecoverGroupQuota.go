@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
 func GetDisasterRecoverGroupQuota(ctx *pulumi.Context, args *GetDisasterRecoverGroupQuotaArgs, opts ...pulumi.InvokeOption) (*GetDisasterRecoverGroupQuotaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDisasterRecoverGroupQuotaResult

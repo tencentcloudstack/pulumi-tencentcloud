@@ -57,6 +57,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDatahubTask](https://www.tencentcloud.com/search/?wd=CreateDatahubTask&amp;type=document&amp;lang=en)
+    ///   - [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&amp;type=document&amp;lang=en)
+    ///   - [ModifyDatahubTask](https://www.tencentcloud.com/search/?wd=ModifyDatahubTask&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteDatahubTask](https://www.tencentcloud.com/search/?wd=DeleteDatahubTask&amp;type=document&amp;lang=en)
+    ///   - [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ckafka DatahubTask can be imported using the id, e.g.

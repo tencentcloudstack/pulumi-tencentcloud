@@ -232,6 +232,14 @@ class CloudResourceAttachment(pulumi.CustomResource):
             resource_id="cdb-fitq5t9h")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindCloudResource](https://www.tencentcloud.com/document/api/1030/37835)
+        * Read: [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+        * Delete: [UnbindCloudResource](https://www.tencentcloud.com/document/api/1030/37834)
+
         ## Import
 
         kms cloud_resource_attachment can be imported using the id, e.g.
@@ -267,6 +275,14 @@ class CloudResourceAttachment(pulumi.CustomResource):
             product_id="mysql",
             resource_id="cdb-fitq5t9h")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindCloudResource](https://www.tencentcloud.com/document/api/1030/37835)
+        * Read: [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+        * Delete: [UnbindCloudResource](https://www.tencentcloud.com/document/api/1030/37834)
 
         ## Import
 

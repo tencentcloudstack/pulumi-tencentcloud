@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
         /// </summary>
         public static Task<GetTopicSyncReplicaResult> InvokeAsync(GetTopicSyncReplicaArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
         /// </summary>
         public static Output<GetTopicSyncReplicaResult> Invoke(GetTopicSyncReplicaInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
         /// </summary>
         public static Output<GetTopicSyncReplicaResult> Invoke(GetTopicSyncReplicaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicSyncReplicaResult>("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args ?? new GetTopicSyncReplicaInvokeArgs(), options.WithDefaults());

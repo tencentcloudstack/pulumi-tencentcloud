@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     attackStatus: "end",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
  */
 export function getOverviewDdosEventList(args: GetOverviewDdosEventListArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewDdosEventListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -95,6 +101,12 @@ export interface GetOverviewDdosEventListResult {
  *     attackStatus: "end",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
  */
 export function getOverviewDdosEventListOutput(args: GetOverviewDdosEventListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOverviewDdosEventListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

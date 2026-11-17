@@ -396,6 +396,15 @@ class TmpAlertRule(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAlertRule](https://www.tencentcloud.com/document/api/248/48767)
+        * Read: [DescribeAlertRules](https://www.tencentcloud.com/document/api/248/48756)
+        * Update: [UpdateAlertRule](https://www.tencentcloud.com/document/api/248/48743)
+        * Delete: [DeleteAlertRules](https://www.tencentcloud.com/document/api/248/48760)
+
         ## Import
 
         monitor tmpAlertRule can be imported using the id, e.g.
@@ -480,6 +489,15 @@ class TmpAlertRule(pulumi.CustomResource):
                 "value": "warning",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAlertRule](https://www.tencentcloud.com/document/api/248/48767)
+        * Read: [DescribeAlertRules](https://www.tencentcloud.com/document/api/248/48756)
+        * Update: [UpdateAlertRule](https://www.tencentcloud.com/document/api/248/48743)
+        * Delete: [DeleteAlertRules](https://www.tencentcloud.com/document/api/248/48760)
 
         ## Import
 

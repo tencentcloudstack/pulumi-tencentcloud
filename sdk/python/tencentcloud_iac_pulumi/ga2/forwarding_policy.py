@@ -212,6 +212,21 @@ class ForwardingPolicy(pulumi.CustomResource):
             host="example.com")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83837)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+        * Read: [DescribeForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83746)
+        * Update:
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+          - [ModifyForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83809)
+        * Delete:
+          - [DeleteForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83829)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+
         ## Import
 
         GA2 forwarding policy can be imported using the composite id `<global_accelerator_id>#<listener_id>#<forwarding_policy_id>`, e.g.
@@ -275,6 +290,21 @@ class ForwardingPolicy(pulumi.CustomResource):
             listener_id=example_listener.listener_id,
             host="example.com")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83837)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+        * Read: [DescribeForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83746)
+        * Update:
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+          - [ModifyForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83809)
+        * Delete:
+          - [DeleteForwardingPolicy](https://www.tencentcloud.com/document/api/1299/83829)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
 
         ## Import
 

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDeliveryConfigByGroupIdResult> InvokeAsync(GetDeliveryConfigByGroupIdArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDeliveryConfigByGroupIdResult> Invoke(GetDeliveryConfigByGroupIdInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDeliveryConfigByGroupIdResult> Invoke(GetDeliveryConfigByGroupIdInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdInvokeArgs(), options.WithDefaults());

@@ -99,6 +99,12 @@ def get_dcn_detail(instance_id: Optional[_builtins.str] = None,
     dcn_detail = tencentcloud.mariadb.get_dcn_detail(instance_id="tdsql-9vqvls95")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_dcn_detail_output(instance_id: pulumi.Input[Optional[_builtins.str]] = N
 
     dcn_detail = tencentcloud.mariadb.get_dcn_detail(instance_id="tdsql-9vqvls95")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
 
 
     :param _builtins.str instance_id: Instance ID.

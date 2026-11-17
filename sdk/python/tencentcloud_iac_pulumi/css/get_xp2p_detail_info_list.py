@@ -130,6 +130,12 @@ def get_xp2p_detail_info_list(dimensions: Optional[Sequence[_builtins.str]] = No
         types=["live"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] dimensions: The dimension parameter can be used to specify the dimension for the query. If this parameter is not passed, the query will default to stream-level data. If you pass this parameter, it will only retrieve data for the specified dimension. The available dimension currently supported is AppId dimension, which allows you to query data based on the application ID. Please note that the returned fields will be related to the specified dimension.
     :param _builtins.str query_time: The UTC minute granularity query time for querying usage data for a specific minute is in the format: yyyy-mm-ddTHH:MM:00Z. Please refer to the link https://cloud.tencent.com/document/product/266/11732#I.For example, if the local time is 2019-01-08 10:00:00 in Beijing, the corresponding UTC time would be 2019-01-08T10:00:00+08:00.This query supports data from the past six months.
@@ -172,6 +178,12 @@ def get_xp2p_detail_info_list_output(dimensions: pulumi.Input[Optional[Optional[
     xp2p_detail_info_list = tencentcloud.css.get_xp2p_detail_info_list(query_time="2023-11-01T14:55:01+08:00",
         types=["live"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] dimensions: The dimension parameter can be used to specify the dimension for the query. If this parameter is not passed, the query will default to stream-level data. If you pass this parameter, it will only retrieve data for the specified dimension. The available dimension currently supported is AppId dimension, which allows you to query data based on the application ID. Please note that the returned fields will be related to the specified dimension.

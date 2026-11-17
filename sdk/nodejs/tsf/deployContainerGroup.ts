@@ -75,6 +75,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DeployContainerGroup](https://www.tencentcloud.com/search/?wd=DeployContainerGroup&type=document&lang=en)
+ *   - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+ * * Read: [DescribeContainerGroupDeployInfo](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupDeployInfo&type=document&lang=en)
+ * * Update: [ModifyContainerReplicas](https://www.tencentcloud.com/search/?wd=ModifyContainerReplicas&type=document&lang=en)
  */
 export class DeployContainerGroup extends pulumi.CustomResource {
     /**

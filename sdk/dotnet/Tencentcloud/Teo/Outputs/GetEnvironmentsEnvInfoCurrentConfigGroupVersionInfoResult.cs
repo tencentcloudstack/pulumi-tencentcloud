@@ -17,23 +17,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
         /// </summary>
-        public readonly string? CreateTime;
+        public readonly string CreateTime;
         /// <summary>
         /// Version description.
         /// </summary>
-        public readonly string? Description;
+        public readonly string Description;
         /// <summary>
         /// Configuraration group ID.
         /// </summary>
-        public readonly string? GroupId;
+        public readonly string GroupId;
         /// <summary>
         /// Configuration group type. Valid values: L7Acceleration (L7 acceleration configuration group), EdgeFunctions (Edge function configuration group).
         /// </summary>
-        public readonly string? GroupType;
+        public readonly string GroupType;
         /// <summary>
-        /// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
+        /// The source version ID that the config group version was derived from.
         /// </summary>
-        public readonly string? Status;
+        public readonly string SourceVersion;
+        /// <summary>
+        /// Environment status. Valid values: creating (Being created), running (The environment is stable, with version changes allowed), VersionDeploying (The version is currently being deployed, with no more changes allowed).
+        /// </summary>
+        public readonly string Status;
         /// <summary>
         /// Version ID.
         /// </summary>
@@ -41,28 +45,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Version No.
         /// </summary>
-        public readonly string? VersionNumber;
+        public readonly string VersionNumber;
 
         [OutputConstructor]
         private GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoResult(
-            string? createTime,
+            string createTime,
 
-            string? description,
+            string description,
 
-            string? groupId,
+            string groupId,
 
-            string? groupType,
+            string groupType,
 
-            string? status,
+            string sourceVersion,
+
+            string status,
 
             string versionId,
 
-            string? versionNumber)
+            string versionNumber)
         {
             CreateTime = createTime;
             Description = description;
             GroupId = groupId;
             GroupType = groupType;
+            SourceVersion = sourceVersion;
             Status = status;
             VersionId = versionId;
             VersionNumber = versionNumber;

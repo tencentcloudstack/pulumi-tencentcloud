@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
     public sealed class InstanceReplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the resource.
+        /// Replication registry ID (readonly).
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

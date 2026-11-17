@@ -119,6 +119,14 @@ class LogFileRetentionPeriod(pulumi.CustomResource):
             days=8)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16151)
+        * Read: [DescribeLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16152)
+        * Update: [ModifyLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16151)
+
         ## Import
 
         mariadb log_file_retention_period can be imported using the id, e.g.
@@ -151,6 +159,14 @@ class LogFileRetentionPeriod(pulumi.CustomResource):
             instance_id="tdsql-4pzs5b67",
             days=8)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16151)
+        * Read: [DescribeLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16152)
+        * Update: [ModifyLogFileRetentionPeriod](https://www.tencentcloud.com/document/api/237/16151)
 
         ## Import
 

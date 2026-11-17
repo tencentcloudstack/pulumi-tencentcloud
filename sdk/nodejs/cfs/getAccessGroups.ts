@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     name: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/34505)
  */
 export function getAccessGroups(args?: GetAccessGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessGroupsResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetAccessGroupsResult {
  *     name: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/34505)
  */
 export function getAccessGroupsOutput(args?: GetAccessGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessGroupsResult> {
     args = args || {};

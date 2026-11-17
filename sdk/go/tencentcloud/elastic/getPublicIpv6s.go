@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
 func GetPublicIpv6s(ctx *pulumi.Context, args *GetPublicIpv6sArgs, opts ...pulumi.InvokeOption) (*GetPublicIpv6sResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublicIpv6sResult

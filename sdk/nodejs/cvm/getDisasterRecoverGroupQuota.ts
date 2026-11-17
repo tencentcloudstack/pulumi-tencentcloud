@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const disasterRecoverGroupQuota = tencentcloud.cvm.getDisasterRecoverGroupQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
  */
 export function getDisasterRecoverGroupQuota(args?: GetDisasterRecoverGroupQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetDisasterRecoverGroupQuotaResult> {
     args = args || {};
@@ -75,6 +81,12 @@ export interface GetDisasterRecoverGroupQuotaResult {
  *
  * const disasterRecoverGroupQuota = tencentcloud.cvm.getDisasterRecoverGroupQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisasterRecoverGroupQuota](https://www.tencentcloud.com/document/api/213/33262)
  */
 export function getDisasterRecoverGroupQuotaOutput(args?: GetDisasterRecoverGroupQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDisasterRecoverGroupQuotaResult> {
     args = args || {};

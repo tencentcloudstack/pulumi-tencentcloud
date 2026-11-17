@@ -15,6 +15,15 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.dlc.UpgradeDataEngineImageOperation("example", {dataEngineId: "DataEngine-g5ds87d8"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+ *   - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+ *   - [UpgradeDataEngineImage](https://www.tencentcloud.com/document/api/1155/62643)
  */
 export class UpgradeDataEngineImageOperation extends pulumi.CustomResource {
     /**

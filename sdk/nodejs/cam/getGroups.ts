@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     name: "cam-group-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListGroups](https://www.tencentcloud.com/document/api/598/32258)
  */
 export function getGroups(args?: GetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupsResult> {
     args = args || {};
@@ -102,6 +108,12 @@ export interface GetGroupsResult {
  *     name: "cam-group-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListGroups](https://www.tencentcloud.com/document/api/598/32258)
  */
 export function getGroupsOutput(args?: GetGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupsResult> {
     args = args || {};

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     order: "ASC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1103/42467)
  */
 export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetZoneResult {
  *     order: "ASC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1103/42467)
  */
 export function getZoneOutput(args?: GetZoneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneResult> {
     args = args || {};

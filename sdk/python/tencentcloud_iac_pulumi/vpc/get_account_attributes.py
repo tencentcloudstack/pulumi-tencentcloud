@@ -86,6 +86,12 @@ def get_account_attributes(result_output_file: Optional[_builtins.str] = None,
     account_attributes = tencentcloud.vpc.get_account_attributes()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_account_attributes_output(result_output_file: pulumi.Input[Optional[Opti
 
     account_attributes = tencentcloud.vpc.get_account_attributes()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
 
 
     :param _builtins.str result_output_file: Used to save results.

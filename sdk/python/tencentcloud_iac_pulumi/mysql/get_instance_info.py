@@ -142,6 +142,12 @@ def get_instance_info(instance_id: Optional[_builtins.str] = None,
     instance_info = tencentcloud.mysql.get_instance_info(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -175,6 +181,12 @@ def get_instance_info_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
 
     instance_info = tencentcloud.mysql.get_instance_info(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
 
 
     :param _builtins.str instance_id: instance id.

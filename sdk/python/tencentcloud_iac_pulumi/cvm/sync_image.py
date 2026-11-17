@@ -311,6 +311,14 @@ class SyncImage(pulumi.CustomResource):
             kms_key_id="f063c18b-654b-11ef-9d9f-525400d3a886")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [SyncImages](https://www.tencentcloud.com/document/api/213/33267)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -349,6 +357,14 @@ class SyncImage(pulumi.CustomResource):
             encrypt=True,
             kms_key_id="f063c18b-654b-11ef-9d9f-525400d3a886")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [SyncImages](https://www.tencentcloud.com/document/api/213/33267)
 
 
         :param str resource_name: The name of the resource.

@@ -94,6 +94,12 @@ def get_instance_vnc_url(instance_id: Optional[_builtins.str] = None,
     instance_vnc_url = tencentcloud.cvm.get_instance_vnc_url(instance_id="ins-xxxxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/213/33259)
+
 
     :param _builtins.str instance_id: Instance ID. To obtain the instance IDs, you can call `DescribeInstances` and look for `InstanceId` in the response.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_instance_vnc_url_output(instance_id: pulumi.Input[Optional[_builtins.str
 
     instance_vnc_url = tencentcloud.cvm.get_instance_vnc_url(instance_id="ins-xxxxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/213/33259)
 
 
     :param _builtins.str instance_id: Instance ID. To obtain the instance IDs, you can call `DescribeInstances` and look for `InstanceId` in the response.

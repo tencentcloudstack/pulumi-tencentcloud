@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&type=document&lang=en)
 func GetBackupTables(ctx *pulumi.Context, args *GetBackupTablesArgs, opts ...pulumi.InvokeOption) (*GetBackupTablesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupTablesResult

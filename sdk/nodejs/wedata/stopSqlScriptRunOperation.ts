@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     projectId: "2983848457986924544",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [StopSQLScriptRun](https://www.tencentcloud.com/document/api/1174/73843)
  */
 export class StopSqlScriptRunOperation extends pulumi.CustomResource {
     /**

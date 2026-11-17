@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.cfw.getEdgeFwSwitches({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
  */
 export function getEdgeFwSwitches(args?: GetEdgeFwSwitchesArgs, opts?: pulumi.InvokeOptions): Promise<GetEdgeFwSwitchesResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetEdgeFwSwitchesResult {
  *
  * const example = tencentcloud.cfw.getEdgeFwSwitches({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
  */
 export function getEdgeFwSwitchesOutput(args?: GetEdgeFwSwitchesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEdgeFwSwitchesResult> {
     args = args || {};

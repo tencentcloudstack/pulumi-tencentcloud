@@ -40,6 +40,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFwSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeFwSyncStatus&type=document&lang=en)
+//   - [SyncFwOperate](https://www.tencentcloud.com/search/?wd=SyncFwOperate&type=document&lang=en)
 type SyncRoute struct {
 	pulumi.CustomResourceState
 

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeServiceEnvironmentList](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentList&type=document&lang=en)
 func LookupServiceEnvironmentList(ctx *pulumi.Context, args *LookupServiceEnvironmentListArgs, opts ...pulumi.InvokeOption) (*LookupServiceEnvironmentListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupServiceEnvironmentListResult

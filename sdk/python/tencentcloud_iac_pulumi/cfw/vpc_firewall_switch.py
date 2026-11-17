@@ -170,6 +170,18 @@ class VpcFirewallSwitch(pulumi.CustomResource):
             enable=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+          - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&type=document&lang=en)
+        * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+        * Update:
+          - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+          - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&type=document&lang=en)
+
         ## Import
 
         cfw vpc_firewall_switch can be imported using the id, e.g.
@@ -223,6 +235,18 @@ class VpcFirewallSwitch(pulumi.CustomResource):
             switch_id=example.switch_lists[0].switch_id,
             enable=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+          - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&type=document&lang=en)
+        * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+        * Update:
+          - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+          - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&type=document&lang=en)
 
         ## Import
 

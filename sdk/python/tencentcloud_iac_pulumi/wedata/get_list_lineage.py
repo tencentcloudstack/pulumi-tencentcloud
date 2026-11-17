@@ -138,6 +138,12 @@ def get_list_lineage(direction: Optional[_builtins.str] = None,
         platform="WEDATA")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListLineage](https://www.tencentcloud.com/document/api/1174/77947)
+
 
     :param _builtins.str direction: Lineage direction: INPUT|OUTPUT.
     :param _builtins.str platform: Source: WEDATA|THIRD, default is WEDATA.
@@ -182,6 +188,12 @@ def get_list_lineage_output(direction: pulumi.Input[Optional[_builtins.str]] = N
         direction="INPUT",
         platform="WEDATA")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListLineage](https://www.tencentcloud.com/document/api/1174/77947)
 
 
     :param _builtins.str direction: Lineage direction: INPUT|OUTPUT.

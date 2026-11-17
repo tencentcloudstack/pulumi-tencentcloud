@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
 func GetEmailIdentities(ctx *pulumi.Context, args *GetEmailIdentitiesArgs, opts ...pulumi.InvokeOption) (*GetEmailIdentitiesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEmailIdentitiesResult

@@ -84,6 +84,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+//   - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&type=document&lang=en)
+//
+// * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+// * Update:
+//   - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+//   - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&type=document&lang=en)
+//
 // ## Import
 //
 // cfw vpcFirewallSwitch can be imported using the id, e.g.

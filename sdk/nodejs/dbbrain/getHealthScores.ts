@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     product: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
  */
 export function getHealthScores(args: GetHealthScoresArgs, opts?: pulumi.InvokeOptions): Promise<GetHealthScoresResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetHealthScoresResult {
  *     product: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
  */
 export function getHealthScoresOutput(args: GetHealthScoresOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetHealthScoresResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

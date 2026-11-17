@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     masterInstanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
  */
 export function getRoMinScale(args?: GetRoMinScaleArgs, opts?: pulumi.InvokeOptions): Promise<GetRoMinScaleResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetRoMinScaleResult {
  *     masterInstanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
  */
 export function getRoMinScaleOutput(args?: GetRoMinScaleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRoMinScaleResult> {
     args = args || {};

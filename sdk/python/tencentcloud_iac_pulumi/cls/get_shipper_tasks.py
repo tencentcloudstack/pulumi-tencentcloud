@@ -127,6 +127,12 @@ def get_shipper_tasks(end_time: Optional[_builtins.int] = None,
         end_time=int(160749910800))
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
+
 
     :param _builtins.int end_time: end time(ms).
     :param _builtins.str result_output_file: Used to save results.
@@ -166,6 +172,12 @@ def get_shipper_tasks_output(end_time: pulumi.Input[Optional[_builtins.int]] = N
         start_time=int(160749910700),
         end_time=int(160749910800))
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
 
 
     :param _builtins.int end_time: end time(ms).

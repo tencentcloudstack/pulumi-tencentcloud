@@ -130,6 +130,12 @@ class UpdateRowFilterOperation(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateRowFilter](https://www.tencentcloud.com/document/api/1155/54459)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -164,6 +170,12 @@ class UpdateRowFilterOperation(pulumi.CustomResource):
                 "re_auth": False,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateRowFilter](https://www.tencentcloud.com/document/api/1155/54459)
 
 
         :param str resource_name: The name of the resource.

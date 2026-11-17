@@ -46,6 +46,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateClusterMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=CreateClusterMaintenanceWindowAndExclusions&type=document&lang=en)
+ * * Read: [DescribeClusterMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=DescribeClusterMaintenanceWindowAndExclusions&type=document&lang=en)
+ * * Update: [ModifyClusterMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=ModifyClusterMaintenanceWindowAndExclusions&type=document&lang=en)
+ * * Delete: [DeleteClusterMaintenanceWindowAndExclusion](https://www.tencentcloud.com/search/?wd=DeleteClusterMaintenanceWindowAndExclusion&type=document&lang=en)
+ *
  * ## Import
  *
  * tke kubernetesClusterMaintenanceWindowAndExclusion can be imported using the id, e.g.

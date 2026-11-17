@@ -88,6 +88,12 @@ def get_config_compliance_packs(result_output_file: Optional[_builtins.str] = No
     example = tencentcloud.system.get_config_compliance_packs()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSystemCompliancePacks](https://www.tencentcloud.com/document/api/1164/84999)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -115,6 +121,12 @@ def get_config_compliance_packs_output(result_output_file: pulumi.Input[Optional
 
     example = tencentcloud.system.get_config_compliance_packs()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSystemCompliancePacks](https://www.tencentcloud.com/document/api/1164/84999)
 
 
     :param _builtins.str result_output_file: Used to save results.

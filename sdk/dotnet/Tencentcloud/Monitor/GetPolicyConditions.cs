@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
         /// </summary>
         public static Task<GetPolicyConditionsResult> InvokeAsync(GetPolicyConditionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
         /// </summary>
         public static Output<GetPolicyConditionsResult> Invoke(GetPolicyConditionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
         /// </summary>
         public static Output<GetPolicyConditionsResult> Invoke(GetPolicyConditionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPolicyConditionsResult>("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args ?? new GetPolicyConditionsInvokeArgs(), options.WithDefaults());

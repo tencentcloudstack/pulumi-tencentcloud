@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     isSecurityLocks: ["true"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&type=document&lang=en)
  */
 export function getTenantInstances(args?: GetTenantInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetTenantInstancesResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetTenantInstancesResult {
  *     isSecurityLocks: ["true"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&type=document&lang=en)
  */
 export function getTenantInstancesOutput(args?: GetTenantInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTenantInstancesResult> {
     args = args || {};

@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     monitorType: "MT_QCE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&type=document&lang=en)
  */
 export function getNoticeContentTmpls(args?: GetNoticeContentTmplsArgs, opts?: pulumi.InvokeOptions): Promise<GetNoticeContentTmplsResult> {
     args = args || {};
@@ -134,6 +140,12 @@ export interface GetNoticeContentTmplsResult {
  *     monitorType: "MT_QCE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&type=document&lang=en)
  */
 export function getNoticeContentTmplsOutput(args?: GetNoticeContentTmplsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNoticeContentTmplsResult> {
     args = args || {};

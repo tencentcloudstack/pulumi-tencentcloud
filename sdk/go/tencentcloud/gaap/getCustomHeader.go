@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
 func LookupCustomHeader(ctx *pulumi.Context, args *LookupCustomHeaderArgs, opts ...pulumi.InvokeOption) (*LookupCustomHeaderResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupCustomHeaderResult

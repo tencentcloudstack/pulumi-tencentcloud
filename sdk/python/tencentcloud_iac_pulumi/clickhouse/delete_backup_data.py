@@ -120,6 +120,12 @@ class DeleteBackupData(pulumi.CustomResource):
             back_up_job_id=1234)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteBackUpData](https://www.tencentcloud.com/search/?wd=DeleteBackUpData&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +151,12 @@ class DeleteBackupData(pulumi.CustomResource):
             instance_id="cdwch-xxxxxx",
             back_up_job_id=1234)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteBackUpData](https://www.tencentcloud.com/search/?wd=DeleteBackUpData&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

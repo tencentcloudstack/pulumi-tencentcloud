@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     diagnoseIndices: "*",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DiagnoseInstance](https://www.tencentcloud.com/search/?wd=DiagnoseInstance&type=document&lang=en)
  */
 export class DiagnoseInstance extends pulumi.CustomResource {
     /**

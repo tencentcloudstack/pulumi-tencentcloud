@@ -114,6 +114,12 @@ def get_groups(filters: Optional[Sequence[Union['GetGroupsFilterArgs', 'GetGroup
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
+
 
     :param Sequence[Union['GetGroupsFilterArgs', 'GetGroupsFilterArgsDict']] filters: filter conditions, valid value:Name,GroupId.
     :param _builtins.str gateway_id: gateway ID.
@@ -151,6 +157,12 @@ def get_groups_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['Ge
             "values": ["group-013c0d8e"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
 
 
     :param Sequence[Union['GetGroupsFilterArgs', 'GetGroupsFilterArgsDict']] filters: filter conditions, valid value:Name,GroupId.

@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&amp;type=document&amp;lang=en)
+    ///   - [RestartLogstashInstance](https://www.tencentcloud.com/search/?wd=RestartLogstashInstance&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/restartLogstashInstanceOperation:RestartLogstashInstanceOperation")]
     public partial class RestartLogstashInstanceOperation : global::Pulumi.CustomResource

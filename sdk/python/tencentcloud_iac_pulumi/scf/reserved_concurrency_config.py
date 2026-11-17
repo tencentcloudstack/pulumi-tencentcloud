@@ -153,6 +153,14 @@ class ReservedConcurrencyConfig(pulumi.CustomResource):
             namespace="default")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39224)
+        * Read: [GetReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39226)
+        * Delete: [DeleteReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39228)
+
         ## Import
 
         scf reserved_concurrency_config can be imported using the id, e.g.
@@ -188,6 +196,14 @@ class ReservedConcurrencyConfig(pulumi.CustomResource):
             reserved_concurrency_mem=128000,
             namespace="default")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39224)
+        * Read: [GetReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39226)
+        * Delete: [DeleteReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39228)
 
         ## Import
 

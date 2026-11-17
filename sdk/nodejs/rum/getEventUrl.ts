@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     projectId: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEventUrl](https://www.tencentcloud.com/document/api/1131/45331)
  */
 export function getEventUrl(args: GetEventUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetEventUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -200,6 +206,12 @@ export interface GetEventUrlResult {
  *     projectId: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEventUrl](https://www.tencentcloud.com/document/api/1131/45331)
  */
 export function getEventUrlOutput(args: GetEventUrlOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEventUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

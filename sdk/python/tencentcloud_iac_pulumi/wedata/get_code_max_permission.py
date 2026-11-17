@@ -107,6 +107,12 @@ def get_code_max_permission(project_id: Optional[_builtins.str] = None,
         resource_id="f0c14b9d-003e-4325-8830-d1a9fa934ed6")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str resource_id: Unique ID of authorization resource, folder ID or file ID.
@@ -141,6 +147,12 @@ def get_code_max_permission_output(project_id: pulumi.Input[Optional[_builtins.s
     example = tencentcloud.wedata.get_code_max_permission(project_id="3108707295180644352",
         resource_id="f0c14b9d-003e-4325-8830-d1a9fa934ed6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
 
 
     :param _builtins.str project_id: Project ID.

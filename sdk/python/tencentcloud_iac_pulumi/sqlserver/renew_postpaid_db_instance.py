@@ -122,6 +122,14 @@ class RenewPostpaidDbInstance(pulumi.CustomResource):
         example_renew_postpaid_db_instance = tencentcloud.sqlserver.RenewPostpaidDbInstance("example", instance_id=example_config_terminate_db_instance.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewPostpaidDBInstance](https://www.tencentcloud.com/document/api/238/72754)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update: [RenewPostpaidDBInstance](https://www.tencentcloud.com/document/api/238/72754)
+
         ## Import
 
         sqlserver renew_postpaid_db_instance can be imported using the id, e.g.
@@ -189,6 +197,14 @@ class RenewPostpaidDbInstance(pulumi.CustomResource):
         example_config_terminate_db_instance = tencentcloud.sqlserver.ConfigTerminateDbInstance("example", instance_id=example.id)
         example_renew_postpaid_db_instance = tencentcloud.sqlserver.RenewPostpaidDbInstance("example", instance_id=example_config_terminate_db_instance.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewPostpaidDBInstance](https://www.tencentcloud.com/document/api/238/72754)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update: [RenewPostpaidDBInstance](https://www.tencentcloud.com/document/api/238/72754)
 
         ## Import
 

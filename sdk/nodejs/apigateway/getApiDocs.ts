@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const myApiDoc = tencentcloud.apigateway.getApiDocs({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAPIDocs](https://www.tencentcloud.com/search/?wd=DescribeAPIDocs&type=document&lang=en)
  */
 export function getApiDocs(args?: GetApiDocsArgs, opts?: pulumi.InvokeOptions): Promise<GetApiDocsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetApiDocsResult {
  *
  * const myApiDoc = tencentcloud.apigateway.getApiDocs({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAPIDocs](https://www.tencentcloud.com/search/?wd=DescribeAPIDocs&type=document&lang=en)
  */
 export function getApiDocsOutput(args?: GetApiDocsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiDocsResult> {
     args = args || {};

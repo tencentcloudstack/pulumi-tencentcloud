@@ -52,6 +52,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34777)
+    ///   - [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+    /// * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+    /// * Delete:
+    ///   - [DeleteDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34776)
+    ///   - [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+    /// 
+    /// ## Import
+    /// 
+    /// DcGatewayCcnRoute can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute example dcg-dr1y0hu7#192.1.1.0/32
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute")]
     public partial class GatewayCcnRoute : global::Pulumi.CustomResource

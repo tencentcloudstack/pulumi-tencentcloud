@@ -17,8 +17,24 @@ import * as utilities from "../utilities";
  *     logSetId: "2ed70190-bf06-4777-980d-2d8a327a2554",
  *     topicName: "tf-example",
  *     status: true,
+ *     period: 30,
+ *     tags: {
+ *         env: "prod",
+ *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateTopic](https://www.tencentcloud.com/document/api/214/37820)
+ *   - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+ *   - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+ * * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+ * * Update: [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+ * * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
  *
  * ## Import
  *
@@ -65,9 +81,17 @@ export class LogTopic extends pulumi.CustomResource {
      */
     declare public readonly logSetId: pulumi.Output<string>;
     /**
+     * Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+     */
+    declare public readonly period: pulumi.Output<number>;
+    /**
      * The status of log topic. true: enable; false: disable. Default is true.
      */
     declare public readonly status: pulumi.Output<boolean>;
+    /**
+     * Tags of clb log topic.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * Log topic of CLB instance.
      */
@@ -88,7 +112,9 @@ export class LogTopic extends pulumi.CustomResource {
             const state = argsOrState as LogTopicState | undefined;
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["logSetId"] = state?.logSetId;
+            resourceInputs["period"] = state?.period;
             resourceInputs["status"] = state?.status;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["topicName"] = state?.topicName;
         } else {
             const args = argsOrState as LogTopicArgs | undefined;
@@ -99,7 +125,9 @@ export class LogTopic extends pulumi.CustomResource {
                 throw new Error("Missing required property 'topicName'");
             }
             resourceInputs["logSetId"] = args?.logSetId;
+            resourceInputs["period"] = args?.period;
             resourceInputs["status"] = args?.status;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["topicName"] = args?.topicName;
             resourceInputs["createTime"] = undefined /*out*/;
         }
@@ -121,9 +149,17 @@ export interface LogTopicState {
      */
     logSetId?: pulumi.Input<string | undefined>;
     /**
+     * Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+     */
+    period?: pulumi.Input<number | undefined>;
+    /**
      * The status of log topic. true: enable; false: disable. Default is true.
      */
     status?: pulumi.Input<boolean | undefined>;
+    /**
+     * Tags of clb log topic.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Log topic of CLB instance.
      */
@@ -139,9 +175,17 @@ export interface LogTopicArgs {
      */
     logSetId: pulumi.Input<string>;
     /**
+     * Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+     */
+    period?: pulumi.Input<number | undefined>;
+    /**
      * The status of log topic. true: enable; false: disable. Default is true.
      */
     status?: pulumi.Input<boolean | undefined>;
+    /**
+     * Tags of clb log topic.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Log topic of CLB instance.
      */

@@ -135,6 +135,14 @@ class OfflineLogConfigAttachment(pulumi.CustomResource):
             unique_id="100027012454")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOfflineLogConfig](https://www.tencentcloud.com/search/?wd=CreateOfflineLogConfig&type=document&lang=en)
+        * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
+        * Delete: [DeleteOfflineLogConfig](https://www.tencentcloud.com/search/?wd=DeleteOfflineLogConfig&type=document&lang=en)
+
         ## Import
 
         rum offline_log_config_attachment can be imported using the id, e.g.
@@ -167,6 +175,14 @@ class OfflineLogConfigAttachment(pulumi.CustomResource):
             project_key="ZEYrYfvaYQ30jRdmPx",
             unique_id="100027012454")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOfflineLogConfig](https://www.tencentcloud.com/search/?wd=CreateOfflineLogConfig&type=document&lang=en)
+        * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
+        * Delete: [DeleteOfflineLogConfig](https://www.tencentcloud.com/search/?wd=DeleteOfflineLogConfig&type=document&lang=en)
 
         ## Import
 

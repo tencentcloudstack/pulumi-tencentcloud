@@ -26,6 +26,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+ *   - [ModifyClusterGlobalEncryption](https://www.tencentcloud.com/document/api/1098/80148)
+ *   - [OpenClusterTransparentEncrypt](https://www.tencentcloud.com/document/api/1098/69803)
+ * * Read: [DescribeClusterTransparentEncryptInfo](https://www.tencentcloud.com/document/api/1098/69806)
+ * * Update:
+ *   - [DescribeTasks](https://www.tencentcloud.com/document/api/1098/74199)
+ *   - [ModifyClusterGlobalEncryption](https://www.tencentcloud.com/document/api/1098/80148)
+ *   - [OpenClusterTransparentEncrypt](https://www.tencentcloud.com/document/api/1098/69803)
+ *
  * ## Import
  *
  * Cynosdb cluster transparent encrypt can be imported using the id, e.g.

@@ -106,6 +106,12 @@ def get_instance(product: Optional[_builtins.str] = None,
     example = tencentcloud.zones.get_instance(product="cvm")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+
 
     :param _builtins.str product: Product name to query, e.g. `cvm`. Use `products_get_instance` to get available product names.
     :param _builtins.str result_output_file: Used to save results.
@@ -139,6 +145,12 @@ def get_instance_output(product: pulumi.Input[Optional[_builtins.str]] = None,
 
     example = tencentcloud.zones.get_instance(product="cvm")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
 
 
     :param _builtins.str product: Product name to query, e.g. `cvm`. Use `products_get_instance` to get available product names.

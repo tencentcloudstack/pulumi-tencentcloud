@@ -16,6 +16,12 @@ import * as utilities from "../utilities";
  * const revokeCertificate = new tencentcloud.ssl.RevokeCertificateOperation("revoke_certificate", {certificateId: "7zUGkVab"});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RevokeCertificate](https://www.tencentcloud.com/document/api/1007/79958)
+ *
  * ## Import
  *
  * ssl revokeCertificate can be imported using the id, e.g.

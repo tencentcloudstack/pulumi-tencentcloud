@@ -165,6 +165,12 @@ def get_account_quota(quota_type: Optional[_builtins.str] = None,
         result_output_file="./quota.json")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&type=document&lang=en)
+
 
     :param _builtins.str quota_type: Filter by quota type. Valid values: PostPaidQuotaSet, PrePaidQuotaSet, SpotPaidQuotaSet, ImageQuotaSet, DisasterRecoverGroupQuotaSet.
     :param _builtins.str result_output_file: Used to save results.
@@ -243,6 +249,12 @@ def get_account_quota_output(quota_type: pulumi.Input[Optional[Optional[_builtin
     quota_output = tencentcloud.cvm.get_account_quota(zones=["ap-guangzhou-3"],
         result_output_file="./quota.json")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&type=document&lang=en)
 
 
     :param _builtins.str quota_type: Filter by quota type. Valid values: PostPaidQuotaSet, PrePaidQuotaSet, SpotPaidQuotaSet, ImageQuotaSet, DisasterRecoverGroupQuotaSet.

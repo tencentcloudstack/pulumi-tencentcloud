@@ -67,6 +67,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read: [DescribeAutoBackupConfig](https://www.tencentcloud.com/document/api/239/32068)
+    /// * Update: [ModifyAutoBackupConfig](https://www.tencentcloud.com/document/api/239/32058)
+    /// * Delete: [ModifyAutoBackupConfig](https://www.tencentcloud.com/document/api/239/32058)
+    /// 
     /// ## Import
     /// 
     /// Redis  backup config can be imported, e.g.

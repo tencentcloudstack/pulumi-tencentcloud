@@ -41,6 +41,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SyncConfig{}
 	case "tencentcloud:Dts/syncJob:SyncJob":
 		r = &SyncJob{}
+	case "tencentcloud:Dts/syncJobConfig:SyncJobConfig":
+		r = &SyncJobConfig{}
 	case "tencentcloud:Dts/syncJobContinueOperation:SyncJobContinueOperation":
 		r = &SyncJobContinueOperation{}
 	case "tencentcloud:Dts/syncJobIsolateOperation:SyncJobIsolateOperation":
@@ -118,6 +120,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dts/syncJob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dts/syncJobConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

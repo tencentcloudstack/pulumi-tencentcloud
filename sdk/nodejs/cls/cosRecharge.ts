@@ -40,6 +40,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateCosRecharge](https://www.tencentcloud.com/document/api/614/54188)
+ * * Read: [DescribeCosRecharges](https://www.tencentcloud.com/document/api/614/54187)
+ * * Update: [ModifyCosRecharge](https://www.tencentcloud.com/document/api/614/54186)
+ *
  * ## Import
  *
  * cls cosRecharge can be imported using the id, e.g.

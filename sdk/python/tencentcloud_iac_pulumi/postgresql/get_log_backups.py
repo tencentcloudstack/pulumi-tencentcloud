@@ -144,6 +144,12 @@ def get_log_backups(filters: Optional[Sequence[Union['GetLogBackupsFilterArgs', 
         order_by_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
+
 
     :param Sequence[Union['GetLogBackupsFilterArgs', 'GetLogBackupsFilterArgsDict']] filters: Filter instances using one or more criteria. Valid filter names:db-instance-id: Filter by instance ID (in string format).db-instance-name: Filter by instance name (in string format).db-instance-ip: Filter by instance VPC IP (in string format).
     :param _builtins.str max_finish_time: Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
@@ -196,6 +202,12 @@ def get_log_backups_output(filters: pulumi.Input[Optional[Optional[Sequence[Unio
         order_by="StartTime",
         order_by_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
 
 
     :param Sequence[Union['GetLogBackupsFilterArgs', 'GetLogBackupsFilterArgsDict']] filters: Filter instances using one or more criteria. Valid filter names:db-instance-id: Filter by instance ID (in string format).db-instance-name: Filter by instance name (in string format).db-instance-ip: Filter by instance VPC IP (in string format).

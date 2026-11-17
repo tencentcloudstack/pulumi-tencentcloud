@@ -106,6 +106,12 @@ def get_gateway_flow_qos(gateway_id: Optional[_builtins.str] = None,
     gateway_flow_qos = tencentcloud.vpc.get_gateway_flow_qos(gateway_id="vpngw-gt8bianl")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
+
 
     :param _builtins.str gateway_id: Network instance ID, the network instance types we currently support are:Private line gateway instance ID, in the form of `dcg-ltjahce6`;Nat gateway instance ID, in the form of `nat-ltjahce6`;VPN gateway instance ID, in the form of `vpn-ltjahce6`.
     :param Sequence[_builtins.str] ip_addresses: Intranet IP of the cloud server with traffic limitation.
@@ -139,6 +145,12 @@ def get_gateway_flow_qos_output(gateway_id: pulumi.Input[Optional[_builtins.str]
 
     gateway_flow_qos = tencentcloud.vpc.get_gateway_flow_qos(gateway_id="vpngw-gt8bianl")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
 
 
     :param _builtins.str gateway_id: Network instance ID, the network instance types we currently support are:Private line gateway instance ID, in the form of `dcg-ltjahce6`;Nat gateway instance ID, in the form of `nat-ltjahce6`;VPN gateway instance ID, in the form of `vpn-ltjahce6`.

@@ -28,11 +28,35 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dcdb.NewAccount(ctx, "account", &dcdb.AccountArgs{
-//				InstanceId:         pulumi.String("tdsqlshard-kkpoxvnv"),
+//			example, err := dcdb.NewHourdbInstance(ctx, "example", &dcdb.HourdbInstanceArgs{
+//				InstanceName: pulumi.String("tf-example"),
+//				Zones: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-6"),
+//					pulumi.String("ap-guangzhou-7"),
+//				},
+//				ShardMemory:     pulumi.Int(4),
+//				ShardStorage:    pulumi.Int(100),
+//				ShardNodeCount:  pulumi.Int(2),
+//				ShardCount:      pulumi.Int(2),
+//				VpcId:           pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:        pulumi.String("subnet-hhi88a58"),
+//				SecurityGroupId: pulumi.String("sg-4z20n68d"),
+//				DbVersionId:     pulumi.String("8.0"),
+//				ResourceTags: dcdb.HourdbInstanceResourceTagArray{
+//					&dcdb.HourdbInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("tagKey"),
+//						TagValue: pulumi.String("tagValue"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = dcdb.NewAccount(ctx, "example", &dcdb.AccountArgs{
+//				InstanceId:         example.ID().ToIDOutput().ToStringOutput(),
 //				UserName:           pulumi.String("mysql"),
 //				Host:               pulumi.String("127.0.0.1"),
-//				Password:           pulumi.String("===password==="),
+//				Password:           pulumi.String("Password@2026"),
 //				ReadOnly:           pulumi.Int(0),
 //				Description:        pulumi.String("this is a test account"),
 //				MaxUserConnections: pulumi.Int(10),
@@ -46,11 +70,25 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAccount](https://www.tencentcloud.com/document/api/1042/34449)
+// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+// * Update:
+//   - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1042/34435)
+//   - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1042/34430)
+//
+// * Delete:
+//   - [DeleteAccount](https://www.tencentcloud.com/document/api/1042/34448)
+//   - [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+//
 // ## Import
 //
-// dcdb account can be imported using the id, e.g.
+// dcdb account can be imported using the instanceId#userName, e.g.
 // ```sh
-// $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+// $ pulumi import tencentcloud:Dcdb/account:Account example tdsqlshard-0tyhkwkzj5#mysql
 // ```
 type Account struct {
 	pulumi.CustomResourceState

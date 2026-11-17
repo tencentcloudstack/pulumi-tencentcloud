@@ -129,6 +129,12 @@ def get_security_audit_log_export_tasks(async_request_ids: Optional[Sequence[_bu
         async_request_ids=[task.async_request_id])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+
 
     :param Sequence[_builtins.int] async_request_ids: async request id list.
     :param _builtins.str product: product, optional value is mysql.
@@ -179,6 +185,12 @@ def get_security_audit_log_export_tasks_output(async_request_ids: pulumi.Input[O
         product="mysql",
         async_request_ids=[task.async_request_id])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
 
 
     :param Sequence[_builtins.int] async_request_ids: async request id list.

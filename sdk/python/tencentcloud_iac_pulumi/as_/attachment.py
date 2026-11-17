@@ -174,6 +174,23 @@ class Attachment(pulumi.CustomResource):
             instance_ids=[example_instance.id])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachInstances](https://www.tencentcloud.com/document/api/377/31017)
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+        * Read: [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+        * Update:
+          - [AttachInstances](https://www.tencentcloud.com/document/api/377/31017)
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [DetachInstances](https://www.tencentcloud.com/document/api/377/31011)
+        * Delete:
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+          - [DetachInstances](https://www.tencentcloud.com/document/api/377/31011)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -253,6 +270,23 @@ class Attachment(pulumi.CustomResource):
             scaling_group_id=example_scaling_group.id,
             instance_ids=[example_instance.id])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AttachInstances](https://www.tencentcloud.com/document/api/377/31017)
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+        * Read: [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+        * Update:
+          - [AttachInstances](https://www.tencentcloud.com/document/api/377/31017)
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [DetachInstances](https://www.tencentcloud.com/document/api/377/31011)
+        * Delete:
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+          - [DetachInstances](https://www.tencentcloud.com/document/api/377/31011)
 
 
         :param str resource_name: The name of the resource.

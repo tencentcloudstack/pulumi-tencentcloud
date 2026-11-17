@@ -277,6 +277,18 @@ class DbInstanceSslConfig(pulumi.CustomResource):
             cmk_region="ap-guangzhou")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBInstanceSSL](https://www.tencentcloud.com/document/api/238/72764)
+        * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBInstanceSSL](https://www.tencentcloud.com/document/api/238/72764)
+
         ## Import
 
         SQL Server db instance ssl config can be imported using the instance_id, e.g.
@@ -340,6 +352,18 @@ class DbInstanceSslConfig(pulumi.CustomResource):
             cmk_id="your-cmk-key-id",
             cmk_region="ap-guangzhou")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBInstanceSSL](https://www.tencentcloud.com/document/api/238/72764)
+        * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBInstanceSSL](https://www.tencentcloud.com/document/api/238/72764)
 
         ## Import
 

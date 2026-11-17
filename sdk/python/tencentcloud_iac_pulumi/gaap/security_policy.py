@@ -158,6 +158,24 @@ class SecurityPolicy(pulumi.CustomResource):
             action="DROP")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSecurityPolicy](https://www.tencentcloud.com/document/api/608/33108)
+          - [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+          - [OpenSecurityPolicy](https://www.tencentcloud.com/document/api/608/33089)
+        * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+        * Update:
+          - [CloseSecurityPolicy](https://www.tencentcloud.com/document/api/608/33110)
+          - [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+          - [OpenSecurityPolicy](https://www.tencentcloud.com/document/api/608/33089)
+        * Delete:
+          - [CloseSecurityPolicy](https://www.tencentcloud.com/document/api/608/33110)
+          - [DeleteSecurityPolicy](https://www.tencentcloud.com/document/api/608/33106)
+          - [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+
         ## Import
 
         GAAP security policy can be imported using the id, e.g.
@@ -198,6 +216,24 @@ class SecurityPolicy(pulumi.CustomResource):
             proxy_id=foo.id,
             action="DROP")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSecurityPolicy](https://www.tencentcloud.com/document/api/608/33108)
+          - [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+          - [OpenSecurityPolicy](https://www.tencentcloud.com/document/api/608/33089)
+        * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+        * Update:
+          - [CloseSecurityPolicy](https://www.tencentcloud.com/document/api/608/33110)
+          - [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+          - [OpenSecurityPolicy](https://www.tencentcloud.com/document/api/608/33089)
+        * Delete:
+          - [CloseSecurityPolicy](https://www.tencentcloud.com/document/api/608/33110)
+          - [DeleteSecurityPolicy](https://www.tencentcloud.com/document/api/608/33106)
+          - [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
 
         ## Import
 

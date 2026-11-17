@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+    ///   - [StopInstances](https://www.tencentcloud.com/document/api/1103/42487)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/stopInstance:StopInstance")]
     public partial class StopInstance : global::Pulumi.CustomResource

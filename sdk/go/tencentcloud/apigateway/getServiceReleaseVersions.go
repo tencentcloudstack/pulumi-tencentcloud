@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&type=document&lang=en)
 func LookupServiceReleaseVersions(ctx *pulumi.Context, args *LookupServiceReleaseVersionsArgs, opts ...pulumi.InvokeOption) (*LookupServiceReleaseVersionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupServiceReleaseVersionsResult

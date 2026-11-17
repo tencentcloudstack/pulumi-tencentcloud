@@ -41,6 +41,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+//   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+//   - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
 func GetAcls(ctx *pulumi.Context, args *GetAclsArgs, opts ...pulumi.InvokeOption) (*GetAclsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAclsResult

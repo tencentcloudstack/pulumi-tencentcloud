@@ -37,6 +37,12 @@ import * as utilities from "../utilities";
  *     roleIds: ["4611686018441060141"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterCommonNames](https://www.tencentcloud.com/document/api/457/41571)
  */
 export function getClusterCommonNames(args?: GetClusterCommonNamesArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterCommonNamesResult> {
     args = args || {};
@@ -119,6 +125,12 @@ export interface GetClusterCommonNamesResult {
  *     roleIds: ["4611686018441060141"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterCommonNames](https://www.tencentcloud.com/document/api/457/41571)
  */
 export function getClusterCommonNamesOutput(args?: GetClusterCommonNamesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterCommonNamesResult> {
     args = args || {};

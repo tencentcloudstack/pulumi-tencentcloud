@@ -122,6 +122,12 @@ def get_used_ip_address(ip_addresses: Optional[Sequence[_builtins.str]] = None,
     used_ip_address = tencentcloud.vpc.get_used_ip_address(vpc_id="vpc-4owdpnwr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
+
 
     :param Sequence[_builtins.str] ip_addresses: IPs to query.
     :param _builtins.str result_output_file: Used to save results.
@@ -159,6 +165,12 @@ def get_used_ip_address_output(ip_addresses: pulumi.Input[Optional[Optional[Sequ
 
     used_ip_address = tencentcloud.vpc.get_used_ip_address(vpc_id="vpc-4owdpnwr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
 
 
     :param Sequence[_builtins.str] ip_addresses: IPs to query.

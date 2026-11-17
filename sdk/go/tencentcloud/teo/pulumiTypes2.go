@@ -28639,6 +28639,8 @@ type LoadBalancerHealthChecker struct {
 	Headers []LoadBalancerHealthCheckerHeader `pulumi:"headers"`
 	// Number of consecutive healthy results to mark the origin as healthy. Default: 3, minimum: 1.
 	HealthThreshold *int `pulumi:"healthThreshold"`
+	// Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+	HostHeaderPolicy *string `pulumi:"hostHeaderPolicy"`
 	// Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
 	Interval *int `pulumi:"interval"`
 	// Request method, valid when `type` is `HTTP` or `HTTPS`. Valid values: `GET`, `HEAD`.
@@ -28647,6 +28649,8 @@ type LoadBalancerHealthChecker struct {
 	Path *string `pulumi:"path"`
 	// Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
 	Port *int `pulumi:"port"`
+	// Probe cluster region scope for health checks. Valid values: `global`, `mainlandChina`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+	ProbeCluster *string `pulumi:"probeCluster"`
 	// Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
 	RecvContext *string `pulumi:"recvContext"`
 	// Content to send during health check, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
@@ -28679,6 +28683,8 @@ type LoadBalancerHealthCheckerArgs struct {
 	Headers LoadBalancerHealthCheckerHeaderArrayInput `pulumi:"headers"`
 	// Number of consecutive healthy results to mark the origin as healthy. Default: 3, minimum: 1.
 	HealthThreshold pulumi.IntPtrInput `pulumi:"healthThreshold"`
+	// Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+	HostHeaderPolicy pulumi.StringPtrInput `pulumi:"hostHeaderPolicy"`
 	// Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
 	Interval pulumi.IntPtrInput `pulumi:"interval"`
 	// Request method, valid when `type` is `HTTP` or `HTTPS`. Valid values: `GET`, `HEAD`.
@@ -28687,6 +28693,8 @@ type LoadBalancerHealthCheckerArgs struct {
 	Path pulumi.StringPtrInput `pulumi:"path"`
 	// Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
 	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Probe cluster region scope for health checks. Valid values: `global`, `mainlandChina`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+	ProbeCluster pulumi.StringPtrInput `pulumi:"probeCluster"`
 	// Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
 	RecvContext pulumi.StringPtrInput `pulumi:"recvContext"`
 	// Content to send during health check, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
@@ -28799,6 +28807,11 @@ func (o LoadBalancerHealthCheckerOutput) HealthThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LoadBalancerHealthChecker) *int { return v.HealthThreshold }).(pulumi.IntPtrOutput)
 }
 
+// Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+func (o LoadBalancerHealthCheckerOutput) HostHeaderPolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LoadBalancerHealthChecker) *string { return v.HostHeaderPolicy }).(pulumi.StringPtrOutput)
+}
+
 // Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
 func (o LoadBalancerHealthCheckerOutput) Interval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LoadBalancerHealthChecker) *int { return v.Interval }).(pulumi.IntPtrOutput)
@@ -28817,6 +28830,11 @@ func (o LoadBalancerHealthCheckerOutput) Path() pulumi.StringPtrOutput {
 // Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
 func (o LoadBalancerHealthCheckerOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LoadBalancerHealthChecker) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Probe cluster region scope for health checks. Valid values: `global`, `mainlandChina`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+func (o LoadBalancerHealthCheckerOutput) ProbeCluster() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LoadBalancerHealthChecker) *string { return v.ProbeCluster }).(pulumi.StringPtrOutput)
 }
 
 // Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
@@ -28913,6 +28931,16 @@ func (o LoadBalancerHealthCheckerPtrOutput) HealthThreshold() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+func (o LoadBalancerHealthCheckerPtrOutput) HostHeaderPolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LoadBalancerHealthChecker) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HostHeaderPolicy
+	}).(pulumi.StringPtrOutput)
+}
+
 // Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
 func (o LoadBalancerHealthCheckerPtrOutput) Interval() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LoadBalancerHealthChecker) *int {
@@ -28951,6 +28979,16 @@ func (o LoadBalancerHealthCheckerPtrOutput) Port() pulumi.IntPtrOutput {
 		}
 		return v.Port
 	}).(pulumi.IntPtrOutput)
+}
+
+// Probe cluster region scope for health checks. Valid values: `global`, `mainlandChina`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+func (o LoadBalancerHealthCheckerPtrOutput) ProbeCluster() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LoadBalancerHealthChecker) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ProbeCluster
+	}).(pulumi.StringPtrOutput)
 }
 
 // Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
@@ -34598,7 +34636,7 @@ func (o RuleEngineRuleSubRuleRuleOrAndArrayOutput) Index(i pulumi.IntInput) Rule
 type SecurityApiResourceApiResources struct {
 	// Associated API service ID list.
 	ApiServiceIds []string `pulumi:"apiServiceIds"`
-	// ID of the resource.
+	// API resource ID, e.g. `apires-xxxxxxxx`.
 	Id *string `pulumi:"id"`
 	// Allowed HTTP methods. Valid values: `GET`, `POST`, `PUT`, `HEAD`, `PATCH`, `OPTIONS`, `DELETE`.
 	Methods []string `pulumi:"methods"`
@@ -34624,7 +34662,7 @@ type SecurityApiResourceApiResourcesInput interface {
 type SecurityApiResourceApiResourcesArgs struct {
 	// Associated API service ID list.
 	ApiServiceIds pulumi.StringArrayInput `pulumi:"apiServiceIds"`
-	// ID of the resource.
+	// API resource ID, e.g. `apires-xxxxxxxx`.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Allowed HTTP methods. Valid values: `GET`, `POST`, `PUT`, `HEAD`, `PATCH`, `OPTIONS`, `DELETE`.
 	Methods pulumi.StringArrayInput `pulumi:"methods"`
@@ -34718,7 +34756,7 @@ func (o SecurityApiResourceApiResourcesOutput) ApiServiceIds() pulumi.StringArra
 	return o.ApplyT(func(v SecurityApiResourceApiResources) []string { return v.ApiServiceIds }).(pulumi.StringArrayOutput)
 }
 
-// ID of the resource.
+// API resource ID, e.g. `apires-xxxxxxxx`.
 func (o SecurityApiResourceApiResourcesOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityApiResourceApiResources) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -34777,7 +34815,7 @@ func (o SecurityApiResourceApiResourcesPtrOutput) ApiServiceIds() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
-// ID of the resource.
+// API resource ID, e.g. `apires-xxxxxxxx`.
 func (o SecurityApiResourceApiResourcesPtrOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityApiResourceApiResources) *string {
 		if v == nil {
@@ -34830,7 +34868,7 @@ func (o SecurityApiResourceApiResourcesPtrOutput) RequestConstraint() pulumi.Str
 type SecurityApiServiceApiServices struct {
 	// API service base path, e.g. `/tt`.
 	BasePath string `pulumi:"basePath"`
-	// ID of the resource.
+	// API service ID, e.g. `apisrv-xxxxxxxx`.
 	Id *string `pulumi:"id"`
 	// API service name.
 	Name string `pulumi:"name"`
@@ -34850,7 +34888,7 @@ type SecurityApiServiceApiServicesInput interface {
 type SecurityApiServiceApiServicesArgs struct {
 	// API service base path, e.g. `/tt`.
 	BasePath pulumi.StringInput `pulumi:"basePath"`
-	// ID of the resource.
+	// API service ID, e.g. `apisrv-xxxxxxxx`.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// API service name.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -34938,7 +34976,7 @@ func (o SecurityApiServiceApiServicesOutput) BasePath() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityApiServiceApiServices) string { return v.BasePath }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// API service ID, e.g. `apisrv-xxxxxxxx`.
 func (o SecurityApiServiceApiServicesOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityApiServiceApiServices) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -34982,7 +35020,7 @@ func (o SecurityApiServiceApiServicesPtrOutput) BasePath() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// API service ID, e.g. `apisrv-xxxxxxxx`.
 func (o SecurityApiServiceApiServicesPtrOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityApiServiceApiServices) *string {
 		if v == nil {
@@ -35007,7 +35045,7 @@ type SecurityClientAttesterClientAttesters struct {
 	AttesterDuration *string `pulumi:"attesterDuration"`
 	// Authentication method. Valid values: `TC-RCE` (Tencent Cloud RCE), `TC-CAPTCHA` (Tencent CAPTCHA), `TC-EO-CAPTCHA` (EdgeOne CAPTCHA).
 	AttesterSource string `pulumi:"attesterSource"`
-	// ID of the resource.
+	// Client attester ID, e.g. `attest-xxxxxxxx`.
 	Id *string `pulumi:"id"`
 	// Attester name.
 	Name string `pulumi:"name"`
@@ -35037,7 +35075,7 @@ type SecurityClientAttesterClientAttestersArgs struct {
 	AttesterDuration pulumi.StringPtrInput `pulumi:"attesterDuration"`
 	// Authentication method. Valid values: `TC-RCE` (Tencent Cloud RCE), `TC-CAPTCHA` (Tencent CAPTCHA), `TC-EO-CAPTCHA` (EdgeOne CAPTCHA).
 	AttesterSource pulumi.StringInput `pulumi:"attesterSource"`
-	// ID of the resource.
+	// Client attester ID, e.g. `attest-xxxxxxxx`.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Attester name.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -35138,7 +35176,7 @@ func (o SecurityClientAttesterClientAttestersOutput) AttesterSource() pulumi.Str
 	return o.ApplyT(func(v SecurityClientAttesterClientAttesters) string { return v.AttesterSource }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// Client attester ID, e.g. `attest-xxxxxxxx`.
 func (o SecurityClientAttesterClientAttestersOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityClientAttesterClientAttesters) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -35218,7 +35256,7 @@ func (o SecurityClientAttesterClientAttestersPtrOutput) AttesterSource() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// Client attester ID, e.g. `attest-xxxxxxxx`.
 func (o SecurityClientAttesterClientAttestersPtrOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityClientAttesterClientAttesters) *string {
 		if v == nil {
@@ -36124,7 +36162,7 @@ type SecurityPolicyConfigSecurityConfig struct {
 	DetectLengthLimitConfigs []SecurityPolicyConfigSecurityConfigDetectLengthLimitConfig `pulumi:"detectLengthLimitConfigs"`
 	// Drop page configuration.
 	DropPageConfig *SecurityPolicyConfigSecurityConfigDropPageConfig `pulumi:"dropPageConfig"`
-	// Exception rules configuration.
+	// Exception rule configuration.
 	ExceptConfig *SecurityPolicyConfigSecurityConfigExceptConfig `pulumi:"exceptConfig"`
 	// Basic access control.
 	IpTableConfig *SecurityPolicyConfigSecurityConfigIpTableConfig `pulumi:"ipTableConfig"`
@@ -36132,7 +36170,7 @@ type SecurityPolicyConfigSecurityConfig struct {
 	RateLimitConfig *SecurityPolicyConfigSecurityConfigRateLimitConfig `pulumi:"rateLimitConfig"`
 	// Slow attack configuration.
 	SlowPostConfig *SecurityPolicyConfigSecurityConfigSlowPostConfig `pulumi:"slowPostConfig"`
-	// Layer-7 protection master switch.
+	// Security switch configuration.
 	SwitchConfig *SecurityPolicyConfigSecurityConfigSwitchConfig `pulumi:"switchConfig"`
 	// Template configuration.
 	TemplateConfigs []SecurityPolicyConfigSecurityConfigTemplateConfig `pulumi:"templateConfigs"`
@@ -36160,7 +36198,7 @@ type SecurityPolicyConfigSecurityConfigArgs struct {
 	DetectLengthLimitConfigs SecurityPolicyConfigSecurityConfigDetectLengthLimitConfigArrayInput `pulumi:"detectLengthLimitConfigs"`
 	// Drop page configuration.
 	DropPageConfig SecurityPolicyConfigSecurityConfigDropPageConfigPtrInput `pulumi:"dropPageConfig"`
-	// Exception rules configuration.
+	// Exception rule configuration.
 	ExceptConfig SecurityPolicyConfigSecurityConfigExceptConfigPtrInput `pulumi:"exceptConfig"`
 	// Basic access control.
 	IpTableConfig SecurityPolicyConfigSecurityConfigIpTableConfigPtrInput `pulumi:"ipTableConfig"`
@@ -36168,7 +36206,7 @@ type SecurityPolicyConfigSecurityConfigArgs struct {
 	RateLimitConfig SecurityPolicyConfigSecurityConfigRateLimitConfigPtrInput `pulumi:"rateLimitConfig"`
 	// Slow attack configuration.
 	SlowPostConfig SecurityPolicyConfigSecurityConfigSlowPostConfigPtrInput `pulumi:"slowPostConfig"`
-	// Layer-7 protection master switch.
+	// Security switch configuration.
 	SwitchConfig SecurityPolicyConfigSecurityConfigSwitchConfigPtrInput `pulumi:"switchConfig"`
 	// Template configuration.
 	TemplateConfigs SecurityPolicyConfigSecurityConfigTemplateConfigArrayInput `pulumi:"templateConfigs"`
@@ -36281,7 +36319,7 @@ func (o SecurityPolicyConfigSecurityConfigOutput) DropPageConfig() SecurityPolic
 	}).(SecurityPolicyConfigSecurityConfigDropPageConfigPtrOutput)
 }
 
-// Exception rules configuration.
+// Exception rule configuration.
 func (o SecurityPolicyConfigSecurityConfigOutput) ExceptConfig() SecurityPolicyConfigSecurityConfigExceptConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfig) *SecurityPolicyConfigSecurityConfigExceptConfig {
 		return v.ExceptConfig
@@ -36309,7 +36347,7 @@ func (o SecurityPolicyConfigSecurityConfigOutput) SlowPostConfig() SecurityPolic
 	}).(SecurityPolicyConfigSecurityConfigSlowPostConfigPtrOutput)
 }
 
-// Layer-7 protection master switch.
+// Security switch configuration.
 func (o SecurityPolicyConfigSecurityConfigOutput) SwitchConfig() SecurityPolicyConfigSecurityConfigSwitchConfigPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfig) *SecurityPolicyConfigSecurityConfigSwitchConfig {
 		return v.SwitchConfig
@@ -36394,7 +36432,7 @@ func (o SecurityPolicyConfigSecurityConfigPtrOutput) DropPageConfig() SecurityPo
 	}).(SecurityPolicyConfigSecurityConfigDropPageConfigPtrOutput)
 }
 
-// Exception rules configuration.
+// Exception rule configuration.
 func (o SecurityPolicyConfigSecurityConfigPtrOutput) ExceptConfig() SecurityPolicyConfigSecurityConfigExceptConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigSecurityConfig) *SecurityPolicyConfigSecurityConfigExceptConfig {
 		if v == nil {
@@ -36434,7 +36472,7 @@ func (o SecurityPolicyConfigSecurityConfigPtrOutput) SlowPostConfig() SecurityPo
 	}).(SecurityPolicyConfigSecurityConfigSlowPostConfigPtrOutput)
 }
 
-// Layer-7 protection master switch.
+// Security switch configuration.
 func (o SecurityPolicyConfigSecurityConfigPtrOutput) SwitchConfig() SecurityPolicyConfigSecurityConfigSwitchConfigPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigSecurityConfig) *SecurityPolicyConfigSecurityConfigSwitchConfig {
 		if v == nil {
@@ -37605,7 +37643,7 @@ type SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRule struct {
 	RuleName *string `pulumi:"ruleName"`
 	// Rule switch.
 	Switch *string `pulumi:"switch"`
-	// Update time.
+	// Update time. Output-only.
 	UpdateTime *string `pulumi:"updateTime"`
 }
 
@@ -37633,7 +37671,7 @@ type SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRuleArgs struct {
 	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
 	// Rule switch.
 	Switch pulumi.StringPtrInput `pulumi:"switch"`
-	// Update time.
+	// Update time. Output-only.
 	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
 }
 
@@ -37724,7 +37762,7 @@ func (o SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRuleOutput) Switch()
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRule) *string { return v.Switch }).(pulumi.StringPtrOutput)
 }
 
-// Update time.
+// Update time. Output-only.
 func (o SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRuleOutput) UpdateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRule) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
 }
@@ -41028,7 +41066,7 @@ type SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRule struct {
 	RulePriority *int `pulumi:"rulePriority"`
 	// Rule status. Valid values: `on`, `off`.
 	RuleStatus *string `pulumi:"ruleStatus"`
-	// Update time.
+	// Update time. Output-only.
 	UpdateTime *string `pulumi:"updateTime"`
 }
 
@@ -41058,7 +41096,7 @@ type SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRuleArgs struct {
 	RulePriority pulumi.IntPtrInput `pulumi:"rulePriority"`
 	// Rule status. Valid values: `on`, `off`.
 	RuleStatus pulumi.StringPtrInput `pulumi:"ruleStatus"`
-	// Update time.
+	// Update time. Output-only.
 	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
 }
 
@@ -41152,7 +41190,7 @@ func (o SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRuleOutput) Rule
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRule) *string { return v.RuleStatus }).(pulumi.StringPtrOutput)
 }
 
-// Update time.
+// Update time. Output-only.
 func (o SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRuleOutput) UpdateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRule) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
 }
@@ -43064,9 +43102,9 @@ func (o SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplatePtrOut
 }
 
 type SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetail struct {
-	// Template action. Output-only.
+	// Action. Valid values: `skip`, `scan`. Output-only.
 	Action *string `pulumi:"action"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id *int `pulumi:"id"`
 	// Template level. Output-only.
 	Mode *string `pulumi:"mode"`
@@ -43090,9 +43128,9 @@ type SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimit
 }
 
 type SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetailArgs struct {
-	// Template action. Output-only.
+	// Action. Valid values: `skip`, `scan`. Output-only.
 	Action pulumi.StringPtrInput `pulumi:"action"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// Template level. Output-only.
 	Mode pulumi.StringPtrInput `pulumi:"mode"`
@@ -43155,14 +43193,14 @@ func (o SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLi
 	return o
 }
 
-// Template action. Output-only.
+// Action. Valid values: `skip`, `scan`. Output-only.
 func (o SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetailOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetail) *string {
 		return v.Action
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// Template ID. Output-only.
 func (o SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetailOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetail) *int {
 		return v.Id
@@ -45661,7 +45699,7 @@ type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntellige
 	BotRatings *SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings `pulumi:"botRatings"`
 	// Whether bot intelligence is enabled. Valid values: `on`, `off`.
 	Enabled *string `pulumi:"enabled"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id *string `pulumi:"id"`
 }
 
@@ -45681,7 +45719,7 @@ type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntellige
 	BotRatings SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput `pulumi:"botRatings"`
 	// Whether bot intelligence is enabled. Valid values: `on`, `off`.
 	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 }
 
@@ -45776,7 +45814,7 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntell
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// Template ID. Output-only.
 func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *string {
 		return v.Id
@@ -45827,7 +45865,7 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntell
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// Template ID. Output-only.
 func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *string {
 		if v == nil {
@@ -50150,8 +50188,12 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputat
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverride struct {
 	// Action override configuration.
 	Action *SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideAction `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId string `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId *string `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds []string `pulumi:"ruleIds"`
 }
 
 // SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideArgs and SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideOutput values.
@@ -50168,8 +50210,12 @@ type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputation
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideArgs struct {
 	// Action override configuration.
 	Action SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionPtrInput `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId pulumi.StringPtrInput `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds pulumi.StringArrayInput `pulumi:"ruleIds"`
 }
 
 func (SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideArgs) ElementType() reflect.Type {
@@ -50230,11 +50276,20 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputat
 	}).(SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionPtrOutput)
 }
 
-// Rule ID or category ID for action override.
-func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverride) string {
+// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+//
+// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideOutput) RuleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverride) *string {
 		return v.RuleId
-	}).(pulumi.StringOutput)
+	}).(pulumi.StringPtrOutput)
+}
+
+// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideOutput) RuleIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverride) []string {
+		return v.RuleIds
+	}).(pulumi.StringArrayOutput)
 }
 
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideArrayOutput struct{ *pulumi.OutputState }
@@ -52354,8 +52409,12 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotC
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverride struct {
 	// Action override configuration.
 	Action *SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId string `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId *string `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds []string `pulumi:"ruleIds"`
 }
 
 // SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideArgs and SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideOutput values.
@@ -52372,8 +52431,12 @@ type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCate
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideArgs struct {
 	// Action override configuration.
 	Action SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionPtrInput `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId pulumi.StringPtrInput `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds pulumi.StringArrayInput `pulumi:"ruleIds"`
 }
 
 func (SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideArgs) ElementType() reflect.Type {
@@ -52434,11 +52497,20 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotC
 	}).(SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionPtrOutput)
 }
 
-// Rule ID or category ID for action override.
-func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverride) string {
+// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+//
+// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideOutput) RuleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverride) *string {
 		return v.RuleId
-	}).(pulumi.StringOutput)
+	}).(pulumi.StringPtrOutput)
+}
+
+// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideOutput) RuleIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverride) []string {
+		return v.RuleIds
+	}).(pulumi.StringArrayOutput)
 }
 
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideArrayOutput struct{ *pulumi.OutputState }
@@ -54558,8 +54630,12 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEng
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverride struct {
 	// Action override configuration.
 	Action *SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideAction `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId string `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId *string `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds []string `pulumi:"ruleIds"`
 }
 
 // SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgs and SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideOutput values.
@@ -54576,8 +54652,12 @@ type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngine
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgs struct {
 	// Action override configuration.
 	Action SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionPtrInput `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId pulumi.StringPtrInput `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds pulumi.StringArrayInput `pulumi:"ruleIds"`
 }
 
 func (SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgs) ElementType() reflect.Type {
@@ -54638,11 +54718,20 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEng
 	}).(SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionPtrOutput)
 }
 
-// Rule ID or category ID for action override.
-func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverride) string {
+// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+//
+// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideOutput) RuleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverride) *string {
 		return v.RuleId
-	}).(pulumi.StringOutput)
+	}).(pulumi.StringPtrOutput)
+}
+
+// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideOutput) RuleIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverride) []string {
+		return v.RuleIds
+	}).(pulumi.StringArrayOutput)
 }
 
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArrayOutput struct{ *pulumi.OutputState }
@@ -56762,8 +56851,12 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdc
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverride struct {
 	// Action override configuration.
 	Action *SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideAction `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId string `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId *string `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds []string `pulumi:"ruleIds"`
 }
 
 // SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgs and SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideOutput values.
@@ -56780,8 +56873,12 @@ type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcAct
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgs struct {
 	// Action override configuration.
 	Action SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionPtrInput `pulumi:"action"`
-	// Rule ID or category ID for action override.
-	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+	//
+	// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+	RuleId pulumi.StringPtrInput `pulumi:"ruleId"`
+	// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+	RuleIds pulumi.StringArrayInput `pulumi:"ruleIds"`
 }
 
 func (SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgs) ElementType() reflect.Type {
@@ -56842,11 +56939,20 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdc
 	}).(SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionPtrOutput)
 }
 
-// Rule ID or category ID for action override.
-func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideOutput) RuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverride) string {
+// It has been deprecated from version 1.83.31. Please use `ruleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `ruleIds` to support one or more IDs.
+//
+// Deprecated: It has been deprecated from version 1.83.31. Please use `ruleIds` instead.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideOutput) RuleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverride) *string {
 		return v.RuleId
-	}).(pulumi.StringOutput)
+	}).(pulumi.StringPtrOutput)
+}
+
+// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `ruleIds` and `ruleId` are set, `ruleIds` takes precedence.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideOutput) RuleIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverride) []string {
+		return v.RuleIds
+	}).(pulumi.StringArrayOutput)
 }
 
 type SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArrayOutput struct{ *pulumi.OutputState }
@@ -67537,6 +67643,8 @@ type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRule struct
 	AttesterId *string `pulumi:"attesterId"`
 	// Rule condition in expression syntax.
 	Condition string `pulumi:"condition"`
+	// Client device configurations. One profile per client type.
+	DeviceProfiles []SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile `pulumi:"deviceProfiles"`
 	// Whether the rule is enabled. Valid values: `on`, `off`.
 	Enabled string `pulumi:"enabled"`
 	// Rule ID.
@@ -67565,6 +67673,8 @@ type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs st
 	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
 	// Rule condition in expression syntax.
 	Condition pulumi.StringInput `pulumi:"condition"`
+	// Client device configurations. One profile per client type.
+	DeviceProfiles SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayInput `pulumi:"deviceProfiles"`
 	// Whether the rule is enabled. Valid values: `on`, `off`.
 	Enabled pulumi.StringInput `pulumi:"enabled"`
 	// Rule ID.
@@ -67642,6 +67752,13 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleOutp
 	}).(pulumi.StringOutput)
 }
 
+// Client device configurations. One profile per client type.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleOutput) DeviceProfiles() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRule) []SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile {
+		return v.DeviceProfiles
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput)
+}
+
 // Whether the rule is enabled. Valid values: `on`, `off`.
 func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleOutput) Enabled() pulumi.StringOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRule) string { return v.Enabled }).(pulumi.StringOutput)
@@ -67687,6 +67804,2043 @@ func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArra
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRule {
 		return vs[0].([]SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRule)[vs[1].(int)]
 	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile struct {
+	// Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+	ClientType string `pulumi:"clientType"`
+	// Minimum score (1-99) for judging a request as high risk. Default 50.
+	HighRiskMinScore *int `pulumi:"highRiskMinScore"`
+	// Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+	HighRiskRequestAction *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction `pulumi:"highRiskRequestAction"`
+	// Minimum score (1-99) for judging a request as medium risk. Default 15.
+	MediumRiskMinScore *int `pulumi:"mediumRiskMinScore"`
+	// Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+	MediumRiskRequestAction *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction `pulumi:"mediumRiskRequestAction"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs struct {
+	// Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+	ClientType pulumi.StringInput `pulumi:"clientType"`
+	// Minimum score (1-99) for judging a request as high risk. Default 50.
+	HighRiskMinScore pulumi.IntPtrInput `pulumi:"highRiskMinScore"`
+	// Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+	HighRiskRequestAction SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrInput `pulumi:"highRiskRequestAction"`
+	// Minimum score (1-99) for judging a request as medium risk. Default 15.
+	MediumRiskMinScore pulumi.IntPtrInput `pulumi:"mediumRiskMinScore"`
+	// Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+	MediumRiskRequestAction SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrInput `pulumi:"mediumRiskRequestAction"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray{ SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs{...} }
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray []SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileInput
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput {
+	return o
+}
+
+// Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) ClientType() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile) string {
+		return v.ClientType
+	}).(pulumi.StringOutput)
+}
+
+// Minimum score (1-99) for judging a request as high risk. Default 50.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) HighRiskMinScore() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile) *int {
+		return v.HighRiskMinScore
+	}).(pulumi.IntPtrOutput)
+}
+
+// Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) HighRiskRequestAction() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction {
+		return v.HighRiskRequestAction
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput)
+}
+
+// Minimum score (1-99) for judging a request as medium risk. Default 15.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) MediumRiskMinScore() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile) *int {
+		return v.MediumRiskMinScore
+	}).(pulumi.IntPtrOutput)
+}
+
+// Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput) MediumRiskRequestAction() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction {
+		return v.MediumRiskRequestAction
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput) Index(i pulumi.IntInput) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile {
+		return vs[0].([]SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfile)[vs[1].(int)]
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters `pulumi:"allowActionParameters"`
+	// Additional parameters when Name is Challenge.
+	ChallengeActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters `pulumi:"denyActionParameters"`
+	// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+	Name *string `pulumi:"name"`
+	// Additional parameters when Name is Redirect.
+	RedirectActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters `pulumi:"redirectActionParameters"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
+	// Additional parameters when Name is Challenge.
+	ChallengeActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
+	// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Additional parameters when Name is Redirect.
+	RedirectActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) AllowActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters {
+		return v.AllowActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) ChallengeActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters {
+		return v.ChallengeActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) DenyActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters {
+		return v.DenyActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *string {
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameters when Name is Redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput) RedirectActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters {
+		return v.RedirectActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) AllowActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.AllowActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) ChallengeActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengeActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) DenyActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.DenyActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameters when Name is Redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput) RedirectActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters struct {
+	// Maximum delay response time. Supported unit: seconds, range 5-10.
+	MaxDelayTime *string `pulumi:"maxDelayTime"`
+	// Minimum delay response time. Supported unit: seconds, range 0-5.
+	MinDelayTime *string `pulumi:"minDelayTime"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs struct {
+	// Maximum delay response time. Supported unit: seconds, range 5-10.
+	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
+	// Minimum delay response time. Supported unit: seconds, range 0-5.
+	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+// Maximum delay response time. Supported unit: seconds, range 5-10.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters) *string {
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum delay response time. Supported unit: seconds, range 0-5.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters) *string {
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput)
+}
+
+// Maximum delay response time. Supported unit: seconds, range 5-10.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum delay response time. Supported unit: seconds, range 0-5.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters struct {
+	// Client authentication method ID.
+	AttesterId *string `pulumi:"attesterId"`
+	// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+	ChallengeOption string `pulumi:"challengeOption"`
+	// The time interval for repeating the challenge.
+	Interval *string `pulumi:"interval"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs struct {
+	// Client authentication method ID.
+	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
+	// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
+	// The time interval for repeating the challenge.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+// Client authentication method ID.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) *string {
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) string {
+		return v.ChallengeOption
+	}).(pulumi.StringOutput)
+}
+
+// The time interval for repeating the challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) *string {
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput)
+}
+
+// Client authentication method ID.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChallengeOption
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for repeating the challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters struct {
+	// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+	BlockIp *string `pulumi:"blockIp"`
+	// IP blocking duration when BlockIP is on.
+	BlockIpDuration *string `pulumi:"blockIpDuration"`
+	// The PageId of the custom page.
+	ErrorPageId *string `pulumi:"errorPageId"`
+	// Customize the status code of the page.
+	ResponseCode *string `pulumi:"responseCode"`
+	// Whether to use custom pages. Valid values: `on`, `off`.
+	ReturnCustomPage *string `pulumi:"returnCustomPage"`
+	// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+	Stall *string `pulumi:"stall"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs struct {
+	// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
+	// IP blocking duration when BlockIP is on.
+	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
+	// The PageId of the custom page.
+	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
+	// Customize the status code of the page.
+	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
+	// Whether to use custom pages. Valid values: `on`, `off`.
+	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
+	// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+	Stall pulumi.StringPtrInput `pulumi:"stall"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// IP blocking duration when BlockIP is on.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The PageId of the custom page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Customize the status code of the page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use custom pages. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput)
+}
+
+// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// IP blocking duration when BlockIP is on.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The PageId of the custom page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Customize the status code of the page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use custom pages. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters struct {
+	// The URL to redirect.
+	Url string `pulumi:"url"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs struct {
+	// The URL to redirect.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+// The URL to redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters) string {
+		return v.Url
+	}).(pulumi.StringOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput)
+}
+
+// The URL to redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters `pulumi:"allowActionParameters"`
+	// Additional parameters when Name is Challenge.
+	ChallengeActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters `pulumi:"denyActionParameters"`
+	// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+	Name *string `pulumi:"name"`
+	// Additional parameters when Name is Redirect.
+	RedirectActionParameters *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters `pulumi:"redirectActionParameters"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
+	// Additional parameters when Name is Challenge.
+	ChallengeActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
+	// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Additional parameters when Name is Redirect.
+	RedirectActionParameters SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) AllowActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters {
+		return v.AllowActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) ChallengeActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters {
+		return v.ChallengeActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) DenyActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters {
+		return v.DenyActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *string {
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameters when Name is Redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput) RedirectActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters {
+		return v.RedirectActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) AllowActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.AllowActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) ChallengeActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengeActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) DenyActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.DenyActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+// Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameters when Name is Redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput) RedirectActionParameters() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestAction) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters struct {
+	// Maximum delay response time. Supported unit: seconds, range 5-10.
+	MaxDelayTime *string `pulumi:"maxDelayTime"`
+	// Minimum delay response time. Supported unit: seconds, range 0-5.
+	MinDelayTime *string `pulumi:"minDelayTime"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs struct {
+	// Maximum delay response time. Supported unit: seconds, range 5-10.
+	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
+	// Minimum delay response time. Supported unit: seconds, range 0-5.
+	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput)
+}
+
+// Maximum delay response time. Supported unit: seconds, range 5-10.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters) *string {
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum delay response time. Supported unit: seconds, range 0-5.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters) *string {
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput)
+}
+
+// Maximum delay response time. Supported unit: seconds, range 5-10.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum delay response time. Supported unit: seconds, range 0-5.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters struct {
+	// Client authentication method ID.
+	AttesterId *string `pulumi:"attesterId"`
+	// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+	ChallengeOption string `pulumi:"challengeOption"`
+	// The time interval for repeating the challenge.
+	Interval *string `pulumi:"interval"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs struct {
+	// Client authentication method ID.
+	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
+	// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
+	// The time interval for repeating the challenge.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput)
+}
+
+// Client authentication method ID.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) *string {
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) string {
+		return v.ChallengeOption
+	}).(pulumi.StringOutput)
+}
+
+// The time interval for repeating the challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) *string {
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput)
+}
+
+// Client authentication method ID.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChallengeOption
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for repeating the challenge.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters struct {
+	// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+	BlockIp *string `pulumi:"blockIp"`
+	// IP blocking duration when BlockIP is on.
+	BlockIpDuration *string `pulumi:"blockIpDuration"`
+	// The PageId of the custom page.
+	ErrorPageId *string `pulumi:"errorPageId"`
+	// Customize the status code of the page.
+	ResponseCode *string `pulumi:"responseCode"`
+	// Whether to use custom pages. Valid values: `on`, `off`.
+	ReturnCustomPage *string `pulumi:"returnCustomPage"`
+	// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+	Stall *string `pulumi:"stall"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs struct {
+	// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
+	// IP blocking duration when BlockIP is on.
+	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
+	// The PageId of the custom page.
+	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
+	// Customize the status code of the page.
+	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
+	// Whether to use custom pages. Valid values: `on`, `off`.
+	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
+	// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+	Stall pulumi.StringPtrInput `pulumi:"stall"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput)
+}
+
+// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// IP blocking duration when BlockIP is on.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The PageId of the custom page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Customize the status code of the page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use custom pages. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput)
+}
+
+// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// IP blocking duration when BlockIP is on.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The PageId of the custom page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Customize the status code of the page.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use custom pages. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters struct {
+	// The URL to redirect.
+	Url string `pulumi:"url"`
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs struct {
+	// The URL to redirect.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs, SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtr and SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrType SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters) *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput)
+}
+
+// The URL to redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters) string {
+		return v.Url
+	}).(pulumi.StringOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters) SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput)
+}
+
+// The URL to redirect.
+func (o SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
 }
 
 type SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationAction struct {
@@ -71218,7 +73372,7 @@ type SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRule struct {
 	Condition string `pulumi:"condition"`
 	// Indicates whether the custom rule is enabled. valid values: <li>on: enabled</li> <li>off: disabled</li>.
 	Enabled string `pulumi:"enabled"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id *string `pulumi:"id"`
 	// The name of the custom rule.
 	Name string `pulumi:"name"`
@@ -71246,7 +73400,7 @@ type SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleArgs struct {
 	Condition pulumi.StringInput `pulumi:"condition"`
 	// Indicates whether the custom rule is enabled. valid values: <li>on: enabled</li> <li>off: disabled</li>.
 	Enabled pulumi.StringInput `pulumi:"enabled"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// The name of the custom rule.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -71324,7 +73478,7 @@ func (o SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleOutput) Enab
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRule) string { return v.Enabled }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// Template ID. Output-only.
 func (o SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -71918,13 +74072,13 @@ func (o SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleActionReturn
 }
 
 type SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRule struct {
-	// Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+	// Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
 	Action SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleAction `pulumi:"action"`
 	// The specific content of the custom rule must comply with the expression grammar. please refer to the product document for detailed specifications.
 	Condition string `pulumi:"condition"`
 	// Indicates whether the custom rule is enabled. valid values: <li>on: enabled</li> <li>off: disabled</li>.
 	Enabled string `pulumi:"enabled"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id *string `pulumi:"id"`
 	// The name of the custom rule.
 	Name string `pulumi:"name"`
@@ -71946,13 +74100,13 @@ type SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleInput interfac
 }
 
 type SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleArgs struct {
-	// Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+	// Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
 	Action SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionInput `pulumi:"action"`
 	// The specific content of the custom rule must comply with the expression grammar. please refer to the product document for detailed specifications.
 	Condition pulumi.StringInput `pulumi:"condition"`
 	// Indicates whether the custom rule is enabled. valid values: <li>on: enabled</li> <li>off: disabled</li>.
 	Enabled pulumi.StringInput `pulumi:"enabled"`
-	// ID of the resource.
+	// Template ID. Output-only.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// The name of the custom rule.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -72013,7 +74167,7 @@ func (o SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleOutput) ToS
 	return o
 }
 
-// Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+// Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
 func (o SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleOutput) Action() SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRule) SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleAction {
 		return v.Action
@@ -72030,7 +74184,7 @@ func (o SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleOutput) Ena
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRule) string { return v.Enabled }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// Template ID. Output-only.
 func (o SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -72624,7 +74778,7 @@ func (o SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionRetur
 }
 
 type SecurityPolicyConfigSecurityPolicyCustomRulesRule struct {
-	// The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+	// The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
 	Action SecurityPolicyConfigSecurityPolicyCustomRulesRuleAction `pulumi:"action"`
 	// The specific content of the precise rate limit must conform to the expression syntax. For detailed specifications, see the product documentation.
 	Condition string `pulumi:"condition"`
@@ -72652,7 +74806,7 @@ type SecurityPolicyConfigSecurityPolicyCustomRulesRuleInput interface {
 }
 
 type SecurityPolicyConfigSecurityPolicyCustomRulesRuleArgs struct {
-	// The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+	// The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
 	Action SecurityPolicyConfigSecurityPolicyCustomRulesRuleActionInput `pulumi:"action"`
 	// The specific content of the precise rate limit must conform to the expression syntax. For detailed specifications, see the product documentation.
 	Condition pulumi.StringInput `pulumi:"condition"`
@@ -72719,7 +74873,7 @@ func (o SecurityPolicyConfigSecurityPolicyCustomRulesRuleOutput) ToSecurityPolic
 	return o
 }
 
-// The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+// The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
 func (o SecurityPolicyConfigSecurityPolicyCustomRulesRuleOutput) Action() SecurityPolicyConfigSecurityPolicyCustomRulesRuleActionOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyCustomRulesRule) SecurityPolicyConfigSecurityPolicyCustomRulesRuleAction {
 		return v.Action
@@ -74137,6 +76291,8 @@ type SecurityPolicyConfigSecurityPolicyExceptionRulesRule struct {
 	SkipScope *string `pulumi:"skipScope"`
 	// Specifies the security protection module for the exception rule. It is valid only when SkipScope is WebSecurityModules. The possible values are: <li>websec-mod-managed-rules: managed rules; </li><li>websec-mod-rate-limiting: rate limiting; </li><li>websec-mod-custom-rules: custom rules; </li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection; </li><li>websec-mod-bot: Bot management. </li>.
 	WebSecurityModulesForExceptions []string `pulumi:"webSecurityModulesForExceptions"`
+	// Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+	WebSecuritySubmodulesForExceptions []string `pulumi:"webSecuritySubmodulesForExceptions"`
 }
 
 // SecurityPolicyConfigSecurityPolicyExceptionRulesRuleInput is an input type that accepts SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs and SecurityPolicyConfigSecurityPolicyExceptionRulesRuleOutput values.
@@ -74171,6 +76327,8 @@ type SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs struct {
 	SkipScope pulumi.StringPtrInput `pulumi:"skipScope"`
 	// Specifies the security protection module for the exception rule. It is valid only when SkipScope is WebSecurityModules. The possible values are: <li>websec-mod-managed-rules: managed rules; </li><li>websec-mod-rate-limiting: rate limiting; </li><li>websec-mod-custom-rules: custom rules; </li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection; </li><li>websec-mod-bot: Bot management. </li>.
 	WebSecurityModulesForExceptions pulumi.StringArrayInput `pulumi:"webSecurityModulesForExceptions"`
+	// Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+	WebSecuritySubmodulesForExceptions pulumi.StringArrayInput `pulumi:"webSecuritySubmodulesForExceptions"`
 }
 
 func (SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs) ElementType() reflect.Type {
@@ -74279,6 +76437,13 @@ func (o SecurityPolicyConfigSecurityPolicyExceptionRulesRuleOutput) SkipScope() 
 func (o SecurityPolicyConfigSecurityPolicyExceptionRulesRuleOutput) WebSecurityModulesForExceptions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyExceptionRulesRule) []string {
 		return v.WebSecurityModulesForExceptions
+	}).(pulumi.StringArrayOutput)
+}
+
+// Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+func (o SecurityPolicyConfigSecurityPolicyExceptionRulesRuleOutput) WebSecuritySubmodulesForExceptions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyExceptionRulesRule) []string {
+		return v.WebSecuritySubmodulesForExceptions
 	}).(pulumi.StringArrayOutput)
 }
 
@@ -80302,6 +82467,8 @@ type SecurityPolicyConfigSecurityPolicyManagedRules struct {
 	DetectionOnly string `pulumi:"detectionOnly"`
 	// Indicates whether the managed rule is enabled. valid values: <li>on: enabled. all managed rules take effect as configured;</li> <li>off: disabled. all managed rules do not take effect.</li>.
 	Enabled string `pulumi:"enabled"`
+	// High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+	FrequentScanningProtection *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection `pulumi:"frequentScanningProtection"`
 	// Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
 	ManagedRuleGroups []SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup `pulumi:"managedRuleGroups"`
 	// Whether the managed rule semantic analysis option is Enabled is valid only when the Enabled parameter is on. valid values: <li>on: enable. perform semantic analysis on requests before processing them;</li> <li>off: disable. process requests directly without semantic analysis.</li> <br/>default off.
@@ -80326,6 +82493,8 @@ type SecurityPolicyConfigSecurityPolicyManagedRulesArgs struct {
 	DetectionOnly pulumi.StringInput `pulumi:"detectionOnly"`
 	// Indicates whether the managed rule is enabled. valid values: <li>on: enabled. all managed rules take effect as configured;</li> <li>off: disabled. all managed rules do not take effect.</li>.
 	Enabled pulumi.StringInput `pulumi:"enabled"`
+	// High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+	FrequentScanningProtection SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrInput `pulumi:"frequentScanningProtection"`
 	// Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
 	ManagedRuleGroups SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArrayInput `pulumi:"managedRuleGroups"`
 	// Whether the managed rule semantic analysis option is Enabled is valid only when the Enabled parameter is on. valid values: <li>on: enable. perform semantic analysis on requests before processing them;</li> <li>off: disable. process requests directly without semantic analysis.</li> <br/>default off.
@@ -80426,6 +82595,13 @@ func (o SecurityPolicyConfigSecurityPolicyManagedRulesOutput) Enabled() pulumi.S
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRules) string { return v.Enabled }).(pulumi.StringOutput)
 }
 
+// High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesOutput) FrequentScanningProtection() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRules) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection {
+		return v.FrequentScanningProtection
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput)
+}
+
 // Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
 func (o SecurityPolicyConfigSecurityPolicyManagedRulesOutput) ManagedRuleGroups() SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArrayOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRules) []SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup {
@@ -80490,6 +82666,16 @@ func (o SecurityPolicyConfigSecurityPolicyManagedRulesPtrOutput) Enabled() pulum
 		}
 		return &v.Enabled
 	}).(pulumi.StringPtrOutput)
+}
+
+// High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesPtrOutput) FrequentScanningProtection() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRules) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection {
+		if v == nil {
+			return nil
+		}
+		return v.FrequentScanningProtection
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput)
 }
 
 // Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
@@ -80667,6 +82853,1256 @@ func (o SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdatePtrOutput) Rules
 			return nil
 		}
 		return v.RulesetVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection struct {
+	// The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+	Action *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction `pulumi:"action"`
+	// Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+	ActionDuration *string `pulumi:"actionDuration"`
+	// Cumulative block count threshold within the counting period. Range 1-4294967294.
+	BlockThreshold *int `pulumi:"blockThreshold"`
+	// Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+	CountBy *string `pulumi:"countBy"`
+	// Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+	CountingPeriod *string `pulumi:"countingPeriod"`
+	// Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+	Enabled *string `pulumi:"enabled"`
+	// Template ID. Output-only.
+	Id *string `pulumi:"id"`
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs{...}
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs struct {
+	// The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+	Action SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrInput `pulumi:"action"`
+	// Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+	ActionDuration pulumi.StringPtrInput `pulumi:"actionDuration"`
+	// Cumulative block count threshold within the counting period. Range 1-4294967294.
+	BlockThreshold pulumi.IntPtrInput `pulumi:"blockThreshold"`
+	// Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+	CountBy pulumi.StringPtrInput `pulumi:"countBy"`
+	// Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+	CountingPeriod pulumi.StringPtrInput `pulumi:"countingPeriod"`
+	// Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
+	// Template ID. Output-only.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput).ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs, SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtr and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrType SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs
+
+func SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtr(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrInput {
+	return (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput)
+}
+
+// The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) Action() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction {
+		return v.Action
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput)
+}
+
+// Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) ActionDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		return v.ActionDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cumulative block count threshold within the counting period. Range 1-4294967294.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) BlockThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *int {
+		return v.BlockThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) CountBy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		return v.CountBy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) CountingPeriod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		return v.CountingPeriod
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		return v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+// Template ID. Output-only.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput)
+}
+
+// The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) Action() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction {
+		if v == nil {
+			return nil
+		}
+		return v.Action
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput)
+}
+
+// Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) ActionDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ActionDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cumulative block count threshold within the counting period. Range 1-4294967294.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) BlockThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BlockThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) CountBy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CountBy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) CountingPeriod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CountingPeriod
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+// Template ID. Output-only.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters `pulumi:"allowActionParameters"`
+	// Additional parameters when Name is Challenge.
+	ChallengeActionParameters *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters `pulumi:"denyActionParameters"`
+	// The specific action of security execution. The values are:
+	// <li>Deny: intercept, block the request to access site resources;</li>
+	// <li>Monitor: observe, only record logs;</li>
+	// <li>Redirect: redirect to URL;</li>
+	// <li>Disabled: disabled, do not enable the specified rule;</li>
+	// <li>Allow: allow access, but delay processing requests;</li>
+	// <li>Challenge: challenge, respond to challenge content;</li>
+	// <li>BlockIP: to be abandoned, IP ban;</li>
+	// <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+	// <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+	// <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+	Name *string `pulumi:"name"`
+	// Additional parameters when Name is Redirect.
+	RedirectActionParameters *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters `pulumi:"redirectActionParameters"`
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs{...}
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
+	// Additional parameters when Name is Challenge.
+	ChallengeActionParameters SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
+	// The specific action of security execution. The values are:
+	// <li>Deny: intercept, block the request to access site resources;</li>
+	// <li>Monitor: observe, only record logs;</li>
+	// <li>Redirect: redirect to URL;</li>
+	// <li>Disabled: disabled, do not enable the specified rule;</li>
+	// <li>Allow: allow access, but delay processing requests;</li>
+	// <li>Challenge: challenge, respond to challenge content;</li>
+	// <li>BlockIP: to be abandoned, IP ban;</li>
+	// <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+	// <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+	// <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Additional parameters when Name is Redirect.
+	RedirectActionParameters SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput).ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs, SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtr and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrType SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs
+
+func SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtr(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrInput {
+	return (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) AllowActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters {
+		return v.AllowActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Challenge.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) ChallengeActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters {
+		return v.ChallengeActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) DenyActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters {
+		return v.DenyActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput)
+}
+
+// The specific action of security execution. The values are:
+// <li>Deny: intercept, block the request to access site resources;</li>
+// <li>Monitor: observe, only record logs;</li>
+// <li>Redirect: redirect to URL;</li>
+// <li>Disabled: disabled, do not enable the specified rule;</li>
+// <li>Allow: allow access, but delay processing requests;</li>
+// <li>Challenge: challenge, respond to challenge content;</li>
+// <li>BlockIP: to be abandoned, IP ban;</li>
+// <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+// <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+// <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *string {
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameters when Name is Redirect.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput) RedirectActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters {
+		return v.RedirectActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) AllowActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.AllowActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Challenge.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) ChallengeActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengeActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) DenyActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.DenyActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput)
+}
+
+// The specific action of security execution. The values are:
+// <li>Deny: intercept, block the request to access site resources;</li>
+// <li>Monitor: observe, only record logs;</li>
+// <li>Redirect: redirect to URL;</li>
+// <li>Disabled: disabled, do not enable the specified rule;</li>
+// <li>Allow: allow access, but delay processing requests;</li>
+// <li>Challenge: challenge, respond to challenge content;</li>
+// <li>BlockIP: to be abandoned, IP ban;</li>
+// <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+// <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+// <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameters when Name is Redirect.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput) RedirectActionParameters() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionAction) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectActionParameters
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters struct {
+	// Maximum delay response time. Supported unit: seconds, range 5-10.
+	MaxDelayTime *string `pulumi:"maxDelayTime"`
+	// Minimum delay response time. Supported unit: seconds, range 0-5.
+	MinDelayTime *string `pulumi:"minDelayTime"`
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs struct {
+	// Maximum delay response time. Supported unit: seconds, range 5-10.
+	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
+	// Minimum delay response time. Supported unit: seconds, range 0-5.
+	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs, SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtr and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrType SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput)
+}
+
+// Maximum delay response time. Supported unit: seconds, range 5-10.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters) *string {
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum delay response time. Supported unit: seconds, range 0-5.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters) *string {
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput)
+}
+
+// Maximum delay response time. Supported unit: seconds, range 5-10.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum delay response time. Supported unit: seconds, range 0-5.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters struct {
+	// Client authentication method ID.
+	AttesterId *string `pulumi:"attesterId"`
+	// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+	ChallengeOption string `pulumi:"challengeOption"`
+	// The time interval for repeating the challenge.
+	Interval *string `pulumi:"interval"`
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs struct {
+	// Client authentication method ID.
+	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
+	// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
+	// The time interval for repeating the challenge.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs, SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtr and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrType SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput)
+}
+
+// Client authentication method ID.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) *string {
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) string {
+		return v.ChallengeOption
+	}).(pulumi.StringOutput)
+}
+
+// The time interval for repeating the challenge.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) *string {
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput)
+}
+
+// Client authentication method ID.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChallengeOption
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time interval for repeating the challenge.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters struct {
+	// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+	BlockIp *string `pulumi:"blockIp"`
+	// IP blocking duration when BlockIP is on.
+	BlockIpDuration *string `pulumi:"blockIpDuration"`
+	// The PageId of the custom page.
+	ErrorPageId *string `pulumi:"errorPageId"`
+	// Customize the status code of the page.
+	ResponseCode *string `pulumi:"responseCode"`
+	// Whether to use custom pages. Valid values: `on`, `off`.
+	ReturnCustomPage *string `pulumi:"returnCustomPage"`
+	// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+	Stall *string `pulumi:"stall"`
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs struct {
+	// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
+	// IP blocking duration when BlockIP is on.
+	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
+	// The PageId of the custom page.
+	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
+	// Customize the status code of the page.
+	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
+	// Whether to use custom pages. Valid values: `on`, `off`.
+	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
+	// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+	Stall pulumi.StringPtrInput `pulumi:"stall"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs, SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtr and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrType SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput)
+}
+
+// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// IP blocking duration when BlockIP is on.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The PageId of the custom page.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Customize the status code of the page.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use custom pages. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput)
+}
+
+// Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// IP blocking duration when BlockIP is on.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The PageId of the custom page.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Customize the status code of the page.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use custom pages. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to ignore the request source suspension. Valid values: `on`, `off`.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters struct {
+	// The URL to redirect.
+	Url string `pulumi:"url"`
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersInput` via:
+//
+//	SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs{...}
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs struct {
+	// The URL to redirect.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput)
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput).ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(ctx)
+}
+
+// SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrInput is an input type that accepts SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs, SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtr and SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput values.
+// You can construct a concrete instance of `SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrInput` via:
+//
+//	        SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput
+	ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput
+}
+
+type securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrType SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs
+
+func SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtr(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrInput {
+	return (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrType)(v)
+}
+
+func (*securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return i.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *securityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrType) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return o.ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters) *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters {
+		return &v
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput)
+}
+
+// The URL to redirect.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters) string {
+		return v.Url
+	}).(pulumi.StringOutput)
+}
+
+type SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput) ToSecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput) Elem() SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters) SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters
+		return ret
+	}).(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput)
+}
+
+// The URL to redirect.
+func (o SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -81486,11 +84922,11 @@ func (o SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataAr
 }
 
 type SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetail struct {
-	// Rule description.
+	// Rule description. Output-only.
 	Description *string `pulumi:"description"`
 	// Protection level of managed rules. valid values: <li>low: low risk. this rule has a relatively low risk and is applicable to access scenarios in a very strict control environment. this level of rule may generate considerable false alarms.</li> <li>medium: medium risk. this means the risk of this rule is normal and it is suitable for protection scenarios with stricter requirements.</li> <li>high: high risk. this indicates that the risk of this rule is relatively high and it will not generate false alarms in most scenarios.</li> <li>extreme: ultra-high risk. this represents that the risk of this rule is extremely high and it will not generate false alarms basically.</li>.
 	RiskLevel *string `pulumi:"riskLevel"`
-	// Managed rule Id.
+	// Rule ID. Output-only.
 	RuleId *string `pulumi:"ruleId"`
 	// Rule ownership version.
 	RuleVersion *string `pulumi:"ruleVersion"`
@@ -81510,11 +84946,11 @@ type SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleD
 }
 
 type SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetailArgs struct {
-	// Rule description.
+	// Rule description. Output-only.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// Protection level of managed rules. valid values: <li>low: low risk. this rule has a relatively low risk and is applicable to access scenarios in a very strict control environment. this level of rule may generate considerable false alarms.</li> <li>medium: medium risk. this means the risk of this rule is normal and it is suitable for protection scenarios with stricter requirements.</li> <li>high: high risk. this indicates that the risk of this rule is relatively high and it will not generate false alarms in most scenarios.</li> <li>extreme: ultra-high risk. this represents that the risk of this rule is extremely high and it will not generate false alarms basically.</li>.
 	RiskLevel pulumi.StringPtrInput `pulumi:"riskLevel"`
-	// Managed rule Id.
+	// Rule ID. Output-only.
 	RuleId pulumi.StringPtrInput `pulumi:"ruleId"`
 	// Rule ownership version.
 	RuleVersion pulumi.StringPtrInput `pulumi:"ruleVersion"`
@@ -81573,7 +85009,7 @@ func (o SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRu
 	return o
 }
 
-// Rule description.
+// Rule description. Output-only.
 func (o SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetailOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetail) *string {
 		return v.Description
@@ -81587,7 +85023,7 @@ func (o SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Managed rule Id.
+// Rule ID. Output-only.
 func (o SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetailOutput) RuleId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetail) *string {
 		return v.RuleId
@@ -82433,7 +85869,7 @@ func (o SecurityPolicyConfigSecurityPolicyRateLimitingRulesPtrOutput) Rules() Se
 }
 
 type SecurityPolicyConfigSecurityPolicyRateLimitingRulesRule struct {
-	// The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+	// The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
 	Action *SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleAction `pulumi:"action"`
 	// Action The duration of the action. The supported units are: <li>s: seconds, with a value of 1 to 120; </li><li>m: minutes, with a value of 1 to 120; </li><li>h: hours, with a value of 1 to 48; </li><li>d: days, with a value of 1 to 30. </li>.
 	ActionDuration *string `pulumi:"actionDuration"`
@@ -82467,7 +85903,7 @@ type SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleInput interface {
 }
 
 type SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleArgs struct {
-	// The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+	// The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
 	Action SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionPtrInput `pulumi:"action"`
 	// Action The duration of the action. The supported units are: <li>s: seconds, with a value of 1 to 120; </li><li>m: minutes, with a value of 1 to 120; </li><li>h: hours, with a value of 1 to 48; </li><li>d: days, with a value of 1 to 30. </li>.
 	ActionDuration pulumi.StringPtrInput `pulumi:"actionDuration"`
@@ -82540,7 +85976,7 @@ func (o SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleOutput) ToSecurit
 	return o
 }
 
-// The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+// The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
 func (o SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleOutput) Action() SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionPtrOutput {
 	return o.ApplyT(func(v SecurityPolicyConfigSecurityPolicyRateLimitingRulesRule) *SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleAction {
 		return v.Action
@@ -83916,6 +87352,8 @@ func (o SharedCnameIpsslSettingPtrOutput) Status() pulumi.StringPtrOutput {
 type WebSecurityTemplateSecurityPolicy struct {
 	// Bot management configuration.
 	BotManagement *WebSecurityTemplateSecurityPolicyBotManagement `pulumi:"botManagement"`
+	// Basic Bot management configuration.
+	BotManagementLite *WebSecurityTemplateSecurityPolicyBotManagementLite `pulumi:"botManagementLite"`
 	// Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
 	CustomRules *WebSecurityTemplateSecurityPolicyCustomRules `pulumi:"customRules"`
 	// Default deny security action parameters configuration.
@@ -83944,6 +87382,8 @@ type WebSecurityTemplateSecurityPolicyInput interface {
 type WebSecurityTemplateSecurityPolicyArgs struct {
 	// Bot management configuration.
 	BotManagement WebSecurityTemplateSecurityPolicyBotManagementPtrInput `pulumi:"botManagement"`
+	// Basic Bot management configuration.
+	BotManagementLite WebSecurityTemplateSecurityPolicyBotManagementLitePtrInput `pulumi:"botManagementLite"`
 	// Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
 	CustomRules WebSecurityTemplateSecurityPolicyCustomRulesPtrInput `pulumi:"customRules"`
 	// Default deny security action parameters configuration.
@@ -84042,6 +87482,13 @@ func (o WebSecurityTemplateSecurityPolicyOutput) BotManagement() WebSecurityTemp
 	}).(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput)
 }
 
+// Basic Bot management configuration.
+func (o WebSecurityTemplateSecurityPolicyOutput) BotManagementLite() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicy) *WebSecurityTemplateSecurityPolicyBotManagementLite {
+		return v.BotManagementLite
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput)
+}
+
 // Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
 func (o WebSecurityTemplateSecurityPolicyOutput) CustomRules() WebSecurityTemplateSecurityPolicyCustomRulesPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicy) *WebSecurityTemplateSecurityPolicyCustomRules {
@@ -84118,6 +87565,16 @@ func (o WebSecurityTemplateSecurityPolicyPtrOutput) BotManagement() WebSecurityT
 	}).(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput)
 }
 
+// Basic Bot management configuration.
+func (o WebSecurityTemplateSecurityPolicyPtrOutput) BotManagementLite() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicy) *WebSecurityTemplateSecurityPolicyBotManagementLite {
+		if v == nil {
+			return nil
+		}
+		return v.BotManagementLite
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput)
+}
+
 // Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
 func (o WebSecurityTemplateSecurityPolicyPtrOutput) CustomRules() WebSecurityTemplateSecurityPolicyCustomRulesPtrOutput {
 	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicy) *WebSecurityTemplateSecurityPolicyCustomRules {
@@ -84176,3228 +87633,6 @@ func (o WebSecurityTemplateSecurityPolicyPtrOutput) RateLimitingRules() WebSecur
 		}
 		return v.RateLimitingRules
 	}).(WebSecurityTemplateSecurityPolicyRateLimitingRulesPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagement struct {
-	// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
-	BasicBotSettings *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings `pulumi:"basicBotSettings"`
-	// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
-	BrowserImpersonationDetection *WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection `pulumi:"browserImpersonationDetection"`
-	// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
-	ClientAttestationRules *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules `pulumi:"clientAttestationRules"`
-	// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
-	CustomRules *WebSecurityTemplateSecurityPolicyBotManagementCustomRules `pulumi:"customRules"`
-	// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
-	Enabled *string `pulumi:"enabled"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementArgs and WebSecurityTemplateSecurityPolicyBotManagementOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementOutput() WebSecurityTemplateSecurityPolicyBotManagementOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementArgs struct {
-	// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
-	BasicBotSettings WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput `pulumi:"basicBotSettings"`
-	// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
-	BrowserImpersonationDetection WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrInput `pulumi:"browserImpersonationDetection"`
-	// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
-	ClientAttestationRules WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrInput `pulumi:"clientAttestationRules"`
-	// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
-	CustomRules WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrInput `pulumi:"customRules"`
-	// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
-	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementOutput() WebSecurityTemplateSecurityPolicyBotManagementOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementOutput).ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementArgs, WebSecurityTemplateSecurityPolicyBotManagementPtr and WebSecurityTemplateSecurityPolicyBotManagementPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementPtrType WebSecurityTemplateSecurityPolicyBotManagementArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementPtr(v *WebSecurityTemplateSecurityPolicyBotManagementArgs) WebSecurityTemplateSecurityPolicyBotManagementPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementOutput() WebSecurityTemplateSecurityPolicyBotManagementOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagement {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput)
-}
-
-// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) BasicBotSettings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
-		return v.BasicBotSettings
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
-}
-
-// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) BrowserImpersonationDetection() WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection {
-		return v.BrowserImpersonationDetection
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput)
-}
-
-// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ClientAttestationRules() WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules {
-		return v.ClientAttestationRules
-	}).(WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput)
-}
-
-// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) CustomRules() WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementCustomRules {
-		return v.CustomRules
-	}).(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput)
-}
-
-// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
-func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) Enabled() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *string { return v.Enabled }).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) WebSecurityTemplateSecurityPolicyBotManagement {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagement
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementOutput)
-}
-
-// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) BasicBotSettings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
-		if v == nil {
-			return nil
-		}
-		return v.BasicBotSettings
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
-}
-
-// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) BrowserImpersonationDetection() WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection {
-		if v == nil {
-			return nil
-		}
-		return v.BrowserImpersonationDetection
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput)
-}
-
-// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ClientAttestationRules() WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules {
-		if v == nil {
-			return nil
-		}
-		return v.ClientAttestationRules
-	}).(WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput)
-}
-
-// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) CustomRules() WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementCustomRules {
-		if v == nil {
-			return nil
-		}
-		return v.CustomRules
-	}).(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput)
-}
-
-// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
-func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) Enabled() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings struct {
-	// Specifies the configuration for Bot intelligent analysis.
-	BotIntelligence *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence `pulumi:"botIntelligence"`
-	// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
-	IpReputation *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation `pulumi:"ipReputation"`
-	// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
-	KnownBotCategories *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories `pulumi:"knownBotCategories"`
-	// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
-	SearchEngineBots *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots `pulumi:"searchEngineBots"`
-	// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
-	SourceIdc *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc `pulumi:"sourceIdc"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs struct {
-	// Specifies the configuration for Bot intelligent analysis.
-	BotIntelligence WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput `pulumi:"botIntelligence"`
-	// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
-	IpReputation WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrInput `pulumi:"ipReputation"`
-	// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
-	KnownBotCategories WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrInput `pulumi:"knownBotCategories"`
-	// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
-	SearchEngineBots WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrInput `pulumi:"searchEngineBots"`
-	// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
-	SourceIdc WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrInput `pulumi:"sourceIdc"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
-}
-
-// Specifies the configuration for Bot intelligent analysis.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) BotIntelligence() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
-		return v.BotIntelligence
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
-}
-
-// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) IpReputation() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation {
-		return v.IpReputation
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput)
-}
-
-// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) KnownBotCategories() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories {
-		return v.KnownBotCategories
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput)
-}
-
-// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) SearchEngineBots() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots {
-		return v.SearchEngineBots
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput)
-}
-
-// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) SourceIdc() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc {
-		return v.SourceIdc
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput)
-}
-
-// Specifies the configuration for Bot intelligent analysis.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) BotIntelligence() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
-		if v == nil {
-			return nil
-		}
-		return v.BotIntelligence
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
-}
-
-// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) IpReputation() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation {
-		if v == nil {
-			return nil
-		}
-		return v.IpReputation
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput)
-}
-
-// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) KnownBotCategories() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories {
-		if v == nil {
-			return nil
-		}
-		return v.KnownBotCategories
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput)
-}
-
-// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) SearchEngineBots() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots {
-		if v == nil {
-			return nil
-		}
-		return v.SearchEngineBots
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput)
-}
-
-// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) SourceIdc() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc {
-		if v == nil {
-			return nil
-		}
-		return v.SourceIdc
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence struct {
-	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
-	BotRatings *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings `pulumi:"botRatings"`
-	// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
-	Enabled *string `pulumi:"enabled"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs struct {
-	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
-	BotRatings WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput `pulumi:"botRatings"`
-	// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
-	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
-}
-
-// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) BotRatings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
-		return v.BotRatings
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
-}
-
-// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) Enabled() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *string {
-		return v.Enabled
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput)
-}
-
-// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) BotRatings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
-		if v == nil {
-			return nil
-		}
-		return v.BotRatings
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
-}
-
-// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) Enabled() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings struct {
-	// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-	HighRiskBotRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction `pulumi:"highRiskBotRequestsAction"`
-	// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
-	HumanRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction `pulumi:"humanRequestsAction"`
-	// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-	LikelyBotRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction `pulumi:"likelyBotRequestsAction"`
-	// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-	VerifiedBotRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction `pulumi:"verifiedBotRequestsAction"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs struct {
-	// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-	HighRiskBotRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput `pulumi:"highRiskBotRequestsAction"`
-	// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
-	HumanRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput `pulumi:"humanRequestsAction"`
-	// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-	LikelyBotRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrInput `pulumi:"likelyBotRequestsAction"`
-	// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-	VerifiedBotRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrInput `pulumi:"verifiedBotRequestsAction"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
-}
-
-// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) HighRiskBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
-		return v.HighRiskBotRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
-}
-
-// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) HumanRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
-		return v.HumanRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
-}
-
-// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) LikelyBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction {
-		return v.LikelyBotRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput)
-}
-
-// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) VerifiedBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction {
-		return v.VerifiedBotRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput)
-}
-
-// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) HighRiskBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
-		if v == nil {
-			return nil
-		}
-		return v.HighRiskBotRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
-}
-
-// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) HumanRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
-		if v == nil {
-			return nil
-		}
-		return v.HumanRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
-}
-
-// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) LikelyBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction {
-		if v == nil {
-			return nil
-		}
-		return v.LikelyBotRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput)
-}
-
-// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) VerifiedBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction {
-		if v == nil {
-			return nil
-		}
-		return v.VerifiedBotRequestsAction
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction struct {
-	// Additional parameters when Name is Allow.
-	AllowActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters `pulumi:"allowActionParameters"`
-	// To be deprecated, additional parameter when Name is BlockIP.
-	BlockIpActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters `pulumi:"blockIpActionParameters"`
-	// Additional parameter when Name is Challenge.
-	ChallengeActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters `pulumi:"challengeActionParameters"`
-	// Additional parameters when Name is Deny.
-	DenyActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters `pulumi:"denyActionParameters"`
-	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-	Name string `pulumi:"name"`
-	// Additional parameter when Name is Redirect.
-	RedirectActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters `pulumi:"redirectActionParameters"`
-	// To be deprecated, additional parameter when Name is ReturnCustomPage.
-	ReturnCustomPageActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters `pulumi:"returnCustomPageActionParameters"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs struct {
-	// Additional parameters when Name is Allow.
-	AllowActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
-	// To be deprecated, additional parameter when Name is BlockIP.
-	BlockIpActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput `pulumi:"blockIpActionParameters"`
-	// Additional parameter when Name is Challenge.
-	ChallengeActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
-	// Additional parameters when Name is Deny.
-	DenyActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
-	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-	Name pulumi.StringInput `pulumi:"name"`
-	// Additional parameter when Name is Redirect.
-	RedirectActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
-	// To be deprecated, additional parameter when Name is ReturnCustomPage.
-	ReturnCustomPageActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput `pulumi:"returnCustomPageActionParameters"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
-}
-
-// Additional parameters when Name is Allow.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
-		return v.AllowActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is BlockIP.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
-		return v.BlockIpActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-// Additional parameter when Name is Challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
-		return v.ChallengeActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
-}
-
-// Additional parameters when Name is Deny.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
-		return v.DenyActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
-}
-
-// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) string {
-		return v.Name
-	}).(pulumi.StringOutput)
-}
-
-// Additional parameter when Name is Redirect.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
-		return v.RedirectActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is ReturnCustomPage.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
-		return v.ReturnCustomPageActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput)
-}
-
-// Additional parameters when Name is Allow.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.AllowActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is BlockIP.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.BlockIpActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-// Additional parameter when Name is Challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.ChallengeActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
-}
-
-// Additional parameters when Name is Deny.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.DenyActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
-}
-
-// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-// Additional parameter when Name is Redirect.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.RedirectActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is ReturnCustomPage.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.ReturnCustomPageActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters struct {
-	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-	MaxDelayTime *string `pulumi:"maxDelayTime"`
-	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-	MinDelayTime *string `pulumi:"minDelayTime"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs struct {
-	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
-	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
-}
-
-// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
-		return v.MaxDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
-		return v.MinDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput)
-}
-
-// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.MaxDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.MinDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters struct {
-	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-	Duration string `pulumi:"duration"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs struct {
-	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-	Duration pulumi.StringInput `pulumi:"duration"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) Duration() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) string {
-		return v.Duration
-	}).(pulumi.StringOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput)
-}
-
-// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) Duration() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Duration
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters struct {
-	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-	AttesterId *string `pulumi:"attesterId"`
-	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-	ChallengeOption string `pulumi:"challengeOption"`
-	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-	Interval *string `pulumi:"interval"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs struct {
-	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
-	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
-	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-	Interval pulumi.StringPtrInput `pulumi:"interval"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
-}
-
-// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
-		return v.AttesterId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) string {
-		return v.ChallengeOption
-	}).(pulumi.StringOutput)
-}
-
-// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
-		return v.Interval
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput)
-}
-
-// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.AttesterId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ChallengeOption
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Interval
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters struct {
-	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-	BlockIp *string `pulumi:"blockIp"`
-	// The ban duration when BlockIP is on.
-	BlockIpDuration *string `pulumi:"blockIpDuration"`
-	// Specifies the page id of the custom page.
-	ErrorPageId *string `pulumi:"errorPageId"`
-	// Status code of the custom page.
-	ResponseCode *string `pulumi:"responseCode"`
-	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-	ReturnCustomPage *string `pulumi:"returnCustomPage"`
-	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-	Stall *string `pulumi:"stall"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs struct {
-	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
-	// The ban duration when BlockIP is on.
-	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
-	// Specifies the page id of the custom page.
-	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
-	// Status code of the custom page.
-	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
-	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
-	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-	Stall pulumi.StringPtrInput `pulumi:"stall"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
-}
-
-// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		return v.BlockIp
-	}).(pulumi.StringPtrOutput)
-}
-
-// The ban duration when BlockIP is on.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		return v.BlockIpDuration
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies the page id of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		return v.ErrorPageId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Status code of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		return v.ResponseCode
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		return v.ReturnCustomPage
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		return v.Stall
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput)
-}
-
-// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.BlockIp
-	}).(pulumi.StringPtrOutput)
-}
-
-// The ban duration when BlockIP is on.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.BlockIpDuration
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies the page id of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ErrorPageId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Status code of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ResponseCode
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ReturnCustomPage
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Stall
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters struct {
-	// Redirect URL.
-	Url string `pulumi:"url"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs struct {
-	// Redirect URL.
-	Url pulumi.StringInput `pulumi:"url"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
-}
-
-// Redirect URL.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) string {
-		return v.Url
-	}).(pulumi.StringOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput)
-}
-
-// Redirect URL.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Url
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters struct {
-	// Response custom page ID.
-	ErrorPageId string `pulumi:"errorPageId"`
-	// Response custom status code.
-	ResponseCode string `pulumi:"responseCode"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs struct {
-	// Response custom page ID.
-	ErrorPageId pulumi.StringInput `pulumi:"errorPageId"`
-	// Response custom status code.
-	ResponseCode pulumi.StringInput `pulumi:"responseCode"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
-}
-
-// Response custom page ID.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ErrorPageId() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) string {
-		return v.ErrorPageId
-	}).(pulumi.StringOutput)
-}
-
-// Response custom status code.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ResponseCode() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) string {
-		return v.ResponseCode
-	}).(pulumi.StringOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput)
-}
-
-// Response custom page ID.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ErrorPageId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Response custom status code.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ResponseCode
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction struct {
-	// Additional parameters when Name is Allow.
-	AllowActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters `pulumi:"allowActionParameters"`
-	// To be deprecated, additional parameter when Name is BlockIP.
-	BlockIpActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters `pulumi:"blockIpActionParameters"`
-	// Additional parameter when Name is Challenge.
-	ChallengeActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters `pulumi:"challengeActionParameters"`
-	// Additional parameters when Name is Deny.
-	DenyActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters `pulumi:"denyActionParameters"`
-	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-	Name string `pulumi:"name"`
-	// Additional parameter when Name is Redirect.
-	RedirectActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters `pulumi:"redirectActionParameters"`
-	// To be deprecated, additional parameter when Name is ReturnCustomPage.
-	ReturnCustomPageActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters `pulumi:"returnCustomPageActionParameters"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs struct {
-	// Additional parameters when Name is Allow.
-	AllowActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
-	// To be deprecated, additional parameter when Name is BlockIP.
-	BlockIpActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput `pulumi:"blockIpActionParameters"`
-	// Additional parameter when Name is Challenge.
-	ChallengeActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
-	// Additional parameters when Name is Deny.
-	DenyActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
-	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-	Name pulumi.StringInput `pulumi:"name"`
-	// Additional parameter when Name is Redirect.
-	RedirectActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
-	// To be deprecated, additional parameter when Name is ReturnCustomPage.
-	ReturnCustomPageActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrInput `pulumi:"returnCustomPageActionParameters"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
-}
-
-// Additional parameters when Name is Allow.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
-		return v.AllowActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is BlockIP.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
-		return v.BlockIpActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-// Additional parameter when Name is Challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
-		return v.ChallengeActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
-}
-
-// Additional parameters when Name is Deny.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
-		return v.DenyActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
-}
-
-// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) string {
-		return v.Name
-	}).(pulumi.StringOutput)
-}
-
-// Additional parameter when Name is Redirect.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
-		return v.RedirectActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is ReturnCustomPage.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters {
-		return v.ReturnCustomPageActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput)
-}
-
-// Additional parameters when Name is Allow.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.AllowActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is BlockIP.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.BlockIpActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-// Additional parameter when Name is Challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.ChallengeActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
-}
-
-// Additional parameters when Name is Deny.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.DenyActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
-}
-
-// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-// Additional parameter when Name is Redirect.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.RedirectActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
-}
-
-// To be deprecated, additional parameter when Name is ReturnCustomPage.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters {
-		if v == nil {
-			return nil
-		}
-		return v.ReturnCustomPageActionParameters
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters struct {
-	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-	MaxDelayTime *string `pulumi:"maxDelayTime"`
-	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-	MinDelayTime *string `pulumi:"minDelayTime"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs struct {
-	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
-	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
-}
-
-// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
-		return v.MaxDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
-		return v.MinDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput)
-}
-
-// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.MaxDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.MinDelayTime
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters struct {
-	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-	Duration string `pulumi:"duration"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs struct {
-	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-	Duration pulumi.StringInput `pulumi:"duration"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
-}
-
-// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) Duration() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) string {
-		return v.Duration
-	}).(pulumi.StringOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput)
-}
-
-// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) Duration() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Duration
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters struct {
-	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-	AttesterId *string `pulumi:"attesterId"`
-	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-	ChallengeOption string `pulumi:"challengeOption"`
-	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-	Interval *string `pulumi:"interval"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs struct {
-	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
-	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
-	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-	Interval pulumi.StringPtrInput `pulumi:"interval"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
-}
-
-// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
-		return v.AttesterId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) string {
-		return v.ChallengeOption
-	}).(pulumi.StringOutput)
-}
-
-// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
-		return v.Interval
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput)
-}
-
-// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.AttesterId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ChallengeOption
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Interval
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters struct {
-	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-	BlockIp *string `pulumi:"blockIp"`
-	// The ban duration when BlockIP is on.
-	BlockIpDuration *string `pulumi:"blockIpDuration"`
-	// Specifies the page id of the custom page.
-	ErrorPageId *string `pulumi:"errorPageId"`
-	// Status code of the custom page.
-	ResponseCode *string `pulumi:"responseCode"`
-	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-	ReturnCustomPage *string `pulumi:"returnCustomPage"`
-	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-	Stall *string `pulumi:"stall"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs struct {
-	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
-	// The ban duration when BlockIP is on.
-	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
-	// Specifies the page id of the custom page.
-	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
-	// Status code of the custom page.
-	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
-	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
-	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-	Stall pulumi.StringPtrInput `pulumi:"stall"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
-}
-
-// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		return v.BlockIp
-	}).(pulumi.StringPtrOutput)
-}
-
-// The ban duration when BlockIP is on.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		return v.BlockIpDuration
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies the page id of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		return v.ErrorPageId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Status code of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		return v.ResponseCode
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		return v.ReturnCustomPage
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		return v.Stall
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput)
-}
-
-// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.BlockIp
-	}).(pulumi.StringPtrOutput)
-}
-
-// The ban duration when BlockIP is on.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.BlockIpDuration
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies the page id of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ErrorPageId
-	}).(pulumi.StringPtrOutput)
-}
-
-// Status code of the custom page.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ResponseCode
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ReturnCustomPage
-	}).(pulumi.StringPtrOutput)
-}
-
-// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return v.Stall
-	}).(pulumi.StringPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters struct {
-	// Redirect URL.
-	Url string `pulumi:"url"`
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput` via:
-//
-//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{...}
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs struct {
-	// Redirect URL.
-	Url pulumi.StringInput `pulumi:"url"`
-}
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput)
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx)
-}
-
-// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput values.
-// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput` via:
-//
-//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{...}
-//
-//	or:
-//
-//	        nil
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput interface {
-	pulumi.Input
-
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput
-	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput
-}
-
-type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs
-
-func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput {
-	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType)(v)
-}
-
-func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
-		return &v
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
-}
-
-// Redirect URL.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
-	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) string {
-		return v.Url
-	}).(pulumi.StringOutput)
-}
-
-type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
-
-func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
-	return o
-}
-
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
-		if v != nil {
-			return *v
-		}
-		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters
-		return ret
-	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput)
-}
-
-// Redirect URL.
-func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Url
-	}).(pulumi.StringPtrOutput)
 }
 
 func init() {
@@ -88175,6 +88410,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementBrowserImpersonationDetectionActionClientBehaviorDetectionChallengeTimeoutActionRedirectActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementBrowserImpersonationDetectionActionClientBehaviorDetectionChallengeTimeoutActionRedirectActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArrayInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionAllowActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionAllowActionParametersArgs{})
@@ -88319,6 +88576,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdatePtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArrayInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupActionInput)(nil)).Elem(), SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupActionArgs{})
@@ -88361,40 +88630,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SharedCnameIpsslSettingPtrInput)(nil)).Elem(), SharedCnameIpsslSettingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{})
 	pulumi.RegisterOutputType(L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionWebSocketParametersOutput{})
 	pulumi.RegisterOutputType(L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionWebSocketParametersPtrOutput{})
 	pulumi.RegisterOutputType(L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleOutput{})
@@ -89169,6 +89404,28 @@ func init() {
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementBrowserImpersonationDetectionActionClientBehaviorDetectionChallengeTimeoutActionRedirectActionParametersPtrOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArrayOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArrayOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersPtrOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionPtrOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionAllowActionParametersOutput{})
@@ -89313,6 +89570,18 @@ func init() {
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesPtrOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdatePtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersOutput{})
+	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersPtrOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArrayOutput{})
 	pulumi.RegisterOutputType(SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupActionOutput{})
@@ -89355,38 +89624,4 @@ func init() {
 	pulumi.RegisterOutputType(SharedCnameIpsslSettingPtrOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput{})
-	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput{})
 }

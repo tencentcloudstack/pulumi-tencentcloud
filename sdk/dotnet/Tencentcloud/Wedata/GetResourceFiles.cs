@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
         /// </summary>
         public static Task<GetResourceFilesResult> InvokeAsync(GetResourceFilesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceFilesResult>("tencentcloud:Wedata/getResourceFiles:getResourceFiles", args ?? new GetResourceFilesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
         /// </summary>
         public static Output<GetResourceFilesResult> Invoke(GetResourceFilesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceFilesResult>("tencentcloud:Wedata/getResourceFiles:getResourceFiles", args ?? new GetResourceFilesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListResourceFiles](https://www.tencentcloud.com/document/api/1174/73871)
         /// </summary>
         public static Output<GetResourceFilesResult> Invoke(GetResourceFilesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceFilesResult>("tencentcloud:Wedata/getResourceFiles:getResourceFiles", args ?? new GetResourceFilesInvokeArgs(), options.WithDefaults());

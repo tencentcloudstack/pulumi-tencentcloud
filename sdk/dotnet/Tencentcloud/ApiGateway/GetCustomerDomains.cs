@@ -47,6 +47,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&amp;type=document&amp;lang=en)
+        ///   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCustomerDomainsResult> InvokeAsync(GetCustomerDomainsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsArgs(), options.WithDefaults());
@@ -86,6 +94,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&amp;type=document&amp;lang=en)
+        ///   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCustomerDomainsResult> Invoke(GetCustomerDomainsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsInvokeArgs(), options.WithDefaults());
@@ -125,6 +141,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&amp;type=document&amp;lang=en)
+        ///   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCustomerDomainsResult> Invoke(GetCustomerDomainsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomerDomainsResult>("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args ?? new GetCustomerDomainsInvokeArgs(), options.WithDefaults());

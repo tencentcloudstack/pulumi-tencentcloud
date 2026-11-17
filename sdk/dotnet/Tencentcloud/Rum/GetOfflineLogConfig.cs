@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetOfflineLogConfigResult> InvokeAsync(GetOfflineLogConfigArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOfflineLogConfigResult> Invoke(GetOfflineLogConfigInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetOfflineLogConfigResult> Invoke(GetOfflineLogConfigInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOfflineLogConfigResult>("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args ?? new GetOfflineLogConfigInvokeArgs(), options.WithDefaults());

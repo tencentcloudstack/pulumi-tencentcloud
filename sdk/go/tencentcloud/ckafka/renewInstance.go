@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RenewCkafkaInstance](https://www.tencentcloud.com/search/?wd=RenewCkafkaInstance&type=document&lang=en)
 type RenewInstance struct {
 	pulumi.CustomResourceState
 

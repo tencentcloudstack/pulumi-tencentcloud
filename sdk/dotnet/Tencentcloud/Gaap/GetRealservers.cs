@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
         /// </summary>
         public static Task<GetRealserversResult> InvokeAsync(GetRealserversArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
         /// </summary>
         public static Output<GetRealserversResult> Invoke(GetRealserversInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
         /// </summary>
         public static Output<GetRealserversResult> Invoke(GetRealserversInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRealserversResult>("tencentcloud:Gaap/getRealservers:getRealservers", args ?? new GetRealserversInvokeArgs(), options.WithDefaults());

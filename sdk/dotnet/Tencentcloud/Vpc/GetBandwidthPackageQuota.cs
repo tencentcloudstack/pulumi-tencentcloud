@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
         /// </summary>
         public static Task<GetBandwidthPackageQuotaResult> InvokeAsync(GetBandwidthPackageQuotaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
         /// </summary>
         public static Output<GetBandwidthPackageQuotaResult> Invoke(GetBandwidthPackageQuotaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
         /// </summary>
         public static Output<GetBandwidthPackageQuotaResult> Invoke(GetBandwidthPackageQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaInvokeArgs(), options.WithDefaults());

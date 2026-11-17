@@ -69,6 +69,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62684)
+// * Read: [DescribeAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62686)
+// * Update: [ModifyAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62684)
 type StoreLocationConfig struct {
 	pulumi.CustomResourceState
 

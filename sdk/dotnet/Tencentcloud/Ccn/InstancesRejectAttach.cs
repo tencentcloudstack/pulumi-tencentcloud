@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RejectAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34781)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instancesRejectAttach:InstancesRejectAttach")]
     public partial class InstancesRejectAttach : global::Pulumi.CustomResource

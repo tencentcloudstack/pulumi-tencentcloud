@@ -228,6 +228,19 @@ class TargetGroupAttachment(pulumi.CustomResource):
             rule_id=example_listener_rule.rule_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssociateTargetGroups](https://www.tencentcloud.com/document/api/214/33847)
+          - [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+          - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+        * Read: [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+        * Delete:
+          - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+          - [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/214/33822)
+
         ## Import
 
         CLB target group attachment can be imported using the id, e.g.
@@ -306,6 +319,19 @@ class TargetGroupAttachment(pulumi.CustomResource):
             listener_id=example_listener.listener_id,
             rule_id=example_listener_rule.rule_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssociateTargetGroups](https://www.tencentcloud.com/document/api/214/33847)
+          - [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+          - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+        * Read: [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+        * Delete:
+          - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+          - [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/214/33822)
 
         ## Import
 

@@ -110,6 +110,12 @@ def get_list_algorithms(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.kms.get_list_algorithms()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -137,6 +143,12 @@ def get_list_algorithms_output(result_output_file: pulumi.Input[Optional[Optiona
 
     example = tencentcloud.kms.get_list_algorithms()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
 
 
     :param _builtins.str result_output_file: Used to save results.

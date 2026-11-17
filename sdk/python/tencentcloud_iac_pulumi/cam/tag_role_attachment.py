@@ -175,6 +175,14 @@ class TagRoleAttachment(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TagRole](https://www.tencentcloud.com/document/api/598/47612)
+        * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+        * Delete: [UntagRole](https://www.tencentcloud.com/document/api/598/47611)
+
         ## Import
 
         CAM tag role can be imported using the id, e.g.
@@ -230,6 +238,14 @@ class TagRoleAttachment(pulumi.CustomResource):
                 "value": "tagValue",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TagRole](https://www.tencentcloud.com/document/api/598/47612)
+        * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+        * Delete: [UntagRole](https://www.tencentcloud.com/document/api/598/47611)
 
         ## Import
 

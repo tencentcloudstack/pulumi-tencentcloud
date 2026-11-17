@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
  */
 export function getSecurityAuditLogDownloadUrls(args: GetSecurityAuditLogDownloadUrlsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityAuditLogDownloadUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetSecurityAuditLogDownloadUrlsResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
  */
 export function getSecurityAuditLogDownloadUrlsOutput(args: GetSecurityAuditLogDownloadUrlsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityAuditLogDownloadUrlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -138,6 +138,12 @@ def get_describe_host_teo_instance_list(certificate_id: Optional[_builtins.str] 
         resource_type="teo")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostTeoInstanceListFilterArgs', 'GetDescribeHostTeoInstanceListFilterArgsDict']] filters: List of filtering parameters; Filterkey: domainmatch.
@@ -184,6 +190,12 @@ def get_describe_host_teo_instance_list_output(certificate_id: pulumi.Input[Opti
     describe_host_teo_instance_list = tencentcloud.ssl.get_describe_host_teo_instance_list(certificate_id="8u8DII0l",
         resource_type="teo")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

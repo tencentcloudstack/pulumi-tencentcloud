@@ -312,6 +312,17 @@ class WafObject(pulumi.CustomResource):
             proxy=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyObject](https://www.tencentcloud.com/document/api/627/64509)
+        * Read:
+          - [DescribeObjects](https://www.tencentcloud.com/document/api/627/64521)
+          - [GetOrganizationRole](https://www.tencentcloud.com/search/?wd=GetOrganizationRole&type=document&lang=en)
+        * Update: [ModifyObject](https://www.tencentcloud.com/document/api/627/64509)
+        * Delete: [ModifyObject](https://www.tencentcloud.com/document/api/627/64509)
+
         ## Import
 
         Waf object can be imported using the id, e.g.
@@ -376,6 +387,17 @@ class WafObject(pulumi.CustomResource):
             status=1,
             proxy=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyObject](https://www.tencentcloud.com/document/api/627/64509)
+        * Read:
+          - [DescribeObjects](https://www.tencentcloud.com/document/api/627/64521)
+          - [GetOrganizationRole](https://www.tencentcloud.com/search/?wd=GetOrganizationRole&type=document&lang=en)
+        * Update: [ModifyObject](https://www.tencentcloud.com/document/api/627/64509)
+        * Delete: [ModifyObject](https://www.tencentcloud.com/document/api/627/64509)
 
         ## Import
 

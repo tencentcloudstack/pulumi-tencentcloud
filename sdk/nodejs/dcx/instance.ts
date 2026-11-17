@@ -56,6 +56,40 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Update bandwidth in place
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.dcx.Instance("example", {
+ *     dcId: "dc-ink7y3qf",
+ *     name: "tf-example",
+ *     dcOwnerAccount: "100017971194",
+ *     networkType: "VPC",
+ *     networkRegion: "ap-guangzhou",
+ *     vpcId: "vpc-nzuu8dyj",
+ *     dcgId: "dcg-ehr22qfb",
+ *     bandwidth: 200,
+ *     routeType: "BGP",
+ *     bgpAsn: 64511,
+ *     vlan: 60,
+ *     tencentAddress: "10.8.254.14/30",
+ *     customerAddress: "10.8.254.13/30",
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19821)
+ *   - [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+ * * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+ * * Update: [ModifyDirectConnectTunnelAttribute](https://www.tencentcloud.com/document/api/216/19818)
+ * * Delete: [DeleteDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19820)
+ *
  * ## Import
  *
  * DCX instance can be imported using the id, e.g.

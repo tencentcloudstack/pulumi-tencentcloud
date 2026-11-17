@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCurrentOp](https://www.tencentcloud.com/document/api/240/74802)
         /// </summary>
         public static Task<GetInstanceCurrentOpResult> InvokeAsync(GetInstanceCurrentOpArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCurrentOp](https://www.tencentcloud.com/document/api/240/74802)
         /// </summary>
         public static Output<GetInstanceCurrentOpResult> Invoke(GetInstanceCurrentOpInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCurrentOp](https://www.tencentcloud.com/document/api/240/74802)
         /// </summary>
         public static Output<GetInstanceCurrentOpResult> Invoke(GetInstanceCurrentOpInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpInvokeArgs(), options.WithDefaults());

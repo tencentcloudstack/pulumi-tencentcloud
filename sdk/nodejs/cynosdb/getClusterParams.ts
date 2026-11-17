@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     paramName: "innodb_checksum_algorithm",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
  */
 export function getClusterParams(args: GetClusterParamsArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterParamsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetClusterParamsResult {
  *     paramName: "innodb_checksum_algorithm",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
  */
 export function getClusterParamsOutput(args: GetClusterParamsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterParamsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

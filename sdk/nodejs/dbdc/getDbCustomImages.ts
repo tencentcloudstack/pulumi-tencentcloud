@@ -39,6 +39,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&type=document&lang=en)
  */
 export function getDbCustomImages(args?: GetDbCustomImagesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCustomImagesResult> {
     args = args || {};
@@ -111,6 +117,12 @@ export interface GetDbCustomImagesResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&type=document&lang=en)
  */
 export function getDbCustomImagesOutput(args?: GetDbCustomImagesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCustomImagesResult> {
     args = args || {};

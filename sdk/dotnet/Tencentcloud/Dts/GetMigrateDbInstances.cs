@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
         /// </summary>
         public static Task<GetMigrateDbInstancesResult> InvokeAsync(GetMigrateDbInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
         /// </summary>
         public static Output<GetMigrateDbInstancesResult> Invoke(GetMigrateDbInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
         /// </summary>
         public static Output<GetMigrateDbInstancesResult> Invoke(GetMigrateDbInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesInvokeArgs(), options.WithDefaults());

@@ -193,6 +193,19 @@ import * as utilities from "../utilities";
  *     }),
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateCLSLogConfig](https://www.tencentcloud.com/search/?wd=CreateCLSLogConfig&type=document&lang=en)
+ *   - [DescribeLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeLogConfigs&type=document&lang=en)
+ * * Read: [DescribeLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeLogConfigs&type=document&lang=en)
+ * * Update: [ModifyLogConfig](https://www.tencentcloud.com/search/?wd=ModifyLogConfig&type=document&lang=en)
+ * * Delete:
+ *   - [DeleteLogConfigs](https://www.tencentcloud.com/search/?wd=DeleteLogConfigs&type=document&lang=en)
+ *   - [DescribeLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeLogConfigs&type=document&lang=en)
  */
 export class LogConfig extends pulumi.CustomResource {
     /**

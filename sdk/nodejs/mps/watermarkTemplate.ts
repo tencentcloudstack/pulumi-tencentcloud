@@ -33,6 +33,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateWatermarkTemplate](https://www.tencentcloud.com/document/api/1041/33670)
+ * * Read: [DescribeWatermarkTemplates](https://www.tencentcloud.com/document/api/1041/33654)
+ * * Update: [ModifyWatermarkTemplate](https://www.tencentcloud.com/document/api/1041/33646)
+ * * Delete: [DeleteWatermarkTemplate](https://www.tencentcloud.com/document/api/1041/33662)
+ *
  * ## Import
  *
  * mps watermarkTemplate can be imported using the id, e.g.

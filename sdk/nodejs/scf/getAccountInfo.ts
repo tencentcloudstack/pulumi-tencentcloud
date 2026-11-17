@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const accountInfo = tencentcloud.scf.getAccountInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
  */
 export function getAccountInfo(args?: GetAccountInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountInfoResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetAccountInfoResult {
  *
  * const accountInfo = tencentcloud.scf.getAccountInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
  */
 export function getAccountInfoOutput(args?: GetAccountInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountInfoResult> {
     args = args || {};

@@ -23,6 +23,14 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "/tmp/redis_instances",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+ *   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -112,6 +120,14 @@ export interface GetInstancesResult {
  *     resultOutputFile: "/tmp/redis_instances",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+ *   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

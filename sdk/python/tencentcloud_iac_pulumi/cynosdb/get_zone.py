@@ -107,6 +107,12 @@ def get_zone(include_virtual_zones: Optional[_builtins.bool] = None,
         show_permission=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1098/53648)
+
 
     :param _builtins.bool include_virtual_zones: Is virtual zone included.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_zone_output(include_virtual_zones: pulumi.Input[Optional[Optional[_built
     zone = tencentcloud.cynosdb.get_zone(include_virtual_zones=True,
         show_permission=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1098/53648)
 
 
     :param _builtins.bool include_virtual_zones: Is virtual zone included.

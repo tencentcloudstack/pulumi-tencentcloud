@@ -56,6 +56,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Serverless
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateSLInstance](https://www.tencentcloud.com/document/api/1026/71619)
+    ///   - [DescribeSLInstance](https://www.tencentcloud.com/document/api/1026/71618)
+    ///   - [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
+    /// * Read: [DescribeSLInstance](https://www.tencentcloud.com/document/api/1026/71618)
+    /// * Update:
+    ///   - [DescribeSLInstance](https://www.tencentcloud.com/document/api/1026/71618)
+    ///   - [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifySLInstance](https://www.tencentcloud.com/document/api/1026/71616)
+    ///   - [ModifySLInstanceBasic](https://www.tencentcloud.com/document/api/1026/71615)
+    /// * Delete:
+    ///   - [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
+    ///   - [TerminateSLInstance](https://www.tencentcloud.com/document/api/1026/71614)
+    /// 
     /// ## Import
     /// 
     /// emr ServerlessHbaseInstance can be imported using the id, e.g.

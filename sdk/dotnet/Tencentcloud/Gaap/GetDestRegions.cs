@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
         /// </summary>
         public static Task<GetDestRegionsResult> InvokeAsync(GetDestRegionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
         /// </summary>
         public static Output<GetDestRegionsResult> Invoke(GetDestRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
         /// </summary>
         public static Output<GetDestRegionsResult> Invoke(GetDestRegionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDestRegionsResult>("tencentcloud:Gaap/getDestRegions:getDestRegions", args ?? new GetDestRegionsInvokeArgs(), options.WithDefaults());

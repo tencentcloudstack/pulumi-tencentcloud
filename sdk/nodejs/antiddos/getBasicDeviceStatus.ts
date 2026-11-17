@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     filterRegion: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBasicDeviceStatus](https://www.tencentcloud.com/document/api/1213/61391)
  */
 export function getBasicDeviceStatus(args?: GetBasicDeviceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetBasicDeviceStatusResult> {
     args = args || {};
@@ -89,6 +95,12 @@ export interface GetBasicDeviceStatusResult {
  *     filterRegion: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBasicDeviceStatus](https://www.tencentcloud.com/document/api/1213/61391)
  */
 export function getBasicDeviceStatusOutput(args?: GetBasicDeviceStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBasicDeviceStatusResult> {
     args = args || {};

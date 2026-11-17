@@ -170,6 +170,14 @@ def get_log(database: Optional[_builtins.str] = None,
         end_time="2025-03-21 23:59:59")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+      - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
+
 
     :param _builtins.str database: Database.
     :param _builtins.float duration: Filter duration.
@@ -226,6 +234,14 @@ def get_log_output(database: pulumi.Input[Optional[Optional[_builtins.str]]] = N
         start_time="2025-03-21 00:00:00",
         end_time="2025-03-21 23:59:59")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+      - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
 
 
     :param _builtins.str database: Database.

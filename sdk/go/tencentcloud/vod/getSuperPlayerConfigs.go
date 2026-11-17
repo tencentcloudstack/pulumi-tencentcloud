@@ -63,6 +63,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&type=document&lang=en)
 func GetSuperPlayerConfigs(ctx *pulumi.Context, args *GetSuperPlayerConfigsArgs, opts ...pulumi.InvokeOption) (*GetSuperPlayerConfigsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSuperPlayerConfigsResult

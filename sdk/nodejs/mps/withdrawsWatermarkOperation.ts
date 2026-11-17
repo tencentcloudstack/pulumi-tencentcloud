@@ -38,6 +38,12 @@ import * as utilities from "../utilities";
  *     sessionContext: "this is a example session context",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [WithdrawsWatermark](https://www.tencentcloud.com/search/?wd=WithdrawsWatermark&type=document&lang=en)
  */
 export class WithdrawsWatermarkOperation extends pulumi.CustomResource {
     /**

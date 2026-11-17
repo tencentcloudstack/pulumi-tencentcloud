@@ -25,6 +25,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateTawInstance](https://www.tencentcloud.com/document/api/1131/45343)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
+ * * Update:
+ *   - [ModifyInstance](https://www.tencentcloud.com/document/api/1131/45299)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteInstance](https://www.tencentcloud.com/document/api/1131/45341)
+ *
  * ## Import
  *
  * rum tawInstance can be imported using the id, e.g.

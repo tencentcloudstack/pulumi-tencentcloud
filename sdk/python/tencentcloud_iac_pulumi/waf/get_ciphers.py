@@ -86,6 +86,12 @@ def get_ciphers(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.waf.get_ciphers()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_ciphers_output(result_output_file: pulumi.Input[Optional[Optional[_built
 
     example = tencentcloud.waf.get_ciphers()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
 
 
     :param _builtins.str result_output_file: Used to save results.

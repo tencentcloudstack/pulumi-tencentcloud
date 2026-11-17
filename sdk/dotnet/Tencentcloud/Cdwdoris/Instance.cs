@@ -192,6 +192,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateInstanceNew](https://www.tencentcloud.com/search/?wd=CreateInstanceNew&amp;type=document&amp;lang=en)
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&amp;type=document&amp;lang=en)
+    ///   - [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyInstance](https://www.tencentcloud.com/search/?wd=ModifyInstance&amp;type=document&amp;lang=en)
+    ///   - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&amp;type=document&amp;lang=en)
+    ///   - [DestroyInstance](https://www.tencentcloud.com/search/?wd=DestroyInstance&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdwdoris/instance:Instance")]
     public partial class Instance : global::Pulumi.CustomResource
@@ -213,6 +235,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// </summary>
         [Output("chargeProperties")]
         public Output<Outputs.InstanceChargeProperties> ChargeProperties { get; private set; } = null!;
+
+        /// <summary>
+        /// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+        /// </summary>
+        [Output("diskEncrypt")]
+        public Output<int> DiskEncrypt { get; private set; } = null!;
 
         /// <summary>
         /// Database password.
@@ -373,6 +401,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         [Input("chargeProperties", required: true)]
         public Input<Inputs.InstanceChargePropertiesArgs> ChargeProperties { get; set; } = null!;
 
+        /// <summary>
+        /// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+        /// </summary>
+        [Input("diskEncrypt")]
+        public Input<int>? DiskEncrypt { get; set; }
+
         [Input("dorisUserPwd", required: true)]
         private Input<string>? _dorisUserPwd;
 
@@ -510,6 +544,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// </summary>
         [Input("chargeProperties")]
         public Input<Inputs.InstanceChargePropertiesGetArgs>? ChargeProperties { get; set; }
+
+        /// <summary>
+        /// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+        /// </summary>
+        [Input("diskEncrypt")]
+        public Input<int>? DiskEncrypt { get; set; }
 
         [Input("dorisUserPwd")]
         private Input<string>? _dorisUserPwd;

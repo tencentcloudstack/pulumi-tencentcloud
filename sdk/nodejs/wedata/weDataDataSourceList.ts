@@ -37,6 +37,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
  */
 export function weDataDataSourceList(args?: WeDataDataSourceListArgs, opts?: pulumi.InvokeOptions): Promise<WeDataDataSourceListResult> {
     args = args || {};
@@ -113,6 +119,12 @@ export interface WeDataDataSourceListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
  */
 export function weDataDataSourceListOutput(args?: WeDataDataSourceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<WeDataDataSourceListResult> {
     args = args || {};

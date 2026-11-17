@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDedicatedClusterImageCache](https://www.tencentcloud.com/search/?wd=CreateDedicatedClusterImageCache&amp;type=document&amp;lang=en)
+    ///   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+    /// * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+    /// * Delete:
+    ///   - [DeleteDedicatedClusterImageCache](https://www.tencentcloud.com/search/?wd=DeleteDedicatedClusterImageCache&amp;type=document&amp;lang=en)
+    ///   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+    /// 
     /// ## Import
     /// 
     /// CDC dedicated cluster image cache can be imported using the id, e.g.

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     period: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeRenewalPrice&type=document&lang=en)
  */
 export function getRenewalPrice(args: GetRenewalPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetRenewalPriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetRenewalPriceResult {
  *     period: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeRenewalPrice&type=document&lang=en)
  */
 export function getRenewalPriceOutput(args: GetRenewalPriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRenewalPriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

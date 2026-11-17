@@ -56,6 +56,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeResourcePackageList](https://www.tencentcloud.com/document/api/1098/55897)
 func GetResourcePackageList(ctx *pulumi.Context, args *GetResourcePackageListArgs, opts ...pulumi.InvokeOption) (*GetResourcePackageListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResourcePackageListResult

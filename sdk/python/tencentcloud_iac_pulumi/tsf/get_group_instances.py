@@ -132,6 +132,12 @@ def get_group_instances(group_id: Optional[_builtins.str] = None,
         order_type=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&type=document&lang=en)
+
 
     :param _builtins.str group_id: group id.
     :param _builtins.str order_by: order term.
@@ -176,6 +182,12 @@ def get_group_instances_output(group_id: pulumi.Input[Optional[_builtins.str]] =
         order_by="ASC",
         order_type=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&type=document&lang=en)
 
 
     :param _builtins.str group_id: group id.

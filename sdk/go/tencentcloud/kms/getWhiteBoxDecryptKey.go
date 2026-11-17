@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWhiteBoxDecryptKey](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDecryptKey&type=document&lang=en)
 func GetWhiteBoxDecryptKey(ctx *pulumi.Context, args *GetWhiteBoxDecryptKeyArgs, opts ...pulumi.InvokeOption) (*GetWhiteBoxDecryptKeyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWhiteBoxDecryptKeyResult

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     name: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisasterRecoverGroups](https://www.tencentcloud.com/document/api/213/33261)
  */
 export function getGroups(args?: GetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupsResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetGroupsResult {
  *     name: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisasterRecoverGroups](https://www.tencentcloud.com/document/api/213/33261)
  */
 export function getGroupsOutput(args?: GetGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupsResult> {
     args = args || {};

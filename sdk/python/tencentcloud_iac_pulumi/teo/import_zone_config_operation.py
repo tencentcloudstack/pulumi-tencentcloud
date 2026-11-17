@@ -202,6 +202,14 @@ class ImportZoneConfigOperation(pulumi.CustomResource):
             content=example.content)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+          - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -230,6 +238,14 @@ class ImportZoneConfigOperation(pulumi.CustomResource):
             zone_id="zone-id2",
             content=example.content)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+          - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
 
 
         :param str resource_name: The name of the resource.

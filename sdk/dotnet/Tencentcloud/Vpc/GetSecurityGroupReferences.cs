@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
         /// </summary>
         public static Task<GetSecurityGroupReferencesResult> InvokeAsync(GetSecurityGroupReferencesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
         /// </summary>
         public static Output<GetSecurityGroupReferencesResult> Invoke(GetSecurityGroupReferencesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
         /// </summary>
         public static Output<GetSecurityGroupReferencesResult> Invoke(GetSecurityGroupReferencesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesInvokeArgs(), options.WithDefaults());

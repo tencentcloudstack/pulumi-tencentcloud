@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=ModifyWafAutoDenyRules&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=DescribeWafAutoDenyRules&amp;type=document&amp;lang=en)
+    /// * Delete: [ModifyWafAutoDenyRules](https://www.tencentcloud.com/search/?wd=ModifyWafAutoDenyRules&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// waf AutoDenyRules can be imported using the id, e.g.

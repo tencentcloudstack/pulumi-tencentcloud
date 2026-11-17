@@ -119,6 +119,18 @@ class VipEipAttachment(pulumi.CustomResource):
             address_ip="1.1.1.1")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+          - [HaVipAssociateAddressIp](https://www.tencentcloud.com/document/api/215/34761)
+        * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+        * Delete:
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+          - [HaVipDisassociateAddressIp](https://www.tencentcloud.com/document/api/215/34760)
+
         ## Import
 
         HA VIP EIP attachment can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class VipEipAttachment(pulumi.CustomResource):
             havip_id="havip-kjqwe4ba",
             address_ip="1.1.1.1")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+          - [HaVipAssociateAddressIp](https://www.tencentcloud.com/document/api/215/34761)
+        * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+        * Delete:
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+          - [HaVipDisassociateAddressIp](https://www.tencentcloud.com/document/api/215/34760)
 
         ## Import
 

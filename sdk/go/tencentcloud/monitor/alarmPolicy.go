@@ -418,6 +418,79 @@ import (
 //
 // ```
 //
+// ### alarm policy binding all objects
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := monitor.NewAlarmPolicy(ctx, "foo", &monitor.AlarmPolicyArgs{
+//				PolicyName:  pulumi.String("tf-policy-bind-all"),
+//				MonitorType: pulumi.String("MT_QCE"),
+//				Enable:      pulumi.Int(1),
+//				ProjectId:   pulumi.Int(0),
+//				Namespace:   pulumi.String("cvm_device"),
+//				IsBindAll:   pulumi.Int(1),
+//				Conditions: &monitor.AlarmPolicyConditionsArgs{
+//					IsUnionRule: pulumi.Int(1),
+//					Rules: monitor.AlarmPolicyConditionsRuleArray{
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							MetricName:      pulumi.String("CpuUsage"),
+//							Period:          pulumi.Int(60),
+//							Operator:        pulumi.String("ge"),
+//							Value:           pulumi.String("89.9"),
+//							ContinuePeriod:  pulumi.Int(1),
+//							NoticeFrequency: pulumi.Int(3600),
+//							IsPowerNotice:   pulumi.Int(0),
+//						},
+//					},
+//				},
+//				EventConditions: monitor.AlarmPolicyEventConditionArray{
+//					&monitor.AlarmPolicyEventConditionArgs{
+//						MetricName: pulumi.String("ping_unreachable"),
+//					},
+//				},
+//				NoticeIds: pulumi.StringArray{
+//					fooTencentcloudMonitorAlarmNotice.Id,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [BindingPolicyTag](https://www.tencentcloud.com/search/?wd=BindingPolicyTag&type=document&lang=en)
+//   - [CreateAlarmPolicy](https://www.tencentcloud.com/document/api/248/39326)
+//   - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+//
+// * Read: [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+// * Update:
+//   - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+//   - [ModifyAlarmPolicyCondition](https://www.tencentcloud.com/document/api/248/39317)
+//   - [ModifyAlarmPolicyInfo](https://www.tencentcloud.com/document/api/248/39316)
+//   - [ModifyAlarmPolicyNotice](https://www.tencentcloud.com/document/api/248/39315)
+//   - [ModifyAlarmPolicyStatus](https://www.tencentcloud.com/document/api/248/39314)
+//   - [ModifyAlarmPolicyTasks](https://www.tencentcloud.com/document/api/248/39313)
+//
+// * Delete: [DeleteAlarmPolicy](https://www.tencentcloud.com/document/api/248/39325)
+//
 // ## Import
 //
 // Alarm policy instance can be imported, e.g.
@@ -444,6 +517,8 @@ type AlarmPolicy struct {
 	GroupBies pulumi.StringArrayOutput `pulumi:"groupBies"`
 	// Alarm hierarchical notice rules configuration.
 	HierarchicalNotices AlarmPolicyHierarchicalNoticeArrayOutput `pulumi:"hierarchicalNotices"`
+	// Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+	IsBindAll pulumi.IntOutput `pulumi:"isBindAll"`
 	// The type of monitor.
 	MonitorType pulumi.StringOutput `pulumi:"monitorType"`
 	// The type of alarm.
@@ -521,6 +596,8 @@ type alarmPolicyState struct {
 	GroupBies []string `pulumi:"groupBies"`
 	// Alarm hierarchical notice rules configuration.
 	HierarchicalNotices []AlarmPolicyHierarchicalNotice `pulumi:"hierarchicalNotices"`
+	// Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+	IsBindAll *int `pulumi:"isBindAll"`
 	// The type of monitor.
 	MonitorType *string `pulumi:"monitorType"`
 	// The type of alarm.
@@ -560,6 +637,8 @@ type AlarmPolicyState struct {
 	GroupBies pulumi.StringArrayInput
 	// Alarm hierarchical notice rules configuration.
 	HierarchicalNotices AlarmPolicyHierarchicalNoticeArrayInput
+	// Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+	IsBindAll pulumi.IntPtrInput
 	// The type of monitor.
 	MonitorType pulumi.StringPtrInput
 	// The type of alarm.
@@ -601,6 +680,8 @@ type alarmPolicyArgs struct {
 	GroupBies []string `pulumi:"groupBies"`
 	// Alarm hierarchical notice rules configuration.
 	HierarchicalNotices []AlarmPolicyHierarchicalNotice `pulumi:"hierarchicalNotices"`
+	// Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+	IsBindAll *int `pulumi:"isBindAll"`
 	// The type of monitor.
 	MonitorType string `pulumi:"monitorType"`
 	// The type of alarm.
@@ -637,6 +718,8 @@ type AlarmPolicyArgs struct {
 	GroupBies pulumi.StringArrayInput
 	// Alarm hierarchical notice rules configuration.
 	HierarchicalNotices AlarmPolicyHierarchicalNoticeArrayInput
+	// Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+	IsBindAll pulumi.IntPtrInput
 	// The type of monitor.
 	MonitorType pulumi.StringInput
 	// The type of alarm.
@@ -782,6 +865,11 @@ func (o AlarmPolicyOutput) GroupBies() pulumi.StringArrayOutput {
 // Alarm hierarchical notice rules configuration.
 func (o AlarmPolicyOutput) HierarchicalNotices() AlarmPolicyHierarchicalNoticeArrayOutput {
 	return o.ApplyT(func(v *AlarmPolicy) AlarmPolicyHierarchicalNoticeArrayOutput { return v.HierarchicalNotices }).(AlarmPolicyHierarchicalNoticeArrayOutput)
+}
+
+// Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+func (o AlarmPolicyOutput) IsBindAll() pulumi.IntOutput {
+	return o.ApplyT(func(v *AlarmPolicy) pulumi.IntOutput { return v.IsBindAll }).(pulumi.IntOutput)
 }
 
 // The type of monitor.

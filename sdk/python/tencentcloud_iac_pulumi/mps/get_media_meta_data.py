@@ -108,6 +108,12 @@ def get_media_meta_data(input_info: Optional[Union['GetMediaMetaDataInputInfoArg
     })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
+
 
     :param Union['GetMediaMetaDataInputInfoArgs', 'GetMediaMetaDataInputInfoArgsDict'] input_info: Input information of file for metadata getting.
     :param _builtins.str result_output_file: Used to save results.
@@ -148,6 +154,12 @@ def get_media_meta_data_output(input_info: pulumi.Input[Optional[Union['GetMedia
         },
     })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
 
 
     :param Union['GetMediaMetaDataInputInfoArgs', 'GetMediaMetaDataInputInfoArgsDict'] input_info: Input information of file for metadata getting.

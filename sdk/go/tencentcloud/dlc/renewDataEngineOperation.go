@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RenewDataEngine](https://www.tencentcloud.com/document/api/1155/62690)
 type RenewDataEngineOperation struct {
 	pulumi.CustomResourceState
 

@@ -215,6 +215,31 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateInstanceNew](https://www.tencentcloud.com/search/?wd=CreateInstanceNew&type=document&lang=en)
+//   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+//   - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+//   - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+//
+// * Read:
+//   - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&type=document&lang=en)
+//   - [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&type=document&lang=en)
+//
+// * Update:
+//   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+//   - [ModifyInstance](https://www.tencentcloud.com/search/?wd=ModifyInstance&type=document&lang=en)
+//   - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+//   - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+//
+// * Delete:
+//   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+//   - [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&type=document&lang=en)
+//   - [DestroyInstance](https://www.tencentcloud.com/search/?wd=DestroyInstance&type=document&lang=en)
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -224,6 +249,8 @@ type Instance struct {
 	CaseSensitive pulumi.IntPtrOutput `pulumi:"caseSensitive"`
 	// Payment type.
 	ChargeProperties InstanceChargePropertiesOutput `pulumi:"chargeProperties"`
+	// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+	DiskEncrypt pulumi.IntOutput `pulumi:"diskEncrypt"`
 	// Database password.
 	DorisUserPwd pulumi.StringOutput `pulumi:"dorisUserPwd"`
 	// Whether to enable multi-availability zone.
@@ -332,6 +359,8 @@ type instanceState struct {
 	CaseSensitive *int `pulumi:"caseSensitive"`
 	// Payment type.
 	ChargeProperties *InstanceChargeProperties `pulumi:"chargeProperties"`
+	// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+	DiskEncrypt *int `pulumi:"diskEncrypt"`
 	// Database password.
 	DorisUserPwd *string `pulumi:"dorisUserPwd"`
 	// Whether to enable multi-availability zone.
@@ -371,6 +400,8 @@ type InstanceState struct {
 	CaseSensitive pulumi.IntPtrInput
 	// Payment type.
 	ChargeProperties InstanceChargePropertiesPtrInput
+	// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+	DiskEncrypt pulumi.IntPtrInput
 	// Database password.
 	DorisUserPwd pulumi.StringPtrInput
 	// Whether to enable multi-availability zone.
@@ -414,6 +445,8 @@ type instanceArgs struct {
 	CaseSensitive *int `pulumi:"caseSensitive"`
 	// Payment type.
 	ChargeProperties InstanceChargeProperties `pulumi:"chargeProperties"`
+	// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+	DiskEncrypt *int `pulumi:"diskEncrypt"`
 	// Database password.
 	DorisUserPwd string `pulumi:"dorisUserPwd"`
 	// Whether to enable multi-availability zone.
@@ -454,6 +487,8 @@ type InstanceArgs struct {
 	CaseSensitive pulumi.IntPtrInput
 	// Payment type.
 	ChargeProperties InstanceChargePropertiesInput
+	// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+	DiskEncrypt pulumi.IntPtrInput
 	// Database password.
 	DorisUserPwd pulumi.StringInput
 	// Whether to enable multi-availability zone.
@@ -586,6 +621,11 @@ func (o InstanceOutput) CaseSensitive() pulumi.IntPtrOutput {
 // Payment type.
 func (o InstanceOutput) ChargeProperties() InstanceChargePropertiesOutput {
 	return o.ApplyT(func(v *Instance) InstanceChargePropertiesOutput { return v.ChargeProperties }).(InstanceChargePropertiesOutput)
+}
+
+// Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+func (o InstanceOutput) DiskEncrypt() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.DiskEncrypt }).(pulumi.IntOutput)
 }
 
 // Database password.

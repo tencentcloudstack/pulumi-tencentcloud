@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     groupField: "level",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
  */
 export function getGroupLog(args: GetGroupLogArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -108,6 +114,12 @@ export interface GetGroupLogResult {
  *     groupField: "level",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
  */
 export function getGroupLogOutput(args: GetGroupLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

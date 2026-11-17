@@ -118,6 +118,12 @@ def get_backup_summaries(order_by: Optional[_builtins.str] = None,
         order_direction="ASC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupSummaries](https://www.tencentcloud.com/document/api/236/35195)
+
 
     :param _builtins.str order_by: Specify to sort by a certain item, the optional values include: BackupVolume: backup volume, DataBackupVolume: data backup volume, BinlogBackupVolume: log backup volume, AutoBackupVolume: automatic backup volume, ManualBackupVolume: manual backup volume. By default, they are sorted by BackupVolume.
     :param _builtins.str order_direction: Specify the sorting direction, optional values include: ASC: forward order, DESC: reverse order. The default is ASC.
@@ -157,6 +163,12 @@ def get_backup_summaries_output(order_by: pulumi.Input[Optional[Optional[_builti
         order_by="BackupVolume",
         order_direction="ASC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupSummaries](https://www.tencentcloud.com/document/api/236/35195)
 
 
     :param _builtins.str order_by: Specify to sort by a certain item, the optional values include: BackupVolume: backup volume, DataBackupVolume: data backup volume, BinlogBackupVolume: log backup volume, AutoBackupVolume: automatic backup volume, ManualBackupVolume: manual backup volume. By default, they are sorted by BackupVolume.

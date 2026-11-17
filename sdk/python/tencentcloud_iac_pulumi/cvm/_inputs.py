@@ -691,7 +691,7 @@ class LaunchTemplateDataDiskArgsDict(TypedDict):
     """
     disk_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Data disk ID.
+    System disk ID.
     """
     disk_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -730,7 +730,7 @@ class LaunchTemplateDataDiskArgs:
         :param pulumi.Input[_builtins.int] disk_size: The size of the data disk.
         :param pulumi.Input[_builtins.str] cdc_id: Cloud Dedicated Cluster(CDC) ID.
         :param pulumi.Input[_builtins.bool] delete_with_instance: Whether the data disk is destroyed along with the instance, true or false.
-        :param pulumi.Input[_builtins.str] disk_id: Data disk ID.
+        :param pulumi.Input[_builtins.str] disk_id: System disk ID.
         :param pulumi.Input[_builtins.str] disk_type: The type of data disk.
         :param pulumi.Input[_builtins.bool] encrypt: Whether the data disk is encrypted, TRUE or FALSE.
         :param pulumi.Input[_builtins.str] kms_key_id: The id of custom CMK.
@@ -795,7 +795,7 @@ class LaunchTemplateDataDiskArgs:
     @pulumi.getter(name="diskId")
     def disk_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Data disk ID.
+        System disk ID.
         """
         return pulumi.get(self, "disk_id")
 

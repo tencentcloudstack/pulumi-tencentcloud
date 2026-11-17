@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     podNameLists: ["keep-terraform-6f8f977688-zvphm"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&type=document&lang=en)
  */
 export function getPodInstances(args: GetPodInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetPodInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetPodInstancesResult {
  *     podNameLists: ["keep-terraform-6f8f977688-zvphm"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&type=document&lang=en)
  */
 export function getPodInstancesOutput(args: GetPodInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPodInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

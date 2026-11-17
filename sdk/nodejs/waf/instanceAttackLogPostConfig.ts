@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyInstanceAttackLogPost](https://www.tencentcloud.com/search/?wd=ModifyInstanceAttackLogPost&type=document&lang=en)
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/627/64766)
+ * * Update: [ModifyInstanceAttackLogPost](https://www.tencentcloud.com/search/?wd=ModifyInstanceAttackLogPost&type=document&lang=en)
+ *
  * ## Import
  *
  * WAF instance attack log post config can be imported using the id, e.g.

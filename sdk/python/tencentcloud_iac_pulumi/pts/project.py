@@ -257,6 +257,15 @@ class Project(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateProject](https://www.tencentcloud.com/document/api/1249/68532)
+        * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/1249/68511)
+        * Update: [UpdateProject](https://www.tencentcloud.com/document/api/1249/68494)
+        * Delete: [DeleteProjects](https://www.tencentcloud.com/document/api/1249/68525)
+
         ## Import
 
         pts project can be imported using the id, e.g.
@@ -294,6 +303,15 @@ class Project(pulumi.CustomResource):
                 "tag_value": "terraform",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateProject](https://www.tencentcloud.com/document/api/1249/68532)
+        * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/1249/68511)
+        * Update: [UpdateProject](https://www.tencentcloud.com/document/api/1249/68494)
+        * Delete: [DeleteProjects](https://www.tencentcloud.com/document/api/1249/68525)
 
         ## Import
 

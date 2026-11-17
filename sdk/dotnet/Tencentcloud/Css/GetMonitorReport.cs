@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMonitorReportResult> InvokeAsync(GetMonitorReportArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMonitorReportResult> Invoke(GetMonitorReportInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMonitorReportResult> Invoke(GetMonitorReportInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMonitorReportResult>("tencentcloud:Css/getMonitorReport:getMonitorReport", args ?? new GetMonitorReportInvokeArgs(), options.WithDefaults());

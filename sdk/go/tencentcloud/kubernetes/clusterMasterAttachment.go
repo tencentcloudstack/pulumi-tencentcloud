@@ -77,6 +77,18 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ScaleOutClusterMaster](https://www.tencentcloud.com/search/?wd=ScaleOutClusterMaster&type=document&lang=en)
+// * Read:
+//   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+//   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+//
+// * Delete: [ScaleInClusterMaster](https://www.tencentcloud.com/search/?wd=ScaleInClusterMaster&type=document&lang=en)
 type ClusterMasterAttachment struct {
 	pulumi.CustomResourceState
 

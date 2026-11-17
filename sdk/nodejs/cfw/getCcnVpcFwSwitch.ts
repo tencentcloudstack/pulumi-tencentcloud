@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     ccnId: "ccn-fkb9bo2v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&type=document&lang=en)
  */
 export function getCcnVpcFwSwitch(args: GetCcnVpcFwSwitchArgs, opts?: pulumi.InvokeOptions): Promise<GetCcnVpcFwSwitchResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetCcnVpcFwSwitchResult {
  *     ccnId: "ccn-fkb9bo2v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&type=document&lang=en)
  */
 export function getCcnVpcFwSwitchOutput(args: GetCcnVpcFwSwitchOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCcnVpcFwSwitchResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

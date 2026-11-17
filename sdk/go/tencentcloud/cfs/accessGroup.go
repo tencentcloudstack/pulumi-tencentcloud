@@ -40,6 +40,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateCfsPGroup](https://www.tencentcloud.com/document/api/582/34509)
+// * Read: [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/34505)
+// * Update: [UpdateCfsPGroup](https://www.tencentcloud.com/document/api/582/34503)
+// * Delete: [DeleteCfsPGroup](https://www.tencentcloud.com/document/api/582/34507)
+//
 // ## Import
 //
 // CFS access group can be imported using the id, e.g.

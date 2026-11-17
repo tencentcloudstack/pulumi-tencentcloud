@@ -408,6 +408,14 @@ class ConfigInstanceRoGroup(pulumi.CustomResource):
             min_read_only_in_group=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72737)
+        * Read: [DescribeReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72739)
+        * Update: [ModifyReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72737)
+
         ## Import
 
         sqlserver config_instance_ro_group can be imported using the id, e.g.
@@ -503,6 +511,14 @@ class ConfigInstanceRoGroup(pulumi.CustomResource):
             read_only_max_delay_time=5,
             min_read_only_in_group=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72737)
+        * Read: [DescribeReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72739)
+        * Update: [ModifyReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72737)
 
         ## Import
 

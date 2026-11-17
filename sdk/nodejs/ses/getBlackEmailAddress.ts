@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     taskId: "7000",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
  */
 export function getBlackEmailAddress(args: GetBlackEmailAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetBlackEmailAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -97,6 +103,12 @@ export interface GetBlackEmailAddressResult {
  *     taskId: "7000",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
  */
 export function getBlackEmailAddressOutput(args: GetBlackEmailAddressOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBlackEmailAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -113,6 +113,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [StartReplication](https://www.tencentcloud.com/document/api/236/44329)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/roStartReplication:RoStartReplication")]
     public partial class RoStartReplication : global::Pulumi.CustomResource

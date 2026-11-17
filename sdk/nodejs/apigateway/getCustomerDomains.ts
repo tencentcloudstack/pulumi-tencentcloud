@@ -31,6 +31,14 @@ import * as utilities from "../utilities";
  *     serviceId: foo.serviceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+ *   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
  */
 export function getCustomerDomains(args: GetCustomerDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomerDomainsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +102,14 @@ export interface GetCustomerDomainsResult {
  *     serviceId: foo.serviceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+ *   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
  */
 export function getCustomerDomainsOutput(args: GetCustomerDomainsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCustomerDomainsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

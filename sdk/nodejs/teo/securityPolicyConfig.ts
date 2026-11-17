@@ -235,14 +235,26 @@ import * as utilities from "../utilities";
  *             }],
  *         },
  *         exceptionRules: {
- *             rules: [{
- *                 name: "High-frequency API bypasses rate limits",
- *                 condition: "${http.request.method} in ['POST'] and ${http.request.uri.path} in ['/api/EventLogUpload']",
- *                 skipScope: "WebSecurityModules",
- *                 skipOption: "SkipOnAllRequestFields",
- *                 webSecurityModulesForExceptions: ["websec-mod-adaptive-control"],
- *                 enabled: "off",
- *             }],
+ *             rules: [
+ *                 {
+ *                     name: "High-frequency API bypasses rate limits",
+ *                     condition: "${http.request.method} in ['POST'] and ${http.request.uri.path} in ['/api/EventLogUpload']",
+ *                     skipScope: "WebSecurityModules",
+ *                     skipOption: "SkipOnAllRequestFields",
+ *                     webSecurityModulesForExceptions: ["websec-mod-adaptive-control"],
+ *                     enabled: "off",
+ *                 },
+ *                 {
+ *                     name: "Skip managed rule set submodule",
+ *                     condition: "${http.request.uri.path} in ['/legacy/api']",
+ *                     skipScope: "WebSecuritySubmodules",
+ *                     webSecuritySubmodulesForExceptions: [
+ *                         "websec-mod-managed-rules/managed-rule-groups",
+ *                         "websec-mod-rate-limiting-rules",
+ *                     ],
+ *                     enabled: "off",
+ *                 },
+ *             ],
  *         },
  *         botManagementLite: {
  *             captchaPageChallenge: {
@@ -258,6 +270,76 @@ import * as utilities from "../utilities";
  *                     },
  *                 },
  *             },
+ *         },
+ *         botManagement: {
+ *             basicBotSettings: {
+ *                 sourceIdc: {
+ *                     baseAction: {
+ *                         name: "Monitor",
+ *                     },
+ *                     actionOverrides: [{
+ *                         ruleIds: [
+ *                             "rule-a",
+ *                             "rule-b",
+ *                         ],
+ *                         action: {
+ *                             name: "Deny",
+ *                         },
+ *                     }],
+ *                 },
+ *                 searchEngineBots: {
+ *                     baseAction: {
+ *                         name: "Monitor",
+ *                     },
+ *                     actionOverrides: [{
+ *                         ruleIds: ["rule-c"],
+ *                         action: {
+ *                             name: "Monitor",
+ *                         },
+ *                     }],
+ *                 },
+ *             },
+ *             clientAttestationRules: [{
+ *                 name: "client-attestation-rule",
+ *                 enabled: "on",
+ *                 priority: 10,
+ *                 condition: "${http.request.host} contain ['abc']",
+ *                 attesterId: "attester-xxxx",
+ *                 invalidAttestationAction: {
+ *                     name: "Monitor",
+ *                 },
+ *                 deviceProfiles: [
+ *                     {
+ *                         clientType: "iOS",
+ *                         highRiskMinScore: 60,
+ *                         highRiskRequestAction: {
+ *                             name: "Deny",
+ *                             denyActionParameters: {
+ *                                 blockIp: "on",
+ *                                 blockIpDuration: "120s",
+ *                             },
+ *                         },
+ *                         mediumRiskMinScore: 20,
+ *                         mediumRiskRequestAction: {
+ *                             name: "Monitor",
+ *                         },
+ *                     },
+ *                     {
+ *                         clientType: "Android",
+ *                         highRiskMinScore: 50,
+ *                         highRiskRequestAction: {
+ *                             name: "Challenge",
+ *                             challengeActionParameters: {
+ *                                 challengeOption: "JSChallenge",
+ *                             },
+ *                         },
+ *                         mediumRiskMinScore: 15,
+ *                         mediumRiskRequestAction: {
+ *                             name: "Monitor",
+ *                         },
+ *                     },
+ *                 ],
+ *             }],
  *         },
  *     },
  * });
@@ -594,6 +676,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
+ * * Read: [DescribeSecurityPolicy](https://www.tencentcloud.com/document/api/1145/50958)
+ * * Update: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
  *
  * ## Import
  *

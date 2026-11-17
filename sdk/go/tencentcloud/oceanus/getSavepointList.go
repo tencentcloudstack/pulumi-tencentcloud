@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&type=document&lang=en)
 func GetSavepointList(ctx *pulumi.Context, args *GetSavepointListArgs, opts ...pulumi.InvokeOption) (*GetSavepointListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSavepointListResult

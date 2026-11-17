@@ -272,6 +272,22 @@ class Tablegroup(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTableGroup](https://www.tencentcloud.com/document/api/1016/35027)
+        * Read:
+          - [DescribeTableGroupTags](https://www.tencentcloud.com/document/api/1016/36900)
+          - [DescribeTableGroups](https://www.tencentcloud.com/document/api/1016/35025)
+        * Update:
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/1016/35045)
+          - [ModifyTableGroupName](https://www.tencentcloud.com/document/api/1016/35024)
+          - [ModifyTableGroupTags](https://www.tencentcloud.com/document/api/1016/36899)
+        * Delete:
+          - [DeleteTableGroup](https://www.tencentcloud.com/document/api/1016/35026)
+          - [DescribeTableGroups](https://www.tencentcloud.com/document/api/1016/35025)
+
         ## Import
 
         TcaplusDB table group can be imported using the clusterId:tableGroupId, e.g.
@@ -343,6 +359,22 @@ class Tablegroup(pulumi.CustomResource):
                 "tag_value": "Terraform",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTableGroup](https://www.tencentcloud.com/document/api/1016/35027)
+        * Read:
+          - [DescribeTableGroupTags](https://www.tencentcloud.com/document/api/1016/36900)
+          - [DescribeTableGroups](https://www.tencentcloud.com/document/api/1016/35025)
+        * Update:
+          - [DescribeTasks](https://www.tencentcloud.com/document/api/1016/35045)
+          - [ModifyTableGroupName](https://www.tencentcloud.com/document/api/1016/35024)
+          - [ModifyTableGroupTags](https://www.tencentcloud.com/document/api/1016/36899)
+        * Delete:
+          - [DeleteTableGroup](https://www.tencentcloud.com/document/api/1016/35026)
+          - [DescribeTableGroups](https://www.tencentcloud.com/document/api/1016/35025)
 
         ## Import
 

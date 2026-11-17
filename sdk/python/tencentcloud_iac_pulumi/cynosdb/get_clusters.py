@@ -141,6 +141,12 @@ def get_clusters(cluster_id: Optional[_builtins.str] = None,
         cluster_name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
+
 
     :param _builtins.str cluster_id: ID of the cluster to be queried.
     :param _builtins.str cluster_name: Name of the cluster to be queried.
@@ -185,6 +191,12 @@ def get_clusters_output(cluster_id: pulumi.Input[Optional[Optional[_builtins.str
         db_type="MYSQL",
         cluster_name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
 
 
     :param _builtins.str cluster_id: ID of the cluster to be queried.

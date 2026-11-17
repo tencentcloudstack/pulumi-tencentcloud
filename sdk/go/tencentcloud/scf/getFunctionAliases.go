@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListAliases](https://www.tencentcloud.com/document/api/583/36322)
 func GetFunctionAliases(ctx *pulumi.Context, args *GetFunctionAliasesArgs, opts ...pulumi.InvokeOption) (*GetFunctionAliasesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFunctionAliasesResult

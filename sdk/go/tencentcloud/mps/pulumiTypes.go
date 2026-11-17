@@ -54088,7 +54088,7 @@ type TranscodeTemplateVideoTemplate struct {
 	Gop *int `pulumi:"gop"`
 	// The maximum value of video stream height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default: 0.
 	Height *int `pulumi:"height"`
-	// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+	// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 	ResolutionAdaptive *string `pulumi:"resolutionAdaptive"`
 	// Video constant bit rate control factor, the value range is [1, 51].If this parameter is specified, the code rate control method of CRF will be used for transcoding (the video code rate will no longer take effect).If there is no special requirement, it is not recommended to specify this parameter.
 	Vcrf *int `pulumi:"vcrf"`
@@ -54120,7 +54120,7 @@ type TranscodeTemplateVideoTemplateArgs struct {
 	Gop pulumi.IntPtrInput `pulumi:"gop"`
 	// The maximum value of video stream height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default: 0.
 	Height pulumi.IntPtrInput `pulumi:"height"`
-	// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+	// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 	ResolutionAdaptive pulumi.StringPtrInput `pulumi:"resolutionAdaptive"`
 	// Video constant bit rate control factor, the value range is [1, 51].If this parameter is specified, the code rate control method of CRF will be used for transcoding (the video code rate will no longer take effect).If there is no special requirement, it is not recommended to specify this parameter.
 	Vcrf pulumi.IntPtrInput `pulumi:"vcrf"`
@@ -54235,7 +54235,7 @@ func (o TranscodeTemplateVideoTemplateOutput) Height() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *int { return v.Height }).(pulumi.IntPtrOutput)
 }
 
-// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 func (o TranscodeTemplateVideoTemplateOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v TranscodeTemplateVideoTemplate) *string { return v.ResolutionAdaptive }).(pulumi.StringPtrOutput)
 }
@@ -54334,7 +54334,7 @@ func (o TranscodeTemplateVideoTemplatePtrOutput) Height() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 func (o TranscodeTemplateVideoTemplatePtrOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TranscodeTemplateVideoTemplate) *string {
 		if v == nil {
@@ -65681,7 +65681,7 @@ type WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplate stru
 	Gop *int `pulumi:"gop"`
 	// The maximum value of video stream height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default: 0.
 	Height *int `pulumi:"height"`
-	// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+	// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 	ResolutionAdaptive *string `pulumi:"resolutionAdaptive"`
 	// Video constant bit rate control factor, the value range is [1, 51].If this parameter is specified, the code rate control method of CRF will be used for transcoding (the video code rate will no longer take effect).If there is no special requirement, it is not recommended to specify this parameter.
 	Vcrf *int `pulumi:"vcrf"`
@@ -65715,7 +65715,7 @@ type WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs 
 	Gop pulumi.IntPtrInput `pulumi:"gop"`
 	// The maximum value of video stream height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default: 0.
 	Height pulumi.IntPtrInput `pulumi:"height"`
-	// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+	// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 	ResolutionAdaptive pulumi.StringPtrInput `pulumi:"resolutionAdaptive"`
 	// Video constant bit rate control factor, the value range is [1, 51].If this parameter is specified, the code rate control method of CRF will be used for transcoding (the video code rate will no longer take effect).If there is no special requirement, it is not recommended to specify this parameter.
 	Vcrf pulumi.IntPtrInput `pulumi:"vcrf"`
@@ -65839,7 +65839,7 @@ func (o WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateOu
 	return o.ApplyT(func(v WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplate) *int { return v.Height }).(pulumi.IntPtrOutput)
 }
 
-// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 func (o WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplate) *string {
 		return v.ResolutionAdaptive
@@ -65950,7 +65950,7 @@ func (o WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplatePt
 	}).(pulumi.IntPtrOutput)
 }
 
-// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 func (o WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplatePtrOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplate) *string {
 		if v == nil {
@@ -66581,7 +66581,7 @@ type WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplate struct {
 	Gop *int `pulumi:"gop"`
 	// The maximum value of video stream height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default: 0.
 	Height *int `pulumi:"height"`
-	// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+	// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 	ResolutionAdaptive *string `pulumi:"resolutionAdaptive"`
 	// Video constant bit rate control factor, the value range is [1, 51].If this parameter is specified, the code rate control method of CRF will be used for transcoding (the video code rate will no longer take effect).If there is no special requirement, it is not recommended to specify this parameter.
 	Vcrf *int `pulumi:"vcrf"`
@@ -66613,7 +66613,7 @@ type WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs struc
 	Gop pulumi.IntPtrInput `pulumi:"gop"`
 	// The maximum value of video stream height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default: 0.
 	Height pulumi.IntPtrInput `pulumi:"height"`
-	// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+	// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 	ResolutionAdaptive pulumi.StringPtrInput `pulumi:"resolutionAdaptive"`
 	// Video constant bit rate control factor, the value range is [1, 51].If this parameter is specified, the code rate control method of CRF will be used for transcoding (the video code rate will no longer take effect).If there is no special requirement, it is not recommended to specify this parameter.
 	Vcrf pulumi.IntPtrInput `pulumi:"vcrf"`
@@ -66728,7 +66728,7 @@ func (o WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateOutput)
 	return o.ApplyT(func(v WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplate) *int { return v.Height }).(pulumi.IntPtrOutput)
 }
 
-// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 func (o WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplate) *string {
 		return v.ResolutionAdaptive
@@ -66829,7 +66829,7 @@ func (o WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplatePtrOutp
 	}).(pulumi.IntPtrOutput)
 }
 
-// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
 func (o WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplatePtrOutput) ResolutionAdaptive() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *WorkflowMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplate) *string {
 		if v == nil {

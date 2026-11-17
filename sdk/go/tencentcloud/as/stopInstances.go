@@ -152,6 +152,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+//   - [StopAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37503)
 type StopInstances struct {
 	pulumi.CustomResourceState
 

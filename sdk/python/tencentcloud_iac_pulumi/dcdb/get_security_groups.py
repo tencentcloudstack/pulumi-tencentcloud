@@ -96,6 +96,12 @@ def get_security_groups(instance_id: Optional[_builtins.str] = None,
     security_groups = tencentcloud.dcdb.get_security_groups(instance_id="your_instance_id")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_security_groups_output(instance_id: pulumi.Input[Optional[_builtins.str]
 
     security_groups = tencentcloud.dcdb.get_security_groups(instance_id="your_instance_id")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
 
 
     :param _builtins.str instance_id: instance id.

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mqtt-g4qgr3gx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopicList](https://www.tencentcloud.com/search/?wd=DescribeTopicList&type=document&lang=en)
  */
 export function getTopics(args: GetTopicsArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetTopicsResult {
  *     instanceId: "mqtt-g4qgr3gx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopicList](https://www.tencentcloud.com/search/?wd=DescribeTopicList&type=document&lang=en)
  */
 export function getTopicsOutput(args: GetTopicsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTopicsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

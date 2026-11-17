@@ -119,6 +119,12 @@ class DownloadCertificateOperation(pulumi.CustomResource):
             output_path="./")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DownloadCertificate](https://www.tencentcloud.com/document/api/1007/36584)
+
         ## Import
 
         ssl download_certificate can be imported using the id, e.g.
@@ -152,6 +158,12 @@ class DownloadCertificateOperation(pulumi.CustomResource):
             certificate_id="8x1eUSSl",
             output_path="./")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DownloadCertificate](https://www.tencentcloud.com/document/api/1007/36584)
 
         ## Import
 

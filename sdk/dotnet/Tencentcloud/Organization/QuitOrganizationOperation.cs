@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [QuitOrganization](https://www.tencentcloud.com/document/api/1031/66413)
+    /// 
     /// ## Import
     /// 
     /// organization QuitOrganizationOperation can be imported using the id, e.g.

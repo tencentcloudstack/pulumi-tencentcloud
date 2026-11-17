@@ -275,6 +275,14 @@ class Yarn(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyGlobalConfig](https://www.tencentcloud.com/document/api/1026/73264)
+        * Read: [DescribeGlobalConfig](https://www.tencentcloud.com/document/api/1026/73265)
+        * Update: [ModifyGlobalConfig](https://www.tencentcloud.com/document/api/1026/73264)
+
         ## Import
 
         emr emr_yarn can be imported using the id, e.g.
@@ -316,6 +324,14 @@ class Yarn(pulumi.CustomResource):
                 "user_max_apps_default": 1000,
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyGlobalConfig](https://www.tencentcloud.com/document/api/1026/73264)
+        * Read: [DescribeGlobalConfig](https://www.tencentcloud.com/document/api/1026/73265)
+        * Update: [ModifyGlobalConfig](https://www.tencentcloud.com/document/api/1026/73264)
 
         ## Import
 

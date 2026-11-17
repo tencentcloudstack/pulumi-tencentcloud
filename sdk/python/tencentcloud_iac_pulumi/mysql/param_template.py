@@ -342,6 +342,17 @@ class ParamTemplate(pulumi.CustomResource):
             engine_type="InnoDB")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/236/34471)
+        * Read:
+          - [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/api/236/34466)
+          - [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/34465)
+        * Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/236/34464)
+        * Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/236/34470)
+
         ## Import
 
         mysql param template can be imported using the id, e.g.
@@ -433,6 +444,17 @@ class ParamTemplate(pulumi.CustomResource):
             template_type="HIGH_STABILITY",
             engine_type="InnoDB")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/236/34471)
+        * Read:
+          - [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/api/236/34466)
+          - [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/34465)
+        * Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/236/34464)
+        * Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/236/34470)
 
         ## Import
 

@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateDomainAlias](https://www.tencentcloud.com/document/api/1157/53866)
+// * Read: [DescribeDomainAliasList](https://www.tencentcloud.com/document/api/1157/53864)
+// * Delete: [DeleteDomainAlias](https://www.tencentcloud.com/document/api/1157/53865)
+//
 // ## Import
 //
 // dnspod domainAlias can be imported using the id, e.g.

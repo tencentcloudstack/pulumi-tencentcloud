@@ -203,6 +203,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyL7AccRulePriority](https://www.tencentcloud.com/document/api/1145/68767)
 type L7AccRulePriorityOperation struct {
 	pulumi.CustomResourceState
 

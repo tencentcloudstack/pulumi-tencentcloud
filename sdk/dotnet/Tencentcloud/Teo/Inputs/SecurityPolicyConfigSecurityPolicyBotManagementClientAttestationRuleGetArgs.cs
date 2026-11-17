@@ -25,6 +25,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         [Input("condition", required: true)]
         public Input<string> Condition { get; set; } = null!;
 
+        [Input("deviceProfiles")]
+        private InputList<Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileGetArgs>? _deviceProfiles;
+
+        /// <summary>
+        /// Client device configurations. One profile per client type.
+        /// </summary>
+        public InputList<Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileGetArgs> DeviceProfiles
+        {
+            get => _deviceProfiles ?? (_deviceProfiles = new InputList<Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileGetArgs>());
+            set => _deviceProfiles = value;
+        }
+
         /// <summary>
         /// Whether the rule is enabled. Valid values: `On`, `Off`.
         /// </summary>

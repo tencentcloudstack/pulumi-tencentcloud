@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RejectAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34781)
  */
 export class InstancesRejectAttach extends pulumi.CustomResource {
     /**

@@ -105,6 +105,14 @@ class AttachDataMaskPolicy(pulumi.CustomResource):
         })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachDataMaskPolicy](https://www.tencentcloud.com/document/api/1155/73720)
+        * Read: [DescribeTable](https://www.tencentcloud.com/search/?wd=DescribeTable&type=document&lang=en)
+        * Delete: [AttachDataMaskPolicy](https://www.tencentcloud.com/document/api/1155/73720)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class AttachDataMaskPolicy(pulumi.CustomResource):
             "column_type": "string",
         })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachDataMaskPolicy](https://www.tencentcloud.com/document/api/1155/73720)
+        * Read: [DescribeTable](https://www.tencentcloud.com/search/?wd=DescribeTable&type=document&lang=en)
+        * Delete: [AttachDataMaskPolicy](https://www.tencentcloud.com/document/api/1155/73720)
 
 
         :param str resource_name: The name of the resource.

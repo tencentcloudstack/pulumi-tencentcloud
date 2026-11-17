@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [VerifyOwnership](https://www.tencentcloud.com/document/api/1145/57426)
 type OwnershipVerify struct {
 	pulumi.CustomResourceState
 

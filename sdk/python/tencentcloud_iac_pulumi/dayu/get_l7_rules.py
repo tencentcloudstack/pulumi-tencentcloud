@@ -137,6 +137,12 @@ def get_l7_rules(domain: Optional[_builtins.str] = None,
         rule_id=test_rule["ruleId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
+
 
     :param _builtins.str domain: Domain of the layer 7 rule to be queried.
     :param _builtins.str resource_id: Id of the resource that the layer 7 rule works for.
@@ -183,6 +189,12 @@ def get_l7_rules_output(domain: pulumi.Input[Optional[Optional[_builtins.str]]] 
         resource_id=test_rule["resourceId"],
         rule_id=test_rule["ruleId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
 
 
     :param _builtins.str domain: Domain of the layer 7 rule to be queried.

@@ -62,6 +62,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
 func GetHttpDomains(ctx *pulumi.Context, args *GetHttpDomainsArgs, opts ...pulumi.InvokeOption) (*GetHttpDomainsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHttpDomainsResult

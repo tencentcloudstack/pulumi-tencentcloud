@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
 func GetBinlogDownloadUrl(ctx *pulumi.Context, args *GetBinlogDownloadUrlArgs, opts ...pulumi.InvokeOption) (*GetBinlogDownloadUrlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBinlogDownloadUrlResult

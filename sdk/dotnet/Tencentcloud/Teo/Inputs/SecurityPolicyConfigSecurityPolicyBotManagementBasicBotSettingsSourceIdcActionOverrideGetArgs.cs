@@ -20,10 +20,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionGetArgs>? Action { get; set; }
 
         /// <summary>
-        /// Rule ID or category ID for action override.
+        /// It has been deprecated from version 1.83.31. Please use `RuleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `RuleIds` to support one or more IDs.
         /// </summary>
-        [Input("ruleId", required: true)]
-        public Input<string> RuleId { get; set; } = null!;
+        [Input("ruleId")]
+        public Input<string>? RuleId { get; set; }
+
+        [Input("ruleIds")]
+        private InputList<string>? _ruleIds;
+
+        /// <summary>
+        /// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `RuleIds` and `RuleId` are set, `RuleIds` takes precedence.
+        /// </summary>
+        public InputList<string> RuleIds
+        {
+            get => _ruleIds ?? (_ruleIds = new InputList<string>());
+            set => _ruleIds = value;
+        }
 
         public SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideGetArgs()
         {

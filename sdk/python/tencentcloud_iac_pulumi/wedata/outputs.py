@@ -13,6 +13,7 @@ if sys.version_info >= (3, 11):
     pass
 else:
     pass
+from .. import _utilities
 
 __all__ = [
     'AddCalcEnginesToProjectOperationDlcInfo',
@@ -6206,6 +6207,8 @@ class ProjectProject(dict):
             suggest = "project_name"
         elif key == "projectModel":
             suggest = "project_model"
+        elif key == "scheduleMode":
+            suggest = "schedule_mode"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectProject. Access the value via the '{suggest}' property getter instead.")
@@ -6221,16 +6224,20 @@ class ProjectProject(dict):
     def __init__(__self__, *,
                  display_name: _builtins.str,
                  project_name: _builtins.str,
-                 project_model: Optional[_builtins.str] = None):
+                 project_model: Optional[_builtins.str] = None,
+                 schedule_mode: Optional[_builtins.str] = None):
         """
         :param _builtins.str display_name: Project display name, can be Chinese name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
         :param _builtins.str project_name: Project identifier, English name starting with a letter, can contain letters, numbers, and underscores, cannot exceed 32 characters.
         :param _builtins.str project_model: Project mode, SIMPLE (default): Simple mode STANDARD: Standard mode.
+        :param _builtins.str schedule_mode: Project schedule mode. task: Task mode; workflow: Workflow mode.
         """
         pulumi.set(__self__, "display_name", display_name)
         pulumi.set(__self__, "project_name", project_name)
         if project_model is not None:
             pulumi.set(__self__, "project_model", project_model)
+        if schedule_mode is not None:
+            pulumi.set(__self__, "schedule_mode", schedule_mode)
 
     @_builtins.property
     @pulumi.getter(name="displayName")
@@ -6255,6 +6262,14 @@ class ProjectProject(dict):
         Project mode, SIMPLE (default): Simple mode STANDARD: Standard mode.
         """
         return pulumi.get(self, "project_model")
+
+    @_builtins.property
+    @pulumi.getter(name="scheduleMode")
+    def schedule_mode(self) -> Optional[_builtins.str]:
+        """
+        Project schedule mode. task: Task mode; workflow: Workflow mode.
+        """
+        return pulumi.get(self, "schedule_mode")
 
 
 @pulumi.output_type
@@ -10340,8 +10355,8 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfiguration(dict):
         :param _builtins.str scheduler_status: Trigger status, ACTIVE or PAUSED.
         :param _builtins.str start_time: Schedule effective start time.
         :param _builtins.str trigger_id: Trigger ID (UUID).
-        :param _builtins.int trigger_minimum_interval_second: Minimum trigger interval in file arrival mode (seconds).
-        :param _builtins.int trigger_wait_time_second: Trigger wait time in file arrival mode (seconds).
+        :param _builtins.int trigger_minimum_interval_second: This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
+        :param _builtins.int trigger_wait_time_second: This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
         """
         pulumi.set(__self__, "trigger_mode", trigger_mode)
         if config_mode is not None:
@@ -10459,17 +10474,19 @@ class TriggerWorkflowTriggerWorkflowSchedulerConfiguration(dict):
 
     @_builtins.property
     @pulumi.getter(name="triggerMinimumIntervalSecond")
+    @_utilities.deprecated("""This parameter is deprecated and will be removed in a future version.""")
     def trigger_minimum_interval_second(self) -> Optional[_builtins.int]:
         """
-        Minimum trigger interval in file arrival mode (seconds).
+        This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
         """
         return pulumi.get(self, "trigger_minimum_interval_second")
 
     @_builtins.property
     @pulumi.getter(name="triggerWaitTimeSecond")
+    @_utilities.deprecated("""This parameter is deprecated and will be removed in a future version.""")
     def trigger_wait_time_second(self) -> Optional[_builtins.int]:
         """
-        Trigger wait time in file arrival mode (seconds).
+        This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
         """
         return pulumi.get(self, "trigger_wait_time_second")
 

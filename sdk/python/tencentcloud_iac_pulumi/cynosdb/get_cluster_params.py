@@ -110,6 +110,12 @@ def get_cluster_params(cluster_id: Optional[_builtins.str] = None,
         param_name="innodb_checksum_algorithm")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
+
 
     :param _builtins.str cluster_id: The ID of cluster.
     :param _builtins.str param_name: Parameter name.
@@ -144,6 +150,12 @@ def get_cluster_params_output(cluster_id: pulumi.Input[Optional[_builtins.str]] 
     cluster_params = tencentcloud.cynosdb.get_cluster_params(cluster_id="cynosdbmysql-bws8h88b",
         param_name="innodb_checksum_algorithm")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
 
 
     :param _builtins.str cluster_id: The ID of cluster.

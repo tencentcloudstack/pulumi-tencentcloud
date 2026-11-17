@@ -22,6 +22,8 @@ __all__ = [
     'PolicyVersionPolicyVersionArgsDict',
     'TagRoleAttachmentTagArgs',
     'TagRoleAttachmentTagArgsDict',
+    'UpdatePasswordRuleConfigRulesArgs',
+    'UpdatePasswordRuleConfigRulesArgsDict',
 ]
 
 class MfaFlagActionFlagArgsDict(TypedDict):
@@ -296,5 +298,134 @@ class TagRoleAttachmentTagArgs:
     @value.setter
     def value(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "value", value)
+
+
+class UpdatePasswordRuleConfigRulesArgsDict(TypedDict):
+    force_password_change: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Forced password change period.
+    """
+    minimum_length: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Minimum password length.
+    """
+    must_contain: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+    """
+    password_expiration_invalidation: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+    """
+    retry_password_limit: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Number of allowed password retries.
+    """
+    reuse_password_limit: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Number of previous passwords that cannot be reused.
+    """
+
+@pulumi.input_type
+class UpdatePasswordRuleConfigRulesArgs:
+    def __init__(__self__, *,
+                 force_password_change: pulumi.Input[Optional[_builtins.int]] = None,
+                 minimum_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 must_contain: pulumi.Input[Optional[_builtins.str]] = None,
+                 password_expiration_invalidation: pulumi.Input[Optional[_builtins.int]] = None,
+                 retry_password_limit: pulumi.Input[Optional[_builtins.int]] = None,
+                 reuse_password_limit: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.int] force_password_change: Forced password change period.
+        :param pulumi.Input[_builtins.int] minimum_length: Minimum password length.
+        :param pulumi.Input[_builtins.str] must_contain: Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+        :param pulumi.Input[_builtins.int] password_expiration_invalidation: Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+        :param pulumi.Input[_builtins.int] retry_password_limit: Number of allowed password retries.
+        :param pulumi.Input[_builtins.int] reuse_password_limit: Number of previous passwords that cannot be reused.
+        """
+        if force_password_change is not None:
+            pulumi.set(__self__, "force_password_change", force_password_change)
+        if minimum_length is not None:
+            pulumi.set(__self__, "minimum_length", minimum_length)
+        if must_contain is not None:
+            pulumi.set(__self__, "must_contain", must_contain)
+        if password_expiration_invalidation is not None:
+            pulumi.set(__self__, "password_expiration_invalidation", password_expiration_invalidation)
+        if retry_password_limit is not None:
+            pulumi.set(__self__, "retry_password_limit", retry_password_limit)
+        if reuse_password_limit is not None:
+            pulumi.set(__self__, "reuse_password_limit", reuse_password_limit)
+
+    @_builtins.property
+    @pulumi.getter(name="forcePasswordChange")
+    def force_password_change(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Forced password change period.
+        """
+        return pulumi.get(self, "force_password_change")
+
+    @force_password_change.setter
+    def force_password_change(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "force_password_change", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minimumLength")
+    def minimum_length(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Minimum password length.
+        """
+        return pulumi.get(self, "minimum_length")
+
+    @minimum_length.setter
+    def minimum_length(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "minimum_length", value)
+
+    @_builtins.property
+    @pulumi.getter(name="mustContain")
+    def must_contain(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Characters that the password must contain, as a literal character set (e.g. `Aa1!` for upper, lower, digit and special characters). Note that the CAM console re-orders this value (e.g. `Aa1!` is stored and read back as `1!aA`); invalid literals are rejected with `InvalidParameter.PasswordRuleError`.
+        """
+        return pulumi.get(self, "must_contain")
+
+    @must_contain.setter
+    def must_contain(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "must_contain", value)
+
+    @_builtins.property
+    @pulumi.getter(name="passwordExpirationInvalidation")
+    def password_expiration_invalidation(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Whether an expired password becomes invalid. Valid values: `1` (the sub-user cannot log in and an administrator must reset the password), `2` (the sub-user can log in and is forced to change the password).
+        """
+        return pulumi.get(self, "password_expiration_invalidation")
+
+    @password_expiration_invalidation.setter
+    def password_expiration_invalidation(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "password_expiration_invalidation", value)
+
+    @_builtins.property
+    @pulumi.getter(name="retryPasswordLimit")
+    def retry_password_limit(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Number of allowed password retries.
+        """
+        return pulumi.get(self, "retry_password_limit")
+
+    @retry_password_limit.setter
+    def retry_password_limit(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "retry_password_limit", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reusePasswordLimit")
+    def reuse_password_limit(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Number of previous passwords that cannot be reused.
+        """
+        return pulumi.get(self, "reuse_password_limit")
+
+    @reuse_password_limit.setter
+    def reuse_password_limit(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "reuse_password_limit", value)
 
 

@@ -676,6 +676,15 @@ class Task(pulumi.CustomResource):
             task_argument="a=c")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTask](https://www.tencentcloud.com/search/?wd=CreateTask&type=document&lang=en)
+        * Read: [DescribeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeTaskDetail&type=document&lang=en)
+        * Update: [ModifyTask](https://www.tencentcloud.com/search/?wd=ModifyTask&type=document&lang=en)
+        * Delete: [DeleteTask](https://www.tencentcloud.com/search/?wd=DeleteTask&type=document&lang=en)
+
         ## Import
 
         tsf task can be imported using the id, e.g.
@@ -739,6 +748,15 @@ class Task(pulumi.CustomResource):
             },
             task_argument="a=c")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTask](https://www.tencentcloud.com/search/?wd=CreateTask&type=document&lang=en)
+        * Read: [DescribeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeTaskDetail&type=document&lang=en)
+        * Update: [ModifyTask](https://www.tencentcloud.com/search/?wd=ModifyTask&type=document&lang=en)
+        * Delete: [DeleteTask](https://www.tencentcloud.com/search/?wd=DeleteTask&type=document&lang=en)
 
         ## Import
 

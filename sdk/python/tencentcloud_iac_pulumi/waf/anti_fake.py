@@ -221,6 +221,19 @@ class AntiFake(pulumi.CustomResource):
             status=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddAntiFakeUrl](https://www.tencentcloud.com/document/api/627/64532)
+          - [ModifyAntiFakeUrlStatus](https://www.tencentcloud.com/document/api/627/64541)
+        * Read: [DescribeAntiFakeRules](https://www.tencentcloud.com/document/api/627/64529)
+        * Update:
+          - [ModifyAntiFakeUrl](https://www.tencentcloud.com/document/api/627/64516)
+          - [ModifyAntiFakeUrlStatus](https://www.tencentcloud.com/document/api/627/64541)
+        * Delete: [DeleteAntiFakeUrl](https://www.tencentcloud.com/document/api/627/64530)
+
         ## Import
 
         waf anti_fake can be imported using the id, e.g.
@@ -260,6 +273,19 @@ class AntiFake(pulumi.CustomResource):
             uri="/anti_fake_url.html",
             status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddAntiFakeUrl](https://www.tencentcloud.com/document/api/627/64532)
+          - [ModifyAntiFakeUrlStatus](https://www.tencentcloud.com/document/api/627/64541)
+        * Read: [DescribeAntiFakeRules](https://www.tencentcloud.com/document/api/627/64529)
+        * Update:
+          - [ModifyAntiFakeUrl](https://www.tencentcloud.com/document/api/627/64516)
+          - [ModifyAntiFakeUrlStatus](https://www.tencentcloud.com/document/api/627/64541)
+        * Delete: [DeleteAntiFakeUrl](https://www.tencentcloud.com/document/api/627/64530)
 
         ## Import
 

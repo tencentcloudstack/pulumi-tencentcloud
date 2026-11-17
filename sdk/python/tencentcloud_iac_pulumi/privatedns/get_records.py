@@ -123,6 +123,12 @@ def get_records(filters: Optional[Sequence[Union['GetRecordsFilterArgs', 'GetRec
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrivateZoneRecordList](https://www.tencentcloud.com/document/api/1097/42115)
+
 
     :param Sequence[Union['GetRecordsFilterArgs', 'GetRecordsFilterArgsDict']] filters: Filter parameters (Value and RecordType filtering are supported).
     :param _builtins.str result_output_file: Used to save results.
@@ -169,6 +175,12 @@ def get_records_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['G
             "values": ["A"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrivateZoneRecordList](https://www.tencentcloud.com/document/api/1097/42115)
 
 
     :param Sequence[Union['GetRecordsFilterArgs', 'GetRecordsFilterArgsDict']] filters: Filter parameters (Value and RecordType filtering are supported).

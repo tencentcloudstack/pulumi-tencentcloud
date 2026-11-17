@@ -73,6 +73,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [PutEvents](https://www.tencentcloud.com/search/?wd=PutEvents&type=document&lang=en)
 type PutEvents struct {
 	pulumi.CustomResourceState
 

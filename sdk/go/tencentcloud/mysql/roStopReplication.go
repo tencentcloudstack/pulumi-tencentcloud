@@ -126,6 +126,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [StopReplication](https://www.tencentcloud.com/document/api/236/44328)
 type RoStopReplication struct {
 	pulumi.CustomResourceState
 

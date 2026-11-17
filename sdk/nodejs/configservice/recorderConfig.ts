@@ -37,6 +37,20 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.configservice.RecorderConfig("example", {status: false});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CloseConfigRecorder](https://www.tencentcloud.com/document/api/1164/84983)
+ *   - [OpenConfigRecorder](https://www.tencentcloud.com/document/api/1164/84985)
+ *   - [UpdateConfigRecorder](https://www.tencentcloud.com/document/api/1164/84978)
+ * * Read: [DescribeConfigRecorder](https://www.tencentcloud.com/document/api/1164/84981)
+ * * Update:
+ *   - [CloseConfigRecorder](https://www.tencentcloud.com/document/api/1164/84983)
+ *   - [OpenConfigRecorder](https://www.tencentcloud.com/document/api/1164/84985)
+ *   - [UpdateConfigRecorder](https://www.tencentcloud.com/document/api/1164/84978)
+ *
  * ## Import
  *
  * Config recorder config can be imported using its token ID, e.g.

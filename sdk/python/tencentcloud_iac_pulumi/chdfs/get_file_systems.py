@@ -86,6 +86,12 @@ def get_file_systems(result_output_file: Optional[_builtins.str] = None,
     file_systems = tencentcloud.chdfs.get_file_systems()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFileSystems](https://www.tencentcloud.com/document/api/1106/42443)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_file_systems_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     file_systems = tencentcloud.chdfs.get_file_systems()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFileSystems](https://www.tencentcloud.com/document/api/1106/42443)
 
 
     :param _builtins.str result_output_file: Used to save results.

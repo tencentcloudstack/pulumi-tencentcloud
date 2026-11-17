@@ -260,6 +260,15 @@ class ParamTemplate(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/1098/55908)
+        * Read: [DescribeParamTemplateDetail](https://www.tencentcloud.com/document/api/1098/55905)
+        * Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/1098/55903)
+        * Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/1098/55907)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -295,6 +304,15 @@ class ParamTemplate(pulumi.CustomResource):
                 "param_name": "optimizer_trace_offset",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/1098/55908)
+        * Read: [DescribeParamTemplateDetail](https://www.tencentcloud.com/document/api/1098/55905)
+        * Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/1098/55903)
+        * Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/1098/55907)
 
 
         :param str resource_name: The name of the resource.

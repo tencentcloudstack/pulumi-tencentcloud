@@ -117,6 +117,12 @@ def get_public_ipv6s(filters: Optional[Sequence[Union['GetPublicIpv6sFilterArgs'
     elastic_public_ipv6s = tencentcloud.elastic.get_public_ipv6s(ipv6_address_ids=["xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
+
 
     :param Sequence[Union['GetPublicIpv6sFilterArgs', 'GetPublicIpv6sFilterArgsDict']] filters: The detailed filter conditions are as follows:
            - address-id-String-required: no-(filter condition) filter by the unique ID of the elastic public network IPv6.
@@ -169,6 +175,12 @@ def get_public_ipv6s_output(filters: pulumi.Input[Optional[Optional[Sequence[Uni
 
     elastic_public_ipv6s = tencentcloud.elastic.get_public_ipv6s(ipv6_address_ids=["xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
 
 
     :param Sequence[Union['GetPublicIpv6sFilterArgs', 'GetPublicIpv6sFilterArgsDict']] filters: The detailed filter conditions are as follows:

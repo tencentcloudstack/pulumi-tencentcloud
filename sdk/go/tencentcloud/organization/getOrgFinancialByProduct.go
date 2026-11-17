@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOrganizationFinancialByProduct](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByProduct&type=document&lang=en)
 func GetOrgFinancialByProduct(ctx *pulumi.Context, args *GetOrgFinancialByProductArgs, opts ...pulumi.InvokeOption) (*GetOrgFinancialByProductResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgFinancialByProductResult

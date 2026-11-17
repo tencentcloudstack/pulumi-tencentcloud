@@ -110,6 +110,12 @@ def get_access_rules(access_group_id: Optional[_builtins.str] = None,
         access_rule_id="rule-qcndbqzj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
+
 
     :param _builtins.str access_group_id: A specified access group ID used to query.
     :param _builtins.str access_rule_id: A specified access rule ID used to query.
@@ -144,6 +150,12 @@ def get_access_rules_output(access_group_id: pulumi.Input[Optional[_builtins.str
     access_rules = tencentcloud.cfs.get_access_rules(access_group_id="pgroup-7nx89k7l",
         access_rule_id="rule-qcndbqzj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
 
 
     :param _builtins.str access_group_id: A specified access group ID used to query.

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListSendTasks](https://www.tencentcloud.com/document/api/1084/44865)
 func GetSendTasks(ctx *pulumi.Context, args *GetSendTasksArgs, opts ...pulumi.InvokeOption) (*GetSendTasksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSendTasksResult

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
         /// </summary>
         public static Task<GetProjectSecurityGroupResult> InvokeAsync(GetProjectSecurityGroupArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
         /// </summary>
         public static Output<GetProjectSecurityGroupResult> Invoke(GetProjectSecurityGroupInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
         /// </summary>
         public static Output<GetProjectSecurityGroupResult> Invoke(GetProjectSecurityGroupInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupResult>("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args ?? new GetProjectSecurityGroupInvokeArgs(), options.WithDefaults());

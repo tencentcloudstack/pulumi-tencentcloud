@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCcnAssociatedInstancesResult> InvokeAsync(GetCcnAssociatedInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCcnAssociatedInstancesResult>("tencentcloud:Cfw/getCcnAssociatedInstances:getCcnAssociatedInstances", args ?? new GetCcnAssociatedInstancesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcnAssociatedInstancesResult> Invoke(GetCcnAssociatedInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcnAssociatedInstancesResult>("tencentcloud:Cfw/getCcnAssociatedInstances:getCcnAssociatedInstances", args ?? new GetCcnAssociatedInstancesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcnAssociatedInstancesResult> Invoke(GetCcnAssociatedInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcnAssociatedInstancesResult>("tencentcloud:Cfw/getCcnAssociatedInstances:getCcnAssociatedInstances", args ?? new GetCcnAssociatedInstancesInvokeArgs(), options.WithDefaults());

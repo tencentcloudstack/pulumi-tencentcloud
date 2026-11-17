@@ -142,6 +142,12 @@ def get_no_primary_key_tables(date: Optional[_builtins.str] = None,
         product="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&type=document&lang=en)
+
 
     :param _builtins.str date: Query date, such as 2021-05-27, the earliest date is 30 days ago.
     :param _builtins.str instance_id: instance id.
@@ -183,6 +189,12 @@ def get_no_primary_key_tables_output(date: pulumi.Input[Optional[_builtins.str]]
         date="",
         product="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&type=document&lang=en)
 
 
     :param _builtins.str date: Query date, such as 2021-05-27, the earliest date is 30 days ago.

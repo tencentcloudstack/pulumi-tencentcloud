@@ -55,6 +55,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeExternalClusterRegisterCommand](https://www.tencentcloud.com/search/?wd=DescribeExternalClusterRegisterCommand&type=document&lang=en)
 func GetExternalClusterRegisterCommand(ctx *pulumi.Context, args *GetExternalClusterRegisterCommandArgs, opts ...pulumi.InvokeOption) (*GetExternalClusterRegisterCommandResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetExternalClusterRegisterCommandResult

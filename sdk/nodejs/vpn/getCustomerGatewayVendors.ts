@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const vpnCustomerGatewayVendors = tencentcloud.vpn.getCustomerGatewayVendors({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
  */
 export function getCustomerGatewayVendors(args?: GetCustomerGatewayVendorsArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomerGatewayVendorsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetCustomerGatewayVendorsResult {
  *
  * const vpnCustomerGatewayVendors = tencentcloud.vpn.getCustomerGatewayVendors({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
  */
 export function getCustomerGatewayVendorsOutput(args?: GetCustomerGatewayVendorsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCustomerGatewayVendorsResult> {
     args = args || {};

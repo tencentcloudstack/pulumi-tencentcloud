@@ -49,6 +49,12 @@ import * as utilities from "../utilities";
  *     instanceSetIds: ["ins-a81rnm8c"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
@@ -203,6 +209,12 @@ export interface GetInstanceResult {
  *     instanceSetIds: ["ins-a81rnm8c"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
  */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceResult> {
     args = args || {};

@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.configservice.StartConfigRuleEvaluationOperation("example", {compliancePackId: "cp-3kr5im1ssbg6tdo5jbi9"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [StartConfigRuleEvaluation](https://www.tencentcloud.com/document/api/1164/84958)
  */
 export class StartConfigRuleEvaluationOperation extends pulumi.CustomResource {
     /**

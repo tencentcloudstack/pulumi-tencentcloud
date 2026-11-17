@@ -108,6 +108,14 @@ def get_parameter_list(engine_version: Optional[_builtins.str] = None,
         result_output_file="mytestpath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+      - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+
 
     :param _builtins.str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
     :param _builtins.str mysql_id: Instance ID.
@@ -143,6 +151,14 @@ def get_parameter_list_output(engine_version: pulumi.Input[Optional[Optional[_bu
         engine_version="5.5",
         result_output_file="mytestpath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+      - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
 
 
     :param _builtins.str engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.

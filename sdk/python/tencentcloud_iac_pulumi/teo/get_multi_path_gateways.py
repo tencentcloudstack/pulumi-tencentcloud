@@ -111,6 +111,12 @@ def get_multi_path_gateways(filters: Optional[Sequence[Union['GetMultiPathGatewa
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
+
 
     :param Sequence[Union['GetMultiPathGatewaysFilterArgs', 'GetMultiPathGatewaysFilterArgsDict']] filters: Filter conditions. The maximum value of Filters.Values is 20. If this parameter is not filled in, all gateway information under the current appid will be returned. Detailed filter conditions are as follows: gateway-type: filter by gateway type, supporting values cloud and private, representing filtering cloud gateways and private gateways respectively; keyword: filter by gateway name keyword.
     :param _builtins.str result_output_file: Used to save results.
@@ -148,6 +154,12 @@ def get_multi_path_gateways_output(filters: pulumi.Input[Optional[Optional[Seque
             "values": ["cloud"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
 
 
     :param Sequence[Union['GetMultiPathGatewaysFilterArgs', 'GetMultiPathGatewaysFilterArgsDict']] filters: Filter conditions. The maximum value of Filters.Values is 20. If this parameter is not filled in, all gateway information under the current appid will be returned. Detailed filter conditions are as follows: gateway-type: filter by gateway type, supporting values cloud and private, representing filtering cloud gateways and private gateways respectively; keyword: filter by gateway name keyword.

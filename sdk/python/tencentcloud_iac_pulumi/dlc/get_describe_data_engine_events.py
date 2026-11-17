@@ -106,6 +106,12 @@ def get_describe_data_engine_events(data_engine_name: Optional[_builtins.str] = 
     example = tencentcloud.dlc.get_describe_data_engine_events(data_engine_name="tf-example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&type=document&lang=en)
+
 
     :param _builtins.str data_engine_name: Data engine name.
     :param _builtins.str result_output_file: Used to save results.
@@ -139,6 +145,12 @@ def get_describe_data_engine_events_output(data_engine_name: pulumi.Input[Option
 
     example = tencentcloud.dlc.get_describe_data_engine_events(data_engine_name="tf-example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&type=document&lang=en)
 
 
     :param _builtins.str data_engine_name: Data engine name.

@@ -119,6 +119,12 @@ def get_default_certificate(filters: Optional[Sequence[Union['GetDefaultCertific
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
+
 
     :param Sequence[Union['GetDefaultCertificateFilterArgs', 'GetDefaultCertificateFilterArgsDict']] filters: Filter conditions, the upper limit of Filters.Values is 5. The detailed filtering conditions are as follows: zone-id - Filter by zone ID. At least one of `zone_id` or `filters` must be specified.
     :param _builtins.str result_output_file: Used to save results.
@@ -164,6 +170,12 @@ def get_default_certificate_output(filters: pulumi.Input[Optional[Optional[Seque
         "values": ["zone-2qtuhspy7cr6"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
 
 
     :param Sequence[Union['GetDefaultCertificateFilterArgs', 'GetDefaultCertificateFilterArgsDict']] filters: Filter conditions, the upper limit of Filters.Values is 5. The detailed filtering conditions are as follows: zone-id - Filter by zone ID. At least one of `zone_id` or `filters` must be specified.

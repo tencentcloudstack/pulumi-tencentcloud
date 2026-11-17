@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
         /// </summary>
         public static Task<GetTopSpaceTablesResult> InvokeAsync(GetTopSpaceTablesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesArgs(), options.WithDefaults());
@@ -104,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
         /// </summary>
         public static Output<GetTopSpaceTablesResult> Invoke(GetTopSpaceTablesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesInvokeArgs(), options.WithDefaults());
@@ -152,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceTables](https://www.tencentcloud.com/document/api/1035/41187)
         /// </summary>
         public static Output<GetTopSpaceTablesResult> Invoke(GetTopSpaceTablesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceTablesResult>("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", args ?? new GetTopSpaceTablesInvokeArgs(), options.WithDefaults());

@@ -152,6 +152,14 @@ class CenterUserGroupAttachment(pulumi.CustomResource):
             group_id="g-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUserToGroup](https://www.tencentcloud.com/document/api/1031/63573)
+        * Read: [ListJoinedGroupsForUser](https://www.tencentcloud.com/document/api/1031/63567)
+        * Delete: [RemoveUserFromGroup](https://www.tencentcloud.com/document/api/1031/63566)
+
         ## Import
 
         organization identity_center_user_group_attachment can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class CenterUserGroupAttachment(pulumi.CustomResource):
             user_id="u-xxxxxx",
             group_id="g-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUserToGroup](https://www.tencentcloud.com/document/api/1031/63573)
+        * Read: [ListJoinedGroupsForUser](https://www.tencentcloud.com/document/api/1031/63567)
+        * Delete: [RemoveUserFromGroup](https://www.tencentcloud.com/document/api/1031/63566)
 
         ## Import
 

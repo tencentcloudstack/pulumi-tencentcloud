@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [SuspendResumeDataEngine](https://www.tencentcloud.com/document/api/1155/53307)
 type SuspendResumeDataEngine struct {
 	pulumi.CustomResourceState
 

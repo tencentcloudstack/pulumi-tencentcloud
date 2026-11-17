@@ -107,6 +107,12 @@ def get_db_instance_versions(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.postgresql.get_db_instance_versions(storage_type="CLOUD_HSSD")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str storage_type: Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
@@ -147,6 +153,12 @@ def get_db_instance_versions_output(result_output_file: pulumi.Input[Optional[Op
 
     example = tencentcloud.postgresql.get_db_instance_versions(storage_type="CLOUD_HSSD")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
 
 
     :param _builtins.str result_output_file: Used to save results.

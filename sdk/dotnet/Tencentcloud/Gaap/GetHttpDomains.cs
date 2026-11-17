@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
         /// </summary>
         public static Task<GetHttpDomainsResult> InvokeAsync(GetHttpDomainsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsArgs(), options.WithDefaults());
@@ -104,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
         /// </summary>
         public static Output<GetHttpDomainsResult> Invoke(GetHttpDomainsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsInvokeArgs(), options.WithDefaults());
@@ -152,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
         /// </summary>
         public static Output<GetHttpDomainsResult> Invoke(GetHttpDomainsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsInvokeArgs(), options.WithDefaults());

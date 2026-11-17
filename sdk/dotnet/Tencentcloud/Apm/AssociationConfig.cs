@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyApmAssociation](https://www.tencentcloud.com/document/api/1166/74309)
+    /// * Read: [DescribeApmAssociation](https://www.tencentcloud.com/document/api/1166/74312)
+    /// * Update: [ModifyApmAssociation](https://www.tencentcloud.com/document/api/1166/74309)
+    /// 
     /// ## Import
     /// 
     /// APM association config can be imported using the id, e.g.

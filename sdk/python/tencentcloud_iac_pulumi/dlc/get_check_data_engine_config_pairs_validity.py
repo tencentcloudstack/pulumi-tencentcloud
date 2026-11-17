@@ -129,6 +129,12 @@ def get_check_data_engine_config_pairs_validity(child_image_version_id: Optional
     example = tencentcloud.dlc.get_check_data_engine_config_pairs_validity(child_image_version_id="d3ftghd4-9a7e-4f64-a3f4-f38507c69742")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckDataEngineConfigPairsValidity](https://www.tencentcloud.com/document/api/1155/62696)
+
 
     :param _builtins.str child_image_version_id: ID of the minor version of the engine.
     :param Sequence[Union['GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs', 'GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgsDict']] data_engine_config_pairs: User-defined parameters.
@@ -167,6 +173,12 @@ def get_check_data_engine_config_pairs_validity_output(child_image_version_id: p
 
     example = tencentcloud.dlc.get_check_data_engine_config_pairs_validity(child_image_version_id="d3ftghd4-9a7e-4f64-a3f4-f38507c69742")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckDataEngineConfigPairsValidity](https://www.tencentcloud.com/document/api/1155/62696)
 
 
     :param _builtins.str child_image_version_id: ID of the minor version of the engine.

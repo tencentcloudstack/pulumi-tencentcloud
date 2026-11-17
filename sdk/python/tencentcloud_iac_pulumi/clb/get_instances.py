@@ -154,6 +154,12 @@ def get_instances(clb_id: Optional[_builtins.str] = None,
     pulumi.export("exclusiveClusterInfo", std.jsondecode(input=example.clb_lists[0].exclusive_cluster).result)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+
 
     :param _builtins.str clb_id: ID of the CLB to be queried.
     :param _builtins.str clb_name: Name of the CLB to be queried.
@@ -205,6 +211,12 @@ def get_instances_output(clb_id: pulumi.Input[Optional[Optional[_builtins.str]]]
         result_output_file="myOutputPath")
     pulumi.export("exclusiveClusterInfo", std.jsondecode(input=example.clb_lists[0].exclusive_cluster).result)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
 
 
     :param _builtins.str clb_id: ID of the CLB to be queried.

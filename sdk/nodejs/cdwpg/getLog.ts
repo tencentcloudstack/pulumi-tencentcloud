@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  *     endTime: "2025-03-21 23:59:59",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+ *   - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
  */
 export function getLog(args: GetLogArgs, opts?: pulumi.InvokeOptions): Promise<GetLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -114,6 +122,14 @@ export interface GetLogResult {
  *     endTime: "2025-03-21 23:59:59",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+ *   - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
  */
 export function getLogOutput(args: GetLogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLogResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

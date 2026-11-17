@@ -35,6 +35,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreatePathRewritesWithDetailResp](https://www.tencentcloud.com/search/?wd=CreatePathRewritesWithDetailResp&amp;type=document&amp;lang=en)
+    /// * Read: [DescribePathRewrite](https://www.tencentcloud.com/search/?wd=DescribePathRewrite&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyPathRewrite](https://www.tencentcloud.com/search/?wd=ModifyPathRewrite&amp;type=document&amp;lang=en)
+    /// * Delete: [DeletePathRewrites](https://www.tencentcloud.com/search/?wd=DeletePathRewrites&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf PathRewrite can be imported using the id, e.g.

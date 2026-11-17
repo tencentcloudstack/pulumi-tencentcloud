@@ -108,6 +108,12 @@ def get_cross_border_region_bandwidth_limits(filters: Optional[Sequence[Union['G
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&type=document&lang=en)
+
 
     :param Sequence[Union['GetCrossBorderRegionBandwidthLimitsFilterArgs', 'GetCrossBorderRegionBandwidthLimitsFilterArgsDict']] filters: Filter condition. Currently, only one value is supported. The supported fields, 1)source-region, the value is like ap-guangzhou; 2)destination-region, the value is like ap-shanghai; 3)ccn-ids,cloud network ID array, the value is like ccn-12345678; 4)user-account-id,user account ID, the value is like 12345678.
     :param _builtins.str result_output_file: Used to save results.
@@ -148,6 +154,12 @@ def get_cross_border_region_bandwidth_limits_output(filters: pulumi.Input[Option
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&type=document&lang=en)
 
 
     :param Sequence[Union['GetCrossBorderRegionBandwidthLimitsFilterArgs', 'GetCrossBorderRegionBandwidthLimitsFilterArgsDict']] filters: Filter condition. Currently, only one value is supported. The supported fields, 1)source-region, the value is like ap-guangzhou; 2)destination-region, the value is like ap-shanghai; 3)ccn-ids,cloud network ID array, the value is like ccn-12345678; 4)user-account-id,user account ID, the value is like 12345678.

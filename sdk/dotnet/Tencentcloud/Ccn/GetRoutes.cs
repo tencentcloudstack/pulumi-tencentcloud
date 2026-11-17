@@ -63,6 +63,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
         /// </summary>
         public static Task<GetRoutesResult> InvokeAsync(GetRoutesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRoutesResult>("tencentcloud:Ccn/getRoutes:getRoutes", args ?? new GetRoutesArgs(), options.WithDefaults());
@@ -118,6 +124,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
         /// </summary>
         public static Output<GetRoutesResult> Invoke(GetRoutesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRoutesResult>("tencentcloud:Ccn/getRoutes:getRoutes", args ?? new GetRoutesInvokeArgs(), options.WithDefaults());
@@ -173,6 +185,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
         /// </summary>
         public static Output<GetRoutesResult> Invoke(GetRoutesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRoutesResult>("tencentcloud:Ccn/getRoutes:getRoutes", args ?? new GetRoutesInvokeArgs(), options.WithDefaults());

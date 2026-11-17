@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
 func GetFunctionAddress(ctx *pulumi.Context, args *GetFunctionAddressArgs, opts ...pulumi.InvokeOption) (*GetFunctionAddressResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFunctionAddressResult

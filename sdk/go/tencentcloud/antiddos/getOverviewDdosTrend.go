@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOverviewDDoSTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewDDoSTrend&type=document&lang=en)
 func GetOverviewDdosTrend(ctx *pulumi.Context, args *GetOverviewDdosTrendArgs, opts ...pulumi.InvokeOption) (*GetOverviewDdosTrendResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOverviewDdosTrendResult

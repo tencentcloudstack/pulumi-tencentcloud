@@ -72,6 +72,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
 func GetPeakPoints(ctx *pulumi.Context, args *GetPeakPointsArgs, opts ...pulumi.InvokeOption) (*GetPeakPointsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPeakPointsResult

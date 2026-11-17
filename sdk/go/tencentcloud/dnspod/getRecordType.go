@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
 func GetRecordType(ctx *pulumi.Context, args *GetRecordTypeArgs, opts ...pulumi.InvokeOption) (*GetRecordTypeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecordTypeResult

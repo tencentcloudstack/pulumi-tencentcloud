@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOpsTasks](https://www.tencentcloud.com/document/api/1174/73820)
         /// </summary>
         public static Task<GetOpsTasksResult> InvokeAsync(GetOpsTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsTasksResult>("tencentcloud:Wedata/getOpsTasks:getOpsTasks", args ?? new GetOpsTasksArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOpsTasks](https://www.tencentcloud.com/document/api/1174/73820)
         /// </summary>
         public static Output<GetOpsTasksResult> Invoke(GetOpsTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsTasksResult>("tencentcloud:Wedata/getOpsTasks:getOpsTasks", args ?? new GetOpsTasksInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOpsTasks](https://www.tencentcloud.com/document/api/1174/73820)
         /// </summary>
         public static Output<GetOpsTasksResult> Invoke(GetOpsTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsTasksResult>("tencentcloud:Wedata/getOpsTasks:getOpsTasks", args ?? new GetOpsTasksInvokeArgs(), options.WithDefaults());

@@ -61,6 +61,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AssociateNetworkInterfaceSecurityGroups](https://www.tencentcloud.com/document/api/215/36090)
+ * * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+ * * Delete: [DisassociateNetworkInterfaceSecurityGroups](https://www.tencentcloud.com/document/api/215/36089)
+ *
  * ## Import
  *
  * vpc eniSgAttachment can be imported using the id, e.g.

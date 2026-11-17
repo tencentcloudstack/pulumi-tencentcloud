@@ -184,6 +184,12 @@ def get_describe_host_cdn_instance_list(async_cache: Optional[_builtins.int] = N
         resource_type="cdn")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostCdnInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCdnInstanceList&type=document&lang=en)
+
 
     :param _builtins.int async_cache: Whether.
     :param _builtins.str certificate_id: Certificate ID to be deployed.
@@ -237,6 +243,12 @@ def get_describe_host_cdn_instance_list_output(async_cache: pulumi.Input[Optiona
     describe_host_cdn_instance_list = tencentcloud.ssl.get_describe_host_cdn_instance_list(certificate_id="8u8DII0l",
         resource_type="cdn")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostCdnInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCdnInstanceList&type=document&lang=en)
 
 
     :param _builtins.int async_cache: Whether.

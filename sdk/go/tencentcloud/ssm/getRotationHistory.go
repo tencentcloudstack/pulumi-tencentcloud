@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
 func GetRotationHistory(ctx *pulumi.Context, args *GetRotationHistoryArgs, opts ...pulumi.InvokeOption) (*GetRotationHistoryResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRotationHistoryResult

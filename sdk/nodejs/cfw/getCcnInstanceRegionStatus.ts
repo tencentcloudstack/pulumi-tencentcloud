@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     routingMode: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&type=document&lang=en)
  */
 export function getCcnInstanceRegionStatus(args: GetCcnInstanceRegionStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetCcnInstanceRegionStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetCcnInstanceRegionStatusResult {
  *     routingMode: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&type=document&lang=en)
  */
 export function getCcnInstanceRegionStatusOutput(args: GetCcnInstanceRegionStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCcnInstanceRegionStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

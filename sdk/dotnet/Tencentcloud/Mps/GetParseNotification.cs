@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ParseNotification](https://www.tencentcloud.com/document/api/1041/33679)
         /// </summary>
         public static Task<GetParseNotificationResult> InvokeAsync(GetParseNotificationArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ParseNotification](https://www.tencentcloud.com/document/api/1041/33679)
         /// </summary>
         public static Output<GetParseNotificationResult> Invoke(GetParseNotificationInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ParseNotification](https://www.tencentcloud.com/document/api/1041/33679)
         /// </summary>
         public static Output<GetParseNotificationResult> Invoke(GetParseNotificationInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationInvokeArgs(), options.WithDefaults());

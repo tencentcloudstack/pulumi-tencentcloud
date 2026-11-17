@@ -91,6 +91,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ScaleOutInstances](https://www.tencentcloud.com/document/api/377/40717)
+    /// 
     /// ## Import
     /// 
     /// as ScaleOutInstances can be imported using the id, e.g.

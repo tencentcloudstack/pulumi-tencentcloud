@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetTriggerTaskRun](https://www.tencentcloud.com/document/api/1174/77889)
 func GetTriggerTaskRun(ctx *pulumi.Context, args *GetTriggerTaskRunArgs, opts ...pulumi.InvokeOption) (*GetTriggerTaskRunResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTriggerTaskRunResult

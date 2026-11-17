@@ -36,6 +36,15 @@ import * as utilities from "../utilities";
  *     }),
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDataSource](https://www.tencentcloud.com/document/api/1174/61095)
+ * * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
+ * * Update: [ModifyDataSource](https://www.tencentcloud.com/document/api/1174/61087)
+ * * Delete: [DeleteDataSources](https://www.tencentcloud.com/document/api/1174/61094)
  */
 export class Datasource extends pulumi.CustomResource {
     /**

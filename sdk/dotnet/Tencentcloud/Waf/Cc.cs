@@ -146,6 +146,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+    /// * Read: [DescribeCCRuleList](https://www.tencentcloud.com/document/api/627/64524)
+    /// * Update: [UpsertCCRule](https://www.tencentcloud.com/document/api/627/64535)
+    /// * Delete: [DeleteCCRule](https://www.tencentcloud.com/document/api/627/64551)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/cc:Cc")]
     public partial class Cc : global::Pulumi.CustomResource

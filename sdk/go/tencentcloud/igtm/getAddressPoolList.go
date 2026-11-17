@@ -72,6 +72,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&type=document&lang=en)
 func GetAddressPoolList(ctx *pulumi.Context, args *GetAddressPoolListArgs, opts ...pulumi.InvokeOption) (*GetAddressPoolListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAddressPoolListResult

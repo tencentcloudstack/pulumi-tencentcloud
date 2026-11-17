@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&type=document&lang=en)
 func GetSqlTemplates(ctx *pulumi.Context, args *GetSqlTemplatesArgs, opts ...pulumi.InvokeOption) (*GetSqlTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSqlTemplatesResult

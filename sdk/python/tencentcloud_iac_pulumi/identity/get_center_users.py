@@ -156,6 +156,12 @@ def get_center_users(filter: Optional[_builtins.str] = None,
     identity_center_users = tencentcloud.identity.get_center_users(zone_id="z-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
+
 
     :param _builtins.str filter: Filter criterion, which currently only supports username, email address, userId, and description.
     :param Sequence[_builtins.str] filter_groups: Filtered user group. IsSelected=1 will be returned for the sub-user associated with this user group.
@@ -209,6 +215,12 @@ def get_center_users_output(filter: pulumi.Input[Optional[Optional[_builtins.str
 
     identity_center_users = tencentcloud.identity.get_center_users(zone_id="z-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
 
 
     :param _builtins.str filter: Filter criterion, which currently only supports username, email address, userId, and description.

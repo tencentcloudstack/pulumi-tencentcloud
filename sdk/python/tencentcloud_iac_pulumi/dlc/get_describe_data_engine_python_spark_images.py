@@ -99,6 +99,12 @@ def get_describe_data_engine_python_spark_images(child_image_version_id: Optiona
     example = tencentcloud.dlc.get_describe_data_engine_python_spark_images(child_image_version_id="d3ftghd4-9a7e-4f64-a3f4-f38507c69742")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
+
 
     :param _builtins.str child_image_version_id: ID of the minor version of the cluster image.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_describe_data_engine_python_spark_images_output(child_image_version_id: 
 
     example = tencentcloud.dlc.get_describe_data_engine_python_spark_images(child_image_version_id="d3ftghd4-9a7e-4f64-a3f4-f38507c69742")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEnginePythonSparkImages](https://www.tencentcloud.com/document/api/1155/62692)
 
 
     :param _builtins.str child_image_version_id: ID of the minor version of the cluster image.

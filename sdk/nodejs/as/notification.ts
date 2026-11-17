@@ -67,6 +67,15 @@ import * as utilities from "../utilities";
  *     notificationUserGroupIds: [exampleGroup.id],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33194)
+ * * Read: [DescribeNotificationConfigurations](https://www.tencentcloud.com/document/api/377/33192)
+ * * Update: [ModifyNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33191)
+ * * Delete: [DeleteNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33193)
  */
 export class Notification extends pulumi.CustomResource {
     /**

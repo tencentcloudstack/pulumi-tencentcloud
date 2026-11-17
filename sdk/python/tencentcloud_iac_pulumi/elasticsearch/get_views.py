@@ -120,6 +120,12 @@ def get_views(instance_id: Optional[_builtins.str] = None,
     views = tencentcloud.elasticsearch.get_views(instance_id="es-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeViews](https://www.tencentcloud.com/document/api/845/44349)
+
 
     :param _builtins.str instance_id: Instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -151,6 +157,12 @@ def get_views_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
 
     views = tencentcloud.elasticsearch.get_views(instance_id="es-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeViews](https://www.tencentcloud.com/document/api/845/44349)
 
 
     :param _builtins.str instance_id: Instance id.

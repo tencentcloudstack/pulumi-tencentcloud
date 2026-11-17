@@ -100,6 +100,12 @@ def get_cross_targets(filters: Optional[Sequence[Union['GetCrossTargetsFilterArg
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
+
 
     :param Sequence[Union['GetCrossTargetsFilterArgs', 'GetCrossTargetsFilterArgsDict']] filters: Filter conditions to query CVMs and ENIs: vpc-id - String - Required: No - (Filter condition) Filter by VPC ID, such as vpc-12345678. ip - String - Required: No - (Filter condition) Filter by real server IP, such as 192.168.0.1. listener-id - String - Required: No - (Filter condition) Filter by listener ID, such as lbl-12345678. location-id - String - Required: No - (Filter condition) Filter by forwarding rule ID of the layer-7 listener, such as loc-12345678.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_cross_targets_output(filters: pulumi.Input[Optional[Optional[Sequence[Un
         "values": ["vpc-4owdpnwr"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
 
 
     :param Sequence[Union['GetCrossTargetsFilterArgs', 'GetCrossTargetsFilterArgsDict']] filters: Filter conditions to query CVMs and ENIs: vpc-id - String - Required: No - (Filter condition) Filter by VPC ID, such as vpc-12345678. ip - String - Required: No - (Filter condition) Filter by real server IP, such as 192.168.0.1. listener-id - String - Required: No - (Filter condition) Filter by listener ID, such as lbl-12345678. location-id - String - Required: No - (Filter condition) Filter by forwarding rule ID of the layer-7 listener, such as loc-12345678.

@@ -109,6 +109,12 @@ def get_multi_path_gateway_origin_acl(gateway_id: Optional[_builtins.str] = None
         gateway_id="gw-12345678")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
+
 
     :param _builtins.str gateway_id: Gateway ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -145,6 +151,12 @@ def get_multi_path_gateway_origin_acl_output(gateway_id: pulumi.Input[Optional[_
     example = tencentcloud.teo.get_multi_path_gateway_origin_acl(zone_id="zone-2noqxz9b6klw",
         gateway_id="gw-12345678")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
 
 
     :param _builtins.str gateway_id: Gateway ID.

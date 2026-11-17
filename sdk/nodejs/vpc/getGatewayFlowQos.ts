@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     gatewayId: "vpngw-gt8bianl",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
  */
 export function getGatewayFlowQos(args: GetGatewayFlowQosArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayFlowQosResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetGatewayFlowQosResult {
  *     gatewayId: "vpngw-gt8bianl",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
  */
 export function getGatewayFlowQosOutput(args: GetGatewayFlowQosOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayFlowQosResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

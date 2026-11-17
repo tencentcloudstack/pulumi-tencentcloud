@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [PutReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39224)
+ * * Read: [GetReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39226)
+ * * Delete: [DeleteReservedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39228)
+ *
  * ## Import
  *
  * scf reservedConcurrencyConfig can be imported using the id, e.g.

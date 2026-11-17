@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
         /// </summary>
         public static Task<GetRoleDetailResult> InvokeAsync(GetRoleDetailArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRoleDetailResult>("tencentcloud:Cam/getRoleDetail:getRoleDetail", args ?? new GetRoleDetailArgs(), options.WithDefaults());
@@ -96,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
         /// </summary>
         public static Output<GetRoleDetailResult> Invoke(GetRoleDetailInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRoleDetailResult>("tencentcloud:Cam/getRoleDetail:getRoleDetail", args ?? new GetRoleDetailInvokeArgs(), options.WithDefaults());
@@ -140,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
         /// </summary>
         public static Output<GetRoleDetailResult> Invoke(GetRoleDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRoleDetailResult>("tencentcloud:Cam/getRoleDetail:getRoleDetail", args ?? new GetRoleDetailInvokeArgs(), options.WithDefaults());

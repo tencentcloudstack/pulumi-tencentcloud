@@ -10,6 +10,12 @@ import * as utilities from "../utilities";
  * Use this data source to query detailed information of DC instances.
  *
  * ## Example Usage
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetInstancesResult {
  * Use this data source to query detailed information of DC instances.
  *
  * ## Example Usage
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

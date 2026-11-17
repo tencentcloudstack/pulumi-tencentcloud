@@ -235,6 +235,12 @@ def get_records(domain: Optional[_builtins.str] = None,
     pulumi.export("result", record.results)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
+
 
     :param _builtins.str domain: The domain for which DNS records are to be obtained.
     :param _builtins.str domain_id: The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.
@@ -326,6 +332,12 @@ def get_records_output(domain: pulumi.Input[Optional[Optional[_builtins.str]]] =
         sort_type="DESC")
     pulumi.export("result", record.results)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
 
 
     :param _builtins.str domain: The domain for which DNS records are to be obtained.

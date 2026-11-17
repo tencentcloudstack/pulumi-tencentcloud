@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
         /// </summary>
         public static Task<GetBlackEmailAddressResult> InvokeAsync(GetBlackEmailAddressArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
         /// </summary>
         public static Output<GetBlackEmailAddressResult> Invoke(GetBlackEmailAddressInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListBlackEmailAddress](https://www.tencentcloud.com/document/api/1084/39416)
         /// </summary>
         public static Output<GetBlackEmailAddressResult> Invoke(GetBlackEmailAddressInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBlackEmailAddressResult>("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args ?? new GetBlackEmailAddressInvokeArgs(), options.WithDefaults());

@@ -132,6 +132,21 @@ class Rule(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddEnterpriseSecurityGroupRules](https://www.tencentcloud.com/document/api/1160/51373)
+          - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&type=document&lang=en)
+        * Read: [DescribeEnterpriseSecurityGroupRuleList](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSecurityGroupRuleList&type=document&lang=en)
+        * Update:
+          - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&type=document&lang=en)
+          - [ModifyEnterpriseSecurityGroupRule](https://www.tencentcloud.com/document/api/1160/54828)
+        * Delete:
+          - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&type=document&lang=en)
+          - [RemoveEnterpriseSecurityGroupRule](https://www.tencentcloud.com/document/api/1160/51365)
+
         ## Import
 
         cfw sg_rule can be imported using the id, e.g.
@@ -175,6 +190,21 @@ class Rule(pulumi.CustomResource):
                 "source_type": "net",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddEnterpriseSecurityGroupRules](https://www.tencentcloud.com/document/api/1160/51373)
+          - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&type=document&lang=en)
+        * Read: [DescribeEnterpriseSecurityGroupRuleList](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSecurityGroupRuleList&type=document&lang=en)
+        * Update:
+          - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&type=document&lang=en)
+          - [ModifyEnterpriseSecurityGroupRule](https://www.tencentcloud.com/document/api/1160/54828)
+        * Delete:
+          - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&type=document&lang=en)
+          - [RemoveEnterpriseSecurityGroupRule](https://www.tencentcloud.com/document/api/1160/51365)
 
         ## Import
 

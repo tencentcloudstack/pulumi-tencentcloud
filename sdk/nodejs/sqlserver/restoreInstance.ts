@@ -25,6 +25,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [RestoreInstance](https://www.tencentcloud.com/document/api/238/32096)
+ * * Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+ * * Update:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [RestoreInstance](https://www.tencentcloud.com/document/api/238/32096)
+ * * Delete:
+ *   - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *
  * ## Import
  *
  * sqlserver restoreInstance can be imported using the id, e.g.

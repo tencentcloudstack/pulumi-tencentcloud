@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
         /// </summary>
         public static Task<GetWatermarksResult> InvokeAsync(GetWatermarksArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
         /// </summary>
         public static Output<GetWatermarksResult> Invoke(GetWatermarksInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
         /// </summary>
         public static Output<GetWatermarksResult> Invoke(GetWatermarksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWatermarksResult>("tencentcloud:Css/getWatermarks:getWatermarks", args ?? new GetWatermarksInvokeArgs(), options.WithDefaults());

@@ -113,6 +113,12 @@ def get_instance_backups(backup_method: Optional[_builtins.int] = None,
         backup_method=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBBackups](https://www.tencentcloud.com/document/api/240/34707)
+
 
     :param _builtins.int backup_method: Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
     :param _builtins.str instance_id: Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
@@ -147,6 +153,12 @@ def get_instance_backups_output(backup_method: pulumi.Input[Optional[Optional[_b
     instance_backups = tencentcloud.mongodb.get_instance_backups(instance_id="cmgo-9d0p6umb",
         backup_method=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBBackups](https://www.tencentcloud.com/document/api/240/34707)
 
 
     :param _builtins.int backup_method: Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.

@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSuperPlayerConfigsResult> InvokeAsync(GetSuperPlayerConfigsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSuperPlayerConfigsResult> Invoke(GetSuperPlayerConfigsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSuperPlayerConfigsResult> Invoke(GetSuperPlayerConfigsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSuperPlayerConfigsResult>("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args ?? new GetSuperPlayerConfigsInvokeArgs(), options.WithDefaults());

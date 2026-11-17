@@ -90,6 +90,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDDoSProtection](https://www.tencentcloud.com/document/api/1145/72281)
+// * Read: [DescribeDDoSProtection](https://www.tencentcloud.com/document/api/1145/72285)
+// * Update: [ModifyDDoSProtection](https://www.tencentcloud.com/document/api/1145/72281)
+//
 // ## Import
 //
 // TEO ddos protection config can be imported using the id, e.g.

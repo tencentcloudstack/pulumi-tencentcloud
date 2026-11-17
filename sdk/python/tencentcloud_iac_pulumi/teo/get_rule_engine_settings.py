@@ -86,6 +86,12 @@ def get_rule_engine_settings(result_output_file: Optional[_builtins.str] = None,
     rule_engine_settings = tencentcloud.teo.get_rule_engine_settings()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRulesSetting](https://www.tencentcloud.com/document/api/1145/50467)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_rule_engine_settings_output(result_output_file: pulumi.Input[Optional[Op
 
     rule_engine_settings = tencentcloud.teo.get_rule_engine_settings()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRulesSetting](https://www.tencentcloud.com/document/api/1145/50467)
 
 
     :param _builtins.str result_output_file: Used to save results.

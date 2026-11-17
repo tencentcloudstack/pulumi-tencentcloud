@@ -152,6 +152,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [StartCpuExpand](https://www.tencentcloud.com/document/api/236/57242)
+//
+// * Read: [DescribeCPUExpandStrategyInfo](https://www.tencentcloud.com/document/api/236/80216)
+// * Delete:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [StopCpuExpand](https://www.tencentcloud.com/document/api/236/57241)
+//
 // ## Import
 //
 // CDB start cpu expand can be imported using the instance_id, e.g.

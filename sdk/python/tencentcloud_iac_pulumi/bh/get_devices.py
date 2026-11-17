@@ -282,6 +282,12 @@ def get_devices(account_id_sets: Optional[Sequence[_builtins.int]] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&type=document&lang=en)
+
 
     :param Sequence[_builtins.int] account_id_sets: Cloud account ID to which the asset belongs.
     :param Sequence[_builtins.str] ap_code_sets: Region code collection.
@@ -406,6 +412,12 @@ def get_devices_output(account_id_sets: pulumi.Input[Optional[Optional[Sequence[
             ],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&type=document&lang=en)
 
 
     :param Sequence[_builtins.int] account_id_sets: Cloud account ID to which the asset belongs.

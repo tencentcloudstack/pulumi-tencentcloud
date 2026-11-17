@@ -62,6 +62,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateClusterMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=CreateClusterMaintenanceWindowAndExclusions&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeClusterMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=DescribeClusterMaintenanceWindowAndExclusions&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyClusterMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=ModifyClusterMaintenanceWindowAndExclusions&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteClusterMaintenanceWindowAndExclusion](https://www.tencentcloud.com/search/?wd=DeleteClusterMaintenanceWindowAndExclusion&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tke KubernetesClusterMaintenanceWindowAndExclusion can be imported using the id, e.g.

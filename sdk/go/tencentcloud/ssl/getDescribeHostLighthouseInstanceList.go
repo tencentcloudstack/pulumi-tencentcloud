@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&type=document&lang=en)
 func GetDescribeHostLighthouseInstanceList(ctx *pulumi.Context, args *GetDescribeHostLighthouseInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostLighthouseInstanceListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostLighthouseInstanceListResult

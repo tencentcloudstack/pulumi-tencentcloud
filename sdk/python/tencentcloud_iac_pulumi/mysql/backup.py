@@ -341,6 +341,18 @@ class Backup(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackup](https://www.tencentcloud.com/document/api/236/15844)
+          - [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+        * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+        * Delete:
+          - [DeleteBackup](https://www.tencentcloud.com/document/api/236/15841)
+          - [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -441,6 +453,18 @@ class Backup(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBackup](https://www.tencentcloud.com/document/api/236/15844)
+          - [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+        * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
+        * Delete:
+          - [DeleteBackup](https://www.tencentcloud.com/document/api/236/15841)
+          - [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
 
 
         :param str resource_name: The name of the resource.

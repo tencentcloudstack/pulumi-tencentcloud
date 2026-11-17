@@ -128,6 +128,12 @@ def get_quality_rule_templates(filters: Optional[Sequence[Union['GetQualityRuleT
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
+
 
     :param Sequence[Union['GetQualityRuleTemplatesFilterArgs', 'GetQualityRuleTemplatesFilterArgsDict']] filters: General filter conditions 1. `Id` Description: Template ID, Value: Unique identifier of the template; 2. `Keyword` Description: Keyword search, supports fuzzy search of template names, Value: String; 3. `Type` Description: Template type, Value: `1` - System template; `2` - Custom template; supports multiple values (OR relationship); 4. `QualityDim` Description: Quality detection dimension, Value: `1` - Accuracy; `2` - Uniqueness; `3` - Completeness; `4` - Consistency; `5` - Timeliness; `6` - Validity; supports multiple values (OR relationship); 5. `SourceObjectType` Description: Source data object type applicable to the rule, Value: `1` - Constant; `2` - Offline table level; `3` - Offline field level; `4` - Database level; supports multiple values (OR relationship); 6. `SourceEngineTypes` Description: Source data engine type applicable to the template, Value: `1` - MySQL; `2` - Hive; `4` - Spark; `8` - Livy; `16` - DLC; `32` - Gbase; `64` - TCHouse-P; `128` - Doris; `256` - TCHouse-D; `512` - EMR_StarRocks; `1024` - TCHouse-X; supports multiple values (OR relationship).
     :param Sequence[Union['GetQualityRuleTemplatesOrderFieldArgs', 'GetQualityRuleTemplatesOrderFieldArgsDict']] order_fields: General sorting, supported sorting fields: `CitationCount` - Sort by citation count; `UpdateTime` - Sort by update time. Sort direction: `1` - Ascending (ASC); `2` - Descending (DESC).
@@ -176,6 +182,12 @@ def get_quality_rule_templates_output(filters: pulumi.Input[Optional[Optional[Se
             ],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
 
 
     :param Sequence[Union['GetQualityRuleTemplatesFilterArgs', 'GetQualityRuleTemplatesFilterArgsDict']] filters: General filter conditions 1. `Id` Description: Template ID, Value: Unique identifier of the template; 2. `Keyword` Description: Keyword search, supports fuzzy search of template names, Value: String; 3. `Type` Description: Template type, Value: `1` - System template; `2` - Custom template; supports multiple values (OR relationship); 4. `QualityDim` Description: Quality detection dimension, Value: `1` - Accuracy; `2` - Uniqueness; `3` - Completeness; `4` - Consistency; `5` - Timeliness; `6` - Validity; supports multiple values (OR relationship); 5. `SourceObjectType` Description: Source data object type applicable to the rule, Value: `1` - Constant; `2` - Offline table level; `3` - Offline field level; `4` - Database level; supports multiple values (OR relationship); 6. `SourceEngineTypes` Description: Source data engine type applicable to the template, Value: `1` - MySQL; `2` - Hive; `4` - Spark; `8` - Livy; `16` - DLC; `32` - Gbase; `64` - TCHouse-P; `128` - Doris; `256` - TCHouse-D; `512` - EMR_StarRocks; `1024` - TCHouse-X; supports multiple values (OR relationship).

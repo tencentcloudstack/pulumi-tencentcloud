@@ -40,6 +40,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AddDBInstanceToReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39729)
+// * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+// * Delete: [RemoveDBInstanceFromReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39721)
 type ReadonlyAttachment struct {
 	pulumi.CustomResourceState
 

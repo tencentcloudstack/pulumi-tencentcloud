@@ -48,6 +48,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&amp;type=document&amp;lang=en)
+        ///   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetThrottlingServicesResult> InvokeAsync(GetThrottlingServicesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesArgs(), options.WithDefaults());
@@ -88,6 +96,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&amp;type=document&amp;lang=en)
+        ///   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetThrottlingServicesResult> Invoke(GetThrottlingServicesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesInvokeArgs(), options.WithDefaults());
@@ -128,6 +144,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&amp;type=document&amp;lang=en)
+        ///   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetThrottlingServicesResult> Invoke(GetThrottlingServicesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesInvokeArgs(), options.WithDefaults());

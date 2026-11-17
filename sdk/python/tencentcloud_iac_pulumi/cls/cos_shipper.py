@@ -627,6 +627,15 @@ class CosShipper(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateShipper](https://www.tencentcloud.com/document/api/614/42775)
+        * Read: [DescribeShippers](https://www.tencentcloud.com/document/api/614/42772)
+        * Update: [ModifyShipper](https://www.tencentcloud.com/document/api/614/42771)
+        * Delete: [DeleteShipper](https://www.tencentcloud.com/document/api/614/42774)
+
         ## Import
 
         cls cos shipper can be imported using the id, e.g.
@@ -751,6 +760,15 @@ class CosShipper(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateShipper](https://www.tencentcloud.com/document/api/614/42775)
+        * Read: [DescribeShippers](https://www.tencentcloud.com/document/api/614/42772)
+        * Update: [ModifyShipper](https://www.tencentcloud.com/document/api/614/42771)
+        * Delete: [DeleteShipper](https://www.tencentcloud.com/document/api/614/42774)
 
         ## Import
 

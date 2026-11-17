@@ -66,6 +66,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePrefetchTask](https://www.tencentcloud.com/document/api/1145/50537)
+    ///   - [DescribePrefetchTasks](https://www.tencentcloud.com/document/api/1145/50533)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/prefetchTaskOperation:PrefetchTaskOperation")]
     public partial class PrefetchTaskOperation : global::Pulumi.CustomResource

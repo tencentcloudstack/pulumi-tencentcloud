@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const subdomainValidateTxtValueOperation = new tencentcloud.subdomain.ValidateTxtValueOperation("subdomain_validate_txt_value_operation", {domainZone: "www.iac-tf.cloud"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateSubdomainValidateTXTValue](https://www.tencentcloud.com/search/?wd=CreateSubdomainValidateTXTValue&type=document&lang=en)
  */
 export class ValidateTxtValueOperation extends pulumi.CustomResource {
     /**

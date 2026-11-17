@@ -207,6 +207,12 @@ def get_sync_jobs(job_id: Optional[_builtins.str] = None,
         job_name="tf_dts_test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+
 
     :param _builtins.str job_id: job id.
     :param _builtins.str job_name: job name.
@@ -283,6 +289,12 @@ def get_sync_jobs_output(job_id: pulumi.Input[Optional[Optional[_builtins.str]]]
     sync_jobs = tencentcloud.dts.get_sync_jobs_output(job_id=job.id,
         job_name="tf_dts_test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
 
 
     :param _builtins.str job_id: job id.

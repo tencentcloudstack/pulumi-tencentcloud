@@ -128,6 +128,12 @@ def get_security_audit_log_download_urls(async_request_id: Optional[_builtins.in
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
+
 
     :param _builtins.int async_request_id: Asynchronous task ID.
     :param _builtins.str product: Service product type, supported values: `mysql` - ApsaraDB for MySQL.
@@ -178,6 +184,12 @@ def get_security_audit_log_download_urls_output(async_request_id: pulumi.Input[O
         async_request_id=task.async_request_id,
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
 
 
     :param _builtins.int async_request_id: Asynchronous task ID.

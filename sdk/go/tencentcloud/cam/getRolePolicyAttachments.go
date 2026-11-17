@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
 func GetRolePolicyAttachments(ctx *pulumi.Context, args *GetRolePolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetRolePolicyAttachmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRolePolicyAttachmentsResult

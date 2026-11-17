@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupUrl](https://www.tencentcloud.com/document/api/239/32075)
         /// </summary>
         public static Task<GetBackupDownloadInfoResult> InvokeAsync(GetBackupDownloadInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupUrl](https://www.tencentcloud.com/document/api/239/32075)
         /// </summary>
         public static Output<GetBackupDownloadInfoResult> Invoke(GetBackupDownloadInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupUrl](https://www.tencentcloud.com/document/api/239/32075)
         /// </summary>
         public static Output<GetBackupDownloadInfoResult> Invoke(GetBackupDownloadInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoInvokeArgs(), options.WithDefaults());

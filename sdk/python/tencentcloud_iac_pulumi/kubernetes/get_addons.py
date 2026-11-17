@@ -119,6 +119,12 @@ def get_addons(addon_name: Optional[_builtins.str] = None,
         addon_name="ip-masq-agent")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+
 
     :param _builtins.str addon_name: Add-on name (all add-ons in the cluster are returned if this parameter is not specified).
     :param _builtins.str cluster_id: Cluster ID.
@@ -162,6 +168,12 @@ def get_addons_output(addon_name: pulumi.Input[Optional[Optional[_builtins.str]]
     example = tencentcloud.kubernetes.get_addons(cluster_id="cls-5yezvaxo",
         addon_name="ip-masq-agent")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
 
 
     :param _builtins.str addon_name: Add-on name (all add-ons in the cluster are returned if this parameter is not specified).

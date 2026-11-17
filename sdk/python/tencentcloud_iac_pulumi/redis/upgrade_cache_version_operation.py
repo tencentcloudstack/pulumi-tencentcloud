@@ -185,6 +185,14 @@ class UpgradeCacheVersionOperation(pulumi.CustomResource):
             instance_type_upgrade_now=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [UpgradeSmallVersion](https://www.tencentcloud.com/document/api/239/47723)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -214,6 +222,14 @@ class UpgradeCacheVersionOperation(pulumi.CustomResource):
             upgrade_redis_version="5.0.1",
             instance_type_upgrade_now=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [UpgradeSmallVersion](https://www.tencentcloud.com/document/api/239/47723)
 
 
         :param str resource_name: The name of the resource.

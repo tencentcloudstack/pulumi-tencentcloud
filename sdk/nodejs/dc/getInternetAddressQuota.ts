@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const internetAddressQuota = tencentcloud.dc.getInternetAddressQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
  */
 export function getInternetAddressQuota(args?: GetInternetAddressQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetAddressQuotaResult> {
     args = args || {};
@@ -75,6 +81,12 @@ export interface GetInternetAddressQuotaResult {
  *
  * const internetAddressQuota = tencentcloud.dc.getInternetAddressQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
  */
 export function getInternetAddressQuotaOutput(args?: GetInternetAddressQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInternetAddressQuotaResult> {
     args = args || {};

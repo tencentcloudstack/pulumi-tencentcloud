@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
 func GetParameters(ctx *pulumi.Context, args *GetParametersArgs, opts ...pulumi.InvokeOption) (*GetParametersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetParametersResult

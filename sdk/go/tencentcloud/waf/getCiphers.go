@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
 func GetCiphers(ctx *pulumi.Context, args *GetCiphersArgs, opts ...pulumi.InvokeOption) (*GetCiphersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCiphersResult

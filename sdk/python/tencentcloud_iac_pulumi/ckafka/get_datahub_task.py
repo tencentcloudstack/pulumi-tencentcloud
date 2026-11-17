@@ -142,6 +142,12 @@ def get_datahub_task(resource: Optional[_builtins.str] = None,
     datahub_task = tencentcloud.ckafka.get_datahub_task()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatahubTasks](https://www.tencentcloud.com/search/?wd=DescribeDatahubTasks&type=document&lang=en)
+
 
     :param _builtins.str resource: Resource.
     :param _builtins.str result_output_file: Used to save results.
@@ -187,6 +193,12 @@ def get_datahub_task_output(resource: pulumi.Input[Optional[Optional[_builtins.s
 
     datahub_task = tencentcloud.ckafka.get_datahub_task()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatahubTasks](https://www.tencentcloud.com/search/?wd=DescribeDatahubTasks&type=document&lang=en)
 
 
     :param _builtins.str resource: Resource.

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
         /// </summary>
         public static Task<GetEmailIdentitiesResult> InvokeAsync(GetEmailIdentitiesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
         /// </summary>
         public static Output<GetEmailIdentitiesResult> Invoke(GetEmailIdentitiesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
         /// </summary>
         public static Output<GetEmailIdentitiesResult> Invoke(GetEmailIdentitiesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEmailIdentitiesResult>("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args ?? new GetEmailIdentitiesInvokeArgs(), options.WithDefaults());

@@ -16,6 +16,12 @@ import * as utilities from "../utilities";
  * const checkCertificateChain = new tencentcloud.ssl.CheckCertificateChainOperation("check_certificate_chain", {certificateChain: "-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----"});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CheckCertificateChain](https://www.tencentcloud.com/search/?wd=CheckCertificateChain&type=document&lang=en)
+ *
  * ## Import
  *
  * ssl checkCertificateChain can be imported using the id, e.g.

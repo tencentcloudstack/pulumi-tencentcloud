@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const limits = tencentcloud.as.getLimits({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
  */
 export function getLimits(args?: GetLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetLimitsResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetLimitsResult {
  *
  * const limits = tencentcloud.as.getLimits({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
  */
 export function getLimitsOutput(args?: GetLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLimitsResult> {
     args = args || {};

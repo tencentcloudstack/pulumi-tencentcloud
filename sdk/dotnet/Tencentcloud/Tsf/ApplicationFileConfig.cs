@@ -39,6 +39,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateFileConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateFileConfigWithDetailResp&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteFileConfig](https://www.tencentcloud.com/search/?wd=DeleteFileConfig&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/applicationFileConfig:ApplicationFileConfig")]
     public partial class ApplicationFileConfig : global::Pulumi.CustomResource

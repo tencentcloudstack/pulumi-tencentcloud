@@ -42,6 +42,12 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ReplaceCertificate](https://www.tencentcloud.com/document/api/1007/36581)
+//
 // ## Import
 //
 // ssl replaceCertificate can be imported using the id, e.g.

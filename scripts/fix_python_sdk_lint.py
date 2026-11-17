@@ -29,6 +29,16 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Pin ruff's target Python version to the lowest version the generated SDK
+# supports (`python_requires='>=3.9'` in sdk/python/setup.py). Without this
+# ruff falls back to its own default target, which changes between ruff
+# releases; e.g. ruff 0.17 rewrites the `else:` branch of the
+# `if sys.version_info >= (3, 11):` guard in `_inputs.py` to
+# `from typing import NotRequired`, which does not exist before Python 3.11.
+# Pinning keeps the output identical across ruff versions so that the CI
+# "Check worktree clean" step stays reproducible.
+RUFF_TARGET_VERSION = "py39"
+
 SELF_IMPORT_RE = re.compile(r"^from \. import outputs\n", re.MULTILINE)
 OUTPUTS_PREFIX_RE = re.compile(r'"outputs\.(\w+)"')
 
@@ -162,6 +172,8 @@ def run_ruff_autofix(pkg_dir: Path) -> None:
             "--unsafe-fixes",
             "--select",
             "F401,C408",
+            "--target-version",
+            RUFF_TARGET_VERSION,
             "--no-cache",
             str(pkg_dir),
         ],
@@ -179,6 +191,8 @@ def run_ruff_autofix(pkg_dir: Path) -> None:
             "--fix",
             "--select",
             "UP009,I001,UP035,RUF022",
+            "--target-version",
+            RUFF_TARGET_VERSION,
             "--no-cache",
             str(pkg_dir),
         ],

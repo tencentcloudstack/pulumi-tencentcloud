@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
         /// </summary>
         public static Task<GetDcnDetailResult> InvokeAsync(GetDcnDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
         /// </summary>
         public static Output<GetDcnDetailResult> Invoke(GetDcnDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
         /// </summary>
         public static Output<GetDcnDetailResult> Invoke(GetDcnDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailInvokeArgs(), options.WithDefaults());

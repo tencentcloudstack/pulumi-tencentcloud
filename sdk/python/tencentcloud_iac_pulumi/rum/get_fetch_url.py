@@ -347,6 +347,12 @@ def get_fetch_url(area: Optional[_builtins.str] = None,
         project_id=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataFetchUrl](https://www.tencentcloud.com/document/api/1131/45329)
+
 
     :param _builtins.str area: The region where the data reporting takes place.
     :param _builtins.str brand: The mobile phone brand used for data reporting.
@@ -479,6 +485,12 @@ def get_fetch_url_output(area: pulumi.Input[Optional[Optional[_builtins.str]]] =
         end_time=1625454840,
         project_id=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataFetchUrl](https://www.tencentcloud.com/document/api/1131/45329)
 
 
     :param _builtins.str area: The region where the data reporting takes place.

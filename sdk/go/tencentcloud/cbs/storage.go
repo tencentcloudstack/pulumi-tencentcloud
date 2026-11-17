@@ -194,6 +194,68 @@ import (
 //
 // ```
 //
+// ### Create a CBS storage with auto-mount instance id
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cbs.NewStorage(ctx, "example", &cbs.StorageArgs{
+//				StorageName:      pulumi.String("tf-example"),
+//				StorageType:      pulumi.String("CLOUD_SSD"),
+//				StorageSize:      pulumi.Int(100),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				ProjectId:        pulumi.Int(0),
+//				InstanceId:       pulumi.String("ins-xxxxxxxx"),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("Terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+//   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+//   - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+//
+// * Read:
+//   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [ApplySnapshot](https://www.tencentcloud.com/document/api/362/15643)
+//   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+//   - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+//   - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+//   - [ModifyDiskExtraPerformance](https://www.tencentcloud.com/document/api/362/40191)
+//   - [ModifyDisksChargeType](https://www.tencentcloud.com/search/?wd=ModifyDisksChargeType&type=document&lang=en)
+//   - [ModifyDisksRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDisksRenewFlag&type=document&lang=en)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+//
+// * Delete:
+//   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+//   - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+//
 // ## Import
 //
 // CBS storage can be imported using the id, e.g.
@@ -218,10 +280,12 @@ type Storage struct {
 	DiskBackupQuota pulumi.IntOutput `pulumi:"diskBackupQuota"`
 	// Pass in this parameter to create an encrypted cloud disk.
 	Encrypt pulumi.BoolPtrOutput `pulumi:"encrypt"`
-	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
 	EncryptType pulumi.StringOutput `pulumi:"encryptType"`
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
+	// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
 	KmsKeyId pulumi.StringOutput `pulumi:"kmsKeyId"`
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -306,10 +370,12 @@ type storageState struct {
 	DiskBackupQuota *int `pulumi:"diskBackupQuota"`
 	// Pass in this parameter to create an encrypted cloud disk.
 	Encrypt *bool `pulumi:"encrypt"`
-	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
 	EncryptType *string `pulumi:"encryptType"`
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete *bool `pulumi:"forceDelete"`
+	// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+	InstanceId *string `pulumi:"instanceId"`
 	// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -353,10 +419,12 @@ type StorageState struct {
 	DiskBackupQuota pulumi.IntPtrInput
 	// Pass in this parameter to create an encrypted cloud disk.
 	Encrypt pulumi.BoolPtrInput
-	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
 	EncryptType pulumi.StringPtrInput
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrInput
+	// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+	InstanceId pulumi.StringPtrInput
 	// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
 	KmsKeyId pulumi.StringPtrInput
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -402,10 +470,12 @@ type storageArgs struct {
 	DiskBackupQuota *int `pulumi:"diskBackupQuota"`
 	// Pass in this parameter to create an encrypted cloud disk.
 	Encrypt *bool `pulumi:"encrypt"`
-	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
 	EncryptType *string `pulumi:"encryptType"`
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete *bool `pulumi:"forceDelete"`
+	// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+	InstanceId *string `pulumi:"instanceId"`
 	// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -446,10 +516,12 @@ type StorageArgs struct {
 	DiskBackupQuota pulumi.IntPtrInput
 	// Pass in this parameter to create an encrypted cloud disk.
 	Encrypt pulumi.BoolPtrInput
-	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+	// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
 	EncryptType pulumi.StringPtrInput
 	// Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrInput
+	// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+	InstanceId pulumi.StringPtrInput
 	// Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
 	KmsKeyId pulumi.StringPtrInput
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
@@ -598,7 +670,7 @@ func (o StorageOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.BoolPtrOutput { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
-// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+// Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
 func (o StorageOutput) EncryptType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.EncryptType }).(pulumi.StringOutput)
 }
@@ -606,6 +678,11 @@ func (o StorageOutput) EncryptType() pulumi.StringOutput {
 // Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 func (o StorageOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
+}
+
+// Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+func (o StorageOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Storage) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
 // Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.

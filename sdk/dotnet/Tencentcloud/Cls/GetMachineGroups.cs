@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
         /// </summary>
         public static Task<GetMachineGroupsResult> InvokeAsync(GetMachineGroupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachineGroupsResult>("tencentcloud:Cls/getMachineGroups:getMachineGroups", args ?? new GetMachineGroupsArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
         /// </summary>
         public static Output<GetMachineGroupsResult> Invoke(GetMachineGroupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachineGroupsResult>("tencentcloud:Cls/getMachineGroups:getMachineGroups", args ?? new GetMachineGroupsInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
         /// </summary>
         public static Output<GetMachineGroupsResult> Invoke(GetMachineGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachineGroupsResult>("tencentcloud:Cls/getMachineGroups:getMachineGroups", args ?? new GetMachineGroupsInvokeArgs(), options.WithDefaults());

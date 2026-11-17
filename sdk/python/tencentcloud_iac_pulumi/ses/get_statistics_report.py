@@ -141,6 +141,12 @@ def get_statistics_report(domain: Optional[_builtins.str] = None,
         receiving_mailbox_type="gmail.com")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
+
 
     :param _builtins.str domain: Sender domain.
     :param _builtins.str end_date: End date.
@@ -186,6 +192,12 @@ def get_statistics_report_output(domain: pulumi.Input[Optional[Optional[_builtin
         domain="iac-tf.cloud",
         receiving_mailbox_type="gmail.com")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
 
 
     :param _builtins.str domain: Sender domain.

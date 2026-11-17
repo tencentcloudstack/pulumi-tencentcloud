@@ -176,6 +176,22 @@ class StandardEngineResourceGroupConfigInfo(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+          - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+        * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+        * Update:
+          - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+          - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+        * Delete:
+          - [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+          - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+          - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+
         ## Import
 
         DLC standard engine resource group config info can be imported using the id, e.g.
@@ -231,6 +247,22 @@ class StandardEngineResourceGroupConfigInfo(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+          - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+        * Read: [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+        * Update:
+          - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+          - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+        * Delete:
+          - [DescribeStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroupConfigInfo&type=document&lang=en)
+          - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+          - [UpdateStandardEngineResourceGroupConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupConfigInfo&type=document&lang=en)
 
         ## Import
 

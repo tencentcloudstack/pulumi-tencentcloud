@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
 func GetElasticPublicIpv6s(ctx *pulumi.Context, args *GetElasticPublicIpv6sArgs, opts ...pulumi.InvokeOption) (*GetElasticPublicIpv6sResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetElasticPublicIpv6sResult

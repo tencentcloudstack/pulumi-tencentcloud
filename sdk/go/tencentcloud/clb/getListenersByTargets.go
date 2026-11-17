@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
 func GetListenersByTargets(ctx *pulumi.Context, args *GetListenersByTargetsArgs, opts ...pulumi.InvokeOption) (*GetListenersByTargetsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListenersByTargetsResult

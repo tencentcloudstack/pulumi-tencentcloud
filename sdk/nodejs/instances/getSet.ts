@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
  */
 export function getSet(args?: GetSetArgs, opts?: pulumi.InvokeOptions): Promise<GetSetResult> {
     args = args || {};
@@ -144,6 +150,12 @@ export interface GetSetResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
  */
 export function getSetOutput(args?: GetSetOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSetResult> {
     args = args || {};

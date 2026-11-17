@@ -175,6 +175,15 @@ class WorkloadGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWorkloadGroup](https://www.tencentcloud.com/search/?wd=CreateWorkloadGroup&type=document&lang=en)
+        * Read: [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&type=document&lang=en)
+        * Update: [ModifyWorkloadGroup](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroup&type=document&lang=en)
+        * Delete: [DeleteWorkloadGroup](https://www.tencentcloud.com/search/?wd=DeleteWorkloadGroup&type=document&lang=en)
+
         ## Import
 
         cdwdoris workload group can be imported using the id, e.g.
@@ -261,6 +270,15 @@ class WorkloadGroup(pulumi.CustomResource):
                 "cpu_hard_limit": "30%",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWorkloadGroup](https://www.tencentcloud.com/search/?wd=CreateWorkloadGroup&type=document&lang=en)
+        * Read: [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&type=document&lang=en)
+        * Update: [ModifyWorkloadGroup](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroup&type=document&lang=en)
+        * Delete: [DeleteWorkloadGroup](https://www.tencentcloud.com/search/?wd=DeleteWorkloadGroup&type=document&lang=en)
 
         ## Import
 

@@ -25,6 +25,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyGlobalConfig](https://www.tencentcloud.com/document/api/1026/73264)
+ * * Read: [DescribeGlobalConfig](https://www.tencentcloud.com/document/api/1026/73265)
+ * * Update: [ModifyGlobalConfig](https://www.tencentcloud.com/document/api/1026/73264)
+ *
  * ## Import
  *
  * emr emrYarn can be imported using the id, e.g.

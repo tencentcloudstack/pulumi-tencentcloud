@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
 func GetListenerRealServers(ctx *pulumi.Context, args *GetListenerRealServersArgs, opts ...pulumi.InvokeOption) (*GetListenerRealServersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListenerRealServersResult

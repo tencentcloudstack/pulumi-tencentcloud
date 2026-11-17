@@ -34,6 +34,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUser](https://www.tencentcloud.com/document/api/1294/76508)
+    /// * Read: [DescribeUserList](https://www.tencentcloud.com/document/api/1294/76506)
+    /// * Update: [ModifyUser](https://www.tencentcloud.com/document/api/1294/76505)
+    /// * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/1294/76507)
+    /// 
     /// ## Import
     /// 
     /// MQTT user can be imported using the id, e.g.

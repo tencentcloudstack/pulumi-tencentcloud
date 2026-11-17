@@ -34,6 +34,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLiveRecordRule](https://www.tencentcloud.com/document/api/267/30846)
+    /// * Read: [DescribeLiveRecordRules](https://www.tencentcloud.com/document/api/267/30841)
+    /// * Delete:
+    ///   - [DeleteLiveRecordRule](https://www.tencentcloud.com/document/api/267/30843)
+    ///   - [DescribeLiveRecordRules](https://www.tencentcloud.com/document/api/267/30841)
+    /// 
     /// ## Import
     /// 
     /// css RecordRule can be imported using the id, e.g.

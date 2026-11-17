@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
         /// </summary>
         public static Task<GetMultiPathGatewaysResult> InvokeAsync(GetMultiPathGatewaysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMultiPathGatewaysResult>("tencentcloud:Teo/getMultiPathGateways:getMultiPathGateways", args ?? new GetMultiPathGatewaysArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
         /// </summary>
         public static Output<GetMultiPathGatewaysResult> Invoke(GetMultiPathGatewaysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMultiPathGatewaysResult>("tencentcloud:Teo/getMultiPathGateways:getMultiPathGateways", args ?? new GetMultiPathGatewaysInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
         /// </summary>
         public static Output<GetMultiPathGatewaysResult> Invoke(GetMultiPathGatewaysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMultiPathGatewaysResult>("tencentcloud:Teo/getMultiPathGateways:getMultiPathGateways", args ?? new GetMultiPathGatewaysInvokeArgs(), options.WithDefaults());

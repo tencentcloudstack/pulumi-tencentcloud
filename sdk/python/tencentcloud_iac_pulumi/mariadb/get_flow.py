@@ -94,6 +94,12 @@ def get_flow(flow_id: Optional[_builtins.int] = None,
     flow = tencentcloud.mariadb.get_flow(flow_id=1307)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+
 
     :param _builtins.int flow_id: Flow ID returned by async request API.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_flow_output(flow_id: pulumi.Input[Optional[_builtins.int]] = None,
 
     flow = tencentcloud.mariadb.get_flow(flow_id=1307)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
 
 
     :param _builtins.int flow_id: Flow ID returned by async request API.

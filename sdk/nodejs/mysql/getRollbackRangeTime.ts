@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["cdb-fitq5t9h"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
  */
 export function getRollbackRangeTime(args: GetRollbackRangeTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetRollbackRangeTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetRollbackRangeTimeResult {
  *     instanceIds: ["cdb-fitq5t9h"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
  */
 export function getRollbackRangeTimeOutput(args: GetRollbackRangeTimeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRollbackRangeTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

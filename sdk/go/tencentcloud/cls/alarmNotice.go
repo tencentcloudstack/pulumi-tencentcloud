@@ -87,6 +87,7 @@ import (
 //				JumpDomain:         pulumi.String("https://console.cloud.tencent.com"),
 //				DeliverStatus:      pulumi.Int(2),
 //				AlarmShieldStatus:  pulumi.Int(2),
+//				SecureDetailStatus: pulumi.Int(1),
 //				CallbackPrioritize: pulumi.Bool(true),
 //				NoticeRules: cls.AlarmNoticeNoticeRuleArray{
 //					&cls.AlarmNoticeNoticeRuleArgs{
@@ -174,6 +175,24 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateAlarmNotice](https://www.tencentcloud.com/document/api/614/42829)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/614/42822)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Delete: [DeleteAlarmNotice](https://www.tencentcloud.com/document/api/614/42827)
+//
 // ## Import
 //
 // cls alarm notice can be imported using the id, e.g.
@@ -200,6 +219,8 @@ type AlarmNotice struct {
 	NoticeReceivers AlarmNoticeNoticeReceiverArrayOutput `pulumi:"noticeReceivers"`
 	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
 	NoticeRules AlarmNoticeNoticeRuleArrayOutput `pulumi:"noticeRules"`
+	// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+	SecureDetailStatus pulumi.IntOutput `pulumi:"secureDetailStatus"`
 	// Tag description list.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Notice type. Value: Trigger, Recovery, All.
@@ -254,6 +275,8 @@ type alarmNoticeState struct {
 	NoticeReceivers []AlarmNoticeNoticeReceiver `pulumi:"noticeReceivers"`
 	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
 	NoticeRules []AlarmNoticeNoticeRule `pulumi:"noticeRules"`
+	// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+	SecureDetailStatus *int `pulumi:"secureDetailStatus"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
 	// Notice type. Value: Trigger, Recovery, All.
@@ -279,6 +302,8 @@ type AlarmNoticeState struct {
 	NoticeReceivers AlarmNoticeNoticeReceiverArrayInput
 	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
 	NoticeRules AlarmNoticeNoticeRuleArrayInput
+	// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+	SecureDetailStatus pulumi.IntPtrInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
 	// Notice type. Value: Trigger, Recovery, All.
@@ -308,6 +333,8 @@ type alarmNoticeArgs struct {
 	NoticeReceivers []AlarmNoticeNoticeReceiver `pulumi:"noticeReceivers"`
 	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
 	NoticeRules []AlarmNoticeNoticeRule `pulumi:"noticeRules"`
+	// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+	SecureDetailStatus *int `pulumi:"secureDetailStatus"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
 	// Notice type. Value: Trigger, Recovery, All.
@@ -334,6 +361,8 @@ type AlarmNoticeArgs struct {
 	NoticeReceivers AlarmNoticeNoticeReceiverArrayInput
 	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
 	NoticeRules AlarmNoticeNoticeRuleArrayInput
+	// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+	SecureDetailStatus pulumi.IntPtrInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
 	// Notice type. Value: Trigger, Recovery, All.
@@ -467,6 +496,11 @@ func (o AlarmNoticeOutput) NoticeReceivers() AlarmNoticeNoticeReceiverArrayOutpu
 // Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
 func (o AlarmNoticeOutput) NoticeRules() AlarmNoticeNoticeRuleArrayOutput {
 	return o.ApplyT(func(v *AlarmNotice) AlarmNoticeNoticeRuleArrayOutput { return v.NoticeRules }).(AlarmNoticeNoticeRuleArrayOutput)
+}
+
+// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+func (o AlarmNoticeOutput) SecureDetailStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v *AlarmNotice) pulumi.IntOutput { return v.SecureDetailStatus }).(pulumi.IntOutput)
 }
 
 // Tag description list.

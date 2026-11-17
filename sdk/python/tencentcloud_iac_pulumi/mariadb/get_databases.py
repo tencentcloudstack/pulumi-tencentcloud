@@ -96,6 +96,12 @@ def get_databases(instance_id: Optional[_builtins.str] = None,
     databases = tencentcloud.mariadb.get_databases(instance_id="tdsql-e9tklsgz")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/237/35740)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_databases_output(instance_id: pulumi.Input[Optional[_builtins.str]] = No
 
     databases = tencentcloud.mariadb.get_databases(instance_id="tdsql-e9tklsgz")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/237/35740)
 
 
     :param _builtins.str instance_id: instance id.

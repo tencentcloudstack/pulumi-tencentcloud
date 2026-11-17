@@ -176,6 +176,17 @@ class ProjectMember(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateProjectMember](https://www.tencentcloud.com/document/api/1174/77875)
+        * Read: [ListProjectMembers](https://www.tencentcloud.com/document/api/1174/77865)
+        * Update:
+          - [GrantMemberProjectRole](https://www.tencentcloud.com/document/api/1174/77867)
+          - [RemoveMemberProjectRole](https://www.tencentcloud.com/document/api/1174/77861)
+        * Delete: [DeleteProjectMember](https://www.tencentcloud.com/document/api/1174/77873)
+
         ## Import
 
         WeData project member can be imported using the projectId#userUin, e.g.
@@ -234,6 +245,17 @@ class ProjectMember(pulumi.CustomResource):
                 "308335260844662784",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateProjectMember](https://www.tencentcloud.com/document/api/1174/77875)
+        * Read: [ListProjectMembers](https://www.tencentcloud.com/document/api/1174/77865)
+        * Update:
+          - [GrantMemberProjectRole](https://www.tencentcloud.com/document/api/1174/77867)
+          - [RemoveMemberProjectRole](https://www.tencentcloud.com/document/api/1174/77861)
+        * Delete: [DeleteProjectMember](https://www.tencentcloud.com/document/api/1174/77873)
 
         ## Import
 

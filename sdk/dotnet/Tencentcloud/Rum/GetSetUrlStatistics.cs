@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataSetUrlStatistics](https://www.tencentcloud.com/document/api/1131/45320)
         /// </summary>
         public static Task<GetSetUrlStatisticsResult> InvokeAsync(GetSetUrlStatisticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataSetUrlStatistics](https://www.tencentcloud.com/document/api/1131/45320)
         /// </summary>
         public static Output<GetSetUrlStatisticsResult> Invoke(GetSetUrlStatisticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataSetUrlStatistics](https://www.tencentcloud.com/document/api/1131/45320)
         /// </summary>
         public static Output<GetSetUrlStatisticsResult> Invoke(GetSetUrlStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsInvokeArgs(), options.WithDefaults());

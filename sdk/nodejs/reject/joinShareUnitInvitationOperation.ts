@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.reject.JoinShareUnitInvitationOperation("example", {unitId: "shareUnit-xhreo**2p"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RejectJoinShareUnitInvitation](https://www.tencentcloud.com/document/api/1031/68227)
  */
 export class JoinShareUnitInvitationOperation extends pulumi.CustomResource {
     /**

@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     roleName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
  */
 export function getRoleDetail(args?: GetRoleDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetRoleDetailResult> {
     args = args || {};
@@ -103,6 +109,12 @@ export interface GetRoleDetailResult {
  *     roleName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
  */
 export function getRoleDetailOutput(args?: GetRoleDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRoleDetailResult> {
     args = args || {};

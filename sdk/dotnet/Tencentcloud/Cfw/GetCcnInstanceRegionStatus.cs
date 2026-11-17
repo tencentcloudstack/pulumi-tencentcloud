@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCcnInstanceRegionStatusResult> InvokeAsync(GetCcnInstanceRegionStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCcnInstanceRegionStatusResult>("tencentcloud:Cfw/getCcnInstanceRegionStatus:getCcnInstanceRegionStatus", args ?? new GetCcnInstanceRegionStatusArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcnInstanceRegionStatusResult> Invoke(GetCcnInstanceRegionStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcnInstanceRegionStatusResult>("tencentcloud:Cfw/getCcnInstanceRegionStatus:getCcnInstanceRegionStatus", args ?? new GetCcnInstanceRegionStatusInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCcnInstanceRegionStatusResult> Invoke(GetCcnInstanceRegionStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCcnInstanceRegionStatusResult>("tencentcloud:Cfw/getCcnInstanceRegionStatus:getCcnInstanceRegionStatus", args ?? new GetCcnInstanceRegionStatusInvokeArgs(), options.WithDefaults());

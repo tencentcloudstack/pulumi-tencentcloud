@@ -86,6 +86,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [SwitchForUpgrade](https://www.tencentcloud.com/document/api/236/15864)
+    /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/switchForUpgrade:SwitchForUpgrade")]
     public partial class SwitchForUpgrade : global::Pulumi.CustomResource

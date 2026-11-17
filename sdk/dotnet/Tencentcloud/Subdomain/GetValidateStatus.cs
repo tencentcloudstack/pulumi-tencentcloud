@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subdomain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetValidateStatusResult> InvokeAsync(GetValidateStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetValidateStatusResult>("tencentcloud:Subdomain/getValidateStatus:getValidateStatus", args ?? new GetValidateStatusArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subdomain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetValidateStatusResult> Invoke(GetValidateStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetValidateStatusResult>("tencentcloud:Subdomain/getValidateStatus:getValidateStatus", args ?? new GetValidateStatusInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subdomain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetValidateStatusResult> Invoke(GetValidateStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetValidateStatusResult>("tencentcloud:Subdomain/getValidateStatus:getValidateStatus", args ?? new GetValidateStatusInvokeArgs(), options.WithDefaults());

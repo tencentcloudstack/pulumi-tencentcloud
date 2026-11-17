@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CheckCertificateDomainVerification](https://www.tencentcloud.com/document/api/1007/79938)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/checkCertificateDomainVerificationOperation:CheckCertificateDomainVerificationOperation")]
     public partial class CheckCertificateDomainVerificationOperation : global::Pulumi.CustomResource

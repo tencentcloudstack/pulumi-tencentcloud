@@ -93,6 +93,14 @@ class AddUsersToWorkGroupAttachment(pulumi.CustomResource):
         })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUsersToWorkGroup](https://www.tencentcloud.com/document/api/1155/62679)
+        * Read: [DescribeWorkGroups](https://www.tencentcloud.com/document/api/1155/62666)
+        * Delete: [DeleteUsersFromWorkGroup](https://www.tencentcloud.com/document/api/1155/62672)
+
         ## Import
 
         DLC add users to work group attachment can be imported using the id, e.g.
@@ -129,6 +137,14 @@ class AddUsersToWorkGroupAttachment(pulumi.CustomResource):
             ],
         })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUsersToWorkGroup](https://www.tencentcloud.com/document/api/1155/62679)
+        * Read: [DescribeWorkGroups](https://www.tencentcloud.com/document/api/1155/62666)
+        * Delete: [DeleteUsersFromWorkGroup](https://www.tencentcloud.com/document/api/1155/62672)
 
         ## Import
 

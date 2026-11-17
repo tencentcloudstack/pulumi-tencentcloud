@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     targetType: "NODE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancersDetail](https://www.tencentcloud.com/document/api/214/38188)
  */
 export function getInstanceDetail(args?: GetInstanceDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceDetailResult> {
     args = args || {};
@@ -83,6 +89,12 @@ export interface GetInstanceDetailResult {
  *     targetType: "NODE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancersDetail](https://www.tencentcloud.com/document/api/214/38188)
  */
 export function getInstanceDetailOutput(args?: GetInstanceDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceDetailResult> {
     args = args || {};

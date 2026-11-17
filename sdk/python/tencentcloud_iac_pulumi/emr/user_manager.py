@@ -251,6 +251,15 @@ class UserManager(pulumi.CustomResource):
             password="tf@123456")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUsersForUserManager](https://www.tencentcloud.com/document/api/1026/47537)
+        * Read: [DescribeUsersForUserManager](https://www.tencentcloud.com/document/api/1026/47536)
+        * Update: [ModifyUserManagerPwd](https://www.tencentcloud.com/document/api/1026/58391)
+        * Delete: [DeleteUserManagerUserList](https://www.tencentcloud.com/search/?wd=DeleteUserManagerUserList&type=document&lang=en)
+
         ## Import
 
         emr user_manager can be imported using the id, e.g.
@@ -290,6 +299,15 @@ class UserManager(pulumi.CustomResource):
             user_group="group1",
             password="tf@123456")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUsersForUserManager](https://www.tencentcloud.com/document/api/1026/47537)
+        * Read: [DescribeUsersForUserManager](https://www.tencentcloud.com/document/api/1026/47536)
+        * Update: [ModifyUserManagerPwd](https://www.tencentcloud.com/document/api/1026/58391)
+        * Delete: [DeleteUserManagerUserList](https://www.tencentcloud.com/search/?wd=DeleteUserManagerUserList&type=document&lang=en)
 
         ## Import
 

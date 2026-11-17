@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&type=document&lang=en)
 func GetOrgAuthNode(ctx *pulumi.Context, args *GetOrgAuthNodeArgs, opts ...pulumi.InvokeOption) (*GetOrgAuthNodeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgAuthNodeResult

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
 func GetListEntitiesForPolicy(ctx *pulumi.Context, args *GetListEntitiesForPolicyArgs, opts ...pulumi.InvokeOption) (*GetListEntitiesForPolicyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListEntitiesForPolicyResult

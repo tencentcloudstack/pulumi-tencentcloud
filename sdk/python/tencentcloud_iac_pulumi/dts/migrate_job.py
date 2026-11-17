@@ -397,6 +397,17 @@ class MigrateJob(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateMigrateCheckJob](https://www.tencentcloud.com/document/api/571/51820)
+          - [DescribeMigrationCheckJob](https://www.tencentcloud.com/document/api/571/51814)
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [ModifyMigrationJob](https://www.tencentcloud.com/document/api/571/51805)
+        * Read: [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+
         ## Import
 
         DTS migrate job can be imported using the id, e.g.
@@ -533,6 +544,17 @@ class MigrateJob(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateMigrateCheckJob](https://www.tencentcloud.com/document/api/571/51820)
+          - [DescribeMigrationCheckJob](https://www.tencentcloud.com/document/api/571/51814)
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [ModifyMigrationJob](https://www.tencentcloud.com/document/api/571/51805)
+        * Read: [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
 
         ## Import
 

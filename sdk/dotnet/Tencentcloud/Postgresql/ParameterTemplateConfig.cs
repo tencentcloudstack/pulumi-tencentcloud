@@ -59,6 +59,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyParameterTemplate](https://www.tencentcloud.com/document/api/409/52650)
+    /// * Read: [DescribeParameterTemplateAttributes](https://www.tencentcloud.com/document/api/409/52652)
+    /// * Update: [ModifyParameterTemplate](https://www.tencentcloud.com/document/api/409/52650)
+    /// 
     /// ## Import
     /// 
     /// PostgreSQL parameter template config can be imported using the id, e.g.

@@ -120,6 +120,12 @@ def get_rocketmq_cluster(cluster_id_lists: Optional[Sequence[_builtins.str]] = N
     example = tencentcloud.tdmq.get_rocketmq_cluster_output(name_keyword=example_rocketmq_cluster.cluster_name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQClusters](https://www.tencentcloud.com/search/?wd=DescribeRocketMQClusters&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] cluster_id_lists: Filter by cluster ID.
     :param _builtins.str id_keyword: Search by cluster ID.
@@ -161,6 +167,12 @@ def get_rocketmq_cluster_output(cluster_id_lists: pulumi.Input[Optional[Optional
         remark="remark.")
     example = tencentcloud.tdmq.get_rocketmq_cluster_output(name_keyword=example_rocketmq_cluster.cluster_name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQClusters](https://www.tencentcloud.com/search/?wd=DescribeRocketMQClusters&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] cluster_id_lists: Filter by cluster ID.

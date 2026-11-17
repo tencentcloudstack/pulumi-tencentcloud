@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     name: "cam-test-provider",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
  */
 export function getSamlProviders(args?: GetSamlProvidersArgs, opts?: pulumi.InvokeOptions): Promise<GetSamlProvidersResult> {
     args = args || {};
@@ -83,6 +89,12 @@ export interface GetSamlProvidersResult {
  *     name: "cam-test-provider",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
  */
 export function getSamlProvidersOutput(args?: GetSamlProvidersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSamlProvidersResult> {
     args = args || {};

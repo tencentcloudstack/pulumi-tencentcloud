@@ -168,6 +168,18 @@ class TableEntryConfig(pulumi.CustomResource):
             disabled=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableRoutes](https://www.tencentcloud.com/document/api/215/68967)
+          - [EnableRoutes](https://www.tencentcloud.com/document/api/215/68966)
+        * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+        * Update:
+          - [DisableRoutes](https://www.tencentcloud.com/document/api/215/68967)
+          - [EnableRoutes](https://www.tencentcloud.com/document/api/215/68966)
+
         ## Import
 
         vpc route table entry config can be imported using the id, e.g.
@@ -219,6 +231,18 @@ class TableEntryConfig(pulumi.CustomResource):
             route_item_id="rti-4f6efqwn",
             disabled=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableRoutes](https://www.tencentcloud.com/document/api/215/68967)
+          - [EnableRoutes](https://www.tencentcloud.com/document/api/215/68966)
+        * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+        * Update:
+          - [DisableRoutes](https://www.tencentcloud.com/document/api/215/68967)
+          - [EnableRoutes](https://www.tencentcloud.com/document/api/215/68966)
 
         ## Import
 

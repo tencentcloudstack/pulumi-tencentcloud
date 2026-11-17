@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     diskIds: ["lhdisk-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
  */
 export function getDisks(args?: GetDisksArgs, opts?: pulumi.InvokeOptions): Promise<GetDisksResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetDisksResult {
  *     diskIds: ["lhdisk-xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
  */
 export function getDisksOutput(args?: GetDisksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDisksResult> {
     args = args || {};

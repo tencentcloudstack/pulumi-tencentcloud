@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
         /// </summary>
         public static Task<GetAdvicesResult> InvokeAsync(GetAdvicesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
         /// </summary>
         public static Output<GetAdvicesResult> Invoke(GetAdvicesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
         /// </summary>
         public static Output<GetAdvicesResult> Invoke(GetAdvicesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAdvicesResult>("tencentcloud:As/getAdvices:getAdvices", args ?? new GetAdvicesInvokeArgs(), options.WithDefaults());

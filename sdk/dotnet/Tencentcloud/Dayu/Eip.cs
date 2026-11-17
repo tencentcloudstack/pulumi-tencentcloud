@@ -34,6 +34,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AssociateDDoSEipAddress](https://www.tencentcloud.com/document/api/1213/61409)
+    ///   - [AssociateDDoSEipLoadBalancer](https://www.tencentcloud.com/document/api/1213/61408)
+    ///   - [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+    /// * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+    /// * Delete: [DisassociateDDoSEipAddress](https://www.tencentcloud.com/document/api/1213/61407)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/eip:Eip")]
     public partial class Eip : global::Pulumi.CustomResource

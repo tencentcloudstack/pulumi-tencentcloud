@@ -135,6 +135,12 @@ def get_image_sprite_templates(definition: Optional[_builtins.str] = None,
         definition=foo_image_sprite_template.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
+
 
     :param _builtins.str definition: Unique ID filter of image sprite template.
     :param _builtins.str result_output_file: Used to save results.
@@ -185,6 +191,12 @@ def get_image_sprite_templates_output(definition: pulumi.Input[Optional[Optional
     foo = tencentcloud.vod.get_image_sprite_templates_output(type="Custom",
         definition=foo_image_sprite_template.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
 
 
     :param _builtins.str definition: Unique ID filter of image sprite template.

@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&type=document&lang=en)
 func GetDatahubGroupOffsets(ctx *pulumi.Context, args *GetDatahubGroupOffsetsArgs, opts ...pulumi.InvokeOption) (*GetDatahubGroupOffsetsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDatahubGroupOffsetsResult

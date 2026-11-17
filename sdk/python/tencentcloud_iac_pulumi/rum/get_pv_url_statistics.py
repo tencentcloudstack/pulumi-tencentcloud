@@ -307,6 +307,12 @@ def get_pv_url_statistics(area: Optional[_builtins.str] = None,
         project_id=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataPvUrlStatistics](https://www.tencentcloud.com/document/api/1131/45322)
+
 
     :param _builtins.str area: The region where the data reporting takes place.
     :param _builtins.str brand: The mobile phone brand used for data reporting.
@@ -423,6 +429,12 @@ def get_pv_url_statistics_output(area: pulumi.Input[Optional[Optional[_builtins.
         end_time=1625454840,
         project_id=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataPvUrlStatistics](https://www.tencentcloud.com/document/api/1131/45322)
 
 
     :param _builtins.str area: The region where the data reporting takes place.

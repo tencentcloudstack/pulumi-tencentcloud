@@ -53,6 +53,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
 func GetQualityRuleTemplates(ctx *pulumi.Context, args *GetQualityRuleTemplatesArgs, opts ...pulumi.InvokeOption) (*GetQualityRuleTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetQualityRuleTemplatesResult

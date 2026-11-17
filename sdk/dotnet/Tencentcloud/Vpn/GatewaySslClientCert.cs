@@ -32,6 +32,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    ///   - [DisableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=DisableVpnGatewaySslClientCert&amp;type=document&amp;lang=en)
+    ///   - [EnableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=EnableVpnGatewaySslClientCert&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeVpnGatewaySslClients](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslClients&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    ///   - [DisableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=DisableVpnGatewaySslClientCert&amp;type=document&amp;lang=en)
+    ///   - [EnableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=EnableVpnGatewaySslClientCert&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// vpc VpnGatewaySslClientCert can be imported using the id, e.g.

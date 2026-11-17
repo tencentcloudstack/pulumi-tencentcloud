@@ -440,6 +440,7 @@ class _GeneralCloudInstanceState:
                  dr_zones: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ha_type: pulumi.Input[Optional[_builtins.str]] = None,
                  instance_charge_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  machine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  memory: pulumi.Input[Optional[_builtins.int]] = None,
                  multi_nodes: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -455,6 +456,7 @@ class _GeneralCloudInstanceState:
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tgw_wan_vport: pulumi.Input[Optional[_builtins.int]] = None,
                  time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+                 uid: pulumi.Input[Optional[_builtins.str]] = None,
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
                  weeklies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  zone: pulumi.Input[Optional[_builtins.str]] = None):
@@ -470,6 +472,7 @@ class _GeneralCloudInstanceState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dr_zones: The standby node availability area is empty by default. When MultiNodes = true, the primary node and standby node availability areas cannot all be the same. The minimum number of standby availability areas set is 2, and the maximum number is no more than 5.
         :param pulumi.Input[_builtins.str] ha_type: It has been deprecated from version 1.81.2. Upgrade the high-availability architecture of sqlserver, upgrade from mirror disaster recovery to always on cluster disaster recovery, only support 2017 and above and support always on high-availability instances, do not support downgrading to mirror disaster recovery, CLUSTER-upgrade to always on capacity Disaster, if not filled, the high-availability architecture will not be modified.
         :param pulumi.Input[_builtins.str] instance_charge_type: Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
+        :param pulumi.Input[_builtins.str] instance_id: Instance ID.
         :param pulumi.Input[_builtins.str] machine_type: The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
         :param pulumi.Input[_builtins.int] memory: Memory, unit: GB.
         :param pulumi.Input[_builtins.bool] multi_nodes: Whether it is a multi-node architecture instance, the default value is false. When MultiNodes = true, the parameter MultiZones must be true.
@@ -485,6 +488,7 @@ class _GeneralCloudInstanceState:
         :param pulumi.Input[_builtins.str] subnet_id: VPC subnet ID, in the form of subnet-bdoe83fa; SubnetId and VpcId need to be set at the same time or not set at the same time.
         :param pulumi.Input[_builtins.int] tgw_wan_vport: External port number.
         :param pulumi.Input[_builtins.str] time_zone: System time zone, default: China Standard Time.
+        :param pulumi.Input[_builtins.str] uid: Unique UID of the instance.
         :param pulumi.Input[_builtins.str] vpc_id: VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] weeklies: Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
         :param pulumi.Input[_builtins.str] zone: Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the DescribeZones API.
@@ -510,6 +514,8 @@ class _GeneralCloudInstanceState:
             pulumi.set(__self__, "ha_type", ha_type)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if machine_type is not None:
             pulumi.set(__self__, "machine_type", machine_type)
         if memory is not None:
@@ -540,6 +546,8 @@ class _GeneralCloudInstanceState:
             pulumi.set(__self__, "tgw_wan_vport", tgw_wan_vport)
         if time_zone is not None:
             pulumi.set(__self__, "time_zone", time_zone)
+        if uid is not None:
+            pulumi.set(__self__, "uid", uid)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if weeklies is not None:
@@ -655,6 +663,18 @@ class _GeneralCloudInstanceState:
     @instance_charge_type.setter
     def instance_charge_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "instance_charge_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_id", value)
 
     @_builtins.property
     @pulumi.getter(name="machineType")
@@ -837,6 +857,18 @@ class _GeneralCloudInstanceState:
         pulumi.set(self, "time_zone", value)
 
     @_builtins.property
+    @pulumi.getter
+    def uid(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Unique UID of the instance.
+        """
+        return pulumi.get(self, "uid")
+
+    @uid.setter
+    def uid(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "uid", value)
+
+    @_builtins.property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -959,6 +991,30 @@ class GeneralCloudInstance(pulumi.CustomResource):
             time_zone="China Standard Time")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCloudDBInstances](https://www.tencentcloud.com/document/api/238/55674)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+        * Read:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+          - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+          - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+          - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+        * Delete:
+          - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+
         ## Import
 
         sqlserver general_cloud_instance can be imported using the id, e.g.
@@ -1056,6 +1112,30 @@ class GeneralCloudInstance(pulumi.CustomResource):
             time_zone="China Standard Time")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCloudDBInstances](https://www.tencentcloud.com/document/api/238/55674)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+        * Read:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+          - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+          - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+          - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+        * Delete:
+          - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+
         ## Import
 
         sqlserver general_cloud_instance can be imported using the id, e.g.
@@ -1150,7 +1230,9 @@ class GeneralCloudInstance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'zone'")
             __props__.__dict__["zone"] = zone
             __props__.__dict__["dns_pod_domain"] = None
+            __props__.__dict__["instance_id"] = None
             __props__.__dict__["tgw_wan_vport"] = None
+            __props__.__dict__["uid"] = None
         super(GeneralCloudInstance, __self__).__init__(
             'tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance',
             resource_name,
@@ -1170,6 +1252,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
             dr_zones: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             ha_type: pulumi.Input[Optional[_builtins.str]] = None,
             instance_charge_type: pulumi.Input[Optional[_builtins.str]] = None,
+            instance_id: pulumi.Input[Optional[_builtins.str]] = None,
             machine_type: pulumi.Input[Optional[_builtins.str]] = None,
             memory: pulumi.Input[Optional[_builtins.int]] = None,
             multi_nodes: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -1185,6 +1268,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
             subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
             tgw_wan_vport: pulumi.Input[Optional[_builtins.int]] = None,
             time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            uid: pulumi.Input[Optional[_builtins.str]] = None,
             vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
             weeklies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
             zone: pulumi.Input[Optional[_builtins.str]] = None) -> 'GeneralCloudInstance':
@@ -1204,6 +1288,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dr_zones: The standby node availability area is empty by default. When MultiNodes = true, the primary node and standby node availability areas cannot all be the same. The minimum number of standby availability areas set is 2, and the maximum number is no more than 5.
         :param pulumi.Input[_builtins.str] ha_type: It has been deprecated from version 1.81.2. Upgrade the high-availability architecture of sqlserver, upgrade from mirror disaster recovery to always on cluster disaster recovery, only support 2017 and above and support always on high-availability instances, do not support downgrading to mirror disaster recovery, CLUSTER-upgrade to always on capacity Disaster, if not filled, the high-availability architecture will not be modified.
         :param pulumi.Input[_builtins.str] instance_charge_type: Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
+        :param pulumi.Input[_builtins.str] instance_id: Instance ID.
         :param pulumi.Input[_builtins.str] machine_type: The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
         :param pulumi.Input[_builtins.int] memory: Memory, unit: GB.
         :param pulumi.Input[_builtins.bool] multi_nodes: Whether it is a multi-node architecture instance, the default value is false. When MultiNodes = true, the parameter MultiZones must be true.
@@ -1219,6 +1304,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] subnet_id: VPC subnet ID, in the form of subnet-bdoe83fa; SubnetId and VpcId need to be set at the same time or not set at the same time.
         :param pulumi.Input[_builtins.int] tgw_wan_vport: External port number.
         :param pulumi.Input[_builtins.str] time_zone: System time zone, default: China Standard Time.
+        :param pulumi.Input[_builtins.str] uid: Unique UID of the instance.
         :param pulumi.Input[_builtins.str] vpc_id: VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] weeklies: Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
         :param pulumi.Input[_builtins.str] zone: Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the DescribeZones API.
@@ -1236,6 +1322,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
         __props__.__dict__["dr_zones"] = dr_zones
         __props__.__dict__["ha_type"] = ha_type
         __props__.__dict__["instance_charge_type"] = instance_charge_type
+        __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["machine_type"] = machine_type
         __props__.__dict__["memory"] = memory
         __props__.__dict__["multi_nodes"] = multi_nodes
@@ -1251,6 +1338,7 @@ class GeneralCloudInstance(pulumi.CustomResource):
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tgw_wan_vport"] = tgw_wan_vport
         __props__.__dict__["time_zone"] = time_zone
+        __props__.__dict__["uid"] = uid
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["weeklies"] = weeklies
         __props__.__dict__["zone"] = zone
@@ -1328,6 +1416,14 @@ class GeneralCloudInstance(pulumi.CustomResource):
         Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
         """
         return pulumi.get(self, "instance_charge_type")
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
 
     @_builtins.property
     @pulumi.getter(name="machineType")
@@ -1448,6 +1544,14 @@ class GeneralCloudInstance(pulumi.CustomResource):
         System time zone, default: China Standard Time.
         """
         return pulumi.get(self, "time_zone")
+
+    @_builtins.property
+    @pulumi.getter
+    def uid(self) -> pulumi.Output[_builtins.str]:
+        """
+        Unique UID of the instance.
+        """
+        return pulumi.get(self, "uid")
 
     @_builtins.property
     @pulumi.getter(name="vpcId")

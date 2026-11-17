@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     stopType: "SOFT_FIRST",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RebootInstances](https://www.tencentcloud.com/document/api/213/33243)
  */
 export class RebootInstance extends pulumi.CustomResource {
     /**

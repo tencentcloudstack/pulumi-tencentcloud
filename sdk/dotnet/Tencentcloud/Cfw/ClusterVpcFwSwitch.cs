@@ -174,6 +174,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&amp;type=document&amp;lang=en)
+    ///   - [DescribeSwitchError](https://www.tencentcloud.com/search/?wd=DescribeSwitchError&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterVpcFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterVpcFwSwitch&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&amp;type=document&amp;lang=en)
+    ///   - [DescribeSwitchError](https://www.tencentcloud.com/search/?wd=DescribeSwitchError&amp;type=document&amp;lang=en)
+    ///   - [UpdateClusterVpcFw](https://www.tencentcloud.com/search/?wd=UpdateClusterVpcFw&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&amp;type=document&amp;lang=en)
+    ///   - [DescribeSwitchError](https://www.tencentcloud.com/search/?wd=DescribeSwitchError&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterVpcFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterVpcFwSwitch&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/clusterVpcFwSwitch:ClusterVpcFwSwitch")]
     public partial class ClusterVpcFwSwitch : global::Pulumi.CustomResource

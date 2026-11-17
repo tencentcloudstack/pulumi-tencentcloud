@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBasicDeviceStatus](https://www.tencentcloud.com/document/api/1213/61391)
 func GetBasicDeviceStatus(ctx *pulumi.Context, args *GetBasicDeviceStatusArgs, opts ...pulumi.InvokeOption) (*GetBasicDeviceStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBasicDeviceStatusResult

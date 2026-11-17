@@ -96,6 +96,12 @@ def get_idle_instances(load_balancer_region: Optional[_builtins.str] = None,
     idle_instance = tencentcloud.clb.get_idle_instances(load_balancer_region="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
+
 
     :param _builtins.str load_balancer_region: CLB instance region.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_idle_instances_output(load_balancer_region: pulumi.Input[Optional[Option
 
     idle_instance = tencentcloud.clb.get_idle_instances(load_balancer_region="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
 
 
     :param _builtins.str load_balancer_region: CLB instance region.

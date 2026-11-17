@@ -96,6 +96,12 @@ def get_switch_record(instance_id: Optional[_builtins.str] = None,
     switch_record = tencentcloud.mysql.get_switch_record(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
+
 
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_switch_record_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
 
     switch_record = tencentcloud.mysql.get_switch_record(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
 
 
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.

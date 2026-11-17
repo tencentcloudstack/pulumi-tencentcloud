@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [OpenBackUp](https://www.tencentcloud.com/search/?wd=OpenBackUp&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&amp;type=document&amp;lang=en)
+    /// * Delete: [OpenBackUp](https://www.tencentcloud.com/search/?wd=OpenBackUp&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// clickhouse backup can be imported using the id, e.g.

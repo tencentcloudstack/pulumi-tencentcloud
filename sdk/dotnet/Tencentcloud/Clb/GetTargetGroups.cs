@@ -70,6 +70,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+        ///   - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
         /// </summary>
         public static Task<GetTargetGroupsResult> InvokeAsync(GetTargetGroupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsArgs(), options.WithDefaults());
@@ -132,6 +140,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+        ///   - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
         /// </summary>
         public static Output<GetTargetGroupsResult> Invoke(GetTargetGroupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsInvokeArgs(), options.WithDefaults());
@@ -194,6 +210,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+        ///   - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
         /// </summary>
         public static Output<GetTargetGroupsResult> Invoke(GetTargetGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTargetGroupsResult>("tencentcloud:Clb/getTargetGroups:getTargetGroups", args ?? new GetTargetGroupsInvokeArgs(), options.WithDefaults());

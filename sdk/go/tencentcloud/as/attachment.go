@@ -143,6 +143,25 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [AttachInstances](https://www.tencentcloud.com/document/api/377/31017)
+//   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+//
+// * Read: [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+// * Update:
+//   - [AttachInstances](https://www.tencentcloud.com/document/api/377/31017)
+//   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+//   - [DetachInstances](https://www.tencentcloud.com/document/api/377/31011)
+//
+// * Delete:
+//   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+//   - [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
+//   - [DetachInstances](https://www.tencentcloud.com/document/api/377/31011)
 type Attachment struct {
 	pulumi.CustomResourceState
 

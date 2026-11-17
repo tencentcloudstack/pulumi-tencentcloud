@@ -28,6 +28,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DeployApplication](https://www.tencentcloud.com/document/api/1094/42032)
+ * * Read: [DescribeApplicationInfo](https://www.tencentcloud.com/document/api/1094/52746)
+ * * Update: [DeployApplication](https://www.tencentcloud.com/document/api/1094/42032)
+ * * Delete: [DeleteApplication](https://www.tencentcloud.com/document/api/1094/45173)
+ *
  * ## Import
  *
  * tem workload can be imported using the id, e.g.

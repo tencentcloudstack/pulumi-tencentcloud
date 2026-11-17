@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     dbEngine: "postgresql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
  */
 export function getDefaultParameters(args: GetDefaultParametersArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultParametersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetDefaultParametersResult {
  *     dbEngine: "postgresql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
  */
 export function getDefaultParametersOutput(args: GetDefaultParametersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDefaultParametersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

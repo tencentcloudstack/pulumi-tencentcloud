@@ -61,6 +61,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AddUserGroupMembers](https://www.tencentcloud.com/search/?wd=AddUserGroupMembers&type=document&lang=en)
+// * Read: [DescribeUserGroupMembers](https://www.tencentcloud.com/search/?wd=DescribeUserGroupMembers&type=document&lang=en)
+// * Delete: [DeleteUserGroupMembers](https://www.tencentcloud.com/search/?wd=DeleteUserGroupMembers&type=document&lang=en)
+//
 // ## Import
 //
 // dasb userGroupMembers can be imported using the id, e.g.

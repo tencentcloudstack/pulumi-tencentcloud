@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
  */
 export function getMysqlProcessList(args: GetMysqlProcessListArgs, opts?: pulumi.InvokeOptions): Promise<GetMysqlProcessListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -146,6 +152,12 @@ export interface GetMysqlProcessListResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
  */
 export function getMysqlProcessListOutput(args: GetMysqlProcessListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMysqlProcessListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

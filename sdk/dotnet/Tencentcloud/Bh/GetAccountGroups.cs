@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetAccountGroupsResult> InvokeAsync(GetAccountGroupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountGroupsResult>("tencentcloud:Bh/getAccountGroups:getAccountGroups", args ?? new GetAccountGroupsArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAccountGroupsResult> Invoke(GetAccountGroupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountGroupsResult>("tencentcloud:Bh/getAccountGroups:getAccountGroups", args ?? new GetAccountGroupsInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAccountGroupsResult> Invoke(GetAccountGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountGroupsResult>("tencentcloud:Bh/getAccountGroups:getAccountGroups", args ?? new GetAccountGroupsInvokeArgs(), options.WithDefaults());

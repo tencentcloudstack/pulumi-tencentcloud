@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
         /// </summary>
         public static Task<GetStoragesSetResult> InvokeAsync(GetStoragesSetArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
         /// </summary>
         public static Output<GetStoragesSetResult> Invoke(GetStoragesSetInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
         /// </summary>
         public static Output<GetStoragesSetResult> Invoke(GetStoragesSetInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetInvokeArgs(), options.WithDefaults());

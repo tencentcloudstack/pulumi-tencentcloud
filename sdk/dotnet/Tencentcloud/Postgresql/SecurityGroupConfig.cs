@@ -74,6 +74,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+    /// * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+    /// * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/securityGroupConfig:SecurityGroupConfig")]
     public partial class SecurityGroupConfig : global::Pulumi.CustomResource

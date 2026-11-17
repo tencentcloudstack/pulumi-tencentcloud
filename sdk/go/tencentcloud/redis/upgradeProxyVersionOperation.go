@@ -42,6 +42,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+//   - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/239/47724)
 type UpgradeProxyVersionOperation struct {
 	pulumi.CustomResourceState
 

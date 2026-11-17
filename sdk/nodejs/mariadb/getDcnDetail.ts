@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "tdsql-9vqvls95",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
  */
 export function getDcnDetail(args: GetDcnDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetDcnDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetDcnDetailResult {
  *     instanceId: "tdsql-9vqvls95",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
  */
 export function getDcnDetailOutput(args: GetDcnDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDcnDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

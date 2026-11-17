@@ -64,6 +64,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateMonitor](https://www.tencentcloud.com/search/?wd=CreateMonitor&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeMonitorDetail](https://www.tencentcloud.com/search/?wd=DescribeMonitorDetail&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyMonitor](https://www.tencentcloud.com/search/?wd=ModifyMonitor&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteMonitor](https://www.tencentcloud.com/search/?wd=DeleteMonitor&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// IGTM monitor can be imported using the id, e.g.

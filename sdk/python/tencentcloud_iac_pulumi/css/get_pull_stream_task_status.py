@@ -96,6 +96,12 @@ def get_pull_stream_task_status(result_output_file: Optional[_builtins.str] = No
     pull_stream_task_status = tencentcloud.css.get_pull_stream_task_status(task_id="63229997")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str task_id: Task ID.
@@ -125,6 +131,12 @@ def get_pull_stream_task_status_output(result_output_file: pulumi.Input[Optional
 
     pull_stream_task_status = tencentcloud.css.get_pull_stream_task_status(task_id="63229997")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

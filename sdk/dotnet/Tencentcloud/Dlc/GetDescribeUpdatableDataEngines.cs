@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
         /// </summary>
         public static Task<GetDescribeUpdatableDataEnginesResult> InvokeAsync(GetDescribeUpdatableDataEnginesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesArgs(), options.WithDefaults());
@@ -92,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
         /// </summary>
         public static Output<GetDescribeUpdatableDataEnginesResult> Invoke(GetDescribeUpdatableDataEnginesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesInvokeArgs(), options.WithDefaults());
@@ -134,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
         /// </summary>
         public static Output<GetDescribeUpdatableDataEnginesResult> Invoke(GetDescribeUpdatableDataEnginesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUpdatableDataEnginesResult>("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args ?? new GetDescribeUpdatableDataEnginesInvokeArgs(), options.WithDefaults());

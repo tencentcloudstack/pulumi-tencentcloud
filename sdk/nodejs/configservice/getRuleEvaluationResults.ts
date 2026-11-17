@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     resourceTypes: ["QCS::CVM::Instance"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
  */
 export function getRuleEvaluationResults(args: GetRuleEvaluationResultsArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleEvaluationResultsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -121,6 +127,12 @@ export interface GetRuleEvaluationResultsResult {
  *     resourceTypes: ["QCS::CVM::Instance"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
  */
 export function getRuleEvaluationResultsOutput(args: GetRuleEvaluationResultsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRuleEvaluationResultsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

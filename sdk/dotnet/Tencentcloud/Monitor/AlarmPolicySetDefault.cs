@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SetDefaultAlarmPolicy](https://www.tencentcloud.com/document/api/248/39312)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/alarmPolicySetDefault:AlarmPolicySetDefault")]
     public partial class AlarmPolicySetDefault : global::Pulumi.CustomResource

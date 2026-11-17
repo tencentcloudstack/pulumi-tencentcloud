@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
         /// </summary>
         public static Task<GetWebSecurityTemplatesResult> InvokeAsync(GetWebSecurityTemplatesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWebSecurityTemplatesResult>("tencentcloud:Teo/getWebSecurityTemplates:getWebSecurityTemplates", args ?? new GetWebSecurityTemplatesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
         /// </summary>
         public static Output<GetWebSecurityTemplatesResult> Invoke(GetWebSecurityTemplatesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebSecurityTemplatesResult>("tencentcloud:Teo/getWebSecurityTemplates:getWebSecurityTemplates", args ?? new GetWebSecurityTemplatesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
         /// </summary>
         public static Output<GetWebSecurityTemplatesResult> Invoke(GetWebSecurityTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebSecurityTemplatesResult>("tencentcloud:Teo/getWebSecurityTemplates:getWebSecurityTemplates", args ?? new GetWebSecurityTemplatesInvokeArgs(), options.WithDefaults());

@@ -127,6 +127,12 @@ def get_renewal_price(amount_unit: Optional[_builtins.str] = None,
         period=2)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeRenewalPrice&type=document&lang=en)
+
 
     :param _builtins.str amount_unit: Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
     :param _builtins.str instance_id: Instance ID.
@@ -166,6 +172,12 @@ def get_renewal_price_output(amount_unit: pulumi.Input[Optional[Optional[_builti
     renewal_price = tencentcloud.mariadb.get_renewal_price(instance_id="tdsql-9vqvls95",
         period=2)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeRenewalPrice&type=document&lang=en)
 
 
     :param _builtins.str amount_unit: Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).

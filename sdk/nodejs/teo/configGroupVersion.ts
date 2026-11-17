@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a teo config group version
+ * Provides a resource to create a TEO (EdgeOne) config group version
  *
  * ## Example Usage
  *
@@ -333,6 +333,7 @@ import * as utilities from "../utilities";
  * `,
  *     description: "test version",
  *     groupId: "cg-3lchxitnb5pb",
+ *     sourceVersion: "ver-2kplomhisdcb",
  *     zoneId: "zone-2xkazzl8yf6k",
  * });
  * ```
@@ -352,6 +353,20 @@ import * as utilities from "../utilities";
  *     groupId: "cg-3lchxitnb5pb",
  *     zoneId: "zone-2xkazzl8yf6k",
  * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57977)
+ * * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
+ *
+ * ## Import
+ *
+ * TEO config group version can be imported using the zoneId#groupId#versionId, e.g.
+ * ```sh
+ * $ pulumi import tencentcloud:Teo/configGroupVersion:ConfigGroupVersion teo_config_group_version zone-2xkazzl8yf6k#cg-3lchxitnb5pb#ver-2kplomhisdcb
  * ```
  */
 export class ConfigGroupVersion extends pulumi.CustomResource {
@@ -403,6 +418,10 @@ export class ConfigGroupVersion extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly groupType: pulumi.Output<string>;
     /**
+     * Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+     */
+    declare public readonly sourceVersion: pulumi.Output<string>;
+    /**
      * Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
      */
     declare public /*out*/ readonly status: pulumi.Output<string>;
@@ -437,6 +456,7 @@ export class ConfigGroupVersion extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["groupId"] = state?.groupId;
             resourceInputs["groupType"] = state?.groupType;
+            resourceInputs["sourceVersion"] = state?.sourceVersion;
             resourceInputs["status"] = state?.status;
             resourceInputs["versionId"] = state?.versionId;
             resourceInputs["versionNumber"] = state?.versionNumber;
@@ -455,6 +475,7 @@ export class ConfigGroupVersion extends pulumi.CustomResource {
             resourceInputs["content"] = args?.content;
             resourceInputs["description"] = args?.description;
             resourceInputs["groupId"] = args?.groupId;
+            resourceInputs["sourceVersion"] = args?.sourceVersion;
             resourceInputs["zoneId"] = args?.zoneId;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["groupType"] = undefined /*out*/;
@@ -492,6 +513,10 @@ export interface ConfigGroupVersionState {
      */
     groupType?: pulumi.Input<string | undefined>;
     /**
+     * Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+     */
+    sourceVersion?: pulumi.Input<string | undefined>;
+    /**
      * Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
      */
     status?: pulumi.Input<string | undefined>;
@@ -525,6 +550,10 @@ export interface ConfigGroupVersionArgs {
      * GroupId of the version to be created.
      */
     groupId: pulumi.Input<string>;
+    /**
+     * Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+     */
+    sourceVersion?: pulumi.Input<string | undefined>;
     /**
      * Zone ID.
      */

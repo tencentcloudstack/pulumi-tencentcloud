@@ -20,6 +20,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<Inputs.WebSecurityTemplateSecurityPolicyBotManagementGetArgs>? BotManagement { get; set; }
 
         /// <summary>
+        /// Basic Bot management configuration.
+        /// </summary>
+        [Input("botManagementLite")]
+        public Input<Inputs.WebSecurityTemplateSecurityPolicyBotManagementLiteGetArgs>? BotManagementLite { get; set; }
+
+        /// <summary>
         /// Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("customRules")]

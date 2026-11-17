@@ -35,6 +35,7 @@ import (
 //						InstanceId:     pulumi.String("vpc-j9yhbzpn"),
 //						InstanceRegion: pulumi.String("ap-guangzhou"),
 //						InstanceType:   pulumi.String("VPC"),
+//						OrderType:      pulumi.String("PayByCcnOwner"),
 //					},
 //				},
 //			})
@@ -46,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AcceptAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34793)
 type InstancesAcceptAttach struct {
 	pulumi.CustomResourceState
 

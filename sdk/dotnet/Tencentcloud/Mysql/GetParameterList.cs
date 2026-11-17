@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+        ///   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
         /// </summary>
         public static Task<GetParameterListResult> InvokeAsync(GetParameterListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListArgs(), options.WithDefaults());
@@ -60,6 +68,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+        ///   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
         /// </summary>
         public static Output<GetParameterListResult> Invoke(GetParameterListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListInvokeArgs(), options.WithDefaults());
@@ -86,6 +102,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+        ///   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
         /// </summary>
         public static Output<GetParameterListResult> Invoke(GetParameterListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListInvokeArgs(), options.WithDefaults());

@@ -157,6 +157,12 @@ def get_user_task(async_request_id: Optional[_builtins.str] = None,
         start_time_end="2017-12-31 10:40:01")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
+
 
     :param _builtins.str async_request_id: Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
     :param _builtins.str instance_id: Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
@@ -211,6 +217,12 @@ def get_user_task_output(async_request_id: pulumi.Input[Optional[Optional[_built
         start_time_begin="2017-12-31 10:40:01",
         start_time_end="2017-12-31 10:40:01")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/236/15848)
 
 
     :param _builtins.str async_request_id: Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.

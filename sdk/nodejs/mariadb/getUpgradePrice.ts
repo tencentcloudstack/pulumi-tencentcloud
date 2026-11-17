@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     nodeCount: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&type=document&lang=en)
  */
 export function getUpgradePrice(args: GetUpgradePriceArgs, opts?: pulumi.InvokeOptions): Promise<GetUpgradePriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetUpgradePriceResult {
  *     nodeCount: 2,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&type=document&lang=en)
  */
 export function getUpgradePriceOutput(args: GetUpgradePriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUpgradePriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

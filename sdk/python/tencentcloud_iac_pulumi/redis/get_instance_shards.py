@@ -107,6 +107,12 @@ def get_instance_shards(filter_slave: Optional[_builtins.bool] = None,
         filter_slave=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
+
 
     :param _builtins.bool filter_slave: Whether to filter out slave information.
     :param _builtins.str instance_id: The ID of instance.
@@ -141,6 +147,12 @@ def get_instance_shards_output(filter_slave: pulumi.Input[Optional[Optional[_bui
     instance_shards = tencentcloud.redis.get_instance_shards(instance_id="crs-c1nl9rpv",
         filter_slave=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
 
 
     :param _builtins.bool filter_slave: Whether to filter out slave information.

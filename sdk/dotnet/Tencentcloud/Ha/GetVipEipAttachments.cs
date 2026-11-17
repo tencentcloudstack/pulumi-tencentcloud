@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
         /// </summary>
         public static Task<GetVipEipAttachmentsResult> InvokeAsync(GetVipEipAttachmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
         /// </summary>
         public static Output<GetVipEipAttachmentsResult> Invoke(GetVipEipAttachmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
         /// </summary>
         public static Output<GetVipEipAttachmentsResult> Invoke(GetVipEipAttachmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetVipEipAttachmentsResult>("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args ?? new GetVipEipAttachmentsInvokeArgs(), options.WithDefaults());

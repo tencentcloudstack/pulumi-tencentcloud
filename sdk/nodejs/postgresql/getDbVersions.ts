@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     dbKernelVersion: "v16.0_r1.0",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
  */
 export function getDbVersions(args?: GetDbVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbVersionsResult> {
     args = args || {};
@@ -118,6 +124,12 @@ export interface GetDbVersionsResult {
  *     dbKernelVersion: "v16.0_r1.0",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
  */
 export function getDbVersionsOutput(args?: GetDbVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbVersionsResult> {
     args = args || {};

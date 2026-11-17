@@ -120,6 +120,12 @@ class RenewInstance(pulumi.CustomResource):
             time_span=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewCkafkaInstance](https://www.tencentcloud.com/search/?wd=RenewCkafkaInstance&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +151,12 @@ class RenewInstance(pulumi.CustomResource):
             instance_id="InstanceId",
             time_span=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewCkafkaInstance](https://www.tencentcloud.com/search/?wd=RenewCkafkaInstance&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

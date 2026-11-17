@@ -29,6 +29,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.User
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+        ///   - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
         /// </summary>
         public static Task<GetInfoResult> InvokeAsync(GetInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoArgs(), options.WithDefaults());
@@ -50,6 +58,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.User
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+        ///   - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
         /// </summary>
         public static Output<GetInfoResult> Invoke(GetInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoInvokeArgs(), options.WithDefaults());
@@ -71,6 +87,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.User
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+        ///   - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
         /// </summary>
         public static Output<GetInfoResult> Invoke(GetInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoInvokeArgs(), options.WithDefaults());

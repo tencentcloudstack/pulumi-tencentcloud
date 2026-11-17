@@ -179,6 +179,14 @@ class TargetGroupAttachments(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateTargetGroups](https://www.tencentcloud.com/document/api/214/33847)
+        * Read: [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+        * Delete: [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/214/33822)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -228,6 +236,14 @@ class TargetGroupAttachments(pulumi.CustomResource):
                 "location_id": "loc-jjqr0ric",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateTargetGroups](https://www.tencentcloud.com/document/api/214/33847)
+        * Read: [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+        * Delete: [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/214/33822)
 
 
         :param str resource_name: The name of the resource.

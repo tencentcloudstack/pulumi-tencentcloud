@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [IsolateHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45898)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/isolateHourInstanceOperation:IsolateHourInstanceOperation")]
     public partial class IsolateHourInstanceOperation : global::Pulumi.CustomResource

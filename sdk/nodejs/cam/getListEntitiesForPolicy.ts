@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     entityFilter: "All",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
  */
 export function getListEntitiesForPolicy(args: GetListEntitiesForPolicyArgs, opts?: pulumi.InvokeOptions): Promise<GetListEntitiesForPolicyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetListEntitiesForPolicyResult {
  *     entityFilter: "All",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
  */
 export function getListEntitiesForPolicyOutput(args: GetListEntitiesForPolicyOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListEntitiesForPolicyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

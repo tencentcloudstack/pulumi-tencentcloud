@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsTaskCode](https://www.tencentcloud.com/document/api/1174/73830)
         /// </summary>
         public static Task<GetOpsTaskCodeResult> InvokeAsync(GetOpsTaskCodeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsTaskCodeResult>("tencentcloud:Wedata/getOpsTaskCode:getOpsTaskCode", args ?? new GetOpsTaskCodeArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsTaskCode](https://www.tencentcloud.com/document/api/1174/73830)
         /// </summary>
         public static Output<GetOpsTaskCodeResult> Invoke(GetOpsTaskCodeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsTaskCodeResult>("tencentcloud:Wedata/getOpsTaskCode:getOpsTaskCode", args ?? new GetOpsTaskCodeInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsTaskCode](https://www.tencentcloud.com/document/api/1174/73830)
         /// </summary>
         public static Output<GetOpsTaskCodeResult> Invoke(GetOpsTaskCodeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsTaskCodeResult>("tencentcloud:Wedata/getOpsTaskCode:getOpsTaskCode", args ?? new GetOpsTaskCodeInvokeArgs(), options.WithDefaults());

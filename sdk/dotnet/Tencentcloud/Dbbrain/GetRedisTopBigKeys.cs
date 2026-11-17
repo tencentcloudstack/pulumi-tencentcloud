@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRedisTopBigKeysResult> InvokeAsync(GetRedisTopBigKeysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRedisTopBigKeysResult> Invoke(GetRedisTopBigKeysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRedisTopBigKeysResult> Invoke(GetRedisTopBigKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysInvokeArgs(), options.WithDefaults());

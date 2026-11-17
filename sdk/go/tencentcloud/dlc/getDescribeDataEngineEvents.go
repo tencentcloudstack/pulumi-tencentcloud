@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&type=document&lang=en)
 func GetDescribeDataEngineEvents(ctx *pulumi.Context, args *GetDescribeDataEngineEventsArgs, opts ...pulumi.InvokeOption) (*GetDescribeDataEngineEventsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeDataEngineEventsResult

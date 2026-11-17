@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetConnectResourceResult> InvokeAsync(GetConnectResourceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetConnectResourceResult> Invoke(GetConnectResourceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConnectResources](https://www.tencentcloud.com/search/?wd=DescribeConnectResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetConnectResourceResult> Invoke(GetConnectResourceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectResourceResult>("tencentcloud:Ckafka/getConnectResource:getConnectResource", args ?? new GetConnectResourceInvokeArgs(), options.WithDefaults());

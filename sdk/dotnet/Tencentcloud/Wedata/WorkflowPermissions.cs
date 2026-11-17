@@ -54,6 +54,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWorkflowPermissions](https://www.tencentcloud.com/document/api/1174/77935)
+    /// * Read: [ListWorkflowPermissions](https://www.tencentcloud.com/document/api/1174/77916)
+    /// * Update:
+    ///   - [CreateWorkflowPermissions](https://www.tencentcloud.com/document/api/1174/77935)
+    ///   - [DeleteWorkflowPermissions](https://www.tencentcloud.com/document/api/1174/77931)
+    /// * Delete:
+    ///   - [DeleteWorkflowPermissions](https://www.tencentcloud.com/document/api/1174/77931)
+    ///   - [ListWorkflowPermissions](https://www.tencentcloud.com/document/api/1174/77916)
+    /// 
     /// ## Import
     /// 
     /// WeData workflow permissions can be imported using the projectId#entityId#entityType, e.g.

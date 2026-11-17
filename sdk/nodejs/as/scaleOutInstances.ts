@@ -58,6 +58,12 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ScaleOutInstances](https://www.tencentcloud.com/document/api/377/40717)
+ *
  * ## Import
  *
  * as scaleOutInstances can be imported using the id, e.g.

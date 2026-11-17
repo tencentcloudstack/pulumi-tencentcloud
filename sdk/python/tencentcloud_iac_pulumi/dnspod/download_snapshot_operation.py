@@ -135,6 +135,12 @@ class DownloadSnapshotOperation(pulumi.CustomResource):
             snapshot_id="456")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DownloadSnapshot](https://www.tencentcloud.com/search/?wd=DownloadSnapshot&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +166,12 @@ class DownloadSnapshotOperation(pulumi.CustomResource):
             domain="dnspod.cn",
             snapshot_id="456")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DownloadSnapshot](https://www.tencentcloud.com/search/?wd=DownloadSnapshot&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

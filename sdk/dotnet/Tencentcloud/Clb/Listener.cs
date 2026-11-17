@@ -340,6 +340,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateListener](https://www.tencentcloud.com/document/api/214/33842)
+    /// * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+    /// * Update: [ModifyListener](https://www.tencentcloud.com/document/api/214/33818)
+    /// * Delete: [DeleteListener](https://www.tencentcloud.com/document/api/214/33838)
+    /// 
     /// ## Import
     /// 
     /// CLB listener can be imported using the clbId#listenerId (version &gt;= 1.47.0), e.g.

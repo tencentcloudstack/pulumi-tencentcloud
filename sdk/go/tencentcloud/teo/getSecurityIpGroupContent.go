@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
 func GetSecurityIpGroupContent(ctx *pulumi.Context, args *GetSecurityIpGroupContentArgs, opts ...pulumi.InvokeOption) (*GetSecurityIpGroupContentResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityIpGroupContentResult

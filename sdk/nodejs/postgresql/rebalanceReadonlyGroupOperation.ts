@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  * });
  * const rebalanceReadonlyGroupOperation = new tencentcloud.postgresql.RebalanceReadonlyGroupOperation("rebalance_readonly_group_operation", {readOnlyGroupId: groupRebalance.id});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RebalanceReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39722)
  */
 export class RebalanceReadonlyGroupOperation extends pulumi.CustomResource {
     /**

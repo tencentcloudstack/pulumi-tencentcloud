@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "waf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostWafInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostWafInstanceList&type=document&lang=en)
  */
 export function getDescribeHostWafInstanceList(args: GetDescribeHostWafInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostWafInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetDescribeHostWafInstanceListResult {
  *     resourceType: "waf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostWafInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostWafInstanceList&type=document&lang=en)
  */
 export function getDescribeHostWafInstanceListOutput(args: GetDescribeHostWafInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostWafInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

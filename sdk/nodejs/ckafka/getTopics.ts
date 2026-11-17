@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  *     topicName: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+ *   - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
  */
 export function getTopics(args: GetTopicsArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +89,14 @@ export interface GetTopicsResult {
  *     topicName: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+ *   - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
  */
 export function getTopicsOutput(args: GetTopicsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTopicsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

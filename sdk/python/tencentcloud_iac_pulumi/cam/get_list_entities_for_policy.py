@@ -117,6 +117,12 @@ def get_list_entities_for_policy(entity_filter: Optional[_builtins.str] = None,
         entity_filter="All")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
+
 
     :param _builtins.str entity_filter: Can take values of &amp;amp;#39;All&amp;amp;#39;, &amp;amp;#39;User&amp;amp;#39;, &amp;amp;#39;Group&amp;amp;#39;, and &amp;amp;#39;Role&amp;amp;#39;. &amp;amp;#39;All&amp;amp;#39; represents obtaining all entity types, &amp;amp;#39;User&amp;amp;#39; represents only obtaining sub accounts, &amp;amp;#39;Group&amp;amp;#39; represents only obtaining user groups, and &amp;amp;#39;Role&amp;amp;#39; represents only obtaining roles. The default value is&amp;amp;#39; All &amp;amp;#39;.
     :param _builtins.int policy_id: Policy Id.
@@ -155,6 +161,12 @@ def get_list_entities_for_policy_output(entity_filter: pulumi.Input[Optional[Opt
     list_entities_for_policy = tencentcloud.cam.get_list_entities_for_policy(policy_id=1,
         entity_filter="All")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
 
 
     :param _builtins.str entity_filter: Can take values of &amp;amp;#39;All&amp;amp;#39;, &amp;amp;#39;User&amp;amp;#39;, &amp;amp;#39;Group&amp;amp;#39;, and &amp;amp;#39;Role&amp;amp;#39;. &amp;amp;#39;All&amp;amp;#39; represents obtaining all entity types, &amp;amp;#39;User&amp;amp;#39; represents only obtaining sub accounts, &amp;amp;#39;Group&amp;amp;#39; represents only obtaining user groups, and &amp;amp;#39;Role&amp;amp;#39; represents only obtaining roles. The default value is&amp;amp;#39; All &amp;amp;#39;.

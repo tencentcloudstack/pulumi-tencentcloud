@@ -173,6 +173,12 @@ def get_ssh_key_pair_value(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.ssm.get_ssh_key_pair_value(ssh_key_id="skey-2ae2snwd")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str secret_name: Secret name.
@@ -231,6 +237,12 @@ def get_ssh_key_pair_value_output(result_output_file: pulumi.Input[Optional[Opti
 
     example = tencentcloud.ssm.get_ssh_key_pair_value(ssh_key_id="skey-2ae2snwd")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -239,6 +239,15 @@ class Script(pulumi.CustomResource):
             file_extension_type="sql")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UploadContent](https://www.tencentcloud.com/document/api/1174/61143)
+        * Read: [GetFileInfo](https://www.tencentcloud.com/document/api/1174/61151)
+        * Update: [UploadContent](https://www.tencentcloud.com/document/api/1174/61143)
+        * Delete: [DeleteFile](https://www.tencentcloud.com/document/api/1174/61166)
+
         ## Import
 
         wedata script can be imported using the id, e.g.
@@ -278,6 +287,15 @@ class Script(pulumi.CustomResource):
             region="ap-guangzhou",
             file_extension_type="sql")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UploadContent](https://www.tencentcloud.com/document/api/1174/61143)
+        * Read: [GetFileInfo](https://www.tencentcloud.com/document/api/1174/61151)
+        * Update: [UploadContent](https://www.tencentcloud.com/document/api/1174/61143)
+        * Delete: [DeleteFile](https://www.tencentcloud.com/document/api/1174/61166)
 
         ## Import
 

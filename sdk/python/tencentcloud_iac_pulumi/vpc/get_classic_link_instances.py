@@ -100,6 +100,12 @@ def get_classic_link_instances(filters: Optional[Sequence[Union['GetClassicLinkI
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
+
 
     :param Sequence[Union['GetClassicLinkInstancesFilterArgs', 'GetClassicLinkInstancesFilterArgsDict']] filters: Filter conditions.`vpc-id` - String - (Filter condition) The VPC instance ID. `vm-ip` - String - (Filter condition) The IP address of the CVM on the basic network.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_classic_link_instances_output(filters: pulumi.Input[Optional[Optional[Se
         "values": ["vpc-lh4nqig9"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
 
 
     :param Sequence[Union['GetClassicLinkInstancesFilterArgs', 'GetClassicLinkInstancesFilterArgsDict']] filters: Filter conditions.`vpc-id` - String - (Filter condition) The VPC instance ID. `vm-ip` - String - (Filter condition) The IP address of the CVM on the basic network.

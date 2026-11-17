@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
  */
 export function getInstanceInfo(args: GetInstanceInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetInstanceInfoResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
  */
 export function getInstanceInfoOutput(args: GetInstanceInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

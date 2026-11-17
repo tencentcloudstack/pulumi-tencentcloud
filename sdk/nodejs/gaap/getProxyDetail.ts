@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     proxyId: "link-m9t4yho9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
  */
 export function getProxyDetail(args: GetProxyDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetProxyDetailResult {
  *     proxyId: "link-m9t4yho9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
  */
 export function getProxyDetailOutput(args: GetProxyDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProxyDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

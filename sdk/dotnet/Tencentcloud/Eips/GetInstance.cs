@@ -106,6 +106,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eips
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Task<GetInstanceResult> InvokeAsync(GetInstanceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Eips/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
@@ -204,6 +212,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eips
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetInstanceResult> Invoke(GetInstanceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Eips/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
@@ -302,6 +318,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eips
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetInstanceResult> Invoke(GetInstanceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Eips/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());

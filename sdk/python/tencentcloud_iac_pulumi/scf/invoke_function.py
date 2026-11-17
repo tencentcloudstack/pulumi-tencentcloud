@@ -286,6 +286,12 @@ class InvokeFunction(pulumi.CustomResource):
             namespace="default")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [Invoke](https://www.tencentcloud.com/document/api/583/17243)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -317,6 +323,12 @@ class InvokeFunction(pulumi.CustomResource):
             qualifier="2",
             namespace="default")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [Invoke](https://www.tencentcloud.com/document/api/583/17243)
 
 
         :param str resource_name: The name of the resource.

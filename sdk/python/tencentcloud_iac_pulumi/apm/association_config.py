@@ -219,6 +219,14 @@ class AssociationConfig(pulumi.CustomResource):
             peer_id="prom-kx3eqdby")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyApmAssociation](https://www.tencentcloud.com/document/api/1166/74309)
+        * Read: [DescribeApmAssociation](https://www.tencentcloud.com/document/api/1166/74312)
+        * Update: [ModifyApmAssociation](https://www.tencentcloud.com/document/api/1166/74309)
+
         ## Import
 
         APM association config can be imported using the id, e.g.
@@ -257,6 +265,14 @@ class AssociationConfig(pulumi.CustomResource):
             status=1,
             peer_id="prom-kx3eqdby")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyApmAssociation](https://www.tencentcloud.com/document/api/1166/74309)
+        * Read: [DescribeApmAssociation](https://www.tencentcloud.com/document/api/1166/74312)
+        * Update: [ModifyApmAssociation](https://www.tencentcloud.com/document/api/1166/74309)
 
         ## Import
 

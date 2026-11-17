@@ -87,6 +87,14 @@ class StartupInstanceOperation(pulumi.CustomResource):
         example = tencentcloud.redis.StartupInstanceOperation("example", instance_id="crs-c1nl9rpv")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [StartupInstance](https://www.tencentcloud.com/document/api/239/33291)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -111,6 +119,14 @@ class StartupInstanceOperation(pulumi.CustomResource):
 
         example = tencentcloud.redis.StartupInstanceOperation("example", instance_id="crs-c1nl9rpv")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+          - [StartupInstance](https://www.tencentcloud.com/document/api/239/33291)
 
 
         :param str resource_name: The name of the resource.

@@ -16,6 +16,15 @@ import * as utilities from "../utilities";
  * const topic = new tencentcloud.tcmq.Topic("topic", {topicName: "topic_name"});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateCmqTopic](https://www.tencentcloud.com/search/?wd=CreateCmqTopic&type=document&lang=en)
+ * * Read: [DescribeCmqTopicDetail](https://www.tencentcloud.com/search/?wd=DescribeCmqTopicDetail&type=document&lang=en)
+ * * Update: [ModifyCmqTopicAttribute](https://www.tencentcloud.com/search/?wd=ModifyCmqTopicAttribute&type=document&lang=en)
+ * * Delete: [DeleteCmqTopic](https://www.tencentcloud.com/search/?wd=DeleteCmqTopic&type=document&lang=en)
+ *
  * ## Import
  *
  * tcmq topic can be imported using the id, e.g.

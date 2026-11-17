@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     limit: 20,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAllScenes](https://www.tencentcloud.com/document/api/1103/52167)
  */
 export function getAllScene(args?: GetAllSceneArgs, opts?: pulumi.InvokeOptions): Promise<GetAllSceneResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetAllSceneResult {
  *     limit: 20,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAllScenes](https://www.tencentcloud.com/document/api/1103/52167)
  */
 export function getAllSceneOutput(args?: GetAllSceneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAllSceneResult> {
     args = args || {};

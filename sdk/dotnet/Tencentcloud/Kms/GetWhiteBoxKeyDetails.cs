@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetWhiteBoxKeyDetailsResult> InvokeAsync(GetWhiteBoxKeyDetailsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWhiteBoxKeyDetailsResult> Invoke(GetWhiteBoxKeyDetailsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWhiteBoxKeyDetailsResult> Invoke(GetWhiteBoxKeyDetailsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsInvokeArgs(), options.WithDefaults());

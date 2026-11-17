@@ -164,6 +164,12 @@ def get_describe_host_cos_instance_list(certificate_id: Optional[_builtins.str] 
         resource_type="cos")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostCosInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCosInstanceList&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostCosInstanceListFilterArgs', 'GetDescribeHostCosInstanceListFilterArgsDict']] filters: List of filter parameters.
@@ -209,6 +215,12 @@ def get_describe_host_cos_instance_list_output(certificate_id: pulumi.Input[Opti
     describe_host_cos_instance_list = tencentcloud.ssl.get_describe_host_cos_instance_list(certificate_id="8u8DII0l",
         resource_type="cos")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostCosInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCosInstanceList&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

@@ -116,6 +116,12 @@ def get_instances(result_output_file: Optional[_builtins.str] = None,
     cdwpg_instances = tencentcloud.cdwpg.get_instances()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSimpleInstances](https://www.tencentcloud.com/document/api/1138/68300)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str search_instance_id: Search instance id.
@@ -153,6 +159,12 @@ def get_instances_output(result_output_file: pulumi.Input[Optional[Optional[_bui
 
     cdwpg_instances = tencentcloud.cdwpg.get_instances()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSimpleInstances](https://www.tencentcloud.com/document/api/1138/68300)
 
 
     :param _builtins.str result_output_file: Used to save results.

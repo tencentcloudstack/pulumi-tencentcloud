@@ -141,6 +141,14 @@ class NotifyRoutes(pulumi.CustomResource):
             route_item_ids="rti-i8bap903")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [NotifyRoutes](https://www.tencentcloud.com/document/api/215/39642)
+        * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+        * Delete: [WithdrawNotifyRoutes](https://www.tencentcloud.com/document/api/215/39641)
+
         ## Import
 
         vpc notify_routes can be imported using the id, e.g.
@@ -180,6 +188,14 @@ class NotifyRoutes(pulumi.CustomResource):
             route_table_id=route_table.id,
             route_item_ids="rti-i8bap903")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [NotifyRoutes](https://www.tencentcloud.com/document/api/215/39642)
+        * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+        * Delete: [WithdrawNotifyRoutes](https://www.tencentcloud.com/document/api/215/39641)
 
         ## Import
 

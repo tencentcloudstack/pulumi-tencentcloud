@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
 func GetTimeShiftStreamList(ctx *pulumi.Context, args *GetTimeShiftStreamListArgs, opts ...pulumi.InvokeOption) (*GetTimeShiftStreamListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTimeShiftStreamListResult

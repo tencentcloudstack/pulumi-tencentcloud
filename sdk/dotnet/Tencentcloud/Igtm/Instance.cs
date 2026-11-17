@@ -41,6 +41,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribeInstanceDetail&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyInstanceConfig](https://www.tencentcloud.com/search/?wd=ModifyInstanceConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// IGTM instance can be imported using the id, e.g.

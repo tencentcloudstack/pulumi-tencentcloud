@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-xxxxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/213/33259)
  */
 export function getInstanceVncUrl(args: GetInstanceVncUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceVncUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetInstanceVncUrlResult {
  *     instanceId: "ins-xxxxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/213/33259)
  */
 export function getInstanceVncUrlOutput(args: GetInstanceVncUrlOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceVncUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

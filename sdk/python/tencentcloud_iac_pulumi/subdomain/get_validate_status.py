@@ -94,6 +94,12 @@ def get_validate_status(domain_zone: Optional[_builtins.str] = None,
     subdomain_validate_status = tencentcloud.subdomain.get_validate_status(domain_zone="www.iac-tf.cloud")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&type=document&lang=en)
+
 
     :param _builtins.str domain_zone: Zone domain for which to view the verification status of TXT records.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_validate_status_output(domain_zone: pulumi.Input[Optional[_builtins.str]
 
     subdomain_validate_status = tencentcloud.subdomain.get_validate_status(domain_zone="www.iac-tf.cloud")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubdomainValidateStatus](https://www.tencentcloud.com/search/?wd=DescribeSubdomainValidateStatus&type=document&lang=en)
 
 
     :param _builtins.str domain_zone: Zone domain for which to view the verification status of TXT records.

@@ -38,6 +38,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/1098/74209)
+ *   - [OpenAuditService](https://www.tencentcloud.com/document/api/1098/52722)
+ * * Read: [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/1098/74209)
+ * * Update: [ModifyAuditService](https://www.tencentcloud.com/document/api/1098/52723)
+ * * Delete:
+ *   - [CloseAuditService](https://www.tencentcloud.com/document/api/1098/52729)
+ *   - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/1098/74209)
+ *
  * ## Import
  *
  * CynosDB audit service can be imported using the id, e.g.

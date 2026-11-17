@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
         /// </summary>
         public static Task<GetListSchemaResult> InvokeAsync(GetListSchemaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListSchemaResult>("tencentcloud:Wedata/getListSchema:getListSchema", args ?? new GetListSchemaArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
         /// </summary>
         public static Output<GetListSchemaResult> Invoke(GetListSchemaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListSchemaResult>("tencentcloud:Wedata/getListSchema:getListSchema", args ?? new GetListSchemaInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
         /// </summary>
         public static Output<GetListSchemaResult> Invoke(GetListSchemaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListSchemaResult>("tencentcloud:Wedata/getListSchema:getListSchema", args ?? new GetListSchemaInvokeArgs(), options.WithDefaults());

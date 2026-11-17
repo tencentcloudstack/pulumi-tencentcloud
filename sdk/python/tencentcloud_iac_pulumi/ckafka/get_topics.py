@@ -110,6 +110,14 @@ def get_topics(instance_id: Optional[_builtins.str] = None,
         topic_name="tf_example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+      - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+
 
     :param _builtins.str instance_id: Ckafka instance ID.
     :param _builtins.str result_output_file: Used to store results.
@@ -144,6 +152,14 @@ def get_topics_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
     example = tencentcloud.ckafka.get_topics(instance_id="ckafka-vv7wp5nx",
         topic_name="tf_example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+      - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
 
 
     :param _builtins.str instance_id: Ckafka instance ID.

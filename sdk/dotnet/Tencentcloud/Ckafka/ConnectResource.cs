@@ -43,6 +43,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateConnectResource](https://www.tencentcloud.com/search/?wd=CreateConnectResource&amp;type=document&amp;lang=en)
+    ///   - [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&amp;type=document&amp;lang=en)
+    ///   - [ModifyConnectResource](https://www.tencentcloud.com/search/?wd=ModifyConnectResource&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteConnectResource](https://www.tencentcloud.com/search/?wd=DeleteConnectResource&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ckafka ConnectResource can be imported using the id, e.g.

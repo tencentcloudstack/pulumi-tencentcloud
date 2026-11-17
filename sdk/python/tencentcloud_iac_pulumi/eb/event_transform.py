@@ -221,6 +221,15 @@ class EventTransform(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTransformation](https://www.tencentcloud.com/document/api/1108/45839)
+        * Read: [GetTransformation](https://www.tencentcloud.com/document/api/1108/45837)
+        * Update: [UpdateTransformation](https://www.tencentcloud.com/document/api/1108/45836)
+        * Delete: [DeleteTransformation](https://www.tencentcloud.com/document/api/1108/45838)
+
         ## Import
 
         eb eb_transform can be imported using the id, e.g.
@@ -322,6 +331,15 @@ class EventTransform(pulumi.CustomResource):
                 },
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTransformation](https://www.tencentcloud.com/document/api/1108/45839)
+        * Read: [GetTransformation](https://www.tencentcloud.com/document/api/1108/45837)
+        * Update: [UpdateTransformation](https://www.tencentcloud.com/document/api/1108/45836)
+        * Delete: [DeleteTransformation](https://www.tencentcloud.com/document/api/1108/45838)
 
         ## Import
 

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
         /// </summary>
         public static Task<GetInsAttributeResult> InvokeAsync(GetInsAttributeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
         /// </summary>
         public static Output<GetInsAttributeResult> Invoke(GetInsAttributeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
         /// </summary>
         public static Output<GetInsAttributeResult> Invoke(GetInsAttributeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeInvokeArgs(), options.WithDefaults());

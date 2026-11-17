@@ -70,6 +70,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+        ///   - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
         /// </summary>
         public static Task<GetLayer4ListenersResult> InvokeAsync(GetLayer4ListenersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayer4ListenersResult>("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", args ?? new GetLayer4ListenersArgs(), options.WithDefaults());
@@ -132,6 +140,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+        ///   - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
         /// </summary>
         public static Output<GetLayer4ListenersResult> Invoke(GetLayer4ListenersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayer4ListenersResult>("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", args ?? new GetLayer4ListenersInvokeArgs(), options.WithDefaults());
@@ -194,6 +210,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+        ///   - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
         /// </summary>
         public static Output<GetLayer4ListenersResult> Invoke(GetLayer4ListenersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayer4ListenersResult>("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", args ?? new GetLayer4ListenersInvokeArgs(), options.WithDefaults());

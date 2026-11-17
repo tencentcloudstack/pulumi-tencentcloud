@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const emailIdentities = tencentcloud.ses.getEmailIdentities({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
  */
 export function getEmailIdentities(args?: GetEmailIdentitiesArgs, opts?: pulumi.InvokeOptions): Promise<GetEmailIdentitiesResult> {
     args = args || {};
@@ -69,6 +75,12 @@ export interface GetEmailIdentitiesResult {
  *
  * const emailIdentities = tencentcloud.ses.getEmailIdentities({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
  */
 export function getEmailIdentitiesOutput(args?: GetEmailIdentitiesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEmailIdentitiesResult> {
     args = args || {};

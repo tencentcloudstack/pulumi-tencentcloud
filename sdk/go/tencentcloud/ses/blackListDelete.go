@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DeleteBlackList](https://www.tencentcloud.com/document/api/1084/39417)
 type BlackListDelete struct {
 	pulumi.CustomResourceState
 

@@ -120,6 +120,20 @@ class GatewaySslClientCert(pulumi.CustomResource):
             switch="off")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [DisableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=DisableVpnGatewaySslClientCert&type=document&lang=en)
+          - [EnableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=EnableVpnGatewaySslClientCert&type=document&lang=en)
+        * Read: [DescribeVpnGatewaySslClients](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslClients&type=document&lang=en)
+        * Update:
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [DisableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=DisableVpnGatewaySslClientCert&type=document&lang=en)
+          - [EnableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=EnableVpnGatewaySslClientCert&type=document&lang=en)
+
         ## Import
 
         vpc vpn_gateway_ssl_client_cert can be imported using the id, e.g.
@@ -153,6 +167,20 @@ class GatewaySslClientCert(pulumi.CustomResource):
             ssl_vpn_client_id="vpnc-123456",
             switch="off")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [DisableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=DisableVpnGatewaySslClientCert&type=document&lang=en)
+          - [EnableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=EnableVpnGatewaySslClientCert&type=document&lang=en)
+        * Read: [DescribeVpnGatewaySslClients](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslClients&type=document&lang=en)
+        * Update:
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [DisableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=DisableVpnGatewaySslClientCert&type=document&lang=en)
+          - [EnableVpnGatewaySslClientCert](https://www.tencentcloud.com/search/?wd=EnableVpnGatewaySslClientCert&type=document&lang=en)
 
         ## Import
 

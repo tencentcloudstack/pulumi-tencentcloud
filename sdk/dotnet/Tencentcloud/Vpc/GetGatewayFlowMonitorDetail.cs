@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
         /// </summary>
         public static Task<GetGatewayFlowMonitorDetailResult> InvokeAsync(GetGatewayFlowMonitorDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
         /// </summary>
         public static Output<GetGatewayFlowMonitorDetailResult> Invoke(GetGatewayFlowMonitorDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
         /// </summary>
         public static Output<GetGatewayFlowMonitorDetailResult> Invoke(GetGatewayFlowMonitorDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayFlowMonitorDetailResult>("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args ?? new GetGatewayFlowMonitorDetailInvokeArgs(), options.WithDefaults());

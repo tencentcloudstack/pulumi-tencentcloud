@@ -121,6 +121,15 @@ class SwitchForUpgrade(pulumi.CustomResource):
         example_switch_for_upgrade = tencentcloud.mysql.SwitchForUpgrade("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+          - [SwitchForUpgrade](https://www.tencentcloud.com/document/api/236/15864)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +188,15 @@ class SwitchForUpgrade(pulumi.CustomResource):
             })
         example_switch_for_upgrade = tencentcloud.mysql.SwitchForUpgrade("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+          - [SwitchForUpgrade](https://www.tencentcloud.com/document/api/236/15864)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 
 
         :param str resource_name: The name of the resource.

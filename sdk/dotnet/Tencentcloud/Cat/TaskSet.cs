@@ -77,6 +77,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateProbeTasks](https://www.tencentcloud.com/search/?wd=CreateProbeTasks&amp;type=document&amp;lang=en)
+    ///   - [DescribeProbeTasks](https://www.tencentcloud.com/search/?wd=DescribeProbeTasks&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeProbeTasks](https://www.tencentcloud.com/search/?wd=DescribeProbeTasks&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ResumeProbeTask](https://www.tencentcloud.com/search/?wd=ResumeProbeTask&amp;type=document&amp;lang=en)
+    ///   - [SuspendProbeTask](https://www.tencentcloud.com/search/?wd=SuspendProbeTask&amp;type=document&amp;lang=en)
+    ///   - [UpdateProbeTaskAttributes](https://www.tencentcloud.com/search/?wd=UpdateProbeTaskAttributes&amp;type=document&amp;lang=en)
+    ///   - [UpdateProbeTaskConfigurationList](https://www.tencentcloud.com/search/?wd=UpdateProbeTaskConfigurationList&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteProbeTask](https://www.tencentcloud.com/search/?wd=DeleteProbeTask&amp;type=document&amp;lang=en)
+    ///   - [DescribeProbeTasks](https://www.tencentcloud.com/search/?wd=DescribeProbeTasks&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cat TaskSet can be imported using the id, e.g.

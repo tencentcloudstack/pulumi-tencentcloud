@@ -10,6 +10,11 @@ export type DbCustomCluster = import("./dbCustomCluster").DbCustomCluster;
 export const DbCustomCluster: typeof import("./dbCustomCluster").DbCustomCluster = null as any;
 utilities.lazyLoad(exports, ["DbCustomCluster"], () => require("./dbCustomCluster"));
 
+export { DbCustomDisasterRecoverGroupArgs, DbCustomDisasterRecoverGroupState } from "./dbCustomDisasterRecoverGroup";
+export type DbCustomDisasterRecoverGroup = import("./dbCustomDisasterRecoverGroup").DbCustomDisasterRecoverGroup;
+export const DbCustomDisasterRecoverGroup: typeof import("./dbCustomDisasterRecoverGroup").DbCustomDisasterRecoverGroup = null as any;
+utilities.lazyLoad(exports, ["DbCustomDisasterRecoverGroup"], () => require("./dbCustomDisasterRecoverGroup"));
+
 export { DbCustomNodeArgs, DbCustomNodeState } from "./dbCustomNode";
 export type DbCustomNode = import("./dbCustomNode").DbCustomNode;
 export const DbCustomNode: typeof import("./dbCustomNode").DbCustomNode = null as any;
@@ -82,6 +87,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Dbdc/dbCustomCluster:DbCustomCluster":
                 return new DbCustomCluster(name, <any>undefined, { urn })
+            case "tencentcloud:Dbdc/dbCustomDisasterRecoverGroup:DbCustomDisasterRecoverGroup":
+                return new DbCustomDisasterRecoverGroup(name, <any>undefined, { urn })
             case "tencentcloud:Dbdc/dbCustomNode:DbCustomNode":
                 return new DbCustomNode(name, <any>undefined, { urn })
             case "tencentcloud:Dbdc/nodeToDbCustomClusterAttachment:NodeToDbCustomClusterAttachment":
@@ -92,5 +99,6 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Dbdc/dbCustomCluster", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dbdc/dbCustomDisasterRecoverGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dbdc/dbCustomNode", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dbdc/nodeToDbCustomClusterAttachment", _module)

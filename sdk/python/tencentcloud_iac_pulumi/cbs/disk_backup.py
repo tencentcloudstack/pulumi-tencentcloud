@@ -133,6 +133,18 @@ class DiskBackup(pulumi.CustomResource):
             disk_backup_name="tf-example")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDiskBackup](https://www.tencentcloud.com/document/api/362/53930)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/document/api/362/50788)
+        * Read: [DescribeDiskBackups](https://www.tencentcloud.com/document/api/362/50788)
+        * Delete:
+          - [DeleteDiskBackups](https://www.tencentcloud.com/document/api/362/50789)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/document/api/362/50788)
+
         ## Import
 
         CBS disk backup can be imported using the id, e.g.
@@ -179,6 +191,18 @@ class DiskBackup(pulumi.CustomResource):
             disk_id=example.id,
             disk_backup_name="tf-example")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDiskBackup](https://www.tencentcloud.com/document/api/362/53930)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/document/api/362/50788)
+        * Read: [DescribeDiskBackups](https://www.tencentcloud.com/document/api/362/50788)
+        * Delete:
+          - [DeleteDiskBackups](https://www.tencentcloud.com/document/api/362/50789)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/document/api/362/50788)
 
         ## Import
 

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     vpnConnectionId: "vpnx-kme2tx8m",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ResetVpnConnection](https://www.tencentcloud.com/document/api/215/17505)
  */
 export class ConnectionReset extends pulumi.CustomResource {
     /**

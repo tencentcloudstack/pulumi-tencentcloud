@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+        ///   - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
         /// </summary>
         public static Task<GetLogResult> InvokeAsync(GetLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogResult>("tencentcloud:Cdwpg/getLog:getLog", args ?? new GetLogArgs(), options.WithDefaults());
@@ -60,6 +68,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+        ///   - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
         /// </summary>
         public static Output<GetLogResult> Invoke(GetLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogResult>("tencentcloud:Cdwpg/getLog:getLog", args ?? new GetLogInvokeArgs(), options.WithDefaults());
@@ -86,6 +102,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeErrorLog](https://www.tencentcloud.com/document/api/1138/69324)
+        ///   - [DescribeSlowLog](https://www.tencentcloud.com/document/api/1138/69322)
         /// </summary>
         public static Output<GetLogResult> Invoke(GetLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogResult>("tencentcloud:Cdwpg/getLog:getLog", args ?? new GetLogInvokeArgs(), options.WithDefaults());

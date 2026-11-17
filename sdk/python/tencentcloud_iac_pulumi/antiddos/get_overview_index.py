@@ -213,6 +213,12 @@ def get_overview_index(end_time: Optional[_builtins.str] = None,
         end_time="2023-11-21 12:32:12")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&type=document&lang=en)
+
 
     :param _builtins.str end_time: EndTime.
     :param _builtins.str result_output_file: Used to save results.
@@ -256,6 +262,12 @@ def get_overview_index_output(end_time: pulumi.Input[Optional[_builtins.str]] = 
     overview_index = tencentcloud.antiddos.get_overview_index(start_time="2023-11-20 12:32:12",
         end_time="2023-11-21 12:32:12")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&type=document&lang=en)
 
 
     :param _builtins.str end_time: EndTime.

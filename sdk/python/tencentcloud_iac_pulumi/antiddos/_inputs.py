@@ -41,6 +41,8 @@ __all__ = [
     'DefaultAlarmThresholdDefaultAlarmConfigArgsDict',
     'GetBgpInstancesFilterTagArgs',
     'GetBgpInstancesFilterTagArgsDict',
+    'GetDdosBlockRecordsFilterArgs',
+    'GetDdosBlockRecordsFilterArgsDict',
     'PacketFilterConfigPacketFilterConfigArgs',
     'PacketFilterConfigPacketFilterConfigArgsDict',
     'PortAclConfigAclConfigArgs',
@@ -1537,5 +1539,52 @@ class GetBgpInstancesFilterTagArgs:
     @tag_value.setter
     def tag_value(self, value: _builtins.str):
         pulumi.set(self, "tag_value", value)
+
+
+class GetDdosBlockRecordsFilterArgsDict(TypedDict):
+    name: _builtins.str
+    """
+    Filter field name. Supported: Resource, Status.
+    """
+    values: Sequence[_builtins.str]
+    """
+    Filter field value.
+    """
+
+@pulumi.input_type
+class GetDdosBlockRecordsFilterArgs:
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 values: Sequence[_builtins.str]):
+        """
+        :param _builtins.str name: Filter field name. Supported: Resource, Status.
+        :param Sequence[_builtins.str] values: Filter field value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Filter field name. Supported: Resource, Status.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: _builtins.str):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Sequence[_builtins.str]:
+        """
+        Filter field value.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[_builtins.str]):
+        pulumi.set(self, "values", value)
 
 

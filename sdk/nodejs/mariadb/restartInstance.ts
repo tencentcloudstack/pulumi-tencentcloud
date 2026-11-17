@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const restartInstance = new tencentcloud.mariadb.RestartInstance("restart_instance", {instanceId: "tdsql-9vqvls95"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+ *   - [RestartDBInstances](https://www.tencentcloud.com/search/?wd=RestartDBInstances&type=document&lang=en)
  */
 export class RestartInstance extends pulumi.CustomResource {
     /**

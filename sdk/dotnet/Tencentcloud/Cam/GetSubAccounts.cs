@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
         /// </summary>
         public static Task<GetSubAccountsResult> InvokeAsync(GetSubAccountsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSubAccountsResult>("tencentcloud:Cam/getSubAccounts:getSubAccounts", args ?? new GetSubAccountsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
         /// </summary>
         public static Output<GetSubAccountsResult> Invoke(GetSubAccountsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSubAccountsResult>("tencentcloud:Cam/getSubAccounts:getSubAccounts", args ?? new GetSubAccountsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
         /// </summary>
         public static Output<GetSubAccountsResult> Invoke(GetSubAccountsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSubAccountsResult>("tencentcloud:Cam/getSubAccounts:getSubAccounts", args ?? new GetSubAccountsInvokeArgs(), options.WithDefaults());

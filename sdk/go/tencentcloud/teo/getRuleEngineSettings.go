@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRulesSetting](https://www.tencentcloud.com/document/api/1145/50467)
 func GetRuleEngineSettings(ctx *pulumi.Context, args *GetRuleEngineSettingsArgs, opts ...pulumi.InvokeOption) (*GetRuleEngineSettingsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRuleEngineSettingsResult

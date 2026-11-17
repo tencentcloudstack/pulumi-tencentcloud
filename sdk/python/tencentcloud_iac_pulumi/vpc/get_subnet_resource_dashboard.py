@@ -96,6 +96,12 @@ def get_subnet_resource_dashboard(result_output_file: Optional[_builtins.str] = 
     subnet_resource_dashboard = tencentcloud.vpc.get_subnet_resource_dashboard(subnet_ids=["subnet-i9tpf6hq"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[_builtins.str] subnet_ids: Subnet instance ID, such as `subnet-f1xjkw1b`.
@@ -125,6 +131,12 @@ def get_subnet_resource_dashboard_output(result_output_file: pulumi.Input[Option
 
     subnet_resource_dashboard = tencentcloud.vpc.get_subnet_resource_dashboard(subnet_ids=["subnet-i9tpf6hq"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
 
 
     :param _builtins.str result_output_file: Used to save results.

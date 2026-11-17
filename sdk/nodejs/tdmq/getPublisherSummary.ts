@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     topic: "keep-topic",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&type=document&lang=en)
  */
 export function getPublisherSummary(args: GetPublisherSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetPublisherSummaryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetPublisherSummaryResult {
  *     topic: "keep-topic",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&type=document&lang=en)
  */
 export function getPublisherSummaryOutput(args: GetPublisherSummaryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublisherSummaryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

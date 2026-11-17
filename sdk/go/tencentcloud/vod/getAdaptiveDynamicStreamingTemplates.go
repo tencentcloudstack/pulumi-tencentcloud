@@ -80,6 +80,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
 func GetAdaptiveDynamicStreamingTemplates(ctx *pulumi.Context, args *GetAdaptiveDynamicStreamingTemplatesArgs, opts ...pulumi.InvokeOption) (*GetAdaptiveDynamicStreamingTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAdaptiveDynamicStreamingTemplatesResult

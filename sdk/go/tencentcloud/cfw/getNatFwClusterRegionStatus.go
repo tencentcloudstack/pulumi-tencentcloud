@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&type=document&lang=en)
 func GetNatFwClusterRegionStatus(ctx *pulumi.Context, args *GetNatFwClusterRegionStatusArgs, opts ...pulumi.InvokeOption) (*GetNatFwClusterRegionStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNatFwClusterRegionStatusResult

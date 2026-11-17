@@ -119,6 +119,12 @@ def get_mount_points(access_group_id: Optional[_builtins.str] = None,
     mount_points = tencentcloud.chdfs.get_mount_points(file_system_id="f14mpfy5lh4e")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMountPoints](https://www.tencentcloud.com/document/api/1106/42431)
+
 
     :param _builtins.str access_group_id: get mount points belongs to access group id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
     :param _builtins.str file_system_id: get mount points belongs to file system id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
@@ -156,6 +162,12 @@ def get_mount_points_output(access_group_id: pulumi.Input[Optional[Optional[_bui
 
     mount_points = tencentcloud.chdfs.get_mount_points(file_system_id="f14mpfy5lh4e")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMountPoints](https://www.tencentcloud.com/document/api/1106/42431)
 
 
     :param _builtins.str access_group_id: get mount points belongs to access group id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.

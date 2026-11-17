@@ -51,6 +51,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
 func GetSecurityAuditLogDownloadUrls(ctx *pulumi.Context, args *GetSecurityAuditLogDownloadUrlsArgs, opts ...pulumi.InvokeOption) (*GetSecurityAuditLogDownloadUrlsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityAuditLogDownloadUrlsResult

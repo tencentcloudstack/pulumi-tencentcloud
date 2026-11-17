@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AttachDisks](https://www.tencentcloud.com/document/api/362/16313)
+    /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    /// * Delete: [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storageSetAttachment:StorageSetAttachment")]
     public partial class StorageSetAttachment : global::Pulumi.CustomResource

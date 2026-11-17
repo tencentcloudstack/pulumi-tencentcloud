@@ -36,6 +36,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CopyJobs](https://www.tencentcloud.com/search/?wd=CopyJobs&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeJobs](https://www.tencentcloud.com/search/?wd=DescribeJobs&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteJobs](https://www.tencentcloud.com/search/?wd=DeleteJobs&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/jobCopy:JobCopy")]
     public partial class JobCopy : global::Pulumi.CustomResource

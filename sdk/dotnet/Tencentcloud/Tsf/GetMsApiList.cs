@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMsApiListResult> InvokeAsync(GetMsApiListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMsApiListResult> Invoke(GetMsApiListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMsApiListResult> Invoke(GetMsApiListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListInvokeArgs(), options.WithDefaults());

@@ -65,6 +65,58 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Cross-account data transform example:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const logsetSrc = new tencentcloud.cls.Logset("logset_src", {
+ *     logsetName: "tf-example-src",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const topicSrc = new tencentcloud.cls.Topic("topic_src", {
+ *     topicName: "tf-example_src",
+ *     logsetId: logsetSrc.id,
+ *     autoSplit: false,
+ *     maxSplitPartitions: 20,
+ *     partitionCount: 1,
+ *     period: 10,
+ *     storageType: "hot",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleCrossAccount = new tencentcloud.cls.DataTransform("example_cross_account", {
+ *     funcType: 1,
+ *     srcTopicId: topicSrc.id,
+ *     name: "tf-example-cross-account",
+ *     etlContent: "ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")",
+ *     taskType: 3,
+ *     enableFlag: 1,
+ *     dstResources: [{
+ *         topicId: "topic-id-in-target-account",
+ *         alias: "cross-account-dst",
+ *         isCrossAccount: true,
+ *         roleArn: "qcs::cam::uin/123456789:roleName/cls-cross-account-role",
+ *         externalId: "external-id-value",
+ *         topicName: "target-topic-name",
+ *         logsetName: "target-logset-name",
+ *     }],
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDataTransform](https://www.tencentcloud.com/document/api/614/56119)
+ * * Read: [DescribeDataTransformInfo](https://www.tencentcloud.com/document/api/614/56117)
+ * * Update: [ModifyDataTransform](https://www.tencentcloud.com/document/api/614/56116)
+ * * Delete: [DeleteDataTransform](https://www.tencentcloud.com/document/api/614/56118)
+ *
  * ## Import
  *
  * CLS data transform can be imported using the id, e.g.

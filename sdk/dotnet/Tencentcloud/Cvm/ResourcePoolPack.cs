@@ -65,6 +65,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeResourcePoolPacks](https://www.tencentcloud.com/search/?wd=DescribeResourcePoolPacks&amp;type=document&amp;lang=en)
+    ///   - [PurchaseResourcePoolPacks](https://www.tencentcloud.com/search/?wd=PurchaseResourcePoolPacks&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeResourcePoolPacks](https://www.tencentcloud.com/search/?wd=DescribeResourcePoolPacks&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeResourcePoolPacks](https://www.tencentcloud.com/search/?wd=DescribeResourcePoolPacks&amp;type=document&amp;lang=en)
+    ///   - [TerminateResourcePoolPacks](https://www.tencentcloud.com/search/?wd=TerminateResourcePoolPacks&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CVM resource pool packs can be imported using the resource pool pack ID, e.g.

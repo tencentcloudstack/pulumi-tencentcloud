@@ -30,6 +30,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         JumpDomain = "https://console.cloud.tencent.com",
     ///         DeliverStatus = 2,
     ///         AlarmShieldStatus = 2,
+    ///         SecureDetailStatus = 1,
     ///         CallbackPrioritize = true,
     ///         NoticeRules = new[]
     ///         {
@@ -181,6 +182,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAlarmNotice](https://www.tencentcloud.com/document/api/614/42829)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyAlarmNotice](https://www.tencentcloud.com/document/api/614/42822)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteAlarmNotice](https://www.tencentcloud.com/document/api/614/42827)
+    /// 
     /// ## Import
     /// 
     /// cls alarm notice can be imported using the id, e.g.
@@ -239,6 +255,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Output("noticeRules")]
         public Output<ImmutableArray<Outputs.AlarmNoticeNoticeRule>> NoticeRules { get; private set; } = null!;
+
+        /// <summary>
+        /// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+        /// </summary>
+        [Output("secureDetailStatus")]
+        public Output<int> SecureDetailStatus { get; private set; } = null!;
 
         /// <summary>
         /// Tag description list.
@@ -365,6 +387,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
             set => _noticeRules = value;
         }
 
+        /// <summary>
+        /// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+        /// </summary>
+        [Input("secureDetailStatus")]
+        public Input<int>? SecureDetailStatus { get; set; }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
@@ -462,6 +490,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
             get => _noticeRules ?? (_noticeRules = new InputList<Inputs.AlarmNoticeNoticeRuleGetArgs>());
             set => _noticeRules = value;
         }
+
+        /// <summary>
+        /// Alarm detail secure authentication redirect switch. Valid values: 1 (off, default), 2 (on).
+        /// </summary>
+        [Input("secureDetailStatus")]
+        public Input<int>? SecureDetailStatus { get; set; }
 
         [Input("tags")]
         private InputMap<string>? _tags;

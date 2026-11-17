@@ -50,6 +50,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateFirewallTemplate](https://www.tencentcloud.com/search/?wd=CreateFirewallTemplate&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeFirewallTemplateRules](https://www.tencentcloud.com/search/?wd=DescribeFirewallTemplateRules&amp;type=document&amp;lang=en)
+    ///   - [DescribeFirewallTemplates](https://www.tencentcloud.com/search/?wd=DescribeFirewallTemplates&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyFirewallTemplate](https://www.tencentcloud.com/search/?wd=ModifyFirewallTemplate&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteFirewallTemplate](https://www.tencentcloud.com/search/?wd=DeleteFirewallTemplate&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// lighthouse FirewallTemplate can be imported using the id, e.g.

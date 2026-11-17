@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
  */
 export function getInstanceParamRecords(args: GetInstanceParamRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceParamRecordsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetInstanceParamRecordsResult {
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/238/41642)
  */
 export function getInstanceParamRecordsOutput(args: GetInstanceParamRecordsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceParamRecordsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

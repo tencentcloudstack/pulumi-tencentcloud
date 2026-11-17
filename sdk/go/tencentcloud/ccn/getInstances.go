@@ -46,6 +46,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeCcnAttachedInstances](https://www.tencentcloud.com/document/api/215/34789)
+//   - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult

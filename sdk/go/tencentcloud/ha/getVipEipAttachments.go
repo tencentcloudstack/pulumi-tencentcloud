@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
 func GetVipEipAttachments(ctx *pulumi.Context, args *GetVipEipAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetVipEipAttachmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVipEipAttachmentsResult

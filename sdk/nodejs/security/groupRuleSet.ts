@@ -97,6 +97,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifySecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15810)
+ * * Read: [DescribeSecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15804)
+ * * Update:
+ *   - [DeleteSecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15809)
+ *   - [ModifySecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15810)
+ * * Delete: [ModifySecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15810)
+ *
  * ## Import
  *
  * Resource tencentcloud.Security.GroupRuleSet can be imported by passing security grou id:

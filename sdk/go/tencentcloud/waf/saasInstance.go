@@ -113,6 +113,22 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [GenerateDealsAndPayNew](https://www.tencentcloud.com/document/api/627/64577)
+//   - [ModifyInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64762)
+//   - [SwitchElasticMode](https://www.tencentcloud.com/document/api/627/64756)
+//
+// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/627/64766)
+// * Update:
+//   - [ModifyInstanceName](https://www.tencentcloud.com/document/api/627/64763)
+//   - [ModifyInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64762)
+//   - [ModifyInstanceRenewFlag](https://www.tencentcloud.com/document/api/627/64761)
+//   - [SwitchElasticMode](https://www.tencentcloud.com/document/api/627/64756)
 type SaasInstance struct {
 	pulumi.CustomResourceState
 

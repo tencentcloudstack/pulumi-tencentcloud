@@ -59,6 +59,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateJWTAuthenticator](https://www.tencentcloud.com/search/?wd=CreateJWTAuthenticator&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAuthenticator](https://www.tencentcloud.com/search/?wd=DescribeAuthenticator&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyJWTAuthenticator](https://www.tencentcloud.com/search/?wd=ModifyJWTAuthenticator&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAuthenticator](https://www.tencentcloud.com/search/?wd=DeleteAuthenticator&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// MQTT jwt authenticator can be imported using the id, e.g.

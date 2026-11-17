@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
 func GetMultiPathGatewayRegion(ctx *pulumi.Context, args *GetMultiPathGatewayRegionArgs, opts ...pulumi.InvokeOption) (*GetMultiPathGatewayRegionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMultiPathGatewayRegionResult

@@ -352,18 +352,20 @@ class Zone(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        vpc = tencentcloud.vpc.Instance("vpc",
+            name="vpc-example",
+            cidr_block="10.0.0.0/16")
         example = tencentcloud.privatedns.Zone("example",
             domain="domain.com",
             remark="remark.",
             vpc_sets=[{
                 "region": "ap-guangzhou",
-                "uniq_vpc_id": vpc["id"],
+                "uniq_vpc_id": vpc.id,
             }],
             account_vpc_sets=[{
                 "uin": "123456789",
                 "uniq_vpc_id": "vpc-adsebmya",
                 "region": "ap-guangzhou",
-                "vpc_name": "vpc-name",
             }],
             dns_forward_status="DISABLED",
             cname_speedup_status="ENABLED",
@@ -372,9 +374,29 @@ class Zone(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrivateZone](https://www.tencentcloud.com/document/api/1097/42123)
+          - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [ModifyPrivateZone](https://www.tencentcloud.com/document/api/1097/42112)
+          - [ModifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/42110)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeletePrivateZone](https://www.tencentcloud.com/document/api/1097/42121)
+
         ## Import
 
-        Private Dns Zone can be imported, e.g.
+        Private Dns Zone can be imported by id, e.g.
 
         ```sh
         $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky
@@ -434,18 +456,20 @@ class Zone(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        vpc = tencentcloud.vpc.Instance("vpc",
+            name="vpc-example",
+            cidr_block="10.0.0.0/16")
         example = tencentcloud.privatedns.Zone("example",
             domain="domain.com",
             remark="remark.",
             vpc_sets=[{
                 "region": "ap-guangzhou",
-                "uniq_vpc_id": vpc["id"],
+                "uniq_vpc_id": vpc.id,
             }],
             account_vpc_sets=[{
                 "uin": "123456789",
                 "uniq_vpc_id": "vpc-adsebmya",
                 "region": "ap-guangzhou",
-                "vpc_name": "vpc-name",
             }],
             dns_forward_status="DISABLED",
             cname_speedup_status="ENABLED",
@@ -454,9 +478,29 @@ class Zone(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrivateZone](https://www.tencentcloud.com/document/api/1097/42123)
+          - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [ModifyPrivateZone](https://www.tencentcloud.com/document/api/1097/42112)
+          - [ModifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/42110)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeletePrivateZone](https://www.tencentcloud.com/document/api/1097/42121)
+
         ## Import
 
-        Private Dns Zone can be imported, e.g.
+        Private Dns Zone can be imported by id, e.g.
 
         ```sh
         $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky

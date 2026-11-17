@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [TriggerJobSavepoint](https://www.tencentcloud.com/search/?wd=TriggerJobSavepoint&type=document&lang=en)
 type TriggerJobSavepoint struct {
 	pulumi.CustomResourceState
 

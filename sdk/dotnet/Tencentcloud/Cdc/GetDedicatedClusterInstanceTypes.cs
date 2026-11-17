@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
         /// </summary>
         public static Task<GetDedicatedClusterInstanceTypesResult> InvokeAsync(GetDedicatedClusterInstanceTypesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDedicatedClusterInstanceTypesResult>("tencentcloud:Cdc/getDedicatedClusterInstanceTypes:getDedicatedClusterInstanceTypes", args ?? new GetDedicatedClusterInstanceTypesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
         /// </summary>
         public static Output<GetDedicatedClusterInstanceTypesResult> Invoke(GetDedicatedClusterInstanceTypesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClusterInstanceTypesResult>("tencentcloud:Cdc/getDedicatedClusterInstanceTypes:getDedicatedClusterInstanceTypes", args ?? new GetDedicatedClusterInstanceTypesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
         /// </summary>
         public static Output<GetDedicatedClusterInstanceTypesResult> Invoke(GetDedicatedClusterInstanceTypesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClusterInstanceTypesResult>("tencentcloud:Cdc/getDedicatedClusterInstanceTypes:getDedicatedClusterInstanceTypes", args ?? new GetDedicatedClusterInstanceTypesInvokeArgs(), options.WithDefaults());

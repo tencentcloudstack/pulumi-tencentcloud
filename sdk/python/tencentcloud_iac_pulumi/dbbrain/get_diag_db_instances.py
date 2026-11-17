@@ -156,6 +156,12 @@ def get_diag_db_instances(instance_ids: Optional[Sequence[_builtins.str]] = None
         instance_names=["keep_preset_mysql"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
+
 
     :param Sequence[_builtins.str] instance_ids: query based on the instance ID condition.
     :param Sequence[_builtins.str] instance_names: query based on the instance name condition.
@@ -204,6 +210,12 @@ def get_diag_db_instances_output(instance_ids: pulumi.Input[Optional[Optional[Se
         product="mysql",
         instance_names=["keep_preset_mysql"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
 
 
     :param Sequence[_builtins.str] instance_ids: query based on the instance ID condition.

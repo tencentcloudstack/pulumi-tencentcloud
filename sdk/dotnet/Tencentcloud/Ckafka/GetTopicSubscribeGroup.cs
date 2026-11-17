@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicSubscribeGroup](https://www.tencentcloud.com/document/api/597/42130)
         /// </summary>
         public static Task<GetTopicSubscribeGroupResult> InvokeAsync(GetTopicSubscribeGroupArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicSubscribeGroup](https://www.tencentcloud.com/document/api/597/42130)
         /// </summary>
         public static Output<GetTopicSubscribeGroupResult> Invoke(GetTopicSubscribeGroupInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopicSubscribeGroup](https://www.tencentcloud.com/document/api/597/42130)
         /// </summary>
         public static Output<GetTopicSubscribeGroupResult> Invoke(GetTopicSubscribeGroupInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupInvokeArgs(), options.WithDefaults());

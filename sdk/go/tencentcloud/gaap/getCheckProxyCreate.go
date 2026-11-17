@@ -14,6 +14,12 @@ import (
 // Use this data source to query detailed information of gaap check proxy create
 //
 // ## Example Usage
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
 func GetCheckProxyCreate(ctx *pulumi.Context, args *GetCheckProxyCreateArgs, opts ...pulumi.InvokeOption) (*GetCheckProxyCreateResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckProxyCreateResult

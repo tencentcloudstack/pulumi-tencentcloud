@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
 func GetUserProject(ctx *pulumi.Context, args *GetUserProjectArgs, opts ...pulumi.InvokeOption) (*GetUserProjectResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUserProjectResult

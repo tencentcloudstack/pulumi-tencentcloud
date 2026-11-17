@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHostTkeInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostTkeInstanceList&type=document&lang=en)
 func GetDescribeHostTkeInstanceList(ctx *pulumi.Context, args *GetDescribeHostTkeInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostTkeInstanceListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostTkeInstanceListResult

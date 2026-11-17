@@ -119,6 +119,14 @@ class BindApiGroup(pulumi.CustomResource):
             group_id="grp-qp0rj3zi")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindApiGroup](https://www.tencentcloud.com/search/?wd=BindApiGroup&type=document&lang=en)
+        * Read: [DescribeGroupBindedGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupBindedGateways&type=document&lang=en)
+        * Delete: [UnbindApiGroup](https://www.tencentcloud.com/search/?wd=UnbindApiGroup&type=document&lang=en)
+
         ## Import
 
         tsf bind_api_group can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class BindApiGroup(pulumi.CustomResource):
             gateway_deploy_group_id="group-vzd97zpy",
             group_id="grp-qp0rj3zi")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindApiGroup](https://www.tencentcloud.com/search/?wd=BindApiGroup&type=document&lang=en)
+        * Read: [DescribeGroupBindedGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupBindedGateways&type=document&lang=en)
+        * Delete: [UnbindApiGroup](https://www.tencentcloud.com/search/?wd=UnbindApiGroup&type=document&lang=en)
 
         ## Import
 

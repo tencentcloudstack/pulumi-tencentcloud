@@ -51,6 +51,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
     /// });
     /// ```
     /// 
+    /// ### Create a PREPAID DBDC db custom node with disaster recover group
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Dbdc.DbCustomNode("example", new()
+    ///     {
+    ///         Zone = "ap-shanghai-5",
+    ///         ImageId = "img-rm13akp3",
+    ///         VpcId = "vpc-cseo7req",
+    ///         SubnetId = "subnet-huka6qhj",
+    ///         NodeType = "DB.AT5.8XLARGE128",
+    ///         Period = 1,
+    ///         AutoRenew = 1,
+    ///         ChargeType = "PREPAID",
+    ///         NodeName = "tf-example",
+    ///         LoginSettings = new Tencentcloud.Dbdc.Inputs.DbCustomNodeLoginSettingsArgs
+    ///         {
+    ///             Password = "Password@2026",
+    ///         },
+    ///         DisasterRecoverGroupIds = "dbps-n2qbf6zv",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### Create a POSTPAID DBDC db custom node
     /// 
     /// ```csharp
@@ -101,6 +136,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDBCustomNodes](https://www.tencentcloud.com/search/?wd=CreateDBCustomNodes&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&amp;type=document&amp;lang=en)
+    ///   - [ModifyDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
+    ///   - [ModifyDBCustomNodeTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodeTags&amp;type=document&amp;lang=en)
+    ///   - [ModifyDBCustomNodesDisasterRecoverGroup](https://www.tencentcloud.com/search/?wd=ModifyDBCustomNodesDisasterRecoverGroup&amp;type=document&amp;lang=en)
+    ///   - [RenewDBCustomNode](https://www.tencentcloud.com/search/?wd=RenewDBCustomNode&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DestroyDBCustomNode](https://www.tencentcloud.com/search/?wd=DestroyDBCustomNode&amp;type=document&amp;lang=en)
+    ///   - [IsolateDBCustomNode](https://www.tencentcloud.com/search/?wd=IsolateDBCustomNode&amp;type=document&amp;lang=en)
     /// 
     /// ## Import
     /// 
@@ -154,6 +211,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// </summary>
         [Output("dataDisks")]
         public Output<ImmutableArray<Outputs.DbCustomNodeDataDisk>> DataDisks { get; private set; } = null!;
+
+        /// <summary>
+        /// Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+        /// </summary>
+        [Output("disasterRecoverGroupIds")]
+        public Output<string> DisasterRecoverGroupIds { get; private set; } = null!;
 
         /// <summary>
         /// Node access IP address when the `NetworkModeCrossTenantENI` network mode is selected. Refreshed from the `DescribeDBCustomNodes` API response.
@@ -371,6 +434,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         }
 
         /// <summary>
+        /// Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+        /// </summary>
+        [Input("disasterRecoverGroupIds")]
+        public Input<string>? DisasterRecoverGroupIds { get; set; }
+
+        /// <summary>
         /// Hostname of the node. Dots (`.`) and hyphens (`-`) cannot be the first/last character or be used consecutively; underscores (`_`) are not allowed. Windows: 2-15 chars (letters, digits, `-`, no `.`); Linux/others: 2-60 chars (supports multiple dot-separated segments). Write-only: not returned by `DescribeDBCustomNodes`, so the configured value is preserved in state.
         /// </summary>
         [Input("hostName")]
@@ -527,6 +596,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
             get => _dataDisks ?? (_dataDisks = new InputList<Inputs.DbCustomNodeDataDiskGetArgs>());
             set => _dataDisks = value;
         }
+
+        /// <summary>
+        /// Placement (disaster recover) group ID list to bind to the node. Maps to the `DisasterRecoverGroupIds` request field of the `CreateDBCustomNodes` API. The API supports specifying only one placement group ID.
+        /// </summary>
+        [Input("disasterRecoverGroupIds")]
+        public Input<string>? DisasterRecoverGroupIds { get; set; }
 
         /// <summary>
         /// Node access IP address when the `NetworkModeCrossTenantENI` network mode is selected. Refreshed from the `DescribeDBCustomNodes` API response.

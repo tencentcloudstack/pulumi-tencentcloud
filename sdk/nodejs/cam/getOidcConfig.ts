@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
  * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
  */
 export function getOidcConfig(args: GetOidcConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetOidcConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetOidcConfigResult {
  * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
  * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
  */
 export function getOidcConfigOutput(args: GetOidcConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOidcConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

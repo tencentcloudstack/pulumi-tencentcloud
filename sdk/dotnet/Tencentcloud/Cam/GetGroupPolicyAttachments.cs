@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
         /// </summary>
         public static Task<GetGroupPolicyAttachmentsResult> InvokeAsync(GetGroupPolicyAttachmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
         /// </summary>
         public static Output<GetGroupPolicyAttachmentsResult> Invoke(GetGroupPolicyAttachmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
         /// </summary>
         public static Output<GetGroupPolicyAttachmentsResult> Invoke(GetGroupPolicyAttachmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupPolicyAttachmentsResult>("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", args ?? new GetGroupPolicyAttachmentsInvokeArgs(), options.WithDefaults());

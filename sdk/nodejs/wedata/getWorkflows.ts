@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     keyword: "test_workflow",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
  */
 export function getWorkflows(args: GetWorkflowsArgs, opts?: pulumi.InvokeOptions): Promise<GetWorkflowsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -120,6 +126,12 @@ export interface GetWorkflowsResult {
  *     keyword: "test_workflow",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
  */
 export function getWorkflowsOutput(args: GetWorkflowsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWorkflowsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

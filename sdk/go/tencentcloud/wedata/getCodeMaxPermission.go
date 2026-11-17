@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetMyCodeMaxPermission](https://www.tencentcloud.com/document/api/1174/77904)
 func GetCodeMaxPermission(ctx *pulumi.Context, args *GetCodeMaxPermissionArgs, opts ...pulumi.InvokeOption) (*GetCodeMaxPermissionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCodeMaxPermissionResult

@@ -97,6 +97,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
             set => _webSecurityModulesForExceptions = value;
         }
 
+        [Input("webSecuritySubmodulesForExceptions")]
+        private InputList<string>? _webSecuritySubmodulesForExceptions;
+
+        /// <summary>
+        /// Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: &lt;ul&gt;&lt;li&gt;ManagedRules module: &lt;ul&gt;&lt;li&gt;websec-mod-managed-rules/managed-rule-groups: rule set; &lt;/li&gt;&lt;li&gt;websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;RateLimitingRules module: &lt;ul&gt;&lt;li&gt;websec-mod-rate-limiting-rules: rate limiting rule; &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;CustomRules module: &lt;ul&gt;&lt;li&gt;websec-mod-custom-rules: custom rule; &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;HttpDDoSProtection module: &lt;ul&gt;&lt;li&gt;websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; &lt;/li&gt;&lt;li&gt;websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; &lt;/li&gt;&lt;li&gt;websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;BotManagement module: &lt;ul&gt;&lt;li&gt;websec-mod-bot-management/basic-feature: basic feature management; &lt;/li&gt;&lt;li&gt;websec-mod-bot-management/ip-reputation: client portrait analysis; &lt;/li&gt;&lt;li&gt;websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; &lt;/li&gt;&lt;li&gt;websec-mod-bot-management/custom-rules: custom rule; &lt;/li&gt;&lt;li&gt;websec-mod-bot-management/browser-impersonation-detection: active feature recognition; &lt;/li&gt;&lt;li&gt;websec-mod-bot-management/client-attestation-rules: client authentication; &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;BotManagementLite module: &lt;ul&gt;&lt;li&gt;websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; &lt;/li&gt;&lt;li&gt;websec-mod-bot-management-lite/captcha-page-challenge: human verification page. &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;.
+        /// </summary>
+        public InputList<string> WebSecuritySubmodulesForExceptions
+        {
+            get => _webSecuritySubmodulesForExceptions ?? (_webSecuritySubmodulesForExceptions = new InputList<string>());
+            set => _webSecuritySubmodulesForExceptions = value;
+        }
+
         public SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs()
         {
         }

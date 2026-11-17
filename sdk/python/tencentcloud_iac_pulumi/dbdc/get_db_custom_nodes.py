@@ -164,6 +164,12 @@ def get_db_custom_nodes(filters: Optional[Sequence[Union['GetDbCustomNodesFilter
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
+
 
     :param Sequence[Union['GetDbCustomNodesFilterArgs', 'GetDbCustomNodesFilterArgsDict']] filters: Filter conditions. Supported filter names: cluster-id, node-name (exact match), status (Creating, Running, Isolating, Isolated, Activating, Destroying), zone.
     :param Sequence[_builtins.str] node_ids: Query by one or more Node IDs. Maximum 100 IDs per request.
@@ -245,6 +251,12 @@ def get_db_custom_nodes_output(filters: pulumi.Input[Optional[Optional[Sequence[
         "value": "production",
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodes&type=document&lang=en)
 
 
     :param Sequence[Union['GetDbCustomNodesFilterArgs', 'GetDbCustomNodesFilterArgsDict']] filters: Filter conditions. Supported filter names: cluster-id, node-name (exact match), status (Creating, Running, Isolating, Isolated, Activating, Destroying), zone.

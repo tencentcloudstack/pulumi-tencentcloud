@@ -151,6 +151,12 @@ class ScaleOutInstances(pulumi.CustomResource):
             scale_out_number=2)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ScaleOutInstances](https://www.tencentcloud.com/document/api/377/40717)
+
         ## Import
 
         as scale_out_instances can be imported using the id, e.g.
@@ -216,6 +222,12 @@ class ScaleOutInstances(pulumi.CustomResource):
             auto_scaling_group_id=example_scaling_group.id,
             scale_out_number=2)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ScaleOutInstances](https://www.tencentcloud.com/document/api/377/40717)
 
         ## Import
 

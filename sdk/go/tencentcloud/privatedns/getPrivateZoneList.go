@@ -137,6 +137,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
 func GetPrivateZoneList(ctx *pulumi.Context, args *GetPrivateZoneListArgs, opts ...pulumi.InvokeOption) (*GetPrivateZoneListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPrivateZoneListResult

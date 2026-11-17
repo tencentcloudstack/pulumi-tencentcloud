@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const bandwidthPackageQuota = tencentcloud.vpc.getBandwidthPackageQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
  */
 export function getBandwidthPackageQuota(args?: GetBandwidthPackageQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetBandwidthPackageQuotaResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetBandwidthPackageQuotaResult {
  *
  * const bandwidthPackageQuota = tencentcloud.vpc.getBandwidthPackageQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
  */
 export function getBandwidthPackageQuotaOutput(args?: GetBandwidthPackageQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBandwidthPackageQuotaResult> {
     args = args || {};

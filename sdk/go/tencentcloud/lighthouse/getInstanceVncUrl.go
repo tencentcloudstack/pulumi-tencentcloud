@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/1103/42499)
 func GetInstanceVncUrl(ctx *pulumi.Context, args *GetInstanceVncUrlArgs, opts ...pulumi.InvokeOption) (*GetInstanceVncUrlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceVncUrlResult

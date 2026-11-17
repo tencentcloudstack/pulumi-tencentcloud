@@ -96,6 +96,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindApiApp](https://www.tencentcloud.com/search/?wd=BindApiApp&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeApiAppBindApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApiAppBindApisStatus&amp;type=document&amp;lang=en)
+    /// * Delete: [UnbindApiApp](https://www.tencentcloud.com/search/?wd=UnbindApiApp&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// apigateway ApiAppAttachment can be imported using the id, e.g.

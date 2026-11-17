@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     dbName: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
  */
 export function getDatabaseObjects(args: GetDatabaseObjectsArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseObjectsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -90,6 +96,12 @@ export interface GetDatabaseObjectsResult {
  *     dbName: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
  */
 export function getDatabaseObjectsOutput(args: GetDatabaseObjectsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatabaseObjectsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

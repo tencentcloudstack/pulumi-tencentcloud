@@ -70,6 +70,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DeleteImage](https://www.tencentcloud.com/document/api/1051/50726)
 type DeleteImageOperation struct {
 	pulumi.CustomResourceState
 

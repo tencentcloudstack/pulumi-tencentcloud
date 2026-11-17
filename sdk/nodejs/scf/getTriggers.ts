@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     order: "DESC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
  */
 export function getTriggers(args: GetTriggersArgs, opts?: pulumi.InvokeOptions): Promise<GetTriggersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetTriggersResult {
  *     order: "DESC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
  */
 export function getTriggersOutput(args: GetTriggersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTriggersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

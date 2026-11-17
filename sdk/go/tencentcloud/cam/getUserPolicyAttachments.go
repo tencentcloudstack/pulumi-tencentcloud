@@ -47,6 +47,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+//   - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
 func GetUserPolicyAttachments(ctx *pulumi.Context, args *GetUserPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetUserPolicyAttachmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUserPolicyAttachmentsResult

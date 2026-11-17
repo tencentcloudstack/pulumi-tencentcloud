@@ -107,6 +107,12 @@ def get_trigger_task_run(project_id: Optional[_builtins.str] = None,
         task_execution_id="20260109165716558")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerTaskRun](https://www.tencentcloud.com/document/api/1174/77889)
+
 
     :param _builtins.str project_id: Workspace ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_trigger_task_run_output(project_id: pulumi.Input[Optional[_builtins.str]
     trigger_task_run = tencentcloud.wedata.get_trigger_task_run(project_id="1840731342293818368",
         task_execution_id="20260109165716558")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerTaskRun](https://www.tencentcloud.com/document/api/1174/77889)
 
 
     :param _builtins.str project_id: Workspace ID.

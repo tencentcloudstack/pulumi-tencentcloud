@@ -107,6 +107,12 @@ def get_savepoint_list(job_id: Optional[_builtins.str] = None,
         work_space_id="space-2idq8wbr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&type=document&lang=en)
+
 
     :param _builtins.str job_id: Job SerialId.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_savepoint_list_output(job_id: pulumi.Input[Optional[_builtins.str]] = No
     example = tencentcloud.oceanus.get_savepoint_list(job_id="cql-314rw6w0",
         work_space_id="space-2idq8wbr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&type=document&lang=en)
 
 
     :param _builtins.str job_id: Job SerialId.

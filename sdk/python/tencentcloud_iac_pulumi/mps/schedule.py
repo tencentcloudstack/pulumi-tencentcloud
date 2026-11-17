@@ -413,6 +413,15 @@ class Schedule(pulumi.CustomResource):
             output_dir="output/")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSchedule](https://www.tencentcloud.com/document/api/1041/54035)
+        * Read: [DescribeSchedules](https://www.tencentcloud.com/document/api/1041/54033)
+        * Update: [ModifySchedule](https://www.tencentcloud.com/document/api/1041/54030)
+        * Delete: [DeleteSchedule](https://www.tencentcloud.com/document/api/1041/54034)
+
         ## Import
 
         mps schedule can be imported using the id, e.g.
@@ -578,6 +587,15 @@ class Schedule(pulumi.CustomResource):
             },
             output_dir="output/")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSchedule](https://www.tencentcloud.com/document/api/1041/54035)
+        * Read: [DescribeSchedules](https://www.tencentcloud.com/document/api/1041/54033)
+        * Update: [ModifySchedule](https://www.tencentcloud.com/document/api/1041/54030)
+        * Delete: [DeleteSchedule](https://www.tencentcloud.com/document/api/1041/54034)
 
         ## Import
 

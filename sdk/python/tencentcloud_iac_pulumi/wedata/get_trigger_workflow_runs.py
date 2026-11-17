@@ -117,6 +117,12 @@ def get_trigger_workflow_runs(filters: Optional[Sequence[Union['GetTriggerWorkfl
     trigger_workflow_runs = tencentcloud.wedata.get_trigger_workflow_runs(project_id="1840731342293643264")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77885)
+
 
     :param Sequence[Union['GetTriggerWorkflowRunsFilterArgs', 'GetTriggerWorkflowRunsFilterArgsDict']] filters: Filter parameters. Workflow name or ID query name: `Keyword`; workflow ID query name: `WorkflowId`; folder query name: `FolderId`; owner query name: `InChargeUin`; workflow execution ID: `ExecutionId`.
     :param Sequence[Union['GetTriggerWorkflowRunsOrderFieldArgs', 'GetTriggerWorkflowRunsOrderFieldArgsDict']] order_fields: Sort fields. Sort field names include, for example, start time: `CreateTime`; end time: `EndTime`.
@@ -154,6 +160,12 @@ def get_trigger_workflow_runs_output(filters: pulumi.Input[Optional[Optional[Seq
 
     trigger_workflow_runs = tencentcloud.wedata.get_trigger_workflow_runs(project_id="1840731342293643264")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77885)
 
 
     :param Sequence[Union['GetTriggerWorkflowRunsFilterArgs', 'GetTriggerWorkflowRunsFilterArgsDict']] filters: Filter parameters. Workflow name or ID query name: `Keyword`; workflow ID query name: `WorkflowId`; folder query name: `FolderId`; owner query name: `InChargeUin`; workflow execution ID: `ExecutionId`.

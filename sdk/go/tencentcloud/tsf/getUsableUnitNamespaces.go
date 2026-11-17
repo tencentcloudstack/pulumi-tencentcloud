@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUsableUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUsableUnitNamespaces&type=document&lang=en)
 func LookupUsableUnitNamespaces(ctx *pulumi.Context, args *LookupUsableUnitNamespacesArgs, opts ...pulumi.InvokeOption) (*LookupUsableUnitNamespacesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupUsableUnitNamespacesResult

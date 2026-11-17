@@ -96,6 +96,12 @@ def get_list_catalog(parent_catalog_id: Optional[_builtins.str] = None,
     example = tencentcloud.wedata.get_list_catalog()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListCatalog](https://www.tencentcloud.com/document/api/1174/77950)
+
 
     :param _builtins.str parent_catalog_id: Parent catalog ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_list_catalog_output(parent_catalog_id: pulumi.Input[Optional[Optional[_b
 
     example = tencentcloud.wedata.get_list_catalog()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListCatalog](https://www.tencentcloud.com/document/api/1174/77950)
 
 
     :param _builtins.str parent_catalog_id: Parent catalog ID.

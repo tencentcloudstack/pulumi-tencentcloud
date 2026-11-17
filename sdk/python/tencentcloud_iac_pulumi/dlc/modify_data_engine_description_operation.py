@@ -119,6 +119,12 @@ class ModifyDataEngineDescriptionOperation(pulumi.CustomResource):
             message="message info.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDataEngineDescription](https://www.tencentcloud.com/document/api/1155/62650)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class ModifyDataEngineDescriptionOperation(pulumi.CustomResource):
             data_engine_name="tf-example",
             message="message info.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDataEngineDescription](https://www.tencentcloud.com/document/api/1155/62650)
 
 
         :param str resource_name: The name of the resource.

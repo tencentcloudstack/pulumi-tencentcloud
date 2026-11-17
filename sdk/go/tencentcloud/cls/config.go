@@ -82,6 +82,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateConfig](https://www.tencentcloud.com/document/api/614/42813)
+// * Read: [DescribeConfigs](https://www.tencentcloud.com/document/api/614/42809)
+// * Update: [ModifyConfig](https://www.tencentcloud.com/document/api/614/42807)
+// * Delete: [DeleteConfig](https://www.tencentcloud.com/document/api/614/42812)
+//
 // ## Import
 //
 // CLS config can be imported using the id, e.g.
@@ -98,7 +107,7 @@ type Config struct {
 	ExtractRule ConfigExtractRuleOutput `pulumi:"extractRule"`
 	// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
 	InputType pulumi.StringOutput `pulumi:"inputType"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrOutput `pulumi:"logType"`
 	// Collection configuration name.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -149,7 +158,7 @@ type configState struct {
 	ExtractRule *ConfigExtractRule `pulumi:"extractRule"`
 	// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
 	InputType *string `pulumi:"inputType"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
 	LogType *string `pulumi:"logType"`
 	// Collection configuration name.
 	Name *string `pulumi:"name"`
@@ -168,7 +177,7 @@ type ConfigState struct {
 	ExtractRule ConfigExtractRulePtrInput
 	// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
 	InputType pulumi.StringPtrInput
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrInput
 	// Collection configuration name.
 	Name pulumi.StringPtrInput
@@ -191,7 +200,7 @@ type configArgs struct {
 	ExtractRule ConfigExtractRule `pulumi:"extractRule"`
 	// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
 	InputType *string `pulumi:"inputType"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
 	LogType *string `pulumi:"logType"`
 	// Collection configuration name.
 	Name *string `pulumi:"name"`
@@ -211,7 +220,7 @@ type ConfigArgs struct {
 	ExtractRule ConfigExtractRuleInput
 	// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
 	InputType pulumi.StringPtrInput
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrInput
 	// Collection configuration name.
 	Name pulumi.StringPtrInput
@@ -325,7 +334,7 @@ func (o ConfigOutput) InputType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Config) pulumi.StringOutput { return v.InputType }).(pulumi.StringOutput)
 }
 
-// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
+// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format; multiline_fullregex_log: log in multi-line and full regex format. Default value: minimalist_log.
 func (o ConfigOutput) LogType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Config) pulumi.StringPtrOutput { return v.LogType }).(pulumi.StringPtrOutput)
 }

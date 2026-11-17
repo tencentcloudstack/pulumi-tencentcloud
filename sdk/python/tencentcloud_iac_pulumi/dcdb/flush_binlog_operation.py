@@ -85,6 +85,12 @@ class FlushBinlogOperation(pulumi.CustomResource):
         flush_operation = tencentcloud.dcdb.FlushBinlogOperation("flush_operation", instance_id=dcdb_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +113,12 @@ class FlushBinlogOperation(pulumi.CustomResource):
 
         flush_operation = tencentcloud.dcdb.FlushBinlogOperation("flush_operation", instance_id=dcdb_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

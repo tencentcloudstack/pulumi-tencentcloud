@@ -174,6 +174,21 @@ class RollbackInstance(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RollbackInstance](https://www.tencentcloud.com/document/api/238/32095)
+        * Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RollbackInstance](https://www.tencentcloud.com/document/api/238/32095)
+        * Delete:
+          - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+
         ## Import
 
         sqlserver rollback_instance can be imported using the id, e.g.
@@ -212,6 +227,21 @@ class RollbackInstance(pulumi.CustomResource):
                 "new_name": "rollback_pubsub_db3",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RollbackInstance](https://www.tencentcloud.com/document/api/238/32095)
+        * Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RollbackInstance](https://www.tencentcloud.com/document/api/238/32095)
+        * Delete:
+          - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
 
         ## Import
 

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     switchTag: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifySwitchTimePeriod](https://www.tencentcloud.com/document/api/409/41612)
  */
 export class ModifySwitchTimePeriodOperation extends pulumi.CustomResource {
     /**

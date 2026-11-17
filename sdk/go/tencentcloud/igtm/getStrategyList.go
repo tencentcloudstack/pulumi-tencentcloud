@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&type=document&lang=en)
 func GetStrategyList(ctx *pulumi.Context, args *GetStrategyListArgs, opts ...pulumi.InvokeOption) (*GetStrategyListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStrategyListResult

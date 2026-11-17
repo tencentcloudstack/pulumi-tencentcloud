@@ -137,6 +137,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AddCustomWhiteRule](https://www.tencentcloud.com/document/api/627/64768)
+ *   - [ModifyCustomWhiteRuleStatus](https://www.tencentcloud.com/document/api/627/64511)
+ * * Read: [DescribeCustomWhiteRule](https://www.tencentcloud.com/document/api/627/64759)
+ * * Update:
+ *   - [ModifyCustomWhiteRule](https://www.tencentcloud.com/document/api/627/64757)
+ *   - [ModifyCustomWhiteRuleStatus](https://www.tencentcloud.com/document/api/627/64511)
+ * * Delete: [DeleteCustomWhiteRule](https://www.tencentcloud.com/document/api/627/64767)
+ *
  * ## Import
  *
  * WAF custom white rule can be imported using the id, e.g.

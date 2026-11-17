@@ -69,6 +69,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
 func GetExportZoneConfig(ctx *pulumi.Context, args *GetExportZoneConfigArgs, opts ...pulumi.InvokeOption) (*GetExportZoneConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetExportZoneConfigResult

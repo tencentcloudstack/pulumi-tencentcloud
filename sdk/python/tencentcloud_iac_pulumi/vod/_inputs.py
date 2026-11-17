@@ -23,6 +23,8 @@ __all__ = [
     'AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgsDict',
     'AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs',
     'AdaptiveDynamicStreamingTemplateStreamInfoVideoArgsDict',
+    'AigcQuotaModelQuotaArgs',
+    'AigcQuotaModelQuotaArgsDict',
     'ProcedureTemplateAiAnalysisTaskArgs',
     'ProcedureTemplateAiAnalysisTaskArgsDict',
     'ProcedureTemplateAiRecognitionTaskArgs',
@@ -582,6 +584,95 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs:
     @width.setter
     def width(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "width", value)
+
+
+class AigcQuotaModelQuotaArgsDict(TypedDict):
+    model_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Model name.
+    """
+    model_version: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Model version.
+    """
+    quota_limit: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Model quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+    """
+    usage: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+    """
+
+@pulumi.input_type
+class AigcQuotaModelQuotaArgs:
+    def __init__(__self__, *,
+                 model_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_version: pulumi.Input[Optional[_builtins.str]] = None,
+                 quota_limit: pulumi.Input[Optional[_builtins.int]] = None,
+                 usage: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] model_name: Model name.
+        :param pulumi.Input[_builtins.str] model_version: Model version.
+        :param pulumi.Input[_builtins.int] quota_limit: Model quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        :param pulumi.Input[_builtins.int] usage: Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        """
+        if model_name is not None:
+            pulumi.set(__self__, "model_name", model_name)
+        if model_version is not None:
+            pulumi.set(__self__, "model_version", model_version)
+        if quota_limit is not None:
+            pulumi.set(__self__, "quota_limit", quota_limit)
+        if usage is not None:
+            pulumi.set(__self__, "usage", usage)
+
+    @_builtins.property
+    @pulumi.getter(name="modelName")
+    def model_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Model name.
+        """
+        return pulumi.get(self, "model_name")
+
+    @model_name.setter
+    def model_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "model_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="modelVersion")
+    def model_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Model version.
+        """
+        return pulumi.get(self, "model_version")
+
+    @model_version.setter
+    def model_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "model_version", value)
+
+    @_builtins.property
+    @pulumi.getter(name="quotaLimit")
+    def quota_limit(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Model quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        """
+        return pulumi.get(self, "quota_limit")
+
+    @quota_limit.setter
+    def quota_limit(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "quota_limit", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def usage(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        """
+        return pulumi.get(self, "usage")
+
+    @usage.setter
+    def usage(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "usage", value)
 
 
 class ProcedureTemplateAiAnalysisTaskArgsDict(TypedDict):

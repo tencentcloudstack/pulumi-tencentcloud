@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     dcxId: "dcx-3ikuw30k",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -89,6 +95,12 @@ export interface GetInstancesResult {
  *     dcxId: "dcx-3ikuw30k",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

@@ -460,6 +460,26 @@ class GrafanaInstance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGrafanaInstance](https://www.tencentcloud.com/document/api/248/49770)
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [EnableGrafanaInternet](https://www.tencentcloud.com/document/api/248/49753)
+          - [ModifyGrafanaInstance](https://www.tencentcloud.com/document/api/248/49749)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [CleanGrafanaInstance](https://www.tencentcloud.com/document/api/248/49771)
+          - [DeleteGrafanaInstance](https://www.tencentcloud.com/document/api/248/49766)
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+
         ## Import
 
         monitor grafanaInstance can be imported using the id, e.g.
@@ -518,6 +538,26 @@ class GrafanaInstance(pulumi.CustomResource):
                 "createdBy": "test",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGrafanaInstance](https://www.tencentcloud.com/document/api/248/49770)
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [EnableGrafanaInternet](https://www.tencentcloud.com/document/api/248/49753)
+          - [ModifyGrafanaInstance](https://www.tencentcloud.com/document/api/248/49749)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [CleanGrafanaInstance](https://www.tencentcloud.com/document/api/248/49771)
+          - [DeleteGrafanaInstance](https://www.tencentcloud.com/document/api/248/49766)
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
 
         ## Import
 

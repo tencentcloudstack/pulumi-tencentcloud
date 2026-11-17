@@ -61,6 +61,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+ *   - [ModifyInstanceReadOnly](https://www.tencentcloud.com/document/api/239/47335)
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+ * * Update:
+ *   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+ *   - [ModifyInstanceReadOnly](https://www.tencentcloud.com/document/api/239/47335)
+ *
  * ## Import
  *
  * redis readOnly can be imported using the instanceId, e.g.

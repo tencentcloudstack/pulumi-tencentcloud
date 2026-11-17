@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const startInstance = new tencentcloud.lighthouse.StartInstance("start_instance", {instanceId: "lhins-xxxxxx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+ *   - [StartInstances](https://www.tencentcloud.com/document/api/1103/42488)
  */
 export class StartInstance extends pulumi.CustomResource {
     /**

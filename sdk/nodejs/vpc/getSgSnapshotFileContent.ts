@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     securityGroupId: "sg-ntrgm89v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
  */
 export function getSgSnapshotFileContent(args: GetSgSnapshotFileContentArgs, opts?: pulumi.InvokeOptions): Promise<GetSgSnapshotFileContentResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -105,6 +111,12 @@ export interface GetSgSnapshotFileContentResult {
  *     securityGroupId: "sg-ntrgm89v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
  */
 export function getSgSnapshotFileContentOutput(args: GetSgSnapshotFileContentOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSgSnapshotFileContentResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -42,6 +42,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateApiRateLimitRuleWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateApiRateLimitRuleWithDetailResp&type=document&lang=en)
+// * Read: [DescribeApiRateLimitRules](https://www.tencentcloud.com/search/?wd=DescribeApiRateLimitRules&type=document&lang=en)
+// * Update: [UpdateApiRateLimitRule](https://www.tencentcloud.com/search/?wd=UpdateApiRateLimitRule&type=document&lang=en)
+// * Delete: [DeleteApiRateLimitRule](https://www.tencentcloud.com/search/?wd=DeleteApiRateLimitRule&type=document&lang=en)
+//
 // ## Import
 //
 // tsf apiRateLimitRule can be imported using the id, e.g.

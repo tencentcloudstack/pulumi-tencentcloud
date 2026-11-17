@@ -82,6 +82,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49769)
+// * Read: [DescribeGrafanaIntegrations](https://www.tencentcloud.com/document/api/248/49758)
+// * Update: [UpdateGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49743)
+// * Delete: [DeleteGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49765)
 type GrafanaIntegration struct {
 	pulumi.CustomResourceState
 

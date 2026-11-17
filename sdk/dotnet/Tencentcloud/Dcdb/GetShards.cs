@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
         /// </summary>
         public static Task<GetShardsResult> InvokeAsync(GetShardsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
         /// </summary>
         public static Output<GetShardsResult> Invoke(GetShardsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
         /// </summary>
         public static Output<GetShardsResult> Invoke(GetShardsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsInvokeArgs(), options.WithDefaults());

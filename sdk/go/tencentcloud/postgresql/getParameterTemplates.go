@@ -53,6 +53,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
 func GetParameterTemplates(ctx *pulumi.Context, args *GetParameterTemplatesArgs, opts ...pulumi.InvokeOption) (*GetParameterTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetParameterTemplatesResult

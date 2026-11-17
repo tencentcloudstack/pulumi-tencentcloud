@@ -49,6 +49,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+//   - [ModifyUserHba](https://www.tencentcloud.com/document/api/1138/69319)
+//
+// * Read: [DescribeUserHbaConfig](https://www.tencentcloud.com/document/api/1138/69320)
+// * Update:
+//   - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+//   - [ModifyUserHba](https://www.tencentcloud.com/document/api/1138/69319)
+//
 // ## Import
 //
 // cdwpg cdwpgUserhba can be imported using the id, e.g.

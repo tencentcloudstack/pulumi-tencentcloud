@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     apiKeyId: test.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
  */
 export function getApiKeys(args?: GetApiKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetApiKeysResult> {
     args = args || {};
@@ -94,6 +100,12 @@ export interface GetApiKeysResult {
  *     apiKeyId: test.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
  */
 export function getApiKeysOutput(args?: GetApiKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiKeysResult> {
     args = args || {};

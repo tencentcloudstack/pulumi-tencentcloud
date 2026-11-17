@@ -111,6 +111,12 @@ def get_gateway_certificates(filters: Optional[Sequence[Union['GetGatewayCertifi
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayCertificates](https://www.tencentcloud.com/document/api/1290/79265)
+
 
     :param Sequence[Union['GetGatewayCertificatesFilterArgs', 'GetGatewayCertificatesFilterArgsDict']] filters: Filter conditions, valid value: `BindDomain`, `Name`.
     :param _builtins.str gateway_id: Gateway ID.
@@ -148,6 +154,12 @@ def get_gateway_certificates_output(filters: pulumi.Input[Optional[Optional[Sequ
             "value": "example.com",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayCertificates](https://www.tencentcloud.com/document/api/1290/79265)
 
 
     :param Sequence[Union['GetGatewayCertificatesFilterArgs', 'GetGatewayCertificatesFilterArgsDict']] filters: Filter conditions, valid value: `BindDomain`, `Name`.

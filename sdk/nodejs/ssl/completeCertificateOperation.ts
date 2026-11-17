@@ -16,6 +16,12 @@ import * as utilities from "../utilities";
  * const completeCertificate = new tencentcloud.ssl.CompleteCertificateOperation("complete_certificate", {certificateId: "9Bfe1IBR"});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CompleteCertificate](https://www.tencentcloud.com/search/?wd=CompleteCertificate&type=document&lang=en)
+ *
  * ## Import
  *
  * ssl completeCertificate can be imported using the id, e.g.

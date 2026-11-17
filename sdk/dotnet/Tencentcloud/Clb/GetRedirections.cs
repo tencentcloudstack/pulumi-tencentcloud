@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
         /// </summary>
         public static Task<GetRedirectionsResult> InvokeAsync(GetRedirectionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
         /// </summary>
         public static Output<GetRedirectionsResult> Invoke(GetRedirectionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
         /// </summary>
         public static Output<GetRedirectionsResult> Invoke(GetRedirectionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRedirectionsResult>("tencentcloud:Clb/getRedirections:getRedirections", args ?? new GetRedirectionsInvokeArgs(), options.WithDefaults());

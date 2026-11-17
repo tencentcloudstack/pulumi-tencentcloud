@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.igtm.getDetectors({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDetectors](https://www.tencentcloud.com/search/?wd=DescribeDetectors&type=document&lang=en)
  */
 export function getDetectors(args?: GetDetectorsArgs, opts?: pulumi.InvokeOptions): Promise<GetDetectorsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetDetectorsResult {
  *
  * const example = tencentcloud.igtm.getDetectors({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDetectors](https://www.tencentcloud.com/search/?wd=DescribeDetectors&type=document&lang=en)
  */
 export function getDetectorsOutput(args?: GetDetectorsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDetectorsResult> {
     args = args || {};

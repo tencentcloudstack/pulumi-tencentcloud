@@ -118,6 +118,14 @@ def get_instances(ccn_id: Optional[_builtins.str] = None,
     name_instances = tencentcloud.ccn.get_instances_output(name=main.name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeCcnAttachedInstances](https://www.tencentcloud.com/document/api/215/34789)
+      - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
+
 
     :param _builtins.str ccn_id: ID of the CCN to be queried.
     :param _builtins.str name: Name of the CCN to be queried.
@@ -157,6 +165,14 @@ def get_instances_output(ccn_id: pulumi.Input[Optional[Optional[_builtins.str]]]
     id_instances = tencentcloud.ccn.get_instances_output(ccn_id=main.id)
     name_instances = tencentcloud.ccn.get_instances_output(name=main.name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeCcnAttachedInstances](https://www.tencentcloud.com/document/api/215/34789)
+      - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
 
 
     :param _builtins.str ccn_id: ID of the CCN to be queried.

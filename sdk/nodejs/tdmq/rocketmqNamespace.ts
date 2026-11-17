@@ -24,6 +24,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateRocketMQNamespace](https://www.tencentcloud.com/search/?wd=CreateRocketMQNamespace&type=document&lang=en)
+ * * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
+ * * Update: [ModifyRocketMQNamespace](https://www.tencentcloud.com/search/?wd=ModifyRocketMQNamespace&type=document&lang=en)
+ * * Delete: [DeleteRocketMQNamespace](https://www.tencentcloud.com/search/?wd=DeleteRocketMQNamespace&type=document&lang=en)
+ *
  * ## Import
  *
  * tdmqRocketmq namespace can be imported using the id, e.g.

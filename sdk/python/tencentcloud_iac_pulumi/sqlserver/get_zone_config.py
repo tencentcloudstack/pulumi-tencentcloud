@@ -86,6 +86,14 @@ def get_zone_config(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_zone_config()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeProductConfig](https://www.tencentcloud.com/document/api/238/32112)
+      - [DescribeZones](https://www.tencentcloud.com/document/api/238/32109)
+
 
     :param _builtins.str result_output_file: Used to store results.
     """
@@ -111,6 +119,14 @@ def get_zone_config_output(result_output_file: pulumi.Input[Optional[Optional[_b
 
     example = tencentcloud.sqlserver.get_zone_config()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeProductConfig](https://www.tencentcloud.com/document/api/238/32112)
+      - [DescribeZones](https://www.tencentcloud.com/document/api/238/32109)
 
 
     :param _builtins.str result_output_file: Used to store results.

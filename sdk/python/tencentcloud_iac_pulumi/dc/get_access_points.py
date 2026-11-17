@@ -99,6 +99,12 @@ def get_access_points(region_id: Optional[_builtins.str] = None,
     access_points = tencentcloud.dc.get_access_points(region_id="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessPoints](https://www.tencentcloud.com/document/api/216/37476)
+
 
     :param _builtins.str region_id: Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_access_points_output(region_id: pulumi.Input[Optional[Optional[_builtins
 
     access_points = tencentcloud.dc.get_access_points(region_id="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessPoints](https://www.tencentcloud.com/document/api/216/37476)
 
 
     :param _builtins.str region_id: Access point region, which can be queried through `DescribeRegions`.You can call `DescribeRegions` to get the region ID.

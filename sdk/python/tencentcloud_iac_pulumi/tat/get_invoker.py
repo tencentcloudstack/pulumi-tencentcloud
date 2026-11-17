@@ -125,6 +125,12 @@ def get_invoker(command_id: Optional[_builtins.str] = None,
     invoker = tencentcloud.tat.get_invoker()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+
 
     :param _builtins.str command_id: Command ID.
     :param _builtins.str invoker_id: Invoker ID.
@@ -162,6 +168,12 @@ def get_invoker_output(command_id: pulumi.Input[Optional[Optional[_builtins.str]
 
     invoker = tencentcloud.tat.get_invoker()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
 
 
     :param _builtins.str command_id: Command ID.

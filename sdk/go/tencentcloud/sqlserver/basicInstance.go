@@ -167,6 +167,40 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateBasicDBInstances](https://www.tencentcloud.com/document/api/238/66344)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+//   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+//   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+//   - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72731)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72728)
+//   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+//   - [ModifyDBInstanceProject](https://www.tencentcloud.com/document/api/238/32103)
+//   - [ModifyDBInstanceRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceRenewFlag&type=document&lang=en)
+//   - [ModifyMaintenanceSpan](https://www.tencentcloud.com/document/api/238/72749)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+//
+// * Delete:
+//   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+//
 // ## Import
 //
 // SQL Server basic instance can be imported using the id, e.g.
@@ -197,6 +231,8 @@ type BasicInstance struct {
 	DnsPodDomain pulumi.StringOutput `pulumi:"dnsPodDomain"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion pulumi.StringPtrOutput `pulumi:"engineVersion"`
+	// Instance ID.
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
 	MachineType pulumi.StringOutput `pulumi:"machineType"`
 	// Start time of the maintenance in one day, format like `HH:mm`.
@@ -227,6 +263,8 @@ type BasicInstance struct {
 	TgwWanVport pulumi.IntOutput `pulumi:"tgwWanVport"`
 	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
 	TimeZone pulumi.StringOutput `pulumi:"timeZone"`
+	// Unique UID of the instance.
+	Uid pulumi.StringOutput `pulumi:"uid"`
 	// IP for private access.
 	Vip pulumi.StringOutput `pulumi:"vip"`
 	// An array of voucher IDs, currently only one can be used for a single order.
@@ -299,6 +337,8 @@ type basicInstanceState struct {
 	DnsPodDomain *string `pulumi:"dnsPodDomain"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion *string `pulumi:"engineVersion"`
+	// Instance ID.
+	InstanceId *string `pulumi:"instanceId"`
 	// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
 	MachineType *string `pulumi:"machineType"`
 	// Start time of the maintenance in one day, format like `HH:mm`.
@@ -329,6 +369,8 @@ type basicInstanceState struct {
 	TgwWanVport *int `pulumi:"tgwWanVport"`
 	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
 	TimeZone *string `pulumi:"timeZone"`
+	// Unique UID of the instance.
+	Uid *string `pulumi:"uid"`
 	// IP for private access.
 	Vip *string `pulumi:"vip"`
 	// An array of voucher IDs, currently only one can be used for a single order.
@@ -360,6 +402,8 @@ type BasicInstanceState struct {
 	DnsPodDomain pulumi.StringPtrInput
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion pulumi.StringPtrInput
+	// Instance ID.
+	InstanceId pulumi.StringPtrInput
 	// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
 	MachineType pulumi.StringPtrInput
 	// Start time of the maintenance in one day, format like `HH:mm`.
@@ -390,6 +434,8 @@ type BasicInstanceState struct {
 	TgwWanVport pulumi.IntPtrInput
 	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
 	TimeZone pulumi.StringPtrInput
+	// Unique UID of the instance.
+	Uid pulumi.StringPtrInput
 	// IP for private access.
 	Vip pulumi.StringPtrInput
 	// An array of voucher IDs, currently only one can be used for a single order.
@@ -640,6 +686,11 @@ func (o BasicInstanceOutput) EngineVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringPtrOutput { return v.EngineVersion }).(pulumi.StringPtrOutput)
 }
 
+// Instance ID.
+func (o BasicInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
 // The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
 func (o BasicInstanceOutput) MachineType() pulumi.StringOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.MachineType }).(pulumi.StringOutput)
@@ -713,6 +764,11 @@ func (o BasicInstanceOutput) TgwWanVport() pulumi.IntOutput {
 // System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
 func (o BasicInstanceOutput) TimeZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.TimeZone }).(pulumi.StringOutput)
+}
+
+// Unique UID of the instance.
+func (o BasicInstanceOutput) Uid() pulumi.StringOutput {
+	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.Uid }).(pulumi.StringOutput)
 }
 
 // IP for private access.

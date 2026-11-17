@@ -96,6 +96,12 @@ def get_vpc_fw_switches(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.cfw.get_vpc_fw_switches(vpc_ins_id="cfwg-c8c2de41")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str vpc_ins_id: Firewall instance id.
@@ -125,6 +131,12 @@ def get_vpc_fw_switches_output(result_output_file: pulumi.Input[Optional[Optiona
 
     example = tencentcloud.cfw.get_vpc_fw_switches(vpc_ins_id="cfwg-c8c2de41")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

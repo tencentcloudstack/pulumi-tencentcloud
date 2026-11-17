@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UploadRevokeLetter](https://www.tencentcloud.com/search/?wd=UploadRevokeLetter&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ssl UploadRevokeLetter can be imported using the id, e.g.

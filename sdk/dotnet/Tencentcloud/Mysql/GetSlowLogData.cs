@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogData](https://www.tencentcloud.com/document/api/236/35668)
         /// </summary>
         public static Task<GetSlowLogDataResult> InvokeAsync(GetSlowLogDataArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataArgs(), options.WithDefaults());
@@ -90,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogData](https://www.tencentcloud.com/document/api/236/35668)
         /// </summary>
         public static Output<GetSlowLogDataResult> Invoke(GetSlowLogDataInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataInvokeArgs(), options.WithDefaults());
@@ -131,6 +143,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogData](https://www.tencentcloud.com/document/api/236/35668)
         /// </summary>
         public static Output<GetSlowLogDataResult> Invoke(GetSlowLogDataInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataInvokeArgs(), options.WithDefaults());

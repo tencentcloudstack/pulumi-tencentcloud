@@ -82,6 +82,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAuditTrack](https://www.tencentcloud.com/search/?wd=CreateAuditTrack&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAuditTrack](https://www.tencentcloud.com/search/?wd=DescribeAuditTrack&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAuditTrack](https://www.tencentcloud.com/search/?wd=ModifyAuditTrack&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAuditTrack](https://www.tencentcloud.com/search/?wd=DeleteAuditTrack&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// audit track can be imported using the id, e.g.

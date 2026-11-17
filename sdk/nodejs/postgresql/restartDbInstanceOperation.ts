@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const restartDbInstanceOperation = new tencentcloud.postgresql.RestartDbInstanceOperation("restart_db_instance_operation", {dbInstanceId: pgsqlId});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+ *   - [RestartDBInstance](https://www.tencentcloud.com/document/api/409/18097)
  */
 export class RestartDbInstanceOperation extends pulumi.CustomResource {
     /**

@@ -31,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityConfigDropPageConfig? DropPageConfig;
         /// <summary>
-        /// Exception rules configuration.
+        /// Exception rule configuration.
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityConfigExceptConfig? ExceptConfig;
         /// <summary>
@@ -47,7 +47,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityConfigSlowPostConfig? SlowPostConfig;
         /// <summary>
-        /// Layer-7 protection master switch.
+        /// Security switch configuration.
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityConfigSwitchConfig? SwitchConfig;
         /// <summary>

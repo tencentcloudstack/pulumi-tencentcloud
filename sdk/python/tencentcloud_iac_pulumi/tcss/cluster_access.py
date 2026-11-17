@@ -152,6 +152,22 @@ class ClusterAccess(pulumi.CustomResource):
             switch_on=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterAccess](https://www.tencentcloud.com/document/api/1163/80608)
+          - [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+          - [ModifyDefendStatus](https://www.tencentcloud.com/document/api/1163/80609)
+        * Read: [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+        * Update:
+          - [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+          - [ModifyDefendStatus](https://www.tencentcloud.com/document/api/1163/80609)
+        * Delete:
+          - [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+          - [UninstallClusterContainerSecurity](https://www.tencentcloud.com/document/api/1163/80607)
+
         ## Import
 
         TCSS cluster access can be imported using the id, e.g.
@@ -185,6 +201,22 @@ class ClusterAccess(pulumi.CustomResource):
             cluster_id="cls-fdy7hm1q",
             switch_on=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterAccess](https://www.tencentcloud.com/document/api/1163/80608)
+          - [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+          - [ModifyDefendStatus](https://www.tencentcloud.com/document/api/1163/80609)
+        * Read: [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+        * Update:
+          - [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+          - [ModifyDefendStatus](https://www.tencentcloud.com/document/api/1163/80609)
+        * Delete:
+          - [DescribeUserCluster](https://www.tencentcloud.com/document/api/1163/53195)
+          - [UninstallClusterContainerSecurity](https://www.tencentcloud.com/document/api/1163/80607)
 
         ## Import
 

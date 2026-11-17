@@ -63,6 +63,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&type=document&lang=en)
 func GetRecordList(ctx *pulumi.Context, args *GetRecordListArgs, opts ...pulumi.InvokeOption) (*GetRecordListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecordListResult

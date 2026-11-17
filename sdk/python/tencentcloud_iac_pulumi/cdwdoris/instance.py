@@ -34,6 +34,7 @@ class InstanceArgs:
                  workload_group_status: pulumi.Input[_builtins.str],
                  zone: pulumi.Input[_builtins.str],
                  case_sensitive: pulumi.Input[Optional[_builtins.int]] = None,
+                 disk_encrypt: pulumi.Input[Optional[_builtins.int]] = None,
                  enable_multi_zones: pulumi.Input[Optional[_builtins.bool]] = None,
                  ha_type: pulumi.Input[Optional[_builtins.int]] = None,
                  is_ssc: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -55,6 +56,7 @@ class InstanceArgs:
         :param pulumi.Input[_builtins.str] workload_group_status: Whether to enable resource group. `open` - enable, `close` - disable.
         :param pulumi.Input[_builtins.str] zone: Availability zone.
         :param pulumi.Input[_builtins.int] case_sensitive: Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.
+        :param pulumi.Input[_builtins.int] disk_encrypt: Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
         :param pulumi.Input[_builtins.bool] enable_multi_zones: Whether to enable multi-availability zone.
         :param pulumi.Input[_builtins.int] ha_type: High availability type: 0 indicates non-high availability (only one FE, FeSpec.CreateInstanceSpec.Count=1), 1 indicates read high availability (at least 3 FEs must be deployed, FeSpec.CreateInstanceSpec.Count>=3, and it must be an odd number), 2 indicates read and write high availability (at least 5 FEs must be deployed, FeSpec.CreateInstanceSpec.Count>=5, and it must be an odd number).
         :param pulumi.Input[_builtins.bool] is_ssc: Whether it is storage-compute separation. Default is false.
@@ -75,6 +77,8 @@ class InstanceArgs:
         pulumi.set(__self__, "zone", zone)
         if case_sensitive is not None:
             pulumi.set(__self__, "case_sensitive", case_sensitive)
+        if disk_encrypt is not None:
+            pulumi.set(__self__, "disk_encrypt", disk_encrypt)
         if enable_multi_zones is not None:
             pulumi.set(__self__, "enable_multi_zones", enable_multi_zones)
         if ha_type is not None:
@@ -233,6 +237,18 @@ class InstanceArgs:
         pulumi.set(self, "case_sensitive", value)
 
     @_builtins.property
+    @pulumi.getter(name="diskEncrypt")
+    def disk_encrypt(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+        """
+        return pulumi.get(self, "disk_encrypt")
+
+    @disk_encrypt.setter
+    def disk_encrypt(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "disk_encrypt", value)
+
+    @_builtins.property
     @pulumi.getter(name="enableMultiZones")
     def enable_multi_zones(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -311,6 +327,7 @@ class _InstanceState:
                  be_spec: pulumi.Input[Optional['InstanceBeSpecArgs']] = None,
                  case_sensitive: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_properties: pulumi.Input[Optional['InstanceChargePropertiesArgs']] = None,
+                 disk_encrypt: pulumi.Input[Optional[_builtins.int]] = None,
                  doris_user_pwd: pulumi.Input[Optional[_builtins.str]] = None,
                  enable_multi_zones: pulumi.Input[Optional[_builtins.bool]] = None,
                  fe_spec: pulumi.Input[Optional['InstanceFeSpecArgs']] = None,
@@ -332,6 +349,7 @@ class _InstanceState:
         :param pulumi.Input['InstanceBeSpecArgs'] be_spec: BE specifications.
         :param pulumi.Input[_builtins.int] case_sensitive: Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.
         :param pulumi.Input['InstanceChargePropertiesArgs'] charge_properties: Payment type.
+        :param pulumi.Input[_builtins.int] disk_encrypt: Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
         :param pulumi.Input[_builtins.str] doris_user_pwd: Database password.
         :param pulumi.Input[_builtins.bool] enable_multi_zones: Whether to enable multi-availability zone.
         :param pulumi.Input['InstanceFeSpecArgs'] fe_spec: FE specifications.
@@ -354,6 +372,8 @@ class _InstanceState:
             pulumi.set(__self__, "case_sensitive", case_sensitive)
         if charge_properties is not None:
             pulumi.set(__self__, "charge_properties", charge_properties)
+        if disk_encrypt is not None:
+            pulumi.set(__self__, "disk_encrypt", disk_encrypt)
         if doris_user_pwd is not None:
             pulumi.set(__self__, "doris_user_pwd", doris_user_pwd)
         if enable_multi_zones is not None:
@@ -420,6 +440,18 @@ class _InstanceState:
     @charge_properties.setter
     def charge_properties(self, value: pulumi.Input[Optional['InstanceChargePropertiesArgs']]):
         pulumi.set(self, "charge_properties", value)
+
+    @_builtins.property
+    @pulumi.getter(name="diskEncrypt")
+    def disk_encrypt(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+        """
+        return pulumi.get(self, "disk_encrypt")
+
+    @disk_encrypt.setter
+    def disk_encrypt(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "disk_encrypt", value)
 
     @_builtins.property
     @pulumi.getter(name="dorisUserPwd")
@@ -611,6 +643,7 @@ class Instance(pulumi.CustomResource):
                  be_spec: pulumi.Input[Optional[Union['InstanceBeSpecArgs', 'InstanceBeSpecArgsDict']]] = None,
                  case_sensitive: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_properties: pulumi.Input[Optional[Union['InstanceChargePropertiesArgs', 'InstanceChargePropertiesArgsDict']]] = None,
+                 disk_encrypt: pulumi.Input[Optional[_builtins.int]] = None,
                  doris_user_pwd: pulumi.Input[Optional[_builtins.str]] = None,
                  enable_multi_zones: pulumi.Input[Optional[_builtins.bool]] = None,
                  fe_spec: pulumi.Input[Optional[Union['InstanceFeSpecArgs', 'InstanceFeSpecArgsDict']]] = None,
@@ -758,12 +791,35 @@ class Instance(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstanceNew](https://www.tencentcloud.com/search/?wd=CreateInstanceNew&type=document&lang=en)
+          - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+          - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+          - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+        * Read:
+          - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&type=document&lang=en)
+          - [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&type=document&lang=en)
+        * Update:
+          - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+          - [ModifyInstance](https://www.tencentcloud.com/search/?wd=ModifyInstance&type=document&lang=en)
+          - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+          - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+        * Delete:
+          - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+          - [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&type=document&lang=en)
+          - [DestroyInstance](https://www.tencentcloud.com/search/?wd=DestroyInstance&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['InstanceBeSpecArgs', 'InstanceBeSpecArgsDict']] be_spec: BE specifications.
         :param pulumi.Input[_builtins.int] case_sensitive: Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.
         :param pulumi.Input[Union['InstanceChargePropertiesArgs', 'InstanceChargePropertiesArgsDict']] charge_properties: Payment type.
+        :param pulumi.Input[_builtins.int] disk_encrypt: Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
         :param pulumi.Input[_builtins.str] doris_user_pwd: Database password.
         :param pulumi.Input[_builtins.bool] enable_multi_zones: Whether to enable multi-availability zone.
         :param pulumi.Input[Union['InstanceFeSpecArgs', 'InstanceFeSpecArgsDict']] fe_spec: FE specifications.
@@ -917,6 +973,28 @@ class Instance(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstanceNew](https://www.tencentcloud.com/search/?wd=CreateInstanceNew&type=document&lang=en)
+          - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+          - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+          - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+        * Read:
+          - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&type=document&lang=en)
+          - [DescribeWorkloadGroup](https://www.tencentcloud.com/search/?wd=DescribeWorkloadGroup&type=document&lang=en)
+        * Update:
+          - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+          - [ModifyInstance](https://www.tencentcloud.com/search/?wd=ModifyInstance&type=document&lang=en)
+          - [ModifySecurityGroups](https://www.tencentcloud.com/search/?wd=ModifySecurityGroups&type=document&lang=en)
+          - [ModifyWorkloadGroupStatus](https://www.tencentcloud.com/search/?wd=ModifyWorkloadGroupStatus&type=document&lang=en)
+        * Delete:
+          - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+          - [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&type=document&lang=en)
+          - [DestroyInstance](https://www.tencentcloud.com/search/?wd=DestroyInstance&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
@@ -936,6 +1014,7 @@ class Instance(pulumi.CustomResource):
                  be_spec: pulumi.Input[Optional[Union['InstanceBeSpecArgs', 'InstanceBeSpecArgsDict']]] = None,
                  case_sensitive: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_properties: pulumi.Input[Optional[Union['InstanceChargePropertiesArgs', 'InstanceChargePropertiesArgsDict']]] = None,
+                 disk_encrypt: pulumi.Input[Optional[_builtins.int]] = None,
                  doris_user_pwd: pulumi.Input[Optional[_builtins.str]] = None,
                  enable_multi_zones: pulumi.Input[Optional[_builtins.bool]] = None,
                  fe_spec: pulumi.Input[Optional[Union['InstanceFeSpecArgs', 'InstanceFeSpecArgsDict']]] = None,
@@ -967,6 +1046,7 @@ class Instance(pulumi.CustomResource):
             if charge_properties is None and not opts.urn:
                 raise TypeError("Missing required property 'charge_properties'")
             __props__.__dict__["charge_properties"] = charge_properties
+            __props__.__dict__["disk_encrypt"] = disk_encrypt
             if doris_user_pwd is None and not opts.urn:
                 raise TypeError("Missing required property 'doris_user_pwd'")
             __props__.__dict__["doris_user_pwd"] = None if doris_user_pwd is None else pulumi.Output.secret(doris_user_pwd)
@@ -1015,6 +1095,7 @@ class Instance(pulumi.CustomResource):
             be_spec: pulumi.Input[Optional[Union['InstanceBeSpecArgs', 'InstanceBeSpecArgsDict']]] = None,
             case_sensitive: pulumi.Input[Optional[_builtins.int]] = None,
             charge_properties: pulumi.Input[Optional[Union['InstanceChargePropertiesArgs', 'InstanceChargePropertiesArgsDict']]] = None,
+            disk_encrypt: pulumi.Input[Optional[_builtins.int]] = None,
             doris_user_pwd: pulumi.Input[Optional[_builtins.str]] = None,
             enable_multi_zones: pulumi.Input[Optional[_builtins.bool]] = None,
             fe_spec: pulumi.Input[Optional[Union['InstanceFeSpecArgs', 'InstanceFeSpecArgsDict']]] = None,
@@ -1040,6 +1121,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[Union['InstanceBeSpecArgs', 'InstanceBeSpecArgsDict']] be_spec: BE specifications.
         :param pulumi.Input[_builtins.int] case_sensitive: Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.
         :param pulumi.Input[Union['InstanceChargePropertiesArgs', 'InstanceChargePropertiesArgsDict']] charge_properties: Payment type.
+        :param pulumi.Input[_builtins.int] disk_encrypt: Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
         :param pulumi.Input[_builtins.str] doris_user_pwd: Database password.
         :param pulumi.Input[_builtins.bool] enable_multi_zones: Whether to enable multi-availability zone.
         :param pulumi.Input[Union['InstanceFeSpecArgs', 'InstanceFeSpecArgsDict']] fe_spec: FE specifications.
@@ -1063,6 +1145,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["be_spec"] = be_spec
         __props__.__dict__["case_sensitive"] = case_sensitive
         __props__.__dict__["charge_properties"] = charge_properties
+        __props__.__dict__["disk_encrypt"] = disk_encrypt
         __props__.__dict__["doris_user_pwd"] = doris_user_pwd
         __props__.__dict__["enable_multi_zones"] = enable_multi_zones
         __props__.__dict__["fe_spec"] = fe_spec
@@ -1103,6 +1186,14 @@ class Instance(pulumi.CustomResource):
         Payment type.
         """
         return pulumi.get(self, "charge_properties")
+
+    @_builtins.property
+    @pulumi.getter(name="diskEncrypt")
+    def disk_encrypt(self) -> pulumi.Output[_builtins.int]:
+        """
+        Disk encryption. Immutable after creation. `0` - disable, `1` - enable. Default is `0`.
+        """
+        return pulumi.get(self, "disk_encrypt")
 
     @_builtins.property
     @pulumi.getter(name="dorisUserPwd")

@@ -100,6 +100,12 @@ def get_template_groups(id: Optional[_builtins.str] = None,
     name = tencentcloud.protocol.get_template_groups(name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
+
 
     :param _builtins.str id: ID of the protocol template group to query.
     :param _builtins.str name: Name of the protocol template group to query.
@@ -132,6 +138,12 @@ def get_template_groups_output(id: pulumi.Input[Optional[Optional[_builtins.str]
 
     name = tencentcloud.protocol.get_template_groups(name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceTemplateGroups](https://www.tencentcloud.com/document/api/215/16718)
 
 
     :param _builtins.str id: ID of the protocol template group to query.

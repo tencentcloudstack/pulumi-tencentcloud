@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const securityGroupLimits = tencentcloud.vpc.getSecurityGroupLimits({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityGroupLimits](https://www.tencentcloud.com/search/?wd=DescribeSecurityGroupLimits&type=document&lang=en)
  */
 export function getSecurityGroupLimits(args?: GetSecurityGroupLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupLimitsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetSecurityGroupLimitsResult {
  *
  * const securityGroupLimits = tencentcloud.vpc.getSecurityGroupLimits({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityGroupLimits](https://www.tencentcloud.com/search/?wd=DescribeSecurityGroupLimits&type=document&lang=en)
  */
 export function getSecurityGroupLimitsOutput(args?: GetSecurityGroupLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityGroupLimitsResult> {
     args = args || {};

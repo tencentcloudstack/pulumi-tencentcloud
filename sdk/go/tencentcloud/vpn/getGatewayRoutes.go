@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeVpnGatewayRoutes](https://www.tencentcloud.com/document/api/215/41055)
 func GetGatewayRoutes(ctx *pulumi.Context, args *GetGatewayRoutesArgs, opts ...pulumi.InvokeOption) (*GetGatewayRoutesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayRoutesResult

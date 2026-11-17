@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     database: "tf_ci_test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
  */
 export function getInstTables(args: GetInstTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetInstTablesResult {
  *     database: "tf_ci_test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
  */
 export function getInstTablesOutput(args: GetInstTablesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

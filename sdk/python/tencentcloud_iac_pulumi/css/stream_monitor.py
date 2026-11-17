@@ -474,6 +474,15 @@ class StreamMonitor(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=CreateLiveStreamMonitor&type=document&lang=en)
+        * Read: [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+        * Update: [ModifyLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=ModifyLiveStreamMonitor&type=document&lang=en)
+        * Delete: [DeleteLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DeleteLiveStreamMonitor&type=document&lang=en)
+
         ## Import
 
         css stream_monitor can be imported using the id, e.g.
@@ -539,6 +548,15 @@ class StreamMonitor(pulumi.CustomResource):
                 "output_stream_width": 1920,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=CreateLiveStreamMonitor&type=document&lang=en)
+        * Read: [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&type=document&lang=en)
+        * Update: [ModifyLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=ModifyLiveStreamMonitor&type=document&lang=en)
+        * Delete: [DeleteLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DeleteLiveStreamMonitor&type=document&lang=en)
 
         ## Import
 

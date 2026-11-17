@@ -141,6 +141,12 @@ def get_attack_total_count(domain: Optional[_builtins.str] = None,
         query_string="method:GET")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
+
 
     :param _builtins.str domain: Query domain name, all domain use all.
     :param _builtins.str end_time: End time.
@@ -199,6 +205,12 @@ def get_attack_total_count_output(domain: pulumi.Input[Optional[_builtins.str]] 
         domain="all",
         query_string="method:GET")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
 
 
     :param _builtins.str domain: Query domain name, all domain use all.

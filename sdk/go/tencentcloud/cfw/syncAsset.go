@@ -36,6 +36,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAssetSync](https://www.tencentcloud.com/search/?wd=DescribeAssetSync&type=document&lang=en)
+//   - [ModifyAssetSync](https://www.tencentcloud.com/search/?wd=ModifyAssetSync&type=document&lang=en)
 type SyncAsset struct {
 	pulumi.CustomResourceState
 }

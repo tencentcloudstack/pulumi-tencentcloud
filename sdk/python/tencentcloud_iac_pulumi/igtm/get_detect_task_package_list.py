@@ -112,6 +112,12 @@ def get_detect_task_package_list(filters: Optional[Sequence[Union['GetDetectTask
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&type=document&lang=en)
+
 
     :param Sequence[Union['GetDetectTaskPackageListFilterArgs', 'GetDetectTaskPackageListFilterArgsDict']] filters: Detect task filter conditions.
     :param _builtins.str result_output_file: Used to save results.
@@ -156,6 +162,12 @@ def get_detect_task_package_list_output(filters: pulumi.Input[Optional[Optional[
         "fuzzy": True,
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&type=document&lang=en)
 
 
     :param Sequence[Union['GetDetectTaskPackageListFilterArgs', 'GetDetectTaskPackageListFilterArgsDict']] filters: Detect task filter conditions.

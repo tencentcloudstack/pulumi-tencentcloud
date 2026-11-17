@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyAssetSyncFlag](https://www.tencentcloud.com/search/?wd=ModifyAssetSyncFlag&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAssetSyncFlag](https://www.tencentcloud.com/search/?wd=DescribeAssetSyncFlag&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAssetSyncFlag](https://www.tencentcloud.com/search/?wd=ModifyAssetSyncFlag&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// BH asset sync flag config can be imported using the customId(like uuid or base64 string), e.g.

@@ -43,6 +43,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36074)
+// * Read: [DescribeVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36075)
+// * Update: [ModifyVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36074)
+//
 // ## Import
 //
 // vpc vpnGatewayCcnRoutes can be imported using the id, e.g.

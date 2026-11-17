@@ -182,6 +182,12 @@ def get_price(amount_unit: Optional[_builtins.str] = None,
         paymode="prepaid")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
+
 
     :param _builtins.str amount_unit: Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
     :param _builtins.int buy_count: The quantity you want to purchase is queried by default for the price of purchasing 1 instance.
@@ -246,6 +252,12 @@ def get_price_output(amount_unit: pulumi.Input[Optional[Optional[_builtins.str]]
         period=1,
         paymode="prepaid")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
 
 
     :param _builtins.str amount_unit: Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).

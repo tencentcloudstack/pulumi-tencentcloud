@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetNoticeContentTmplsResult> InvokeAsync(GetNoticeContentTmplsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNoticeContentTmplsResult>("tencentcloud:Monitor/getNoticeContentTmpls:getNoticeContentTmpls", args ?? new GetNoticeContentTmplsArgs(), options.WithDefaults());
@@ -104,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNoticeContentTmplsResult> Invoke(GetNoticeContentTmplsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNoticeContentTmplsResult>("tencentcloud:Monitor/getNoticeContentTmpls:getNoticeContentTmpls", args ?? new GetNoticeContentTmplsInvokeArgs(), options.WithDefaults());
@@ -152,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNoticeContentTmplsResult> Invoke(GetNoticeContentTmplsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNoticeContentTmplsResult>("tencentcloud:Monitor/getNoticeContentTmpls:getNoticeContentTmpls", args ?? new GetNoticeContentTmplsInvokeArgs(), options.WithDefaults());

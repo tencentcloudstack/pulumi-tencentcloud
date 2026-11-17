@@ -110,6 +110,12 @@ def get_project_security_groups(product: Optional[_builtins.str] = None,
         project_id=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/237/39448)
+
 
     :param _builtins.str product: Database engine name. Valid value: `mariadb`.
     :param _builtins.int project_id: Project ID.
@@ -144,6 +150,12 @@ def get_project_security_groups_output(product: pulumi.Input[Optional[_builtins.
     project_security_groups = tencentcloud.mariadb.get_project_security_groups(product="mariadb",
         project_id=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/237/39448)
 
 
     :param _builtins.str product: Database engine name. Valid value: `mariadb`.

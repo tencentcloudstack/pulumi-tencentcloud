@@ -32,6 +32,7 @@ class StorageArgs:
                  encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  encrypt_type: pulumi.Input[Optional[_builtins.str]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  period: pulumi.Input[Optional[_builtins.int]] = None,
                  prepaid_period: pulumi.Input[Optional[_builtins.int]] = None,
@@ -52,8 +53,9 @@ class StorageArgs:
         :param pulumi.Input[_builtins.str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[_builtins.int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[_builtins.bool] encrypt: Pass in this parameter to create an encrypted cloud disk.
-        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
+        :param pulumi.Input[_builtins.str] instance_id: Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
         :param pulumi.Input[_builtins.str] kms_key_id: Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
         :param pulumi.Input[_builtins.int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
@@ -81,6 +83,8 @@ class StorageArgs:
             pulumi.set(__self__, "encrypt_type", encrypt_type)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if kms_key_id is not None:
             pulumi.set(__self__, "kms_key_id", kms_key_id)
         if period is not None:
@@ -213,7 +217,7 @@ class StorageArgs:
     @pulumi.getter(name="encryptType")
     def encrypt_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         """
         return pulumi.get(self, "encrypt_type")
 
@@ -232,6 +236,18 @@ class StorageArgs:
     @force_delete.setter
     def force_delete(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_delete", value)
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_id", value)
 
     @_builtins.property
     @pulumi.getter(name="kmsKeyId")
@@ -343,6 +359,7 @@ class _StorageState:
                  encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  encrypt_type: pulumi.Input[Optional[_builtins.str]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  period: pulumi.Input[Optional[_builtins.int]] = None,
                  prepaid_period: pulumi.Input[Optional[_builtins.int]] = None,
@@ -365,8 +382,9 @@ class _StorageState:
         :param pulumi.Input[_builtins.str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[_builtins.int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[_builtins.bool] encrypt: Pass in this parameter to create an encrypted cloud disk.
-        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
+        :param pulumi.Input[_builtins.str] instance_id: Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
         :param pulumi.Input[_builtins.str] kms_key_id: Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
         :param pulumi.Input[_builtins.int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
@@ -398,6 +416,8 @@ class _StorageState:
             pulumi.set(__self__, "encrypt_type", encrypt_type)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if kms_key_id is not None:
             pulumi.set(__self__, "kms_key_id", kms_key_id)
         if period is not None:
@@ -514,7 +534,7 @@ class _StorageState:
     @pulumi.getter(name="encryptType")
     def encrypt_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         """
         return pulumi.get(self, "encrypt_type")
 
@@ -533,6 +553,18 @@ class _StorageState:
     @force_delete.setter
     def force_delete(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_delete", value)
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_id", value)
 
     @_builtins.property
     @pulumi.getter(name="kmsKeyId")
@@ -694,6 +726,7 @@ class Storage(pulumi.CustomResource):
                  encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  encrypt_type: pulumi.Input[Optional[_builtins.str]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  period: pulumi.Input[Optional[_builtins.int]] = None,
                  prepaid_period: pulumi.Input[Optional[_builtins.int]] = None,
@@ -809,6 +842,49 @@ class Storage(pulumi.CustomResource):
             })
         ```
 
+        ### Create a CBS storage with auto-mount instance id
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cbs.Storage("example",
+            storage_name="tf-example",
+            storage_type="CLOUD_SSD",
+            storage_size=100,
+            availability_zone="ap-guangzhou-3",
+            project_id=0,
+            instance_id="ins-xxxxxxxx",
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+        * Read:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ApplySnapshot](https://www.tencentcloud.com/document/api/362/15643)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+          - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+          - [ModifyDiskExtraPerformance](https://www.tencentcloud.com/document/api/362/40191)
+          - [ModifyDisksChargeType](https://www.tencentcloud.com/search/?wd=ModifyDisksChargeType&type=document&lang=en)
+          - [ModifyDisksRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDisksRenewFlag&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+        * Delete:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+
         ## Import
 
         CBS storage can be imported using the id, e.g.
@@ -826,8 +902,9 @@ class Storage(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[_builtins.int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[_builtins.bool] encrypt: Pass in this parameter to create an encrypted cloud disk.
-        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
+        :param pulumi.Input[_builtins.str] instance_id: Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
         :param pulumi.Input[_builtins.str] kms_key_id: Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
         :param pulumi.Input[_builtins.int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
@@ -949,6 +1026,49 @@ class Storage(pulumi.CustomResource):
             })
         ```
 
+        ### Create a CBS storage with auto-mount instance id
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cbs.Storage("example",
+            storage_name="tf-example",
+            storage_type="CLOUD_SSD",
+            storage_size=100,
+            availability_zone="ap-guangzhou-3",
+            project_id=0,
+            instance_id="ins-xxxxxxxx",
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+        * Read:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ApplySnapshot](https://www.tencentcloud.com/document/api/362/15643)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+          - [ModifyDiskBackupQuota](https://www.tencentcloud.com/document/api/362/50786)
+          - [ModifyDiskExtraPerformance](https://www.tencentcloud.com/document/api/362/40191)
+          - [ModifyDisksChargeType](https://www.tencentcloud.com/search/?wd=ModifyDisksChargeType&type=document&lang=en)
+          - [ModifyDisksRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDisksRenewFlag&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+        * Delete:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+
         ## Import
 
         CBS storage can be imported using the id, e.g.
@@ -981,6 +1101,7 @@ class Storage(pulumi.CustomResource):
                  encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  encrypt_type: pulumi.Input[Optional[_builtins.str]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  period: pulumi.Input[Optional[_builtins.int]] = None,
                  prepaid_period: pulumi.Input[Optional[_builtins.int]] = None,
@@ -1011,6 +1132,7 @@ class Storage(pulumi.CustomResource):
             __props__.__dict__["encrypt"] = encrypt
             __props__.__dict__["encrypt_type"] = encrypt_type
             __props__.__dict__["force_delete"] = force_delete
+            __props__.__dict__["instance_id"] = instance_id
             __props__.__dict__["kms_key_id"] = kms_key_id
             __props__.__dict__["period"] = period
             __props__.__dict__["prepaid_period"] = prepaid_period
@@ -1049,6 +1171,7 @@ class Storage(pulumi.CustomResource):
             encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
             encrypt_type: pulumi.Input[Optional[_builtins.str]] = None,
             force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
+            instance_id: pulumi.Input[Optional[_builtins.str]] = None,
             kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             period: pulumi.Input[Optional[_builtins.int]] = None,
             prepaid_period: pulumi.Input[Optional[_builtins.int]] = None,
@@ -1075,8 +1198,9 @@ class Storage(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[_builtins.int] disk_backup_quota: The quota of backup points of cloud disk.
         :param pulumi.Input[_builtins.bool] encrypt: Pass in this parameter to create an encrypted cloud disk.
-        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        :param pulumi.Input[_builtins.str] encrypt_type: Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
+        :param pulumi.Input[_builtins.str] instance_id: Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
         :param pulumi.Input[_builtins.str] kms_key_id: Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
         :param pulumi.Input[_builtins.int] period: It has been deprecated from version 1.33.0. Set `prepaid_period` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
         :param pulumi.Input[_builtins.int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
@@ -1103,6 +1227,7 @@ class Storage(pulumi.CustomResource):
         __props__.__dict__["encrypt"] = encrypt
         __props__.__dict__["encrypt_type"] = encrypt_type
         __props__.__dict__["force_delete"] = force_delete
+        __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["kms_key_id"] = kms_key_id
         __props__.__dict__["period"] = period
         __props__.__dict__["prepaid_period"] = prepaid_period
@@ -1177,7 +1302,7 @@ class Storage(pulumi.CustomResource):
     @pulumi.getter(name="encryptType")
     def encrypt_type(self) -> pulumi.Output[_builtins.str]:
         """
-        Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
+        Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk. https://www.tencentcloud.com/document/product/362/33139?lang=en&pg=.
         """
         return pulumi.get(self, "encrypt_type")
 
@@ -1188,6 +1313,14 @@ class Storage(pulumi.CustomResource):
         Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         """
         return pulumi.get(self, "force_delete")
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Specifies the CVM instance ID for auto-mounting and auto-initializing the data disk during creation. When set, the disk will be automatically mounted to the specified CVM instance. This parameter maps to `AutoMountConfiguration.InstanceId` of the `CreateDisks` API. Note: 1. encrypted disks do not support auto-mounting, so this parameter cannot be used together with `encrypt`. 2.Cannot be used simultaneously with `Cbs.StorageSetAttachment`. 3.Modification is not supported. The current field only supports binding to an instance when creating a CBS instance.
+        """
+        return pulumi.get(self, "instance_id")
 
     @_builtins.property
     @pulumi.getter(name="kmsKeyId")

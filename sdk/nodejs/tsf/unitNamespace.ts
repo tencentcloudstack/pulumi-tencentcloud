@@ -20,6 +20,16 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateUnitNamespaces](https://www.tencentcloud.com/search/?wd=CreateUnitNamespaces&type=document&lang=en)
+ * * Read: [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&type=document&lang=en)
+ * * Delete:
+ *   - [DeleteUnitNamespaces](https://www.tencentcloud.com/search/?wd=DeleteUnitNamespaces&type=document&lang=en)
+ *   - [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&type=document&lang=en)
+ *
  * ## Import
  *
  * tsf unitNamespace can be imported using the id, e.g.

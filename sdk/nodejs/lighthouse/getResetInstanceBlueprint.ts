@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     limit: 20,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
  */
 export function getResetInstanceBlueprint(args: GetResetInstanceBlueprintArgs, opts?: pulumi.InvokeOptions): Promise<GetResetInstanceBlueprintResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetResetInstanceBlueprintResult {
  *     limit: 20,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
  */
 export function getResetInstanceBlueprintOutput(args: GetResetInstanceBlueprintOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResetInstanceBlueprintResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

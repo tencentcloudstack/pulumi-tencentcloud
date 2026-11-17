@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCfsFileSystemClients](https://www.tencentcloud.com/document/api/582/38185)
 func GetFileSystemClients(ctx *pulumi.Context, args *GetFileSystemClientsArgs, opts ...pulumi.InvokeOption) (*GetFileSystemClientsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFileSystemClientsResult

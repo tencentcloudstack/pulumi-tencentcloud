@@ -176,6 +176,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
 func GetPublishSubscribes(ctx *pulumi.Context, args *GetPublishSubscribesArgs, opts ...pulumi.InvokeOption) (*GetPublishSubscribesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublishSubscribesResult

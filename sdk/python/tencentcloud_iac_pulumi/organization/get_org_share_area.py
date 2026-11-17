@@ -96,6 +96,12 @@ def get_org_share_area(lang: Optional[_builtins.str] = None,
     org_share_area = tencentcloud.organization.get_org_share_area(lang="zh")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
+
 
     :param _builtins.str lang: Language.default zh.
            Valid values:
@@ -126,6 +132,12 @@ def get_org_share_area_output(lang: pulumi.Input[Optional[Optional[_builtins.str
 
     org_share_area = tencentcloud.organization.get_org_share_area(lang="zh")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
 
 
     :param _builtins.str lang: Language.default zh.

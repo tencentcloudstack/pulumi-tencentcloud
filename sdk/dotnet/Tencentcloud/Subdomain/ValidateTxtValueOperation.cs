@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subdomain
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSubdomainValidateTXTValue](https://www.tencentcloud.com/search/?wd=CreateSubdomainValidateTXTValue&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Subdomain/validateTxtValueOperation:ValidateTxtValueOperation")]
     public partial class ValidateTxtValueOperation : global::Pulumi.CustomResource

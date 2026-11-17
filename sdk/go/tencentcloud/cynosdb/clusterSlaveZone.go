@@ -74,8 +74,10 @@ import (
 //				return err
 //			}
 //			_, err = cynosdb.NewClusterSlaveZone(ctx, "example", &cynosdb.ClusterSlaveZoneArgs{
-//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
-//				SlaveZone: pulumi.String("ap-guangzhou-7"),
+//				ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
+//				SlaveZone:       pulumi.String("ap-guangzhou-7"),
+//				BinlogSyncWay:   pulumi.String("async"),
+//				SemiSyncTimeout: pulumi.Int(10000),
 //			})
 //			if err != nil {
 //				return err
@@ -85,6 +87,23 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [AddClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50016)
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//
+// * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+// * Update:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//   - [ModifyClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50015)
+//
+// * Delete:
+//   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+//   - [RemoveClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50014)
 //
 // ## Import
 //
@@ -96,8 +115,12 @@ import (
 type ClusterSlaveZone struct {
 	pulumi.CustomResourceState
 
+	// Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+	BinlogSyncWay pulumi.StringOutput `pulumi:"binlogSyncWay"`
 	// The ID of cluster.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
+	// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+	SemiSyncTimeout pulumi.IntOutput `pulumi:"semiSyncTimeout"`
 	// Slave zone.
 	SlaveZone pulumi.StringOutput `pulumi:"slaveZone"`
 }
@@ -138,15 +161,23 @@ func GetClusterSlaveZone(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ClusterSlaveZone resources.
 type clusterSlaveZoneState struct {
+	// Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+	BinlogSyncWay *string `pulumi:"binlogSyncWay"`
 	// The ID of cluster.
 	ClusterId *string `pulumi:"clusterId"`
+	// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+	SemiSyncTimeout *int `pulumi:"semiSyncTimeout"`
 	// Slave zone.
 	SlaveZone *string `pulumi:"slaveZone"`
 }
 
 type ClusterSlaveZoneState struct {
+	// Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+	BinlogSyncWay pulumi.StringPtrInput
 	// The ID of cluster.
 	ClusterId pulumi.StringPtrInput
+	// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+	SemiSyncTimeout pulumi.IntPtrInput
 	// Slave zone.
 	SlaveZone pulumi.StringPtrInput
 }
@@ -156,16 +187,24 @@ func (ClusterSlaveZoneState) ElementType() reflect.Type {
 }
 
 type clusterSlaveZoneArgs struct {
+	// Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+	BinlogSyncWay *string `pulumi:"binlogSyncWay"`
 	// The ID of cluster.
 	ClusterId string `pulumi:"clusterId"`
+	// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+	SemiSyncTimeout *int `pulumi:"semiSyncTimeout"`
 	// Slave zone.
 	SlaveZone string `pulumi:"slaveZone"`
 }
 
 // The set of arguments for constructing a ClusterSlaveZone resource.
 type ClusterSlaveZoneArgs struct {
+	// Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+	BinlogSyncWay pulumi.StringPtrInput
 	// The ID of cluster.
 	ClusterId pulumi.StringInput
+	// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+	SemiSyncTimeout pulumi.IntPtrInput
 	// Slave zone.
 	SlaveZone pulumi.StringInput
 }
@@ -257,9 +296,19 @@ func (o ClusterSlaveZoneOutput) ToClusterSlaveZoneOutputWithContext(ctx context.
 	return o
 }
 
+// Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+func (o ClusterSlaveZoneOutput) BinlogSyncWay() pulumi.StringOutput {
+	return o.ApplyT(func(v *ClusterSlaveZone) pulumi.StringOutput { return v.BinlogSyncWay }).(pulumi.StringOutput)
+}
+
 // The ID of cluster.
 func (o ClusterSlaveZoneOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ClusterSlaveZone) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+func (o ClusterSlaveZoneOutput) SemiSyncTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v *ClusterSlaveZone) pulumi.IntOutput { return v.SemiSyncTimeout }).(pulumi.IntOutput)
 }
 
 // Slave zone.

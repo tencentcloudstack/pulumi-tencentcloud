@@ -21,6 +21,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateCloudNativeAPIGatewayCertificate](https://www.tencentcloud.com/document/api/1290/79294)
+ * * Read: [DescribeCloudNativeAPIGatewayCertificateDetails](https://www.tencentcloud.com/document/api/1290/79266)
+ * * Update: [UpdateCloudNativeAPIGatewayCertificateInfo](https://www.tencentcloud.com/document/api/1290/79229)
+ * * Delete: [DeleteCloudNativeAPIGatewayCertificate](https://www.tencentcloud.com/document/api/1290/79280)
+ *
  * ## Import
  *
  * tse cngwCertificate can be imported using the id, e.g.

@@ -67,6 +67,12 @@ import * as utilities from "../utilities";
  *     portable: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
  */
 export function getStorages(args?: GetStoragesArgs, opts?: pulumi.InvokeOptions): Promise<GetStoragesResult> {
     args = args || {};
@@ -269,6 +275,12 @@ export interface GetStoragesResult {
  *     portable: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
  */
 export function getStoragesOutput(args?: GetStoragesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStoragesResult> {
     args = args || {};

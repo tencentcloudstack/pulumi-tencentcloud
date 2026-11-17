@@ -99,6 +99,12 @@ def get_mount_targets(file_system_id: Optional[_builtins.str] = None,
     mount_targets = tencentcloud.cfs.get_mount_targets(file_system_id="cfs-iobiaxtj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+
 
     :param _builtins.str file_system_id: File system ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_mount_targets_output(file_system_id: pulumi.Input[Optional[_builtins.str
 
     mount_targets = tencentcloud.cfs.get_mount_targets(file_system_id="cfs-iobiaxtj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
 
 
     :param _builtins.str file_system_id: File system ID.

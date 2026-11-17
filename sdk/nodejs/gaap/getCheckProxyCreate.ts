@@ -8,6 +8,12 @@ import * as utilities from "../utilities";
  * Use this data source to query detailed information of gaap check proxy create
  *
  * ## Example Usage
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
  */
 export function getCheckProxyCreate(args: GetCheckProxyCreateArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckProxyCreateResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetCheckProxyCreateResult {
  * Use this data source to query detailed information of gaap check proxy create
  *
  * ## Example Usage
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
  */
 export function getCheckProxyCreateOutput(args: GetCheckProxyCreateOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCheckProxyCreateResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

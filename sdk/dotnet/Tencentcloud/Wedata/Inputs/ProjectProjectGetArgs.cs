@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         [Input("projectName", required: true)]
         public Input<string> ProjectName { get; set; } = null!;
 
+        /// <summary>
+        /// Project schedule mode. task: Task mode; workflow: Workflow mode.
+        /// </summary>
+        [Input("scheduleMode")]
+        public Input<string>? ScheduleMode { get; set; }
+
         public ProjectProjectGetArgs()
         {
         }

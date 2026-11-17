@@ -79,6 +79,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
 func GetDiagEvents(ctx *pulumi.Context, args *GetDiagEventsArgs, opts ...pulumi.InvokeOption) (*GetDiagEventsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiagEventsResult

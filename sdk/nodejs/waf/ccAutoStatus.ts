@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&type=document&lang=en)
+ * * Read: [DescribeCCAutoStatus](https://www.tencentcloud.com/search/?wd=DescribeCCAutoStatus&type=document&lang=en)
+ * * Delete: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&type=document&lang=en)
+ *
  * ## Import
  *
  * waf ccAutoStatus can be imported using the id, e.g.

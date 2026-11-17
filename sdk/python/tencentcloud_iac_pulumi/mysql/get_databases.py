@@ -139,6 +139,12 @@ def get_databases(database_regexp: Optional[_builtins.str] = None,
         database_regexp="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/236/17493)
+
 
     :param _builtins.str database_regexp: Regular expression to match database library names.
     :param _builtins.str instance_id: The ID of instance.
@@ -182,6 +188,12 @@ def get_databases_output(database_regexp: pulumi.Input[Optional[Optional[_builti
     databases = tencentcloud.mysql.get_databases(instance_id="cdb-c1nl9rpv",
         database_regexp="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDatabases](https://www.tencentcloud.com/document/api/236/17493)
 
 
     :param _builtins.str database_regexp: Regular expression to match database library names.

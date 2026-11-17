@@ -85,6 +85,14 @@ class SyncJobContinueOperation(pulumi.CustomResource):
         sync_job_continue_operation = tencentcloud.dts.SyncJobContinueOperation("sync_job_continue_operation", job_id="sync-werwfs23")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ContinueSyncJob](https://www.tencentcloud.com/document/api/571/53980)
+          - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class SyncJobContinueOperation(pulumi.CustomResource):
 
         sync_job_continue_operation = tencentcloud.dts.SyncJobContinueOperation("sync_job_continue_operation", job_id="sync-werwfs23")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ContinueSyncJob](https://www.tencentcloud.com/document/api/571/53980)
+          - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
 
 
         :param str resource_name: The name of the resource.

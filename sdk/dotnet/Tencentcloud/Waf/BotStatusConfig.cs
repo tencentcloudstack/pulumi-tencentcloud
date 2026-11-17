@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+    /// * Read: [DescribeBotSceneOverview](https://www.tencentcloud.com/search/?wd=DescribeBotSceneOverview&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+    /// 
     /// ## Import
     /// 
     /// WAF bot status config can be imported using the id, e.g.

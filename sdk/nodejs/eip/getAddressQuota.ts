@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const addressQuota = tencentcloud.eip.getAddressQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
  */
 export function getAddressQuota(args?: GetAddressQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetAddressQuotaResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetAddressQuotaResult {
  *
  * const addressQuota = tencentcloud.eip.getAddressQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAddressQuota](https://www.tencentcloud.com/document/api/215/16701)
  */
 export function getAddressQuotaOutput(args?: GetAddressQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAddressQuotaResult> {
     args = args || {};

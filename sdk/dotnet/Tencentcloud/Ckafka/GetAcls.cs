@@ -35,6 +35,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
         /// </summary>
         public static Task<GetAclsResult> InvokeAsync(GetAclsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsArgs(), options.WithDefaults());
@@ -62,6 +71,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
         /// </summary>
         public static Output<GetAclsResult> Invoke(GetAclsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsInvokeArgs(), options.WithDefaults());
@@ -89,6 +107,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
         /// </summary>
         public static Output<GetAclsResult> Invoke(GetAclsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAclsResult>("tencentcloud:Ckafka/getAcls:getAcls", args ?? new GetAclsInvokeArgs(), options.WithDefaults());

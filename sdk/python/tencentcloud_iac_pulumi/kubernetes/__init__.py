@@ -19,6 +19,7 @@ from .cluster_roll_out_sequence_tag_config import *
 from .cluster_scheduler_policy_config import *
 from .control_plane_log import *
 from .encryption_protection import *
+from .get_addon_values import *
 from .get_addons import *
 from .get_available_cluster_versions import *
 from .get_charts import *

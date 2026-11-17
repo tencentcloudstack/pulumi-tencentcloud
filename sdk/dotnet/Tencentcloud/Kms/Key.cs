@@ -41,6 +41,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// });
     /// ```
     /// 
+    /// ### Create kms instance with key rotation and rotate days.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Kms.Key("example", new()
+    ///     {
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         KeyUsage = "ENCRYPT_DECRYPT",
+    ///         KeyRotationEnabled = true,
+    ///         RotateDays = 30,
+    ///         IsEnabled = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### Create kms instance with HSM
     /// 
     /// ```csharp
@@ -114,6 +141,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ArchiveKey](https://www.tencentcloud.com/document/api/1030/38198)
+    ///   - [CreateKey](https://www.tencentcloud.com/document/api/1030/32199)
+    ///   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+    ///   - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+    ///   - [EnableKeyRotation](https://www.tencentcloud.com/document/api/1030/32191)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateAlias](https://www.tencentcloud.com/document/api/1030/32182)
+    ///   - [UpdateKeyDescription](https://www.tencentcloud.com/document/api/1030/32181)
+    /// * Delete:
+    ///   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+    ///   - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+    ///   - [ScheduleKeyDeletion](https://www.tencentcloud.com/document/api/1030/33534)
+    /// 
     /// ## Import
     /// 
     /// KMS keys can be imported using the id, e.g.
@@ -178,6 +229,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// </summary>
         [Output("pendingDeleteWindowInDays")]
         public Output<int?> PendingDeleteWindowInDays { get; private set; } = null!;
+
+        /// <summary>
+        /// Key rotation period in days, range 7~365, default 365. Only effective when `KeyUsage` is `ENCRYPT_DECRYPT` and `KeyRotationEnabled` is `True`.
+        /// </summary>
+        [Output("rotateDays")]
+        public Output<int> RotateDays { get; private set; } = null!;
 
         /// <summary>
         /// Tags of CMK.
@@ -280,6 +337,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         [Input("pendingDeleteWindowInDays")]
         public Input<int>? PendingDeleteWindowInDays { get; set; }
 
+        /// <summary>
+        /// Key rotation period in days, range 7~365, default 365. Only effective when `KeyUsage` is `ENCRYPT_DECRYPT` and `KeyRotationEnabled` is `True`.
+        /// </summary>
+        [Input("rotateDays")]
+        public Input<int>? RotateDays { get; set; }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
@@ -353,6 +416,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// </summary>
         [Input("pendingDeleteWindowInDays")]
         public Input<int>? PendingDeleteWindowInDays { get; set; }
+
+        /// <summary>
+        /// Key rotation period in days, range 7~365, default 365. Only effective when `KeyUsage` is `ENCRYPT_DECRYPT` and `KeyRotationEnabled` is `True`.
+        /// </summary>
+        [Input("rotateDays")]
+        public Input<int>? RotateDays { get; set; }
 
         [Input("tags")]
         private InputMap<string>? _tags;

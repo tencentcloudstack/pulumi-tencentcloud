@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
 func GetDescribeUserInfo(ctx *pulumi.Context, args *GetDescribeUserInfoArgs, opts ...pulumi.InvokeOption) (*GetDescribeUserInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeUserInfoResult

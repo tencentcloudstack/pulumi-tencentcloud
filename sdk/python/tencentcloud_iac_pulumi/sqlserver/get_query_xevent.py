@@ -138,6 +138,12 @@ def get_query_xevent(end_time: Optional[_builtins.str] = None,
         end_time="2023-08-10 00:00:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
+
 
     :param _builtins.str end_time: Generation end time of an extended file.
     :param _builtins.str event_type: Event type. Valid values: slow (Slow SQL event), blocked (blocking event), deadlock` (deadlock event).
@@ -182,6 +188,12 @@ def get_query_xevent_output(end_time: pulumi.Input[Optional[_builtins.str]] = No
         start_time="2023-08-01 00:00:00",
         end_time="2023-08-10 00:00:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeXEvents](https://www.tencentcloud.com/document/api/238/54814)
 
 
     :param _builtins.str end_time: Generation end time of an extended file.

@@ -42,6 +42,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCluster](https://www.tencentcloud.com/search/?wd=CreateCluster&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteCluster](https://www.tencentcloud.com/search/?wd=DeleteCluster&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/cluster:Cluster")]
     public partial class Cluster : global::Pulumi.CustomResource

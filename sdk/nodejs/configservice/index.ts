@@ -5,6 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { AggregateCompliancePackArgs, AggregateCompliancePackState } from "./aggregateCompliancePack";
+export type AggregateCompliancePack = import("./aggregateCompliancePack").AggregateCompliancePack;
+export const AggregateCompliancePack: typeof import("./aggregateCompliancePack").AggregateCompliancePack = null as any;
+utilities.lazyLoad(exports, ["AggregateCompliancePack"], () => require("./aggregateCompliancePack"));
+
+export { AggregatorArgs, AggregatorState } from "./aggregator";
+export type Aggregator = import("./aggregator").Aggregator;
+export const Aggregator: typeof import("./aggregator").Aggregator = null as any;
+utilities.lazyLoad(exports, ["Aggregator"], () => require("./aggregator"));
+
 export { AlarmPolicyArgs, AlarmPolicyState } from "./alarmPolicy";
 export type AlarmPolicy = import("./alarmPolicy").AlarmPolicy;
 export const AlarmPolicy: typeof import("./alarmPolicy").AlarmPolicy = null as any;
@@ -29,6 +39,16 @@ export { GetDiscoveredResourcesArgs, GetDiscoveredResourcesResult, GetDiscovered
 export const getDiscoveredResources: typeof import("./getDiscoveredResources").getDiscoveredResources = null as any;
 export const getDiscoveredResourcesOutput: typeof import("./getDiscoveredResources").getDiscoveredResourcesOutput = null as any;
 utilities.lazyLoad(exports, ["getDiscoveredResources","getDiscoveredResourcesOutput"], () => require("./getDiscoveredResources"));
+
+export { GetListAggregateCompliancePacksArgs, GetListAggregateCompliancePacksResult, GetListAggregateCompliancePacksOutputArgs } from "./getListAggregateCompliancePacks";
+export const getListAggregateCompliancePacks: typeof import("./getListAggregateCompliancePacks").getListAggregateCompliancePacks = null as any;
+export const getListAggregateCompliancePacksOutput: typeof import("./getListAggregateCompliancePacks").getListAggregateCompliancePacksOutput = null as any;
+utilities.lazyLoad(exports, ["getListAggregateCompliancePacks","getListAggregateCompliancePacksOutput"], () => require("./getListAggregateCompliancePacks"));
+
+export { GetListAggregatorsArgs, GetListAggregatorsResult, GetListAggregatorsOutputArgs } from "./getListAggregators";
+export const getListAggregators: typeof import("./getListAggregators").getListAggregators = null as any;
+export const getListAggregatorsOutput: typeof import("./getListAggregators").getListAggregatorsOutput = null as any;
+utilities.lazyLoad(exports, ["getListAggregators","getListAggregatorsOutput"], () => require("./getListAggregators"));
 
 export { GetResourceTypesArgs, GetResourceTypesResult, GetResourceTypesOutputArgs } from "./getResourceTypes";
 export const getResourceTypes: typeof import("./getResourceTypes").getResourceTypes = null as any;
@@ -70,11 +90,25 @@ export type StartConfigRuleEvaluationOperation = import("./startConfigRuleEvalua
 export const StartConfigRuleEvaluationOperation: typeof import("./startConfigRuleEvaluationOperation").StartConfigRuleEvaluationOperation = null as any;
 utilities.lazyLoad(exports, ["StartConfigRuleEvaluationOperation"], () => require("./startConfigRuleEvaluationOperation"));
 
+export { UpdateAggregateConfigDeliverArgs, UpdateAggregateConfigDeliverState } from "./updateAggregateConfigDeliver";
+export type UpdateAggregateConfigDeliver = import("./updateAggregateConfigDeliver").UpdateAggregateConfigDeliver;
+export const UpdateAggregateConfigDeliver: typeof import("./updateAggregateConfigDeliver").UpdateAggregateConfigDeliver = null as any;
+utilities.lazyLoad(exports, ["UpdateAggregateConfigDeliver"], () => require("./updateAggregateConfigDeliver"));
+
+export { UpdateConfigDeliverArgs, UpdateConfigDeliverState } from "./updateConfigDeliver";
+export type UpdateConfigDeliver = import("./updateConfigDeliver").UpdateConfigDeliver;
+export const UpdateConfigDeliver: typeof import("./updateConfigDeliver").UpdateConfigDeliver = null as any;
+utilities.lazyLoad(exports, ["UpdateConfigDeliver"], () => require("./updateConfigDeliver"));
+
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Config/aggregateCompliancePack:AggregateCompliancePack":
+                return new AggregateCompliancePack(name, <any>undefined, { urn })
+            case "tencentcloud:Config/aggregator:Aggregator":
+                return new Aggregator(name, <any>undefined, { urn })
             case "tencentcloud:Config/alarmPolicy:AlarmPolicy":
                 return new AlarmPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Config/compliancePack:CompliancePack":
@@ -89,11 +123,17 @@ const _module = {
                 return new Rule(name, <any>undefined, { urn })
             case "tencentcloud:Config/startConfigRuleEvaluationOperation:StartConfigRuleEvaluationOperation":
                 return new StartConfigRuleEvaluationOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Config/updateAggregateConfigDeliver:UpdateAggregateConfigDeliver":
+                return new UpdateAggregateConfigDeliver(name, <any>undefined, { urn })
+            case "tencentcloud:Config/updateConfigDeliver:UpdateConfigDeliver":
+                return new UpdateConfigDeliver(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Config/aggregateCompliancePack", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Config/aggregator", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Config/alarmPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Config/compliancePack", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Config/deliverConfig", _module)
@@ -101,3 +141,5 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Config/recorderConfig", _
 pulumi.runtime.registerResourceModule("tencentcloud", "Config/remediation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Config/rule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Config/startConfigRuleEvaluationOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Config/updateAggregateConfigDeliver", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Config/updateConfigDeliver", _module)

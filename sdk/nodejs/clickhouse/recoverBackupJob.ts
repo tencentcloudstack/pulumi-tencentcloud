@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     backUpJobId: 1234,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RecoverBackUpJob](https://www.tencentcloud.com/search/?wd=RecoverBackUpJob&type=document&lang=en)
  */
 export class RecoverBackupJob extends pulumi.CustomResource {
     /**

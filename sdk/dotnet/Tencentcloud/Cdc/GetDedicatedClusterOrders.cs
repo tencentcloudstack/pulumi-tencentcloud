@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
         /// </summary>
         public static Task<GetDedicatedClusterOrdersResult> InvokeAsync(GetDedicatedClusterOrdersArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDedicatedClusterOrdersResult>("tencentcloud:Cdc/getDedicatedClusterOrders:getDedicatedClusterOrders", args ?? new GetDedicatedClusterOrdersArgs(), options.WithDefaults());
@@ -108,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
         /// </summary>
         public static Output<GetDedicatedClusterOrdersResult> Invoke(GetDedicatedClusterOrdersInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClusterOrdersResult>("tencentcloud:Cdc/getDedicatedClusterOrders:getDedicatedClusterOrders", args ?? new GetDedicatedClusterOrdersInvokeArgs(), options.WithDefaults());
@@ -158,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
         /// </summary>
         public static Output<GetDedicatedClusterOrdersResult> Invoke(GetDedicatedClusterOrdersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClusterOrdersResult>("tencentcloud:Cdc/getDedicatedClusterOrders:getDedicatedClusterOrders", args ?? new GetDedicatedClusterOrdersInvokeArgs(), options.WithDefaults());

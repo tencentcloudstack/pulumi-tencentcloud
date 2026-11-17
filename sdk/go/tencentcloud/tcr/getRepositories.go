@@ -14,6 +14,14 @@ import (
 // Use this data source to query detailed information of TCR repositories.
 //
 // ## Example Usage
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+//   - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
 func GetRepositories(ctx *pulumi.Context, args *GetRepositoriesArgs, opts ...pulumi.InvokeOption) (*GetRepositoriesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRepositoriesResult

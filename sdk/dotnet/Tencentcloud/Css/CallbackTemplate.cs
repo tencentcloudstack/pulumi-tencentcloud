@@ -39,6 +39,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30815)
+    /// * Read: [DescribeLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30811)
+    /// * Update: [ModifyLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30809)
+    /// * Delete: [DeleteLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30813)
+    /// 
     /// ## Import
     /// 
     /// css CallbackTemplate can be imported using the id, e.g.

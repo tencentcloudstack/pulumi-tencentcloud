@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     role: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
  */
 export function getListKeys(args?: GetListKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetListKeysResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetListKeysResult {
  *     role: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
  */
 export function getListKeysOutput(args?: GetListKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListKeysResult> {
     args = args || {};

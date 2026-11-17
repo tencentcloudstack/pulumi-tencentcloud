@@ -55,6 +55,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
         /// </summary>
         public static Task<GetInstanceTaskListResult> InvokeAsync(GetInstanceTaskListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListArgs(), options.WithDefaults());
@@ -102,6 +108,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
         /// </summary>
         public static Output<GetInstanceTaskListResult> Invoke(GetInstanceTaskListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListInvokeArgs(), options.WithDefaults());
@@ -149,6 +161,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
         /// </summary>
         public static Output<GetInstanceTaskListResult> Invoke(GetInstanceTaskListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTaskListResult>("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args ?? new GetInstanceTaskListInvokeArgs(), options.WithDefaults());

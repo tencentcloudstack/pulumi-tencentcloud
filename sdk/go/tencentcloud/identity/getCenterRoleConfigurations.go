@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
 func GetCenterRoleConfigurations(ctx *pulumi.Context, args *GetCenterRoleConfigurationsArgs, opts ...pulumi.InvokeOption) (*GetCenterRoleConfigurationsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCenterRoleConfigurationsResult

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogUserHostStats](https://www.tencentcloud.com/document/api/1035/41182)
         /// </summary>
         public static Task<GetSlowLogUserHostStatsResult> InvokeAsync(GetSlowLogUserHostStatsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogUserHostStats](https://www.tencentcloud.com/document/api/1035/41182)
         /// </summary>
         public static Output<GetSlowLogUserHostStatsResult> Invoke(GetSlowLogUserHostStatsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogUserHostStats](https://www.tencentcloud.com/document/api/1035/41182)
         /// </summary>
         public static Output<GetSlowLogUserHostStatsResult> Invoke(GetSlowLogUserHostStatsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsInvokeArgs(), options.WithDefaults());

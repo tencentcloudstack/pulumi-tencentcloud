@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTrafficPackages](https://www.tencentcloud.com/search/?wd=CreateTrafficPackages&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeTrafficPackages](https://www.tencentcloud.com/document/api/215/52740)
+    /// * Delete: [DeleteTrafficPackages](https://www.tencentcloud.com/document/api/215/56576)
+    /// 
     /// ## Import
     /// 
     /// vpc TrafficPackage can be imported using the id, e.g.

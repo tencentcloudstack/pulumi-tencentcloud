@@ -93,6 +93,56 @@ import (
 //
 // ```
 //
+// ### Update bandwidth in place
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcx"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := dcx.NewInstance(ctx, "example", &dcx.InstanceArgs{
+//				DcId:            pulumi.String("dc-ink7y3qf"),
+//				Name:            pulumi.String("tf-example"),
+//				DcOwnerAccount:  pulumi.String("100017971194"),
+//				NetworkType:     pulumi.String("VPC"),
+//				NetworkRegion:   pulumi.String("ap-guangzhou"),
+//				VpcId:           pulumi.String("vpc-nzuu8dyj"),
+//				DcgId:           pulumi.String("dcg-ehr22qfb"),
+//				Bandwidth:       pulumi.Int(200),
+//				RouteType:       pulumi.String("BGP"),
+//				BgpAsn:          pulumi.Int(64511),
+//				Vlan:            pulumi.Int(60),
+//				TencentAddress:  pulumi.String("10.8.254.14/30"),
+//				CustomerAddress: pulumi.String("10.8.254.13/30"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19821)
+//   - [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+//
+// * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+// * Update: [ModifyDirectConnectTunnelAttribute](https://www.tencentcloud.com/document/api/216/19818)
+// * Delete: [DeleteDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19820)
+//
 // ## Import
 //
 // DCX instance can be imported using the id, e.g.

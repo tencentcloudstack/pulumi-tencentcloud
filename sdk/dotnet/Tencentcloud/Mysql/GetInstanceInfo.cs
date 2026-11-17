@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
         /// </summary>
         public static Task<GetInstanceInfoResult> InvokeAsync(GetInstanceInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
         /// </summary>
         public static Output<GetInstanceInfoResult> Invoke(GetInstanceInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
         /// </summary>
         public static Output<GetInstanceInfoResult> Invoke(GetInstanceInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoInvokeArgs(), options.WithDefaults());

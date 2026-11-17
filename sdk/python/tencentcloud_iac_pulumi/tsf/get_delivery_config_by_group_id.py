@@ -96,6 +96,12 @@ def get_delivery_config_by_group_id(group_id: Optional[_builtins.str] = None,
     delivery_config_by_group_id = tencentcloud.tsf.get_delivery_config_by_group_id(group_id="group-yrjkln9v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&type=document&lang=en)
+
 
     :param _builtins.str group_id: groupId.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_delivery_config_by_group_id_output(group_id: pulumi.Input[Optional[_buil
 
     delivery_config_by_group_id = tencentcloud.tsf.get_delivery_config_by_group_id(group_id="group-yrjkln9v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDeliveryConfigByGroupId](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigByGroupId&type=document&lang=en)
 
 
     :param _builtins.str group_id: groupId.

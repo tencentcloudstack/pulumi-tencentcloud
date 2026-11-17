@@ -1431,6 +1431,29 @@ class NodePool(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateClusterNodePool](https://www.tencentcloud.com/document/api/457/38781)
+        * Read:
+          - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+        * Update:
+          - [DeleteMachine](https://www.tencentcloud.com/document/api/296/30907)
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+          - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+          - [ModifyClusterNodePool](https://www.tencentcloud.com/document/api/457/38776)
+          - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+          - [ModifyNodePoolDesiredCapacityAboutAsg](https://www.tencentcloud.com/search/?wd=ModifyNodePoolDesiredCapacityAboutAsg&type=document&lang=en)
+          - [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+          - [UseAsClient](https://www.tencentcloud.com/search/?wd=UseAsClient&type=document&lang=en)
+        * Delete: [DeleteClusterNodePool](https://www.tencentcloud.com/document/api/457/38779)
+
         ## Import
 
         tke node pool can be imported, e.g.
@@ -1784,6 +1807,29 @@ class NodePool(pulumi.CustomResource):
                 "createBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateClusterNodePool](https://www.tencentcloud.com/document/api/457/38781)
+        * Read:
+          - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+        * Update:
+          - [DeleteMachine](https://www.tencentcloud.com/document/api/296/30907)
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+          - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+          - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+          - [ModifyClusterNodePool](https://www.tencentcloud.com/document/api/457/38776)
+          - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+          - [ModifyNodePoolDesiredCapacityAboutAsg](https://www.tencentcloud.com/search/?wd=ModifyNodePoolDesiredCapacityAboutAsg&type=document&lang=en)
+          - [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+          - [UseAsClient](https://www.tencentcloud.com/search/?wd=UseAsClient&type=document&lang=en)
+        * Delete: [DeleteClusterNodePool](https://www.tencentcloud.com/document/api/457/38779)
 
         ## Import
 
@@ -2156,7 +2202,7 @@ class NodePool(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="multiZoneSubnetPolicy")
-    def multi_zone_subnet_policy(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def multi_zone_subnet_policy(self) -> pulumi.Output[_builtins.str]:
         """
         Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
         """
@@ -2172,7 +2218,7 @@ class NodePool(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="nodeConfig")
-    def node_config(self) -> pulumi.Output[Optional['outputs.NodePoolNodeConfig']]:
+    def node_config(self) -> pulumi.Output['outputs.NodePoolNodeConfig']:
         """
         Node config.
         """

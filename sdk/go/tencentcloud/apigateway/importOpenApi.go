@@ -108,6 +108,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ImportOpenApi](https://www.tencentcloud.com/search/?wd=ImportOpenApi&type=document&lang=en)
+// * Read: [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&type=document&lang=en)
+// * Delete: [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&type=document&lang=en)
 type ImportOpenApi struct {
 	pulumi.CustomResourceState
 

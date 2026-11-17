@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     versionName: "20240204142759-b5a4f741-adc0-4964-b01b-2a4a04ff6964",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateService](https://www.tencentcloud.com/search/?wd=UpdateService&type=document&lang=en)
  */
 export class UpdateService extends pulumi.CustomResource {
     /**

@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
         /// </summary>
         public static Task<GetAttackLogListResult> InvokeAsync(GetAttackLogListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListArgs(), options.WithDefaults());
@@ -120,6 +126,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
         /// </summary>
         public static Output<GetAttackLogListResult> Invoke(GetAttackLogListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListInvokeArgs(), options.WithDefaults());
@@ -176,6 +188,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
         /// </summary>
         public static Output<GetAttackLogListResult> Invoke(GetAttackLogListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackLogListResult>("tencentcloud:Waf/getAttackLogList:getAttackLogList", args ?? new GetAttackLogListInvokeArgs(), options.WithDefaults());

@@ -107,6 +107,12 @@ def get_dc_route(nat_gateway_id: Optional[_builtins.str] = None,
         vpc_id="vpc-pyyv5k3v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
+
 
     :param _builtins.str nat_gateway_id: Unique identifier of Nat Gateway.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_dc_route_output(nat_gateway_id: pulumi.Input[Optional[_builtins.str]] = 
     nat_dc_route = tencentcloud.nat.get_dc_route(nat_gateway_id="nat-gnxkey2e",
         vpc_id="vpc-pyyv5k3v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
 
 
     :param _builtins.str nat_gateway_id: Unique identifier of Nat Gateway.

@@ -86,6 +86,12 @@ def get_resource_types(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.config.get_resource_types()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_resource_types_output(result_output_file: pulumi.Input[Optional[Optional
 
     example = tencentcloud.config.get_resource_types()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListResourceTypes](https://www.tencentcloud.com/document/api/1164/84979)
 
 
     :param _builtins.str result_output_file: Used to save results.

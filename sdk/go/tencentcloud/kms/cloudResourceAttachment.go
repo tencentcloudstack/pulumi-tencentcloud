@@ -42,6 +42,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [BindCloudResource](https://www.tencentcloud.com/document/api/1030/37835)
+// * Read: [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+// * Delete: [UnbindCloudResource](https://www.tencentcloud.com/document/api/1030/37834)
+//
 // ## Import
 //
 // kms cloudResourceAttachment can be imported using the id, e.g.

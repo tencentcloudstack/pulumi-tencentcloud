@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSCIMCredential](https://www.tencentcloud.com/document/api/1031/66423)
+    /// * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+    /// * Delete: [DeleteSCIMCredential](https://www.tencentcloud.com/document/api/1031/66422)
+    /// 
     /// ## Import
     /// 
     /// organization IdentityCenterScimCredential can be imported using the id, e.g.
